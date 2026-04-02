@@ -1,0 +1,17 @@
+{
+  "id": "silvana",
+  "name": "Silvanas Befreiung",
+  "kennung": "Silvanas Befreiung",
+  "danger_calc": 5,
+  "setup": {
+    "blue_cards": [
+      "Zeitskala 'Silvanas Befreiung'",
+      "Anführer: Keine (Scherge mit höchstem GP zählt als Anführer)",
+      "Heldenaktion: Namen erraten"
+    ],
+    "minion_keywords": ["Pirat", "Ork"],
+    "special_notes": "Falls Körperbeherrschung-Probe misslungen: 'Feiger Goblin' hinzufügen.",
+    "victory": "Alle Gegner besiegt oder vertrieben.",
+    "defeat": "Anzahl Verderbensmarken entspricht Anzahl der Helden."
+  }
+}
