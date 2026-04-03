@@ -4,13 +4,13 @@
   "danger_calc": 4,
   "setup": {
     "blue_cards": [
-      "Zeitskala 'Leute, die nicht spielen' [cite: 817]",
-      "Kampfumgebung: Risiko und Gewinn [cite: 817]",
-      "Glücks-Idol [cite: 817]",
-      "Heldenaktion: Den Einsatz erhöhen [cite: 817]",
-      "Karte: Am Spiel teilnehmen (Seite 'Das Spiel spielen') [cite: 820]"
+      "Zeitskala 'Leute, die nicht spielen'",
+      "Kampfumgebung: Risiko und Gewinn",
+      "Glücks-Idol",
+      "Heldenaktion: Den Einsatz erhöhen",
+      "Karte: Am Spiel teilnehmen (Seite 'Das Spiel spielen') [cite: 817-820]"
     ],
-    "minion_keywords": [ "Schergenkarten eurer Wahl [cite: 822]" ],
+    "minion_keywords": [ "Schergenkarten eurer Wahl " ],
     "special_decks": [
       "Ereignis-Deck (verdeckt) [cite: 818]",
       "Anführer-Aktionsdeck (verdeckt) [cite: 819]"
