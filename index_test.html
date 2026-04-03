@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aventuria Prototyp - Test-Features</title>
+    <link rel="stylesheet" href="css/aventura-theme.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Aventuria - Erweiterter Guide</h1>
+            <div class="top-bar">
+                <div class="config-item">
+                    <label>Helden:</label>
+                    <input type="number" id="heroCount" value="2" min="1" max="4">
+                </div>
+                <div class="config-item">
+                    <label>Schwierigkeit:</label>
+                    <select id="difficulty">
+                        <option value="einfach">Einfach</option>
+                        <option value="normal" selected>Normal</option>
+                        <option value="schwer">Schwer</option>
+                        <option value="legendär">Legendär</option>
+                    </select>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <section id="selection">
+                <select id="adventurePicker">
+                    <option value="">-- Abenteuer wählen --</option>
+                    <optgroup label="Grundbox">
+                        <option value="base_game/silvanas_befreiung">Silvanas Befreiung</option>
+                        <option value="base_game/leute_nicht_spielen">Leute, die nicht spielen</option>
+                        <option value="base_game/wildenstein_akt_1">Das Erbe von Wildenstein - Akt I</option>
+                    </optgroup>
+                </select>
+            </section>
+
+            <div id="setup-display" class="hidden">
+                <h2 id="title"></h2>
+
+                <div class="phase-tracker">
+                    <h3>Aktuelle Kampfphase</h3>
+                    <div class="phase-steps">
+                        <div class="step" id="phase1">1. Vorbereitung</div>
+                        <div class="step" id="phase2">2. Helden-Züge</div>
+                        <div class="step" id="phase3">3. Gegner-Züge</div>
+                        <div class="step" id="phase4">4. Zeit-Effekte</div>
+                        <div class="step" id="phase5">5. Rundenende</div>
+                    </div>
+                    <button onclick="nextPhase()" class="btn">Nächste Phase ➔</button>
+                </div>
+
+                <div class="grid-container">
+                    <div class="card-list" id="blue-cards"><h3>Abenteuerkarten (Blau)</h3><ul></ul></div>
+                    <div class="card-list" id="minions"><h3>Schergendeck (Monster)</h3><p id="danger-value"></p><ul></ul></div>
+                    
+                    <div class="card-list" id="utilities">
+                        <h3>Hilfsmittel</h3>
+                        <div class="utility-box">
+                            <button onclick="randomTarget()" class="btn">Zufälliges Ziel 🎯</button>
+                            <p id="targetResult">--</p>
+                        </div>
+                        <hr>
+                        <div class="talent-ref">
+                            <p><strong>Talent-Ergebnisse:</strong></p>
+                            <small>1 = Kritisch | ≤ Wert = Erfolg | > Wert = Misserfolg | 20 = Patzer</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-dashboard" id="heroDashboard">
+                    </div>
+
+                <div class="intermission-box">
+                    <h3>Atempause-Rechner</h3>
+                    <div class="calc-row">
+                        <label>Restliche Zeitmarken:</label>
+                        <input type="number" id="timeLeft" value="0" min="0">
+                        <button onclick="calcRecovery()" class="btn">Berechnen</button>
+                    </div>
+                    <p id="recoveryResult">Erholungspunkte: --</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/app_test.js"></script>
+</body>
+</html>
