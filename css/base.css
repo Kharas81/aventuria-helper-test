@@ -1,0 +1,34 @@
+body {
+    background: #dcd0ba radial-gradient(circle, #e6dec9 0%, #dcd0ba 100%);
+    font-family: 'Georgia', 'Times New Roman', serif;
+    color: #2e241f;
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.app-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 30px;
+    border: 3px solid #5c1e1e;
+    box-shadow: 0 0 25px rgba(0,0,0,0.2);
+    border-radius: 4px;
+}
+
+header {
+    text-align: center;
+    border-bottom: 2px solid #8b4513;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+}
+
+h1 {
+    color: #5c1e1e;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin: 0;
+}
+
+.hidden { display: none; }
