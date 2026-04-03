@@ -1,66 +1,55 @@
-/**
- * js/app.js
- * Hauptlogik für das UI-Update und die Gefahrenberechnung
- */
-const adventurePicker = document.getElementById('adventurePicker');
-const heroInput = document.getElementById('heroCount');
-const setupDisplay = document.getElementById('setup-display');
-
-// Event-Listener für Änderungen
-adventurePicker.addEventListener('change', refreshSetup);
-heroInput.addEventListener('change', refreshSetup);
+document.getElementById('adventurePicker').addEventListener('change', refreshSetup);
+document.getElementById('heroCount').addEventListener('change', refreshSetup);
 
 async function refreshSetup() {
-    const path = adventurePicker.value;
+    const path = document.getElementById('adventurePicker').value;
+    const display = document.getElementById('setup-display');
+    
     if (!path) {
-        setupDisplay.classList.add('hidden');
+        display.classList.add('hidden');
         return;
     }
 
-    const data = await fetchAdventureData(path);
-    if (data) {
+    try {
+        // Wir nutzen einen relativen Pfad ohne führenden Slash
+        const response = await fetch(`data/adventures/${path}.json`);
+        
+        if (!response.ok) {
+            throw new Error(`Datei nicht gefunden: data/adventures/${path}.json (Status: ${response.status})`);
+        }
+        
+        const data = await response.json();
         renderSetup(data);
+    } catch (error) {
+        console.error("Fehler:", error);
+        document.getElementById('title').innerText = "Fehler beim Laden";
+        document.getElementById('blue-cards').innerHTML = `<p style="color:red">${error.message}</p>`;
+        display.classList.remove('hidden');
     }
 }
 
 function renderSetup(data) {
-    const heroCount = parseInt(heroInput.value) || 2;
-    
-    // 1. Titel setzen
+    const heroCount = parseInt(document.getElementById('heroCount').value) || 2;
     document.getElementById('title').innerText = data.name;
 
-    // 2. Blaue Abenteuerkarten [cite: 188, 189]
+    // Blaue Karten [cite: 191]
     const blueList = document.querySelector('#blue-cards ul');
-    blueList.innerHTML = data.setup.blue_cards
-        .map(card => `<li>${card}</li>`)
-        .join('');
+    blueList.innerHTML = data.setup.blue_cards.map(c => `<li>${c}</li>`).join('');
 
-    // 3. Schergen & Gefahrenwert [cite: 465, 466]
+    // Monster & GP Berechnung [cite: 466, 479]
     const dangerValue = heroCount * data.danger_calc;
     document.getElementById('danger-value').innerHTML = 
-        `Ziel-Gefahrenwert: <strong>${dangerValue} GP</strong> (Helden: ${heroCount} x ${data.danger_calc})`;
+        `Ziel-Gefahrenwert: <strong>${dangerValue} GP</strong>`;
     
     const minionList = document.querySelector('#minions ul');
-    minionList.innerHTML = data.setup.minion_keywords
-        .map(kw => `<li>Schlagwort: <strong>${kw}</strong></li>`)
-        .join('');
-    
-    if (data.setup.special_notes) {
-        minionList.innerHTML += `<li class="highlight">${data.setup.special_notes}</li>`;
-    }
+    minionList.innerHTML = data.setup.minion_keywords.map(k => `<li>Schlagwort: <strong>${k}</strong></li>`).join('');
 
-    // 4. Spezialkarten (Grün) [cite: 226, 227]
+    // Spezial/Sieg/Niederlage [cite: 622]
     const specialList = document.querySelector('#special ul');
-    let specialHtml = data.setup.special_decks
-        .map(deck => `<li>${deck}</li>`)
-        .join('');
-    
-    // Sieg- & Niederlage-Bedingungen ergänzen [cite: 622, 623]
-    specialHtml += `<hr><li><strong>Sieg:</strong> ${data.setup.victory}</li>`;
-    specialHtml += `<li><strong>Niederlage:</strong> ${data.setup.defeat}</li>`;
-    
-    specialList.innerHTML = specialHtml;
+    let html = (data.setup.special_decks || []).map(d => `<li>${d}</li>`).join('');
+    html += `<hr><li><strong>Sieg:</strong> ${data.setup.victory}</li>`;
+    html += `<li><strong>Niederlage:</strong> ${data.setup.defeat}</li>`;
+    specialList.innerHTML = html;
 
-    // Anzeigen
-    setupDisplay.classList.remove('hidden');
+    document.getElementById('setup-display').classList.remove('hidden');
 }
