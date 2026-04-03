@@ -1,114 +1,31 @@
-/* Grundstimmung: Pergament und altes Papier */
 body {
-    background-color: #dcd0ba;
-    background-image: url('https://www.transparenttextures.com/patterns/parchment.png'); /* Subtile Papierstruktur */
-    font-family: 'Georgia', 'Times New Roman', serif;
+    /* Ersatz für parchment.png: Ein dezenter Papier-Farbverlauf */
+    background: #dcd0ba radial-gradient(circle, #e6dec9 0%, #dcd0ba 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, serif;
     color: #2e241f;
     margin: 0;
     padding: 20px;
+    min-height: 100vh;
 }
 
-.app-container {
-    max-width: 1000px;
-    margin: 0 auto;
-    background: rgba(255, 255, 255, 0.4);
-    padding: 30px;
-    border: 3px solid #5c1e1e; /* Dunkelroter Rand wie im Logo [cite: 3] */
-    box-shadow: 0 0 20px rgba(0,0,0,0.3);
-    border-radius: 5px;
-}
-
-header {
-    text-align: center;
-    border-bottom: 2px solid #8b4513;
-    margin-bottom: 30px;
-    padding-bottom: 10px;
-}
-
-h1 {
-    color: #5c1e1e;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin: 0;
-}
-
-/* Konfiguration (Heldenanzahl) */
-.player-config {
-    margin-top: 15px;
-    font-weight: bold;
-}
-
-.player-config input {
-    width: 50px;
-    padding: 5px;
-    background: #f4e7d3;
-    border: 1px solid #8b4513;
-    font-size: 1.1em;
-}
-
-/* Auswahl-Menü */
-#selection {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-select {
-    padding: 12px 20px;
-    font-size: 1.2em;
-    background: #f4e7d3;
-    border: 2px solid #8b4513;
-    border-radius: 4px;
+/* Checklisten Styling */
+.checklist-item {
+    display: flex;
+    align-items: center;
     cursor: pointer;
-    font-family: inherit;
+    gap: 10px;
+    transition: opacity 0.3s;
 }
 
-/* Das Setup-Display (Grid-Layout) */
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+.checklist-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #5c1e1e;
 }
 
-.card-list {
-    background: rgba(244, 231, 211, 0.8); /* Helleres Beige für Lesbarkeit */
-    padding: 20px;
-    border: 1px solid #a0522d;
-    border-radius: 8px;
-    position: relative;
-}
-
-.card-list h3 {
-    margin-top: 0;
-    color: #5c1e1e;
-    border-bottom: 1px solid #a0522d;
-    padding-bottom: 5px;
-}
-
-/* Spezielle Farben für Kartentypen */
-#blue-cards h3 { color: #2c5282; border-bottom-color: #2c5282; } /* Blau für Abenteuer  */
-#special h3 { color: #276749; border-bottom-color: #276749; }    /* Grün für Spezialkarten [cite: 226] */
-
-/* Listen-Styling */
-ul {
-    list-style-type: "⚔ "; /* Kleines Schwert als Bulletpoint */
-    padding-left: 20px;
-}
-
-li {
-    margin-bottom: 10px;
-    line-height: 1.4;
-}
-
-#danger-value {
-    font-size: 1.1em;
-    color: #742a2a;
-    margin-bottom: 15px;
-}
-
-/* Hilfsklassen */
-.hidden { display: none; }
-
-.highlight {
-    font-weight: bold;
-    color: #5c1e1e;
+/* Wenn abgehakt: Text durchstreichen und blasser machen */
+.checklist-item input:checked + span {
+    text-decoration: line-through;
+    opacity: 0.5;
 }

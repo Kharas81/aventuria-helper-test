@@ -1,0 +1,18 @@
+{
+  "id": "wildenstein_1",
+  "name": "Das Erbe von Wildenstein - Akt I",
+  "danger_calc": 5,
+  "setup": {
+    "blue_cards": [
+      "Zeitskala 'Wildenstein-I'",
+      "Anführer: 'Greifbart Gichthain' [cite: 1965]",
+      "Karte: 'Erbe' (wird dem Erben-Spieler zugewiesen) [cite: 1939]"
+    ],
+    "minion_keywords": [ "Räuber [cite: 1970]" ],
+    "special_decks": [
+      "Ereignis-Deck: 'Allgemein', 'Gewässer', 'Wald' [cite: 1965]"
+    ],
+    "victory": "Alle Gegner besiegt/vertrieben UND der Erbe lebt noch. [cite: 1973]",
+    "defeat": "Der Erbe wird ausgeschaltet. [cite: 1972]"
+  }
+}
