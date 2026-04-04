@@ -2,17 +2,25 @@
   "id": "wildenstein_1",
   "name": "Das Erbe von Wildenstein - Akt I",
   "danger_calc": 5,
+  "narrative": {
+    "intro": "In Perainefurten erreicht euch ein Brief eurer Mutter: Ihr sollt das Erbe des verstorbenen Barons Wildenstein antreten. Doch der Weg dorthin ist gefährlich und führt durch die Schattenlande... [cite: 837-854]",
+    "checks": [
+      {
+        "id": "scout",
+        "skill": "Sinnesschärfe",
+        "text": "Ihr erreicht eine Furt. Ist dort ein Hinterhalt? [cite: 872-874]",
+        "results": {
+          "success": "Du reagierst blitzschnell! Starte mit +1 Handkarte. [cite: 875]",
+          "fail": "Du wirst überrascht! Starte mit -1 Handkarte. [cite: 877]"
+        }
+      }
+    ]
+  },
   "setup": {
-    "blue_cards": [
-      "Zeitskala 'Wildenstein-I'",
-      "Anführer: 'Greifbart Gichthain' [cite: 1965]",
-      "Karte: 'Erbe' (wird dem Erben-Spieler zugewiesen) [cite: 1939]"
-    ],
-    "minion_keywords": [ "Räuber [cite: 1970]" ],
-    "special_decks": [
-      "Ereignis-Deck: 'Allgemein', 'Gewässer', 'Wald' [cite: 1965]"
-    ],
-    "victory": "Alle Gegner besiegt/vertrieben UND der Erbe lebt noch. [cite: 1973]",
-    "defeat": "Der Erbe wird ausgeschaltet. [cite: 1972]"
+    "blue_cards": ["Zeitskala Wildenstein-I", "Anführer: Greifbart Gichthain", "Karte: Erbe [cite: 881]"],
+    "minion_keywords": ["Räuber [cite: 886]"],
+    "special_decks": ["Ereignisse: Allgemein, Gewässer, Wald [cite: 881]"],
+    "victory": "Alle Gegner besiegt UND der Erbe lebt noch. [cite: 889]",
+    "defeat": "Der Erbe wird ausgeschaltet. [cite: 888]"
   }
 }

@@ -2,20 +2,25 @@
   "id": "leute_nicht_spielen",
   "name": "Leute, die nicht spielen",
   "danger_calc": 4,
+  "narrative": {
+    "intro": "Chorhop, 1024 BF: Die Stadt ist bei Nacht ein gefährliches Pflaster. Ihr eskortiert das 'Glücks-Idol' zum Spielhaus 'Karfunkel-Stein'. Als ihr es betretet, beginnt die Statue plötzlich Goldstücke zu weinen... [cite: 790-798]",
+    "checks": [
+      {
+        "id": "will_check",
+        "skill": "Willenskraft",
+        "text": "Könnt ihr dem Bann des Glücks-Idols widerstehen? [cite: 809]",
+        "results": {
+          "success": "Du kannst dich dem Einfluss vollständig widersetzen. [cite: 811]",
+          "fail": "Du verlierst 1W6 Lebenspunkte, bevor du den Bann brichst. [cite: 814]"
+        }
+      }
+    ]
+  },
   "setup": {
-    "blue_cards": [
-      "Zeitskala 'Leute, die nicht spielen'",
-      "Kampfumgebung: Risiko und Gewinn",
-      "Glücks-Idol",
-      "Heldenaktion: Den Einsatz erhöhen",
-      "Karte: Am Spiel teilnehmen (Seite 'Das Spiel spielen') [cite: 817-820]"
-    ],
-    "minion_keywords": [ "Schergenkarten eurer Wahl " ],
-    "special_decks": [
-      "Ereignis-Deck (verdeckt) [cite: 818]",
-      "Anführer-Aktionsdeck (verdeckt) [cite: 819]"
-    ],
-    "victory": "Erfolgreiches Durchführen der Heldenaktion: 'Das Spiel beenden'[cite: 825].",
-    "defeat": "Die letzte Zeitmarke wird entfernt, während der Kampf noch läuft[cite: 824]."
+    "blue_cards": ["Zeitskala", "Kampfumgebung: Risiko und Gewinn", "Glücks-Idol", "Heldenaktion: Das Spiel spielen [cite: 817-820]"],
+    "minion_keywords": ["Schergen eurer Wahl"],
+    "special_decks": ["Ereignisse", "Anführer-Aktionen"],
+    "victory": "Aktion 'Das Spiel beenden' erfolgreich durchgeführt. [cite: 825]",
+    "defeat": "Letzte Zeitmarke entfernt, während Kampf noch läuft. [cite: 824]"
   }
 }
