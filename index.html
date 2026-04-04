@@ -2,10 +2,12 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Aventuria Setup-Guide</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aventuria Setup-Guide & Kampf-Assistent</title>
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/features.css">
+    <link rel="stylesheet" href="css/modal.css">
 </head>
 <body>
     <div class="app-container">
@@ -25,6 +27,7 @@
                         <option value="legendär">Legendär</option>
                     </select>
                 </div>
+                <button class="btn-outline" onclick="openRulebook()">📜 Kodex der Helden</button>
             </div>
         </header>
 
@@ -37,8 +40,14 @@
                         <option value="base_game/leute_nicht_spielen">Leute, die nicht spielen</option>
                         <option value="base_game/wildenstein_akt_1">Das Erbe von Wildenstein - Akt I</option>
                     </optgroup>
+                    <optgroup label="Erweiterungen (Beispiel)">
+                        <option value="wildenstein/wildenstein_akt_2">Wildenstein - Akt II</option>
+                        <option value="wildenstein/wildenstein_akt_3">Wildenstein - Akt III</option>
+                    </optgroup>
                 </select>
             </section>
+
+            <section id="story-area"></section>
 
             <div id="setup-display" class="hidden">
                 <h2 id="title"></h2>
@@ -48,11 +57,13 @@
                         <h3>Abenteuerkarten (Blau)</h3>
                         <ul></ul>
                     </div>
+
                     <div class="card-list" id="minions">
                         <h3>Schergendeck (Monster)</h3>
                         <p id="danger-value"></p>
                         <ul></ul>
                     </div>
+
                     <div class="card-list" id="special">
                         <h3>Spezialkarten (Grün)</h3>
                         <ul></ul>
@@ -76,6 +87,7 @@
                             </div>
                             <button onclick="nextPhase()" class="btn">Nächste Phase ➔</button>
                         </div>
+
                         <div class="card-list">
                             <h3>Zufalls-Ziel</h3>
                             <button onclick="randomTarget()" class="btn">Ziel ermitteln 🎯</button>
@@ -89,7 +101,7 @@
                 <div class="intermission-area">
                     <div class="intermission-card">
                         <h3>✨ Atempause</h3>
-                        <p>Berechne die Erholung für den nächsten Akt [cite: 644-646].</p>
+                        <p>Berechne die Erholung für den nächsten Akt[cite: 645].</p>
                         <div class="calc-row">
                             <input type="number" id="timeLeft" placeholder="Restliche Zeit" min="0">
                             <button onclick="calcRecovery()" class="btn">EP Berechnen</button>
@@ -100,6 +112,19 @@
             </div>
         </main>
     </div>
+
+    <div id="rule-modal" class="modal-backdrop">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeRulebook()">&times;</span>
+            <h2>📜 Kodex der Helden</h2>
+            <input type="text" class="search-bar" placeholder="Suche nach Phasen, LP, Proben, Atempause..." onkeyup="filterRules(this.value)">
+            <div id="rules-results">
+                </div>
+        </div>
+    </div>
+
+    <script src="js/rulebook.js"></script>
+    <script src="js/narrative.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>

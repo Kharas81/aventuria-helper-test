@@ -1,0 +1,46 @@
+{
+  "phases": [
+    {
+      "id": 1,
+      "name": "Vorbereitung",
+      "desc": "Phase 1-4 der Duell-Regeln gleichzeitig ausführen: Karten ziehen, bereit machen, Ausdauer spielen[cite: 530]."
+    },
+    {
+      "id": 2,
+      "name": "Helden-Spielzüge",
+      "desc": "Reihum agieren, Karten spielen und Angriffe durchführen [cite: 531-534]."
+    },
+    {
+      "id": 3,
+      "name": "Gegner-Spielzüge",
+      "desc": "Gegner handeln von links nach rechts mit ihren Aktionen [cite: 572-574]."
+    },
+    {
+      "id": 4,
+      "name": "Zeit-Effekte",
+      "desc": "Zeitmarke entfernen und Effekte der Zeitskala auslösen [cite: 616-617]."
+    },
+    {
+      "id": 5,
+      "name": "Ende der Runde",
+      "desc": "Startspielermarke weitergeben [cite: 620-621]."
+    }
+  ],
+  "rules": {
+    "Wiederbelebung": "Erschöpfe X Ausdauerkarten. Würfle W20 <= X. Bei Erfolg kehrt Held mit X LP zurück [cite: 677-682].",
+    "Atempause": "Erholungspunkte (EP) = Zeitmarken + 2 [cite: 645-646]. Optionen: Ausruhen (1 EP = 2 LP), Beten (2 EP = 1 Schicksalspunkt), Vorbereiten (4 EP = 1 Karte suchen) [cite: 647-653].",
+    "Sieg & Niederlage": "Siegbedingungen variieren je nach Abenteuer[cite: 623]. Bei Niederlage: Alles entfernen und bei 'Vorbereitung der Helden' neu starten [cite: 624-627]."
+  },
+  "pantheon": [
+    {
+      "name": "Praios",
+      "aspekte": "Gerechtigkeit, Magiebann, Wahrheit",
+      "tier": "Greif [cite: 126]"
+    },
+    {
+      "name": "Rondra",
+      "aspekte": "Ehre, Kampf, Mut",
+      "tier": "Löwin [cite: 126]"
+    }
+  ]
+}

@@ -1,17 +1,26 @@
 {
   "id": "silvana",
   "name": "Silvanas Befreiung",
-  "kennung": "Silvanas Befreiung",
   "danger_calc": 5,
+  "expansion": "Grundbox [cite: 146]",
+  "narrative": {
+    "intro": "Euer Freund Alrik hat euch herbeigerufen... Hinter der Tür blickt ihr in das Gesicht eines Kobolds... [cite: 715-718]",
+    "checks": [
+      {
+        "id": "chase_goblins",
+        "skill": "Körperbeherrschung [cite: 722]",
+        "text": "Die Goblins ergreifen die Flucht! Setzt ihnen nach.",
+        "results": {
+          "success": "Ein Goblin weniger im Kampf [cite: 725-726].",
+          "fail": "Füge 'Feiger Goblin' zum Schergendeck hinzu [cite: 727-729]."
+        }
+      }
+    ]
+  },
   "setup": {
-    "blue_cards": [
-      "Zeitskala 'Silvanas Befreiung'",
-      "Anführer: Keine (Scherge mit höchstem GP zählt als Anführer)",
-      "Heldenaktion: Namen erraten"
-    ],
-    "minion_keywords": ["Pirat", "Ork"],
-    "special_notes": "Falls Körperbeherrschung-Probe misslungen: 'Feiger Goblin' hinzufügen.",
-    "victory": "Alle Gegner besiegt oder vertrieben.",
-    "defeat": "Anzahl Verderbensmarken entspricht Anzahl der Helden."
+    "blue_cards": ["Zeitskala 'Silvanas Befreiung'", "Heldenaktion: Namen erraten [cite: 768-772]"],
+    "minion_keywords": ["Pirat", "Ork [cite: 770]"],
+    "victory": "Alle Gegner besiegt oder vertrieben[cite: 774].",
+    "defeat": "Verderbensmarken = Anzahl Helden[cite: 773]."
   }
 }

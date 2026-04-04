@@ -1,28 +1,45 @@
-// Wir definieren die Variablen außerhalb, damit sie überall bekannt sind
+/**
+ * app.js - Hauptlogik für den Aventuria Setup-Guide
+ */
+
 let currentPhase = 0;
 
-// Diese Funktionen hängen wir direkt an das "window" Objekt, 
-// damit die "onclick"-Attribute im HTML sie garantiert finden.
+// --- ALLGEMEINE UI FUNKTIONEN ---
 
+/**
+ * Schaltet die Sichtbarkeit von Sektionen um (z.B. Kampf-Hilfen)
+ */
 window.toggleSection = function(id) {
     const el = document.getElementById(id);
     if (el) {
         el.classList.toggle('show');
-        console.log("Sektion getoggelt:", id);
-    } else {
-        console.error("Sektion nicht gefunden:", id);
     }
 };
 
+/**
+ * Ändert einen numerischen Wert im Dashboard (z.B. Lebenspunkte)
+ */
+window.changeStat = function(id, delta) {
+    const el = document.getElementById(id);
+    if (el) {
+        let val = parseInt(el.innerText) || 0;
+        el.innerText = Math.max(0, val + delta);
+    }
+};
+
+// --- KAMPF-LOGIK (Basierend auf der Anleitung) ---
+
+/**
+ * Wechselt zur nächsten Kampfphase (1 bis 5) [cite: 524-528]
+ */
 window.nextPhase = function() {
-    // Alle Phasen-Schritte suchen
     const steps = document.querySelectorAll('.step');
     if (steps.length === 0) return;
 
-    // Aktive Markierung bei allen entfernen
+    // Aktive Markierung entfernen
     steps.forEach(s => s.classList.remove('active'));
 
-    // Zähler erhöhen (1 bis 5) [cite: 524-528]
+    // Zähler erhöhen (Loop 1-5) 
     currentPhase = (currentPhase % 5) + 1;
 
     // Neue Phase markieren
@@ -32,14 +49,9 @@ window.nextPhase = function() {
     }
 };
 
-window.changeStat = function(id, delta) {
-    const el = document.getElementById(id);
-    if (el) {
-        let val = parseInt(el.innerText) || 0;
-        el.innerText = Math.max(0, val + delta);
-    }
-};
-
+/**
+ * Ermittelt ein zufälliges Ziel unter den Helden [cite: 237, 591-593]
+ */
 window.randomTarget = function() {
     const count = parseInt(document.getElementById('heroCount').value) || 2;
     const target = Math.floor(Math.random() * count) + 1;
@@ -47,47 +59,73 @@ window.randomTarget = function() {
     if (res) res.innerText = `🎯 Ziel: Held ${target}`;
 };
 
+/**
+ * Berechnet Erholungspunkte während der Atempause 
+ * Formel: Verbleibende Zeitmarken + 2 EP
+ */
 window.calcRecovery = function() {
     const time = parseInt(document.getElementById('timeLeft').value) || 0;
     const res = document.getElementById('recoveryResult');
-    if (res) res.innerText = `${time + 2} EP`; // [cite: 645-646]
+    if (res) res.innerText = `${time + 2} EP`;
 };
 
-// --- SETUP LOGIK ---
+// --- SETUP & DATEN-LOGIK ---
 
+/**
+ * Hauptfunktion zum Laden eines Abenteuers
+ */
 async function refreshSetup() {
     const picker = document.getElementById('adventurePicker');
     if (!picker || !picker.value) return;
 
     try {
         const response = await fetch(`data/adventures/${picker.value}.json`);
-        if (!response.ok) throw new Error("Datei nicht gefunden");
+        if (!response.ok) throw new Error("Abenteuerdatei nicht gefunden");
         const data = await response.json();
         
+        // UI Komponenten aktualisieren
         renderSetup(data);
+        
+        // Narrativ-Modus (Vorlesetexte) triggern
+        if (typeof window.renderStory === 'function') {
+            window.renderStory(data);
+        }
+
         document.getElementById('setup-display').classList.remove('hidden');
-        updateHeroDashboard(); // Helden-Karten neu zeichnen
+        updateHeroDashboard(); 
     } catch (e) {
-        console.error(e);
+        console.error("Fehler beim Laden des Setups:", e);
     }
 }
 
+/**
+ * Zeichnet die Kartenlisten und berechnet GP-Werte
+ */
 function renderSetup(data) {
     const heroCount = parseInt(document.getElementById('heroCount').value) || 2;
     document.getElementById('title').innerText = data.name;
 
+    // Hilfsfunktion für Checklisten
     const createChecklist = (items) => (items || []).map(item => 
         `<li><label class="checklist-item"><input type="checkbox"> <span>${item}</span></label></li>`).join('');
 
+    // Abenteuerkarten (Blau) [cite: 188-191]
     document.querySelector('#blue-cards ul').innerHTML = createChecklist(data.setup.blue_cards);
-    document.getElementById('danger-value').innerHTML = `Gefahrenwert: <strong>${heroCount * data.danger_calc} GP</strong>`;
+    
+    // Schergendeck (GP Berechnung) [cite: 465-468, 771]
+    const totalGP = heroCount * data.danger_calc;
+    document.getElementById('danger-value').innerHTML = `Gefahrenwert: <strong>${totalGP} GP</strong>`;
     document.querySelector('#minions ul').innerHTML = createChecklist(data.setup.minion_keywords);
     
+    // Spezialkarten (Grün) [cite: 225-227]
     const specialContainer = document.getElementById('special');
     specialContainer.innerHTML = `<h3>Spezialkarten</h3><ul>` + createChecklist(data.setup.special_decks) + 
         `</ul><hr><p><strong>⚔ Sieg:</strong> ${data.setup.victory}</p><p><strong>☠ Niederlage:</strong> ${data.setup.defeat}</p>`;
 }
 
+/**
+ * Erstellt die LP-Tracker für die gewählte Heldenanzahl [cite: 149, 204]
+ */
 function updateHeroDashboard() {
     const count = parseInt(document.getElementById('heroCount').value) || 2;
     const container = document.getElementById('heroDashboard');
@@ -106,9 +144,22 @@ function updateHeroDashboard() {
     }
 }
 
-// Initialisierung beim Laden
+// --- INITIALISIERUNG ---
+
 document.addEventListener('DOMContentLoaded', () => {
     const picker = document.getElementById('adventurePicker');
+    const heroInput = document.getElementById('heroCount');
+
     if (picker) picker.addEventListener('change', refreshSetup);
+    
+    // Dashboard bei Änderung der Heldenanzahl sofort anpassen
+    if (heroInput) {
+        heroInput.addEventListener('change', () => {
+            updateHeroDashboard();
+            if (picker && picker.value) refreshSetup(); // GP neu berechnen
+        });
+    }
+
+    // Erstmaliges Dashboard-Setup
     updateHeroDashboard();
 });
