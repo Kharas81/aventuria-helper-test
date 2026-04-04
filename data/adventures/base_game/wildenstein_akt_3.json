@@ -1,0 +1,14 @@
+{
+  "id": "wildenstein_3",
+  "name": "Das Erbe von Wildenstein - Akt III",
+  "danger_calc": 7,
+  "setup": {
+    "blue_cards": [ "Zeitskala Wildenstein-III", "Anführer: Der Geisterfürst", "Handlung: Geisterbann" ],
+    "minion_keywords": [ "Untote", "Geister" ],
+    "special_decks": [ "Ereignisse: Grabkammer", "Übernatürlich" ]
+  },
+  "rewards": [
+    { "name": "Abenteuerkarte: Das Erbe ist dein!" },
+    { "name": "3 Schicksalspunkte extra" }
+  ]
+}

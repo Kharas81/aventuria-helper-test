@@ -1,138 +1,103 @@
-// Variable für den Rundenablauf
-let currentPhase = 0;
+// --- DATENBANK FÜR DIE SUCHE (Mockup) ---
+const cardDatabase = [
+    { name: "Räuber", set: "Grundbox", loc: "Box 1, Fach A" },
+    { name: "Skelett", set: "Schiff der Verlorenen", loc: "Box 2, Fach B" },
+    { name: "Greifbart", set: "Grundbox", loc: "Anführer-Stapel" },
+    { name: "Heiltrank", set: "Grundbox", loc: "Ausrüstung" }
+];
 
-// Warten, bis die Seite komplett geladen ist
-document.addEventListener('DOMContentLoaded', () => {
-    console.log("Aventuria App gestartet...");
-    
-    const picker = document.getElementById('adventurePicker');
-    const heroInp = document.getElementById('heroCount');
+const bossRules = {
+    "wildenstein_akt_1": "Greifbart erhält +1 Schaden für jeden Helden mit weniger als 10 LP.",
+    "silvanas_befreiung": "Wenn ein Pirat flieht, ziehe sofort eine neue Schergenkarte."
+};
 
-    if (picker) picker.addEventListener('change', refreshSetup);
-    if (heroInp) heroInp.addEventListener('change', () => {
-        updateHeroDashboard();
-        refreshSetup(); // GP neu berechnen bei Heldenänderung
-    });
+// --- FUNKTIONEN ---
 
-    // Initiales Dashboard
-    updateHeroDashboard();
-});
+window.searchCards = function() {
+    const query = document.getElementById('cardSearch').value.toLowerCase();
+    const resultsDiv = document.getElementById('searchResults');
+    if (query.length < 2) { resultsDiv.classList.add('hidden'); return; }
+
+    const filtered = cardDatabase.filter(c => c.name.toLowerCase().includes(query) || c.set.toLowerCase().includes(query));
+    resultsDiv.innerHTML = filtered.map(c => `
+        <div class="search-item">
+            <strong>${c.name}</strong> <span class="origin-badge">${c.set}</span>
+            <br><small>Ort: ${c.loc}</small>
+        </div>
+    `).join('');
+    resultsDiv.classList.remove('hidden');
+};
+
+window.saveLog = function() {
+    const data = {
+        adventure: document.getElementById('adventurePicker').value,
+        heroes: document.getElementById('heroCount').value,
+        date: new Date().toLocaleDateString()
+    };
+    localStorage.setItem('aventuria_save', JSON.stringify(data));
+    document.getElementById('logStatus').innerText = "Gespeichert: " + data.date;
+};
+
+window.loadLog = function() {
+    const saved = localStorage.getItem('aventuria_save');
+    if (saved) {
+        const data = JSON.parse(saved);
+        document.getElementById('adventurePicker').value = data.adventure;
+        document.getElementById('heroCount').value = data.heroes;
+        document.getElementById('logStatus').innerText = "Geladen: " + data.date;
+        refreshSetup();
+    }
+};
+
+window.validateDeck = function() {
+    const count = document.getElementById('deckCount').value;
+    const feedback = document.getElementById('deckFeedback');
+    if (count == 30) { feedback.innerText = "✅ Deck legal"; feedback.style.color = "green"; }
+    else { feedback.innerText = `❌ ${count}/30 Karten`; feedback.style.color = "red"; }
+};
+
+window.playMusic = function(type) {
+    const audio = document.getElementById('bgAudio');
+    // Beispiel-Links (Platzhalter)
+    audio.src = type === 'forest' ? 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3' : '';
+    audio.play();
+};
+
+window.stopMusic = function() { document.getElementById('bgAudio').pause(); };
+
+window.toggleSection = function(id) { document.getElementById(id).classList.toggle('show'); };
+
+// --- SETUP LOGIK ---
 
 async function refreshSetup() {
     const picker = document.getElementById('adventurePicker');
-    const path = picker.value;
-    const display = document.getElementById('setup-display');
-    
-    if (!path) {
-        if(display) display.classList.add('hidden');
-        return;
-    }
-
-    console.log("Lade Abenteuer:", path);
+    if (!picker.value) return;
 
     try {
-        // Pfad prüfen: data/adventures/ + base_game/name + .json
-        const response = await fetch(`data/adventures/${path}.json`);
-        
-        if (!response.ok) {
-            throw new Error(`Datei nicht gefunden: data/adventures/${path}.json (Status: ${response.status})`);
-        }
-        
+        const response = await fetch(`data/adventures/${picker.value}.json`);
         const data = await response.json();
-        renderSetup(data);
-        if(display) display.classList.remove('hidden');
-    } catch (error) {
-        console.error("Setup Fehler:", error);
-        alert("Fehler beim Laden: " + error.message);
-    }
-}
+        
+        // Setup anzeigen
+        document.getElementById('title').innerText = data.name;
+        document.getElementById('setup-display').classList.remove('hidden');
 
-function renderSetup(data) {
-    const heroCount = parseInt(document.getElementById('heroCount').value) || 2;
-    document.getElementById('title').innerText = data.name;
+        // Boss KI Regeln laden
+        const bossBox = document.getElementById('boss-ai');
+        const slug = picker.value.split('/').pop();
+        if (bossRules[slug]) {
+            document.getElementById('boss-text').innerText = bossRules[slug];
+            bossBox.classList.remove('hidden');
+        } else {
+            bossBox.classList.add('hidden');
+        }
 
-    // Funktion für Checkboxen
-    const createChecklist = (items) => {
-        if (!items || items.length === 0) return "<li>Keine Einträge</li>";
-        return items.map(item => `
-            <li>
-                <label class="checklist-item">
-                    <input type="checkbox"> <span>${item}</span>
-                </label>
-            </li>
+        // Belohnungen (Wegweiser)
+        const rewardDiv = document.getElementById('reward-display');
+        rewardDiv.innerHTML = (data.rewards || ["Keine Belohnung gelistet"]).map(r => `
+            <div class="reward-card">🎁 ${r.name || r}</div>
         `).join('');
-    };
 
-    // Listen befüllen
-    document.querySelector('#blue-cards ul').innerHTML = createChecklist(data.setup.blue_cards);
-    
-    // GP Berechnung [cite: 465-468, 771, 887]
-    const dangerValue = heroCount * data.danger_calc;
-    document.getElementById('danger-value').innerHTML = `Ziel-Gefahrenwert: <strong>${dangerValue} GP</strong>`;
-    document.querySelector('#minions ul').innerHTML = createChecklist(data.setup.minion_keywords);
-
-    // Spezialkarten
-    const specialContainer = document.getElementById('special');
-    if (specialContainer) {
-        let html = `<h3>Spezialkarten (Grün)</h3><ul>`;
-        html += (data.setup.special_decks || []).map(d => `
-            <li><label class="checklist-item"><input type="checkbox"> <span>${d}</span></label></li>
-        `).join('');
-        html += `</ul><hr>`;
-        html += `<p><strong>⚔ Sieg:</strong> ${data.setup.victory}</p>`;
-        html += `<p><strong>☠ Niederlage:</strong> ${data.setup.defeat}</p>`;
-        specialContainer.innerHTML = html;
-    }
+    } catch (e) { console.error(e); }
 }
 
-// --- TEST FEATURES ---
-
-// 1. Phasen-Steuerung 
-function nextPhase() {
-    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-    currentPhase = (currentPhase % 5) + 1;
-    const activeStep = document.getElementById(`phase${currentPhase}`);
-    if(activeStep) activeStep.classList.add('active');
-}
-
-// 2. Helden-Dashboard (LP & Schicksal) [cite: 664]
-function updateHeroDashboard() {
-    const count = parseInt(document.getElementById('heroCount').value) || 2;
-    const container = document.getElementById('heroDashboard');
-    if(!container) return;
-    
-    container.innerHTML = "";
-    for(let i=1; i<=count; i++) {
-        container.innerHTML += `
-            <div class="hero-card">
-                <h4>Held ${i}</h4>
-                <div class="stat">LP: <span id="lp${i}">40</span> 
-                    <button onclick="changeStat('lp${i}', -1)">-</button>
-                    <button onclick="changeStat('lp${i}', 1)">+</button>
-                </div>
-                <div class="stat">SchiP: <span id="sp${i}">2</span> 
-                    <button onclick="changeStat('sp${i}', -1)">-</button>
-                    <button onclick="changeStat('sp${i}', 1)">+</button>
-                </div>
-            </div>`;
-    }
-}
-
-function changeStat(id, delta) {
-    const el = document.getElementById(id);
-    if(el) el.innerText = Math.max(0, parseInt(el.innerText) + delta);
-}
-
-// 3. Zufall Target [cite: 591-592]
-function randomTarget() {
-    const count = parseInt(document.getElementById('heroCount').value) || 2;
-    const target = Math.floor(Math.random() * count) + 1;
-    document.getElementById('targetResult').innerText = `🎯 Ziel: Held ${target}`;
-}
-
-// 4. Atempause [cite: 645-646]
-function calcRecovery() {
-    const time = parseInt(document.getElementById('timeLeft').value) || 0;
-    const ep = time + 2;
-    document.getElementById('recoveryResult').innerText = `Erholungspunkte: ${ep}`;
-}
+document.getElementById('adventurePicker').addEventListener('change', refreshSetup);

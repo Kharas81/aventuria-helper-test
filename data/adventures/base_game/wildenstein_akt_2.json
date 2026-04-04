@@ -1,0 +1,14 @@
+{
+  "id": "wildenstein_2",
+  "name": "Das Erbe von Wildenstein - Akt II",
+  "danger_calc": 6,
+  "setup": {
+    "blue_cards": ["Zeitskala Wildenstein-II", "Anführer: Baron von Wildenstein", "Handlung: Hypnose brechen"],
+    "minion_keywords": ["Wächter", "Diener"],
+    "special_decks": ["Anführer-Aktionen: Übernatürlich", "Nekromantie"]
+  },
+  "rewards": [
+    {"name": "Belohnungskarte: Gunst der Baronin"},
+    {"name": "Ausrüstung: Alter Dolch"}
+  ]
+}
