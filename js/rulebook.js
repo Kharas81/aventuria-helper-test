@@ -1,9 +1,29 @@
 /**
- * rulebook.js - Modulares Ladesystem mit Deep-Linking
+ * rulebook.js - Modulares Ladesystem mit Index und Suchfunktion
  */
 let rulesData = [];
 let currentPage = 1;
 const MAX_PAGES = 24;
+
+// Index-Daten basierend auf dem Inhaltsverzeichnis der Anleitung [cite: 140]
+const indexData = [
+    { p: 1, title: "Titelblatt" },
+    { p: 2, title: "Was ist Aventurien?" },
+    { p: 5, title: "Götter & Währung" },
+    { p: 6, title: "Vorbereitung" },
+    { p: 7, title: "Spielmaterial" },
+    { p: 9, title: "Das Abenteuer" },
+    { p: 10, title: "Der Kampf (Setup)" },
+    { p: 13, title: "Kampfablauf" },
+    { p: 15, title: "Sieg & Atempause" },
+    { p: 16, title: "Ergänzende Regeln" },
+    { p: 17, title: "Silvanas Befreiung" },
+    { p: 19, title: "Leute, die nicht spielen" },
+    { p: 20, title: "Wildenstein Akt I" },
+    { p: 21, title: "Wildenstein Akt II" },
+    { p: 23, title: "Wildenstein Akt III" },
+    { p: 24, title: "Übersichten" }
+];
 
 async function initRulebook() {
     try {
@@ -13,44 +33,37 @@ async function initRulebook() {
             ...regData.phases.map(p => ({ title: `Phase ${p.id}: ${p.name}`, text: p.desc })),
             ...Object.entries(regData.rules).map(([key, val]) => ({ title: key, text: val }))
         ];
+        renderIndex();
     } catch (e) { console.error("Initialisierungsfehler:", e); }
+}
+
+function renderIndex() {
+    const list = document.getElementById('manual-index');
+    list.innerHTML = indexData.map(item => 
+        `<li onclick="jumpToPage(${item.p})">S. ${item.p}: ${item.title}</li>`
+    ).join('');
 }
 
 window.openRulebook = () => { 
     document.getElementById('rule-modal').style.display = 'flex'; 
-    switchTab('search'); // Standardmäßig beim Öffnen die Suche zeigen
 };
 
 window.closeRulebook = () => { 
     document.getElementById('rule-modal').style.display = 'none'; 
 };
 
-// Neue Funktion für Info-Buttons
 window.jumpToPage = (pageNumber) => {
-    document.getElementById('rule-modal').style.display = 'flex';
     switchTab('reader');
     loadPage(pageNumber);
 };
 
 window.switchTab = (tab) => {
-    const searchTab = document.getElementById('tab-search');
-    const readerTab = document.getElementById('tab-reader');
-    const btnSearch = document.getElementById('btn-search');
-    const btnReader = document.getElementById('btn-reader');
-
-    if (tab === 'search') {
-        searchTab.classList.remove('hidden');
-        readerTab.classList.add('hidden');
-        btnSearch.classList.add('active');
-        btnReader.classList.remove('active');
-        renderRules('');
-    } else {
-        searchTab.classList.add('hidden');
-        readerTab.classList.remove('hidden');
-        btnSearch.classList.remove('active');
-        btnReader.classList.add('active');
-        loadPage(currentPage);
-    }
+    document.getElementById('tab-search').classList.toggle('hidden', tab !== 'search');
+    document.getElementById('tab-reader').classList.toggle('hidden', tab !== 'reader');
+    document.getElementById('btn-search').classList.toggle('active', tab === 'search');
+    document.getElementById('btn-reader').classList.toggle('active', tab === 'reader');
+    
+    if(tab === 'reader') loadPage(currentPage);
 };
 
 async function loadPage(pageNumber) {
@@ -58,12 +71,15 @@ async function loadPage(pageNumber) {
     const pageNumDisplay = document.getElementById('currentPageNum');
     const formattedNum = pageNumber.toString().padStart(2, '0');
     
+    container.innerHTML = "Lade...";
     try {
         const resp = await fetch(`data/manual/base_game/page_${formattedNum}.json`);
         const data = await resp.json();
-        container.innerHTML = `<h3>${data.title}</h3><div class="reader-text">${data.content}</div>`;
+        container.innerHTML = `<div class="reader-text"><h4>${data.title}</h4>${data.content}</div>`;
         pageNumDisplay.innerText = pageNumber;
         currentPage = pageNumber;
+        // Scrollt nach oben bei Seitenwechsel
+        container.scrollTop = 0;
     } catch (e) {
         container.innerHTML = `<p>Seite ${formattedNum} nicht gefunden.</p>`;
     }
@@ -74,6 +90,7 @@ window.prevPage = () => { if(currentPage > 1) loadPage(currentPage - 1); };
 
 window.filterRules = (term) => {
     const container = document.getElementById('rules-results');
+    if(!term) { container.innerHTML = ""; return; }
     const filtered = rulesData.filter(r => r.title.toLowerCase().includes(term.toLowerCase()) || r.text.toLowerCase().includes(term.toLowerCase()));
     container.innerHTML = filtered.map(r => `<div class="rule-entry"><h4>${r.title}</h4><p>${r.text}</p></div>`).join('');
 };

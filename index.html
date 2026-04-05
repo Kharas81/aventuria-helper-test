@@ -108,21 +108,36 @@
     <div id="rule-modal" class="modal-backdrop">
         <div class="modal-content">
             <span class="close-modal" onclick="closeRulebook()">&times;</span>
-            <div class="modal-tabs">
-                <button class="tab-btn active" id="btn-search" onclick="switchTab('search')">Regel-Suche</button>
-                <button class="tab-btn" id="btn-reader" onclick="switchTab('reader')">Anleitung Blättern</button>
-            </div>
-            <div id="tab-search">
-                <input type="text" class="search-bar" placeholder="Nach Regeln suchen..." onkeyup="filterRules(this.value)">
-                <div id="rules-results"></div>
-            </div>
-            <div id="tab-reader" class="hidden">
-                <div class="reader-controls">
-                    <button onclick="prevPage()">◀</button>
-                    <span>Seite <span id="currentPageNum">1</span> / 24</span>
-                    <button onclick="nextPage()">▶</button>
+            
+            <div class="modal-layout">
+                <nav class="modal-sidebar">
+                    <h4>Inhalt</h4>
+                    <ul id="manual-index">
+                        </ul>
+                </nav>
+
+                <div class="modal-main">
+                    <header class="modal-nav">
+                        <button class="tab-btn active" id="btn-search" onclick="switchTab('search')">🔍 Kodex (Suche)</button>
+                        <button class="tab-btn" id="btn-reader" onclick="switchTab('reader')">📖 Regelbuch (Lesen)</button>
+                    </header>
+
+                    <div id="tab-search" class="tab-content">
+                        <input type="text" class="search-bar" placeholder="Regel suchen..." onkeyup="filterRules(this.value)">
+                        <div id="rules-results"></div>
+                    </div>
+
+                    <div id="tab-reader" class="tab-content hidden">
+                        <div class="reader-container">
+                            <div id="page-content" class="reader-page"></div>
+                            <footer class="reader-footer">
+                                <button onclick="prevPage()">◀ Zurück</button>
+                                <span>Seite <span id="currentPageNum">1</span> / 24</span>
+                                <button onclick="nextPage()">Weiter ▶</button>
+                            </footer>
+                        </div>
+                    </div>
                 </div>
-                <div id="page-content"></div>
             </div>
         </div>
     </div>
