@@ -23,169 +23,85 @@
     font-size: 2.5em; cursor: pointer; color: #5c1e1e; z-index: 100;
 }
 
-/* --- LAYOUT AUFTEILUNG --- */
+/* --- LAYOUT --- */
 .modal-layout {
     display: flex;
     height: 100%;
     overflow: hidden;
 }
 
-/* --- SIDEBAR (INDEX) --- */
+/* SIDEBAR (INDEX) */
 .modal-sidebar {
     width: 280px;
     background: #e6dec9;
     border-right: 2px solid #8b4513;
     padding: 20px;
     overflow-y: auto;
-    display: flex;
-    flex-direction: column;
 }
 
 .modal-sidebar h4 { 
-    margin-top: 0; 
-    color: #5c1e1e; 
-    border-bottom: 2px solid #8b4513;
-    padding-bottom: 5px;
-    font-variant: small-caps;
+    margin-top: 0; color: #5c1e1e; border-bottom: 2px solid #8b4513;
+    padding-bottom: 5px; font-variant: small-caps;
 }
 
 .modal-sidebar ul { list-style: none; padding: 0; margin: 0; }
 
 .modal-sidebar li {
-    padding: 10px 8px;
-    border-bottom: 1px solid rgba(139, 69, 19, 0.1);
-    font-size: 0.95em;
-    cursor: pointer;
-    transition: background 0.2s;
+    padding: 10px 8px; border-bottom: 1px solid rgba(139, 69, 19, 0.1);
+    font-size: 0.95em; cursor: pointer; transition: background 0.2s;
 }
 
-.modal-sidebar li:hover { 
-    background: #dcd0ba; 
-    color: #5c1e1e;
-    font-weight: bold;
-}
+.modal-sidebar li:hover { background: #dcd0ba; font-weight: bold; }
 
-/* --- HAUPTBEREICH --- */
+/* HAUPTBEREICH */
 .modal-main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    background: #f4e7d3;
+    flex: 1; display: flex; flex-direction: column; background: #f4e7d3;
 }
 
 .modal-nav {
-    display: flex;
-    padding: 10px 20px;
-    background: #dcd0ba;
-    border-bottom: 2px solid #8b4513;
-    gap: 15px;
+    display: flex; padding: 10px 20px; background: #dcd0ba;
+    border-bottom: 2px solid #8b4513; gap: 15px;
 }
 
-/* Tab-Buttons */
 .tab-btn {
-    background: #f4e7d3;
-    border: 1px solid #8b4513;
-    padding: 8px 20px;
-    cursor: pointer;
-    font-weight: bold;
-    font-family: inherit;
-    border-radius: 4px;
+    background: #f4e7d3; border: 1px solid #8b4513; padding: 8px 20px;
+    cursor: pointer; font-weight: bold; font-family: inherit; border-radius: 4px;
 }
 
-.tab-btn.active {
-    background: #5c1e1e;
-    color: white;
-    border-color: #5c1e1e;
-}
+.tab-btn.active { background: #5c1e1e; color: white; border-color: #5c1e1e; }
 
-/* --- CONTENT BEREICHE --- */
-.tab-content {
-    flex: 1;
-    padding: 25px;
-    overflow-y: auto;
-}
+.tab-content { flex: 1; padding: 25px; overflow-y: auto; }
 
-/* Reader-Spezifisch */
-.reader-container {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
+/* --- READER & BILDER --- */
+.reader-container { display: flex; flex-direction: column; height: 100%; }
 
-.reader-page {
-    flex: 1;
-    overflow-y: auto;
-    padding-right: 15px;
-    /* Garantiert feste Position der Navigation unten */
-    min-height: 0; 
-}
+.reader-page { flex: 1; overflow-y: auto; padding-right: 15px; }
 
 .reader-text {
-    font-family: 'Georgia', serif;
-    line-height: 1.6;
-    color: #2e241f;
-    max-width: 800px;
-    margin: 0 auto;
+    font-family: 'Georgia', serif; line-height: 1.6; color: #2e241f;
+    max-width: 850px; margin: 0 auto;
 }
 
-.reader-text h4 {
-    color: #5c1e1e;
-    font-size: 1.5em;
-    border-bottom: 1px solid #8b4513;
-    margin-bottom: 20px;
-}
-
-.page-body {
-    font-size: 1.1em;
-}
-
-/* Bild-Styling für Original-Anleitung */
+/* Der Rahmen-Trick für einheitliche Bilder */
 .manual-page-img {
-    display: block;
-    max-width: 100%;
-    height: auto;
+    display: block; width: 100%; max-width: 800px; height: auto;
     margin: 0 auto 25px auto;
-    border: 1px solid #8b4513;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    border: 8px solid #fdf5e6; /* Heller Rahmen kaschiert Schnittkanten */
+    outline: 1px solid #8b4513; /* Dünne Außenlinie */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    background-color: white;
 }
 
-/* Navigation unten */
 .reader-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 0;
-    margin-top: 10px;
-    border-top: 2px solid #8b4513;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 15px 0; margin-top: 10px; border-top: 2px solid #8b4513;
 }
 
-.reader-footer button {
-    background: #8b4513;
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 4px;
-    cursor: pointer;
+/* KODEX SUCHE */
+.search-bar { width: 100%; padding: 12px; margin-bottom: 20px; border: 2px solid #8b4513; }
+.rule-entry { 
+    background: rgba(255, 255, 255, 0.4); padding: 15px; margin-bottom: 15px;
+    border-left: 5px solid #5c1e1e; border-radius: 4px;
 }
-
-/* --- KODEX SUCHE --- */
-.search-bar {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 20px;
-    font-size: 1.1em;
-    border: 2px solid #8b4513;
-    background: #fff;
-}
-
-.rule-entry {
-    background: rgba(255, 255, 255, 0.4);
-    padding: 15px;
-    border-radius: 4px;
-    border-left: 5px solid #5c1e1e;
-    margin-bottom: 15px;
-}
-
-.rule-entry h4 { margin-top: 0; color: #5c1e1e; }
 
 .hidden { display: none; }
