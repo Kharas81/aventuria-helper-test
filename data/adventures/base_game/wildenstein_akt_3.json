@@ -2,13 +2,26 @@
   "id": "wildenstein_3",
   "name": "Das Erbe von Wildenstein - Akt III",
   "danger_calc": 7,
-  "setup": {
-    "blue_cards": [ "Zeitskala Wildenstein-III", "Anführer: Der Geisterfürst", "Handlung: Geisterbann" ],
-    "minion_keywords": [ "Untote", "Geister" ],
-    "special_decks": [ "Ereignisse: Grabkammer", "Übernatürlich" ]
+  "narrative": {
+    "intro": "Ihr habt den Geheimgang gefunden. Die Spuren des Barons führen in einen schaurigen Forst. Es ist genau die Art Wald in den Schattenlanden, vor der man euch immer gewarnt hat [cite: 975-987].",
+    "checks": [
+      {
+        "skill": "Körperbeherrschung",
+        "text": "Seilt euch am Wehrgang in den Forst ab.",
+        "results": { "success": "Du seilst dich erfolgreich ab [cite: 982].", "fail": "Du stürzt oder rutschst ab und verlierst LP [cite: 983-984]." }
+      },
+      {
+        "skill": "Wildnisleben",
+        "text": "Folgt den Spuren des Barons im Dickicht.",
+        "results": { "success": "Du findest eine Abkürzung (+1 Schicksalspunkt) [cite: 990-992].", "fail": "Du verlierst die Spur (Zeitmarke wird entfernt) [cite: 995-996]." }
+      }
+    ]
   },
-  "rewards": [
-    { "name": "Abenteuerkarte: Das Erbe ist dein!" },
-    { "name": "3 Schicksalspunkte extra" }
-  ]
+  "setup": {
+    "blue_cards": ["Zeitskala Wildenstein-III", "Anführer: Grautax", "Dämon: Irrhalk [cite: 1018-1019]"],
+    "minion_keywords": ["Skelett [cite: 1026]"],
+    "special_decks": ["Anführer-Aktionen: Nekromantie", "Ereignisse: Untotenbeschwörung [cite: 1020-1021]"],
+    "victory": "Grautax, der falsche Baron, wurde besiegt[cite: 1031].",
+    "defeat": "Anzahl Verderbensmarken = Anzahl Helden[cite: 1030]."
+  }
 }

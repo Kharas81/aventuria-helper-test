@@ -1,5 +1,5 @@
 /**
- * app.js - Hauptlogik für den Aventuria Setup-Guide
+ * app.js - Hauptsteuerung für den Aventuria Setup-Guide
  */
 
 let currentPhase = 0;
@@ -7,7 +7,7 @@ let currentPhase = 0;
 // --- ALLGEMEINE UI FUNKTIONEN ---
 
 /**
- * Schaltet die Sichtbarkeit von Sektionen um (z.B. Kampf-Hilfen)
+ * Schaltet Sektionen ein/aus (z.B. Kampf-Hilfen)
  */
 window.toggleSection = function(id) {
     const el = document.getElementById(id);
@@ -17,7 +17,7 @@ window.toggleSection = function(id) {
 };
 
 /**
- * Ändert einen numerischen Wert im Dashboard (z.B. Lebenspunkte)
+ * Ändert Werte im Helden-Dashboard (LP)
  */
 window.changeStat = function(id, delta) {
     const el = document.getElementById(id);
@@ -30,19 +30,17 @@ window.changeStat = function(id, delta) {
 // --- KAMPF-LOGIK (Basierend auf der Anleitung) ---
 
 /**
- * Wechselt zur nächsten Kampfphase (1 bis 5) [cite: 524-528]
+ * Wechselt durch die 5 Phasen einer Kampfrunde [cite: 524-528, 1071-1077]
  */
 window.nextPhase = function() {
     const steps = document.querySelectorAll('.step');
     if (steps.length === 0) return;
 
-    // Aktive Markierung entfernen
     steps.forEach(s => s.classList.remove('active'));
 
-    // Zähler erhöhen (Loop 1-5) 
+    // Zähler 1-5 [cite: 1072-1076]
     currentPhase = (currentPhase % 5) + 1;
 
-    // Neue Phase markieren
     const activeStep = document.getElementById(`phase${currentPhase}`);
     if (activeStep) {
         activeStep.classList.add('active');
@@ -50,7 +48,7 @@ window.nextPhase = function() {
 };
 
 /**
- * Ermittelt ein zufälliges Ziel unter den Helden [cite: 237, 591-593]
+ * Ermittelt ein zufälliges Ziel unter den Helden [cite: 591-593]
  */
 window.randomTarget = function() {
     const count = parseInt(document.getElementById('heroCount').value) || 2;
@@ -60,8 +58,7 @@ window.randomTarget = function() {
 };
 
 /**
- * Berechnet Erholungspunkte während der Atempause 
- * Formel: Verbleibende Zeitmarken + 2 EP
+ * Berechnet Erholungspunkte (EP) in der Atempause [cite: 645-646]
  */
 window.calcRecovery = function() {
     const time = parseInt(document.getElementById('timeLeft').value) || 0;
@@ -72,7 +69,7 @@ window.calcRecovery = function() {
 // --- SETUP & DATEN-LOGIK ---
 
 /**
- * Hauptfunktion zum Laden eines Abenteuers
+ * Lädt Abenteuer-Daten und triggert das UI-Update
  */
 async function refreshSetup() {
     const picker = document.getElementById('adventurePicker');
@@ -80,13 +77,12 @@ async function refreshSetup() {
 
     try {
         const response = await fetch(`data/adventures/${picker.value}.json`);
-        if (!response.ok) throw new Error("Abenteuerdatei nicht gefunden");
+        if (!response.ok) throw new Error("Datei nicht gefunden");
         const data = await response.json();
         
-        // UI Komponenten aktualisieren
         renderSetup(data);
         
-        // Narrativ-Modus (Vorlesetexte) triggern
+        // Narrative Story (Vorlesetexte) laden
         if (typeof window.renderStory === 'function') {
             window.renderStory(data);
         }
@@ -94,37 +90,45 @@ async function refreshSetup() {
         document.getElementById('setup-display').classList.remove('hidden');
         updateHeroDashboard(); 
     } catch (e) {
-        console.error("Fehler beim Laden des Setups:", e);
+        console.error("Setup-Fehler:", e);
     }
 }
 
 /**
- * Zeichnet die Kartenlisten und berechnet GP-Werte
+ * Rendert die Kartenlisten und berechnet den GP-Wert [cite: 466, 479]
  */
 function renderSetup(data) {
     const heroCount = parseInt(document.getElementById('heroCount').value) || 2;
     document.getElementById('title').innerText = data.name;
 
-    // Hilfsfunktion für Checklisten
     const createChecklist = (items) => (items || []).map(item => 
         `<li><label class="checklist-item"><input type="checkbox"> <span>${item}</span></label></li>`).join('');
 
     // Abenteuerkarten (Blau) [cite: 188-191]
     document.querySelector('#blue-cards ul').innerHTML = createChecklist(data.setup.blue_cards);
     
-    // Schergendeck (GP Berechnung) [cite: 465-468, 771]
+    // GP Berechnung & Info-Button zur Anleitung (Seite 12) [cite: 465-468, 479]
     const totalGP = heroCount * data.danger_calc;
-    document.getElementById('danger-value').innerHTML = `Gefahrenwert: <strong>${totalGP} GP</strong>`;
+    document.getElementById('danger-value').innerHTML = `
+        Gefahrenwert: <strong>${totalGP} GP</strong> 
+        <button class="info-btn" onclick="jumpToPage(12)">i</button>
+    `;
+    
     document.querySelector('#minions ul').innerHTML = createChecklist(data.setup.minion_keywords);
     
     // Spezialkarten (Grün) [cite: 225-227]
     const specialContainer = document.getElementById('special');
-    specialContainer.innerHTML = `<h3>Spezialkarten</h3><ul>` + createChecklist(data.setup.special_decks) + 
-        `</ul><hr><p><strong>⚔ Sieg:</strong> ${data.setup.victory}</p><p><strong>☠ Niederlage:</strong> ${data.setup.defeat}</p>`;
+    specialContainer.innerHTML = `
+        <h3>Spezialkarten</h3>
+        <ul>${createChecklist(data.setup.special_decks)}</ul>
+        <hr>
+        <p><strong>⚔ Sieg:</strong> ${data.setup.victory}</p>
+        <p><strong>☠ Niederlage:</strong> ${data.setup.defeat}</p>
+    `;
 }
 
 /**
- * Erstellt die LP-Tracker für die gewählte Heldenanzahl [cite: 149, 204]
+ * Erstellt LP-Tracker für das Helden-Dashboard
  */
 function updateHeroDashboard() {
     const count = parseInt(document.getElementById('heroCount').value) || 2;
@@ -144,22 +148,17 @@ function updateHeroDashboard() {
     }
 }
 
-// --- INITIALISIERUNG ---
-
+// Initialisierung
 document.addEventListener('DOMContentLoaded', () => {
     const picker = document.getElementById('adventurePicker');
     const heroInput = document.getElementById('heroCount');
 
     if (picker) picker.addEventListener('change', refreshSetup);
-    
-    // Dashboard bei Änderung der Heldenanzahl sofort anpassen
     if (heroInput) {
         heroInput.addEventListener('change', () => {
             updateHeroDashboard();
-            if (picker && picker.value) refreshSetup(); // GP neu berechnen
+            if (picker && picker.value) refreshSetup();
         });
     }
-
-    // Erstmaliges Dashboard-Setup
     updateHeroDashboard();
 });

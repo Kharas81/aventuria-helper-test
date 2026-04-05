@@ -2,13 +2,26 @@
   "id": "wildenstein_2",
   "name": "Das Erbe von Wildenstein - Akt II",
   "danger_calc": 6,
-  "setup": {
-    "blue_cards": ["Zeitskala Wildenstein-II", "Anführer: Baron von Wildenstein", "Handlung: Hypnose brechen"],
-    "minion_keywords": ["Wächter", "Diener"],
-    "special_decks": ["Anführer-Aktionen: Übernatürlich", "Nekromantie"]
+  "narrative": {
+    "intro": "Dorf Wildenstein, im Spätherbst: Bei Sonnenaufgang werdet ihr durch den Ruf von Raben geweckt. Sie fliegen zur Burg, deren Silhouette bedrohlich auf einem fernen Fels thront. Ein Gefühl der Beklommenheit überkommt euch [cite: 906-909].",
+    "checks": [
+      {
+        "skill": "Willenskraft",
+        "text": "Könnt ihr der Beklommenheit widerstehen? ",
+        "results": { "success": "Du schöpfst Mut (+1 Schicksalspunkt) [cite: 911].", "fail": "Du bist nervös und zweifelnd (Lege 1 Schicksalspunkt ab)[cite: 913]." }
+      },
+      {
+        "skill": "Handwerk",
+        "text": "Helft den Dorfbewohnern bei Reparaturen.",
+        "results": { "success": "Du erhältst ein Zwölfgötter-Amulett [cite: 922-924].", "fail": "Du stümperst herum und verlierst 1W6 LP [cite: 925-926]." }
+      }
+    ]
   },
-  "rewards": [
-    {"name": "Belohnungskarte: Gunst der Baronin"},
-    {"name": "Ausrüstung: Alter Dolch"}
-  ]
+  "setup": {
+    "blue_cards": ["Zeitskala Wildenstein-II", "Anführer: Baron von Wildenstein", "Handlung: Hypnose brechen [cite: 951]"],
+    "minion_keywords": ["Wächter", "Diener [cite: 956]"],
+    "special_decks": ["Anführer-Aktionen: Übernatürlich", "Nekromantie [cite: 952]"],
+    "victory": "Alle Gegner besiegt oder Baron vertrieben[cite: 958].",
+    "defeat": "Der Erbe wird ausgeschaltet[cite: 957]."
+  }
 }
