@@ -1,56 +1,71 @@
+/* --- MODAL BASIS --- */
 .modal-backdrop {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.85);
+    background: rgba(0, 0, 0, 0.9);
     display: none; justify-content: center; align-items: center;
     z-index: 2000;
 }
 
 .modal-content {
     background: #f4e7d3;
-    width: 95vw; max-width: 1100px;
-    height: 85vh;
+    width: 95vw; max-width: 1200px;
+    height: 90vh;
     border: 3px solid #5c1e1e;
     border-radius: 8px;
     position: relative;
     display: flex; flex-direction: column;
+    box-shadow: 0 0 50px rgba(0,0,0,0.5);
 }
 
 .close-modal {
     position: absolute; top: 10px; right: 20px;
-    font-size: 2.5em; cursor: pointer; color: #5c1e1e; z-index: 10;
+    font-size: 2.5em; cursor: pointer; color: #5c1e1e; z-index: 100;
 }
 
-/* Layout-Aufteilung */
+/* --- LAYOUT AUFTEILUNG --- */
 .modal-layout {
     display: flex;
     height: 100%;
     overflow: hidden;
 }
 
-/* Seitenleiste (Index) */
+/* --- SIDEBAR (INDEX) --- */
 .modal-sidebar {
-    width: 250px;
+    width: 280px;
     background: #e6dec9;
     border-right: 2px solid #8b4513;
     padding: 20px;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
 }
 
-.modal-sidebar h4 { margin-top: 0; color: #5c1e1e; border-bottom: 1px solid #8b4513; }
+.modal-sidebar h4 { 
+    margin-top: 0; 
+    color: #5c1e1e; 
+    border-bottom: 2px solid #8b4513;
+    padding-bottom: 5px;
+    font-variant: small-caps;
+}
 
-.modal-sidebar ul { list-style: none; padding: 0; }
+.modal-sidebar ul { list-style: none; padding: 0; margin: 0; }
 
 .modal-sidebar li {
-    padding: 8px 5px;
-    border-bottom: 1px solid rgba(139, 69, 19, 0.2);
-    font-size: 0.9em;
+    padding: 10px 8px;
+    border-bottom: 1px solid rgba(139, 69, 19, 0.1);
+    font-size: 0.95em;
     cursor: pointer;
+    transition: background 0.2s;
 }
 
-.modal-sidebar li:hover { background: #dcd0ba; font-weight: bold; }
+.modal-sidebar li:hover { 
+    background: #dcd0ba; 
+    color: #5c1e1e;
+    font-weight: bold;
+}
 
-/* Hauptbereich */
+/* --- HAUPTBEREICH --- */
 .modal-main {
     flex: 1;
     display: flex;
@@ -60,19 +75,37 @@
 
 .modal-nav {
     display: flex;
-    padding: 15px;
+    padding: 10px 20px;
     background: #dcd0ba;
     border-bottom: 2px solid #8b4513;
-    gap: 10px;
+    gap: 15px;
 }
 
+/* Tab-Buttons */
+.tab-btn {
+    background: #f4e7d3;
+    border: 1px solid #8b4513;
+    padding: 8px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: inherit;
+    border-radius: 4px;
+}
+
+.tab-btn.active {
+    background: #5c1e1e;
+    color: white;
+    border-color: #5c1e1e;
+}
+
+/* --- CONTENT BEREICHE --- */
 .tab-content {
     flex: 1;
-    padding: 20px;
+    padding: 25px;
     overflow-y: auto;
 }
 
-/* Regelbuch Container mit fester Größe */
+/* Reader-Spezifisch */
 .reader-container {
     display: flex;
     flex-direction: column;
@@ -83,28 +116,76 @@
     flex: 1;
     overflow-y: auto;
     padding-right: 15px;
-    /* Feste Basis-Optik */
-    min-height: 400px; 
+    /* Garantiert feste Position der Navigation unten */
+    min-height: 0; 
 }
 
+.reader-text {
+    font-family: 'Georgia', serif;
+    line-height: 1.6;
+    color: #2e241f;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.reader-text h4 {
+    color: #5c1e1e;
+    font-size: 1.5em;
+    border-bottom: 1px solid #8b4513;
+    margin-bottom: 20px;
+}
+
+.page-body {
+    font-size: 1.1em;
+}
+
+/* Bild-Styling für Original-Anleitung */
+.manual-page-img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto 25px auto;
+    border: 1px solid #8b4513;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Navigation unten */
 .reader-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px 0;
+    margin-top: 10px;
     border-top: 2px solid #8b4513;
-    background: #f4e7d3;
 }
 
-.reader-text {
-    font-family: 'Crimson Text', serif;
-    line-height: 1.6;
-    color: #2e241f;
-}
-
-.tab-btn.active {
-    background: #5c1e1e;
+.reader-footer button {
+    background: #8b4513;
     color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
 }
+
+/* --- KODEX SUCHE --- */
+.search-bar {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    font-size: 1.1em;
+    border: 2px solid #8b4513;
+    background: #fff;
+}
+
+.rule-entry {
+    background: rgba(255, 255, 255, 0.4);
+    padding: 15px;
+    border-radius: 4px;
+    border-left: 5px solid #5c1e1e;
+    margin-bottom: 15px;
+}
+
+.rule-entry h4 { margin-top: 0; color: #5c1e1e; }
 
 .hidden { display: none; }
