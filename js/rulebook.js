@@ -1,52 +1,95 @@
 /**
- * rulebook.js - Suche und Blätterfunktion für die Regeln
+ * rulebook.js - Modulares Ladesystem für die Anleitung
  */
 let rulesData = [];
-let manualPages = [];
-let currentPage = 0;
+let currentPage = 1; // Wir starten bei Seite 1
+const MAX_PAGES = 24;
 
 async function initRulebook() {
     try {
-        const [regResp, pagResp] = await Promise.all([
-            fetch('data/manual.json'),
-            fetch('data/manual_pages.json')
-        ]);
-        
+        // Allgemeine Suchdaten laden (für die Schnellsuche)
+        const regResp = await fetch('data/manual.json');
         const regData = await regResp.json();
-        manualPages = await pagResp.json();
 
         rulesData = [
             ...regData.phases.map(p => ({ title: `Phase ${p.id}: ${p.name}`, text: p.desc })),
             ...Object.entries(regData.rules).map(([key, val]) => ({ title: key, text: val }))
         ];
-    } catch (e) { console.error("Regel-Ladefehler:", e); }
+    } catch (e) { 
+        console.error("Fehler beim Initialisieren der Regelsuche:", e); 
+    }
 }
 
-window.openRulebook = () => { document.getElementById('rule-modal').style.display = 'flex'; renderRules(''); };
-window.closeRulebook = () => { document.getElementById('rule-modal').style.display = 'none'; };
+/**
+ * Lädt eine spezifische Seite vom Server
+ */
+async function loadPage(pageNumber) {
+    const container = document.getElementById('page-content');
+    const pageNumDisplay = document.getElementById('currentPageNum');
+    
+    // Führende Null für Dateinamen hinzufügen (z.B. page_01.json)
+    const formattedNum = pageNumber.toString().padStart(2, '0');
+    
+    try {
+        container.innerHTML = "<p>Lade Seite...</p>";
+        const resp = await fetch(`data/manual/base_game/page_${formattedNum}.json`);
+        if (!resp.ok) throw new Error("Seite nicht gefunden");
+        
+        const data = await resp.json();
+        
+        // Inhalt anzeigen
+        container.innerHTML = `<h3>${data.title}</h3><div class="reader-text">${data.content}</div>`;
+        pageNumDisplay.innerText = pageNumber;
+        currentPage = pageNumber;
+    } catch (e) {
+        container.innerHTML = `<p class="error">Fehler: Die Seite ${formattedNum} konnte nicht geladen werden.</p>`;
+        console.error(e);
+    }
+}
+
+window.openRulebook = () => { 
+    document.getElementById('rule-modal').style.display = 'flex'; 
+    renderRules(''); 
+};
+
+window.closeRulebook = () => { 
+    document.getElementById('rule-modal').style.display = 'none'; 
+};
 
 window.switchTab = (tab) => {
     document.getElementById('tab-search').classList.toggle('hidden', tab !== 'search');
     document.getElementById('tab-reader').classList.toggle('hidden', tab !== 'reader');
     document.getElementById('btn-search').classList.toggle('active', tab === 'search');
     document.getElementById('btn-reader').classList.toggle('active', tab === 'reader');
-    if(tab === 'reader') displayPage();
+    
+    if(tab === 'reader') loadPage(currentPage);
 };
 
-function displayPage() {
-    const page = manualPages[currentPage];
-    if(!page) return;
-    document.getElementById('page-content').innerHTML = `<h3>${page.title}</h3><div class="reader-text">${page.content}</div>`;
-    document.getElementById('currentPageNum').innerText = currentPage + 1;
-}
+window.nextPage = () => { 
+    if(currentPage < MAX_PAGES) { 
+        loadPage(currentPage + 1); 
+    } 
+};
 
-window.nextPage = () => { if(currentPage < manualPages.length - 1) { currentPage++; displayPage(); } };
-window.prevPage = () => { if(currentPage > 0) { currentPage--; displayPage(); } };
+window.prevPage = () => { 
+    if(currentPage > 1) { 
+        loadPage(currentPage - 1); 
+    } 
+};
 
 window.filterRules = (term) => {
     const container = document.getElementById('rules-results');
-    const filtered = rulesData.filter(r => r.title.toLowerCase().includes(term.toLowerCase()) || r.text.toLowerCase().includes(term.toLowerCase()));
-    container.innerHTML = filtered.map(r => `<div class="rule-entry"><h4>${r.title}</h4><p>${r.text}</p></div>`).join('');
+    if (!term) { container.innerHTML = ""; return; }
+    
+    const filtered = rulesData.filter(r => 
+        r.title.toLowerCase().includes(term.toLowerCase()) || 
+        r.text.toLowerCase().includes(term.toLowerCase())
+    );
+    container.innerHTML = filtered.map(r => `
+        <div class="rule-entry">
+            <h4>${r.title}</h4>
+            <p>${r.text}</p>
+        </div>`).join('');
 };
 
 document.addEventListener('DOMContentLoaded', initRulebook);
