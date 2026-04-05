@@ -1,11 +1,10 @@
 /**
- * rulebook.js - Modulares Ladesystem mit Cite-Säuberung und Deep-Links
+ * rulebook.js - Modulares Ladesystem mit verbesserter Cite-Reinigung
  */
 let rulesData = [];
 let currentPage = 1;
 const MAX_PAGES = 24;
 
-// Inhaltsverzeichnis
 const indexData = [
     { p: 1, title: "Titelblatt" },
     { p: 2, title: "Was ist Aventurien?" },
@@ -25,6 +24,13 @@ const indexData = [
     { p: 24, title: "Übersichten" }
 ];
 
+// Hilfsfunktion zum Säubern der Texte von Quellenangaben
+function cleanAventuriaText(text) {
+    if (!text) return "";
+    // Diese Regel findet [cite: 1], [cite: 1085] oder [cite: 1091-1095]
+    return text.replace(/\]+\]/g, '').trim();
+}
+
 async function initRulebook() {
     try {
         const regResp = await fetch('data/manual.json');
@@ -34,7 +40,7 @@ async function initRulebook() {
             ...Object.entries(regData.rules).map(([key, val]) => ({ title: key, text: val }))
         ];
         renderIndex();
-    } catch (e) { console.error("Kodex konnte nicht initialisiert werden:", e); }
+    } catch (e) { console.error("Fehler beim Laden des Kodex:", e); }
 }
 
 function renderIndex() {
@@ -72,16 +78,16 @@ async function loadPage(pageNumber) {
         const resp = await fetch(`data/manual/base_game/page_${formattedNum}.json`);
         const data = await resp.json();
         
-        // BILD LOGIK
         const imageHtml = data.image ? `<img src="${data.image}" class="manual-page-img">` : "";
         
-        // CITE-REINIGUNG (Entfernt aus dem Text)
-        const cleanContent = data.content.replace(/\/g, '');
+        // Reinigung anwenden
+        const cleanContent = cleanAventuriaText(data.content);
+        const cleanTitle = cleanAventuriaText(data.title);
 
         container.innerHTML = `
             <div class="reader-text">
                 ${imageHtml}
-                <h4>${data.title}</h4>
+                <h4>${cleanTitle}</h4>
                 <div class="page-body">${cleanContent}</div>
             </div>`;
             
@@ -102,8 +108,9 @@ window.filterRules = (term) => {
         r.text.toLowerCase().includes(term.toLowerCase())
     );
     container.innerHTML = filtered.map(r => {
-        const cleanText = r.text.replace(/\/g, '');
-        return `<div class="rule-entry"><h4>${r.title}</h4><p>${cleanText}</p></div>`;
+        const cleanTitle = cleanAventuriaText(r.title);
+        const cleanText = cleanAventuriaText(r.text);
+        return `<div class="rule-entry"><h4>${cleanTitle}</h4><p>${cleanText}</p></div>`;
     }).join('') || "<p>Kein Eintrag im Kodex gefunden.</p>";
 };
 
