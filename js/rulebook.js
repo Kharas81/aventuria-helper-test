@@ -1,5 +1,5 @@
 /**
- * rulebook.js - Modulares Ladesystem mit verbesserter Cite-Reinigung
+ * rulebook.js - Finale Version mit "Iron-Clad" Cite-Reinigung
  */
 let rulesData = [];
 let currentPage = 1;
@@ -24,11 +24,12 @@ const indexData = [
     { p: 24, title: "Übersichten" }
 ];
 
-// Hilfsfunktion zum Säubern der Texte von Quellenangaben
+// Diese Funktion ist jetzt extrem gründlich
 function cleanAventuriaText(text) {
     if (!text) return "";
-    // Diese Regel findet [cite: 1], [cite: 1085] oder [cite: 1091-1095]
-    return text.replace(/\]+\]/g, '').trim();
+    // Entfernt ALLES was oder oder [cite: 123-456] ist
+    // Nutzt 'gi' für global und case-insensitive
+    return text.replace(/\/gi, '').trim();
 }
 
 async function initRulebook() {
@@ -40,7 +41,7 @@ async function initRulebook() {
             ...Object.entries(regData.rules).map(([key, val]) => ({ title: key, text: val }))
         ];
         renderIndex();
-    } catch (e) { console.error("Fehler beim Laden des Kodex:", e); }
+    } catch (e) { console.error("Kodex-Fehler:", e); }
 }
 
 function renderIndex() {
@@ -73,14 +74,14 @@ async function loadPage(pageNumber) {
     const pageNumDisplay = document.getElementById('currentPageNum');
     const formattedNum = pageNumber.toString().padStart(2, '0');
     
-    container.innerHTML = "<p>Lade Seite...</p>";
+    container.innerHTML = "<p>Reinige Pergament...</p>";
     try {
         const resp = await fetch(`data/manual/base_game/page_${formattedNum}.json`);
         const data = await resp.json();
         
-        const imageHtml = data.image ? `<img src="${data.image}" class="manual-page-img">` : "";
+        const imageHtml = data.image ? `<div class="img-wrapper"><img src="${data.image}" class="manual-page-img"></div>` : "";
         
-        // Reinigung anwenden
+        // Reinigung auf Titel UND Inhalt anwenden
         const cleanContent = cleanAventuriaText(data.content);
         const cleanTitle = cleanAventuriaText(data.title);
 
@@ -94,7 +95,7 @@ async function loadPage(pageNumber) {
         pageNumDisplay.innerText = pageNumber;
         currentPage = pageNumber;
         container.scrollTop = 0;
-    } catch (e) { container.innerHTML = `<p>Fehler beim Laden von Seite ${formattedNum}.</p>`; }
+    } catch (e) { container.innerHTML = `<p>Seite ${formattedNum} fehlt noch im Archiv.</p>`; }
 }
 
 window.nextPage = () => { if(currentPage < MAX_PAGES) loadPage(currentPage + 1); };
