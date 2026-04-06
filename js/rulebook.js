@@ -1,10 +1,11 @@
 /**
- * rulebook.js - Finale Version mit "Iron-Clad" Cite-Reinigung
+ * rulebook.js - Robuste Version
  */
 let rulesData = [];
 let currentPage = 1;
 const MAX_PAGES = 24;
 
+// Index-Daten
 const indexData = [
     { p: 1, title: "Titelblatt" },
     { p: 2, title: "Was ist Aventurien?" },
@@ -24,95 +25,118 @@ const indexData = [
     { p: 24, title: "Übersichten" }
 ];
 
-// Diese Funktion ist jetzt extrem gründlich
 function cleanAventuriaText(text) {
     if (!text) return "";
-    // Entfernt ALLES was oder oder [cite: 123-456] ist
-    // Nutzt 'gi' für global und case-insensitive
     return text.replace(/\/gi, '').trim();
 }
 
-async function initRulebook() {
-    try {
-        const regResp = await fetch('data/manual.json');
-        const regData = await regResp.json();
-        rulesData = [
-            ...regData.phases.map(p => ({ title: `Phase ${p.id}: ${p.name}`, text: p.desc })),
-            ...Object.entries(regData.rules).map(([key, val]) => ({ title: key, text: val }))
-        ];
-        renderIndex();
-    } catch (e) { console.error("Kodex-Fehler:", e); }
-}
-
-function renderIndex() {
-    const list = document.getElementById('manual-index');
-    if (list) {
-        list.innerHTML = indexData.map(item => 
-            `<li onclick="jumpToPage(${item.p})">S. ${item.p}: ${item.title}</li>`
-        ).join('');
+// Diese Funktion MUSS global verfügbar sein, damit der Button sie findet
+window.openRulebook = function() {
+    const modal = document.getElementById('rule-modal');
+    if (modal) {
+        modal.style.display = 'flex';
+        // Wir stellen sicher, dass beim Öffnen ein Tab aktiv ist
+        window.switchTab('search');
+    } else {
+        console.error("Fehler: Element 'rule-modal' wurde nicht gefunden!");
     }
-}
+};
 
-window.openRulebook = () => { document.getElementById('rule-modal').style.display = 'flex'; };
-window.closeRulebook = () => { document.getElementById('rule-modal').style.display = 'none'; };
+window.closeRulebook = function() {
+    const modal = document.getElementById('rule-modal');
+    if (modal) modal.style.display = 'none';
+};
 
-window.jumpToPage = (pageNumber) => {
-    switchTab('reader');
+window.jumpToPage = function(pageNumber) {
+    window.switchTab('reader');
     loadPage(pageNumber);
 };
 
-window.switchTab = (tab) => {
-    document.getElementById('tab-search').classList.toggle('hidden', tab !== 'search');
-    document.getElementById('tab-reader').classList.toggle('hidden', tab !== 'reader');
-    document.getElementById('btn-search').classList.toggle('active', tab === 'search');
-    document.getElementById('btn-reader').classList.toggle('active', tab === 'reader');
-    if (tab === 'reader') loadPage(currentPage);
+window.switchTab = function(tab) {
+    const sTab = document.getElementById('tab-search');
+    const rTab = document.getElementById('tab-reader');
+    const sBtn = document.getElementById('btn-search');
+    const rBtn = document.getElementById('btn-reader');
+
+    if (sTab && rTab && sBtn && rBtn) {
+        sTab.classList.toggle('hidden', tab !== 'search');
+        rTab.classList.toggle('hidden', tab !== 'reader');
+        sBtn.classList.toggle('active', tab === 'search');
+        rBtn.classList.toggle('active', tab === 'reader');
+        
+        if (tab === 'reader') loadPage(currentPage);
+    }
 };
 
 async function loadPage(pageNumber) {
     const container = document.getElementById('page-content');
     const pageNumDisplay = document.getElementById('currentPageNum');
+    if (!container) return;
+
     const formattedNum = pageNumber.toString().padStart(2, '0');
-    
-    container.innerHTML = "<p>Reinige Pergament...</p>";
+    container.innerHTML = "<p>Lade...</p>";
+
     try {
         const resp = await fetch(`data/manual/base_game/page_${formattedNum}.json`);
+        if (!resp.ok) throw new Error("Datei nicht da");
         const data = await resp.json();
         
         const imageHtml = data.image ? `<div class="img-wrapper"><img src="${data.image}" class="manual-page-img"></div>` : "";
         
-        // Reinigung auf Titel UND Inhalt anwenden
-        const cleanContent = cleanAventuriaText(data.content);
-        const cleanTitle = cleanAventuriaText(data.title);
-
         container.innerHTML = `
             <div class="reader-text">
                 ${imageHtml}
-                <h4>${cleanTitle}</h4>
-                <div class="page-body">${cleanContent}</div>
+                <h4>${cleanAventuriaText(data.title)}</h4>
+                <div class="page-body">${cleanAventuriaText(data.content)}</div>
             </div>`;
             
-        pageNumDisplay.innerText = pageNumber;
+        if (pageNumDisplay) pageNumDisplay.innerText = pageNumber;
         currentPage = pageNumber;
         container.scrollTop = 0;
-    } catch (e) { container.innerHTML = `<p>Seite ${formattedNum} fehlt noch im Archiv.</p>`; }
+    } catch (e) {
+        container.innerHTML = `<p>Seite ${formattedNum} konnte nicht geladen werden.</p>`;
+    }
 }
 
 window.nextPage = () => { if(currentPage < MAX_PAGES) loadPage(currentPage + 1); };
 window.prevPage = () => { if(currentPage > 1) loadPage(currentPage - 1); };
 
 window.filterRules = (term) => {
-    const container = document.getElementById('rules-results');
-    if(!term) { container.innerHTML = ""; return; }
+    const resContainer = document.getElementById('rules-results');
+    if(!resContainer) return;
+    if(!term) { resContainer.innerHTML = ""; return; }
+    
     const filtered = rulesData.filter(r => 
         r.title.toLowerCase().includes(term.toLowerCase()) || 
         r.text.toLowerCase().includes(term.toLowerCase())
     );
-    container.innerHTML = filtered.map(r => {
-        const cleanTitle = cleanAventuriaText(r.title);
-        const cleanText = cleanAventuriaText(r.text);
-        return `<div class="rule-entry"><h4>${cleanTitle}</h4><p>${cleanText}</p></div>`;
-    }).join('') || "<p>Kein Eintrag im Kodex gefunden.</p>";
+    
+    resContainer.innerHTML = filtered.map(r => `
+        <div class="rule-entry">
+            <h4>${cleanAventuriaText(r.title)}</h4>
+            <p>${cleanAventuriaText(r.text)}</p>
+        </div>`).join('') || "<p>Kein Eintrag gefunden.</p>";
 };
 
-document.addEventListener('DOMContentLoaded', initRulebook);
+// Initialisierung
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        const regResp = await fetch('data/manual.json');
+        if (regResp.ok) {
+            const regData = await regResp.json();
+            rulesData = [
+                ...regData.phases.map(p => ({ title: `Phase ${p.id}: ${p.name}`, text: p.desc })),
+                ...Object.entries(regData.rules).map(([key, val]) => ({ title: key, text: val }))
+            ];
+        }
+        
+        const list = document.getElementById('manual-index');
+        if (list) {
+            list.innerHTML = indexData.map(item => 
+                `<li onclick="jumpToPage(${item.p})">S. ${item.p}: ${item.title}</li>`
+            ).join('');
+        }
+    } catch (e) {
+        console.warn("Daten konnten nicht sofort geladen werden, Suche wird später verfügbar sein.");
+    }
+});
