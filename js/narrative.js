@@ -1,37 +1,47 @@
 /**
  * narrative.js - Steuert die Vorlesetexte und interaktiven Proben
  */
-window.renderStory = function(data) {
-    const container = document.getElementById('story-area');
-    container.innerHTML = ""; // Container leeren vor neuem Abenteuer
 
-    if (!data.narrative) {
-        container.style.display = "none";
-        return;
-    }
+const Narrative = {
+    renderStory(data) {
+        const container = document.getElementById('story-area');
+        if (!container) return;
 
-    container.style.display = "block";
-    let html = `
-        <div class="narrative-box">
-            <h3>📖 Die Geschichte</h3>
-            <p class="italic-text">${data.narrative.intro}</p>
-    `;
+        // Wenn keine Story-Daten vorhanden sind, Bereich leeren/verstecken
+        if (!data.story) {
+            container.innerHTML = "";
+            return;
+        }
 
-    if (data.narrative.checks && data.narrative.checks.length > 0) {
-        html += `<hr><h4>Interaktive Proben:</h4>`;
-        data.narrative.checks.forEach(check => {
-            html += `
-                <div class="check-card">
-                    <p><strong>${check.skill}:</strong> ${check.text}</p>
-                    <div class="check-btns">
-                        <button class="btn-sm success" onclick="alert('Erfolg: ${check.results.success}')">Erfolg</button>
-                        <button class="btn-sm fail" onclick="alert('Misserfolg: ${check.results.fail}')">Misserfolg</button>
+        container.innerHTML = `
+            <div class="card-list">
+                <h3>📖 Die Geschichte</h3>
+                <p class="story-text">${data.story.intro}</p>
+                
+                ${this.renderChecks(data.story.checks)}
+            </div>
+        `;
+    },
+
+    renderChecks(checks) {
+        if (!checks || checks.length === 0) return "";
+
+        return `
+            <div class="probes-area">
+                <h4>Interaktive Proben:</h4>
+                ${checks.map((check, index) => `
+                    <div class="probe-item">
+                        <p><strong>${check.type}:</strong> ${check.description}</p>
+                        <div class="probe-buttons">
+                            <button class="btn-sm success" onclick="UI.handleCheck(this, 'success', '${check.success}')">Erfolg</button>
+                            <button class="btn-sm fail" onclick="UI.handleCheck(this, 'fail', '${check.fail}')">Misserfolg</button>
+                        </div>
                     </div>
-                </div>
-            `;
-        });
+                `).join('')}
+            </div>
+        `;
     }
-
-    html += `</div>`;
-    container.innerHTML = html;
 };
+
+// Globaler Alias für die app.js
+window.renderStory = (data) => Narrative.renderStory(data);
