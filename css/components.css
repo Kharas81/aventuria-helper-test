@@ -1,105 +1,49 @@
-/* --- LAYOUT ELEMENTE --- */
-.top-bar {
-    display: flex;
+/* --- Listen ohne Punkte --- */
+.card-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* --- Info Button Style --- */
+.info-btn { 
+    background: #8b4513; 
+    color: white; 
+    border: none; 
+    border-radius: 50%; 
+    width: 22px; 
+    height: 22px; 
+    font-size: 13px; 
+    cursor: pointer; 
+    margin-left: 8px;
+    display: inline-flex; 
+    align-items: center; 
     justify-content: center;
-    align-items: center;
-    gap: 30px;
-    margin-bottom: 20px;
-}
-
-.button-group {
-    display: flex;
-    gap: 10px;
-}
-
-.config-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-/* --- BUTTONS --- */
-.btn, .btn-outline {
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
     font-weight: bold;
-    font-family: inherit;
-    transition: all 0.2s;
+    flex-shrink: 0; /* Verhindert, dass der Button gequetscht wird */
 }
 
-.btn { background: #5c1e1e; color: white; border: none; }
-.btn-outline { background: none; border: 2px solid #8b4513; color: #8b4513; }
-.btn-outline:hover { background: #8b4513; color: white; }
+.info-btn:hover { background: #5c1e1e; }
 
-.info-btn {
-    background: #8b4513; color: white; border: none; border-radius: 50%;
-    width: 20px; height: 20px; font-size: 13px; cursor: pointer;
-    margin-left: 8px; display: inline-flex; align-items: center; justify-content: center;
+/* --- Hover Text (ohne Striche) --- */
+.has-preview { 
+    color: #5c1e1e; 
+    cursor: help; 
+    /* border-bottom entfernt, damit keine Striche mehr da sind */
 }
 
-/* --- GRID & KARTEN --- */
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 25px;
-}
-
-.card-list {
-    background: rgba(244, 231, 211, 0.9);
-    padding: 20px;
-    border: 1px solid #a0522d;
-    border-radius: 8px;
-    box-shadow: 3px 3px 10px rgba(0,0,0,0.1);
-}
-
-.checklist-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 5px 0;
-    cursor: default;
-}
-
-/* Markiert Text, der eine Hover-Vorschau hat */
-.has-preview {
-    color: #5c1e1e;
-    border-bottom: 1px dashed #5c1e1e;
-    cursor: help;
-}
-
-/* --- TOOLTIP VERGRÖSSERT --- */
+/* --- Tooltip (Groß für bessere Sicht) --- */
 .card-tooltip {
-    position: fixed;
-    display: none;
-    z-index: 9999;
+    position: fixed; 
+    display: none; 
+    z-index: 9999; 
     pointer-events: none;
-    
-    /* Hier die Größe anpassen */
     width: 450px; 
-    
-    /* Etwas dickerer Rahmen für bessere Sichtbarkeit */
     border: 5px solid #5c1e1e; 
     border-radius: 12px;
+    background: #000; 
     box-shadow: 0 15px 50px rgba(0,0,0,0.6);
-    background: #000;
 }
 .card-tooltip img { width: 100%; display: block; border-radius: 7px; }
 
-/* --- ARCHIV GRID --- */
-.archive-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 20px;
-    padding: 20px;
-    overflow-y: auto;
-}
-
-.archive-card {
-    cursor: pointer;
-    transition: transform 0.2s;
-    text-align: center;
-}
-.archive-card:hover { transform: translateY(-5px); }
-.archive-card img { width: 100%; border: 2px solid #8b4513; border-radius: 5px; }
-.archive-card p { font-size: 0.8em; margin-top: 5px; font-weight: bold; }
+/* ... Rest deiner components.css ... */
