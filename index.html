@@ -27,7 +27,10 @@
                         <option value="legendär">Legendär</option>
                     </select>
                 </div>
-                <button class="btn-outline" onclick="openRulebook()">📜 Regelbuch & Kodex</button>
+                <div class="button-group">
+                    <button class="btn-outline" onclick="openRulebook()">📜 Regelbuch & Kodex</button>
+                    <button class="btn-outline" onclick="openArchive()">🃏 Karten-Archiv</button>
+                </div>
             </div>
         </header>
 
@@ -63,12 +66,6 @@
                         <h3>Spezialkarten (Grün)</h3>
                         <ul></ul>
                     </div>
-                </div>
-
-                <div id="adventure-cards-section" class="card-list hidden">
-                    <h3>Abenteuer-Spezialkarten</h3>
-                    <div id="cards-grid" class="cards-display-grid">
-                        </div>
                 </div>
 
                 <div class="toggle-section">
@@ -142,6 +139,31 @@
             </div>
         </div>
     </div>
+
+    <div id="archive-modal" class="modal-backdrop">
+        <div class="modal-content archive-modal-size">
+            <span class="close-modal" onclick="closeArchive()">&times;</span>
+            <div class="modal-layout">
+                <nav class="modal-sidebar">
+                    <h4>Sammlung</h4>
+                    <ul id="archive-sets">
+                        <li onclick="loadArchiveSet('base_game')">📦 Grundbox</li>
+                    </ul>
+                </nav>
+                <div class="modal-main">
+                    <header class="modal-nav archive-header">
+                        <h2>Karten-Datenbank</h2>
+                        <input type="text" class="search-bar" placeholder="Karte suchen..." onkeyup="filterArchive(this.value)">
+                    </header>
+                    <div class="archive-grid" id="archive-grid">
+                        <p class="placeholder-text">Wähle eine Box aus der Liste links.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="card-tooltip" class="card-tooltip"></div>
 
     <script src="js/rulebook.js"></script>
     <script src="js/narrative.js"></script>
