@@ -52,7 +52,6 @@ input[type="number"], select {
     color: white; 
 }
 
-/* Kleine Buttons für Story-Checks */
 .btn-sm {
     padding: 5px 12px;
     font-size: 0.85em;
@@ -65,7 +64,6 @@ input[type="number"], select {
 .btn-sm.success { background: #276749; color: white; }
 .btn-sm.fail { background: #9b2c2c; color: white; }
 
-/* Der kleine Info-Button für Deep-Links */
 .info-btn {
     background: #8b4513;
     color: white;
@@ -100,6 +98,7 @@ input[type="number"], select {
     border: 1px solid #a0522d;
     border-radius: 8px;
     box-shadow: 3px 3px 10px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
 }
 
 .card-list h3 {
@@ -113,14 +112,54 @@ input[type="number"], select {
     padding: 0;
 }
 
-/* Farbcodes für Kartentypen */
 #blue-cards h3 { color: #2c5282; border-bottom: 2px solid #2c5282; }
 #minions h3 { color: #5c1e1e; border-bottom: 2px solid #5c1e1e; }
 #special h3 { color: #276749; border-bottom: 2px solid #276749; }
 
-/* Hilfstext unter Überschriften */
 #danger-value {
     font-size: 1.1em;
     margin-bottom: 15px;
     color: #5c1e1e;
+}
+
+/* --- GRAFISCHE KARTEN ANZEIGE --- */
+.cards-display-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
+    padding: 10px;
+}
+
+.game-card {
+    background: #fdf5e6;
+    border: 2px solid #8b4513;
+    border-radius: 10px;
+    width: 320px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.game-card img {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #8b4513;
+    display: block;
+}
+
+.game-card-info { padding: 15px; color: #2e241f; }
+.game-card-info span { font-size: 0.75em; color: #8b4513; font-weight: bold; text-transform: uppercase; }
+.game-card-info h4 { margin: 5px 0; color: #5c1e1e; font-size: 1.2em; }
+
+.card-table {
+    width: 100%;
+    font-size: 0.85em;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.card-table td {
+    padding: 6px 4px;
+    border-top: 1px solid rgba(139, 69, 19, 0.2);
+    vertical-align: top;
 }
