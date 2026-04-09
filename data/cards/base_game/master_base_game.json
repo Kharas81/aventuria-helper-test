@@ -1,0 +1,15 @@
+{
+  "set_name": "Aventuria Grundbox",
+  "cards": [
+    {
+      "id": "lg_leute_idol",
+      "name": "Glücks-Idol",
+      "image": "assets/images/cards/base_game/leute_die_nicht_spielen/gluecks_idol.jpg"
+    },
+    {
+      "id": "zs_leute",
+      "name": "Zeitskala (Leute, die nicht spielen)",
+      "image": "assets/images/cards/base_game/leute_die_nicht_spielen/zs_leute.jpg"
+    }
+  ]
+}
