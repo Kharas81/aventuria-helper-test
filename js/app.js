@@ -6,9 +6,6 @@ let currentPhase = 0;
 
 // --- ALLGEMEINE UI FUNKTIONEN ---
 
-/**
- * Schaltet Sektionen ein/aus (z.B. Kampf-Hilfen)
- */
 window.toggleSection = function(id) {
     const el = document.getElementById(id);
     if (el) {
@@ -16,9 +13,6 @@ window.toggleSection = function(id) {
     }
 };
 
-/**
- * Ändert Werte im Helden-Dashboard (LP)
- */
 window.changeStat = function(id, delta) {
     const el = document.getElementById(id);
     if (el) {
@@ -27,18 +21,13 @@ window.changeStat = function(id, delta) {
     }
 };
 
-// --- KAMPF-LOGIK (Basierend auf der Anleitung) ---
+// --- KAMPF-LOGIK ---
 
-/**
- * Wechselt durch die 5 Phasen einer Kampfrunde [cite: 524-528, 1071-1077]
- */
 window.nextPhase = function() {
     const steps = document.querySelectorAll('.step');
     if (steps.length === 0) return;
 
     steps.forEach(s => s.classList.remove('active'));
-
-    // Zähler 1-5 [cite: 1072-1076]
     currentPhase = (currentPhase % 5) + 1;
 
     const activeStep = document.getElementById(`phase${currentPhase}`);
@@ -47,9 +36,6 @@ window.nextPhase = function() {
     }
 };
 
-/**
- * Ermittelt ein zufälliges Ziel unter den Helden [cite: 591-593]
- */
 window.randomTarget = function() {
     const count = parseInt(document.getElementById('heroCount').value) || 2;
     const target = Math.floor(Math.random() * count) + 1;
@@ -57,9 +43,6 @@ window.randomTarget = function() {
     if (res) res.innerText = `🎯 Ziel: Held ${target}`;
 };
 
-/**
- * Berechnet Erholungspunkte (EP) in der Atempause [cite: 645-646]
- */
 window.calcRecovery = function() {
     const time = parseInt(document.getElementById('timeLeft').value) || 0;
     const res = document.getElementById('recoveryResult');
@@ -68,24 +51,25 @@ window.calcRecovery = function() {
 
 // --- SETUP & DATEN-LOGIK ---
 
-/**
- * Lädt Abenteuer-Daten und triggert das UI-Update
- */
 async function refreshSetup() {
     const picker = document.getElementById('adventurePicker');
     if (!picker || !picker.value) return;
 
     try {
         const response = await fetch(`data/adventures/${picker.value}.json`);
-        if (!response.ok) throw new Error("Datei nicht gefunden");
+        if (!response.ok) throw new Error("Abenteuer-Datei nicht gefunden");
         const data = await response.json();
         
         renderSetup(data);
         
-        // Narrative Story (Vorlesetexte) laden
+        // Narrative Story laden
         if (typeof window.renderStory === 'function') {
             window.renderStory(data);
         }
+
+        // --- NEU: Grafische Karten laden ---
+        const adventureId = picker.value.split('/').pop(); 
+        loadAdventureCards(adventureId);
 
         document.getElementById('setup-display').classList.remove('hidden');
         updateHeroDashboard(); 
@@ -95,8 +79,59 @@ async function refreshSetup() {
 }
 
 /**
- * Rendert die Kartenlisten und berechnet den GP-Wert [cite: 466, 479]
+ * Lädt die spezifischen Karten eines Abenteuers (Glücks-Idol, Zeitskala etc.)
  */
+async function loadAdventureCards(adventureId) {
+    const section = document.getElementById('adventure-cards-section');
+    const grid = document.getElementById('cards-grid');
+    if (!grid || !section) return;
+
+    try {
+        const response = await fetch(`data/cards/base_game/${adventureId}.json`);
+        if (!response.ok) {
+            section.classList.add('hidden'); // Verstecken, wenn keine Datei existiert
+            return;
+        }
+        
+        const data = await response.json();
+        grid.innerHTML = ""; // Container leeren
+        section.classList.remove('hidden');
+
+        data.cards.forEach(card => {
+            const cardEl = document.createElement('div');
+            cardEl.className = 'game-card';
+
+            let tableHtml = "";
+            // Tabelle für Glücks-Idol
+            if (card.action_table) {
+                tableHtml = `<table class="card-table">` + 
+                    card.action_table.map(row => `<tr><td><b>${row.roll}</b></td><td><b>${row.title || ""}</b><br>${row.description}</td></tr>`).join('') + 
+                    `</table>`;
+            }
+            // Tabelle für Zeitskala
+            if (card.milestones) {
+                tableHtml = `<table class="card-table">` + 
+                    Object.entries(card.milestones).map(([key, val]) => `<tr><td><b>${key}</b></td><td>${val}</td></tr>`).join('') + 
+                    `</table>`;
+            }
+
+            cardEl.innerHTML = `
+                <img src="${card.image}" alt="${card.name}">
+                <div class="game-card-info">
+                    <span>${card.sub_name}</span>
+                    <h4>${card.name}</h4>
+                    <p style="font-size: 0.8em; line-height:1.3;">${card.passive_rules || ""}</p>
+                    ${tableHtml}
+                </div>
+            `;
+            grid.appendChild(cardEl);
+        });
+    } catch (e) {
+        console.warn("Keine spezialisierten Kartendaten für:", adventureId);
+        section.classList.add('hidden');
+    }
+}
+
 function renderSetup(data) {
     const heroCount = parseInt(document.getElementById('heroCount').value) || 2;
     document.getElementById('title').innerText = data.name;
@@ -104,10 +139,8 @@ function renderSetup(data) {
     const createChecklist = (items) => (items || []).map(item => 
         `<li><label class="checklist-item"><input type="checkbox"> <span>${item}</span></label></li>`).join('');
 
-    // Abenteuerkarten (Blau) [cite: 188-191]
     document.querySelector('#blue-cards ul').innerHTML = createChecklist(data.setup.blue_cards);
     
-    // GP Berechnung & Info-Button zur Anleitung (Seite 12) [cite: 465-468, 479]
     const totalGP = heroCount * data.danger_calc;
     document.getElementById('danger-value').innerHTML = `
         Gefahrenwert: <strong>${totalGP} GP</strong> 
@@ -116,7 +149,6 @@ function renderSetup(data) {
     
     document.querySelector('#minions ul').innerHTML = createChecklist(data.setup.minion_keywords);
     
-    // Spezialkarten (Grün) [cite: 225-227]
     const specialContainer = document.getElementById('special');
     specialContainer.innerHTML = `
         <h3>Spezialkarten</h3>
@@ -127,9 +159,6 @@ function renderSetup(data) {
     `;
 }
 
-/**
- * Erstellt LP-Tracker für das Helden-Dashboard
- */
 function updateHeroDashboard() {
     const count = parseInt(document.getElementById('heroCount').value) || 2;
     const container = document.getElementById('heroDashboard');
@@ -148,7 +177,6 @@ function updateHeroDashboard() {
     }
 }
 
-// Initialisierung
 document.addEventListener('DOMContentLoaded', () => {
     const picker = document.getElementById('adventurePicker');
     const heroInput = document.getElementById('heroCount');
