@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/10/2026, 12:08:15 PM
+# 🛡️ Aventuria Projekt-Backup - 4/10/2026, 6:46:28 PM
 
 ## 📄 Datei: css/aventura-theme - orginal.css
 ```css
@@ -1759,8 +1759,8 @@ input[type="number"], select {
                     </select>
                 </div>
                 <div class="button-group">
-                    <button class="btn-outline" onclick="openRulebook()">📜 Regelbuch & Kodex</button>
-                    <button class="btn-outline" onclick="Archive.open()">🃏 Karten-Archiv</button>
+                    <button class="btn-outline" onclick="window.openRulebook()">📜 Regelbuch & Kodex</button>
+                    <button class="btn-outline" onclick="window.Archive.open()">🃏 Karten-Archiv</button>
                 </div>
             </div>
         </header>
@@ -1779,6 +1779,7 @@ input[type="number"], select {
                         <option value="base_game/wildenstein_akt_3">Das Erbe von Wildenstein - Akt III</option>
                     </optgroup>
                 </select>
+                <div id="loading-status" style="font-size: 0.8em; color: #8b4513; margin-top: 5px;"></div>
             </section>
 
             <div id="setup-display" class="hidden">
@@ -1790,8 +1791,8 @@ input[type="number"], select {
                 </div>
 
                 <div class="toggle-section">
-                    <button class="btn-outline" onclick="UI.toggleSection('combat-tools')">Kampf-Hilfen</button>
-                    <button class="btn-outline" onclick="UI.toggleSection('intermission-display')">⚖️ Atempause</button>
+                    <button class="btn-outline" onclick="window.UI.toggleSection('combat-tools')">Kampf-Hilfen</button>
+                    <button class="btn-outline" onclick="window.UI.toggleSection('intermission-display')">⚖️ Atempause</button>
                 </div>
 
                 <div id="combat-tools" class="hidden-section">
@@ -1803,11 +1804,11 @@ input[type="number"], select {
                                 <div id="phase3" class="step">3. Gegner</div><div id="phase4" class="step">4. Zeit</div>
                                 <div id="phase5" class="step">5. Ende</div>
                             </div>
-                            <button onclick="Combat.nextPhase()" class="btn">Nächste Phase ➔</button>
+                            <button onclick="window.Combat.nextPhase()" class="btn">Nächste Phase ➔</button>
                         </div>
                         <div class="card-list">
                             <h3>Zufalls-Ziel</h3>
-                            <button onclick="Combat.randomTarget()" class="btn">Ziel ermitteln 🎯</button>
+                            <button onclick="window.Combat.randomTarget()" class="btn">Ziel ermitteln 🎯</button>
                             <p id="targetResult">--</p>
                         </div>
                     </div>
@@ -1820,7 +1821,7 @@ input[type="number"], select {
                             <h3>⚖️ Atempause</h3>
                             <div class="config-item" style="justify-content: center; margin-bottom: 15px;">
                                 <label>Zeitmarken:</label>
-                                <input type="number" id="remainingTime" value="0" min="0" onchange="Combat.calculateIntermission()">
+                                <input type="number" id="remainingTime" value="0" min="0" onchange="window.Combat.calculateIntermission()">
                             </div>
                             <div class="result-badge" id="ep-result">2 EP</div>
                         </div>
@@ -1832,11 +1833,11 @@ input[type="number"], select {
 
     <div id="archive-modal" class="modal-backdrop">
         <div class="modal-content archive-modal-size">
-            <span class="close-modal" onclick="Archive.close()">&times;</span>
+            <span class="close-modal" onclick="window.Archive.close()">&times;</span>
             <div class="modal-layout">
-                <nav class="modal-sidebar"><h4>Sammlung</h4><ul id="archive-sets"><li onclick="Archive.loadSet('base_game')">📦 Grundbox</li></ul></nav>
+                <nav class="modal-sidebar"><h4>Sammlung</h4><ul id="archive-sets"><li onclick="window.Archive.loadSet('base_game')">📦 Grundbox</li></ul></nav>
                 <div class="modal-main">
-                    <header class="modal-nav"><h2>Karten-Archiv</h2><input type="text" class="search-bar" placeholder="Karte suchen..." onkeyup="Archive.filter(this.value)"></header>
+                    <header class="modal-nav"><h2>Karten-Archiv</h2><input type="text" class="search-bar" placeholder="Karte suchen..." onkeyup="window.Archive.filter(this.value)"></header>
                     <div class="archive-grid" id="archive-grid"></div>
                 </div>
             </div>
@@ -1845,24 +1846,24 @@ input[type="number"], select {
 
     <div id="rule-modal" class="modal-backdrop">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeRulebook()">&times;</span>
+            <span class="close-modal" onclick="window.closeRulebook()">&times;</span>
             <div class="modal-layout">
                 <nav class="modal-sidebar"><h4>Kodex</h4><ul id="manual-index"></ul></nav>
                 <div class="modal-main">
                     <header class="modal-nav">
-                        <button id="btn-search" class="tab-btn active" onclick="switchTab('search')">🔍 Kodex</button>
-                        <button id="btn-reader" class="tab-btn" onclick="switchTab('reader')">📖 Regelbuch</button>
+                        <button id="btn-search" class="tab-btn active" onclick="window.switchTab('search')">🔍 Kodex</button>
+                        <button id="btn-reader" class="tab-btn" onclick="window.switchTab('reader')">📖 Regelbuch</button>
                     </header>
                     <div id="tab-search" class="tab-content">
-                        <input type="text" class="search-bar" placeholder="Suche..." onkeyup="filterRules(this.value)">
+                        <input type="text" class="search-bar" placeholder="Suche..." onkeyup="window.filterRules(this.value)">
                         <div id="rules-results"></div>
                     </div>
                     <div id="tab-reader" class="tab-content hidden">
                         <div id="page-content"></div>
                         <footer class="reader-footer">
-                            <button onclick="prevPage()">⬅</button>
+                            <button onclick="window.prevPage()">⬅</button>
                             <span>Seite <span id="currentPageNum">1</span></span>
-                            <button onclick="nextPage()">➡</button>
+                            <button onclick="window.nextPage()">➡</button>
                         </footer>
                     </div>
                 </div>
@@ -1873,7 +1874,7 @@ input[type="number"], select {
     <div id="card-tooltip" class="card-tooltip"></div>
 
     <div style="position: fixed; bottom: 10px; right: 10px; z-index: 9999;">
-        <button onclick="SystemCheck.run(true)" class="btn-sm" style="background: #2e241f; color: white;">⚙️ Check</button>
+        <button onclick="window.SystemCheck.run(true)" class="btn-sm" style="background: #2e241f; color: white;">⚙️ Check</button>
     </div>
 
     <script src="js/config.js"></script>
