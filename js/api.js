@@ -1,14 +1,18 @@
-window.API = {
-    async getAdventure(id) {
-        try {
-            const r = await fetch(`data/adventures/${id}.json`);
-            return r.ok ? await r.json() : null;
-        } catch(e) { return null; }
+window.App = {
+    async init() {
+        document.getElementById('adventurePicker').addEventListener('change', () => this.handleUpdate());
+        document.getElementById('heroCount').addEventListener('change', () => this.handleUpdate());
+        Combat.updateDashboard();
     },
-    async getCards(id) {
-        try {
-            const r = await fetch(`data/cards/base_game/${id}.json`);
-            return r.ok ? await r.json() : { cards: [] };
-        } catch(e) { return { cards: [] }; }
+    async handleUpdate() {
+        const picker = document.getElementById('adventurePicker');
+        if (!picker.value) return;
+        const id = picker.value.split('/').pop();
+        const [advData, cardData] = await Promise.all([API.getAdventure(picker.value), API.getCards(id)]);
+        Renderer.renderSetup(advData, cardData.cards);
+        Narrative.renderStory(advData);
+        document.getElementById('setup-display').classList.remove('hidden');
+        Combat.updateDashboard();
     }
 };
+document.addEventListener('DOMContentLoaded', () => App.init());
