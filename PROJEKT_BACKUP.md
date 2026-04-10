@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/10/2026, 6:54:52 PM
+# 🛡️ Aventuria Projekt-Backup - 4/10/2026, 6:55:09 PM
 
 ## 📄 Datei: css/aventura-theme - orginal.css
 ```css
@@ -1931,7 +1931,7 @@ console.log("✅ API-Modul registriert.");
 ## 📄 Datei: js/app.js
 ```js
 /**
- * js/app.js - Hauptsteuerung
+ * js/app.js - Hauptsteuerung der App
  */
 window.App = {
     async init() {
@@ -1941,7 +1941,7 @@ window.App = {
         if (picker) picker.addEventListener('change', () => this.handleUpdate());
         if (count) count.addEventListener('change', () => this.handleUpdate());
         
-        window.Combat.updateDashboard();
+        if (window.Combat) window.Combat.updateDashboard();
         console.log("App initialisiert.");
     },
 
@@ -1954,8 +1954,10 @@ window.App = {
         const id = picker.value.split('/').pop();
 
         try {
-            // Prüfung ob API existiert bevor Aufruf
-            if (!window.API) throw new Error("API-Modul nicht geladen.");
+            // Prüfung ob API existiert
+            if (!window.API) {
+                throw new Error("API-Modul ist noch nicht bereit. Bitte Seite neu laden.");
+            }
 
             const [advData, cardData] = await Promise.all([
                 window.API.getAdventure(picker.value),
@@ -1963,21 +1965,21 @@ window.App = {
             ]);
 
             if (!advData) {
-                status.innerText = "❌ Fehler: Abenteuer-Datei nicht gefunden.";
+                status.innerText = "❌ Fehler: Abenteuer-Datei fehlt.";
                 return;
             }
 
-            window.Renderer.renderSetup(advData, cardData.cards);
-            window.Narrative.renderStory(advData);
+            if (window.Renderer) window.Renderer.renderSetup(advData, cardData.cards);
+            if (window.Narrative) window.Narrative.renderStory(advData);
             
             document.getElementById('setup-display').classList.remove('hidden');
-            window.Combat.updateDashboard();
-            status.innerText = "✅ Geladen.";
+            if (window.Combat) window.Combat.updateDashboard();
+            status.innerText = "✅ Abenteuer geladen.";
 
         } catch (err) {
-            console.error("Update fehlgeschlagen:", err);
-            status.innerText = `💥 Kritischer Fehler: ${err.message}`;
-            alert("Fehler beim Laden des Abenteuers. Details in der Konsole.");
+            console.error("Ladevorgang abgebrochen:", err);
+            status.innerText = `💥 Fehler: ${err.message}`;
+            alert("Das Abenteuer konnte nicht geladen werden.");
         }
     }
 };
