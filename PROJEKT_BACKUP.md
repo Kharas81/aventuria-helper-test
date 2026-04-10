@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/10/2026, 11:40:13 AM
+# 🛡️ Aventuria Projekt-Backup - 4/10/2026, 11:41:07 AM
 
 ## 📄 Datei: css/aventura-theme - orginal.css
 ```css
@@ -1897,12 +1897,16 @@ input[type="number"], select {
 ```js
 const API = {
     async getAdventure(id) {
-        const r = await fetch(`${CONFIG.paths.adventures}${id}.json`);
-        return r.ok ? await r.json() : null;
+        try {
+            const r = await fetch(`data/adventures/${id}.json`);
+            return r.ok ? await r.json() : null;
+        } catch(e) { return null; }
     },
     async getCards(id) {
-        const r = await fetch(`${CONFIG.paths.cardsBase}${id}.json`);
-        return r.ok ? await r.json() : { cards: [] };
+        try {
+            const r = await fetch(`data/cards/base_game/${id}.json`);
+            return r.ok ? await r.json() : { cards: [] };
+        } catch(e) { return { cards: [] }; }
     }
 };
 
