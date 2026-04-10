@@ -1,0 +1,31 @@
+name: Projekt Backup Roboter
+
+on:
+  push:
+    branches: [ main ]  # Läuft jedes Mal, wenn du Code hochlädst
+  workflow_dispatch:    # Erlaubt es dir, den Button auch manuell zu drücken
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Wichtig: Der Roboter darf Dateien schreiben
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Erstelle Backup Datei
+      run: node backup.js
+
+    - name: Commit und Push das Backup
+      run: |
+        git config --global user.name "GitHub Action Bot"
+        git config --global user.email "actions@github.com"
+        git add PROJEKT_BACKUP.md
+        git commit -m "Automatisches Backup erstellt" || echo "Keine Änderungen"
+        git push
