@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/10/2026, 6:49:21 PM
+# 🛡️ Aventuria Projekt-Backup - 4/10/2026, 6:54:31 PM
 
 ## 📄 Datei: css/aventura-theme - orginal.css
 ```css
@@ -1897,17 +1897,17 @@ input[type="number"], select {
 ## 📄 Datei: js/api.js
 ```js
 /**
- * js/api.js - Datenbeschaffung
+ * js/api.js - Zentrale Schnittstelle für Daten-Abrufe
  */
 window.API = {
     async getAdventure(id) {
         const path = `data/adventures/${id}.json`;
         try {
             const r = await fetch(path);
-            if (!r.ok) throw new Error(`Status ${r.status}`);
+            if (!r.ok) throw new Error(`Server lieferte Status ${r.status}`);
             return await r.json();
         } catch(e) {
-            console.error(`Fehler beim Laden von ${path}:`, e);
+            console.error(`API-Fehler bei Abenteuer-Pfad: ${path}`, e);
             return null;
         }
     },
@@ -1917,9 +1917,12 @@ window.API = {
             const r = await fetch(path);
             if (!r.ok) return { cards: [] };
             return await r.json();
-        } catch(e) { return { cards: [] }; }
+        } catch(e) { 
+            return { cards: [] }; 
+        }
     }
 };
+console.log("✅ API-Modul registriert.");
 
 ```
 
