@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/10/2026, 7:43:38 PM
+# 🛡️ Aventuria Projekt-Backup - 4/10/2026, 7:43:49 PM
 
 ## 📄 Datei: css/aventura-theme - orginal.css
 ```css
@@ -2248,6 +2248,9 @@ window.UI = {
 
 ## 📄 Datei: js/ui-renderer.js
 ```js
+/**
+ * js/ui-renderer.js - Verbesserte Karten-Vorschau
+ */
 window.Renderer = {
     renderSetup(data, adventureCards) {
         if (!data) return;
@@ -2255,7 +2258,10 @@ window.Renderer = {
         document.getElementById('title').innerText = data.name;
 
         const buildList = (items) => (items || []).map(item => {
-            const card = adventureCards.find(c => item.toLowerCase().includes(c.name.toLowerCase()));
+            // Verbesserte Suche: Ignoriert Zitate und unnötige Leerzeichen
+            const cleanName = item.split('[')[0].trim().toLowerCase();
+            const card = adventureCards.find(c => cleanName.includes(c.name.toLowerCase()) || c.name.toLowerCase().includes(cleanName));
+            
             let hover = "", btn = "", cssClass = "";
 
             if (card) {
