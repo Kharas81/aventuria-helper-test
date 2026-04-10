@@ -1,4 +1,4 @@
-const Combat = {
+window.Combat = {
     currentPhase: 0,
     nextPhase() {
         const steps = document.querySelectorAll('.step');
@@ -26,6 +26,7 @@ const Combat = {
     calculateIntermission() {
         const time = parseInt(document.getElementById('remainingTime').value) || 0;
         const ep = time + 2;
-        document.getElementById('ep-result').innerText = `${ep} EP`;
+        const res = document.getElementById('ep-result');
+        if(res) res.innerText = `${ep} EP`;
     }
 };
