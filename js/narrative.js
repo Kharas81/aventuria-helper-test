@@ -1,24 +1,23 @@
 /**
- * narrative.js - Steuert die Vorlesetexte und interaktiven Proben
+ * js/narrative.js - Steuert Vorlesetexte und interaktive Proben
  */
-
 const Narrative = {
     renderStory(data) {
         const container = document.getElementById('story-area');
         if (!container) return;
 
-        // Wenn keine Story-Daten vorhanden sind, Bereich leeren/verstecken
-        if (!data.story) {
+        // Nutzt data.narrative passend zu den JSON-Dateien
+        if (!data.narrative) {
             container.innerHTML = "";
             return;
         }
 
         container.innerHTML = `
-            <div class="card-list">
+            <div class="card-list" style="margin-bottom: 20px;">
                 <h3>📖 Die Geschichte</h3>
-                <p class="story-text">${data.story.intro}</p>
-                
-                ${this.renderChecks(data.story.checks)}
+                <p class="story-text">${data.narrative.intro}</p>
+                <hr>
+                ${this.renderChecks(data.narrative.checks)}
             </div>
         `;
     },
@@ -29,12 +28,12 @@ const Narrative = {
         return `
             <div class="probes-area">
                 <h4>Interaktive Proben:</h4>
-                ${checks.map((check, index) => `
-                    <div class="probe-item">
-                        <p><strong>${check.type}:</strong> ${check.description}</p>
+                ${checks.map((check) => `
+                    <div class="probe-item" style="margin-bottom: 15px; padding: 10px; background: rgba(0,0,0,0.03); border-radius: 4px;">
+                        <p><strong>${check.skill}:</strong> ${check.text}</p>
                         <div class="probe-buttons">
-                            <button class="btn-sm success" onclick="UI.handleCheck(this, 'success', '${check.success}')">Erfolg</button>
-                            <button class="btn-sm fail" onclick="UI.handleCheck(this, 'fail', '${check.fail}')">Misserfolg</button>
+                            <button class="btn-sm success" onclick="UI.handleCheck(this, 'success', '${check.results.success}')">Erfolg</button>
+                            <button class="btn-sm fail" onclick="UI.handleCheck(this, 'fail', '${check.results.fail}')">Misserfolg</button>
                         </div>
                     </div>
                 `).join('')}
@@ -43,5 +42,4 @@ const Narrative = {
     }
 };
 
-// Globaler Alias für die app.js
 window.renderStory = (data) => Narrative.renderStory(data);
