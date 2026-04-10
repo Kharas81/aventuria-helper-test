@@ -1,4 +1,4 @@
-const Renderer = {
+window.Renderer = {
     renderSetup(data, adventureCards) {
         const heroCount = document.getElementById('heroCount').value;
         document.getElementById('title').innerText = data.name;
@@ -13,13 +13,7 @@ const Renderer = {
                 cssClass = "has-preview";
             }
 
-            return `<li>
-                <label class="checklist-item">
-                    <input type="checkbox"> 
-                    <span class="${cssClass}" ${hover}>${item}</span> 
-                    ${btn}
-                </label>
-            </li>`;
+            return `<li><label class="checklist-item"><input type="checkbox"><span class="${cssClass}" ${hover}>${item}</span>${btn}</label></li>`;
         }).join('');
 
         document.querySelector('#blue-cards ul').innerHTML = buildList(data.setup.blue_cards);
@@ -30,9 +24,7 @@ const Renderer = {
              <button class="info-btn" onclick="jumpToPage(12)">i</button>`;
 
         document.getElementById('special').innerHTML = `
-            <h3>Spezialkarten</h3>
-            <ul>${buildList(data.setup.special_decks)}</ul>
-            <hr>
+            <h3>Spezialkarten</h3><ul>${buildList(data.setup.special_decks)}</ul><hr>
             <p><strong>⚔ Sieg:</strong> ${data.setup.victory}</p>
             <p><strong>☠ Niederlage:</strong> ${data.setup.defeat}</p>`;
     }
