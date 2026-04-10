@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/10/2026, 12:07:23 PM
+# 🛡️ Aventuria Projekt-Backup - 4/10/2026, 12:07:34 PM
 
 ## 📄 Datei: css/aventura-theme - orginal.css
 ```css
@@ -2040,15 +2040,13 @@ async function fetchAdventureData(path) {
 
 ## 📄 Datei: js/narrative.js
 ```js
-const Narrative = {
+window.Narrative = {
     renderStory(data) {
         const container = document.getElementById('story-area');
         if (!container || !data.narrative) return;
-
         container.innerHTML = `
             <div class="card-list">
-                <h3>📖 Die Geschichte</h3>
-                <p class="story-text">${data.narrative.intro}</p>
+                <h3>📖 Die Geschichte</h3><p class="story-text">${data.narrative.intro}</p>
                 <div class="probes-area">
                     <h4>Interaktive Proben:</h4>
                     ${data.narrative.checks.map(check => `
@@ -2058,11 +2056,9 @@ const Narrative = {
                                 <button class="btn-sm success" onclick="UI.handleCheck(this, 'success', '${check.results.success}')">Erfolg</button>
                                 <button class="btn-sm fail" onclick="UI.handleCheck(this, 'fail', '${check.results.fail}')">Misserfolg</button>
                             </div>
-                        </div>
-                    `).join('')}
+                        </div>`).join('')}
                 </div>
-            </div>
-        `;
+            </div>`;
     }
 };
 window.renderStory = (data) => Narrative.renderStory(data);
