@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/10/2026, 10:48:24 AM
+# 🛡️ Aventuria Projekt-Backup - 4/10/2026, 11:02:55 AM
 
 ## 📄 Datei: css/aventura-theme - orginal.css
 ```css
@@ -1766,6 +1766,8 @@ input[type="number"], select {
         </header>
 
         <main>
+            <section id="story-area"></section>
+
             <section id="selection">
                 <select id="adventurePicker">
                     <option value="">-- Abenteuer wählen --</option>
@@ -1779,8 +1781,6 @@ input[type="number"], select {
                 </select>
             </section>
 
-            <section id="story-area"></section>
-
             <div id="setup-display" class="hidden">
                 <h2 id="title"></h2>
                 <div class="grid-container">
@@ -1791,6 +1791,7 @@ input[type="number"], select {
 
                 <div class="toggle-section">
                     <button class="btn-outline" onclick="UI.toggleSection('combat-tools')">Kampf-Hilfen ein/ausblenden</button>
+                    <button class="btn-outline" onclick="UI.toggleSection('intermission-display')">⚖️ Atempause</button>
                 </div>
 
                 <div id="combat-tools" class="hidden-section">
@@ -1812,6 +1813,21 @@ input[type="number"], select {
                     </div>
                     <div class="hero-dashboard" id="heroDashboard"></div>
                 </div>
+
+                <div id="intermission-display" class="hidden-section">
+                    <div class="intermission-area">
+                        <div class="intermission-card">
+                            <h3>⚖️ Atempause</h3>
+                            <p>Berechnet eure Erholungspunkte (EP) basierend auf der verbleibenden Zeit.</p>
+                            <div class="config-item" style="justify-content: center; margin: 15px 0;">
+                                <label>Verbleibende Zeitmarken:</label>
+                                <input type="number" id="remainingTime" value="0" min="0" onchange="Combat.calculateIntermission()">
+                            </div>
+                            <div class="result-badge" id="ep-result">2 EP</div>
+                            <p><small>EP = Zeitmarken + 2</small></p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
     </div>
@@ -1831,8 +1847,42 @@ input[type="number"], select {
             </div>
         </div>
     </div>
+
+    <div id="rule-modal" class="modal-backdrop">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeRulebook()">&times;</span>
+            <div class="modal-layout">
+                <nav class="modal-sidebar">
+                    <h4>Kodex & Regeln</h4>
+                    <ul id="manual-index"></ul>
+                </nav>
+                <div class="modal-main">
+                    <header class="modal-nav">
+                        <button id="btn-search" class="tab-btn active" onclick="switchTab('search')">🔍 Kodex</button>
+                        <button id="btn-reader" class="tab-btn" onclick="switchTab('reader')">📖 Regelbuch</button>
+                    </header>
+                    <div id="tab-search" class="tab-content">
+                        <input type="text" class="search-bar" placeholder="Regel suchen..." onkeyup="filterRules(this.value)">
+                        <div id="rules-results"></div>
+                    </div>
+                    <div id="tab-reader" class="tab-content hidden">
+                        <div id="page-content" class="reader-container"></div>
+                        <footer class="reader-footer">
+                            <button onclick="prevPage()">⬅ Zurück</button>
+                            <span>Seite <span id="currentPageNum">1</span> / 24</span>
+                            <button onclick="nextPage()">Weiter ➡</button>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <div id="card-tooltip" class="card-tooltip"></div>
+
+    <div style="position: fixed; bottom: 10px; right: 10px; opacity: 0.6; z-index: 1000;">
+        <button onclick="SystemCheck.run()" class="btn-sm" style="background: #2e241f; color: #dcd0ba; border: 1px solid #8b4513;">⚙️ System-Check</button>
+    </div>
 
     <script src="js/config.js"></script>
     <script src="js/api.js"></script>
@@ -1842,6 +1892,7 @@ input[type="number"], select {
     <script src="js/archive.js"></script>
     <script src="js/rulebook.js"></script>
     <script src="js/narrative.js"></script>
+    <script src="js/validator.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>
