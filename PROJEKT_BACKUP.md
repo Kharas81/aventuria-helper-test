@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/10/2026, 11:34:42 AM
+# 🛡️ Aventuria Projekt-Backup - 4/10/2026, 11:38:35 AM
 
 ## 📄 Datei: css/aventura-theme - orginal.css
 ```css
@@ -2378,43 +2378,43 @@ const Renderer = {
 ## 📄 Datei: js/validator.js
 ```js
 /**
- * js/validator.js - Überprüft die Integrität der App beim Start
+ * js/validator.js - Findet fehlende Module
  */
 const SystemCheck = {
     requirements: {
-        elements: ['story-area', 'setup-display', 'heroCount', 'adventurePicker', 'heroDashboard', 'rule-modal', 'archive-modal'],
-        modules: ['UI', 'Combat', 'Renderer', 'Narrative', 'Archive', 'API', 'CONFIG']
+        modules: [
+            { name: 'CONFIG', obj: 'CONFIG' },
+            { name: 'API', obj: 'API' },
+            { name: 'Renderer', obj: 'Renderer' },
+            { name: 'UI', obj: 'UI' },
+            { name: 'Combat', obj: 'Combat' },
+            { name: 'Archive', obj: 'Archive' },
+            { name: 'Narrative', obj: 'Narrative' }
+        ]
     },
 
-    run() {
-        console.log("🛡️ Aventuria System-Check gestartet...");
+    run(manual = false) {
+        console.log("🛡️ Aventuria System-Check...");
         let errors = [];
 
-        // 1. HTML-Struktur prüfen
-        this.requirements.elements.forEach(id => {
-            if (!document.getElementById(id)) errors.push(`❌ HTML-Element fehlt: #${id}`);
-        });
-
-        // 2. JavaScript-Module prüfen
         this.requirements.modules.forEach(mod => {
-            if (typeof window[mod] === 'undefined') {
-                errors.push(`❌ JS-Modul fehlt: ${mod}.js`);
+            if (typeof window[mod.obj] === 'undefined') {
+                errors.push(`❌ JS-Modul fehlt: ${mod.name}.js`);
             }
         });
 
-        // 3. Feedback geben
         if (errors.length > 0) {
-            console.error("System-Check fehlgeschlagen:", errors);
-            alert("ACHTUNG: System-Fehler gefunden!\n\n" + errors.join("\n"));
-        } else {
-            console.log("✅ System-Check: Alles bereit.");
-            if (arguments.length > 0) alert("✅ System-Check erfolgreich: Alle Komponenten vorhanden.");
+            alert("ACHTUNG: System-Fehler gefunden!\n\n" + errors.join("\n") + "\n\nPrüfe, ob alle Dateien im /js Ordner liegen.");
+        } else if (manual) {
+            alert("✅ System-Check erfolgreich: Alle Module geladen.");
         }
     }
 };
 
-// Automatischer Check beim Laden
-document.addEventListener('DOMContentLoaded', () => setTimeout(() => SystemCheck.run(), 500));
+// Automatischer Check kurz nach dem Start
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => SystemCheck.run(), 1000); 
+});
 
 ```
 
