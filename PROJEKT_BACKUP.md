@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/10/2026, 6:47:44 PM
+# 🛡️ Aventuria Projekt-Backup - 4/10/2026, 6:48:04 PM
 
 ## 📄 Datei: css/aventura-theme - orginal.css
 ```css
