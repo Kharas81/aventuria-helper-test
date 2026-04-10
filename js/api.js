@@ -1,10 +1,14 @@
 const API = {
     async getAdventure(id) {
-        const r = await fetch(`${CONFIG.paths.adventures}${id}.json`);
-        return r.ok ? await r.json() : null;
+        try {
+            const r = await fetch(`data/adventures/${id}.json`);
+            return r.ok ? await r.json() : null;
+        } catch(e) { return null; }
     },
     async getCards(id) {
-        const r = await fetch(`${CONFIG.paths.cardsBase}${id}.json`);
-        return r.ok ? await r.json() : { cards: [] };
+        try {
+            const r = await fetch(`data/cards/base_game/${id}.json`);
+            return r.ok ? await r.json() : { cards: [] };
+        } catch(e) { return { cards: [] }; }
     }
 };
