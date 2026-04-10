@@ -1,7 +1,10 @@
 window.Narrative = {
     renderStory(data) {
         const container = document.getElementById('story-area');
-        if (!container || !data.narrative) return;
+        if (!container || !data || !data.narrative) {
+            if(container) container.innerHTML = "";
+            return;
+        }
         container.innerHTML = `
             <div class="card-list">
                 <h3>📖 Die Geschichte</h3><p class="story-text">${data.narrative.intro}</p>
@@ -11,12 +14,11 @@ window.Narrative = {
                         <div class="probe-item">
                             <p><strong>${check.skill}:</strong> ${check.text}</p>
                             <div class="probe-buttons">
-                                <button class="btn-sm success" onclick="UI.handleCheck(this, 'success', '${check.results.success}')">Erfolg</button>
-                                <button class="btn-sm fail" onclick="UI.handleCheck(this, 'fail', '${check.results.fail}')">Misserfolg</button>
+                                <button class="btn-sm success" onclick="window.UI.handleCheck(this, 'success', '${check.results.success}')">Erfolg</button>
+                                <button class="btn-sm fail" onclick="window.UI.handleCheck(this, 'fail', '${check.results.fail}')">Misserfolg</button>
                             </div>
                         </div>`).join('')}
                 </div>
             </div>`;
     }
 };
-window.renderStory = (data) => Narrative.renderStory(data);
