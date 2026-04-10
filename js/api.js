@@ -1,4 +1,4 @@
-const API = {
+window.API = {
     async getAdventure(id) {
         try {
             const r = await fetch(`data/adventures/${id}.json`);
