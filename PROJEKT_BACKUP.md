@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/10/2026, 11:04:22 AM
+# 🛡️ Aventuria Projekt-Backup - 4/10/2026, 11:34:42 AM
 
 ## 📄 Datei: css/aventura-theme - orginal.css
 ```css
@@ -1790,7 +1790,7 @@ input[type="number"], select {
                 </div>
 
                 <div class="toggle-section">
-                    <button class="btn-outline" onclick="UI.toggleSection('combat-tools')">Kampf-Hilfen ein/ausblenden</button>
+                    <button class="btn-outline" onclick="UI.toggleSection('combat-tools')">Kampf-Hilfen</button>
                     <button class="btn-outline" onclick="UI.toggleSection('intermission-display')">⚖️ Atempause</button>
                 </div>
 
@@ -1818,13 +1818,11 @@ input[type="number"], select {
                     <div class="intermission-area">
                         <div class="intermission-card">
                             <h3>⚖️ Atempause</h3>
-                            <p>Berechnet eure Erholungspunkte (EP) basierend auf der verbleibenden Zeit.</p>
-                            <div class="config-item" style="justify-content: center; margin: 15px 0;">
-                                <label>Verbleibende Zeitmarken:</label>
+                            <div class="config-item" style="justify-content: center; margin-bottom: 15px;">
+                                <label>Zeitmarken:</label>
                                 <input type="number" id="remainingTime" value="0" min="0" onchange="Combat.calculateIntermission()">
                             </div>
                             <div class="result-badge" id="ep-result">2 EP</div>
-                            <p><small>EP = Zeitmarken + 2</small></p>
                         </div>
                     </div>
                 </div>
@@ -1836,13 +1834,10 @@ input[type="number"], select {
         <div class="modal-content archive-modal-size">
             <span class="close-modal" onclick="Archive.close()">&times;</span>
             <div class="modal-layout">
-                <nav class="modal-sidebar">
-                    <h4>Sammlung</h4>
-                    <ul id="archive-sets"><li onclick="Archive.loadSet('base_game')">📦 Grundbox</li></ul>
-                </nav>
+                <nav class="modal-sidebar"><h4>Sammlung</h4><ul id="archive-sets"><li onclick="Archive.loadSet('base_game')">📦 Grundbox</li></ul></nav>
                 <div class="modal-main">
                     <header class="modal-nav"><h2>Karten-Archiv</h2><input type="text" class="search-bar" placeholder="Karte suchen..." onkeyup="Archive.filter(this.value)"></header>
-                    <div class="archive-grid" id="archive-grid"><p class="placeholder-text">Wähle eine Box.</p></div>
+                    <div class="archive-grid" id="archive-grid"></div>
                 </div>
             </div>
         </div>
@@ -1852,25 +1847,22 @@ input[type="number"], select {
         <div class="modal-content">
             <span class="close-modal" onclick="closeRulebook()">&times;</span>
             <div class="modal-layout">
-                <nav class="modal-sidebar">
-                    <h4>Kodex & Regeln</h4>
-                    <ul id="manual-index"></ul>
-                </nav>
+                <nav class="modal-sidebar"><h4>Kodex</h4><ul id="manual-index"></ul></nav>
                 <div class="modal-main">
                     <header class="modal-nav">
                         <button id="btn-search" class="tab-btn active" onclick="switchTab('search')">🔍 Kodex</button>
                         <button id="btn-reader" class="tab-btn" onclick="switchTab('reader')">📖 Regelbuch</button>
                     </header>
                     <div id="tab-search" class="tab-content">
-                        <input type="text" class="search-bar" placeholder="Regel suchen..." onkeyup="filterRules(this.value)">
+                        <input type="text" class="search-bar" placeholder="Suche..." onkeyup="filterRules(this.value)">
                         <div id="rules-results"></div>
                     </div>
                     <div id="tab-reader" class="tab-content hidden">
-                        <div id="page-content" class="reader-container"></div>
+                        <div id="page-content"></div>
                         <footer class="reader-footer">
-                            <button onclick="prevPage()">⬅ Zurück</button>
-                            <span>Seite <span id="currentPageNum">1</span> / 24</span>
-                            <button onclick="nextPage()">Weiter ➡</button>
+                            <button onclick="prevPage()">⬅</button>
+                            <span>Seite <span id="currentPageNum">1</span></span>
+                            <button onclick="nextPage()">➡</button>
                         </footer>
                     </div>
                 </div>
@@ -1880,8 +1872,8 @@ input[type="number"], select {
     
     <div id="card-tooltip" class="card-tooltip"></div>
 
-    <div style="position: fixed; bottom: 10px; right: 10px; opacity: 0.6; z-index: 1000;">
-        <button onclick="SystemCheck.run()" class="btn-sm" style="background: #2e241f; color: #dcd0ba; border: 1px solid #8b4513;">⚙️ System-Check</button>
+    <div style="position: fixed; bottom: 10px; right: 10px; z-index: 9999;">
+        <button onclick="SystemCheck.run(true)" class="btn-sm" style="background: #2e241f; color: white;">⚙️ Check</button>
     </div>
 
     <script src="js/config.js"></script>
