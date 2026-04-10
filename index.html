@@ -8,6 +8,31 @@
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/features.css">
     <link rel="stylesheet" href="css/modal.css">
+    <style>
+        /* Kurzer Style-Fix für bessere Lesbarkeit des Pickers */
+        #adventurePicker {
+            width: 100%;
+            max-width: 400px;
+            padding: 12px;
+            font-size: 1.1em;
+            border: 2px solid #5c1e1e;
+            background-color: #f4e7d3;
+            color: #2e241f;
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+        }
+        #adventurePicker optgroup { font-style: normal; font-weight: bold; color: #5c1e1e; }
+        .selection-box { 
+            background: rgba(92, 30, 30, 0.1); 
+            padding: 20px; 
+            border-radius: 8px; 
+            margin-bottom: 25px;
+            border: 1px solid #8b4513;
+        }
+    </style>
 </head>
 <body>
     <div class="app-container">
@@ -25,28 +50,28 @@
                     </select>
                 </div>
                 <div class="button-group">
-                    <button class="btn-outline" onclick="window.openRulebook()">📜 Regelbuch & Kodex</button>
-                    <button class="btn-outline" onclick="window.Archive.open()">🃏 Karten-Archiv</button>
+                    <button class="btn-outline" onclick="window.openRulebook()">📜 Regelbuch</button>
+                    <button class="btn-outline" onclick="window.Archive.open()">🃏 Archiv</button>
                 </div>
             </div>
-        </header>
-
-        <main>
-            <section id="story-area"></section>
-
-            <section id="selection">
+            
+            <div class="selection-box">
                 <select id="adventurePicker">
-                    <option value="">-- Abenteuer wählen --</option>
+                    <option value="">-- Wähle ein Abenteuer --</option>
                     <optgroup label="Grundbox">
                         <option value="base_game/silvanas_befreiung">Silvanas Befreiung</option>
-                        <option value="base_game/leute_nicht_spielen">Leute, die nicht spielen</option>
+                        <option value="base_game/leute_die_nicht_spielen">Leute, die nicht spielen</option>
                         <option value="base_game/wildenstein_akt_1">Das Erbe von Wildenstein - Akt I</option>
                         <option value="base_game/wildenstein_akt_2">Das Erbe von Wildenstein - Akt II</option>
                         <option value="base_game/wildenstein_akt_3">Das Erbe von Wildenstein - Akt III</option>
                     </optgroup>
                 </select>
-                <div id="loading-status" style="font-size: 0.8em; color: #8b4513; margin-top: 5px;"></div>
-            </section>
+                <div id="loading-status" style="font-size: 0.85em; margin-top: 8px; font-weight: bold; color: #276749;"></div>
+            </div>
+        </header>
+
+        <main>
+            <section id="story-area"></section>
 
             <div id="setup-display" class="hidden">
                 <h2 id="title"></h2>
@@ -97,46 +122,8 @@
         </main>
     </div>
 
-    <div id="archive-modal" class="modal-backdrop">
-        <div class="modal-content archive-modal-size">
-            <span class="close-modal" onclick="window.Archive.close()">&times;</span>
-            <div class="modal-layout">
-                <nav class="modal-sidebar"><h4>Sammlung</h4><ul id="archive-sets"><li onclick="window.Archive.loadSet('base_game')">📦 Grundbox</li></ul></nav>
-                <div class="modal-main">
-                    <header class="modal-nav"><h2>Karten-Archiv</h2><input type="text" class="search-bar" placeholder="Karte suchen..." onkeyup="window.Archive.filter(this.value)"></header>
-                    <div class="archive-grid" id="archive-grid"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="rule-modal" class="modal-backdrop">
-        <div class="modal-content">
-            <span class="close-modal" onclick="window.closeRulebook()">&times;</span>
-            <div class="modal-layout">
-                <nav class="modal-sidebar"><h4>Kodex</h4><ul id="manual-index"></ul></nav>
-                <div class="modal-main">
-                    <header class="modal-nav">
-                        <button id="btn-search" class="tab-btn active" onclick="window.switchTab('search')">🔍 Kodex</button>
-                        <button id="btn-reader" class="tab-btn" onclick="window.switchTab('reader')">📖 Regelbuch</button>
-                    </header>
-                    <div id="tab-search" class="tab-content">
-                        <input type="text" class="search-bar" placeholder="Suche..." onkeyup="window.filterRules(this.value)">
-                        <div id="rules-results"></div>
-                    </div>
-                    <div id="tab-reader" class="tab-content hidden">
-                        <div id="page-content"></div>
-                        <footer class="reader-footer">
-                            <button onclick="window.prevPage()">⬅</button>
-                            <span>Seite <span id="currentPageNum">1</span></span>
-                            <button onclick="window.nextPage()">➡</button>
-                        </footer>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
+    <div id="archive-modal" class="modal-backdrop">...</div>
+    <div id="rule-modal" class="modal-backdrop">...</div>
     <div id="card-tooltip" class="card-tooltip"></div>
 
     <div style="position: fixed; bottom: 10px; right: 10px; z-index: 9999;">
