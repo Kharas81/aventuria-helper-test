@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/10/2026, 12:07:34 PM
+# 🛡️ Aventuria Projekt-Backup - 4/10/2026, 12:07:46 PM
 
 ## 📄 Datei: css/aventura-theme - orginal.css
 ```css
@@ -1941,15 +1941,20 @@ document.addEventListener('DOMContentLoaded', () => App.init());
 
 ## 📄 Datei: js/archive.js
 ```js
-const Archive = {
+window.Archive = {
     open() { document.getElementById('archive-modal').style.display = 'flex'; },
     close() { document.getElementById('archive-modal').style.display = 'none'; },
     async loadSet(setKey) {
         const grid = document.getElementById('archive-grid');
-        grid.innerHTML = "Lade...";
-        const res = await fetch(`data/cards/base_game/master_${setKey}.json`);
-        const data = await res.json();
-        grid.innerHTML = data.cards.map(c => `<div class="archive-card" onmouseover="UI.showPreview(event, '${c.image}')" onmousemove="UI.movePreview(event)" onmouseout="UI.hidePreview()"><img src="${c.image}"><p>${c.name}</p></div>`).join('');
+        grid.innerHTML = "Lade Karten...";
+        try {
+            const res = await fetch(`data/cards/base_game/master_${setKey}.json`);
+            const data = await res.json();
+            grid.innerHTML = data.cards.map(c => `
+                <div class="archive-card" onmouseover="UI.showPreview(event, '${c.image}')" onmousemove="UI.movePreview(event)" onmouseout="UI.hidePreview()">
+                    <img src="${c.image}"><p>${c.name}</p>
+                </div>`).join('');
+        } catch(e) { grid.innerHTML = "Fehler beim Laden."; }
     },
     filter(query) {
         const q = query.toLowerCase();
