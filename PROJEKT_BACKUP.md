@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/10/2026, 6:47:32 PM
+# 🛡️ Aventuria Projekt-Backup - 4/10/2026, 6:47:44 PM
 
 ## 📄 Datei: css/aventura-theme - orginal.css
 ```css
@@ -2177,6 +2177,7 @@ window.UI = {
 ```js
 window.Renderer = {
     renderSetup(data, adventureCards) {
+        if (!data) return;
         const heroCount = document.getElementById('heroCount').value;
         document.getElementById('title').innerText = data.name;
 
@@ -2185,8 +2186,8 @@ window.Renderer = {
             let hover = "", btn = "", cssClass = "";
 
             if (card) {
-                hover = `onmouseover="UI.showPreview(event, '${card.image}')" onmousemove="UI.movePreview(event)" onmouseout="UI.hidePreview()"` ;
-                btn = `<button class="info-btn" onclick="UI.showPreview(event, '${card.image}')">i</button>`;
+                hover = `onmouseover="window.UI.showPreview(event, '${card.image}')" onmousemove="window.UI.movePreview(event)" onmouseout="window.UI.hidePreview()"` ;
+                btn = `<button class="info-btn" onclick="window.UI.showPreview(event, '${card.image}')">i</button>`;
                 cssClass = "has-preview";
             }
 
@@ -2198,7 +2199,7 @@ window.Renderer = {
         
         document.getElementById('danger-value').innerHTML = 
             `Gefahrenwert: <strong>${heroCount * data.danger_calc} GP</strong> 
-             <button class="info-btn" onclick="jumpToPage(12)">i</button>`;
+             <button class="info-btn" onclick="window.jumpToPage(12)">i</button>`;
 
         document.getElementById('special').innerHTML = `
             <h3>Spezialkarten</h3><ul>${buildList(data.setup.special_decks)}</ul><hr>
