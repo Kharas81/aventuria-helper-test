@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/10/2026, 11:38:35 AM
+# 🛡️ Aventuria Projekt-Backup - 4/10/2026, 11:39:31 AM
 
 ## 📄 Datei: css/aventura-theme - orginal.css
 ```css
@@ -2296,18 +2296,20 @@ const UI = {
     },
     showPreview(e, path) {
         const t = document.getElementById('card-tooltip');
-        if (!path) return;
+        if (!path || !t) return;
         t.innerHTML = `<img src="${path}">`;
         t.style.display = 'block';
         this.movePreview(e);
     },
     movePreview(e) {
         const t = document.getElementById('card-tooltip');
-        t.style.left = (e.clientX + 30) + 'px';
+        if (!t) return;
+        t.style.left = (e.clientX + 20) + 'px';
         t.style.top = (e.clientY - 200) + 'px';
     },
     hidePreview() {
-        document.getElementById('card-tooltip').style.display = 'none';
+        const t = document.getElementById('card-tooltip');
+        if (t) t.style.display = 'none';
     },
     handleCheck(btn, type, text) {
         let res = btn.parentElement.querySelector('.check-result');
