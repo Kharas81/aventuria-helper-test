@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/10/2026, 6:48:04 PM
+# 🛡️ Aventuria Projekt-Backup - 4/10/2026, 6:48:18 PM
 
 ## 📄 Datei: css/aventura-theme - orginal.css
 ```css
@@ -1987,11 +1987,13 @@ window.Combat = {
         const steps = document.querySelectorAll('.step');
         steps.forEach(s => s.classList.remove('active'));
         this.currentPhase = (this.currentPhase % 5) + 1;
-        document.getElementById(`phase${this.currentPhase}`).classList.add('active');
+        const el = document.getElementById(`phase${this.currentPhase}`);
+        if(el) el.classList.add('active');
     },
     randomTarget() {
         const count = document.getElementById('heroCount').value;
-        document.getElementById('targetResult').innerText = `🎯 Ziel: Held ${Math.floor(Math.random() * count) + 1}`;
+        const res = document.getElementById('targetResult');
+        if(res) res.innerText = `🎯 Ziel: Held ${Math.floor(Math.random() * count) + 1}`;
     },
     updateDashboard() {
         const count = document.getElementById('heroCount').value;
@@ -1999,7 +2001,7 @@ window.Combat = {
         if (!container) return;
         container.innerHTML = "";
         for(let i=1; i<=count; i++) {
-            container.innerHTML += `<div class="hero-card"><h4>Held ${i}</h4><div class="stat">❤️ <span id="lp${i}">40</span> <button onclick="Combat.changeStat('lp${i}', -1)">-</button><button onclick="Combat.changeStat('lp${i}', 1)">+</button></div></div>`;
+            container.innerHTML += `<div class="hero-card"><h4>Held ${i}</h4><div class="stat">❤️ <span id="lp${i}">40</span> <button onclick="window.Combat.changeStat('lp${i}', -1)">-</button><button onclick="window.Combat.changeStat('lp${i}', 1)">+</button></div></div>`;
         }
     },
     changeStat(id, delta) {
