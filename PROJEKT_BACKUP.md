@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/10/2026, 12:07:00 PM
+# 🛡️ Aventuria Projekt-Backup - 4/10/2026, 12:07:13 PM
 
 ## 📄 Datei: css/aventura-theme - orginal.css
 ```css
@@ -2255,7 +2255,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 ## 📄 Datei: js/ui-helper.js
 ```js
-const UI = {
+window.UI = {
     toggleSection(id) {
         const el = document.getElementById(id);
         if (el) el.classList.toggle('show');
