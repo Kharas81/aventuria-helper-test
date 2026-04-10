@@ -1,5 +1,5 @@
 /**
- * js/validator.js - Korrigierte Pfadprüfung
+ * js/validator.js - Prüft Module und Abenteuerpfade
  */
 window.SystemCheck = {
     requirements: [
@@ -23,18 +23,18 @@ window.SystemCheck = {
         if (picker && manual) {
             const options = Array.from(picker.querySelectorAll('option')).filter(o => o.value);
             for (let opt of options) {
-                // KORREKTUR: Der Pfad muss genau so wie beim Laden aufgebaut sein
                 const res = await fetch(`data/adventures/${opt.value}.json`, { method: 'HEAD' });
-                if (!res.ok) errors.push(`⚠️ Datei nicht erreichbar: ${opt.value}.json`);
+                if (!res.ok) errors.push(`⚠️ Datei nicht gefunden: data/adventures/${opt.value}.json`);
             }
         }
 
         if (errors.length > 0) {
-            console.error("System-Check fehlgeschlagen:", errors);
-            if(manual) alert("Fehler:\n" + errors.join("\n"));
+            console.error("System-Check Fehler:", errors);
+            if(manual) alert("Fehler gefunden:\n" + errors.join("\n"));
         } else if (manual) {
-            alert("✅ Alle Systeme und Abenteuer-Pfade sind korrekt!");
+            alert("✅ Alle Module und Abenteuer-Dateien sind erreichbar!");
         }
     }
 };
+
 document.addEventListener('DOMContentLoaded', () => setTimeout(() => window.SystemCheck.run(), 1000));
