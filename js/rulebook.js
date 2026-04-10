@@ -4,7 +4,6 @@
 window.rulesData = [];
 window.currentPage = 1;
 
-// Das Inhaltsverzeichnis für die Sidebar
 const indexData = [
     { p: 1, title: "Titelblatt" },
     { p: 2, title: "Was ist Aventurien?" },
@@ -67,19 +66,21 @@ window.filterRules = (term) => {
     res.innerHTML = filtered.map(r => `<div class="rule-entry"><h4>${r.title}</h4><p>${r.text}</p></div>`).join('') || "Kein Treffer im Kodex.";
 };
 
-document.addEventListener('DOMContentLoaded', async () => {
-    // Index befüllen
+// Initialisierung
+function initRulebook() {
     const list = document.getElementById('manual-index');
     if (list) {
         list.innerHTML = indexData.map(item => 
             `<li onclick="window.jumpToPage(${item.p})">S. ${item.p}: ${item.title}</li>`
         ).join('');
     }
+}
 
-    // Kodex-Daten laden
+document.addEventListener('DOMContentLoaded', async () => {
+    initRulebook();
     try {
         const r = await fetch('data/manual.json');
         const d = await r.json();
         window.rulesData = [...d.phases.map(p => ({title: p.name, text: p.desc})), ...Object.entries(d.rules).map(([k,v])=>({title: k, text: v}))];
-    } catch(e){ console.warn("Kodex-Daten konnten nicht geladen werden."); }
+    } catch(e){ console.warn("Kodex-Daten fehlen."); }
 });
