@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/10/2026, 6:48:28 PM
+# 🛡️ Aventuria Projekt-Backup - 4/10/2026, 6:48:45 PM
 
 ## 📄 Datei: css/aventura-theme - orginal.css
 ```css
@@ -1962,7 +1962,7 @@ window.Archive = {
             const res = await fetch(`data/cards/base_game/master_${setKey}.json`);
             const data = await res.json();
             grid.innerHTML = data.cards.map(c => `
-                <div class="archive-card" onmouseover="UI.showPreview(event, '${c.image}')" onmousemove="UI.movePreview(event)" onmouseout="UI.hidePreview()">
+                <div class="archive-card" onmouseover="window.UI.showPreview(event, '${c.image}')" onmousemove="window.UI.movePreview(event)" onmouseout="window.UI.hidePreview()">
                     <img src="${c.image}"><p>${c.name}</p>
                 </div>`).join('');
         } catch(e) { grid.innerHTML = "Fehler beim Laden."; }
