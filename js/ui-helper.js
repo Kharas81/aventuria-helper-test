@@ -1,4 +1,4 @@
-const UI = {
+window.UI = {
     toggleSection(id) {
         const el = document.getElementById(id);
         if (el) el.classList.toggle('show');
