@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/10/2026, 12:07:13 PM
+# 🛡️ Aventuria Projekt-Backup - 4/10/2026, 12:07:23 PM
 
 ## 📄 Datei: css/aventura-theme - orginal.css
 ```css
@@ -1965,7 +1965,7 @@ const Archive = {
 
 ## 📄 Datei: js/combat.js
 ```js
-const Combat = {
+window.Combat = {
     currentPhase: 0,
     nextPhase() {
         const steps = document.querySelectorAll('.step');
@@ -1993,7 +1993,8 @@ const Combat = {
     calculateIntermission() {
         const time = parseInt(document.getElementById('remainingTime').value) || 0;
         const ep = time + 2;
-        document.getElementById('ep-result').innerText = `${ep} EP`;
+        const res = document.getElementById('ep-result');
+        if(res) res.innerText = `${ep} EP`;
     }
 };
 
