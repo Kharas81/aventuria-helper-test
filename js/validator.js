@@ -1,38 +1,34 @@
 /**
- * js/validator.js - Findet fehlende Module
+ * js/validator.js - Prüft die Modul-Existenz robust
  */
-const SystemCheck = {
-    requirements: {
-        modules: [
-            { name: 'CONFIG', obj: 'CONFIG' },
-            { name: 'API', obj: 'API' },
-            { name: 'Renderer', obj: 'Renderer' },
-            { name: 'UI', obj: 'UI' },
-            { name: 'Combat', obj: 'Combat' },
-            { name: 'Archive', obj: 'Archive' },
-            { name: 'Narrative', obj: 'Narrative' }
-        ]
-    },
+window.SystemCheck = {
+    requirements: [
+        { name: 'CONFIG', id: 'config.js' },
+        { name: 'API', id: 'api.js' },
+        { name: 'Renderer', id: 'ui-renderer.js' },
+        { name: 'UI', id: 'ui-helper.js' },
+        { name: 'Combat', id: 'combat.js' },
+        { name: 'Archive', id: 'archive.js' },
+        { name: 'Narrative', id: 'narrative.js' },
+        { name: 'App', id: 'app.js' }
+    ],
 
     run(manual = false) {
-        console.log("🛡️ Aventuria System-Check...");
         let errors = [];
-
-        this.requirements.modules.forEach(mod => {
-            if (typeof window[mod.obj] === 'undefined') {
-                errors.push(`❌ JS-Modul fehlt: ${mod.name}.js`);
+        this.requirements.forEach(req => {
+            if (typeof window[req.name] === 'undefined') {
+                errors.push(`❌ Modul fehlt: ${req.id}`);
             }
         });
 
         if (errors.length > 0) {
-            alert("ACHTUNG: System-Fehler gefunden!\n\n" + errors.join("\n") + "\n\nPrüfe, ob alle Dateien im /js Ordner liegen.");
-        } else if (manual) {
-            alert("✅ System-Check erfolgreich: Alle Module geladen.");
+            console.error("System-Check fehlgeschlagen:", errors);
+            if(manual) alert("Fehler gefunden:\n" + errors.join("\n"));
+        } else {
+            console.log("✅ Alle Aventuria-Module geladen.");
+            if(manual) alert("✅ Alles bereit!");
         }
     }
 };
 
-// Automatischer Check kurz nach dem Start
-document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => SystemCheck.run(), 1000); 
-});
+document.addEventListener('DOMContentLoaded', () => setTimeout(() => window.SystemCheck.run(), 1500));
