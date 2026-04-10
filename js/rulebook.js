@@ -1,7 +1,7 @@
 let rulesData = [];
-let currentPage = 1;
+window.currentPage = 1;
 
-window.openRulebook = () => { document.getElementById('rule-modal').style.display = 'flex'; switchTab('search'); };
+window.openRulebook = () => { document.getElementById('rule-modal').style.display = 'flex'; window.switchTab('search'); };
 window.closeRulebook = () => { document.getElementById('rule-modal').style.display = 'none'; };
 
 window.switchTab = (tab) => {
@@ -9,10 +9,10 @@ window.switchTab = (tab) => {
     document.getElementById('tab-reader').classList.toggle('hidden', tab !== 'reader');
     document.getElementById('btn-search').classList.toggle('active', tab === 'search');
     document.getElementById('btn-reader').classList.toggle('active', tab === 'reader');
-    if(tab === 'reader') loadPage(currentPage);
+    if(tab === 'reader') window.loadPage(window.currentPage);
 };
 
-async function loadPage(nr) {
+window.loadPage = async (nr) => {
     const cont = document.getElementById('page-content');
     cont.innerHTML = "Lade...";
     try {
@@ -20,12 +20,12 @@ async function loadPage(nr) {
         const data = await res.json();
         cont.innerHTML = `<h4>${data.title}</h4>${data.image ? `<img src="${data.image}" style="width:100%">`:''}<div class="reader-text">${data.content}</div>`;
         document.getElementById('currentPageNum').innerText = nr;
-        currentPage = nr;
+        window.currentPage = nr;
     } catch(e) { cont.innerHTML = "Fehler."; }
-}
+};
 
-window.nextPage = () => { if(currentPage < 24) loadPage(currentPage+1); };
-window.prevPage = () => { if(currentPage > 1) loadPage(currentPage-1); };
+window.nextPage = () => { if(window.currentPage < 24) window.loadPage(window.currentPage+1); };
+window.prevPage = () => { if(window.currentPage > 1) window.loadPage(window.currentPage-1); };
 
 window.filterRules = (term) => {
     const res = document.getElementById('rules-results');
