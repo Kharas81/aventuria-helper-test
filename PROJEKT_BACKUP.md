@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/10/2026, 7:43:22 PM
+# 🛡️ Aventuria Projekt-Backup - 4/10/2026, 7:43:38 PM
 
 ## 📄 Datei: css/aventura-theme - orginal.css
 ```css
@@ -2288,7 +2288,7 @@ window.Renderer = {
 ## 📄 Datei: js/validator.js
 ```js
 /**
- * js/validator.js - Erweiterter System-Check
+ * js/validator.js - Korrigierte Pfadprüfung
  */
 window.SystemCheck = {
     requirements: [
@@ -2305,22 +2305,27 @@ window.SystemCheck = {
     async run(manual = false) {
         let errors = [];
         this.requirements.forEach(req => {
-            if (typeof window[req.name] === 'undefined' || window[req.name] === null) {
-                errors.push(`❌ Modul nicht erkannt: ${req.id}`);
-            }
+            if (typeof window[req.name] === 'undefined') errors.push(`❌ Modul fehlt: ${req.id}`);
         });
 
+        const picker = document.getElementById('adventurePicker');
+        if (picker && manual) {
+            const options = Array.from(picker.querySelectorAll('option')).filter(o => o.value);
+            for (let opt of options) {
+                // KORREKTUR: Der Pfad muss genau so wie beim Laden aufgebaut sein
+                const res = await fetch(`data/adventures/${opt.value}.json`, { method: 'HEAD' });
+                if (!res.ok) errors.push(`⚠️ Datei nicht erreichbar: ${opt.value}.json`);
+            }
+        }
+
         if (errors.length > 0) {
-            console.error("Integritätsprüfung fehlgeschlagen:", errors);
-            if(manual) alert("Fehlende Komponenten:\n" + errors.join("\n"));
-        } else {
-            console.log("✅ System-Check: Alle Aventuria-Module sind einsatzbereit.");
-            if(manual) alert("✅ Alles bereit! Viel Spaß in Aventurien.");
+            console.error("System-Check fehlgeschlagen:", errors);
+            if(manual) alert("Fehler:\n" + errors.join("\n"));
+        } else if (manual) {
+            alert("✅ Alle Systeme und Abenteuer-Pfade sind korrekt!");
         }
     }
 };
-
-// Automatischer Check nach einer Sekunde
 document.addEventListener('DOMContentLoaded', () => setTimeout(() => window.SystemCheck.run(), 1000));
 
 ```
