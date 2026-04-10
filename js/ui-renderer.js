@@ -1,3 +1,6 @@
+/**
+ * js/ui-renderer.js - Verbesserte Karten-Vorschau
+ */
 window.Renderer = {
     renderSetup(data, adventureCards) {
         if (!data) return;
@@ -5,7 +8,10 @@ window.Renderer = {
         document.getElementById('title').innerText = data.name;
 
         const buildList = (items) => (items || []).map(item => {
-            const card = adventureCards.find(c => item.toLowerCase().includes(c.name.toLowerCase()));
+            // Verbesserte Suche: Ignoriert Zitate und unnötige Leerzeichen
+            const cleanName = item.split('[')[0].trim().toLowerCase();
+            const card = adventureCards.find(c => cleanName.includes(c.name.toLowerCase()) || c.name.toLowerCase().includes(cleanName));
+            
             let hover = "", btn = "", cssClass = "";
 
             if (card) {
