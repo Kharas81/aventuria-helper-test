@@ -4,12 +4,17 @@
 window.rulesData = [];
 window.currentPage = 1;
 
-// Seiten 4 und 5 sind aktuell fehlerhaft/doppelt und werden vorerst übersprungen
-window.validManualPages = [1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
+// Seiten 4 und 5 sind jetzt wieder regulär vorhanden
+window.validManualPages = [
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
+    13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24
+];
 
 const indexData = [
     { p: 1, title: "Titelblatt" },
     { p: 2, title: "Was ist Aventurien?" },
+    { p: 4, title: "Südosten & ferne Regionen" },
+    { p: 5, title: "Religionen, Kulturen & Gefahren" },
     { p: 6, title: "Vorbereitung" },
     { p: 7, title: "Spielmaterial" },
     { p: 9, title: "Das Abenteuer" },
@@ -25,17 +30,21 @@ const indexData = [
 ];
 
 window.openRulebook = () => {
-    document.getElementById('rule-modal').style.display = 'flex';
+    const modal = document.getElementById('rule-modal');
+    if (!modal) return;
+    modal.style.display = 'flex';
     window.switchTab('search');
 };
 
 window.closeRulebook = () => {
-    document.getElementById('rule-modal').style.display = 'none';
+    const modal = document.getElementById('rule-modal');
+    if (!modal) return;
+    modal.style.display = 'none';
 };
 
 window.jumpToPage = (nr) => {
     if (!window.validManualPages.includes(nr)) {
-        console.warn(`Regelbuch-Seite ${nr} ist aktuell deaktiviert.`);
+        console.warn(`Regelbuch-Seite ${nr} ist aktuell nicht verfügbar.`);
         return;
     }
 
@@ -44,10 +53,10 @@ window.jumpToPage = (nr) => {
 };
 
 window.switchTab = (tab) => {
-    document.getElementById('tab-search').classList.toggle('hidden', tab !== 'search');
-    document.getElementById('tab-reader').classList.toggle('hidden', tab !== 'reader');
-    document.getElementById('btn-search').classList.toggle('active', tab === 'search');
-    document.getElementById('btn-reader').classList.toggle('active', tab === 'reader');
+    document.getElementById('tab-search')?.classList.toggle('hidden', tab !== 'search');
+    document.getElementById('tab-reader')?.classList.toggle('hidden', tab !== 'reader');
+    document.getElementById('btn-search')?.classList.toggle('active', tab === 'search');
+    document.getElementById('btn-reader')?.classList.toggle('active', tab === 'reader');
 
     if (tab === 'reader') {
         window.loadPage(window.currentPage);
@@ -55,24 +64,24 @@ window.switchTab = (tab) => {
 };
 
 window.getNextManualPage = (current) => {
-    return window.validManualPages.find(p => p > current) ?? current;
+    return window.validManualPages.find(page => page > current) ?? current;
 };
 
 window.getPrevManualPage = (current) => {
-    const prev = [...window.validManualPages].reverse().find(p => p < current);
+    const prev = [...window.validManualPages].reverse().find(page => page < current);
     return prev ?? current;
 };
 
 window.loadPage = async (nr) => {
-    const cont = document.getElementById('page-content');
-    if (!cont) return;
+    const container = document.getElementById('page-content');
+    if (!container) return;
 
     if (!window.validManualPages.includes(nr)) {
-        cont.innerHTML = "Diese Seite ist aktuell nicht verfügbar.";
+        container.innerHTML = 'Diese Seite ist aktuell nicht verfügbar.';
         return;
     }
 
-    cont.innerHTML = "Lade Schriftrolle...";
+    container.innerHTML = 'Lade Schriftrolle...';
 
     try {
         const res = await fetch(`data/manual/base_game/page_${nr.toString().padStart(2, '0')}.json`);
@@ -82,7 +91,7 @@ window.loadPage = async (nr) => {
 
         const data = await res.json();
 
-        cont.innerHTML = `
+        container.innerHTML = `
             <h4>${data.title}</h4>
             ${data.image ? `<img src="${data.image}" style="width:100%; border:1px solid #8b4513;">` : ''}
             <div class="reader-text" style="margin-top:15px;">${data.content}</div>
@@ -90,9 +99,9 @@ window.loadPage = async (nr) => {
 
         document.getElementById('currentPageNum').innerText = nr;
         window.currentPage = nr;
-    } catch (e) {
-        console.error("Fehler beim Laden der Regelbuch-Seite:", e);
-        cont.innerHTML = "Fehler beim Laden der Seite.";
+    } catch (error) {
+        console.error('Fehler beim Laden der Regelbuch-Seite:', error);
+        container.innerHTML = 'Fehler beim Laden der Seite.';
     }
 };
 
@@ -105,49 +114,63 @@ window.prevPage = () => {
 };
 
 window.filterRules = (term) => {
-    const res = document.getElementById('rules-results');
-    if (!res) return;
+    const results = document.getElementById('rules-results');
+    if (!results) return;
 
     if (!term) {
-        res.innerHTML = "";
+        results.innerHTML = '';
         return;
     }
 
-    const filtered = window.rulesData.filter(r =>
-        r.title.toLowerCase().includes(term.toLowerCase()) ||
-        r.text.toLowerCase().includes(term.toLowerCase())
+    const normalized = term.toLowerCase();
+
+    const filtered = window.rulesData.filter(rule =>
+        rule.title.toLowerCase().includes(normalized) ||
+        rule.text.toLowerCase().includes(normalized)
     );
 
-    res.innerHTML = filtered.map(r => `
+    results.innerHTML = filtered.map(rule => `
         <div class="rule-entry">
-            <h4>${r.title}</h4>
-            <p>${r.text}</p>
+            <h4>${rule.title}</h4>
+            <p>${rule.text}</p>
         </div>
-    `).join('') || "Kein Treffer im Kodex.";
+    `).join('') || 'Kein Treffer im Kodex.';
 };
 
-// Initialisierung
 function initRulebook() {
     const list = document.getElementById('manual-index');
     if (!list) return;
 
-    list.innerHTML = indexData.map(item =>
-        `<li onclick="window.jumpToPage(${item.p})">S. ${item.p}: ${item.title}</li>`
-    ).join('');
+    list.innerHTML = '';
+
+    const fragment = document.createDocumentFragment();
+
+    indexData.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = `S. ${item.p}: ${item.title}`;
+        li.addEventListener('click', () => window.jumpToPage(item.p));
+        fragment.appendChild(li);
+    });
+
+    list.appendChild(fragment);
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
     initRulebook();
 
     try {
-        const r = await fetch('data/manual.json');
-        const d = await r.json();
+        const res = await fetch('data/manual.json');
+        if (!res.ok) {
+            throw new Error(`HTTP ${res.status}`);
+        }
+
+        const data = await res.json();
 
         window.rulesData = [
-            ...d.phases.map(p => ({ title: p.name, text: p.desc })),
-            ...Object.entries(d.rules).map(([k, v]) => ({ title: k, text: v }))
+            ...data.phases.map(phase => ({ title: phase.name, text: phase.desc })),
+            ...Object.entries(data.rules).map(([key, value]) => ({ title: key, text: value }))
         ];
-    } catch (e) {
-        console.warn("Kodex-Daten fehlen.");
+    } catch (error) {
+        console.warn('Kodex-Daten fehlen.', error);
     }
 });
