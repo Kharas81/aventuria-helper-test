@@ -5,10 +5,10 @@ window.App = {
     async init() {
         const picker = document.getElementById('adventurePicker');
         const count = document.getElementById('heroCount');
-        
+
         if (picker) picker.addEventListener('change', () => this.handleUpdate());
         if (count) count.addEventListener('change', () => this.handleUpdate());
-        
+
         if (window.Combat) window.Combat.updateDashboard();
         console.log("App initialisiert.");
     },
@@ -39,11 +39,15 @@ window.App = {
 
             if (window.Renderer) window.Renderer.renderSetup(advData, cardData.cards);
             if (window.Narrative) window.Narrative.renderStory(advData);
-            
-            document.getElementById('setup-display').classList.remove('hidden');
-            if (window.Combat) window.Combat.updateDashboard();
-            status.innerText = "✅ Abenteuer geladen.";
 
+            document.getElementById('setup-display').classList.remove('hidden');
+
+            if (window.Combat) {
+                window.Combat.resetPhase();
+                window.Combat.updateDashboard();
+            }
+
+            status.innerText = "✅ Abenteuer geladen.";
         } catch (err) {
             console.error("Ladevorgang abgebrochen:", err);
             status.innerText = `💥 Fehler: ${err.message}`;
