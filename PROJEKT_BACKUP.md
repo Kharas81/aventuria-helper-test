@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 2:53:57 PM
+# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 2:54:11 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -824,21 +824,29 @@ hr {
 ## 📄 Datei: data/adventures/base_game/wildenstein_akt_2.json
 ```json
 {
-  "id": "wildenstein_2",
+  "id": "wildenstein_akt_2",
   "name": "Das Erbe von Wildenstein - Akt II",
   "danger_calc": 6,
   "narrative": {
     "intro": "Dorf Wildenstein, im Spätherbst: Bei Sonnenaufgang werdet ihr durch den Ruf von Raben geweckt. Sie fliegen zur Burg, deren Silhouette bedrohlich auf einem fernen Fels thront. Ein Gefühl der Beklommenheit überkommt euch [cite: 906-909].",
     "checks": [
       {
+        "id": "beklommenheit",
         "skill": "Willenskraft",
-        "text": "Könnt ihr der Beklommenheit widerstehen? ",
-        "results": { "success": "Du schöpfst Mut (+1 Schicksalspunkt) [cite: 911].", "fail": "Du bist nervös und zweifelnd (Lege 1 Schicksalspunkt ab)[cite: 913]." }
+        "text": "Könnt ihr der Beklommenheit widerstehen?",
+        "results": {
+          "success": "Du schöpfst Mut (+1 Schicksalspunkt) [cite: 911].",
+          "fail": "Du bist nervös und zweifelnd (Lege 1 Schicksalspunkt ab)[cite: 913]."
+        }
       },
       {
+        "id": "reparaturen",
         "skill": "Handwerk",
         "text": "Helft den Dorfbewohnern bei Reparaturen.",
-        "results": { "success": "Du erhältst ein Zwölfgötter-Amulett [cite: 922-924].", "fail": "Du stümperst herum und verlierst 1W6 LP [cite: 925-926]." }
+        "results": {
+          "success": "Du erhältst ein Zwölfgötter-Amulett [cite: 922-924].",
+          "fail": "Du stümperst herum und verlierst 1W6 LP [cite: 925-926]."
+        }
       }
     ]
   },
@@ -850,6 +858,7 @@ hr {
     "defeat": "Der Erbe wird ausgeschaltet[cite: 957]."
   }
 }
+
 ```
 
 ---
