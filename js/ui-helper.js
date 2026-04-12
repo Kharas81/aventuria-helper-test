@@ -1,33 +1,76 @@
 window.UI = {
     toggleSection(id) {
         const el = document.getElementById(id);
-        if (el) el.classList.toggle('show');
+        if (!el) return;
+        el.classList.toggle('show');
     },
-    showPreview(e, path) {
-        const t = document.getElementById('card-tooltip');
-        if (!path || !t) return;
-        t.innerHTML = `<img src="${path}">`;
-        t.style.display = 'block';
-        this.movePreview(e);
+
+    showPreview(event, imageSrc) {
+        const tooltip = document.getElementById('card-tooltip');
+        if (!tooltip || !imageSrc) return;
+
+        tooltip.innerHTML = `<img src="${imageSrc}" alt="Kartenvorschau">`;
+        tooltip.style.display = 'block';
+        this.movePreview(event);
     },
-    movePreview(e) {
-        const t = document.getElementById('card-tooltip');
-        if (!t) return;
-        t.style.left = (e.clientX + 20) + 'px';
-        t.style.top = (e.clientY - 200) + 'px';
-    },
-    hidePreview() {
-        const t = document.getElementById('card-tooltip');
-        if (t) t.style.display = 'none';
-    },
-    handleCheck(btn, type, text) {
-        let res = btn.parentElement.querySelector('.check-result');
-        if (!res) {
-            res = document.createElement('div');
-            res.className = 'check-result';
-            btn.parentElement.appendChild(res);
+
+    movePreview(event) {
+        const tooltip = document.getElementById('card-tooltip');
+        if (!tooltip || tooltip.style.display !== 'block') return;
+
+        const offsetX = 20;
+        const offsetY = 20;
+        const margin = 16;
+
+        const tooltipWidth = tooltip.offsetWidth || 450;
+        const tooltipHeight = tooltip.offsetHeight || 300;
+
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
+
+        let left = event.clientX + offsetX;
+        let top = event.clientY + offsetY;
+
+        if (left + tooltipWidth + margin > viewportWidth) {
+            left = event.clientX - tooltipWidth - offsetX;
         }
-        res.className = `check-result show ${type}`;
-        res.innerHTML = `<strong>${type==='success'?'✅':'❌'}</strong> ${text}`;
+
+        if (left < margin) {
+            left = margin;
+        }
+
+        if (top + tooltipHeight + margin > viewportHeight) {
+            top = viewportHeight - tooltipHeight - margin;
+        }
+
+        if (top < margin) {
+            top = margin;
+        }
+
+        tooltip.style.left = `${left}px`;
+        tooltip.style.top = `${top}px`;
+    },
+
+    hidePreview() {
+        const tooltip = document.getElementById('card-tooltip');
+        if (tooltip) {
+            tooltip.style.display = 'none';
+        }
+    },
+
+    handleCheck(btn, type, text) {
+        const probeItem = btn.closest('.probe-item');
+        if (!probeItem) return;
+
+        let result = probeItem.querySelector('.check-result');
+
+        if (!result) {
+            result = document.createElement('div');
+            result.className = 'check-result';
+            probeItem.appendChild(result);
+        }
+
+        result.className = `check-result show ${type}`;
+        result.innerHTML = `<strong>${type === 'success' ? '✅' : '❌'}</strong> ${text}`;
     }
 };
