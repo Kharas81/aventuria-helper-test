@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 4:56:35 PM
+# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 4:56:50 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -913,9 +913,19 @@ hr {
     ]
   },
   "setup": {
-    "blue_cards": ["Zeitskala Wildenstein-II", "Anführer: Baron von Wildenstein", "Handlung: Hypnose brechen [cite: 951]"],
-    "minion_keywords": ["Wächter", "Diener [cite: 956]"],
-    "special_decks": ["Anführer-Aktionen: Übernatürlich", "Nekromantie [cite: 952]"],
+    "blue_cards": [
+      { "id": "zs_wildenstein_2" },
+      { "id": "leader_baron_von_wildenstein" },
+      { "id": "ha_hypnose_brechen" }
+    ],
+    "minion_cards": [
+      { "id": "minion_waechter", "label": "Wächter" },
+      { "id": "minion_diener", "label": "Diener" }
+    ],
+    "special_cards": [
+      { "id": "special_anfuehrer_aktionen_uebernatuerlich", "label": "Anführer-Aktionen: Übernatürlich" },
+      { "id": "special_nekromantie", "label": "Nekromantie" }
+    ],
     "victory": "Alle Gegner besiegt oder Baron vertrieben[cite: 958].",
     "defeat": "Der Erbe wird ausgeschaltet[cite: 957]."
   }
