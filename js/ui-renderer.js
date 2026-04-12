@@ -1,5 +1,5 @@
 /**
- * js/ui-renderer.js - Verbesserte Karten-Vorschau
+ * js/ui-renderer.js - Rendert Abenteuerdaten über Karten-IDs
  */
 window.Renderer = {
     escapeHtml(value) {
@@ -11,24 +11,20 @@ window.Renderer = {
             .replace(/'/g, "&#39;");
     },
 
-    renderSetup(data, adventureCards) {
-        if (!data) return;
+    getCardById(cards, id) {
+        return (cards || []).find(card => card.id === id) || null;
+    },
 
-        const heroCount = parseInt(document.getElementById('heroCount')?.value, 10) || 0;
-        const dangerCalc = Number.isFinite(Number(data.danger_calc)) ? Number(data.danger_calc) : 0;
+    buildList(items, cards) {
+        if (!Array.isArray(items)) return "";
 
-        document.getElementById('title').innerText = data.name || "Unbekanntes Abenteuer";
+        return items.map(item => {
+            const entry = typeof item === "string" ? { id: item } : item;
+            const card = this.getCardById(cards, entry.id);
 
-        const buildList = (items) => (items || []).map(item => {
-            const originalText = String(item ?? "");
-            const cleanName = originalText.split('[')[0].trim().toLowerCase();
-
-            const card = (adventureCards || []).find(c => {
-                const cardName = String(c.name ?? "").toLowerCase();
-                return cleanName.includes(cardName) || cardName.includes(cleanName);
-            });
-
-            const safeText = this.escapeHtml(originalText);
+            const label = this.escapeHtml(
+                entry.label || card?.name || `⚠️ ${entry.id}`
+            );
 
             if (card?.image) {
                 const safeImage = this.escapeHtml(card.image);
@@ -37,10 +33,7 @@ window.Renderer = {
                     <li>
                         <label class="checklist-item">
                             <input type="checkbox">
-                            <span
-                                class="has-preview"
-                                data-card-image="${safeImage}"
-                            >${safeText}</span>
+                            <span class="has-preview">${label}</span>
                             <button
                                 type="button"
                                 class="info-btn"
@@ -56,7 +49,7 @@ window.Renderer = {
                 <li>
                     <label class="checklist-item">
                         <input type="checkbox">
-                        <span>${safeText}</span>
+                        <span>${label}</span>
                         <button
                             type="button"
                             class="info-btn"
@@ -66,10 +59,26 @@ window.Renderer = {
                     </label>
                 </li>
             `;
-        }).join('');
+        }).join("");
+    },
 
-        document.querySelector('#blue-cards ul').innerHTML = buildList(data.setup?.blue_cards);
-        document.querySelector('#minions ul').innerHTML = buildList(data.setup?.minion_keywords);
+    renderSetup(data, adventureCards) {
+        if (!data) return;
+
+        const heroCount = parseInt(document.getElementById('heroCount')?.value, 10) || 0;
+        const dangerCalc = Number.isFinite(Number(data.danger_calc)) ? Number(data.danger_calc) : 0;
+
+        document.getElementById('title').innerText = data.name || "Unbekanntes Abenteuer";
+
+        document.querySelector('#blue-cards ul').innerHTML = this.buildList(
+            data.setup?.blue_cards,
+            adventureCards
+        );
+
+        document.querySelector('#minions ul').innerHTML = this.buildList(
+            data.setup?.minion_cards,
+            adventureCards
+        );
 
         document.getElementById('danger-value').innerHTML = `
             Gefahrenwert: <strong>${heroCount * dangerCalc} GP</strong>
@@ -78,7 +87,7 @@ window.Renderer = {
 
         document.getElementById('special').innerHTML = `
             <h3>Spezialkarten</h3>
-            <ul>${buildList(data.setup?.special_decks)}</ul>
+            <ul>${this.buildList(data.setup?.special_cards, adventureCards)}</ul>
             <hr>
             <p><strong>⚔ Sieg:</strong> ${this.escapeHtml(data.setup?.victory ?? "—")}</p>
             <p><strong>☠ Niederlage:</strong> ${this.escapeHtml(data.setup?.defeat ?? "—")}</p>
