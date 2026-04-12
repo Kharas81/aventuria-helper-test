@@ -1,34 +1,92 @@
 /**
- * js/app.js - Hauptsteuerung der App
+ * js/app.js - Hauptsteuerung + State Restore
  */
 window.App = {
     async init() {
         const picker = document.getElementById('adventurePicker');
-        const count = document.getElementById('heroCount');
+        const heroCount = document.getElementById('heroCount');
+        const difficulty = document.getElementById('difficulty');
+        const remainingTime = document.getElementById('remainingTime');
 
-        if (picker) picker.addEventListener('change', () => this.handleUpdate());
-        if (count) count.addEventListener('change', () => this.handleUpdate());
+        picker?.addEventListener('change', async () => {
+            window.StorageManager?.save({
+                currentAdventurePath: picker.value
+            });
+            await this.handleUpdate();
+        });
 
-        if (window.Combat) window.Combat.updateDashboard();
-        console.log("App initialisiert.");
+        heroCount?.addEventListener('change', async () => {
+            window.StorageManager?.save({
+                heroCount: parseInt(heroCount.value, 10) || 2
+            });
+            await this.handleUpdate();
+        });
+
+        difficulty?.addEventListener('change', () => {
+            window.StorageManager?.save({
+                difficulty: difficulty.value
+            });
+        });
+
+        remainingTime?.addEventListener('change', () => {
+            window.Combat?.calculateIntermission();
+        });
+
+        this.restoreGlobalState();
+
+        if (window.Combat) {
+            window.Combat.updateDashboard();
+            const state = window.StorageManager?.load();
+            if (state) {
+                window.Combat.setPhase(state.combatPhase || 0);
+            }
+        }
+
+        if (picker?.value) {
+            await this.handleUpdate(false);
+        }
+
+        console.log('App initialisiert.');
     },
 
-    async handleUpdate() {
+    restoreGlobalState() {
+        const state = window.StorageManager?.load();
+        if (!state) return;
+
+        const picker = document.getElementById('adventurePicker');
+        const heroCount = document.getElementById('heroCount');
+        const difficulty = document.getElementById('difficulty');
+        const remainingTime = document.getElementById('remainingTime');
+
+        if (picker && state.currentAdventurePath) {
+            picker.value = state.currentAdventurePath;
+        }
+
+        if (heroCount) {
+            heroCount.value = String(state.heroCount || 2);
+        }
+
+        if (difficulty) {
+            difficulty.value = state.difficulty || 'normal';
+        }
+
+        if (remainingTime) {
+            remainingTime.value = String(state.remainingTime || 0);
+        }
+    },
+
+    async handleUpdate(persistAdventure = true) {
         const picker = document.getElementById('adventurePicker');
         const status = document.getElementById('loading-status');
         if (!picker || !picker.value) return;
 
-        status.innerText = "⌛ Lade Daten...";
+        status.innerText = '⌛ Lade Daten...';
 
         try {
-            if (!window.API) {
-                throw new Error("API-Modul ist noch nicht bereit. Bitte Seite neu laden.");
-            }
-
             const advData = await window.API.getAdventure(picker.value);
 
             if (!advData) {
-                status.innerText = "❌ Fehler: Abenteuer-Datei fehlt.";
+                status.innerText = '❌ Fehler: Abenteuer-Datei fehlt.';
                 return;
             }
 
@@ -37,18 +95,38 @@ window.App = {
             if (window.Renderer) window.Renderer.renderSetup(advData, cardData.cards);
             if (window.Narrative) window.Narrative.renderStory(advData);
 
-            document.getElementById('setup-display').classList.remove('hidden');
+            document.getElementById('setup-display')?.classList.remove('hidden');
 
             if (window.Combat) {
-                window.Combat.resetPhase();
                 window.Combat.updateDashboard();
+
+                const state = window.StorageManager?.load();
+                if (state) {
+                    window.Combat.setPhase(state.combatPhase || 0);
+                }
+
+                window.Combat.calculateIntermission();
             }
 
-            status.innerText = "✅ Abenteuer geladen.";
+            if (persistAdventure) {
+                window.StorageManager?.save({
+                    currentAdventurePath: picker.value,
+                    currentAdventureId: advData.id,
+                    heroCount: parseInt(document.getElementById('heroCount')?.value, 10) || 2,
+                    difficulty: document.getElementById('difficulty')?.value || 'normal',
+                    remainingTime: parseInt(document.getElementById('remainingTime')?.value, 10) || 0
+                });
+            } else {
+                window.StorageManager?.save({
+                    currentAdventureId: advData.id
+                });
+            }
+
+            status.innerText = '✅ Abenteuer geladen.';
         } catch (err) {
-            console.error("Ladevorgang abgebrochen:", err);
+            console.error('Ladevorgang abgebrochen:', err);
             status.innerText = `💥 Fehler: ${err.message}`;
-            alert("Das Abenteuer konnte nicht geladen werden.");
+            alert('Das Abenteuer konnte nicht geladen werden.');
         }
     }
 };
