@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 4:41:57 PM
+# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 4:42:41 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -1304,7 +1304,6 @@ hr {
     <link rel="stylesheet" href="css/features.css">
     <link rel="stylesheet" href="css/modal.css">
     <style>
-        /* Fokus auf Lesbarkeit des Auswahlmenüs */
         .selection-container {
             background: rgba(92, 30, 30, 0.08);
             border: 2px solid #8b4513;
@@ -1360,7 +1359,7 @@ hr {
                     <option value="">-- Abenteuer auswählen --</option>
                     <optgroup label="Grundbox">
                         <option value="base_game/silvanas_befreiung">Silvanas Befreiung</option>
-                        <option value="base_game/leute_nicht_spielen">Leute, die nicht spielen</option>
+                        <option value="base_game/leute_die_nicht_spielen">Leute, die nicht spielen</option>
                         <option value="base_game/wildenstein_akt_1">Das Erbe von Wildenstein - Akt I</option>
                         <option value="base_game/wildenstein_akt_2">Das Erbe von Wildenstein - Akt II</option>
                         <option value="base_game/wildenstein_akt_3">Das Erbe von Wildenstein - Akt III</option>
@@ -1378,7 +1377,7 @@ hr {
                 <div class="grid-container">
                     <div class="card-list" id="blue-cards"><h3>Abenteuerkarten (Blau)</h3><ul></ul></div>
                     <div class="card-list" id="minions"><h3>Schergendeck (Monster)</h3><p id="danger-value"></p><ul></ul></div>
-                    <div class="card-list" id="special"><h3>Spezialkarten (Grün)</h3><ul></ul></div>
+                    <div class="card-list" id="special"><h3>Spezialkarten</h3><ul></ul></div>
                 </div>
 
                 <div class="toggle-section">
@@ -1391,8 +1390,10 @@ hr {
                         <div class="card-list">
                             <h3>Phasen-Tracker</h3>
                             <div class="phase-steps">
-                                <div id="phase1" class="step">1. Vorbereitung</div><div id="phase2" class="step">2. Helden</div>
-                                <div id="phase3" class="step">3. Gegner</div><div id="phase4" class="step">4. Zeit</div>
+                                <div id="phase1" class="step">1. Vorbereitung</div>
+                                <div id="phase2" class="step">2. Helden</div>
+                                <div id="phase3" class="step">3. Gegner</div>
+                                <div id="phase4" class="step">4. Zeit</div>
                                 <div id="phase5" class="step">5. Ende</div>
                             </div>
                             <button onclick="window.Combat.nextPhase()" class="btn">Nächste Phase ➔</button>
@@ -1428,10 +1429,15 @@ hr {
             <div class="modal-layout">
                 <nav class="modal-sidebar">
                     <h4>Sammlung</h4>
-                    <ul id="archive-sets"><li onclick="window.Archive.loadSet('base_game')">📦 Grundbox</li></ul>
+                    <ul id="archive-sets">
+                        <li onclick="window.Archive.loadSet('base_game')">📦 Grundbox</li>
+                    </ul>
                 </nav>
                 <div class="modal-main">
-                    <header class="modal-nav"><h2>Karten-Archiv</h2><input type="text" class="search-bar" placeholder="Karte suchen..." onkeyup="window.Archive.filter(this.value)"></header>
+                    <header class="modal-nav">
+                        <h2>Karten-Archiv</h2>
+                        <input type="text" class="search-bar" placeholder="Karte suchen..." onkeyup="window.Archive.filter(this.value)">
+                    </header>
                     <div class="archive-grid" id="archive-grid"></div>
                 </div>
             </div>
