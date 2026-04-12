@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 5:59:02 PM
+# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 6:18:59 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -2740,112 +2740,168 @@ document.addEventListener('DOMContentLoaded', async () => {
 ## 📄 Datei: js/storage.js
 ```js
 /**
- * js/storage.js - Persistenz für UI- und Spielzustand
+ * js/storage.js
+ * Persistenter Spielstand für Aventuria Setup-Guide
  */
 window.StorageManager = {
-    STORAGE_KEY: 'aventuria_app_state_v1',
+    storageKey: 'aventuria_save_v1',
 
     getDefaultState() {
         return {
             version: 1,
-            currentAdventurePath: '',
-            currentAdventureId: '',
+            selectedAdventure: '',
             heroCount: 2,
             difficulty: 'normal',
-            remainingTime: 0,
             combatPhase: 0,
             heroStats: {},
-            checkedItems: {},
-            archive: {
-                search: '',
-                type: '',
-                status: ''
+            checklist: {},
+            sections: {
+                combatToolsOpen: false,
+                intermissionOpen: false
             }
         };
     },
 
-    load() {
+    loadState() {
         try {
-            const raw = localStorage.getItem(this.STORAGE_KEY);
+            const raw = localStorage.getItem(this.storageKey);
             if (!raw) return this.getDefaultState();
 
             const parsed = JSON.parse(raw);
             return {
                 ...this.getDefaultState(),
                 ...parsed,
-                archive: {
-                    ...this.getDefaultState().archive,
-                    ...(parsed.archive || {})
-                }
+                sections: {
+                    ...this.getDefaultState().sections,
+                    ...(parsed.sections || {})
+                },
+                heroStats: parsed.heroStats || {},
+                checklist: parsed.checklist || {}
             };
         } catch (error) {
-            console.warn('Speicherstand konnte nicht gelesen werden.', error);
+            console.warn('Spielstand konnte nicht geladen werden. Nutze Standardwerte.', error);
             return this.getDefaultState();
         }
     },
 
-    save(nextState) {
+    saveState(state) {
         try {
-            const current = this.load();
-            const merged = {
-                ...current,
-                ...nextState,
-                archive: {
-                    ...current.archive,
-                    ...(nextState.archive || {})
-                }
-            };
-
-            localStorage.setItem(this.STORAGE_KEY, JSON.stringify(merged));
-            return merged;
+            localStorage.setItem(this.storageKey, JSON.stringify(state));
         } catch (error) {
-            console.warn('Speicherstand konnte nicht gespeichert werden.', error);
-            return null;
+            console.warn('Spielstand konnte nicht gespeichert werden.', error);
         }
     },
 
-    clear() {
+    clearState() {
         try {
-            localStorage.removeItem(this.STORAGE_KEY);
+            localStorage.removeItem(this.storageKey);
         } catch (error) {
-            console.warn('Speicherstand konnte nicht gelöscht werden.', error);
+            console.warn('Spielstand konnte nicht gelöscht werden.', error);
         }
     },
 
-    saveCheckedItems(adventureId) {
-        if (!adventureId) return;
-
-        const checked = {};
-        document.querySelectorAll('[data-check-id]').forEach(input => {
-            checked[input.dataset.checkId] = !!input.checked;
+    collectHeroStats() {
+        const result = {};
+        document.querySelectorAll('[id^="lp"]').forEach(el => {
+            const id = el.id;
+            result[id] = parseInt(el.innerText, 10) || 0;
         });
+        return result;
+    },
 
-        const state = this.load();
-        const checkedItems = {
-            ...(state.checkedItems || {}),
-            [adventureId]: checked
+    collectChecklistState() {
+        const result = {};
+        document.querySelectorAll('.checklist-item input[type="checkbox"]').forEach((checkbox, index) => {
+            result[`check_${index}`] = checkbox.checked;
+        });
+        return result;
+    },
+
+    applyChecklistState(checklistState) {
+        const entries = document.querySelectorAll('.checklist-item input[type="checkbox"]');
+        entries.forEach((checkbox, index) => {
+            checkbox.checked = Boolean(checklistState?.[`check_${index}`]);
+        });
+    },
+
+    applyHeroStats(heroStats) {
+        Object.entries(heroStats || {}).forEach(([id, value]) => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.innerText = String(value);
+            }
+        });
+    },
+
+    collectUIState() {
+        return {
+            combatToolsOpen: document.getElementById('combat-tools')?.classList.contains('show') || false,
+            intermissionOpen: document.getElementById('intermission-display')?.classList.contains('show') || false
         };
-
-        this.save({ checkedItems });
     },
 
-    restoreCheckedItems(adventureId) {
-        if (!adventureId) return;
+    applyUIState(sections) {
+        const combatTools = document.getElementById('combat-tools');
+        const intermission = document.getElementById('intermission-display');
 
-        const state = this.load();
-        const checked = state.checkedItems?.[adventureId] || {};
+        if (combatTools) {
+            combatTools.classList.toggle('show', Boolean(sections?.combatToolsOpen));
+        }
 
-        document.querySelectorAll('[data-check-id]').forEach(input => {
-            input.checked = !!checked[input.dataset.checkId];
+        if (intermission) {
+            intermission.classList.toggle('show', Boolean(sections?.intermissionOpen));
+        }
+    },
+
+    collectFullState() {
+        return {
+            version: 1,
+            selectedAdventure: document.getElementById('adventurePicker')?.value || '',
+            heroCount: parseInt(document.getElementById('heroCount')?.value, 10) || 2,
+            difficulty: document.getElementById('difficulty')?.value || 'normal',
+            combatPhase: window.Combat?.currentPhase || 0,
+            heroStats: this.collectHeroStats(),
+            checklist: this.collectChecklistState(),
+            sections: this.collectUIState()
+        };
+    },
+
+    persist() {
+        const state = this.collectFullState();
+        this.saveState(state);
+    },
+
+    bindAutoSave() {
+        document.addEventListener('change', (event) => {
+            const target = event.target;
+
+            if (
+                target.matches('#heroCount') ||
+                target.matches('#difficulty') ||
+                target.matches('#adventurePicker') ||
+                target.matches('.checklist-item input[type="checkbox"]') ||
+                target.matches('#remainingTime')
+            ) {
+                this.persist();
+            }
         });
-    },
 
-    saveHeroStats(heroStats) {
-        this.save({ heroStats });
-    },
+        document.addEventListener('click', (event) => {
+            const target = event.target;
 
-    restoreHeroStats() {
-        return this.load().heroStats || {};
+            if (
+                target.closest('.btn') ||
+                target.closest('.btn-outline') ||
+                target.closest('.info-btn') ||
+                target.closest('.stat button')
+            ) {
+                setTimeout(() => this.persist(), 0);
+            }
+        });
+
+        window.addEventListener('beforeunload', () => {
+            this.persist();
+        });
     }
 };
 
