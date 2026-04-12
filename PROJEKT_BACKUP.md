@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 2:53:09 PM
+# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 2:53:21 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -1001,10 +1001,11 @@ hr {
 ## 📄 Datei: data/manual/base_game/page_05.json
 ```json
 {
-  "pageNumber": 3,
-  "title": "Der Süden und Osten Aventuriens",
-  "content": "<p>Al'Anfa ist eine Stadt voller Dekadenz und Intrigen, in der das Leben eines Fremden oft nur seinen Wert auf dem Sklavenmarkt besitzt[cite: 38]. Der Dschungel des Südens und die Waldinseln werden von Waldmenschen und Utulu bewohnt, die ständig von Sklavenjägern bedroht werden [cite: 40-41]. Weiter südlich locken im Südmeer sagenhafte Schätze und Passagen zu unbekannten Kontinenten Abenteurer an [cite: 42-43].</p><p>Im Osten beherrschen die Novadis die Wüste Khôm. Als stolze Nomaden und Anhänger des Gottes Rastullah belächeln sie die Vielgötterei anderer Völker [cite: 44-45]. Jenseits davon liegen die Tulamidenlande, bekannt für Dschinnenbeschwörer und exotische Basare [cite: 46-47]. Das fruchtbare Aranien ist geprägt durch ein Völkergemisch, in dem Frauen die eigentlichen Machthaber sind [cite: 48-51]. Die Insel Maraskan gilt als Bannland mit einer giftigen Tierwelt und einer einzigartigen Religion um die Zwillingsgötter Rur und Gror [cite: 52-53].</p>"
+  "pageNumber": 5,
+  "title": "Religionen, Kulturen & Gefahren",
+  "content": "<p>Aventurien ist geprägt von einer Vielzahl von Glaubensrichtungen, regionalen Traditionen und unterschiedlichen Lebensweisen. Diese Vielfalt beeinflusst Städte, Reiche, Handel, Recht und den Alltag der Helden.</p><p>Gleichzeitig ist der Kontinent voller Gefahren: politische Intrigen, uralte Ruinen, wilde Kreaturen, übernatürliche Bedrohungen und Konflikte zwischen Reichen. Gerade diese Mischung aus Kultur, Mythos und Gefahr macht Aventurien zum Schauplatz unzähliger Abenteuer.</p>"
 }
+
 ```
 
 ---
