@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 1:53:52 PM
+# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 2:09:11 PM
 
 ## 📄 Datei: css/aventura-theme - orginal.css
 ```css
@@ -474,7 +474,9 @@ input[type="number"], select {
     border: none; 
 }
 
-.btn:hover { background: #7a2828; }
+.btn:hover { 
+    background: #7a2828; 
+}
 
 .btn-outline { 
     background: none; 
@@ -498,8 +500,15 @@ input[type="number"], select {
     margin-right: 5px;
 }
 
-.btn-sm.success { background: #276749; color: white; }
-.btn-sm.fail { background: #9b2c2c; color: white; }
+.btn-sm.success { 
+    background: #276749; 
+    color: white; 
+}
+
+.btn-sm.fail { 
+    background: #9b2c2c; 
+    color: white; 
+}
 
 /* --- DER INFO-BUTTON (i) --- */
 .info-btn {
@@ -509,7 +518,7 @@ input[type="number"], select {
     border-radius: 50%;
     width: 22px;
     height: 22px;
-    min-width: 22px; /* Verhindert Quetschen */
+    min-width: 22px;
     min-height: 22px;
     font-size: 13px;
     font-weight: bold;
@@ -522,12 +531,18 @@ input[type="number"], select {
     flex-shrink: 0;
 }
 
-.info-btn:hover { 
+.info-btn:hover:not(:disabled) { 
     background: #5c1e1e; 
     transform: scale(1.1); 
 }
 
-/* --- KARTEN-LISTEN & CHECKLISTE --- */
+.info-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* --- KARTEN-LISTEN & GRID --- */
 .grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -543,20 +558,62 @@ input[type="number"], select {
     box-shadow: 3px 3px 10px rgba(0,0,0,0.1);
 }
 
+.card-list h3 {
+    margin-top: 0;
+    font-variant: small-caps;
+    border-bottom: 1px solid #a0522d;
+    padding-bottom: 8px;
+}
+
+#blue-cards h3 { 
+    color: #2c5282; 
+    border-bottom-color: #2c5282; 
+}
+
+#special h3 { 
+    color: #276749; 
+    border-bottom-color: #276749; 
+}
+
 .card-list ul {
-    list-style: none; /* Entfernt die Standard-Punkte */
+    list-style: none;
     padding: 0;
     margin: 0;
 }
 
-.checklist-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 6px 0;
+.card-list li {
+    margin-bottom: 10px;
 }
 
-/* Hover-Text-Stil (Keine Striche mehr!) */
+/* --- CHECKLISTE --- */
+.checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 6px 0;
+    line-height: 1.4;
+    transition: transform 0.2s ease;
+}
+
+.checklist-item:hover {
+    transform: translateX(5px);
+}
+
+.checklist-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    cursor: pointer;
+    accent-color: #5c1e1e;
+    flex-shrink: 0;
+}
+
+.checklist-item input:checked + span {
+    text-decoration: line-through #5c1e1e 2px;
+    color: #7a7a7a;
+    opacity: 0.6;
+}
+
 .has-preview {
     color: #5c1e1e;
     cursor: help;
@@ -581,8 +638,13 @@ input[type="number"], select {
     animation: slideIn 0.3s ease-out; 
 }
 
-.check-result.success { border-color: #276749; }
-.check-result.fail { border-color: #9b2c2c; }
+.check-result.success { 
+    border-color: #276749; 
+}
+
+.check-result.fail { 
+    border-color: #9b2c2c; 
+}
 
 /* --- TOOLTIP / GROSSE VORSCHAU --- */
 .card-tooltip {
@@ -590,7 +652,8 @@ input[type="number"], select {
     display: none;
     z-index: 9999;
     pointer-events: none;
-    width: 450px; /* Schön groß für bessere Lesbarkeit */
+    width: 450px;
+    max-width: min(450px, 90vw);
     border: 5px solid #5c1e1e;
     border-radius: 12px;
     box-shadow: 0 15px 50px rgba(0,0,0,0.6);
@@ -617,7 +680,9 @@ input[type="number"], select {
     transition: transform 0.2s;
 }
 
-.archive-card:hover { transform: translateY(-5px); }
+.archive-card:hover { 
+    transform: translateY(-5px); 
+}
 
 .archive-card img {
     width: 100%;
@@ -631,6 +696,22 @@ input[type="number"], select {
     margin-top: 8px;
     font-weight: bold;
     color: #5c1e1e;
+}
+
+/* --- DANGER / HINWEISE --- */
+#danger-value {
+    font-size: 1.15em;
+    color: #5c1e1e;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: rgba(92, 30, 30, 0.05);
+    border-radius: 4px;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #a0522d;
+    margin: 20px 0;
 }
 
 /* --- ANIMATIONEN --- */
