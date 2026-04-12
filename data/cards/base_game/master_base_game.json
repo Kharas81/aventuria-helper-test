@@ -20,6 +20,116 @@
       "id": "ha_das_spiel_spielen",
       "name": "Heldenaktion: Das Spiel spielen",
       "image": ""
+    },
+    {
+      "id": "zs_silvana",
+      "name": "Zeitskala 'Silvanas Befreiung'",
+      "image": ""
+    },
+    {
+      "id": "ha_namen_erraten",
+      "name": "Heldenaktion: Namen erraten",
+      "image": ""
+    },
+    {
+      "id": "minion_pirat",
+      "name": "Pirat",
+      "image": ""
+    },
+    {
+      "id": "minion_ork",
+      "name": "Ork",
+      "image": ""
+    },
+    {
+      "id": "zs_wildenstein_1",
+      "name": "Zeitskala Wildenstein-I",
+      "image": ""
+    },
+    {
+      "id": "leader_greifbart_gichthain",
+      "name": "Anführer: Greifbart Gichthain",
+      "image": ""
+    },
+    {
+      "id": "card_erbe",
+      "name": "Karte: Erbe",
+      "image": ""
+    },
+    {
+      "id": "minion_raeuber",
+      "name": "Räuber",
+      "image": ""
+    },
+    {
+      "id": "special_ereignisse_allgemein_gewaesser_wald",
+      "name": "Ereignisse: Allgemein, Gewässer, Wald",
+      "image": ""
+    },
+    {
+      "id": "zs_wildenstein_2",
+      "name": "Zeitskala Wildenstein-II",
+      "image": ""
+    },
+    {
+      "id": "leader_baron_von_wildenstein",
+      "name": "Anführer: Baron von Wildenstein",
+      "image": ""
+    },
+    {
+      "id": "ha_hypnose_brechen",
+      "name": "Handlung: Hypnose brechen",
+      "image": ""
+    },
+    {
+      "id": "minion_waechter",
+      "name": "Wächter",
+      "image": ""
+    },
+    {
+      "id": "minion_diener",
+      "name": "Diener",
+      "image": ""
+    },
+    {
+      "id": "special_anfuehrer_aktionen_uebernatuerlich",
+      "name": "Anführer-Aktionen: Übernatürlich",
+      "image": ""
+    },
+    {
+      "id": "special_nekromantie",
+      "name": "Nekromantie",
+      "image": ""
+    },
+    {
+      "id": "zs_wildenstein_3",
+      "name": "Zeitskala Wildenstein-III",
+      "image": ""
+    },
+    {
+      "id": "leader_grautax",
+      "name": "Anführer: Grautax",
+      "image": ""
+    },
+    {
+      "id": "daemon_irrhalk",
+      "name": "Dämon: Irrhalk",
+      "image": ""
+    },
+    {
+      "id": "minion_skelett",
+      "name": "Skelett",
+      "image": ""
+    },
+    {
+      "id": "special_anfuehrer_aktionen_nekromantie",
+      "name": "Anführer-Aktionen: Nekromantie",
+      "image": ""
+    },
+    {
+      "id": "special_ereignisse_untotenbeschwoerung",
+      "name": "Ereignisse: Untotenbeschwörung",
+      "image": ""
     }
   ]
 }
