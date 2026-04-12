@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 5:57:55 PM
+# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 5:58:13 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -2857,32 +2857,38 @@ window.UI = {
 ## 📄 Datei: js/ui-renderer.js
 ```js
 /**
- * js/ui-renderer.js - Rendert Abenteuerdaten über Karten-IDs
+ * js/ui-renderer.js - Setup-Renderer auf ID-Basis + Persistenz
  */
 window.Renderer = {
     escapeHtml(value) {
-        return String(value ?? "")
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#39;");
+        return String(value ?? '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
     },
 
     getCardById(cards, id) {
         return (cards || []).find(card => card.id === id) || null;
     },
 
-    buildList(items, cards) {
-        if (!Array.isArray(items)) return "";
+    createCheckId(section, entry) {
+        return `${section}::${entry.id}`;
+    },
+
+    buildList(section, items, cards) {
+        if (!Array.isArray(items)) return '';
 
         return items.map(item => {
-            const entry = typeof item === "string" ? { id: item } : item;
+            const entry = typeof item === 'string' ? { id: item } : item;
             const card = this.getCardById(cards, entry.id);
 
             const label = this.escapeHtml(
                 entry.label || card?.name || `⚠️ ${entry.id}`
             );
+
+            const checkId = this.escapeHtml(this.createCheckId(section, entry));
 
             if (card?.image) {
                 const safeImage = this.escapeHtml(card.image);
@@ -2890,7 +2896,7 @@ window.Renderer = {
                 return `
                     <li>
                         <label class="checklist-item">
-                            <input type="checkbox">
+                            <input type="checkbox" data-check-id="${checkId}">
                             <span class="has-preview">${label}</span>
                             <button
                                 type="button"
@@ -2906,7 +2912,7 @@ window.Renderer = {
             return `
                 <li>
                     <label class="checklist-item">
-                        <input type="checkbox">
+                        <input type="checkbox" data-check-id="${checkId}">
                         <span>${label}</span>
                         <button
                             type="button"
@@ -2917,42 +2923,7 @@ window.Renderer = {
                     </label>
                 </li>
             `;
-        }).join("");
-    },
-
-    renderSetup(data, adventureCards) {
-        if (!data) return;
-
-        const heroCount = parseInt(document.getElementById('heroCount')?.value, 10) || 0;
-        const dangerCalc = Number.isFinite(Number(data.danger_calc)) ? Number(data.danger_calc) : 0;
-
-        document.getElementById('title').innerText = data.name || "Unbekanntes Abenteuer";
-
-        document.querySelector('#blue-cards ul').innerHTML = this.buildList(
-            data.setup?.blue_cards,
-            adventureCards
-        );
-
-        document.querySelector('#minions ul').innerHTML = this.buildList(
-            data.setup?.minion_cards,
-            adventureCards
-        );
-
-        document.getElementById('danger-value').innerHTML = `
-            Gefahrenwert: <strong>${heroCount * dangerCalc} GP</strong>
-            <button type="button" class="info-btn" id="danger-info-btn">i</button>
-        `;
-
-        document.getElementById('special').innerHTML = `
-            <h3>Spezialkarten</h3>
-            <ul>${this.buildList(data.setup?.special_cards, adventureCards)}</ul>
-            <hr>
-            <p><strong>⚔ Sieg:</strong> ${this.escapeHtml(data.setup?.victory ?? "—")}</p>
-            <p><strong>☠ Niederlage:</strong> ${this.escapeHtml(data.setup?.defeat ?? "—")}</p>
-        `;
-
-        this.bindPreviewEvents();
-        this.bindDangerInfoButton();
+        }).join('');
     },
 
     bindPreviewEvents() {
@@ -2980,10 +2951,55 @@ window.Renderer = {
         btn.addEventListener('click', () => {
             if (typeof window.jumpToPage === 'function') {
                 window.jumpToPage(12);
-            } else {
-                console.warn('jumpToPage ist noch nicht verfügbar.');
             }
         });
+    },
+
+    bindChecklistPersistence(adventureId) {
+        document.querySelectorAll('[data-check-id]').forEach(input => {
+            input.addEventListener('change', () => {
+                window.StorageManager?.saveCheckedItems(adventureId);
+            });
+        });
+    },
+
+    renderSetup(data, adventureCards) {
+        if (!data) return;
+
+        const heroCount = parseInt(document.getElementById('heroCount')?.value, 10) || 0;
+        const dangerCalc = Number.isFinite(Number(data.danger_calc)) ? Number(data.danger_calc) : 0;
+
+        document.getElementById('title').innerText = data.name || 'Unbekanntes Abenteuer';
+
+        document.querySelector('#blue-cards ul').innerHTML = this.buildList(
+            'blue_cards',
+            data.setup?.blue_cards,
+            adventureCards
+        );
+
+        document.querySelector('#minions ul').innerHTML = this.buildList(
+            'minion_cards',
+            data.setup?.minion_cards,
+            adventureCards
+        );
+
+        document.getElementById('danger-value').innerHTML = `
+            Gefahrenwert: <strong>${heroCount * dangerCalc} GP</strong>
+            <button type="button" class="info-btn" id="danger-info-btn">i</button>
+        `;
+
+        document.getElementById('special').innerHTML = `
+            <h3>Spezialkarten</h3>
+            <ul>${this.buildList('special_cards', data.setup?.special_cards, adventureCards)}</ul>
+            <hr>
+            <p><strong>⚔ Sieg:</strong> ${this.escapeHtml(data.setup?.victory ?? '—')}</p>
+            <p><strong>☠ Niederlage:</strong> ${this.escapeHtml(data.setup?.defeat ?? '—')}</p>
+        `;
+
+        this.bindPreviewEvents();
+        this.bindDangerInfoButton();
+        this.bindChecklistPersistence(data.id);
+        window.StorageManager?.restoreCheckedItems(data.id);
     }
 };
 
