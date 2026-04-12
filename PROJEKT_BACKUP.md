@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 5:01:00 PM
+# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 5:01:15 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -1125,6 +1125,68 @@ hr {
       "type": "minion",
       "image": "",
       "note": "Optionaler Zusatz-Scherge"
+    }
+  ]
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/base_game/wildenstein_akt_1/wildenstein_akt_1.json
+```json
+{
+  "adventure_id": "wildenstein_akt_1",
+  "adventure_name": "Das Erbe von Wildenstein - Akt I",
+  "cards": [
+    {
+      "id": "zs_wildenstein_1",
+      "name": "Zeitskala Wildenstein-I",
+      "type": "timeline",
+      "image": "",
+      "note": "Bild/Kartendaten noch ergänzen"
+    },
+    {
+      "id": "leader_greifbart_gichthain",
+      "name": "Anführer: Greifbart Gichthain",
+      "type": "leader",
+      "image": "",
+      "note": "Bild/Kartendaten noch ergänzen"
+    },
+    {
+      "id": "story_erbe",
+      "name": "Karte: Erbe",
+      "type": "story_card",
+      "image": "",
+      "note": "Bild/Kartendaten noch ergänzen"
+    },
+    {
+      "id": "minion_raeuber",
+      "name": "Räuber",
+      "type": "minion",
+      "image": "",
+      "note": "Sammel-/Platzhalter-Eintrag"
+    },
+    {
+      "id": "special_ereignisse_allgemein",
+      "name": "Ereignisse: Allgemein",
+      "type": "special_deck",
+      "image": "",
+      "note": "Deck-Referenz"
+    },
+    {
+      "id": "special_ereignisse_gewaesser",
+      "name": "Ereignisse: Gewässer",
+      "type": "special_deck",
+      "image": "",
+      "note": "Deck-Referenz"
+    },
+    {
+      "id": "special_ereignisse_wald",
+      "name": "Ereignisse: Wald",
+      "type": "special_deck",
+      "image": "",
+      "note": "Deck-Referenz"
     }
   ]
 }
