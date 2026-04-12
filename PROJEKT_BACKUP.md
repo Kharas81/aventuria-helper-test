@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 4:43:49 PM
+# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 4:51:10 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -1020,8 +1020,18 @@ hr {
     },
     {
       "id": "zs_leute",
-      "name": "Zeitskala (Leute, die nicht spielen)",
+      "name": "Zeitskala",
       "image": "assets/images/cards/base_game/leute_die_nicht_spielen/zs_leute.jpg"
+    },
+    {
+      "id": "kg_risiko_gewinn",
+      "name": "Kampfumgebung: Risiko und Gewinn",
+      "image": ""
+    },
+    {
+      "id": "ha_das_spiel_spielen",
+      "name": "Heldenaktion: Das Spiel spielen",
+      "image": ""
     }
   ]
 }
