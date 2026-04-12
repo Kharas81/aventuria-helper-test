@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 2:09:36 PM
+# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 2:10:00 PM
 
 ## 📄 Datei: css/aventura-theme.css
 ```css
@@ -1933,27 +1933,67 @@ async function fetchAdventureData(path) {
 ## 📄 Datei: js/narrative.js
 ```js
 window.Narrative = {
+    escapeHtml(value) {
+        return String(value ?? "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#39;");
+    },
+
     renderStory(data) {
         const container = document.getElementById('story-area');
+
         if (!container || !data || !data.narrative) {
-            if(container) container.innerHTML = "";
+            if (container) container.innerHTML = "";
             return;
         }
+
+        const checks = Array.isArray(data.narrative.checks) ? data.narrative.checks : [];
+
         container.innerHTML = `
             <div class="card-list">
-                <h3>📖 Die Geschichte</h3><p class="story-text">${data.narrative.intro}</p>
+                <h3>📖 Die Geschichte</h3>
+                <p class="story-text">${this.escapeHtml(data.narrative.intro ?? "")}</p>
                 <div class="probes-area">
                     <h4>Interaktive Proben:</h4>
-                    ${data.narrative.checks.map(check => `
-                        <div class="probe-item">
-                            <p><strong>${check.skill}:</strong> ${check.text}</p>
+                    ${checks.map((check, index) => `
+                        <div class="probe-item" data-check-index="${index}">
+                            <p>
+                                <strong>${this.escapeHtml(check.skill ?? "Probe")}:</strong>
+                                ${this.escapeHtml(check.text ?? "")}
+                            </p>
                             <div class="probe-buttons">
-                                <button class="btn-sm success" onclick="window.UI.handleCheck(this, 'success', '${check.results.success}')">Erfolg</button>
-                                <button class="btn-sm fail" onclick="window.UI.handleCheck(this, 'fail', '${check.results.fail}')">Misserfolg</button>
+                                <button type="button" class="btn-sm success" data-check-result="success">Erfolg</button>
+                                <button type="button" class="btn-sm fail" data-check-result="fail">Misserfolg</button>
                             </div>
-                        </div>`).join('')}
+                        </div>
+                    `).join('')}
                 </div>
-            </div>`;
+            </div>
+        `;
+
+        this.bindCheckButtons(checks);
+    },
+
+    bindCheckButtons(checks) {
+        document.querySelectorAll('.probe-item').forEach(item => {
+            const index = parseInt(item.dataset.checkIndex, 10);
+            const check = checks[index];
+            if (!check || !check.results) return;
+
+            item.querySelectorAll('[data-check-result]').forEach(button => {
+                button.addEventListener('click', () => {
+                    const type = button.dataset.checkResult;
+                    const resultText = check.results?.[type] ?? "Kein Ergebnis vorhanden.";
+
+                    if (window.UI?.handleCheck) {
+                        window.UI.handleCheck(button, type, this.escapeHtml(resultText));
+                    }
+                });
+            });
+        });
     }
 };
 
