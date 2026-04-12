@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/10/2026, 7:47:37 PM
+# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 1:52:54 PM
 
 ## 📄 Datei: css/aventura-theme - orginal.css
 ```css
@@ -1915,11 +1915,11 @@ input[type="number"], select {
 
     <script src="js/config.js"></script>
     <script src="js/api.js"></script>
-    <script src="js/ui-renderer.js"></script>
     <script src="js/ui-helper.js"></script>
     <script src="js/combat.js"></script>
     <script src="js/archive.js"></script>
     <script src="js/rulebook.js"></script>
+    <script src="js/ui-renderer.js"></script>
     <script src="js/narrative.js"></script>
     <script src="js/validator.js"></script>
     <script src="js/app.js"></script>
