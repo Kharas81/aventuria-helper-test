@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 5:58:13 PM
+# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 5:58:45 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -2118,51 +2118,72 @@ window.Archive = {
         window.UI?.hidePreview();
     },
 
-    escapeHtml(value) {
-        return String(value ?? '')
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#39;');
-    },
-
     async loadSet(setKey) {
         const grid = document.getElementById('archive-grid');
         if (!grid) return;
 
         grid.innerHTML = 'Lade Karten...';
 
-        try {
-            const res = await fetch(`data/cards/base_game/master_${setKey}.json`);
-            if (!res.ok) {
-                throw new Error(`HTTP ${res.status}`);
-            }
+        const data = await window.API.getMasterSet(setKey);
+        this.currentCards = Array.isArray(data.cards) ? data.cards : [];
 
-            const data = await res.json();
-            this.currentCards = Array.isArray(data.cards) ? data.cards : [];
-            this.renderCards(this.currentCards);
-        } catch (error) {
-            console.error('Fehler beim Laden des Archivs:', error);
-            grid.innerHTML = '<p class="placeholder-text">Fehler beim Laden des Karten-Archivs.</p>';
-        }
+        this.restoreArchiveFilters();
+        this.applyFilters();
     },
 
-    filter(term) {
-        const normalized = String(term ?? '').trim().toLowerCase();
+    restoreArchiveFilters() {
+        const state = window.StorageManager?.load();
+        if (!state) return;
 
-        if (!normalized) {
-            this.renderCards(this.currentCards);
-            return;
-        }
+        const search = document.getElementById('archiveSearch');
+        const type = document.getElementById('archiveTypeFilter');
+        const status = document.getElementById('archiveStatusFilter');
+
+        if (search) search.value = state.archive?.search || '';
+        if (type) type.value = state.archive?.type || '';
+        if (status) status.value = state.archive?.status || '';
+    },
+
+    persistArchiveFilters() {
+        const search = document.getElementById('archiveSearch')?.value || '';
+        const type = document.getElementById('archiveTypeFilter')?.value || '';
+        const status = document.getElementById('archiveStatusFilter')?.value || '';
+
+        window.StorageManager?.save({
+            archive: { search, type, status }
+        });
+    },
+
+    applyFilters() {
+        const search = (document.getElementById('archiveSearch')?.value || '').trim().toLowerCase();
+        const type = document.getElementById('archiveTypeFilter')?.value || '';
+        const status = document.getElementById('archiveStatusFilter')?.value || '';
+
+        this.persistArchiveFilters();
 
         const filtered = this.currentCards.filter(card => {
-            const name = String(card.name ?? '').toLowerCase();
-            const id = String(card.id ?? '').toLowerCase();
-            return name.includes(normalized) || id.includes(normalized);
+            const haystack = [
+                card.name,
+                card.id,
+                card.type,
+                card.status,
+                ...(card.tags || [])
+            ].join(' ').toLowerCase();
+
+            const matchesSearch = !search || haystack.includes(search);
+            const matchesType = !type || card.type === type;
+            const matchesStatus = !status || card.status === status;
+
+            return matchesSearch && matchesType && matchesStatus;
         });
 
         this.renderCards(filtered);
+    },
+
+    bindControls() {
+        document.getElementById('archiveSearch')?.addEventListener('input', () => this.applyFilters());
+        document.getElementById('archiveTypeFilter')?.addEventListener('change', () => this.applyFilters());
+        document.getElementById('archiveStatusFilter')?.addEventListener('change', () => this.applyFilters());
     },
 
     renderCards(cards) {
@@ -2183,32 +2204,25 @@ window.Archive = {
             wrapper.className = 'archive-card';
 
             const image = document.createElement('img');
-            image.src = card.image;
+            image.src = card.image || 'assets/images/placeholder_card.jpg';
             image.alt = card.name || 'Karte';
             image.loading = 'lazy';
 
-            const caption = document.createElement('p');
-            caption.textContent = card.name || 'Unbenannte Karte';
+            const title = document.createElement('p');
+            title.textContent = card.name || 'Unbenannte Karte';
+
+            const meta = document.createElement('small');
+            meta.textContent = `${card.type || 'unknown'} • ${card.status || 'raw'}`;
 
             wrapper.appendChild(image);
-            wrapper.appendChild(caption);
+            wrapper.appendChild(title);
+            wrapper.appendChild(meta);
 
             if (card.image) {
-                wrapper.addEventListener('mouseover', (event) => {
-                    window.UI?.showPreview(event, card.image);
-                });
-
-                wrapper.addEventListener('mousemove', (event) => {
-                    window.UI?.movePreview(event);
-                });
-
-                wrapper.addEventListener('mouseout', () => {
-                    window.UI?.hidePreview();
-                });
-
-                wrapper.addEventListener('click', (event) => {
-                    window.UI?.showPreview(event, card.image);
-                });
+                wrapper.addEventListener('mouseover', (event) => window.UI?.showPreview(event, card.image));
+                wrapper.addEventListener('mousemove', (event) => window.UI?.movePreview(event));
+                wrapper.addEventListener('mouseout', () => window.UI?.hidePreview());
+                wrapper.addEventListener('click', (event) => window.UI?.showPreview(event, card.image));
             }
 
             fragment.appendChild(wrapper);
@@ -2217,6 +2231,10 @@ window.Archive = {
         grid.appendChild(fragment);
     }
 };
+
+document.addEventListener('DOMContentLoaded', () => {
+    window.Archive.bindControls();
+});
 
 ```
 
