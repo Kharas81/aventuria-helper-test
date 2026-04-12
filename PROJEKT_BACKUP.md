@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 5:01:15 PM
+# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 5:03:48 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -1187,6 +1187,68 @@ hr {
       "type": "special_deck",
       "image": "",
       "note": "Deck-Referenz"
+    }
+  ]
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/base_game/wildenstein_akt_2/wildenstein_akt_2.json
+```json
+{
+  "adventure_id": "wildenstein_akt_2",
+  "adventure_name": "Das Erbe von Wildenstein - Akt II",
+  "cards": [
+    {
+      "id": "zs_wildenstein_2",
+      "name": "Zeitskala Wildenstein-II",
+      "type": "timeline",
+      "image": "",
+      "note": "Kartendaten/Bild noch nicht ergänzt"
+    },
+    {
+      "id": "leader_baron_von_wildenstein",
+      "name": "Anführer: Baron von Wildenstein",
+      "type": "leader",
+      "image": "",
+      "note": "Kartendaten/Bild noch nicht ergänzt"
+    },
+    {
+      "id": "ha_hypnose_brechen",
+      "name": "Handlung: Hypnose brechen",
+      "type": "hero_action",
+      "image": "",
+      "note": "Kartendaten/Bild noch nicht ergänzt"
+    },
+    {
+      "id": "minion_waechter",
+      "name": "Wächter",
+      "type": "minion",
+      "image": "",
+      "note": "Schergenkarte noch nicht ergänzt"
+    },
+    {
+      "id": "minion_diener",
+      "name": "Diener",
+      "type": "minion",
+      "image": "",
+      "note": "Schergenkarte noch nicht ergänzt"
+    },
+    {
+      "id": "special_anfuehrer_aktionen_uebernatuerlich",
+      "name": "Anführer-Aktionen: Übernatürlich",
+      "type": "special",
+      "image": "",
+      "note": "Spezialkarten-Daten noch nicht ergänzt"
+    },
+    {
+      "id": "special_nekromantie",
+      "name": "Nekromantie",
+      "type": "special",
+      "image": "",
+      "note": "Spezialkarten-Daten noch nicht ergänzt"
     }
   ]
 }
