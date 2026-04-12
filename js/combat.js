@@ -1,92 +1,106 @@
 window.Combat = {
     currentPhase: 0,
+    maxPhase: 5,
+
+    persistState() {
+        if (window.StorageManager) {
+            window.StorageManager.persist();
+        }
+    },
 
     resetPhase() {
         this.currentPhase = 0;
+
         document.querySelectorAll('.step').forEach(step => {
             step.classList.remove('active');
         });
+
         this.persistState();
     },
 
     setPhase(phaseNumber) {
-        const phase = Math.max(0, Math.min(5, parseInt(phaseNumber, 10) || 0));
-        this.currentPhase = phase;
+        const numericPhase = parseInt(phaseNumber, 10) || 0;
 
         document.querySelectorAll('.step').forEach(step => {
             step.classList.remove('active');
         });
 
-        if (phase > 0) {
-            const el = document.getElementById(`phase${phase}`);
-            if (el) el.classList.add('active');
+        this.currentPhase = Math.max(0, Math.min(this.maxPhase, numericPhase));
+
+        if (this.currentPhase > 0) {
+            const el = document.getElementById(`phase${this.currentPhase}`);
+            if (el) {
+                el.classList.add('active');
+            }
         }
 
         this.persistState();
     },
 
     nextPhase() {
-        const next = (this.currentPhase % 5) + 1;
+        let next = this.currentPhase + 1;
+        if (next > this.maxPhase) next = 1;
         this.setPhase(next);
     },
 
     randomTarget() {
         const count = parseInt(document.getElementById('heroCount')?.value, 10) || 0;
-        const res = document.getElementById('targetResult');
+        const resultEl = document.getElementById('targetResult');
 
-        if (!res) return;
+        if (!resultEl) return;
 
         if (count < 1) {
-            res.innerText = '🎯 Kein gültiges Ziel vorhanden';
+            resultEl.innerText = '🎯 Kein gültiges Ziel vorhanden';
+            this.persistState();
             return;
         }
 
-        res.innerText = `🎯 Ziel: Held ${Math.floor(Math.random() * count) + 1}`;
+        const target = Math.floor(Math.random() * count) + 1;
+        resultEl.innerText = `🎯 Ziel: Held ${target}`;
+        this.persistState();
     },
 
-    getHeroStatsFromDom() {
-        const stats = {};
-        document.querySelectorAll('[data-hero-index]').forEach(card => {
-            const index = card.dataset.heroIndex;
-            const lpEl = card.querySelector('[data-stat="lp"]');
-            if (!index || !lpEl) return;
-
-            stats[`hero_${index}`] = {
-                lp: parseInt(lpEl.innerText, 10) || 40
-            };
-        });
-
-        return stats;
+    getDefaultHeroStats(index) {
+        return {
+            lp: 40,
+            fate: 0
+        };
     },
 
-    persistState() {
-        if (!window.StorageManager) return;
-
-        window.StorageManager.save({
-            combatPhase: this.currentPhase,
-            heroStats: this.getHeroStatsFromDom(),
-            remainingTime: parseInt(document.getElementById('remainingTime')?.value, 10) || 0
-        });
-    },
-
-    updateDashboard() {
+    updateDashboard(savedHeroStats = null) {
         const count = parseInt(document.getElementById('heroCount')?.value, 10) || 0;
         const container = document.getElementById('heroDashboard');
         if (!container) return;
 
-        const savedStats = window.StorageManager?.restoreHeroStats() || {};
+        const fallbackStats = window.StorageManager?.loadState()?.heroStats || {};
+        const sourceStats = savedHeroStats || fallbackStats;
+
         container.innerHTML = '';
 
         for (let i = 1; i <= count; i++) {
-            const stats = savedStats[`hero_${i}`] || { lp: 40 };
+            const lpId = `lp${i}`;
+            const fateId = `fate${i}`;
+
+            const lpValue = parseInt(sourceStats?.[lpId], 10);
+            const fateValue = parseInt(sourceStats?.[fateId], 10);
+
+            const lp = Number.isFinite(lpValue) ? lpValue : this.getDefaultHeroStats(i).lp;
+            const fate = Number.isFinite(fateValue) ? fateValue : this.getDefaultHeroStats(i).fate;
 
             container.innerHTML += `
-                <div class="hero-card" data-hero-index="${i}">
+                <div class="hero-card">
                     <h4>Held ${i}</h4>
+
                     <div class="stat">
-                        ❤️ <span data-stat="lp">${stats.lp}</span>
-                        <button type="button" onclick="window.Combat.changeStat(${i}, 'lp', -1)">-</button>
-                        <button type="button" onclick="window.Combat.changeStat(${i}, 'lp', 1)">+</button>
+                        ❤️ <span id="${lpId}">${lp}</span>
+                        <button type="button" onclick="window.Combat.changeStat('${lpId}', -1)">-</button>
+                        <button type="button" onclick="window.Combat.changeStat('${lpId}', 1)">+</button>
+                    </div>
+
+                    <div class="stat">
+                        🍀 <span id="${fateId}">${fate}</span>
+                        <button type="button" onclick="window.Combat.changeStat('${fateId}', -1, 0)">-</button>
+                        <button type="button" onclick="window.Combat.changeStat('${fateId}', 1, 0)">+</button>
                     </div>
                 </div>
             `;
@@ -95,26 +109,24 @@ window.Combat = {
         this.persistState();
     },
 
-    changeStat(heroIndex, statName, delta) {
-        const card = document.querySelector(`[data-hero-index="${heroIndex}"]`);
-        if (!card) return;
+    changeStat(id, delta, minValue = 0) {
+        const el = document.getElementById(id);
+        if (!el) return;
 
-        const statEl = card.querySelector(`[data-stat="${statName}"]`);
-        if (!statEl) return;
+        const current = parseInt(el.innerText, 10) || 0;
+        const nextValue = Math.max(minValue, current + delta);
 
-        const current = parseInt(statEl.innerText, 10) || 0;
-        statEl.innerText = Math.max(0, current + delta);
-
+        el.innerText = String(nextValue);
         this.persistState();
     },
 
     calculateIntermission() {
         const time = parseInt(document.getElementById('remainingTime')?.value, 10) || 0;
         const ep = time + 2;
-        const res = document.getElementById('ep-result');
+        const resultEl = document.getElementById('ep-result');
 
-        if (res) {
-            res.innerText = `${ep} EP`;
+        if (resultEl) {
+            resultEl.innerText = `${ep} EP`;
         }
 
         this.persistState();
