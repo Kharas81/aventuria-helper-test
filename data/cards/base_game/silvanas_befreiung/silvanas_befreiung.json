@@ -1,0 +1,48 @@
+{
+  "adventure_id": "silvanas_befreiung",
+  "adventure_name": "Silvanas Befreiung",
+  "cards": [
+    {
+      "id": "zs_silvana",
+      "name": "Zeitskala 'Silvanas Befreiung'",
+      "type": "timeline",
+      "image": "",
+      "note": "Bild/Kartendaten noch ergänzen"
+    },
+    {
+      "id": "ha_namen_erraten",
+      "name": "Heldenaktion: Namen erraten",
+      "type": "hero_action",
+      "image": "",
+      "note": "Bild/Kartendaten noch ergänzen"
+    },
+    {
+      "id": "leader_kobold",
+      "name": "???, der Kobold",
+      "type": "leader",
+      "image": "",
+      "note": "Bild/Kartendaten noch ergänzen"
+    },
+    {
+      "id": "minion_pirat",
+      "name": "Pirat",
+      "type": "minion",
+      "image": "",
+      "note": "Sammel-/Platzhalter-Eintrag"
+    },
+    {
+      "id": "minion_ork",
+      "name": "Ork",
+      "type": "minion",
+      "image": "",
+      "note": "Sammel-/Platzhalter-Eintrag"
+    },
+    {
+      "id": "minion_feiger_goblin",
+      "name": "Feiger Goblin",
+      "type": "minion",
+      "image": "",
+      "note": "Optionaler Zusatz-Scherge"
+    }
+  ]
+}
