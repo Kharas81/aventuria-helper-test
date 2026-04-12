@@ -19,23 +19,20 @@ window.App = {
         if (!picker || !picker.value) return;
 
         status.innerText = "⌛ Lade Daten...";
-        const id = picker.value.split('/').pop();
 
         try {
-            // Prüfung ob API existiert
             if (!window.API) {
                 throw new Error("API-Modul ist noch nicht bereit. Bitte Seite neu laden.");
             }
 
-            const [advData, cardData] = await Promise.all([
-                window.API.getAdventure(picker.value),
-                window.API.getCards(id)
-            ]);
+            const advData = await window.API.getAdventure(picker.value);
 
             if (!advData) {
                 status.innerText = "❌ Fehler: Abenteuer-Datei fehlt.";
                 return;
             }
+
+            const cardData = await window.API.getCards(advData.id);
 
             if (window.Renderer) window.Renderer.renderSetup(advData, cardData.cards);
             if (window.Narrative) window.Narrative.renderStory(advData);
