@@ -17,9 +17,19 @@
     ]
   },
   "setup": {
-    "blue_cards": ["Zeitskala Wildenstein-I", "Anführer: Greifbart Gichthain", "Karte: Erbe [cite: 881]"],
-    "minion_keywords": ["Räuber [cite: 886]"],
-    "special_decks": ["Ereignisse: Allgemein, Gewässer, Wald [cite: 881]"],
+    "blue_cards": [
+      { "id": "zs_wildenstein_1" },
+      { "id": "leader_greifbart_gichthain" },
+      { "id": "story_erbe" }
+    ],
+    "minion_cards": [
+      { "id": "minion_raeuber", "label": "Räuber" }
+    ],
+    "special_cards": [
+      { "id": "special_ereignisse_allgemein", "label": "Ereignisse: Allgemein" },
+      { "id": "special_ereignisse_gewaesser", "label": "Ereignisse: Gewässer" },
+      { "id": "special_ereignisse_wald", "label": "Ereignisse: Wald" }
+    ],
     "victory": "Alle Gegner besiegt UND der Erbe lebt noch. [cite: 889]",
     "defeat": "Der Erbe wird ausgeschaltet. [cite: 888]"
   }
