@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 2:10:38 PM
+# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 2:24:56 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -1472,32 +1472,54 @@ hr {
 ## 📄 Datei: js/api.js
 ```js
 /**
- * js/api.js - Zentrale Schnittstelle für Daten-Abrufe
+ * js/api.js - Lädt Abenteuer- und Kartendaten
  */
 window.API = {
-    async getAdventure(id) {
-        const path = `data/adventures/${id}.json`;
+
+    /**
+     * Mapping für Karten-Dateien:
+     * Falls Abenteuer-ID ≠ Karten-Ordnername
+     */
+    cardMap: {
+        leute_nicht_spielen: "leute_die_nicht_spielen"
+        // Hier kannst du später weitere Abweichungen ergänzen
+    },
+
+    /**
+     * Lädt ein Abenteuer
+     */
+    async getAdventure(path) {
         try {
-            const r = await fetch(path);
-            if (!r.ok) throw new Error(`Server lieferte Status ${r.status}`);
-            return await r.json();
-        } catch(e) {
-            console.error(`API-Fehler bei Abenteuer-Pfad: ${path}`, e);
+            const res = await fetch(`data/adventures/${path}.json`);
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+            return await res.json();
+        } catch (err) {
+            console.error("Fehler beim Laden des Abenteuers:", err);
             return null;
         }
     },
+
+    /**
+     * Lädt Karten für ein Abenteuer
+     */
     async getCards(id) {
-        const path = `data/cards/base_game/${id}.json`;
         try {
-            const r = await fetch(path);
-            if (!r.ok) return { cards: [] };
-            return await r.json();
-        } catch(e) { 
-            return { cards: [] }; 
+            // Mapping anwenden
+            const realId = this.cardMap[id] || id;
+
+            const res = await fetch(`data/cards/base_game/${realId}/${realId}.json`);
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+            return await res.json();
+        } catch (err) {
+            console.warn(`⚠️ Karten nicht gefunden für "${id}" → Fallback leer`, err);
+
+            // Fallback → verhindert UI-Crashes
+            return { cards: [] };
         }
     }
 };
-console.log("✅ API-Modul registriert.");
 
 ```
 
