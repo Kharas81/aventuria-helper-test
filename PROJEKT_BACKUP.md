@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 5:56:56 PM
+# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 5:57:45 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -1954,38 +1954,84 @@ hr {
  * js/api.js - Lädt Abenteuer- und Kartendaten
  */
 window.API = {
-    async getAdventure(path) {
+    async fetchJson(path, fallback = null) {
         try {
-            const res = await fetch(`data/adventures/${path}.json`);
+            const res = await fetch(path);
             if (!res.ok) {
                 throw new Error(`HTTP ${res.status}`);
             }
-
-            const data = await res.json();
-
-            if (!data.id) {
-                data.id = path.split('/').pop();
-            }
-
-            return data;
-        } catch (err) {
-            console.error('Fehler beim Laden des Abenteuers:', err);
-            return null;
+            return await res.json();
+        } catch (error) {
+            console.warn(`Fehler beim Laden von ${path}`, error);
+            return fallback;
         }
     },
 
-    async getCards(id) {
-        try {
-            const res = await fetch(`data/cards/base_game/${id}/${id}.json`);
-            if (!res.ok) {
-                throw new Error(`HTTP ${res.status}`);
-            }
+    normalizeCard(rawCard, adventureId = '') {
+        const card = rawCard || {};
 
-            return await res.json();
-        } catch (err) {
-            console.warn(`⚠️ Karten nicht gefunden für "${id}"`, err);
-            return { cards: [] };
+        return {
+            id: card.id || '',
+            name: card.name || 'Unbenannte Karte',
+            type: card.type || 'unknown',
+            status: card.status || 'raw',
+            image: card.image || '',
+            adventure_id: card.adventure_id || adventureId || '',
+            set: card.set || 'base_game',
+            tags: Array.isArray(card.tags) ? card.tags : [],
+            stats: card.stats || {},
+            rules: card.rules || {},
+            note: card.note || '',
+            sub_name: card.sub_name || ''
+        };
+    },
+
+    async getAdventure(path) {
+        const data = await this.fetchJson(`data/adventures/${path}.json`, null);
+        if (!data) return null;
+
+        if (!data.id) {
+            data.id = path.split('/').pop();
         }
+
+        data.setup = data.setup || {};
+        data.setup.blue_cards = Array.isArray(data.setup.blue_cards) ? data.setup.blue_cards : [];
+        data.setup.minion_cards = Array.isArray(data.setup.minion_cards) ? data.setup.minion_cards : [];
+        data.setup.special_cards = Array.isArray(data.setup.special_cards) ? data.setup.special_cards : [];
+
+        return data;
+    },
+
+    async getCards(adventureId) {
+        const data = await this.fetchJson(
+            `data/cards/base_game/${adventureId}/${adventureId}.json`,
+            { cards: [] }
+        );
+
+        const cards = Array.isArray(data.cards)
+            ? data.cards.map(card => this.normalizeCard(card, adventureId))
+            : [];
+
+        return {
+            ...data,
+            cards
+        };
+    },
+
+    async getMasterSet(setKey = 'base_game') {
+        const data = await this.fetchJson(
+            `data/cards/base_game/master_${setKey}.json`,
+            { cards: [] }
+        );
+
+        const cards = Array.isArray(data.cards)
+            ? data.cards.map(card => this.normalizeCard(card))
+            : [];
+
+        return {
+            ...data,
+            cards
+        };
     }
 };
 
@@ -2674,20 +2720,31 @@ window.UI = {
 
         tooltip.innerHTML = `<img src="${imageSrc}" alt="Kartenvorschau">`;
         tooltip.style.display = 'block';
+        tooltip.classList.remove('is-mobile-center');
+
+        if (window.innerWidth <= 900) {
+            tooltip.classList.add('is-mobile-center');
+            tooltip.style.left = '50%';
+            tooltip.style.top = '50%';
+            tooltip.style.transform = 'translate(-50%, -50%)';
+            return;
+        }
+
+        tooltip.style.transform = 'none';
         this.movePreview(event);
     },
 
     movePreview(event) {
         const tooltip = document.getElementById('card-tooltip');
         if (!tooltip || tooltip.style.display !== 'block') return;
+        if (window.innerWidth <= 900) return;
 
         const offsetX = 20;
         const offsetY = 20;
         const margin = 16;
 
         const tooltipWidth = tooltip.offsetWidth || 450;
-        const tooltipHeight = tooltip.offsetHeight || 300;
-
+        const tooltipHeight = tooltip.offsetHeight || 320;
         const viewportWidth = window.innerWidth;
         const viewportHeight = window.innerHeight;
 
@@ -2712,13 +2769,16 @@ window.UI = {
 
         tooltip.style.left = `${left}px`;
         tooltip.style.top = `${top}px`;
+        tooltip.style.transform = 'none';
     },
 
     hidePreview() {
         const tooltip = document.getElementById('card-tooltip');
-        if (tooltip) {
-            tooltip.style.display = 'none';
-        }
+        if (!tooltip) return;
+
+        tooltip.style.display = 'none';
+        tooltip.classList.remove('is-mobile-center');
+        tooltip.style.transform = 'none';
     },
 
     handleCheck(btn, type, text) {
