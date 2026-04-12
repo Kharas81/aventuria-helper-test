@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 6:18:59 PM
+# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 6:21:35 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -1761,10 +1761,11 @@ hr {
             border-radius: 8px;
             padding: 20px;
             margin: 20px auto;
-            max-width: 600px;
+            max-width: 700px;
             text-align: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
+
         #adventurePicker {
             width: 90%;
             padding: 12px;
@@ -1777,10 +1778,48 @@ hr {
             cursor: pointer;
             border-radius: 4px;
         }
+
         #loading-status {
             font-weight: bold;
             margin-top: 10px;
             min-height: 1.2em;
+        }
+
+        .save-bar {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 700px) {
+            body {
+                padding: 10px;
+            }
+
+            .app-container {
+                padding: 16px;
+            }
+
+            .selection-container {
+                padding: 14px;
+            }
+
+            #adventurePicker {
+                width: 100%;
+                font-size: 1em;
+            }
+
+            .save-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .save-bar .btn-outline,
+            .save-bar .btn {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -1788,10 +1827,15 @@ hr {
     <div class="app-container">
         <header>
             <h1>AVENTURIA SETUP-GUIDE</h1>
+
             <div class="top-bar">
-                <div class="config-item"><label>Helden:</label><input type="number" id="heroCount" value="2" min="1" max="4"></div>
                 <div class="config-item">
-                    <label>Schwierigkeit:</label>
+                    <label for="heroCount">Helden:</label>
+                    <input type="number" id="heroCount" value="2" min="1" max="4">
+                </div>
+
+                <div class="config-item">
+                    <label for="difficulty">Schwierigkeit:</label>
                     <select id="difficulty">
                         <option value="einfach">Einfach</option>
                         <option value="normal" selected>Normal</option>
@@ -1799,6 +1843,7 @@ hr {
                         <option value="legendär">Legendär</option>
                     </select>
                 </div>
+
                 <div class="button-group">
                     <button class="btn-outline" onclick="window.openRulebook()">📜 Regelbuch & Kodex</button>
                     <button class="btn-outline" onclick="window.Archive.open()">🃏 Karten-Archiv</button>
@@ -1816,7 +1861,13 @@ hr {
                         <option value="base_game/wildenstein_akt_3">Das Erbe von Wildenstein - Akt III</option>
                     </optgroup>
                 </select>
+
                 <div id="loading-status"></div>
+
+                <div class="save-bar">
+                    <button class="btn-outline" id="saveStateBtn" type="button">💾 Spielstand speichern</button>
+                    <button class="btn-outline" id="clearStateBtn" type="button">🗑️ Spielstand löschen</button>
+                </div>
             </div>
         </header>
 
@@ -1825,15 +1876,32 @@ hr {
 
             <div id="setup-display" class="hidden">
                 <h2 id="title"></h2>
+
                 <div class="grid-container">
-                    <div class="card-list" id="blue-cards"><h3>Abenteuerkarten (Blau)</h3><ul></ul></div>
-                    <div class="card-list" id="minions"><h3>Schergendeck (Monster)</h3><p id="danger-value"></p><ul></ul></div>
-                    <div class="card-list" id="special"><h3>Spezialkarten</h3><ul></ul></div>
+                    <div class="card-list" id="blue-cards">
+                        <h3>Abenteuerkarten (Blau)</h3>
+                        <ul></ul>
+                    </div>
+
+                    <div class="card-list" id="minions">
+                        <h3>Schergendeck (Monster)</h3>
+                        <p id="danger-value"></p>
+                        <ul></ul>
+                    </div>
+
+                    <div class="card-list" id="special">
+                        <h3>Spezialkarten</h3>
+                        <ul></ul>
+                    </div>
                 </div>
 
                 <div class="toggle-section">
-                    <button class="btn-outline" onclick="window.UI.toggleSection('combat-tools')">Kampf-Hilfen ein/ausblenden</button>
-                    <button class="btn-outline" onclick="window.UI.toggleSection('intermission-display')">⚖️ Atempause</button>
+                    <button class="btn-outline" onclick="window.UI.toggleSection('combat-tools')">
+                        Kampf-Hilfen ein/ausblenden
+                    </button>
+                    <button class="btn-outline" onclick="window.UI.toggleSection('intermission-display')">
+                        ⚖️ Atempause
+                    </button>
                 </div>
 
                 <div id="combat-tools" class="hidden-section">
@@ -1847,14 +1915,16 @@ hr {
                                 <div id="phase4" class="step">4. Zeit</div>
                                 <div id="phase5" class="step">5. Ende</div>
                             </div>
-                            <button onclick="window.Combat.nextPhase()" class="btn">Nächste Phase ➔</button>
+                            <button onclick="window.Combat.nextPhase()" class="btn" type="button">Nächste Phase ➔</button>
                         </div>
+
                         <div class="card-list">
                             <h3>Zufalls-Ziel</h3>
-                            <button onclick="window.Combat.randomTarget()" class="btn">Ziel ermitteln 🎯</button>
+                            <button onclick="window.Combat.randomTarget()" class="btn" type="button">Ziel ermitteln 🎯</button>
                             <p id="targetResult">--</p>
                         </div>
                     </div>
+
                     <div class="hero-dashboard" id="heroDashboard"></div>
                 </div>
 
@@ -1863,8 +1933,14 @@ hr {
                         <div class="intermission-card">
                             <h3>⚖️ Atempause</h3>
                             <div class="config-item" style="justify-content: center; margin-bottom: 15px;">
-                                <label>Zeitmarken:</label>
-                                <input type="number" id="remainingTime" value="0" min="0" onchange="window.Combat.calculateIntermission()">
+                                <label for="remainingTime">Zeitmarken:</label>
+                                <input
+                                    type="number"
+                                    id="remainingTime"
+                                    value="0"
+                                    min="0"
+                                    onchange="window.Combat.calculateIntermission()"
+                                >
                             </div>
                             <div class="result-badge" id="ep-result">2 EP</div>
                         </div>
@@ -1884,10 +1960,16 @@ hr {
                         <li onclick="window.Archive.loadSet('base_game')">📦 Grundbox</li>
                     </ul>
                 </nav>
+
                 <div class="modal-main">
                     <header class="modal-nav">
                         <h2>Karten-Archiv</h2>
-                        <input type="text" class="search-bar" placeholder="Karte suchen..." onkeyup="window.Archive.filter(this.value)">
+                        <input
+                            type="text"
+                            class="search-bar"
+                            placeholder="Karte suchen..."
+                            onkeyup="window.Archive.filter(this.value)"
+                        >
                     </header>
                     <div class="archive-grid" id="archive-grid"></div>
                 </div>
@@ -1903,36 +1985,47 @@ hr {
                     <h4>Kodex & Regeln</h4>
                     <ul id="manual-index"></ul>
                 </nav>
+
                 <div class="modal-main">
                     <header class="modal-nav">
                         <button id="btn-search" class="tab-btn active" onclick="window.switchTab('search')">🔍 Kodex</button>
                         <button id="btn-reader" class="tab-btn" onclick="window.switchTab('reader')">📖 Regelbuch</button>
                     </header>
+
                     <div id="tab-search" class="tab-content">
-                        <input type="text" class="search-bar" placeholder="Regel suchen..." onkeyup="window.filterRules(this.value)">
+                        <input
+                            type="text"
+                            class="search-bar"
+                            placeholder="Regel suchen..."
+                            onkeyup="window.filterRules(this.value)"
+                        >
                         <div id="rules-results"></div>
                     </div>
+
                     <div id="tab-reader" class="tab-content hidden">
                         <div id="page-content" class="reader-container"></div>
                         <footer class="reader-footer">
-                            <button onclick="window.prevPage()">⬅ Zurück</button>
+                            <button onclick="window.prevPage()" type="button">⬅ Zurück</button>
                             <span>Seite <span id="currentPageNum">1</span> / 24</span>
-                            <button onclick="window.nextPage()">Weiter ➡</button>
+                            <button onclick="window.nextPage()" type="button">Weiter ➡</button>
                         </footer>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <div id="card-tooltip" class="card-tooltip"></div>
 
     <div style="position: fixed; bottom: 10px; right: 10px; z-index: 9999;">
-        <button onclick="window.SystemCheck.run(true)" class="btn-sm" style="background: #2e241f; color: white;">⚙️ Check</button>
+        <button onclick="window.SystemCheck.run(true)" class="btn-sm" style="background: #2e241f; color: white;" type="button">
+            ⚙️ Check
+        </button>
     </div>
 
     <script src="js/config.js"></script>
     <script src="js/api.js"></script>
+    <script src="js/storage.js"></script>
     <script src="js/ui-helper.js"></script>
     <script src="js/combat.js"></script>
     <script src="js/archive.js"></script>
