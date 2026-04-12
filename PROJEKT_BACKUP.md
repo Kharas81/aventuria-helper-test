@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 4:51:10 PM
+# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 4:56:24 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -820,8 +820,17 @@ hr {
     ]
   },
   "setup": {
-    "blue_cards": ["Zeitskala 'Silvanas Befreiung'", "Heldenaktion: Namen erraten [cite: 768-772]"],
-    "minion_keywords": ["Pirat", "Ork [cite: 770]"],
+    "blue_cards": [
+      { "id": "zs_silvana" },
+      { "id": "ha_namen_erraten" },
+      { "id": "leader_kobold" }
+    ],
+    "minion_cards": [
+      { "id": "minion_pirat", "label": "Pirat" },
+      { "id": "minion_ork", "label": "Ork" },
+      { "id": "minion_feiger_goblin", "label": "Feiger Goblin (falls benötigt)" }
+    ],
+    "special_cards": [],
     "victory": "Alle Gegner besiegt oder vertrieben[cite: 774].",
     "defeat": "Verderbensmarken = Anzahl Helden[cite: 773]."
   }
