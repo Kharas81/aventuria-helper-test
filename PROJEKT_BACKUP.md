@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 2:53:21 PM
+# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 2:53:39 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -758,7 +758,7 @@ hr {
 ## 📄 Datei: data/adventures/base_game/silvanas_befreiung.json
 ```json
 {
-  "id": "silvana",
+  "id": "silvanas_befreiung",
   "name": "Silvanas Befreiung",
   "danger_calc": 5,
   "expansion": "Grundbox [cite: 146]",
@@ -783,6 +783,7 @@ hr {
     "defeat": "Verderbensmarken = Anzahl Helden[cite: 773]."
   }
 }
+
 ```
 
 ---
