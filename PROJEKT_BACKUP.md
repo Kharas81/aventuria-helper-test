@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 2:53:39 PM
+# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 2:53:57 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -791,7 +791,7 @@ hr {
 ## 📄 Datei: data/adventures/base_game/wildenstein_akt_1.json
 ```json
 {
-  "id": "wildenstein_1",
+  "id": "wildenstein_akt_1",
   "name": "Das Erbe von Wildenstein - Akt I",
   "danger_calc": 5,
   "narrative": {
@@ -816,6 +816,7 @@ hr {
     "defeat": "Der Erbe wird ausgeschaltet. [cite: 888]"
   }
 }
+
 ```
 
 ---
