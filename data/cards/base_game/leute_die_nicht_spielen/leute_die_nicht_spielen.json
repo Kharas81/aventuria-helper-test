@@ -6,48 +6,230 @@
       "id": "lg_leute_idol",
       "name": "Glücks-Idol",
       "type": "leader",
+      "status": "playable",
+      "adventure_id": "leute_die_nicht_spielen",
+      "set": "base_game",
       "sub_name": "Spezial-Gegner",
+      "difficulty": null,
       "image": "assets/images/cards/base_game/leute_die_nicht_spielen/gluecks_idol.jpg",
-      "keywords": ["Göttlich", "Dämon", "Übernatürlich"],
-      "passive_rules": "Das Idol kann nicht zum Ziel von Angriffen werden. Das Wurfergebnis für seine Aktionen wird pro 🌀 auf dieser Karte um 1 gesenkt. Die 🌀 werden abgelegt, sobald der Aktionswurf „Spannung“ ergibt.",
-      "action_table": [
-        { "roll": "1-5", "title": "Spannung", "description": "Es wird ein zusätzlicher Scherge gezogen und rechts an die Schergenreihe angelegt." },
-        { "roll": "6-8", "title": "Glückssache", "description": "Ein zufälliger Held muss die „Heldenaktion: Den Einsatz erhöhen“ ausführen." },
-        { "roll": "9", "title": "Glücksspiel", "description": "Alle Helden führen einen Wurf für die „Kampfumgebung: Risiko und Gewinn“ aus." },
-        { "roll": "10-12", "title": "Entspannung", "description": "Jedem Schergen werden 5 🩸 geheilt." },
-        { "roll": "13-20", "title": "Unterhaltung", "description": "Das Idol tanzt." }
-      ]
+      "thumb": null,
+      "tags": [
+        "goettlich",
+        "daemon",
+        "uebernatuerlich",
+        "anfuehrer"
+      ],
+      "stats": {
+        "gp": null,
+        "lp": null,
+        "armor": null,
+        "evasion": null,
+        "actions": null,
+        "start_value": null,
+        "cost": null
+      },
+      "rules": {
+        "passive": "Das Idol kann nicht zum Ziel von Angriffen werden. Das Wurfergebnis für seine Aktionen wird pro 🌀 auf dieser Karte um 1 gesenkt. Die 🌀 werden abgelegt, sobald der Aktionswurf „Spannung“ ergibt.",
+        "success": "",
+        "fail": "",
+        "timed_effects": [],
+        "milestones": [],
+        "action_table": [
+          {
+            "roll": "1-5",
+            "title": "Spannung",
+            "description": "Es wird ein zusätzlicher Scherge gezogen und rechts an die Schergenreihe angelegt."
+          },
+          {
+            "roll": "6-8",
+            "title": "Glückssache",
+            "description": "Ein zufälliger Held muss die „Heldenaktion: Den Einsatz erhöhen“ ausführen."
+          },
+          {
+            "roll": "9",
+            "title": "Glücksspiel",
+            "description": "Alle Helden führen einen Wurf für die „Kampfumgebung: Risiko und Gewinn“ aus."
+          },
+          {
+            "roll": "10-12",
+            "title": "Entspannung",
+            "description": "Jedem Schergen werden 5 🩸 geheilt."
+          },
+          {
+            "roll": "13-20",
+            "title": "Unterhaltung",
+            "description": "Das Idol tanzt."
+          }
+        ],
+        "draw_effect": "",
+        "flavor": ""
+      },
+      "keywords": [
+        "Göttlich",
+        "Dämon",
+        "Übernatürlich"
+      ],
+      "pool_refs": [],
+      "source": {
+        "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+        "page": 19,
+        "note": "Abenteuer 'Leute, die nicht spielen' im Regelbuch; Detailwerte der Anführerkarte bei Bedarf später aus der Karte/Bildquelle ergänzen."
+      },
+      "note": "Aktionstabelle und passive Regel gepflegt. LP/Aktionen/Rüstung/Ausweichen später ergänzen, sobald die Kartenwerte vollständig vorliegen."
     },
     {
       "id": "zs_leute",
       "name": "Zeitskala",
       "type": "timeline",
+      "status": "playable",
+      "adventure_id": "leute_die_nicht_spielen",
+      "set": "base_game",
       "sub_name": "Leute, die nicht spielen",
       "difficulty": "normal",
       "image": "assets/images/cards/base_game/leute_die_nicht_spielen/zs_leute.jpg",
-      "start_value": 6,
-      "milestones": {
-        "5": "Zieht eine Ereigniskarte.",
-        "4": "Zieht eine Anführer-Aktionskarte.",
-        "3": "Befinden sich 1 oder weniger Schergen im Spiel, zieht einen weiteren Schergen vom Schergenstapel und fügt ihn rechts an die Gegnerreihe an.",
-        "2": "Zieht sowohl eine Ereigniskarte als auch eine Anführer-Aktionskarte.",
-        "1": "Zieht einen weiteren Schergen vom Schergenstapel und fügt ihn rechts an die Gegnerreihe an.",
-        "0": "Wenn der Kampf zu diesem Zeitpunkt noch läuft, erleiden die Helden automatisch eine Niederlage."
-      }
+      "thumb": null,
+      "tags": [
+        "zeitskala",
+        "abenteuerkarte"
+      ],
+      "stats": {
+        "gp": null,
+        "lp": null,
+        "armor": null,
+        "evasion": null,
+        "actions": null,
+        "start_value": 6,
+        "cost": null
+      },
+      "rules": {
+        "passive": "",
+        "success": "",
+        "fail": "",
+        "timed_effects": [],
+        "milestones": [
+          {
+            "value": 5,
+            "text": "Zieht eine Ereigniskarte."
+          },
+          {
+            "value": 4,
+            "text": "Zieht eine Anführer-Aktionskarte."
+          },
+          {
+            "value": 3,
+            "text": "Befinden sich 1 oder weniger Schergen im Spiel, zieht einen weiteren Schergen vom Schergenstapel und fügt ihn rechts an die Gegnerreihe an."
+          },
+          {
+            "value": 2,
+            "text": "Zieht sowohl eine Ereigniskarte als auch eine Anführer-Aktionskarte."
+          },
+          {
+            "value": 1,
+            "text": "Zieht einen weiteren Schergen vom Schergenstapel und fügt ihn rechts an die Gegnerreihe an."
+          },
+          {
+            "value": 0,
+            "text": "Wenn der Kampf zu diesem Zeitpunkt noch läuft, erleiden die Helden automatisch eine Niederlage."
+          }
+        ],
+        "action_table": [],
+        "draw_effect": "",
+        "flavor": ""
+      },
+      "keywords": [],
+      "pool_refs": [],
+      "source": {
+        "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+        "page": 19,
+        "note": "Gefahrenwert und Siegbedingung im Abenteuertext, Startwert und Effekte auf der Zeitskala-Karte."
+      },
+      "note": "Zeitskala normal gepflegt. Weitere Schwierigkeitsstufen können später als eigene Karten oder Varianten ergänzt werden."
     },
     {
       "id": "kg_risiko_gewinn",
       "name": "Kampfumgebung: Risiko und Gewinn",
       "type": "environment",
+      "status": "raw",
+      "adventure_id": "leute_die_nicht_spielen",
+      "set": "base_game",
+      "sub_name": null,
+      "difficulty": null,
       "image": "",
-      "note": "Kartendaten/Bild noch nicht ergänzt"
+      "thumb": null,
+      "tags": [
+        "kampfumgebung",
+        "abenteuerkarte"
+      ],
+      "stats": {
+        "gp": null,
+        "lp": null,
+        "armor": null,
+        "evasion": null,
+        "actions": null,
+        "start_value": null,
+        "cost": null
+      },
+      "rules": {
+        "passive": "",
+        "success": "",
+        "fail": "",
+        "timed_effects": [],
+        "milestones": [],
+        "action_table": [],
+        "draw_effect": "",
+        "flavor": ""
+      },
+      "keywords": [],
+      "pool_refs": [],
+      "source": {
+        "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+        "page": 19,
+        "note": "Im Abenteuer 'Leute, die nicht spielen' erwähnt."
+      },
+      "note": "Kartendaten/Bild noch nicht ergänzt."
     },
     {
       "id": "ha_das_spiel_spielen",
       "name": "Heldenaktion: Das Spiel spielen",
       "type": "hero_action",
+      "status": "raw",
+      "adventure_id": "leute_die_nicht_spielen",
+      "set": "base_game",
+      "sub_name": null,
+      "difficulty": null,
       "image": "",
-      "note": "Kartendaten/Bild noch nicht ergänzt"
+      "thumb": null,
+      "tags": [
+        "heldenaktion",
+        "abenteuerkarte"
+      ],
+      "stats": {
+        "gp": null,
+        "lp": null,
+        "armor": null,
+        "evasion": null,
+        "actions": null,
+        "start_value": null,
+        "cost": null
+      },
+      "rules": {
+        "passive": "",
+        "success": "",
+        "fail": "",
+        "timed_effects": [],
+        "milestones": [],
+        "action_table": [],
+        "draw_effect": "",
+        "flavor": ""
+      },
+      "keywords": [],
+      "pool_refs": [],
+      "source": {
+        "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+        "page": 19,
+        "note": "Im Abenteuertext als Siegbedingung genannt: 'Das Spiel beenden' / Spiel-bezogene Heldenaktion."
+      },
+      "note": "Kartendaten/Bild noch nicht ergänzt. Namen und genaue Wirkung bei späterer Datenergänzung prüfen."
     }
   ]
 }
