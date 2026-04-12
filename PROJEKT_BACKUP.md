@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 2:09:11 PM
+# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 2:09:28 PM
 
 ## 📄 Datei: css/aventura-theme - orginal.css
 ```css
@@ -724,176 +724,11 @@ hr {
 
 ---
 
-## 📄 Datei: css/features orginal.css
-```css
-/* --- SEKTIONS-STEUERUNG (Ein/Ausblenden) --- */
-.hidden-section {
-    display: none; /* Standardmäßig unsichtbar */
-    margin-top: 20px;
-    padding: 20px;
-    border: 1px dashed #8b4513;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    animation: fadeIn 0.3s ease-in-out;
-}
-
-/* Diese Klasse wird per JavaScript hinzugefügt/entfernt */
-.hidden-section.show {
-    display: block;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* --- CHECKLISTEN-MECHANIK --- */
-.checklist-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    cursor: pointer;
-    margin-bottom: 12px;
-    transition: transform 0.2s;
-}
-
-.checklist-item:hover {
-    transform: translateX(5px);
-}
-
-.checklist-item input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
-    margin-top: 2px;
-    accent-color: #5c1e1e; /* Aventuria-Rot */
-    cursor: pointer;
-}
-
-/* Effekt: Text durchstreichen wenn abgehakt */
-.checklist-item input:checked + span {
-    text-decoration: line-through #5c1e1e 2px;
-    color: #7a7a7a;
-    opacity: 0.6;
-}
-
-/* --- PHASEN-TRACKER [cite: 524-528] --- */
-.phase-steps {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    margin: 20px 0;
-    gap: 10px;
-}
-
-.step {
-    padding: 10px 15px;
-    background: rgba(255, 255, 255, 0.5);
-    border: 1px solid #8b4513;
-    border-radius: 20px;
-    font-size: 0.85em;
-    font-weight: bold;
-    opacity: 0.3;
-    transition: all 0.4s ease;
-}
-
-.step.active {
-    opacity: 1;
-    background: #5c1e1e;
-    color: white;
-    border-color: #5c1e1e;
-    transform: scale(1.1);
-    box-shadow: 0 4px 10px rgba(92, 30, 30, 0.3);
-}
-
-/* --- HELDEN-DASHBOARD (LP Tracker) --- */
-.hero-dashboard {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 30px;
-    flex-wrap: wrap;
-}
-
-.hero-card {
-    background: #f4e7d3;
-    border: 1px solid #8b4513;
-    border-top: 6px solid #5c1e1e;
-    padding: 15px;
-    min-width: 160px;
-    border-radius: 4px;
-    box-shadow: 3px 3px 8px rgba(0,0,0,0.1);
-    text-align: center;
-}
-
-.hero-card h4 {
-    margin: 0 0 10px 0;
-    color: #5c1e1e;
-    font-variant: small-caps;
-}
-
-.stat {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    font-size: 1.2em;
-    font-weight: bold;
-}
-
-.stat button {
-    background: #8b4513;
-    color: white;
-    border: none;
-    width: 28px;
-    height: 28px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-/* --- ATEMPAUSE BEREICH [cite: 644-646] --- */
-.intermission-area {
-    margin-top: 60px;
-    display: flex;
-    justify-content: center;
-}
-
-.intermission-card {
-    background: linear-gradient(145deg, #f4e7d3, #e6dec9);
-    border: 2px solid #8b4513;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
-    text-align: center;
-    max-width: 450px;
-}
-
-.intermission-card h3 {
-    margin-top: 0;
-    color: #5c1e1e;
-    font-size: 1.5em;
-}
-
-.result-badge {
-    margin-top: 20px;
-    font-size: 2em;
-    color: #5c1e1e;
-    font-weight: bold;
-    background: rgba(255,255,255,0.5);
-    display: inline-block;
-    padding: 5px 20px;
-    border-radius: 8px;
-    border: 1px solid #8b4513;
-}
-```
-
----
-
 ## 📄 Datei: css/features.css
 ```css
 /* --- SEKTIONS-STEUERUNG (Ein/Ausblenden) --- */
 .hidden-section {
-    display: none; /* Standardmäßig unsichtbar */
+    display: none;
     margin-top: 20px;
     padding: 20px;
     border: 1px dashed #8b4513;
@@ -902,46 +737,19 @@ hr {
     animation: fadeIn 0.3s ease-in-out;
 }
 
-/* Diese Klasse wird per JavaScript hinzugefügt/entfernt */
 .hidden-section.show {
     display: block;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* --- CHECKLISTEN-MECHANIK --- */
-.checklist-item {
+.toggle-section {
     display: flex;
-    align-items: flex-start;
+    justify-content: center;
     gap: 12px;
-    cursor: pointer;
-    margin-bottom: 12px;
-    transition: transform 0.2s;
+    margin-top: 30px;
+    flex-wrap: wrap;
 }
 
-.checklist-item:hover {
-    transform: translateX(5px);
-}
-
-.checklist-item input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
-    margin-top: 2px;
-    accent-color: #5c1e1e; /* Aventuria-Rot */
-    cursor: pointer;
-}
-
-/* Effekt: Text durchstreichen wenn abgehakt */
-.checklist-item input:checked + span {
-    text-decoration: line-through #5c1e1e 2px;
-    color: #7a7a7a;
-    opacity: 0.6;
-}
-
-/* --- PHASEN-TRACKER [cite: 524-528] --- */
+/* --- PHASEN-TRACKER --- */
 .phase-steps {
     display: flex;
     justify-content: space-around;
@@ -970,7 +778,7 @@ hr {
     box-shadow: 0 4px 10px rgba(92, 30, 30, 0.3);
 }
 
-/* --- HELDEN-DASHBOARD (LP Tracker) --- */
+/* --- HELDEN-DASHBOARD --- */
 .hero-dashboard {
     display: flex;
     justify-content: center;
@@ -1016,7 +824,35 @@ hr {
     font-weight: bold;
 }
 
-/* --- ATEMPAUSE BEREICH [cite: 644-646] --- */
+/* --- STORY / PROBEN --- */
+.story-text {
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.probes-area {
+    margin-top: 20px;
+}
+
+.probe-item {
+    padding: 15px;
+    margin-bottom: 15px;
+    background: rgba(255,255,255,0.35);
+    border-left: 4px solid #8b4513;
+    border-radius: 4px;
+}
+
+.probe-item p {
+    margin: 0 0 10px 0;
+}
+
+.probe-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* --- ATEMPAUSE BEREICH --- */
 .intermission-area {
     margin-top: 60px;
     display: flex;
@@ -1050,6 +886,13 @@ hr {
     border-radius: 8px;
     border: 1px solid #8b4513;
 }
+
+/* --- ANIMATIONEN --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 ```
 
 ---
