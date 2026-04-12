@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 4:42:41 PM
+# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 4:43:14 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -718,6 +718,49 @@ hr {
 }
 
 .hidden { display: none; }
+
+```
+
+---
+
+## 📄 Datei: data/adventures/base_game/leute_die_nicht_spielen.json
+```json
+{
+  "id": "leute_die_nicht_spielen",
+  "name": "Leute, die nicht spielen",
+  "danger_calc": 4,
+  "narrative": {
+    "intro": "Chorhop, 1024 BF: Die Stadt ist bei Nacht ein gefährliches Pflaster. Ihr eskortiert das 'Glücks-Idol' zum Spielhaus 'Karfunkel-Stein'. Als ihr es betretet, beginnt die Statue plötzlich Goldstücke zu weinen... [cite: 790-798]",
+    "checks": [
+      {
+        "id": "will_check",
+        "skill": "Willenskraft",
+        "text": "Könnt ihr dem Bann des Glücks-Idols widerstehen? [cite: 809]",
+        "results": {
+          "success": "Du kannst dich dem Einfluss vollständig widersetzen. [cite: 811]",
+          "fail": "Du verlierst 1W6 Lebenspunkte, bevor du den Bann brichst. [cite: 814]"
+        }
+      }
+    ]
+  },
+  "setup": {
+    "blue_cards": [
+      { "id": "zs_leute" },
+      { "id": "kg_risiko_gewinn" },
+      { "id": "lg_leute_idol" },
+      { "id": "ha_das_spiel_spielen" }
+    ],
+    "minion_cards": [
+      { "id": "minions_eurer_wahl", "label": "Schergen eurer Wahl" }
+    ],
+    "special_cards": [
+      { "id": "special_ereignisse", "label": "Ereignisse" },
+      { "id": "special_anfuehrer_aktionen", "label": "Anführer-Aktionen" }
+    ],
+    "victory": "Aktion 'Das Spiel beenden' erfolgreich durchgeführt. [cite: 825]",
+    "defeat": "Letzte Zeitmarke entfernt, während Kampf noch läuft. [cite: 824]"
+  }
+}
 
 ```
 
