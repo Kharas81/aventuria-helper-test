@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 4:43:14 PM
+# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 4:43:49 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -957,6 +957,7 @@ hr {
     {
       "id": "lg_leute_idol",
       "name": "Glücks-Idol",
+      "type": "leader",
       "sub_name": "Spezial-Gegner",
       "image": "assets/images/cards/base_game/leute_die_nicht_spielen/gluecks_idol.jpg",
       "keywords": ["Göttlich", "Dämon", "Übernatürlich"],
@@ -972,6 +973,7 @@ hr {
     {
       "id": "zs_leute",
       "name": "Zeitskala",
+      "type": "timeline",
       "sub_name": "Leute, die nicht spielen",
       "difficulty": "normal",
       "image": "assets/images/cards/base_game/leute_die_nicht_spielen/zs_leute.jpg",
@@ -984,6 +986,20 @@ hr {
         "1": "Zieht einen weiteren Schergen vom Schergenstapel und fügt ihn rechts an die Gegnerreihe an.",
         "0": "Wenn der Kampf zu diesem Zeitpunkt noch läuft, erleiden die Helden automatisch eine Niederlage."
       }
+    },
+    {
+      "id": "kg_risiko_gewinn",
+      "name": "Kampfumgebung: Risiko und Gewinn",
+      "type": "environment",
+      "image": "",
+      "note": "Kartendaten/Bild noch nicht ergänzt"
+    },
+    {
+      "id": "ha_das_spiel_spielen",
+      "name": "Heldenaktion: Das Spiel spielen",
+      "type": "hero_action",
+      "image": "",
+      "note": "Kartendaten/Bild noch nicht ergänzt"
     }
   ]
 }
