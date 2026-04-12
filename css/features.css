@@ -1,6 +1,6 @@
 /* --- SEKTIONS-STEUERUNG (Ein/Ausblenden) --- */
 .hidden-section {
-    display: none; /* Standardmäßig unsichtbar */
+    display: none;
     margin-top: 20px;
     padding: 20px;
     border: 1px dashed #8b4513;
@@ -9,46 +9,19 @@
     animation: fadeIn 0.3s ease-in-out;
 }
 
-/* Diese Klasse wird per JavaScript hinzugefügt/entfernt */
 .hidden-section.show {
     display: block;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* --- CHECKLISTEN-MECHANIK --- */
-.checklist-item {
+.toggle-section {
     display: flex;
-    align-items: flex-start;
+    justify-content: center;
     gap: 12px;
-    cursor: pointer;
-    margin-bottom: 12px;
-    transition: transform 0.2s;
+    margin-top: 30px;
+    flex-wrap: wrap;
 }
 
-.checklist-item:hover {
-    transform: translateX(5px);
-}
-
-.checklist-item input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
-    margin-top: 2px;
-    accent-color: #5c1e1e; /* Aventuria-Rot */
-    cursor: pointer;
-}
-
-/* Effekt: Text durchstreichen wenn abgehakt */
-.checklist-item input:checked + span {
-    text-decoration: line-through #5c1e1e 2px;
-    color: #7a7a7a;
-    opacity: 0.6;
-}
-
-/* --- PHASEN-TRACKER [cite: 524-528] --- */
+/* --- PHASEN-TRACKER --- */
 .phase-steps {
     display: flex;
     justify-content: space-around;
@@ -77,7 +50,7 @@
     box-shadow: 0 4px 10px rgba(92, 30, 30, 0.3);
 }
 
-/* --- HELDEN-DASHBOARD (LP Tracker) --- */
+/* --- HELDEN-DASHBOARD --- */
 .hero-dashboard {
     display: flex;
     justify-content: center;
@@ -123,7 +96,35 @@
     font-weight: bold;
 }
 
-/* --- ATEMPAUSE BEREICH [cite: 644-646] --- */
+/* --- STORY / PROBEN --- */
+.story-text {
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.probes-area {
+    margin-top: 20px;
+}
+
+.probe-item {
+    padding: 15px;
+    margin-bottom: 15px;
+    background: rgba(255,255,255,0.35);
+    border-left: 4px solid #8b4513;
+    border-radius: 4px;
+}
+
+.probe-item p {
+    margin: 0 0 10px 0;
+}
+
+.probe-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* --- ATEMPAUSE BEREICH --- */
 .intermission-area {
     margin-top: 60px;
     display: flex;
@@ -156,4 +157,10 @@
     padding: 5px 20px;
     border-radius: 8px;
     border: 1px solid #8b4513;
+}
+
+/* --- ANIMATIONEN --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
