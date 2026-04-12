@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 5:03:48 PM
+# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 5:04:09 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -1246,6 +1246,61 @@ hr {
     {
       "id": "special_nekromantie",
       "name": "Nekromantie",
+      "type": "special",
+      "image": "",
+      "note": "Spezialkarten-Daten noch nicht ergänzt"
+    }
+  ]
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/base_game/wildenstein_akt_3/wildenstein_akt_3.json
+```json
+{
+  "adventure_id": "wildenstein_akt_3",
+  "adventure_name": "Das Erbe von Wildenstein - Akt III",
+  "cards": [
+    {
+      "id": "zs_wildenstein_3",
+      "name": "Zeitskala Wildenstein-III",
+      "type": "timeline",
+      "image": "",
+      "note": "Kartendaten/Bild noch nicht ergänzt"
+    },
+    {
+      "id": "leader_grautax",
+      "name": "Anführer: Grautax",
+      "type": "leader",
+      "image": "",
+      "note": "Kartendaten/Bild noch nicht ergänzt"
+    },
+    {
+      "id": "daemon_irrhalk",
+      "name": "Dämon: Irrhalk",
+      "type": "special",
+      "image": "",
+      "note": "Kartendaten/Bild noch nicht ergänzt"
+    },
+    {
+      "id": "minion_skelett",
+      "name": "Skelett",
+      "type": "minion",
+      "image": "",
+      "note": "Schergenkarte noch nicht ergänzt"
+    },
+    {
+      "id": "special_anfuehrer_aktionen_nekromantie",
+      "name": "Anführer-Aktionen: Nekromantie",
+      "type": "special",
+      "image": "",
+      "note": "Spezialkarten-Daten noch nicht ergänzt"
+    },
+    {
+      "id": "special_ereignisse_untotenbeschwoerung",
+      "name": "Ereignisse: Untotenbeschwörung",
       "type": "special",
       "image": "",
       "note": "Spezialkarten-Daten noch nicht ergänzt"
