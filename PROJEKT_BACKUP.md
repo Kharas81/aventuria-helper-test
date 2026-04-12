@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 4:56:50 PM
+# 🛡️ Aventuria Projekt-Backup - 4/12/2026, 4:57:01 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -965,9 +965,18 @@ hr {
     ]
   },
   "setup": {
-    "blue_cards": ["Zeitskala Wildenstein-III", "Anführer: Grautax", "Dämon: Irrhalk [cite: 1018-1019]"],
-    "minion_keywords": ["Skelett [cite: 1026]"],
-    "special_decks": ["Anführer-Aktionen: Nekromantie", "Ereignisse: Untotenbeschwörung [cite: 1020-1021]"],
+    "blue_cards": [
+      { "id": "zs_wildenstein_3" },
+      { "id": "leader_grautax" },
+      { "id": "demon_irrhalk" }
+    ],
+    "minion_cards": [
+      { "id": "minion_skelett", "label": "Skelett" }
+    ],
+    "special_cards": [
+      { "id": "special_anfuehrer_aktionen_nekromantie", "label": "Anführer-Aktionen: Nekromantie" },
+      { "id": "special_untotenbeschwoerung", "label": "Ereignisse: Untotenbeschwörung" }
+    ],
     "victory": "Grautax, der falsche Baron, wurde besiegt[cite: 1031].",
     "defeat": "Anzahl Verderbensmarken = Anzahl Helden[cite: 1030]."
   }
