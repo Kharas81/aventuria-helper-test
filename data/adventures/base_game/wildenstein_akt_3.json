@@ -1,19 +1,27 @@
 {
-  "id": "wildenstein_3",
+  "id": "wildenstein_akt_3",
   "name": "Das Erbe von Wildenstein - Akt III",
   "danger_calc": 7,
   "narrative": {
     "intro": "Ihr habt den Geheimgang gefunden. Die Spuren des Barons führen in einen schaurigen Forst. Es ist genau die Art Wald in den Schattenlanden, vor der man euch immer gewarnt hat [cite: 975-987].",
     "checks": [
       {
+        "id": "abseilen",
         "skill": "Körperbeherrschung",
         "text": "Seilt euch am Wehrgang in den Forst ab.",
-        "results": { "success": "Du seilst dich erfolgreich ab [cite: 982].", "fail": "Du stürzt oder rutschst ab und verlierst LP [cite: 983-984]." }
+        "results": {
+          "success": "Du seilst dich erfolgreich ab [cite: 982].",
+          "fail": "Du stürzt oder rutschst ab und verlierst LP [cite: 983-984]."
+        }
       },
       {
+        "id": "spuren_folgen",
         "skill": "Wildnisleben",
         "text": "Folgt den Spuren des Barons im Dickicht.",
-        "results": { "success": "Du findest eine Abkürzung (+1 Schicksalspunkt) [cite: 990-992].", "fail": "Du verlierst die Spur (Zeitmarke wird entfernt) [cite: 995-996]." }
+        "results": {
+          "success": "Du findest eine Abkürzung (+1 Schicksalspunkt) [cite: 990-992].",
+          "fail": "Du verlierst die Spur (Zeitmarke wird entfernt) [cite: 995-996]."
+        }
       }
     ]
   },
