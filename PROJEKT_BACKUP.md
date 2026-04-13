@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/13/2026, 7:37:13 AM
+# 🛡️ Aventuria Projekt-Backup - 4/13/2026, 7:37:41 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -1281,6 +1281,53 @@ hr {
     "victory": "Grautax, der falsche Baron, wurde besiegt[cite: 1031].",
     "defeat": "Anzahl Verderbensmarken = Anzahl Helden[cite: 1030]."
   }
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/base_game/_template_card.json
+```json
+{
+  "id": "card_id_hier_eintragen",
+  "name": "Kartenname hier eintragen",
+  "type": "unknown",
+  "status": "raw",
+  "adventure_id": null,
+  "set": "base_game",
+  "sub_name": null,
+  "difficulty": null,
+  "image": "",
+  "thumb": null,
+  "tags": [],
+  "stats": {
+    "gp": null,
+    "lp": null,
+    "armor": null,
+    "evasion": null,
+    "actions": null,
+    "start_value": null,
+    "cost": null
+  },
+  "rules": {
+    "passive": "",
+    "success": "",
+    "fail": "",
+    "timed_effects": [],
+    "milestones": [],
+    "action_table": [],
+    "draw_effect": "",
+    "flavor": ""
+  },
+  "keywords": [],
+  "pool_refs": [],
+  "source": {
+    "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+    "page": null,
+    "note": ""
+  },
+  "note": ""
 }
 
 ```
