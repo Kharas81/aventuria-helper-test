@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/13/2026, 1:44:43 PM
+# 🛡️ Aventuria Projekt-Backup - 4/13/2026, 1:46:59 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -1669,6 +1669,91 @@ hr {
   },
 
   "notes": ""
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/base_game/catalog/kg_risiko_gewinn.json
+```json
+{
+  "id": "kg_risiko_gewinn",
+  "name": "Kampfumgebung: Risiko und Gewinn",
+
+  "set": {
+    "id": "base_game",
+    "name": "Aventuria Grundbox"
+  },
+
+  "card_category": "abenteuerkarte",
+  "type": "environment",
+  "subtypes": [
+    "Kampfumgebung"
+  ],
+
+  "status": "raw",
+
+  "adventure_refs": [
+    {
+      "id": "leute_die_nicht_spielen",
+      "name": "Leute, die nicht spielen"
+    }
+  ],
+
+  "images": {
+    "front": "",
+    "back": null,
+    "alt": []
+  },
+
+  "tags": [
+    "abenteuerkarte",
+    "kampfumgebung",
+    "gluecksspiel",
+    "risiko"
+  ],
+
+  "custom_tags": [
+    "chorhop",
+    "karfunkel-stein"
+  ],
+
+  "keywords": [
+    "Risiko",
+    "Gewinn"
+  ],
+
+  "search_text": "Kampfumgebung Risiko und Gewinn Leute die nicht spielen Abenteuerkarte Glücksspiel Risiko Gewinn Chorhop Karfunkel-Stein",
+
+  "stats": {
+    "gp": null,
+    "lp": null,
+    "armor": null,
+    "evasion": null,
+    "actions": null,
+    "start_value": null,
+    "cost": null
+  },
+
+  "rules": {
+    "passive": "",
+    "success": "",
+    "fail": "",
+    "timed_effects": [],
+    "milestones": [],
+    "action_table": [],
+    "draw_effect": "",
+    "flavor": "Die Kampfumgebung gehört zum Kurzabenteuer 'Leute, die nicht spielen' und wird durch das Glücks-Idol in den Ablauf eingebunden."
+  },
+
+  "source": {
+    "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+    "page": 19,
+    "note": "Im Kurzabenteuer 'Leute, die nicht spielen' als Kampfumgebung referenziert. Genaue Kartentexte und Bilddatei später ergänzen."
+  },
+
+  "notes": "Platzhalter im neuen Einzelkartenformat. Sobald Bild oder vollständiger Kartentext vorliegt, diese Datei von 'raw' auf 'playable' oder 'complete' hochziehen."
 }
 
 ```
