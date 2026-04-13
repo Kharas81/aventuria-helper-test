@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/13/2026, 7:37:58 AM
+# 🛡️ Aventuria Projekt-Backup - 4/13/2026, 7:38:16 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -1280,6 +1280,59 @@ hr {
     ],
     "victory": "Grautax, der falsche Baron, wurde besiegt[cite: 1031].",
     "defeat": "Anzahl Verderbensmarken = Anzahl Helden[cite: 1030]."
+  }
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/base_game/_template_adventure.json
+```json
+{
+  "id": "abenteuer_id_hier_eintragen",
+  "name": "Abenteuername hier eintragen",
+  "danger_calc": 5,
+
+  "narrative": {
+    "intro": "Kurze Einleitung des Abenteuers. Was passiert? Warum sind die Helden hier?",
+    "checks": [
+      {
+        "id": "check_1",
+        "skill": "Mut",
+        "text": "Die Helden müssen sich einer ersten Herausforderung stellen.",
+        "results": {
+          "success": "Die Helden bestehen die Probe und erhalten einen Vorteil.",
+          "fail": "Die Helden scheitern und müssen die Konsequenzen tragen."
+        }
+      }
+    ]
+  },
+
+  "setup": {
+    "blue_cards": [
+      {
+        "id": "zs_beispiel"
+      },
+      {
+        "id": "kg_beispiel"
+      }
+    ],
+
+    "minion_cards": [
+      {
+        "id": "minion_beispiel"
+      }
+    ],
+
+    "special_cards": [
+      {
+        "id": "special_beispiel"
+      }
+    ],
+
+    "victory": "Die Helden gewinnen, wenn sie den Anführer besiegen oder das Ziel des Abenteuers erreichen.",
+    "defeat": "Die Helden verlieren, wenn alle Helden besiegt sind oder die Zeitskala 0 erreicht."
   }
 }
 
