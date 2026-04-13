@@ -69,7 +69,6 @@ window.Archive = {
 
     filter(term) {
         this.currentQuery = String(term ?? '').trim();
-
         const normalizedQuery = this.normalizeText(this.currentQuery);
 
         if (!normalizedQuery) {
@@ -79,13 +78,20 @@ window.Archive = {
         }
 
         this.filteredCards = this.currentCards.filter(card => {
-            const haystack = [
+            const haystackParts = [
                 card.id,
                 card.name,
+                card.card_category,
                 card.type,
+                card.status,
                 card.note,
-                ...(Array.isArray(card.tags) ? card.tags : [])
-            ]
+                card.search_text,
+                ...(Array.isArray(card.tags) ? card.tags : []),
+                ...(Array.isArray(card.keywords) ? card.keywords : []),
+                ...(Array.isArray(card.adventure_refs) ? card.adventure_refs : [])
+            ];
+
+            const haystack = haystackParts
                 .map(entry => this.normalizeText(entry))
                 .join(' ');
 
@@ -98,9 +104,13 @@ window.Archive = {
     buildMeta(card) {
         const meta = [];
 
+        if (card.card_category) meta.push(card.card_category);
         if (card.type) meta.push(card.type);
         if (card.status) meta.push(card.status);
-        if (card.adventure_id) meta.push(card.adventure_id);
+
+        if (Array.isArray(card.adventure_refs) && card.adventure_refs.length) {
+            meta.push(`Abenteuer: ${card.adventure_refs.join(', ')}`);
+        }
 
         return meta;
     },
@@ -125,119 +135,80 @@ window.Archive = {
             const imageSrc = String(card.image ?? '').trim();
             const hasImage = imageSrc.length > 0;
 
-            const image = document.createElement('img');
-            image.alt = card.name || 'Karte';
-            image.loading = 'lazy';
+            const title = this.escapeHtml(card.name || card.id || 'Unbenannte Karte');
+            const meta = this.buildMeta(card)
+                .map(entry => this.escapeHtml(entry))
+                .join(' • ');
 
-            if (hasImage) {
-                image.src = imageSrc;
-                image.setAttribute('data-card-image', imageSrc);
-            } else {
-                image.src =
-                    'data:image/svg+xml;utf8,' +
-                    encodeURIComponent(`
-                        <svg xmlns="http://www.w3.org/2000/svg" width="300" height="420" viewBox="0 0 300 420">
-                            <rect width="300" height="420" fill="#f4e7d3"/>
-                            <rect x="8" y="8" width="284" height="404" fill="none" stroke="#8b4513" stroke-width="3"/>
-                            <text x="150" y="190" text-anchor="middle" font-family="Georgia, serif" font-size="20" fill="#5c1e1e">
-                                Keine Vorschau
-                            </text>
-                            <text x="150" y="225" text-anchor="middle" font-family="Georgia, serif" font-size="14" fill="#8b4513">
-                                Bild noch nicht ergänzt
-                            </text>
-                        </svg>
-                    `);
-            }
+            wrapper.innerHTML = `
+                ${
+                    hasImage
+                        ? `<img src="${this.escapeHtml(imageSrc)}" alt="${title}" loading="lazy">`
+                        : `<div style="width:100%; aspect-ratio:5/7; display:flex; align-items:center; justify-content:center; border:2px solid #8b4513; border-radius:5px; background:#f4e7d3; color:#8b4513; font-weight:bold;">Kein Bild</div>`
+                }
+                <p>${title}</p>
+                ${meta ? `<small style="display:block; margin-top:6px; color:#6b4f3a;">${meta}</small>` : ''}
+            `;
 
-            image.addEventListener('error', () => {
-                image.src =
-                    'data:image/svg+xml;utf8,' +
-                    encodeURIComponent(`
-                        <svg xmlns="http://www.w3.org/2000/svg" width="300" height="420" viewBox="0 0 300 420">
-                            <rect width="300" height="420" fill="#f4e7d3"/>
-                            <rect x="8" y="8" width="284" height="404" fill="none" stroke="#8b4513" stroke-width="3"/>
-                            <text x="150" y="190" text-anchor="middle" font-family="Georgia, serif" font-size="20" fill="#5c1e1e">
-                                Bild fehlt
-                            </text>
-                            <text x="150" y="225" text-anchor="middle" font-family="Georgia, serif" font-size="14" fill="#8b4513">
-                                Pfad prüfen
-                            </text>
-                        </svg>
-                    `);
-                image.removeAttribute('data-card-image');
-            });
-
-            const title = document.createElement('p');
-            title.textContent = card.name || 'Unbenannte Karte';
-
-            const meta = this.buildMeta(card);
-            if (meta.length) {
-                const metaEl = document.createElement('p');
-                metaEl.style.fontSize = '0.75em';
-                metaEl.style.marginTop = '4px';
-                metaEl.style.color = '#8b4513';
-                metaEl.textContent = meta.join(' • ');
-                wrapper.appendChild(metaEl);
-            }
-
-            if (card.id) {
-                const idEl = document.createElement('p');
-                idEl.style.fontSize = '0.72em';
-                idEl.style.marginTop = '4px';
-                idEl.style.wordBreak = 'break-word';
-                idEl.style.color = '#6b4b36';
-                idEl.textContent = `ID: ${card.id}`;
-                wrapper.appendChild(idEl);
-            }
-
-            wrapper.insertBefore(image, wrapper.firstChild);
-            wrapper.appendChild(title);
-
-            if (Array.isArray(card.tags) && card.tags.length) {
-                const tagsEl = document.createElement('p');
-                tagsEl.style.fontSize = '0.72em';
-                tagsEl.style.marginTop = '4px';
-                tagsEl.style.color = '#6b4b36';
-                tagsEl.textContent = `Tags: ${card.tags.join(', ')}`;
-                wrapper.appendChild(tagsEl);
-            }
-
-            if (card.note) {
-                const noteEl = document.createElement('p');
-                noteEl.style.fontSize = '0.72em';
-                noteEl.style.marginTop = '4px';
-                noteEl.style.color = '#6b4b36';
-                noteEl.textContent = card.note;
-                wrapper.appendChild(noteEl);
-            }
-
-            if (hasImage) {
-                wrapper.addEventListener('mouseover', (event) => {
-                    if (!window.UI?.isTouchDevice) {
-                        window.UI?.showPreview(event, imageSrc);
-                    }
-                });
-
-                wrapper.addEventListener('mousemove', (event) => {
-                    if (!window.UI?.isTouchDevice) {
-                        window.UI?.movePreview(event);
-                    }
-                });
-
-                wrapper.addEventListener('mouseout', () => {
-                    if (!window.UI?.isTouchDevice) {
-                        window.UI?.hidePreview();
-                    }
-                });
-
-                wrapper.addEventListener('click', (event) => {
-                    window.UI?.showPreview(event, imageSrc);
-                });
-            }
+            wrapper.addEventListener('click', () => this.openCard(card));
 
             fragment.appendChild(wrapper);
         });
 
         grid.appendChild(fragment);
+    },
+
+    async openCard(card) {
+        if (window.UI && typeof window.UI.openPreview === 'function') {
+            const imageSrc = String(card.image ?? '').trim();
+            if (imageSrc) {
+                window.UI.openPreview(imageSrc);
+            }
+        }
+
+        if (!card.detail_path) {
+            return;
+        }
+
+        try {
+            const res = await fetch(card.detail_path);
+            if (!res.ok) {
+                throw new Error(`HTTP ${res.status}`);
+            }
+
+            const detail = await res.json();
+            console.log('Archiv-Kartendetails geladen:', detail);
+        } catch (error) {
+            console.error(`Fehler beim Laden der Kartendetails für "${card.id}":`, error);
+        }
+    },
+
+    init() {
+        const input = document.getElementById('archive-search');
+        if (input) {
+            input.addEventListener('input', (event) => {
+                this.filter(event.target.value);
+            });
+        }
+
+        const closeBtn = document.getElementById('close-archive-modal');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => this.close());
+        }
+
+        const modal = document.getElementById('archive-modal');
+        if (modal) {
+            modal.addEventListener('click', (event) => {
+                if (event.target === modal) {
+                    this.close();
+                }
+            });
+        }
     }
 };
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (window.Archive) {
+        window.Archive.init();
+    }
+});
