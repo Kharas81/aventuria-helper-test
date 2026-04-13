@@ -1,0 +1,110 @@
+{
+  "id": "zs_leute",
+  "name": "Zeitskala",
+
+  "set": {
+    "id": "base_game",
+    "name": "Aventuria Grundbox"
+  },
+
+  "card_category": "abenteuerkarte",
+  "type": "timeline",
+  "subtypes": [
+    "Zeitskala"
+  ],
+
+  "status": "playable",
+
+  "adventure_refs": [
+    {
+      "id": "leute_die_nicht_spielen",
+      "name": "Leute, die nicht spielen"
+    }
+  ],
+
+  "images": {
+    "front": "assets/images/cards/base_game/leute_die_nicht_spielen/zs_leute.jpg",
+    "back": null,
+    "alt": []
+  },
+
+  "tags": [
+    "abenteuerkarte",
+    "zeitskala",
+    "timer",
+    "schergen",
+    "ereigniskarte",
+    "anfuehrer-aktionskarte",
+    "niederlagebedingung"
+  ],
+
+  "custom_tags": [
+    "countdown",
+    "tempo",
+    "druck"
+  ],
+
+  "keywords": [
+    "Zeitmarken",
+    "Ereigniskarte",
+    "Anführer-Aktionskarte",
+    "Schergenstapel",
+    "Niederlage"
+  ],
+
+  "search_text": "Zeitskala Leute die nicht spielen Abenteuerkarte timeline Zeitmarken Ereigniskarte Anführer-Aktionskarte Schergenstapel Niederlage Countdown Timer",
+
+  "stats": {
+    "gp": null,
+    "lp": null,
+    "armor": null,
+    "evasion": null,
+    "actions": null,
+    "start_value": 6,
+    "cost": null
+  },
+
+  "rules": {
+    "passive": "",
+    "success": "",
+    "fail": "",
+    "timed_effects": [],
+    "milestones": [
+      {
+        "value": 5,
+        "text": "Zieht eine Ereigniskarte."
+      },
+      {
+        "value": 4,
+        "text": "Zieht eine Anführer-Aktionskarte."
+      },
+      {
+        "value": 3,
+        "text": "Befinden sich 1 oder weniger Schergen im Spiel, zieht einen weiteren Schergen vom Schergenstapel und fügt ihn rechts an die Gegnerreihe an."
+      },
+      {
+        "value": 2,
+        "text": "Zieht sowohl eine Ereigniskarte als auch eine Anführer-Aktionskarte."
+      },
+      {
+        "value": 1,
+        "text": "Zieht einen weiteren Schergen vom Schergenstapel und fügt ihn rechts an die Gegnerreihe an."
+      },
+      {
+        "value": 0,
+        "text": "Wenn der Kampf zu diesem Zeitpunkt noch läuft, erleiden die Helden automatisch eine Niederlage."
+      }
+    ],
+    "action_table": [],
+    "draw_effect": "",
+    "flavor": "Die Zeitskala steuert das Tempo des Kampfes und erhöht den Druck auf die Helden Runde für Runde."
+  },
+
+  "source": {
+    "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+    "page": 19,
+    "note": "Kurzabenteuer 'Leute, die nicht spielen'. Startwert und Meilensteine aus bestehender Projektdatei übernommen."
+  },
+
+  "notes": "Langfristige Einzelkarten-Datei. Weitere Schwierigkeitsvarianten können später als eigene Karten oder als Variantenmodell ergänzt werden."
+}
