@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/13/2026, 1:48:33 PM
+# 🛡️ Aventuria Projekt-Backup - 4/13/2026, 1:52:45 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -2408,12 +2408,17 @@ hr {
       "image": "",
       "tags": [
         "abenteuerkarte",
-        "kampfumgebung"
+        "kampfumgebung",
+        "gluecksspiel",
+        "risiko"
       ],
-      "keywords": [],
-      "search_text": "Kampfumgebung Risiko und Gewinn Leute die nicht spielen Abenteuerkarte",
-      "detail_path": null,
-      "note": "Noch nicht in Einzelkarten-Datei migriert."
+      "keywords": [
+        "Risiko",
+        "Gewinn"
+      ],
+      "search_text": "Kampfumgebung Risiko und Gewinn Leute die nicht spielen Abenteuerkarte Glücksspiel Risiko Gewinn Chorhop Karfunkel-Stein",
+      "detail_path": "data/cards/base_game/catalog/kg_risiko_gewinn.json",
+      "note": "Einzelkarten-Datei angelegt, Inhalte noch raw."
     },
     {
       "id": "ha_das_spiel_spielen",
@@ -2427,12 +2432,16 @@ hr {
       "image": "",
       "tags": [
         "abenteuerkarte",
-        "heldenaktion"
+        "heldenaktion",
+        "gluecksspiel",
+        "interaktion"
       ],
-      "keywords": [],
-      "search_text": "Heldenaktion Das Spiel spielen Leute die nicht spielen Abenteuerkarte",
-      "detail_path": null,
-      "note": "Noch nicht in Einzelkarten-Datei migriert."
+      "keywords": [
+        "Das Spiel spielen"
+      ],
+      "search_text": "Heldenaktion Das Spiel spielen Leute die nicht spielen Abenteuerkarte Glücksspiel Chorhop Karfunkel-Stein Spielhaus",
+      "detail_path": "data/cards/base_game/catalog/ha_das_spiel_spielen.json",
+      "note": "Einzelkarten-Datei angelegt, Inhalte noch raw."
     }
   ]
 }
