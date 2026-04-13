@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/13/2026, 7:36:33 AM
+# 🛡️ Aventuria Projekt-Backup - 4/13/2026, 7:36:45 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -55,6 +55,7 @@ h1 {
 .button-group {
     display: flex;
     gap: 10px;
+    flex-wrap: wrap;
 }
 
 .config-item {
@@ -64,7 +65,8 @@ h1 {
 }
 
 /* --- FORMULAR ELEMENTE --- */
-input[type="number"], select {
+input[type="number"],
+select {
     padding: 8px;
     background: #f4e7d3;
     border: 1px solid #8b4513;
@@ -74,34 +76,35 @@ input[type="number"], select {
 }
 
 /* --- BUTTON STYLES --- */
-.btn, .btn-outline {
+.btn,
+.btn-outline {
     padding: 10px 20px;
     border-radius: 4px;
     cursor: pointer;
     font-weight: bold;
     font-family: inherit;
-    transition: all 0.2s;
+    transition: all 0.2s ease;
 }
 
-.btn { 
-    background: #5c1e1e; 
-    color: white; 
-    border: none; 
+.btn {
+    background: #5c1e1e;
+    color: white;
+    border: none;
 }
 
-.btn:hover { 
-    background: #7a2828; 
+.btn:hover {
+    background: #7a2828;
 }
 
-.btn-outline { 
-    background: none; 
-    border: 2px solid #8b4513; 
-    color: #8b4513; 
+.btn-outline {
+    background: none;
+    border: 2px solid #8b4513;
+    color: #8b4513;
 }
 
-.btn-outline:hover { 
-    background: #8b4513; 
-    color: white; 
+.btn-outline:hover {
+    background: #8b4513;
+    color: white;
 }
 
 /* Kleine Buttons für Proben/Checks */
@@ -115,14 +118,14 @@ input[type="number"], select {
     margin-right: 5px;
 }
 
-.btn-sm.success { 
-    background: #276749; 
-    color: white; 
+.btn-sm.success {
+    background: #276749;
+    color: white;
 }
 
-.btn-sm.fail { 
-    background: #9b2c2c; 
-    color: white; 
+.btn-sm.fail {
+    background: #9b2c2c;
+    color: white;
 }
 
 /* --- DER INFO-BUTTON (i) --- */
@@ -146,9 +149,9 @@ input[type="number"], select {
     flex-shrink: 0;
 }
 
-.info-btn:hover:not(:disabled) { 
-    background: #5c1e1e; 
-    transform: scale(1.1); 
+.info-btn:hover:not(:disabled) {
+    background: #5c1e1e;
+    transform: scale(1.1);
 }
 
 .info-btn:disabled {
@@ -180,14 +183,14 @@ input[type="number"], select {
     padding-bottom: 8px;
 }
 
-#blue-cards h3 { 
-    color: #2c5282; 
-    border-bottom-color: #2c5282; 
+#blue-cards h3 {
+    color: #2c5282;
+    border-bottom-color: #2c5282;
 }
 
-#special h3 { 
-    color: #276749; 
-    border-bottom-color: #276749; 
+#special h3 {
+    color: #276749;
+    border-bottom-color: #276749;
 }
 
 .card-list ul {
@@ -197,7 +200,7 @@ input[type="number"], select {
 }
 
 .card-list li {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 /* --- CHECKLISTE --- */
@@ -205,7 +208,7 @@ input[type="number"], select {
     display: flex;
     align-items: flex-start;
     gap: 12px;
-    padding: 6px 0;
+    padding: 8px 0;
     line-height: 1.4;
     transition: transform 0.2s ease;
 }
@@ -221,6 +224,13 @@ input[type="number"], select {
     cursor: pointer;
     accent-color: #5c1e1e;
     flex-shrink: 0;
+}
+
+.checklist-item span {
+    display: block;
+    min-width: 0;
+    word-break: break-word;
+    flex: 1;
 }
 
 .checklist-item input:checked + span {
@@ -248,17 +258,17 @@ input[type="number"], select {
     color: #2e241f;
 }
 
-.check-result.show { 
-    display: block; 
-    animation: slideIn 0.3s ease-out; 
+.check-result.show {
+    display: block;
+    animation: slideIn 0.3s ease-out;
 }
 
-.check-result.success { 
-    border-color: #276749; 
+.check-result.success {
+    border-color: #276749;
 }
 
-.check-result.fail { 
-    border-color: #9b2c2c; 
+.check-result.fail {
+    border-color: #9b2c2c;
 }
 
 /* --- TOOLTIP / GROSSE VORSCHAU --- */
@@ -266,13 +276,19 @@ input[type="number"], select {
     position: fixed;
     display: none;
     z-index: 9999;
-    pointer-events: none;
     width: 450px;
     max-width: min(450px, 90vw);
     border: 5px solid #5c1e1e;
     border-radius: 12px;
     box-shadow: 0 15px 50px rgba(0,0,0,0.6);
     background: #000;
+    overflow: hidden;
+}
+
+.card-tooltip .tooltip-inner {
+    width: 100%;
+    max-height: calc(100vh - 24px);
+    overflow: auto;
 }
 
 .card-tooltip img {
@@ -287,20 +303,29 @@ input[type="number"], select {
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 20px;
     padding: 20px;
+    align-items: start;
 }
 
 .archive-card {
     text-align: center;
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: transform 0.2s ease;
+    background: rgba(255,255,255,0.35);
+    border: 1px solid rgba(139, 69, 19, 0.2);
+    border-radius: 8px;
+    padding: 10px;
+    min-height: 100%;
+    box-sizing: border-box;
 }
 
-.archive-card:hover { 
-    transform: translateY(-5px); 
+.archive-card:hover {
+    transform: translateY(-5px);
 }
 
 .archive-card img {
     width: 100%;
+    aspect-ratio: 5 / 7;
+    object-fit: cover;
     border: 2px solid #8b4513;
     border-radius: 5px;
     background: #fff;
@@ -309,8 +334,10 @@ input[type="number"], select {
 .archive-card p {
     font-size: 0.85em;
     margin-top: 8px;
+    margin-bottom: 0;
     font-weight: bold;
     color: #5c1e1e;
+    word-break: break-word;
 }
 
 /* --- DANGER / HINWEISE --- */
@@ -333,6 +360,79 @@ hr {
 @keyframes slideIn {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- RESPONSIVE FEINSCHLIFF --- */
+@media (max-width: 900px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+
+    .archive-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 16px;
+        padding: 12px;
+    }
+}
+
+@media (max-width: 700px) {
+    .top-bar {
+        gap: 16px;
+    }
+
+    .button-group {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .config-item {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .card-list {
+        padding: 16px;
+    }
+
+    .checklist-item {
+        gap: 10px;
+        padding: 10px 0;
+    }
+
+    .archive-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        padding: 8px;
+    }
+
+    .archive-card {
+        padding: 8px;
+    }
+
+    .card-tooltip {
+        max-width: calc(100vw - 24px);
+        border-width: 3px;
+        border-radius: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .btn,
+    .btn-outline {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .archive-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .info-btn {
+        width: 24px;
+        height: 24px;
+        min-width: 24px;
+        min-height: 24px;
+    }
 }
 
 ```
