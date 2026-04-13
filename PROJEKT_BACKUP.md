@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/13/2026, 7:38:16 AM
+# 🛡️ Aventuria Projekt-Backup - 4/13/2026, 1:12:04 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -1604,6 +1604,71 @@ hr {
     "note": ""
   },
   "note": ""
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/base_game/catalog/_template_card.json
+```json
+{
+  "id": "card_id_hier_eintragen",
+  "name": "Kartenname hier eintragen",
+
+  "set": {
+    "id": "base_game",
+    "name": "Aventuria Grundbox"
+  },
+
+  "card_category": "unknown",
+  "type": "unknown",
+  "subtypes": [],
+
+  "status": "raw",
+
+  "adventure_refs": [],
+
+  "images": {
+    "front": "",
+    "back": null,
+    "alt": []
+  },
+
+  "tags": [],
+  "custom_tags": [],
+  "keywords": [],
+
+  "search_text": "",
+
+  "stats": {
+    "gp": null,
+    "lp": null,
+    "armor": null,
+    "evasion": null,
+    "actions": null,
+    "start_value": null,
+    "cost": null
+  },
+
+  "rules": {
+    "passive": "",
+    "success": "",
+    "fail": "",
+    "timed_effects": [],
+    "milestones": [],
+    "action_table": [],
+    "draw_effect": "",
+    "flavor": ""
+  },
+
+  "source": {
+    "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+    "page": null,
+    "note": ""
+  },
+
+  "notes": ""
 }
 
 ```
