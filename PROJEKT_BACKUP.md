@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/13/2026, 2:16:24 PM
+# 🛡️ Aventuria Projekt-Backup - 4/13/2026, 2:18:52 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4746,7 +4746,7 @@ window.Archive = {
             modal.style.display = 'none';
         }
 
-        if (window.UI) {
+        if (window.UI && typeof window.UI.closePreview === 'function') {
             window.UI.closePreview();
         }
     },
@@ -4884,14 +4884,12 @@ window.Archive = {
     },
 
     async openCard(card) {
-        if (window.UI && typeof window.UI.openPreview === 'function') {
-            const imageSrc = String(card.image ?? '').trim();
-            if (imageSrc) {
-                window.UI.openPreview(imageSrc);
-            }
-        }
+        const imageSrc = String(card.image ?? '').trim();
 
         if (!card.detail_path) {
+            if (imageSrc && window.UI && typeof window.UI.openPreview === 'function') {
+                window.UI.openPreview(imageSrc);
+            }
             return;
         }
 
@@ -4902,9 +4900,21 @@ window.Archive = {
             }
 
             const detail = await res.json();
-            console.log('Archiv-Kartendetails geladen:', detail);
+
+            if (window.Renderer && typeof window.Renderer.openCardDetail === 'function') {
+                window.Renderer.openCardDetail(detail);
+                return;
+            }
+
+            if (imageSrc && window.UI && typeof window.UI.openPreview === 'function') {
+                window.UI.openPreview(imageSrc);
+            }
         } catch (error) {
             console.error(`Fehler beim Laden der Kartendetails für "${card.id}":`, error);
+
+            if (imageSrc && window.UI && typeof window.UI.openPreview === 'function') {
+                window.UI.openPreview(imageSrc);
+            }
         }
     },
 
