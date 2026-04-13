@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/13/2026, 1:33:48 PM
+# 🛡️ Aventuria Projekt-Backup - 4/13/2026, 1:35:34 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4083,25 +4083,74 @@ hr {
 
 ## 📄 Datei: js/api.js
 ```js
-/**
- * js/api.js
- * Lädt Abenteuer- und Kartendaten und normalisiert sie auf ein flexibles Minimal-Schema.
- */
 window.API = {
-    getDefaultCard() {
+    normalizeString(value) {
+        return String(value ?? '').trim();
+    },
+
+    normalizeArray(value) {
+        return Array.isArray(value) ? value : [];
+    },
+
+    slugify(value) {
+        return this.normalizeString(value)
+            .toLowerCase()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/[^a-z0-9]+/g, '_')
+            .replace(/^_+|_+$/g, '');
+    },
+
+    async fetchJson(path) {
+        const res = await fetch(path);
+        if (!res.ok) {
+            throw new Error(`${path} → HTTP ${res.status}`);
+        }
+        return await res.json();
+    },
+
+    normalizeAdventure(rawData, fallbackPath) {
         return {
-            id: '',
-            name: '',
-            type: 'unknown',
-            status: 'basic',
-            adventure_id: null,
-            set: 'base_game',
-            sub_name: null,
-            difficulty: null,
-            image: '',
-            thumb: null,
-            tags: [],
-            stats: {
+            id: this.normalizeString(rawData?.id || fallbackPath.split('/').pop()),
+            name: this.normalizeString(rawData?.name),
+            danger_calc: Number(rawData?.danger_calc ?? 0),
+            narrative: {
+                intro: this.normalizeString(rawData?.narrative?.intro),
+                checks: this.normalizeArray(rawData?.narrative?.checks)
+            },
+            setup: {
+                blue_cards: this.normalizeArray(rawData?.setup?.blue_cards),
+                minion_cards: this.normalizeArray(rawData?.setup?.minion_cards),
+                special_cards: this.normalizeArray(rawData?.setup?.special_cards),
+                victory: this.normalizeString(rawData?.setup?.victory),
+                defeat: this.normalizeString(rawData?.setup?.defeat)
+            }
+        };
+    },
+
+    normalizeLegacyCard(card) {
+        return {
+            id: this.normalizeString(card?.id),
+            name: this.normalizeString(card?.name),
+            type: this.normalizeString(card?.type || 'unknown'),
+            card_category: this.normalizeString(card?.card_category || card?.type || 'unknown'),
+            status: this.normalizeString(card?.status || 'raw'),
+            adventure_id: this.normalizeString(card?.adventure_id),
+            adventure_refs: this.normalizeArray(card?.adventure_refs),
+            set: card?.set || { id: 'base_game', name: 'Aventuria Grundbox' },
+            sub_name: card?.sub_name ?? null,
+            difficulty: card?.difficulty ?? null,
+            image: this.normalizeString(card?.image),
+            images: card?.images || {
+                front: this.normalizeString(card?.image),
+                back: null,
+                alt: []
+            },
+            tags: this.normalizeArray(card?.tags),
+            custom_tags: this.normalizeArray(card?.custom_tags),
+            keywords: this.normalizeArray(card?.keywords),
+            search_text: this.normalizeString(card?.search_text),
+            stats: card?.stats || {
                 gp: null,
                 lp: null,
                 armor: null,
@@ -4110,7 +4159,7 @@ window.API = {
                 start_value: null,
                 cost: null
             },
-            rules: {
+            rules: card?.rules || {
                 passive: '',
                 success: '',
                 fail: '',
@@ -4120,200 +4169,71 @@ window.API = {
                 draw_effect: '',
                 flavor: ''
             },
-            keywords: [],
-            pool_refs: [],
-            source: {
-                book: null,
+            source: card?.source || {
+                book: '',
                 page: null,
                 note: ''
             },
-            note: ''
+            note: this.normalizeString(card?.note || card?.notes)
         };
     },
 
-    normalizeArray(value) {
-        return Array.isArray(value) ? value : [];
-    },
-
-    normalizeString(value, fallback = '') {
-        return typeof value === 'string' ? value : fallback;
-    },
-
-    normalizeNullableString(value) {
-        return typeof value === 'string' ? value : null;
-    },
-
-    normalizeIntOrNull(value) {
-        if (value === null || value === undefined || value === '') return null;
-        const parsed = parseInt(value, 10);
-        return Number.isFinite(parsed) ? parsed : null;
-    },
-
-    normalizeMilestones(rawMilestones) {
-        if (Array.isArray(rawMilestones)) {
-            return rawMilestones.map(entry => ({
-                value: this.normalizeIntOrNull(entry?.value),
-                text: this.normalizeString(entry?.text)
-            })).filter(entry => entry.value !== null && entry.text);
-        }
-
-        if (rawMilestones && typeof rawMilestones === 'object') {
-            return Object.entries(rawMilestones).map(([key, text]) => ({
-                value: this.normalizeIntOrNull(key),
-                text: this.normalizeString(text)
-            })).filter(entry => entry.value !== null && entry.text);
-        }
-
-        return [];
-    },
-
-    normalizeActionTable(rawTable) {
-        return this.normalizeArray(rawTable).map(row => ({
-            roll: this.normalizeString(row?.roll),
-            title: this.normalizeString(row?.title),
-            description: this.normalizeString(row?.description)
-        })).filter(row => row.roll || row.title || row.description);
-    },
-
-    normalizeTimedEffects(rawEffects) {
-        return this.normalizeArray(rawEffects).map(entry => ({
-            trigger: this.normalizeString(entry?.trigger),
-            text: this.normalizeString(entry?.text)
-        })).filter(entry => entry.trigger || entry.text);
-    },
-
-    inferCardType(card) {
-        if (card.type) return card.type;
-
-        const id = this.normalizeString(card.id).toLowerCase();
-        const name = this.normalizeString(card.name).toLowerCase();
-
-        if (id.startsWith('zs_') || name.includes('zeitskala')) return 'timeline';
-        if (id.startsWith('leader_') || id.startsWith('lg_') || name.includes('anführer')) return 'leader';
-        if (id.startsWith('minion_')) return 'minion';
-        if (id.startsWith('ha_') || name.includes('heldenaktion') || name.includes('handlung')) return 'hero_action';
-        if (id.startsWith('special_') || id.startsWith('daemon_') || id.startsWith('demon_')) return 'special';
-        if (id.startsWith('reward_')) return 'reward';
-        if (id.startsWith('training_')) return 'training';
-        if (id.startsWith('kg_')) return 'environment';
-
-        return 'unknown';
-    },
-
-    normalizeCard(rawCard, fallbackAdventureId = null) {
-        const base = this.getDefaultCard();
-
-        const keywords = this.normalizeArray(rawCard?.keywords).map(value => this.normalizeString(value)).filter(Boolean);
-        const tags = this.normalizeArray(rawCard?.tags).map(value => this.normalizeString(value)).filter(Boolean);
-
-        const normalized = {
-            ...base,
-            id: this.normalizeString(rawCard?.id),
-            name: this.normalizeString(rawCard?.name),
-            type: this.inferCardType(rawCard),
-            status: this.normalizeString(rawCard?.status || 'basic'),
-            adventure_id: this.normalizeNullableString(rawCard?.adventure_id) || fallbackAdventureId,
-            set: this.normalizeString(rawCard?.set || 'base_game'),
-            sub_name: this.normalizeNullableString(rawCard?.sub_name),
-            difficulty: this.normalizeNullableString(rawCard?.difficulty),
-            image: this.normalizeString(rawCard?.image),
-            thumb: this.normalizeNullableString(rawCard?.thumb),
-            tags: tags.length ? tags : keywords,
-            stats: {
-                gp: this.normalizeIntOrNull(rawCard?.stats?.gp ?? rawCard?.gp),
-                lp: this.normalizeIntOrNull(rawCard?.stats?.lp ?? rawCard?.lp),
-                armor: this.normalizeIntOrNull(rawCard?.stats?.armor ?? rawCard?.armor),
-                evasion: this.normalizeIntOrNull(rawCard?.stats?.evasion ?? rawCard?.evasion),
-                actions: this.normalizeIntOrNull(rawCard?.stats?.actions ?? rawCard?.actions),
-                start_value: this.normalizeIntOrNull(rawCard?.stats?.start_value ?? rawCard?.start_value),
-                cost: this.normalizeIntOrNull(rawCard?.stats?.cost ?? rawCard?.cost)
+    normalizeCatalogCard(card) {
+        return {
+            id: this.normalizeString(card?.id),
+            name: this.normalizeString(card?.name),
+            type: this.normalizeString(card?.type || 'unknown'),
+            card_category: this.normalizeString(card?.card_category || card?.type || 'unknown'),
+            status: this.normalizeString(card?.status || 'raw'),
+            adventure_id: '',
+            adventure_refs: this.normalizeArray(card?.adventure_refs).map(ref => {
+                if (typeof ref === 'string') return ref;
+                if (ref && typeof ref === 'object') return this.normalizeString(ref.id || ref.name);
+                return '';
+            }).filter(Boolean),
+            set: card?.set || { id: 'base_game', name: 'Aventuria Grundbox' },
+            sub_name: null,
+            difficulty: null,
+            image: this.normalizeString(card?.images?.front),
+            images: {
+                front: this.normalizeString(card?.images?.front),
+                back: card?.images?.back ?? null,
+                alt: this.normalizeArray(card?.images?.alt)
             },
-            rules: {
-                passive: this.normalizeString(rawCard?.rules?.passive ?? rawCard?.passive_rules),
-                success: this.normalizeString(rawCard?.rules?.success ?? rawCard?.success),
-                fail: this.normalizeString(rawCard?.rules?.fail ?? rawCard?.fail),
-                timed_effects: this.normalizeTimedEffects(rawCard?.rules?.timed_effects),
-                milestones: this.normalizeMilestones(rawCard?.rules?.milestones ?? rawCard?.milestones),
-                action_table: this.normalizeActionTable(rawCard?.rules?.action_table ?? rawCard?.action_table),
-                draw_effect: this.normalizeString(rawCard?.rules?.draw_effect),
-                flavor: this.normalizeString(rawCard?.rules?.flavor)
+            tags: this.normalizeArray(card?.tags),
+            custom_tags: this.normalizeArray(card?.custom_tags),
+            keywords: this.normalizeArray(card?.keywords),
+            search_text: this.normalizeString(card?.search_text),
+            stats: card?.stats || {
+                gp: null,
+                lp: null,
+                armor: null,
+                evasion: null,
+                actions: null,
+                start_value: null,
+                cost: null
             },
-            keywords,
-            pool_refs: this.normalizeArray(rawCard?.pool_refs).map(value => this.normalizeString(value)).filter(Boolean),
-            source: {
-                book: this.normalizeNullableString(rawCard?.source?.book),
-                page: this.normalizeIntOrNull(rawCard?.source?.page),
-                note: this.normalizeString(rawCard?.source?.note)
+            rules: card?.rules || {
+                passive: '',
+                success: '',
+                fail: '',
+                timed_effects: [],
+                milestones: [],
+                action_table: [],
+                draw_effect: '',
+                flavor: ''
             },
-            note: this.normalizeString(rawCard?.note)
+            source: card?.source || {
+                book: '',
+                page: null,
+                note: ''
+            },
+            note: this.normalizeString(card?.note || card?.notes)
         };
-
-        return normalized;
     },
 
-    normalizeSetupArray(items) {
-        if (!Array.isArray(items)) return [];
-
-        return items.map(item => {
-            if (typeof item === 'string') {
-                return { id: item };
-            }
-
-            return {
-                id: this.normalizeString(item?.id),
-                label: this.normalizeString(item?.label || '')
-            };
-        }).filter(item => item.id);
-    },
-
-    normalizeAdventure(rawAdventure, path) {
-        const fallbackId = this.normalizeString(path.split('/').pop());
-
-        const normalized = {
-            ...rawAdventure,
-            id: this.normalizeString(rawAdventure?.id || fallbackId),
-            name: this.normalizeString(rawAdventure?.name || fallbackId),
-            danger_calc: this.normalizeIntOrNull(rawAdventure?.danger_calc) ?? 0,
-            narrative: {
-                intro: this.normalizeString(rawAdventure?.narrative?.intro),
-                checks: this.normalizeArray(rawAdventure?.narrative?.checks).map(check => ({
-                    id: this.normalizeString(check?.id || ''),
-                    skill: this.normalizeString(check?.skill),
-                    text: this.normalizeString(check?.text),
-                    results: {
-                        success: this.normalizeString(check?.results?.success),
-                        fail: this.normalizeString(check?.results?.fail)
-                    }
-                }))
-            },
-            setup: {
-                blue_cards: this.normalizeSetupArray(
-                    rawAdventure?.setup?.blue_cards ?? rawAdventure?.setup?.blueCards ?? []
-                ),
-                minion_cards: this.normalizeSetupArray(
-                    rawAdventure?.setup?.minion_cards ??
-                    rawAdventure?.setup?.minionCards ??
-                    rawAdventure?.setup?.minion_keywords ??
-                    []
-                ),
-                special_cards: this.normalizeSetupArray(
-                    rawAdventure?.setup?.special_cards ??
-                    rawAdventure?.setup?.specialCards ??
-                    rawAdventure?.setup?.special_decks ??
-                    []
-                ),
-                victory: this.normalizeString(rawAdventure?.setup?.victory),
-                defeat: this.normalizeString(rawAdventure?.setup?.defeat)
-            }
-        };
-
-        return normalized;
-    },
-
-    normalizeCardPayload(rawPayload, fallbackAdventureId = null) {
-        const cards = this.normalizeArray(rawPayload?.cards).map(card =>
-            this.normalizeCard(card, fallbackAdventureId)
-        );
+    normalizeCardPayload(rawPayload, fallbackAdventureId) {
+        const cards = this.normalizeArray(rawPayload?.cards).map(card => this.normalizeLegacyCard(card));
 
         return {
             adventure_id: this.normalizeString(rawPayload?.adventure_id || fallbackAdventureId),
@@ -4324,12 +4244,7 @@ window.API = {
 
     async getAdventure(path) {
         try {
-            const res = await fetch(`data/adventures/${path}.json`);
-            if (!res.ok) {
-                throw new Error(`HTTP ${res.status}`);
-            }
-
-            const rawData = await res.json();
+            const rawData = await this.fetchJson(`data/adventures/${path}.json`);
             return this.normalizeAdventure(rawData, path);
         } catch (err) {
             console.error('Fehler beim Laden des Abenteuers:', err);
@@ -4337,18 +4252,64 @@ window.API = {
         }
     },
 
-    async getCards(id) {
+    async getMasterIndex(setKey = 'base_game') {
         try {
-            const res = await fetch(`data/cards/base_game/${id}/${id}.json`);
-            if (!res.ok) {
-                throw new Error(`HTTP ${res.status}`);
+            const rawData = await this.fetchJson(`data/cards/base_game/master_${setKey}.json`);
+            return {
+                set: rawData?.set || { id: setKey, name: setKey },
+                catalog_version: Number(rawData?.catalog_version ?? 1),
+                cards: this.normalizeArray(rawData?.cards)
+            };
+        } catch (err) {
+            console.error('Fehler beim Laden des Master-Index:', err);
+            return {
+                set: { id: setKey, name: setKey },
+                catalog_version: 1,
+                cards: []
+            };
+        }
+    },
+
+    async getCatalogCard(detailPath) {
+        const rawData = await this.fetchJson(detailPath);
+        return this.normalizeCatalogCard(rawData);
+    },
+
+    async getCards(adventureId) {
+        const master = await this.getMasterIndex('base_game');
+
+        const migratedMasterCards = master.cards.filter(card =>
+            Array.isArray(card.adventure_refs) &&
+            card.adventure_refs.includes(adventureId) &&
+            typeof card.detail_path === 'string' &&
+            card.detail_path.trim().length > 0
+        );
+
+        if (migratedMasterCards.length > 0) {
+            const loadedCards = [];
+
+            for (const entry of migratedMasterCards) {
+                try {
+                    const detail = await this.getCatalogCard(entry.detail_path);
+                    loadedCards.push(detail);
+                } catch (err) {
+                    console.warn(`⚠️ Katalogkarte konnte nicht geladen werden: ${entry.id}`, err);
+                }
             }
 
-            const rawData = await res.json();
-            return this.normalizeCardPayload(rawData, id);
+            return {
+                adventure_id: adventureId,
+                adventure_name: '',
+                cards: loadedCards
+            };
+        }
+
+        try {
+            const rawData = await this.fetchJson(`data/cards/base_game/${adventureId}/${adventureId}.json`);
+            return this.normalizeCardPayload(rawData, adventureId);
         } catch (err) {
-            console.warn(`⚠️ Karten nicht gefunden für "${id}"`, err);
-            return this.normalizeCardPayload({ cards: [] }, id);
+            console.warn(`⚠️ Karten nicht gefunden für "${adventureId}"`, err);
+            return this.normalizeCardPayload({ cards: [] }, adventureId);
         }
     }
 };
