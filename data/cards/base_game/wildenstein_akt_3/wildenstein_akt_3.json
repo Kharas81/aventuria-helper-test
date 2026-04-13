@@ -6,43 +6,265 @@
       "id": "zs_wildenstein_3",
       "name": "Zeitskala Wildenstein-III",
       "type": "timeline",
+      "status": "raw",
+      "adventure_id": "wildenstein_akt_3",
+      "set": "base_game",
+      "sub_name": "Wildenstein III",
+      "difficulty": null,
       "image": "",
-      "note": "Kartendaten/Bild noch nicht ergänzt"
+      "thumb": null,
+      "tags": [
+        "zeitskala",
+        "wildenstein",
+        "abenteuerkarte"
+      ],
+      "stats": {
+        "gp": null,
+        "lp": null,
+        "armor": null,
+        "evasion": null,
+        "actions": null,
+        "start_value": null,
+        "cost": null
+      },
+      "rules": {
+        "passive": "",
+        "success": "",
+        "fail": "",
+        "timed_effects": [],
+        "milestones": [],
+        "action_table": [],
+        "draw_effect": "",
+        "flavor": ""
+      },
+      "keywords": [],
+      "pool_refs": [],
+      "source": {
+        "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+        "page": 23,
+        "note": "Abenteuer 'Das Erbe von Wildenstein' Akt III. Zeitskala-Details später direkt von Karte/Bild ergänzen."
+      },
+      "note": "Bild/Kartendaten noch ergänzen."
     },
     {
       "id": "leader_grautax",
       "name": "Anführer: Grautax",
       "type": "leader",
+      "status": "raw",
+      "adventure_id": "wildenstein_akt_3",
+      "set": "base_game",
+      "sub_name": null,
+      "difficulty": null,
       "image": "",
-      "note": "Kartendaten/Bild noch nicht ergänzt"
+      "thumb": null,
+      "tags": [
+        "anfuehrer",
+        "grautax",
+        "wildenstein"
+      ],
+      "stats": {
+        "gp": null,
+        "lp": null,
+        "armor": null,
+        "evasion": null,
+        "actions": null,
+        "start_value": null,
+        "cost": null
+      },
+      "rules": {
+        "passive": "",
+        "success": "",
+        "fail": "",
+        "timed_effects": [],
+        "milestones": [],
+        "action_table": [],
+        "draw_effect": "",
+        "flavor": ""
+      },
+      "keywords": [],
+      "pool_refs": [],
+      "source": {
+        "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+        "page": 23,
+        "note": "Grautax wird im Setup von Wildenstein Akt III als Anführer genannt."
+      },
+      "note": "Bild/Kartendaten noch ergänzen. LP/Aktionen/Ausweichen/Rüstung und Aktionswürfe später übernehmen."
     },
     {
       "id": "daemon_irrhalk",
       "name": "Dämon: Irrhalk",
       "type": "special",
+      "status": "raw",
+      "adventure_id": "wildenstein_akt_3",
+      "set": "base_game",
+      "sub_name": null,
+      "difficulty": null,
       "image": "",
-      "note": "Kartendaten/Bild noch nicht ergänzt"
+      "thumb": null,
+      "tags": [
+        "daemon",
+        "irrhalk",
+        "spezial"
+      ],
+      "stats": {
+        "gp": null,
+        "lp": null,
+        "armor": null,
+        "evasion": null,
+        "actions": null,
+        "start_value": null,
+        "cost": null
+      },
+      "rules": {
+        "passive": "",
+        "success": "",
+        "fail": "",
+        "timed_effects": [],
+        "milestones": [],
+        "action_table": [],
+        "draw_effect": "",
+        "flavor": ""
+      },
+      "keywords": [],
+      "pool_refs": [],
+      "source": {
+        "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+        "page": 23,
+        "note": "Im Setup von Wildenstein Akt III als zusätzliche Dämon-/Spezialkarte genannt."
+      },
+      "note": "Kartendaten/Bild noch nicht ergänzt."
     },
     {
       "id": "minion_skelett",
       "name": "Skelett",
       "type": "minion",
+      "status": "raw",
+      "adventure_id": "wildenstein_akt_3",
+      "set": "base_game",
+      "sub_name": null,
+      "difficulty": null,
       "image": "",
-      "note": "Schergenkarte noch nicht ergänzt"
+      "thumb": null,
+      "tags": [
+        "scherge",
+        "skelett",
+        "untot"
+      ],
+      "stats": {
+        "gp": null,
+        "lp": null,
+        "armor": null,
+        "evasion": null,
+        "actions": null,
+        "start_value": null,
+        "cost": null
+      },
+      "rules": {
+        "passive": "",
+        "success": "",
+        "fail": "",
+        "timed_effects": [],
+        "milestones": [],
+        "action_table": [],
+        "draw_effect": "",
+        "flavor": ""
+      },
+      "keywords": [],
+      "pool_refs": [],
+      "source": {
+        "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+        "page": 23,
+        "note": "Im Setup von Wildenstein Akt III als Schergen-Schlagwort genannt."
+      },
+      "note": "Sammel-/Platzhalter-Eintrag. Einzelne Skelett-Schergen später genauer erfassen."
     },
     {
       "id": "special_anfuehrer_aktionen_nekromantie",
       "name": "Anführer-Aktionen: Nekromantie",
       "type": "special",
+      "status": "raw",
+      "adventure_id": "wildenstein_akt_3",
+      "set": "base_game",
+      "sub_name": null,
+      "difficulty": null,
       "image": "",
-      "note": "Spezialkarten-Daten noch nicht ergänzt"
+      "thumb": null,
+      "tags": [
+        "anfuehrer-aktion",
+        "nekromantie",
+        "deck"
+      ],
+      "stats": {
+        "gp": null,
+        "lp": null,
+        "armor": null,
+        "evasion": null,
+        "actions": null,
+        "start_value": null,
+        "cost": null
+      },
+      "rules": {
+        "passive": "",
+        "success": "",
+        "fail": "",
+        "timed_effects": [],
+        "milestones": [],
+        "action_table": [],
+        "draw_effect": "",
+        "flavor": ""
+      },
+      "keywords": [],
+      "pool_refs": [],
+      "source": {
+        "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+        "page": 23,
+        "note": "Im Setup von Wildenstein Akt III als Spezialdeck genannt."
+      },
+      "note": "Deck-Referenz. Später als Deckliste oder Pool ausbauen."
     },
     {
       "id": "special_ereignisse_untotenbeschwoerung",
       "name": "Ereignisse: Untotenbeschwörung",
       "type": "special",
+      "status": "raw",
+      "adventure_id": "wildenstein_akt_3",
+      "set": "base_game",
+      "sub_name": null,
+      "difficulty": null,
       "image": "",
-      "note": "Spezialkarten-Daten noch nicht ergänzt"
+      "thumb": null,
+      "tags": [
+        "ereignisse",
+        "untotenbeschwoerung",
+        "deck"
+      ],
+      "stats": {
+        "gp": null,
+        "lp": null,
+        "armor": null,
+        "evasion": null,
+        "actions": null,
+        "start_value": null,
+        "cost": null
+      },
+      "rules": {
+        "passive": "",
+        "success": "",
+        "fail": "",
+        "timed_effects": [],
+        "milestones": [],
+        "action_table": [],
+        "draw_effect": "",
+        "flavor": ""
+      },
+      "keywords": [],
+      "pool_refs": [],
+      "source": {
+        "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+        "page": 23,
+        "note": "Im Setup von Wildenstein Akt III als Spezialdeck genannt."
+      },
+      "note": "Deck-Referenz. Später als Deckliste oder Pool ausbauen."
     }
   ]
 }
