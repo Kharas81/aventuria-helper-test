@@ -1,26 +1,20 @@
 {
   "id": "leute_nicht_spielen",
   "name": "Leute, die nicht spielen",
-  "danger_calc": 4,
+  "status": "deprecated_alias",
+  "redirect_to": "data/adventures/base_game/leute_die_nicht_spielen.json",
+  "note": "Diese Datei ist nur noch ein Altname/Kompatibilitätseintrag. Die kanonische Abenteuerdatei ist data/adventures/base_game/leute_die_nicht_spielen.json. Pflege und Änderungen nur noch dort vornehmen.",
+
   "narrative": {
-    "intro": "Chorhop, 1024 BF: Die Stadt ist bei Nacht ein gefährliches Pflaster. Ihr eskortiert das 'Glücks-Idol' zum Spielhaus 'Karfunkel-Stein'. Als ihr es betretet, beginnt die Statue plötzlich Goldstücke zu weinen... [cite: 790-798]",
-    "checks": [
-      {
-        "id": "will_check",
-        "skill": "Willenskraft",
-        "text": "Könnt ihr dem Bann des Glücks-Idols widerstehen? [cite: 809]",
-        "results": {
-          "success": "Du kannst dich dem Einfluss vollständig widersetzen. [cite: 811]",
-          "fail": "Du verlierst 1W6 Lebenspunkte, bevor du den Bann brichst. [cite: 814]"
-        }
-      }
-    ]
+    "intro": "DEPRECATED_ALIAS",
+    "checks": []
   },
+
   "setup": {
-    "blue_cards": ["Zeitskala", "Kampfumgebung: Risiko und Gewinn", "Glücks-Idol", "Heldenaktion: Das Spiel spielen [cite: 817-820]"],
-    "minion_keywords": ["Schergen eurer Wahl"],
-    "special_decks": ["Ereignisse", "Anführer-Aktionen"],
-    "victory": "Aktion 'Das Spiel beenden' erfolgreich durchgeführt. [cite: 825]",
-    "defeat": "Letzte Zeitmarke entfernt, während Kampf noch läuft. [cite: 824]"
+    "blue_cards": [],
+    "minion_cards": [],
+    "special_cards": [],
+    "victory": "Siehe kanonische Datei.",
+    "defeat": "Siehe kanonische Datei."
   }
 }
