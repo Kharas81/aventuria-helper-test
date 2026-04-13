@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/13/2026, 1:12:04 PM
+# 🛡️ Aventuria Projekt-Backup - 4/13/2026, 1:19:57 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -1669,6 +1669,128 @@ hr {
   },
 
   "notes": ""
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/base_game/catalog/lg_leute_idol.json
+```json
+{
+  "id": "lg_leute_idol",
+  "name": "Glücks-Idol",
+
+  "set": {
+    "id": "base_game",
+    "name": "Aventuria Grundbox"
+  },
+
+  "card_category": "abenteuerkarte",
+  "type": "leader",
+  "subtypes": [
+    "Göttlich",
+    "Dämon",
+    "Übernatürlich"
+  ],
+
+  "status": "playable",
+
+  "adventure_refs": [
+    {
+      "id": "leute_die_nicht_spielen",
+      "name": "Leute, die nicht spielen"
+    }
+  ],
+
+  "images": {
+    "front": "assets/images/cards/base_game/leute_die_nicht_spielen/gluecks_idol.jpg",
+    "back": null,
+    "alt": []
+  },
+
+  "tags": [
+    "abenteuerkarte",
+    "anfuehrer",
+    "goettlich",
+    "daemon",
+    "uebernatuerlich",
+    "wuerfelmechanik",
+    "schergen",
+    "zufall"
+  ],
+
+  "custom_tags": [
+    "idol",
+    "gluecksspiel",
+    "chorhop",
+    "karfunkel-stein"
+  ],
+
+  "keywords": [
+    "Spannung",
+    "Glückssache",
+    "Glücksspiel",
+    "Entspannung",
+    "Unterhaltung"
+  ],
+
+  "search_text": "Glücks-Idol Leute die nicht spielen Anführer Abenteuerkarte göttlich dämon übernatürlich Spannung Glückssache Glücksspiel Entspannung Unterhaltung zusätzlicher Scherge Held Einsatz erhöhen Risiko und Gewinn",
+
+  "stats": {
+    "gp": null,
+    "lp": null,
+    "armor": null,
+    "evasion": null,
+    "actions": null,
+    "start_value": null,
+    "cost": null
+  },
+
+  "rules": {
+    "passive": "Das Idol kann nicht zum Ziel von Angriffen werden. Das Wurfergebnis für seine Aktionen wird pro 🌀 auf dieser Karte um 1 gesenkt. Die 🌀 werden abgelegt, sobald der Aktionswurf „Spannung“ ergibt.",
+    "success": "",
+    "fail": "",
+    "timed_effects": [],
+    "milestones": [],
+    "action_table": [
+      {
+        "roll": "1-5",
+        "title": "Spannung",
+        "description": "Es wird ein zusätzlicher Scherge gezogen und rechts an die Schergenreihe angelegt."
+      },
+      {
+        "roll": "6-8",
+        "title": "Glückssache",
+        "description": "Ein zufälliger Held muss die „Heldenaktion: Den Einsatz erhöhen“ ausführen."
+      },
+      {
+        "roll": "9",
+        "title": "Glücksspiel",
+        "description": "Alle Helden führen einen Wurf für die „Kampfumgebung: Risiko und Gewinn“ aus."
+      },
+      {
+        "roll": "10-12",
+        "title": "Entspannung",
+        "description": "Jedem Schergen werden 5 🩸 geheilt."
+      },
+      {
+        "roll": "13-20",
+        "title": "Unterhaltung",
+        "description": "Das Idol tanzt."
+      }
+    ],
+    "draw_effect": "",
+    "flavor": "Im Abenteuer 'Leute, die nicht spielen' ist das Glücks-Idol der zentrale Gegner und Auslöser des chaotischen Kampfgeschehens."
+  },
+
+  "source": {
+    "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+    "page": 19,
+    "note": "Kurzabenteuer 'Leute, die nicht spielen'. Detailregel und Aktionszeilen aus bestehender Projektdatei übernommen; Abenteuerkontext durch Regelheft bestätigt."
+  },
+
+  "notes": "Langfristige Einzelkarten-Datei. LP/Aktionen/Rüstung/Ausweichen können später ergänzt werden, sobald vollständige Kartenwerte oder bessere Bildquellen vorliegen."
 }
 
 ```
