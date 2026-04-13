@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/13/2026, 1:52:45 PM
+# 🛡️ Aventuria Projekt-Backup - 4/13/2026, 1:55:29 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -2089,12 +2089,14 @@ hr {
 {
   "adventure_id": "leute_die_nicht_spielen",
   "adventure_name": "Leute, die nicht spielen",
+  "migration_status": "catalog_source_of_truth",
+  "note": "Kompatibilitätsdatei für die laufende Migration. Die eigentliche Datenquelle sind jetzt die Einzelkarten unter data/cards/base_game/catalog/ und der Master-Index master_base_game.json.",
   "cards": [
     {
       "id": "lg_leute_idol",
       "name": "Glücks-Idol",
       "type": "leader",
-      "status": "playable",
+      "status": "migrated",
       "adventure_id": "leute_die_nicht_spielen",
       "set": "base_game",
       "sub_name": "Spezial-Gegner",
@@ -2102,10 +2104,11 @@ hr {
       "image": "assets/images/cards/base_game/leute_die_nicht_spielen/gluecks_idol.jpg",
       "thumb": null,
       "tags": [
+        "abenteuerkarte",
+        "anfuehrer",
         "goettlich",
         "daemon",
-        "uebernatuerlich",
-        "anfuehrer"
+        "uebernatuerlich"
       ],
       "stats": {
         "gp": null,
@@ -2117,59 +2120,35 @@ hr {
         "cost": null
       },
       "rules": {
-        "passive": "Das Idol kann nicht zum Ziel von Angriffen werden. Das Wurfergebnis für seine Aktionen wird pro 🌀 auf dieser Karte um 1 gesenkt. Die 🌀 werden abgelegt, sobald der Aktionswurf „Spannung“ ergibt.",
+        "passive": "Migriert in Einzelkarten-Datei.",
         "success": "",
         "fail": "",
         "timed_effects": [],
         "milestones": [],
-        "action_table": [
-          {
-            "roll": "1-5",
-            "title": "Spannung",
-            "description": "Es wird ein zusätzlicher Scherge gezogen und rechts an die Schergenreihe angelegt."
-          },
-          {
-            "roll": "6-8",
-            "title": "Glückssache",
-            "description": "Ein zufälliger Held muss die „Heldenaktion: Den Einsatz erhöhen“ ausführen."
-          },
-          {
-            "roll": "9",
-            "title": "Glücksspiel",
-            "description": "Alle Helden führen einen Wurf für die „Kampfumgebung: Risiko und Gewinn“ aus."
-          },
-          {
-            "roll": "10-12",
-            "title": "Entspannung",
-            "description": "Jedem Schergen werden 5 🩸 geheilt."
-          },
-          {
-            "roll": "13-20",
-            "title": "Unterhaltung",
-            "description": "Das Idol tanzt."
-          }
-        ],
+        "action_table": [],
         "draw_effect": "",
         "flavor": ""
       },
       "keywords": [
-        "Göttlich",
-        "Dämon",
-        "Übernatürlich"
+        "Spannung",
+        "Glückssache",
+        "Glücksspiel",
+        "Entspannung",
+        "Unterhaltung"
       ],
       "pool_refs": [],
       "source": {
         "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
         "page": 19,
-        "note": "Abenteuer 'Leute, die nicht spielen' im Regelbuch; Detailwerte der Anführerkarte bei Bedarf später aus der Karte/Bildquelle ergänzen."
+        "note": "Quelle im neuen Katalog: data/cards/base_game/catalog/lg_leute_idol.json"
       },
-      "note": "Aktionstabelle und passive Regel gepflegt. LP/Aktionen/Rüstung/Ausweichen später ergänzen, sobald die Kartenwerte vollständig vorliegen."
+      "note": "Kompatibilitätseintrag. Inhaltliche Pflege nur noch in der Einzelkarten-Datei."
     },
     {
       "id": "zs_leute",
       "name": "Zeitskala",
       "type": "timeline",
-      "status": "playable",
+      "status": "migrated",
       "adventure_id": "leute_die_nicht_spielen",
       "set": "base_game",
       "sub_name": "Leute, die nicht spielen",
@@ -2177,8 +2156,9 @@ hr {
       "image": "assets/images/cards/base_game/leute_die_nicht_spielen/zs_leute.jpg",
       "thumb": null,
       "tags": [
+        "abenteuerkarte",
         "zeitskala",
-        "abenteuerkarte"
+        "timer"
       ],
       "stats": {
         "gp": null,
@@ -2190,54 +2170,35 @@ hr {
         "cost": null
       },
       "rules": {
-        "passive": "",
+        "passive": "Migriert in Einzelkarten-Datei.",
         "success": "",
         "fail": "",
         "timed_effects": [],
-        "milestones": [
-          {
-            "value": 5,
-            "text": "Zieht eine Ereigniskarte."
-          },
-          {
-            "value": 4,
-            "text": "Zieht eine Anführer-Aktionskarte."
-          },
-          {
-            "value": 3,
-            "text": "Befinden sich 1 oder weniger Schergen im Spiel, zieht einen weiteren Schergen vom Schergenstapel und fügt ihn rechts an die Gegnerreihe an."
-          },
-          {
-            "value": 2,
-            "text": "Zieht sowohl eine Ereigniskarte als auch eine Anführer-Aktionskarte."
-          },
-          {
-            "value": 1,
-            "text": "Zieht einen weiteren Schergen vom Schergenstapel und fügt ihn rechts an die Gegnerreihe an."
-          },
-          {
-            "value": 0,
-            "text": "Wenn der Kampf zu diesem Zeitpunkt noch läuft, erleiden die Helden automatisch eine Niederlage."
-          }
-        ],
+        "milestones": [],
         "action_table": [],
         "draw_effect": "",
         "flavor": ""
       },
-      "keywords": [],
+      "keywords": [
+        "Zeitmarken",
+        "Ereigniskarte",
+        "Anführer-Aktionskarte",
+        "Schergenstapel",
+        "Niederlage"
+      ],
       "pool_refs": [],
       "source": {
         "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
         "page": 19,
-        "note": "Gefahrenwert und Siegbedingung im Abenteuertext, Startwert und Effekte auf der Zeitskala-Karte."
+        "note": "Quelle im neuen Katalog: data/cards/base_game/catalog/zs_leute.json"
       },
-      "note": "Zeitskala normal gepflegt. Weitere Schwierigkeitsstufen können später als eigene Karten oder Varianten ergänzt werden."
+      "note": "Kompatibilitätseintrag. Inhaltliche Pflege nur noch in der Einzelkarten-Datei."
     },
     {
       "id": "kg_risiko_gewinn",
       "name": "Kampfumgebung: Risiko und Gewinn",
       "type": "environment",
-      "status": "raw",
+      "status": "migrated",
       "adventure_id": "leute_die_nicht_spielen",
       "set": "base_game",
       "sub_name": null,
@@ -2245,8 +2206,10 @@ hr {
       "image": "",
       "thumb": null,
       "tags": [
+        "abenteuerkarte",
         "kampfumgebung",
-        "abenteuerkarte"
+        "gluecksspiel",
+        "risiko"
       ],
       "stats": {
         "gp": null,
@@ -2258,7 +2221,7 @@ hr {
         "cost": null
       },
       "rules": {
-        "passive": "",
+        "passive": "Migriert in Einzelkarten-Datei.",
         "success": "",
         "fail": "",
         "timed_effects": [],
@@ -2267,20 +2230,23 @@ hr {
         "draw_effect": "",
         "flavor": ""
       },
-      "keywords": [],
+      "keywords": [
+        "Risiko",
+        "Gewinn"
+      ],
       "pool_refs": [],
       "source": {
         "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
         "page": 19,
-        "note": "Im Abenteuer 'Leute, die nicht spielen' erwähnt."
+        "note": "Quelle im neuen Katalog: data/cards/base_game/catalog/kg_risiko_gewinn.json"
       },
-      "note": "Kartendaten/Bild noch nicht ergänzt."
+      "note": "Kompatibilitätseintrag. Inhaltliche Pflege nur noch in der Einzelkarten-Datei."
     },
     {
       "id": "ha_das_spiel_spielen",
       "name": "Heldenaktion: Das Spiel spielen",
       "type": "hero_action",
-      "status": "raw",
+      "status": "migrated",
       "adventure_id": "leute_die_nicht_spielen",
       "set": "base_game",
       "sub_name": null,
@@ -2288,8 +2254,10 @@ hr {
       "image": "",
       "thumb": null,
       "tags": [
+        "abenteuerkarte",
         "heldenaktion",
-        "abenteuerkarte"
+        "gluecksspiel",
+        "interaktion"
       ],
       "stats": {
         "gp": null,
@@ -2301,7 +2269,7 @@ hr {
         "cost": null
       },
       "rules": {
-        "passive": "",
+        "passive": "Migriert in Einzelkarten-Datei.",
         "success": "",
         "fail": "",
         "timed_effects": [],
@@ -2310,14 +2278,16 @@ hr {
         "draw_effect": "",
         "flavor": ""
       },
-      "keywords": [],
+      "keywords": [
+        "Das Spiel spielen"
+      ],
       "pool_refs": [],
       "source": {
         "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
         "page": 19,
-        "note": "Im Abenteuertext als Siegbedingung genannt: 'Das Spiel beenden' / Spiel-bezogene Heldenaktion."
+        "note": "Quelle im neuen Katalog: data/cards/base_game/catalog/ha_das_spiel_spielen.json"
       },
-      "note": "Kartendaten/Bild noch nicht ergänzt. Namen und genaue Wirkung bei späterer Datenergänzung prüfen."
+      "note": "Kompatibilitätseintrag. Inhaltliche Pflege nur noch in der Einzelkarten-Datei."
     }
   ]
 }
