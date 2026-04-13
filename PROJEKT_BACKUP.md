@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/13/2026, 7:35:37 AM
+# 🛡️ Aventuria Projekt-Backup - 4/13/2026, 7:35:50 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -1554,43 +1554,260 @@ hr {
       "id": "zs_silvana",
       "name": "Zeitskala 'Silvanas Befreiung'",
       "type": "timeline",
+      "status": "raw",
+      "adventure_id": "silvanas_befreiung",
+      "set": "base_game",
+      "sub_name": "Silvanas Befreiung",
+      "difficulty": null,
       "image": "",
-      "note": "Bild/Kartendaten noch ergänzen"
+      "thumb": null,
+      "tags": [
+        "zeitskala",
+        "abenteuerkarte"
+      ],
+      "stats": {
+        "gp": null,
+        "lp": null,
+        "armor": null,
+        "evasion": null,
+        "actions": null,
+        "start_value": null,
+        "cost": null
+      },
+      "rules": {
+        "passive": "",
+        "success": "",
+        "fail": "",
+        "timed_effects": [],
+        "milestones": [],
+        "action_table": [],
+        "draw_effect": "",
+        "flavor": ""
+      },
+      "keywords": [],
+      "pool_refs": [],
+      "source": {
+        "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+        "page": 17,
+        "note": "Zeitskala für das Kurzabenteuer Silvanas Befreiung, Details später von der Kartenabbildung/Originalkarte übernehmen."
+      },
+      "note": "Bild/Kartendaten noch ergänzen. Kann später in mehrere Schwierigkeitsvarianten aufgeteilt werden."
     },
     {
       "id": "ha_namen_erraten",
       "name": "Heldenaktion: Namen erraten",
       "type": "hero_action",
+      "status": "basic",
+      "adventure_id": "silvanas_befreiung",
+      "set": "base_game",
+      "sub_name": null,
+      "difficulty": null,
       "image": "",
-      "note": "Bild/Kartendaten noch ergänzen"
+      "thumb": null,
+      "tags": [
+        "heldenaktion",
+        "abenteuerkarte"
+      ],
+      "stats": {
+        "gp": null,
+        "lp": null,
+        "armor": null,
+        "evasion": null,
+        "actions": null,
+        "start_value": null,
+        "cost": null
+      },
+      "rules": {
+        "passive": "",
+        "success": "",
+        "fail": "",
+        "timed_effects": [],
+        "milestones": [],
+        "action_table": [],
+        "draw_effect": "",
+        "flavor": ""
+      },
+      "keywords": [],
+      "pool_refs": [],
+      "source": {
+        "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+        "page": 7,
+        "note": "Die Karte ist auf der Spielmaterial-Seite als Beispielabbildung zu sehen; Abenteuerbezug in Silvanas Befreiung."
+      },
+      "note": "Bild/Kartendaten noch ergänzen. Wirktext der Heldenaktion später direkt von der Karte übernehmen."
     },
     {
       "id": "leader_kobold",
       "name": "???, der Kobold",
       "type": "leader",
+      "status": "basic",
+      "adventure_id": "silvanas_befreiung",
+      "set": "base_game",
+      "sub_name": null,
+      "difficulty": null,
       "image": "",
-      "note": "Bild/Kartendaten noch ergänzen"
+      "thumb": null,
+      "tags": [
+        "anfuehrer",
+        "kobold",
+        "uebernatuerlich"
+      ],
+      "stats": {
+        "gp": null,
+        "lp": null,
+        "armor": null,
+        "evasion": null,
+        "actions": null,
+        "start_value": null,
+        "cost": null
+      },
+      "rules": {
+        "passive": "",
+        "success": "",
+        "fail": "",
+        "timed_effects": [],
+        "milestones": [],
+        "action_table": [],
+        "draw_effect": "",
+        "flavor": ""
+      },
+      "keywords": [],
+      "pool_refs": [],
+      "source": {
+        "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+        "page": 10,
+        "note": "Anführerkarten-Beispiel zeigt ???, der Kobold mit Tabellen- und Anführerstruktur."
+      },
+      "note": "Bild/Kartendaten noch ergänzen. LP/Aktionen/Ausweichen/Rüstung und Aktionswürfe später übernehmen."
     },
     {
       "id": "minion_pirat",
       "name": "Pirat",
       "type": "minion",
+      "status": "raw",
+      "adventure_id": "silvanas_befreiung",
+      "set": "base_game",
+      "sub_name": null,
+      "difficulty": null,
       "image": "",
-      "note": "Sammel-/Platzhalter-Eintrag"
+      "thumb": null,
+      "tags": [
+        "scherge",
+        "pirat"
+      ],
+      "stats": {
+        "gp": null,
+        "lp": null,
+        "armor": null,
+        "evasion": null,
+        "actions": null,
+        "start_value": null,
+        "cost": null
+      },
+      "rules": {
+        "passive": "",
+        "success": "",
+        "fail": "",
+        "timed_effects": [],
+        "milestones": [],
+        "action_table": [],
+        "draw_effect": "",
+        "flavor": ""
+      },
+      "keywords": [],
+      "pool_refs": [],
+      "source": {
+        "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+        "page": 18,
+        "note": "Im Abenteuer Silvanas Befreiung als mögliche Schergen genannt."
+      },
+      "note": "Sammel-/Platzhalter-Eintrag. Einzelne Piratenkarten später genauer erfassen."
     },
     {
       "id": "minion_ork",
       "name": "Ork",
       "type": "minion",
+      "status": "raw",
+      "adventure_id": "silvanas_befreiung",
+      "set": "base_game",
+      "sub_name": null,
+      "difficulty": null,
       "image": "",
-      "note": "Sammel-/Platzhalter-Eintrag"
+      "thumb": null,
+      "tags": [
+        "scherge",
+        "ork"
+      ],
+      "stats": {
+        "gp": null,
+        "lp": null,
+        "armor": null,
+        "evasion": null,
+        "actions": null,
+        "start_value": null,
+        "cost": null
+      },
+      "rules": {
+        "passive": "",
+        "success": "",
+        "fail": "",
+        "timed_effects": [],
+        "milestones": [],
+        "action_table": [],
+        "draw_effect": "",
+        "flavor": ""
+      },
+      "keywords": [],
+      "pool_refs": [],
+      "source": {
+        "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+        "page": 18,
+        "note": "Im Abenteuer Silvanas Befreiung als mögliche Schergen genannt."
+      },
+      "note": "Sammel-/Platzhalter-Eintrag. Einzelne Ork-Schergen später genauer erfassen."
     },
     {
       "id": "minion_feiger_goblin",
       "name": "Feiger Goblin",
       "type": "minion",
+      "status": "raw",
+      "adventure_id": "silvanas_befreiung",
+      "set": "base_game",
+      "sub_name": null,
+      "difficulty": null,
       "image": "",
-      "note": "Optionaler Zusatz-Scherge"
+      "thumb": null,
+      "tags": [
+        "scherge",
+        "goblin"
+      ],
+      "stats": {
+        "gp": null,
+        "lp": null,
+        "armor": null,
+        "evasion": null,
+        "actions": null,
+        "start_value": null,
+        "cost": null
+      },
+      "rules": {
+        "passive": "",
+        "success": "",
+        "fail": "",
+        "timed_effects": [],
+        "milestones": [],
+        "action_table": [],
+        "draw_effect": "",
+        "flavor": ""
+      },
+      "keywords": [],
+      "pool_refs": [],
+      "source": {
+        "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+        "page": 17,
+        "note": "Wird bei Misserfolg in der Erzählung als zusätzlicher Scherge erwähnt."
+      },
+      "note": "Optionaler Zusatz-Scherge. Später konkretisieren, falls mehrere Goblin-Karten infrage kommen."
     }
   ]
 }
