@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/13/2026, 1:28:22 PM
+# 🛡️ Aventuria Projekt-Backup - 4/13/2026, 1:32:05 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -2159,311 +2159,110 @@ hr {
 ## 📄 Datei: data/cards/base_game/master_base_game.json
 ```json
 {
-  "set_name": "Aventuria Grundbox",
+  "set": {
+    "id": "base_game",
+    "name": "Aventuria Grundbox"
+  },
+  "catalog_version": 2,
   "cards": [
     {
       "id": "lg_leute_idol",
       "name": "Glücks-Idol",
+      "card_category": "abenteuerkarte",
       "type": "leader",
-      "status": "basic",
-      "adventure_id": "leute_die_nicht_spielen",
+      "status": "playable",
+      "adventure_refs": [
+        "leute_die_nicht_spielen"
+      ],
       "image": "assets/images/cards/base_game/leute_die_nicht_spielen/gluecks_idol.jpg",
-      "tags": ["goettlich", "daemon", "uebernatuerlich"],
-      "note": "Bild vorhanden, Regelwerte später weiter ergänzen"
+      "tags": [
+        "abenteuerkarte",
+        "anfuehrer",
+        "goettlich",
+        "daemon",
+        "uebernatuerlich",
+        "wuerfelmechanik",
+        "schergen",
+        "zufall"
+      ],
+      "keywords": [
+        "Spannung",
+        "Glückssache",
+        "Glücksspiel",
+        "Entspannung",
+        "Unterhaltung"
+      ],
+      "search_text": "Glücks-Idol Leute die nicht spielen Anführer Abenteuerkarte göttlich dämon übernatürlich Spannung Glückssache Glücksspiel Entspannung Unterhaltung zusätzlicher Scherge Held Einsatz erhöhen Risiko und Gewinn",
+      "detail_path": "data/cards/base_game/catalog/lg_leute_idol.json",
+      "note": "Einzelkarten-Datei migriert."
     },
     {
       "id": "zs_leute",
       "name": "Zeitskala",
+      "card_category": "abenteuerkarte",
       "type": "timeline",
-      "status": "basic",
-      "adventure_id": "leute_die_nicht_spielen",
+      "status": "playable",
+      "adventure_refs": [
+        "leute_die_nicht_spielen"
+      ],
       "image": "assets/images/cards/base_game/leute_die_nicht_spielen/zs_leute.jpg",
-      "tags": ["zeitskala"],
-      "note": "Startwert und Meilensteine sind in der Abenteuer-Kartendatei gepflegt"
+      "tags": [
+        "abenteuerkarte",
+        "zeitskala",
+        "timer",
+        "schergen",
+        "ereigniskarte",
+        "anfuehrer-aktionskarte",
+        "niederlagebedingung"
+      ],
+      "keywords": [
+        "Zeitmarken",
+        "Ereigniskarte",
+        "Anführer-Aktionskarte",
+        "Schergenstapel",
+        "Niederlage"
+      ],
+      "search_text": "Zeitskala Leute die nicht spielen Abenteuerkarte timeline Zeitmarken Ereigniskarte Anführer-Aktionskarte Schergenstapel Niederlage Countdown Timer",
+      "detail_path": "data/cards/base_game/catalog/zs_leute.json",
+      "note": "Einzelkarten-Datei migriert."
     },
     {
       "id": "kg_risiko_gewinn",
       "name": "Kampfumgebung: Risiko und Gewinn",
+      "card_category": "abenteuerkarte",
       "type": "environment",
       "status": "raw",
-      "adventure_id": "leute_die_nicht_spielen",
+      "adventure_refs": [
+        "leute_die_nicht_spielen"
+      ],
       "image": "",
-      "tags": ["kampfumgebung"],
-      "note": "Kartendaten/Bild noch ergänzen"
+      "tags": [
+        "abenteuerkarte",
+        "kampfumgebung"
+      ],
+      "keywords": [],
+      "search_text": "Kampfumgebung Risiko und Gewinn Leute die nicht spielen Abenteuerkarte",
+      "detail_path": null,
+      "note": "Noch nicht in Einzelkarten-Datei migriert."
     },
     {
       "id": "ha_das_spiel_spielen",
       "name": "Heldenaktion: Das Spiel spielen",
+      "card_category": "abenteuerkarte",
       "type": "hero_action",
       "status": "raw",
-      "adventure_id": "leute_die_nicht_spielen",
+      "adventure_refs": [
+        "leute_die_nicht_spielen"
+      ],
       "image": "",
-      "tags": ["heldenaktion"],
-      "note": "Kartendaten/Bild noch ergänzen"
-    },
-
-    {
-      "id": "zs_silvana",
-      "name": "Zeitskala 'Silvanas Befreiung'",
-      "type": "timeline",
-      "status": "raw",
-      "adventure_id": "silvanas_befreiung",
-      "image": "",
-      "tags": ["zeitskala"],
-      "note": "Bild/Kartendaten noch ergänzen"
-    },
-    {
-      "id": "ha_namen_erraten",
-      "name": "Heldenaktion: Namen erraten",
-      "type": "hero_action",
-      "status": "raw",
-      "adventure_id": "silvanas_befreiung",
-      "image": "",
-      "tags": ["heldenaktion"],
-      "note": "Bild/Kartendaten noch ergänzen"
-    },
-    {
-      "id": "leader_kobold",
-      "name": "???, der Kobold",
-      "type": "leader",
-      "status": "raw",
-      "adventure_id": "silvanas_befreiung",
-      "image": "",
-      "tags": ["anfuehrer", "kobold"],
-      "note": "Bild/Kartendaten noch ergänzen"
-    },
-    {
-      "id": "minion_pirat",
-      "name": "Pirat",
-      "type": "minion",
-      "status": "raw",
-      "adventure_id": "silvanas_befreiung",
-      "image": "",
-      "tags": ["scherge", "pirat"],
-      "note": "Sammel-/Platzhalter-Eintrag"
-    },
-    {
-      "id": "minion_ork",
-      "name": "Ork",
-      "type": "minion",
-      "status": "raw",
-      "adventure_id": "silvanas_befreiung",
-      "image": "",
-      "tags": ["scherge", "ork"],
-      "note": "Sammel-/Platzhalter-Eintrag"
-    },
-    {
-      "id": "minion_feiger_goblin",
-      "name": "Feiger Goblin",
-      "type": "minion",
-      "status": "raw",
-      "adventure_id": "silvanas_befreiung",
-      "image": "",
-      "tags": ["scherge", "goblin"],
-      "note": "Optionaler Zusatz-Scherge"
-    },
-
-    {
-      "id": "zs_wildenstein_1",
-      "name": "Zeitskala Wildenstein-I",
-      "type": "timeline",
-      "status": "raw",
-      "adventure_id": "wildenstein_akt_1",
-      "image": "",
-      "tags": ["zeitskala", "wildenstein"],
-      "note": "Bild/Kartendaten noch ergänzen"
-    },
-    {
-      "id": "leader_greifbart_gichthain",
-      "name": "Anführer: Greifbart Gichthain",
-      "type": "leader",
-      "status": "raw",
-      "adventure_id": "wildenstein_akt_1",
-      "image": "",
-      "tags": ["anfuehrer", "wildenstein"],
-      "note": "Bild/Kartendaten noch ergänzen"
-    },
-    {
-      "id": "story_erbe",
-      "name": "Karte: Erbe",
-      "type": "adventure_card",
-      "status": "raw",
-      "adventure_id": "wildenstein_akt_1",
-      "image": "",
-      "tags": ["abenteuerkarte", "story"],
-      "note": "Bild/Kartendaten noch ergänzen"
-    },
-    {
-      "id": "minion_raeuber",
-      "name": "Räuber",
-      "type": "minion",
-      "status": "raw",
-      "adventure_id": "wildenstein_akt_1",
-      "image": "",
-      "tags": ["scherge", "raeuber"],
-      "note": "Sammel-/Platzhalter-Eintrag"
-    },
-    {
-      "id": "special_ereignisse_allgemein",
-      "name": "Ereignisse: Allgemein",
-      "type": "special",
-      "status": "raw",
-      "adventure_id": "wildenstein_akt_1",
-      "image": "",
-      "tags": ["ereignisse", "deck"],
-      "note": "Deck-Referenz"
-    },
-    {
-      "id": "special_ereignisse_gewaesser",
-      "name": "Ereignisse: Gewässer",
-      "type": "special",
-      "status": "raw",
-      "adventure_id": "wildenstein_akt_1",
-      "image": "",
-      "tags": ["ereignisse", "gewaesser", "deck"],
-      "note": "Deck-Referenz"
-    },
-    {
-      "id": "special_ereignisse_wald",
-      "name": "Ereignisse: Wald",
-      "type": "special",
-      "status": "raw",
-      "adventure_id": "wildenstein_akt_1",
-      "image": "",
-      "tags": ["ereignisse", "wald", "deck"],
-      "note": "Deck-Referenz"
-    },
-
-    {
-      "id": "zs_wildenstein_2",
-      "name": "Zeitskala Wildenstein-II",
-      "type": "timeline",
-      "status": "raw",
-      "adventure_id": "wildenstein_akt_2",
-      "image": "",
-      "tags": ["zeitskala", "wildenstein"],
-      "note": "Kartendaten/Bild noch nicht ergänzt"
-    },
-    {
-      "id": "leader_baron_von_wildenstein",
-      "name": "Anführer: Baron von Wildenstein",
-      "type": "leader",
-      "status": "raw",
-      "adventure_id": "wildenstein_akt_2",
-      "image": "",
-      "tags": ["anfuehrer", "wildenstein", "baron"],
-      "note": "Kartendaten/Bild noch nicht ergänzt"
-    },
-    {
-      "id": "ha_hypnose_brechen",
-      "name": "Handlung: Hypnose brechen",
-      "type": "hero_action",
-      "status": "raw",
-      "adventure_id": "wildenstein_akt_2",
-      "image": "",
-      "tags": ["heldenaktion", "handlung"],
-      "note": "Kartendaten/Bild noch nicht ergänzt"
-    },
-    {
-      "id": "minion_waechter",
-      "name": "Wächter",
-      "type": "minion",
-      "status": "raw",
-      "adventure_id": "wildenstein_akt_2",
-      "image": "",
-      "tags": ["scherge", "waechter"],
-      "note": "Schergenkarte noch nicht ergänzt"
-    },
-    {
-      "id": "minion_diener",
-      "name": "Diener",
-      "type": "minion",
-      "status": "raw",
-      "adventure_id": "wildenstein_akt_2",
-      "image": "",
-      "tags": ["scherge", "diener"],
-      "note": "Schergenkarte noch nicht ergänzt"
-    },
-    {
-      "id": "special_anfuehrer_aktionen_uebernatuerlich",
-      "name": "Anführer-Aktionen: Übernatürlich",
-      "type": "special",
-      "status": "raw",
-      "adventure_id": "wildenstein_akt_2",
-      "image": "",
-      "tags": ["anfuehrer-aktion", "uebernatuerlich", "deck"],
-      "note": "Spezialkarten-Daten noch nicht ergänzt"
-    },
-    {
-      "id": "special_nekromantie",
-      "name": "Nekromantie",
-      "type": "special",
-      "status": "raw",
-      "adventure_id": "wildenstein_akt_2",
-      "image": "",
-      "tags": ["nekromantie", "deck"],
-      "note": "Spezialkarten-Daten noch nicht ergänzt"
-    },
-
-    {
-      "id": "zs_wildenstein_3",
-      "name": "Zeitskala Wildenstein-III",
-      "type": "timeline",
-      "status": "raw",
-      "adventure_id": "wildenstein_akt_3",
-      "image": "",
-      "tags": ["zeitskala", "wildenstein"],
-      "note": "Kartendaten/Bild noch nicht ergänzt"
-    },
-    {
-      "id": "leader_grautax",
-      "name": "Anführer: Grautax",
-      "type": "leader",
-      "status": "raw",
-      "adventure_id": "wildenstein_akt_3",
-      "image": "",
-      "tags": ["anfuehrer", "grautax", "wildenstein"],
-      "note": "Kartendaten/Bild noch nicht ergänzt"
-    },
-    {
-      "id": "daemon_irrhalk",
-      "name": "Dämon: Irrhalk",
-      "type": "special",
-      "status": "raw",
-      "adventure_id": "wildenstein_akt_3",
-      "image": "",
-      "tags": ["daemon", "irrhalk"],
-      "note": "Kartendaten/Bild noch nicht ergänzt"
-    },
-    {
-      "id": "minion_skelett",
-      "name": "Skelett",
-      "type": "minion",
-      "status": "raw",
-      "adventure_id": "wildenstein_akt_3",
-      "image": "",
-      "tags": ["scherge", "skelett"],
-      "note": "Schergenkarte noch nicht ergänzt"
-    },
-    {
-      "id": "special_anfuehrer_aktionen_nekromantie",
-      "name": "Anführer-Aktionen: Nekromantie",
-      "type": "special",
-      "status": "raw",
-      "adventure_id": "wildenstein_akt_3",
-      "image": "",
-      "tags": ["anfuehrer-aktion", "nekromantie", "deck"],
-      "note": "Spezialkarten-Daten noch nicht ergänzt"
-    },
-    {
-      "id": "special_ereignisse_untotenbeschwoerung",
-      "name": "Ereignisse: Untotenbeschwörung",
-      "type": "special",
-      "status": "raw",
-      "adventure_id": "wildenstein_akt_3",
-      "image": "",
-      "tags": ["ereignisse", "untotenbeschwoerung", "deck"],
-      "note": "Spezialkarten-Daten noch nicht ergänzt"
+      "tags": [
+        "abenteuerkarte",
+        "heldenaktion"
+      ],
+      "keywords": [],
+      "search_text": "Heldenaktion Das Spiel spielen Leute die nicht spielen Abenteuerkarte",
+      "detail_path": null,
+      "note": "Noch nicht in Einzelkarten-Datei migriert."
     }
   ]
 }
