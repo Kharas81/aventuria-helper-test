@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/13/2026, 2:18:52 PM
+# 🛡️ Aventuria Projekt-Backup - 4/13/2026, 2:27:32 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -5743,6 +5743,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ## 📄 Datei: js/ui-renderer.js
 ```js
+/**
+ * js/ui-renderer.js
+ * Rendert Abenteuer-Setup und Karten-Details.
+ * Kompatibel mit altem Setup-Flow und neuem Karten-Katalog.
+ */
 window.Renderer = {
     escapeHtml(value) {
         return String(value ?? '')
@@ -5753,98 +5758,149 @@ window.Renderer = {
             .replace(/'/g, '&#39;');
     },
 
+    normalizeArray(value) {
+        return Array.isArray(value) ? value : [];
+    },
+
+    normalizeCard(rawCard) {
+        return {
+            id: rawCard?.id || '',
+            name: rawCard?.name || '',
+            card_category: rawCard?.card_category || rawCard?.type || 'unknown',
+            type: rawCard?.type || 'unknown',
+            status: rawCard?.status || 'basic',
+            image: rawCard?.image || rawCard?.images?.front || '',
+            images: rawCard?.images || {
+                front: rawCard?.image || '',
+                back: null,
+                alt: []
+            },
+            subtypes: Array.isArray(rawCard?.subtypes) ? rawCard.subtypes : [],
+            tags: Array.isArray(rawCard?.tags) ? rawCard.tags : [],
+            keywords: Array.isArray(rawCard?.keywords) ? rawCard.keywords : [],
+            note: rawCard?.note || rawCard?.notes || '',
+            stats: rawCard?.stats || {},
+            rules: rawCard?.rules || {},
+            source: rawCard?.source || {}
+        };
+    },
+
     getCardById(cards, id) {
-        return (Array.isArray(cards) ? cards : []).find(card => card?.id === id) || null;
+        const match = (Array.isArray(cards) ? cards : []).find(card => card?.id === id);
+        return match ? this.normalizeCard(match) : null;
     },
 
-    getImageSrc(card) {
+    getDisplayName(entry, cards) {
+        const ref = typeof entry === 'string' ? { id: entry } : (entry || {});
+        const card = this.getCardById(cards, ref.id);
+        return ref.label || card?.name || ref.name || ref.id || '⚠️ Unbekannte Karte';
+    },
+
+    buildMetaLine(card) {
         if (!card) return '';
-        if (card.images?.front) return card.images.front;
-        if (card.image) return card.image;
-        return '';
+
+        const parts = [];
+
+        if (card.card_category) parts.push(card.card_category);
+        if (card.type) parts.push(card.type);
+        if (card.status) parts.push(card.status);
+
+        if (!parts.length) return '';
+
+        return `
+            <small style="display:block; margin-top:4px; color:#8b4513;">
+                ${this.escapeHtml(parts.join(' • '))}
+            </small>
+        `;
     },
 
-    getDisplayName(cardRef, cardMap) {
-        if (!cardRef) return 'Unbekannte Karte';
+    buildNoteLine(card) {
+        if (!card?.note) return '';
 
-        if (typeof cardRef === 'string') {
-            return cardMap.get(cardRef)?.name || cardRef;
-        }
-
-        if (typeof cardRef === 'object') {
-            return cardMap.get(cardRef.id)?.name || cardRef.label || cardRef.name || cardRef.id || 'Unbekannte Karte';
-        }
-
-        return 'Unbekannte Karte';
+        return `
+            <small style="display:block; margin-top:4px; color:#6b4b36;">
+                ${this.escapeHtml(card.note)}
+            </small>
+        `;
     },
 
-    buildCardMap(cards) {
-        const map = new Map();
-        (Array.isArray(cards) ? cards : []).forEach(card => {
-            if (card?.id) {
-                map.set(card.id, card);
-            }
-        });
-        return map;
-    },
+    buildList(items, cards, listType = 'generic') {
+        const safeItems = this.normalizeArray(items);
 
-    renderListItems(items, cardMap, options = {}) {
-        const allowPreview = options.allowPreview !== false;
-
-        if (!Array.isArray(items) || items.length === 0) {
-            return '<li>Keine Einträge vorhanden.</li>';
+        if (!safeItems.length) {
+            return '<li><em>Keine Einträge vorhanden.</em></li>';
         }
 
-        return items.map((entry) => {
-            const cardId = typeof entry === 'string' ? entry : entry?.id;
-            const card = cardId ? cardMap.get(cardId) : null;
-            const label = this.getDisplayName(entry, cardMap);
-            const imageSrc = this.getImageSrc(card);
+        return safeItems.map((item, index) => {
+            const entry = typeof item === 'string' ? { id: item } : item;
+            const card = this.getCardById(cards, entry?.id);
+            const label = this.escapeHtml(this.getDisplayName(entry, cards));
+            const metaLine = this.buildMetaLine(card);
+            const noteLine = this.buildNoteLine(card);
+            const imageSrc = card?.image ? this.escapeHtml(card.image) : '';
 
-            const infoButton = card
-                ? `<button type="button" class="info-btn" data-card-id="${this.escapeHtml(card.id)}" title="Kartendetails anzeigen">i</button>`
-                : '';
-
-            const textClass = allowPreview && imageSrc ? 'has-preview' : '';
+            const dataAttrs = [
+                `data-list-type="${this.escapeHtml(listType)}"`,
+                `data-list-index="${index}"`,
+                `data-card-id="${this.escapeHtml(entry?.id || '')}"`
+            ].join(' ');
 
             return `
                 <li>
-                    <label class="checklist-item">
+                    <label class="checklist-item" ${dataAttrs}>
                         <input type="checkbox">
-                        <span class="${textClass}" ${imageSrc ? `data-preview-src="${this.escapeHtml(imageSrc)}"` : ''}>
-                            ${this.escapeHtml(label)}
+                        <span ${imageSrc ? `class="has-preview" data-preview-src="${imageSrc}"` : ''}>
+                            ${label}
+                            ${metaLine}
+                            ${noteLine}
                         </span>
-                        ${infoButton}
+                        ${
+                            card
+                                ? `<button
+                                        type="button"
+                                        class="info-btn"
+                                        data-card-id="${this.escapeHtml(card.id)}"
+                                        title="Kartendetails anzeigen"
+                                   >i</button>`
+                                : ''
+                        }
                     </label>
-                    <div class="check-result"></div>
                 </li>
             `;
         }).join('');
     },
 
-    bindPreviewAndInfo(root, cardMap) {
+    bindSetupInteractions(root, cards) {
         if (!root) return;
 
         root.querySelectorAll('[data-preview-src]').forEach(el => {
             const imageSrc = el.dataset.previewSrc;
             if (!imageSrc) return;
 
-            if (!window.UI?.isTouchDevice) {
+            if (window.UI?.isTouchDevice) {
+                el.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    if (window.UI?.openPreview) {
+                        window.UI.openPreview(imageSrc);
+                    }
+                });
+            } else {
                 el.addEventListener('mouseenter', (event) => {
-                    window.UI?.showPreview(event, imageSrc);
+                    if (window.UI?.showPreview) {
+                        window.UI.showPreview(event, imageSrc);
+                    }
                 });
 
                 el.addEventListener('mousemove', (event) => {
-                    window.UI?.movePreview(event);
+                    if (window.UI?.movePreview) {
+                        window.UI.movePreview(event);
+                    }
                 });
 
                 el.addEventListener('mouseleave', () => {
-                    window.UI?.closePreview();
-                });
-            } else {
-                el.addEventListener('click', (event) => {
-                    event.preventDefault();
-                    window.UI?.openPreview(imageSrc);
+                    if (window.UI?.closePreview) {
+                        window.UI.closePreview();
+                    }
                 });
             }
         });
@@ -5855,9 +5911,7 @@ window.Renderer = {
                 event.stopPropagation();
 
                 const cardId = btn.dataset.cardId;
-                if (!cardId) return;
-
-                const card = cardMap.get(cardId);
+                const card = this.getCardById(cards, cardId);
                 if (!card) return;
 
                 this.openCardDetail(card);
@@ -5870,11 +5924,9 @@ window.Renderer = {
         if (!setupDisplay) return;
 
         const setup = adventureData?.setup || {};
-        const cardMap = this.buildCardMap(cards);
-
-        const blueCards = Array.isArray(setup.blue_cards) ? setup.blue_cards : [];
-        const minionCards = Array.isArray(setup.minion_cards) ? setup.minion_cards : [];
-        const specialCards = Array.isArray(setup.special_cards) ? setup.special_cards : [];
+        const blueCards = this.normalizeArray(setup.blue_cards);
+        const minionCards = this.normalizeArray(setup.minion_cards);
+        const specialCards = this.normalizeArray(setup.special_cards);
 
         setupDisplay.innerHTML = `
             <div id="danger-value">
@@ -5882,38 +5934,38 @@ window.Renderer = {
             </div>
 
             <div class="grid-container">
-                <section class="card-list" id="blue-cards">
-                    <h3>🔵 Abenteuerkarten</h3>
+                <div class="card-list" id="blue-cards">
+                    <h3>Abenteuerkarten</h3>
                     <ul>
-                        ${this.renderListItems(blueCards, cardMap, { allowPreview: true })}
+                        ${this.buildList(blueCards, cards, 'blue_cards')}
                     </ul>
-                </section>
+                </div>
 
-                <section class="card-list" id="minions">
-                    <h3>⚔️ Schergen</h3>
+                <div class="card-list" id="minions">
+                    <h3>Schergen</h3>
                     <ul>
-                        ${this.renderListItems(minionCards, cardMap, { allowPreview: true })}
+                        ${this.buildList(minionCards, cards, 'minion_cards')}
                     </ul>
-                </section>
+                </div>
 
-                <section class="card-list" id="special">
-                    <h3>🟢 Spezialkarten</h3>
+                <div class="card-list" id="special">
+                    <h3>Spezialkarten</h3>
                     <ul>
-                        ${this.renderListItems(specialCards, cardMap, { allowPreview: true })}
+                        ${this.buildList(specialCards, cards, 'special_cards')}
                     </ul>
-                </section>
+                </div>
             </div>
 
             <hr>
 
             <div class="card-list">
-                <h3>🏆 Sieg & Niederlage</h3>
-                <p><strong>Sieg:</strong> ${this.escapeHtml(setup.victory ?? '—')}</p>
-                <p><strong>Niederlage:</strong> ${this.escapeHtml(setup.defeat ?? '—')}</p>
+                <h3>Sieg & Niederlage</h3>
+                <p><strong>Sieg:</strong> ${this.escapeHtml(setup.victory || '—')}</p>
+                <p><strong>Niederlage:</strong> ${this.escapeHtml(setup.defeat || '—')}</p>
             </div>
         `;
 
-        this.bindPreviewAndInfo(setupDisplay, cardMap);
+        this.bindSetupInteractions(setupDisplay, cards);
     },
 
     renderCardDetail(card) {
@@ -5921,26 +5973,24 @@ window.Renderer = {
             return '<p>Keine Kartendaten vorhanden.</p>';
         }
 
-        const imageSrc = this.getImageSrc(card);
-        const subtypes = Array.isArray(card.subtypes) ? card.subtypes : [];
-        const tags = Array.isArray(card.tags) ? card.tags : [];
-        const keywords = Array.isArray(card.keywords) ? card.keywords : [];
-        const actionTable = Array.isArray(card.rules?.action_table) ? card.rules.action_table : [];
-        const milestones = Array.isArray(card.rules?.milestones) ? card.rules.milestones : [];
-        const timedEffects = Array.isArray(card.rules?.timed_effects) ? card.rules.timed_effects : [];
+        const safeCard = this.normalizeCard(card);
+        const imageSrc = safeCard.image;
+        const milestones = this.normalizeArray(safeCard.rules?.milestones);
+        const actionTable = this.normalizeArray(safeCard.rules?.action_table);
+        const timedEffects = this.normalizeArray(safeCard.rules?.timed_effects);
 
         let html = `
             <div class="card-list">
-                <h3>${this.escapeHtml(card.name)}</h3>
+                <h3>${this.escapeHtml(safeCard.name)}</h3>
                 <p>
-                    <strong>Kategorie:</strong> ${this.escapeHtml(card.card_category || '—')}<br>
-                    <strong>Typ:</strong> ${this.escapeHtml(card.type || '—')}<br>
-                    <strong>Status:</strong> ${this.escapeHtml(card.status || '—')}
+                    <strong>Kategorie:</strong> ${this.escapeHtml(safeCard.card_category || '—')}<br>
+                    <strong>Typ:</strong> ${this.escapeHtml(safeCard.type || '—')}<br>
+                    <strong>Status:</strong> ${this.escapeHtml(safeCard.status || '—')}
                 </p>
         `;
 
-        if (subtypes.length) {
-            html += `<p><strong>Untertypen:</strong> ${subtypes.map(v => this.escapeHtml(v)).join(', ')}</p>`;
+        if (safeCard.subtypes.length) {
+            html += `<p><strong>Untertypen:</strong> ${safeCard.subtypes.map(v => this.escapeHtml(v)).join(', ')}</p>`;
         }
 
         if (imageSrc) {
@@ -5948,31 +5998,35 @@ window.Renderer = {
                 <div style="margin: 16px 0;">
                     <img
                         src="${this.escapeHtml(imageSrc)}"
-                        alt="${this.escapeHtml(card.name)}"
+                        alt="${this.escapeHtml(safeCard.name)}"
                         style="max-width: 320px; width: 100%; border: 2px solid #8b4513; border-radius: 6px; display: block;"
                     >
                 </div>
             `;
         }
 
-        if (card.rules?.passive) {
-            html += `<p><strong>Passiv:</strong> ${this.escapeHtml(card.rules.passive)}</p>`;
+        if (safeCard.rules?.passive) {
+            html += `<p><strong>Passiv:</strong> ${this.escapeHtml(safeCard.rules.passive)}</p>`;
         }
 
-        if (card.rules?.success || card.rules?.fail) {
+        if (safeCard.rules?.success || safeCard.rules?.fail) {
             html += `<h4>Ergebnisse</h4>`;
-            if (card.rules?.success) {
-                html += `<p><strong>Erfolg:</strong> ${this.escapeHtml(card.rules.success)}</p>`;
+            if (safeCard.rules?.success) {
+                html += `<p><strong>Erfolg:</strong> ${this.escapeHtml(safeCard.rules.success)}</p>`;
             }
-            if (card.rules?.fail) {
-                html += `<p><strong>Misserfolg:</strong> ${this.escapeHtml(card.rules.fail)}</p>`;
+            if (safeCard.rules?.fail) {
+                html += `<p><strong>Misserfolg:</strong> ${this.escapeHtml(safeCard.rules.fail)}</p>`;
             }
         }
 
         if (milestones.length) {
             html += `<h4>Meilensteine</h4><ul>`;
             milestones.forEach(item => {
-                html += `<li><strong>${this.escapeHtml(item.value)}:</strong> ${this.escapeHtml(item.text)}</li>`;
+                if (typeof item === 'object') {
+                    html += `<li><strong>${this.escapeHtml(item.value)}:</strong> ${this.escapeHtml(item.text)}</li>`;
+                } else {
+                    html += `<li>${this.escapeHtml(item)}</li>`;
+                }
             });
             html += `</ul>`;
         }
@@ -5980,7 +6034,12 @@ window.Renderer = {
         if (timedEffects.length) {
             html += `<h4>Zeitlich eintretende Effekte</h4><ul>`;
             timedEffects.forEach(item => {
-                html += `<li>${this.escapeHtml(typeof item === 'string' ? item : JSON.stringify(item))}</li>`;
+                if (typeof item === 'object') {
+                    const trigger = item.trigger ? `<strong>${this.escapeHtml(item.trigger)}:</strong> ` : '';
+                    html += `<li>${trigger}${this.escapeHtml(item.text || '')}</li>`;
+                } else {
+                    html += `<li>${this.escapeHtml(item)}</li>`;
+                }
             });
             html += `</ul>`;
         }
@@ -6012,38 +6071,38 @@ window.Renderer = {
             `;
         }
 
-        if (card.rules?.draw_effect) {
-            html += `<p><strong>Zugeffekt:</strong> ${this.escapeHtml(card.rules.draw_effect)}</p>`;
+        if (safeCard.rules?.draw_effect) {
+            html += `<p><strong>Zugeffekt:</strong> ${this.escapeHtml(safeCard.rules.draw_effect)}</p>`;
         }
 
-        if (card.rules?.flavor) {
-            html += `<p><strong>Beschreibung:</strong> <em>${this.escapeHtml(card.rules.flavor)}</em></p>`;
+        if (safeCard.rules?.flavor) {
+            html += `<p><strong>Beschreibung:</strong> <em>${this.escapeHtml(safeCard.rules.flavor)}</em></p>`;
         }
 
-        if (tags.length) {
-            html += `<p><strong>Tags:</strong> ${tags.map(tag => `#${this.escapeHtml(tag)}`).join(' ')}</p>`;
+        if (safeCard.tags.length) {
+            html += `<p><strong>Tags:</strong> ${safeCard.tags.map(tag => `#${this.escapeHtml(tag)}`).join(' ')}</p>`;
         }
 
-        if (keywords.length) {
-            html += `<p><strong>Keywords:</strong> ${keywords.map(v => this.escapeHtml(v)).join(', ')}</p>`;
+        if (safeCard.keywords.length) {
+            html += `<p><strong>Keywords:</strong> ${safeCard.keywords.map(v => this.escapeHtml(v)).join(', ')}</p>`;
         }
 
-        if (card.source?.book || card.source?.page || card.source?.note) {
+        if (safeCard.source?.book || safeCard.source?.page || safeCard.source?.note) {
             html += `<h4>Quelle</h4><p>`;
-            if (card.source?.book) {
-                html += `<strong>Buch:</strong> ${this.escapeHtml(card.source.book)}<br>`;
+            if (safeCard.source?.book) {
+                html += `<strong>Buch:</strong> ${this.escapeHtml(safeCard.source.book)}<br>`;
             }
-            if (card.source?.page !== null && card.source?.page !== undefined && card.source?.page !== '') {
-                html += `<strong>Seite:</strong> ${this.escapeHtml(card.source.page)}<br>`;
+            if (safeCard.source?.page !== null && safeCard.source?.page !== undefined && safeCard.source?.page !== '') {
+                html += `<strong>Seite:</strong> ${this.escapeHtml(safeCard.source.page)}<br>`;
             }
-            if (card.source?.note) {
-                html += `<strong>Hinweis:</strong> ${this.escapeHtml(card.source.note)}`;
+            if (safeCard.source?.note) {
+                html += `<strong>Hinweis:</strong> ${this.escapeHtml(safeCard.source.note)}`;
             }
             html += `</p>`;
         }
 
-        if (card.notes || card.note) {
-            html += `<p><strong>Notiz:</strong> ${this.escapeHtml(card.notes || card.note)}</p>`;
+        if (safeCard.note) {
+            html += `<p><strong>Notiz:</strong> ${this.escapeHtml(safeCard.note)}</p>`;
         }
 
         html += `</div>`;
