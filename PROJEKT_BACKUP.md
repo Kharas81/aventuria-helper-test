@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/13/2026, 7:37:41 AM
+# 🛡️ Aventuria Projekt-Backup - 4/13/2026, 7:37:58 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -1281,6 +1281,229 @@ hr {
     "victory": "Grautax, der falsche Baron, wurde besiegt[cite: 1031].",
     "defeat": "Anzahl Verderbensmarken = Anzahl Helden[cite: 1030]."
   }
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/base_game/_template_adventure_cards.json
+```json
+{
+  "adventure_id": "abenteuer_id_hier_eintragen",
+  "adventure_name": "Abenteuername hier eintragen",
+  "cards": [
+    {
+      "id": "zs_beispiel",
+      "name": "Zeitskala Beispiel",
+      "type": "timeline",
+      "status": "raw",
+      "adventure_id": "abenteuer_id_hier_eintragen",
+      "set": "base_game",
+      "sub_name": null,
+      "difficulty": null,
+      "image": "",
+      "thumb": null,
+      "tags": [
+        "zeitskala"
+      ],
+      "stats": {
+        "gp": null,
+        "lp": null,
+        "armor": null,
+        "evasion": null,
+        "actions": null,
+        "start_value": null,
+        "cost": null
+      },
+      "rules": {
+        "passive": "",
+        "success": "",
+        "fail": "",
+        "timed_effects": [],
+        "milestones": [],
+        "action_table": [],
+        "draw_effect": "",
+        "flavor": ""
+      },
+      "keywords": [],
+      "pool_refs": [],
+      "source": {
+        "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+        "page": null,
+        "note": ""
+      },
+      "note": ""
+    },
+    {
+      "id": "leader_beispiel",
+      "name": "Anführer: Beispiel",
+      "type": "leader",
+      "status": "raw",
+      "adventure_id": "abenteuer_id_hier_eintragen",
+      "set": "base_game",
+      "sub_name": null,
+      "difficulty": null,
+      "image": "",
+      "thumb": null,
+      "tags": [
+        "anfuehrer"
+      ],
+      "stats": {
+        "gp": null,
+        "lp": null,
+        "armor": null,
+        "evasion": null,
+        "actions": null,
+        "start_value": null,
+        "cost": null
+      },
+      "rules": {
+        "passive": "",
+        "success": "",
+        "fail": "",
+        "timed_effects": [],
+        "milestones": [],
+        "action_table": [],
+        "draw_effect": "",
+        "flavor": ""
+      },
+      "keywords": [],
+      "pool_refs": [],
+      "source": {
+        "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+        "page": null,
+        "note": ""
+      },
+      "note": ""
+    },
+    {
+      "id": "ha_beispiel",
+      "name": "Heldenaktion: Beispiel",
+      "type": "hero_action",
+      "status": "raw",
+      "adventure_id": "abenteuer_id_hier_eintragen",
+      "set": "base_game",
+      "sub_name": null,
+      "difficulty": null,
+      "image": "",
+      "thumb": null,
+      "tags": [
+        "heldenaktion"
+      ],
+      "stats": {
+        "gp": null,
+        "lp": null,
+        "armor": null,
+        "evasion": null,
+        "actions": null,
+        "start_value": null,
+        "cost": null
+      },
+      "rules": {
+        "passive": "",
+        "success": "",
+        "fail": "",
+        "timed_effects": [],
+        "milestones": [],
+        "action_table": [],
+        "draw_effect": "",
+        "flavor": ""
+      },
+      "keywords": [],
+      "pool_refs": [],
+      "source": {
+        "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+        "page": null,
+        "note": ""
+      },
+      "note": ""
+    },
+    {
+      "id": "minion_beispiel",
+      "name": "Beispiel-Scherge",
+      "type": "minion",
+      "status": "raw",
+      "adventure_id": "abenteuer_id_hier_eintragen",
+      "set": "base_game",
+      "sub_name": null,
+      "difficulty": null,
+      "image": "",
+      "thumb": null,
+      "tags": [
+        "scherge"
+      ],
+      "stats": {
+        "gp": null,
+        "lp": null,
+        "armor": null,
+        "evasion": null,
+        "actions": null,
+        "start_value": null,
+        "cost": null
+      },
+      "rules": {
+        "passive": "",
+        "success": "",
+        "fail": "",
+        "timed_effects": [],
+        "milestones": [],
+        "action_table": [],
+        "draw_effect": "",
+        "flavor": ""
+      },
+      "keywords": [],
+      "pool_refs": [],
+      "source": {
+        "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+        "page": null,
+        "note": ""
+      },
+      "note": ""
+    },
+    {
+      "id": "special_beispiel",
+      "name": "Spezialkarte oder Deck-Referenz Beispiel",
+      "type": "special",
+      "status": "raw",
+      "adventure_id": "abenteuer_id_hier_eintragen",
+      "set": "base_game",
+      "sub_name": null,
+      "difficulty": null,
+      "image": "",
+      "thumb": null,
+      "tags": [
+        "spezial"
+      ],
+      "stats": {
+        "gp": null,
+        "lp": null,
+        "armor": null,
+        "evasion": null,
+        "actions": null,
+        "start_value": null,
+        "cost": null
+      },
+      "rules": {
+        "passive": "",
+        "success": "",
+        "fail": "",
+        "timed_effects": [],
+        "milestones": [],
+        "action_table": [],
+        "draw_effect": "",
+        "flavor": ""
+      },
+      "keywords": [],
+      "pool_refs": [],
+      "source": {
+        "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+        "page": null,
+        "note": ""
+      },
+      "note": ""
+    }
+  ]
 }
 
 ```
