@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/13/2026, 7:36:08 AM
+# 🛡️ Aventuria Projekt-Backup - 4/13/2026, 7:36:19 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -2146,50 +2146,310 @@ hr {
       "id": "zs_wildenstein_2",
       "name": "Zeitskala Wildenstein-II",
       "type": "timeline",
+      "status": "raw",
+      "adventure_id": "wildenstein_akt_2",
+      "set": "base_game",
+      "sub_name": "Wildenstein II",
+      "difficulty": null,
       "image": "",
-      "note": "Kartendaten/Bild noch nicht ergänzt"
+      "thumb": null,
+      "tags": [
+        "zeitskala",
+        "wildenstein",
+        "abenteuerkarte"
+      ],
+      "stats": {
+        "gp": null,
+        "lp": null,
+        "armor": null,
+        "evasion": null,
+        "actions": null,
+        "start_value": null,
+        "cost": null
+      },
+      "rules": {
+        "passive": "",
+        "success": "",
+        "fail": "",
+        "timed_effects": [],
+        "milestones": [],
+        "action_table": [],
+        "draw_effect": "",
+        "flavor": ""
+      },
+      "keywords": [],
+      "pool_refs": [],
+      "source": {
+        "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+        "page": 21,
+        "note": "Abenteuer 'Das Erbe von Wildenstein' Akt II. Zeitskalen-Details später direkt von Karte/Bild ergänzen."
+      },
+      "note": "Bild/Kartendaten noch ergänzen."
     },
     {
       "id": "leader_baron_von_wildenstein",
       "name": "Anführer: Baron von Wildenstein",
       "type": "leader",
+      "status": "basic",
+      "adventure_id": "wildenstein_akt_2",
+      "set": "base_game",
+      "sub_name": null,
+      "difficulty": null,
       "image": "",
-      "note": "Kartendaten/Bild noch nicht ergänzt"
+      "thumb": null,
+      "tags": [
+        "anfuehrer",
+        "baron",
+        "wildenstein",
+        "untoter"
+      ],
+      "stats": {
+        "gp": null,
+        "lp": null,
+        "armor": null,
+        "evasion": null,
+        "actions": null,
+        "start_value": null,
+        "cost": null
+      },
+      "rules": {
+        "passive": "",
+        "success": "",
+        "fail": "",
+        "timed_effects": [],
+        "milestones": [],
+        "action_table": [],
+        "draw_effect": "",
+        "flavor": ""
+      },
+      "keywords": [],
+      "pool_refs": [],
+      "source": {
+        "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+        "page": 12,
+        "note": "Auf der Beispielseite zum Auslegen von Anführern und Schergen wird der Baron von Wildenstein mit Kartenstruktur beschrieben."
+      },
+      "note": "Guter Kandidat für frühe Vervollständigung, da das Regelbuch bereits Beispielinfos zur Karte zeigt. Konkrete LP/Aktionen/Werte später aus Karte/Bild übernehmen."
     },
     {
       "id": "ha_hypnose_brechen",
       "name": "Handlung: Hypnose brechen",
       "type": "hero_action",
+      "status": "raw",
+      "adventure_id": "wildenstein_akt_2",
+      "set": "base_game",
+      "sub_name": null,
+      "difficulty": null,
       "image": "",
-      "note": "Kartendaten/Bild noch nicht ergänzt"
+      "thumb": null,
+      "tags": [
+        "heldenaktion",
+        "handlung",
+        "wildenstein"
+      ],
+      "stats": {
+        "gp": null,
+        "lp": null,
+        "armor": null,
+        "evasion": null,
+        "actions": null,
+        "start_value": null,
+        "cost": null
+      },
+      "rules": {
+        "passive": "",
+        "success": "",
+        "fail": "",
+        "timed_effects": [],
+        "milestones": [],
+        "action_table": [],
+        "draw_effect": "",
+        "flavor": ""
+      },
+      "keywords": [],
+      "pool_refs": [],
+      "source": {
+        "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+        "page": 21,
+        "note": "Im Setup von Wildenstein Akt II als Handlungskarte genannt."
+      },
+      "note": "Bild/Kartendaten noch ergänzen."
     },
     {
       "id": "minion_waechter",
       "name": "Wächter",
       "type": "minion",
+      "status": "basic",
+      "adventure_id": "wildenstein_akt_2",
+      "set": "base_game",
+      "sub_name": null,
+      "difficulty": null,
       "image": "",
-      "note": "Schergenkarte noch nicht ergänzt"
+      "thumb": null,
+      "tags": [
+        "scherge",
+        "waechter",
+        "wildenstein"
+      ],
+      "stats": {
+        "gp": null,
+        "lp": null,
+        "armor": null,
+        "evasion": null,
+        "actions": null,
+        "start_value": null,
+        "cost": null
+      },
+      "rules": {
+        "passive": "",
+        "success": "",
+        "fail": "",
+        "timed_effects": [],
+        "milestones": [],
+        "action_table": [],
+        "draw_effect": "",
+        "flavor": ""
+      },
+      "keywords": [],
+      "pool_refs": [],
+      "source": {
+        "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+        "page": 12,
+        "note": "Im Schergen-Beispiel für Wildenstein II als Schlagwort/Schergengruppe genannt."
+      },
+      "note": "Sammel-/Platzhalter-Eintrag. Einzelne Wächterkarten später genauer erfassen."
     },
     {
       "id": "minion_diener",
       "name": "Diener",
       "type": "minion",
+      "status": "basic",
+      "adventure_id": "wildenstein_akt_2",
+      "set": "base_game",
+      "sub_name": null,
+      "difficulty": null,
       "image": "",
-      "note": "Schergenkarte noch nicht ergänzt"
+      "thumb": null,
+      "tags": [
+        "scherge",
+        "diener",
+        "wildenstein"
+      ],
+      "stats": {
+        "gp": null,
+        "lp": null,
+        "armor": null,
+        "evasion": null,
+        "actions": null,
+        "start_value": null,
+        "cost": null
+      },
+      "rules": {
+        "passive": "",
+        "success": "",
+        "fail": "",
+        "timed_effects": [],
+        "milestones": [],
+        "action_table": [],
+        "draw_effect": "",
+        "flavor": ""
+      },
+      "keywords": [],
+      "pool_refs": [],
+      "source": {
+        "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+        "page": 12,
+        "note": "Im Schergen-Beispiel für Wildenstein II als Schlagwort/Schergengruppe genannt."
+      },
+      "note": "Sammel-/Platzhalter-Eintrag. Einzelne Dienerkarten später genauer erfassen."
     },
     {
       "id": "special_anfuehrer_aktionen_uebernatuerlich",
       "name": "Anführer-Aktionen: Übernatürlich",
       "type": "special",
+      "status": "raw",
+      "adventure_id": "wildenstein_akt_2",
+      "set": "base_game",
+      "sub_name": null,
+      "difficulty": null,
       "image": "",
-      "note": "Spezialkarten-Daten noch nicht ergänzt"
+      "thumb": null,
+      "tags": [
+        "anfuehrer-aktion",
+        "uebernatuerlich",
+        "deck"
+      ],
+      "stats": {
+        "gp": null,
+        "lp": null,
+        "armor": null,
+        "evasion": null,
+        "actions": null,
+        "start_value": null,
+        "cost": null
+      },
+      "rules": {
+        "passive": "",
+        "success": "",
+        "fail": "",
+        "timed_effects": [],
+        "milestones": [],
+        "action_table": [],
+        "draw_effect": "",
+        "flavor": ""
+      },
+      "keywords": [],
+      "pool_refs": [],
+      "source": {
+        "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+        "page": 21,
+        "note": "Im Setup von Wildenstein Akt II als Spezialdeck genannt."
+      },
+      "note": "Deck-Referenz. Später als Deckliste oder Pool ausbauen."
     },
     {
       "id": "special_nekromantie",
       "name": "Nekromantie",
       "type": "special",
+      "status": "raw",
+      "adventure_id": "wildenstein_akt_2",
+      "set": "base_game",
+      "sub_name": null,
+      "difficulty": null,
       "image": "",
-      "note": "Spezialkarten-Daten noch nicht ergänzt"
+      "thumb": null,
+      "tags": [
+        "nekromantie",
+        "deck",
+        "spezial"
+      ],
+      "stats": {
+        "gp": null,
+        "lp": null,
+        "armor": null,
+        "evasion": null,
+        "actions": null,
+        "start_value": null,
+        "cost": null
+      },
+      "rules": {
+        "passive": "",
+        "success": "",
+        "fail": "",
+        "timed_effects": [],
+        "milestones": [],
+        "action_table": [],
+        "draw_effect": "",
+        "flavor": ""
+      },
+      "keywords": [],
+      "pool_refs": [],
+      "source": {
+        "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+        "page": 21,
+        "note": "Im Setup von Wildenstein Akt II als Spezialdeck genannt."
+      },
+      "note": "Deck-Referenz. Später als Deckliste oder Pool ausbauen."
     }
   ]
 }
