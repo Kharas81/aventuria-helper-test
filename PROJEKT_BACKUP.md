@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/13/2026, 7:35:50 AM
+# 🛡️ Aventuria Projekt-Backup - 4/13/2026, 7:36:08 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -1826,50 +1826,308 @@ hr {
       "id": "zs_wildenstein_1",
       "name": "Zeitskala Wildenstein-I",
       "type": "timeline",
+      "status": "raw",
+      "adventure_id": "wildenstein_akt_1",
+      "set": "base_game",
+      "sub_name": "Wildenstein I",
+      "difficulty": null,
       "image": "",
-      "note": "Bild/Kartendaten noch ergänzen"
+      "thumb": null,
+      "tags": [
+        "zeitskala",
+        "wildenstein",
+        "abenteuerkarte"
+      ],
+      "stats": {
+        "gp": null,
+        "lp": null,
+        "armor": null,
+        "evasion": null,
+        "actions": null,
+        "start_value": null,
+        "cost": null
+      },
+      "rules": {
+        "passive": "",
+        "success": "",
+        "fail": "",
+        "timed_effects": [],
+        "milestones": [],
+        "action_table": [],
+        "draw_effect": "",
+        "flavor": ""
+      },
+      "keywords": [],
+      "pool_refs": [],
+      "source": {
+        "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+        "page": 20,
+        "note": "Abenteuer 'Das Erbe von Wildenstein' beginnt auf Seite 20. Die Zeitskala selbst ist später aus Karte/Bild zu ergänzen."
+      },
+      "note": "Bild/Kartendaten noch ergänzen."
     },
     {
       "id": "leader_greifbart_gichthain",
       "name": "Anführer: Greifbart Gichthain",
       "type": "leader",
+      "status": "raw",
+      "adventure_id": "wildenstein_akt_1",
+      "set": "base_game",
+      "sub_name": null,
+      "difficulty": null,
       "image": "",
-      "note": "Bild/Kartendaten noch ergänzen"
+      "thumb": null,
+      "tags": [
+        "anfuehrer",
+        "wildenstein"
+      ],
+      "stats": {
+        "gp": null,
+        "lp": null,
+        "armor": null,
+        "evasion": null,
+        "actions": null,
+        "start_value": null,
+        "cost": null
+      },
+      "rules": {
+        "passive": "",
+        "success": "",
+        "fail": "",
+        "timed_effects": [],
+        "milestones": [],
+        "action_table": [],
+        "draw_effect": "",
+        "flavor": ""
+      },
+      "keywords": [],
+      "pool_refs": [],
+      "source": {
+        "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+        "page": 20,
+        "note": "Greifbart Gichthain wird im Setup von Wildenstein Akt I als Anführer genannt."
+      },
+      "note": "Bild/Kartendaten noch ergänzen. LP/Aktionen/Ausweichen/Rüstung später übernehmen."
     },
     {
       "id": "story_erbe",
       "name": "Karte: Erbe",
-      "type": "story_card",
+      "type": "adventure_card",
+      "status": "raw",
+      "adventure_id": "wildenstein_akt_1",
+      "set": "base_game",
+      "sub_name": null,
+      "difficulty": null,
       "image": "",
-      "note": "Bild/Kartendaten noch ergänzen"
+      "thumb": null,
+      "tags": [
+        "abenteuerkarte",
+        "story",
+        "wildenstein"
+      ],
+      "stats": {
+        "gp": null,
+        "lp": null,
+        "armor": null,
+        "evasion": null,
+        "actions": null,
+        "start_value": null,
+        "cost": null
+      },
+      "rules": {
+        "passive": "",
+        "success": "",
+        "fail": "",
+        "timed_effects": [],
+        "milestones": [],
+        "action_table": [],
+        "draw_effect": "",
+        "flavor": ""
+      },
+      "keywords": [],
+      "pool_refs": [],
+      "source": {
+        "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+        "page": 20,
+        "note": "Im Setup von Wildenstein Akt I als zusätzliche Karte genannt."
+      },
+      "note": "Bild/Kartendaten noch ergänzen."
     },
     {
       "id": "minion_raeuber",
       "name": "Räuber",
       "type": "minion",
+      "status": "raw",
+      "adventure_id": "wildenstein_akt_1",
+      "set": "base_game",
+      "sub_name": null,
+      "difficulty": null,
       "image": "",
-      "note": "Sammel-/Platzhalter-Eintrag"
+      "thumb": null,
+      "tags": [
+        "scherge",
+        "raeuber",
+        "wildenstein"
+      ],
+      "stats": {
+        "gp": null,
+        "lp": null,
+        "armor": null,
+        "evasion": null,
+        "actions": null,
+        "start_value": null,
+        "cost": null
+      },
+      "rules": {
+        "passive": "",
+        "success": "",
+        "fail": "",
+        "timed_effects": [],
+        "milestones": [],
+        "action_table": [],
+        "draw_effect": "",
+        "flavor": ""
+      },
+      "keywords": [],
+      "pool_refs": [],
+      "source": {
+        "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+        "page": 20,
+        "note": "Im Setup von Wildenstein Akt I als Schergen-Schlagwort genannt."
+      },
+      "note": "Sammel-/Platzhalter-Eintrag. Einzelne Räuber-Schergen später genauer erfassen."
     },
     {
       "id": "special_ereignisse_allgemein",
       "name": "Ereignisse: Allgemein",
-      "type": "special_deck",
+      "type": "special",
+      "status": "raw",
+      "adventure_id": "wildenstein_akt_1",
+      "set": "base_game",
+      "sub_name": null,
+      "difficulty": null,
       "image": "",
-      "note": "Deck-Referenz"
+      "thumb": null,
+      "tags": [
+        "ereignisse",
+        "deck",
+        "allgemein"
+      ],
+      "stats": {
+        "gp": null,
+        "lp": null,
+        "armor": null,
+        "evasion": null,
+        "actions": null,
+        "start_value": null,
+        "cost": null
+      },
+      "rules": {
+        "passive": "",
+        "success": "",
+        "fail": "",
+        "timed_effects": [],
+        "milestones": [],
+        "action_table": [],
+        "draw_effect": "",
+        "flavor": ""
+      },
+      "keywords": [],
+      "pool_refs": [],
+      "source": {
+        "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+        "page": 20,
+        "note": "Im Setup von Wildenstein Akt I als Spezialdeck referenziert."
+      },
+      "note": "Deck-Referenz, keine Einzelkarte. Später als Pool oder Deckliste ausbauen."
     },
     {
       "id": "special_ereignisse_gewaesser",
       "name": "Ereignisse: Gewässer",
-      "type": "special_deck",
+      "type": "special",
+      "status": "raw",
+      "adventure_id": "wildenstein_akt_1",
+      "set": "base_game",
+      "sub_name": null,
+      "difficulty": null,
       "image": "",
-      "note": "Deck-Referenz"
+      "thumb": null,
+      "tags": [
+        "ereignisse",
+        "deck",
+        "gewaesser"
+      ],
+      "stats": {
+        "gp": null,
+        "lp": null,
+        "armor": null,
+        "evasion": null,
+        "actions": null,
+        "start_value": null,
+        "cost": null
+      },
+      "rules": {
+        "passive": "",
+        "success": "",
+        "fail": "",
+        "timed_effects": [],
+        "milestones": [],
+        "action_table": [],
+        "draw_effect": "",
+        "flavor": ""
+      },
+      "keywords": [],
+      "pool_refs": [],
+      "source": {
+        "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+        "page": 20,
+        "note": "Im Setup von Wildenstein Akt I als Spezialdeck referenziert."
+      },
+      "note": "Deck-Referenz, keine Einzelkarte. Später als Pool oder Deckliste ausbauen."
     },
     {
       "id": "special_ereignisse_wald",
       "name": "Ereignisse: Wald",
-      "type": "special_deck",
+      "type": "special",
+      "status": "raw",
+      "adventure_id": "wildenstein_akt_1",
+      "set": "base_game",
+      "sub_name": null,
+      "difficulty": null,
       "image": "",
-      "note": "Deck-Referenz"
+      "thumb": null,
+      "tags": [
+        "ereignisse",
+        "deck",
+        "wald"
+      ],
+      "stats": {
+        "gp": null,
+        "lp": null,
+        "armor": null,
+        "evasion": null,
+        "actions": null,
+        "start_value": null,
+        "cost": null
+      },
+      "rules": {
+        "passive": "",
+        "success": "",
+        "fail": "",
+        "timed_effects": [],
+        "milestones": [],
+        "action_table": [],
+        "draw_effect": "",
+        "flavor": ""
+      },
+      "keywords": [],
+      "pool_refs": [],
+      "source": {
+        "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+        "page": 20,
+        "note": "Im Setup von Wildenstein Akt I als Spezialdeck referenziert."
+      },
+      "note": "Deck-Referenz, keine Einzelkarte. Später als Pool oder Deckliste ausbauen."
     }
   ]
 }
