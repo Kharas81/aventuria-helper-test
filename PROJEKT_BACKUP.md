@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/13/2026, 1:46:59 PM
+# 🛡️ Aventuria Projekt-Backup - 4/13/2026, 1:48:33 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -1669,6 +1669,91 @@ hr {
   },
 
   "notes": ""
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/base_game/catalog/ha_das_spiel_spielen.json
+```json
+{
+  "id": "ha_das_spiel_spielen",
+  "name": "Heldenaktion: Das Spiel spielen",
+
+  "set": {
+    "id": "base_game",
+    "name": "Aventuria Grundbox"
+  },
+
+  "card_category": "abenteuerkarte",
+  "type": "hero_action",
+  "subtypes": [
+    "Heldenaktion"
+  ],
+
+  "status": "raw",
+
+  "adventure_refs": [
+    {
+      "id": "leute_die_nicht_spielen",
+      "name": "Leute, die nicht spielen"
+    }
+  ],
+
+  "images": {
+    "front": "",
+    "back": null,
+    "alt": []
+  },
+
+  "tags": [
+    "abenteuerkarte",
+    "heldenaktion",
+    "gluecksspiel",
+    "interaktion"
+  ],
+
+  "custom_tags": [
+    "chorhop",
+    "karfunkel-stein",
+    "spielhaus"
+  ],
+
+  "keywords": [
+    "Das Spiel spielen"
+  ],
+
+  "search_text": "Heldenaktion Das Spiel spielen Leute die nicht spielen Abenteuerkarte Glücksspiel Chorhop Karfunkel-Stein Spielhaus",
+
+  "stats": {
+    "gp": null,
+    "lp": null,
+    "armor": null,
+    "evasion": null,
+    "actions": null,
+    "start_value": null,
+    "cost": null
+  },
+
+  "rules": {
+    "passive": "",
+    "success": "",
+    "fail": "",
+    "timed_effects": [],
+    "milestones": [],
+    "action_table": [],
+    "draw_effect": "",
+    "flavor": "Die Heldenaktion gehört zum Kurzabenteuer 'Leute, die nicht spielen' und bildet einen zentralen Interaktionspunkt im Kampf gegen das Glücks-Idol."
+  },
+
+  "source": {
+    "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+    "page": 19,
+    "note": "Im Kurzabenteuer 'Leute, die nicht spielen' als Heldenaktion referenziert. Genaue Regeln und Bilddatei später ergänzen."
+  },
+
+  "notes": "Platzhalter im neuen Einzelkartenformat. Sobald Bild oder vollständiger Kartentext vorliegt, Status auf 'playable' oder 'complete' erhöhen."
 }
 
 ```
