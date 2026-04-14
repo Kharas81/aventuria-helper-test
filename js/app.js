@@ -2,11 +2,11 @@ window.App = {
     isApplyingSavedState: false,
 
     async init() {
-        const picker = document.getElementById('adventurePicker');
-        const heroCount = document.getElementById('heroCount');
-        const difficulty = document.getElementById('difficulty');
-        const saveBtn = document.getElementById('saveStateBtn');
-        const clearBtn = document.getElementById('clearStateBtn');
+        const picker = Utils.byId('adventurePicker');
+        const heroCount = Utils.byId('heroCount');
+        const difficulty = Utils.byId('difficulty');
+        const saveBtn = Utils.byId('saveStateBtn');
+        const clearBtn = Utils.byId('clearStateBtn');
 
         if (picker) {
             picker.addEventListener('change', () => this.handleUpdate());
@@ -36,7 +36,7 @@ window.App = {
             saveBtn.addEventListener('click', () => {
                 if (window.StorageManager) {
                     window.StorageManager.persist();
-                    this.setStatus('💾 Spielstand gespeichert.');
+                    window.UI?.setStatus?.('💾 Spielstand gespeichert.');
                 }
             });
         }
@@ -48,7 +48,7 @@ window.App = {
                 }
 
                 this.resetUIToDefaults();
-                this.setStatus('🗑️ Spielstand gelöscht.');
+                window.UI?.setStatus?.('🗑️ Spielstand gelöscht.');
             });
         }
 
@@ -65,41 +65,25 @@ window.App = {
         console.log('App initialisiert.');
     },
 
-    setStatus(message) {
-        const status = document.getElementById('loading-status');
-        if (status) {
-            status.innerText = message;
-        }
-    },
-
-    escapeHtml(value) {
-        return String(value ?? '')
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#39;');
-    },
-
     setVictoryDefeat(adventure) {
-        const victoryEl = document.getElementById('victory-text');
-        const defeatEl = document.getElementById('defeat-text');
+        const victoryEl = Utils.byId('victory-text');
+        const defeatEl = Utils.byId('defeat-text');
 
         const victory = String(adventure?.setup?.victory ?? '—').trim() || '—';
         const defeat = String(adventure?.setup?.defeat ?? '—').trim() || '—';
 
         if (victoryEl) {
-            victoryEl.innerHTML = `<strong>Sieg:</strong> ${this.escapeHtml(victory)}`;
+            victoryEl.innerHTML = `<strong>Sieg:</strong> ${Utils.escapeHtml(victory)}`;
         }
 
         if (defeatEl) {
-            defeatEl.innerHTML = `<strong>Niederlage:</strong> ${this.escapeHtml(defeat)}`;
+            defeatEl.innerHTML = `<strong>Niederlage:</strong> ${Utils.escapeHtml(defeat)}`;
         }
     },
 
     clearVictoryDefeat() {
-        const victoryEl = document.getElementById('victory-text');
-        const defeatEl = document.getElementById('defeat-text');
+        const victoryEl = Utils.byId('victory-text');
+        const defeatEl = Utils.byId('defeat-text');
 
         if (victoryEl) {
             victoryEl.innerHTML = '<strong>Sieg:</strong> —';
@@ -116,26 +100,26 @@ window.App = {
             return;
         }
 
-        const container = document.getElementById('story-area');
+        const container = Utils.byId('story-area');
         if (container) {
             container.innerHTML = '';
         }
     },
 
     resetUIToDefaults() {
-        const picker = document.getElementById('adventurePicker');
-        const heroCount = document.getElementById('heroCount');
-        const difficulty = document.getElementById('difficulty');
-        const setupDisplay = document.getElementById('setup-display');
-        const storyArea = document.getElementById('story-area');
-        const title = document.getElementById('title');
-        const blueCards = document.querySelector('#blue-cards ul');
-        const minions = document.querySelector('#minions ul');
-        const special = document.getElementById('special');
-        const dangerValue = document.getElementById('danger-value');
-        const remainingTime = document.getElementById('remainingTime');
-        const epResult = document.getElementById('ep-result');
-        const targetResult = document.getElementById('targetResult');
+        const picker = Utils.byId('adventurePicker');
+        const heroCount = Utils.byId('heroCount');
+        const difficulty = Utils.byId('difficulty');
+        const setupDisplay = Utils.byId('setup-display');
+        const storyArea = Utils.byId('story-area');
+        const title = Utils.byId('title');
+        const blueCards = Utils.qs('#blue-cards ul');
+        const minions = Utils.qs('#minions ul');
+        const special = Utils.byId('special');
+        const dangerValue = Utils.byId('danger-value');
+        const remainingTime = Utils.byId('remainingTime');
+        const epResult = Utils.byId('ep-result');
+        const targetResult = Utils.byId('targetResult');
 
         if (picker) picker.value = '';
         if (heroCount) heroCount.value = '2';
@@ -170,20 +154,18 @@ window.App = {
     },
 
     async handleUpdate(options = {}) {
-        const {
-            skipPersist = false
-        } = options;
+        const { skipPersist = false } = options;
 
-        const picker = document.getElementById('adventurePicker');
+        const picker = Utils.byId('adventurePicker');
         const adventureId = picker?.value || '';
 
         if (!adventureId) {
             this.resetUIToDefaults();
-            this.setStatus('Bereit.');
+            window.UI?.setStatus?.('Bereit.');
             return;
         }
 
-        this.setStatus('⏳ Abenteuer wird geladen...');
+        window.UI?.setStatus?.('⏳ Abenteuer wird geladen...');
 
         try {
             const advData = await window.API?.getAdventure?.(adventureId);
@@ -217,10 +199,10 @@ window.App = {
                 window.StorageManager.persist();
             }
 
-            this.setStatus(`✅ Abenteuer geladen: ${advData.name}`);
+            window.UI?.setStatus?.(`✅ Abenteuer geladen: ${advData.name}`);
         } catch (error) {
             console.error(error);
-            this.setStatus(`❌ Fehler: ${error.message}`);
+            window.UI?.setStatus?.(`❌ Fehler: ${error.message}`);
         }
     },
 
@@ -232,9 +214,9 @@ window.App = {
         const state = window.StorageManager.loadState();
         if (!state) return;
 
-        const picker = document.getElementById('adventurePicker');
-        const heroCount = document.getElementById('heroCount');
-        const difficulty = document.getElementById('difficulty');
+        const picker = Utils.byId('adventurePicker');
+        const heroCount = Utils.byId('heroCount');
+        const difficulty = Utils.byId('difficulty');
 
         this.isApplyingSavedState = true;
 
