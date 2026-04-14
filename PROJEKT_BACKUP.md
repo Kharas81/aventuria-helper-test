@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 3:30:06 AM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 3:36:03 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -3968,289 +3968,244 @@ hr {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aventuria Guide & Reader</title>
+    <title>Aventuria Abenteuer-Helfer</title>
+
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/features.css">
     <link rel="stylesheet" href="css/modal.css">
-    <style>
-        .selection-container {
-            background: rgba(92, 30, 30, 0.08);
-            border: 2px solid #8b4513;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px auto;
-            max-width: 700px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        #adventurePicker {
-            width: 90%;
-            padding: 12px;
-            font-size: 1.15em;
-            font-family: 'Georgia', serif;
-            font-weight: bold;
-            background-color: #f4e7d3;
-            border: 2px solid #5c1e1e;
-            color: #2e241f;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-
-        #loading-status {
-            font-weight: bold;
-            margin-top: 10px;
-            min-height: 1.2em;
-        }
-
-        .save-bar {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: 15px;
-        }
-
-        @media (max-width: 700px) {
-            body {
-                padding: 10px;
-            }
-
-            .app-container {
-                padding: 16px;
-            }
-
-            .selection-container {
-                padding: 14px;
-            }
-
-            #adventurePicker {
-                width: 100%;
-                font-size: 1em;
-            }
-
-            .save-bar {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .save-bar .btn-outline,
-            .save-bar .btn {
-                width: 100%;
-            }
-        }
-    </style>
 </head>
 <body>
     <div class="app-container">
         <header>
-            <h1>AVENTURIA SETUP-GUIDE</h1>
-
-            <div class="top-bar">
-                <div class="config-item">
-                    <label for="heroCount">Helden:</label>
-                    <input type="number" id="heroCount" value="2" min="1" max="4">
-                </div>
-
-                <div class="config-item">
-                    <label for="difficulty">Schwierigkeit:</label>
-                    <select id="difficulty">
-                        <option value="einfach">Einfach</option>
-                        <option value="normal" selected>Normal</option>
-                        <option value="schwer">Schwer</option>
-                        <option value="legendär">Legendär</option>
-                    </select>
-                </div>
-
-                <div class="button-group">
-                    <button class="btn-outline" onclick="window.openRulebook()">📜 Regelbuch & Kodex</button>
-                    <button class="btn-outline" onclick="window.Archive.open()">🃏 Karten-Archiv</button>
-                </div>
-            </div>
-
-            <div class="selection-container">
-                <select id="adventurePicker">
-                    <option value="">-- Abenteuer auswählen --</option>
-                    <optgroup label="Grundbox">
-                        <option value="base_game/silvanas_befreiung">Silvanas Befreiung</option>
-                        <option value="base_game/leute_die_nicht_spielen">Leute, die nicht spielen</option>
-                        <option value="base_game/wildenstein_akt_1">Das Erbe von Wildenstein - Akt I</option>
-                        <option value="base_game/wildenstein_akt_2">Das Erbe von Wildenstein - Akt II</option>
-                        <option value="base_game/wildenstein_akt_3">Das Erbe von Wildenstein - Akt III</option>
-                    </optgroup>
-                </select>
-
-                <div id="loading-status"></div>
-
-                <div class="save-bar">
-                    <button class="btn-outline" id="saveStateBtn" type="button">💾 Spielstand speichern</button>
-                    <button class="btn-outline" id="clearStateBtn" type="button">🗑️ Spielstand löschen</button>
-                </div>
-            </div>
+            <h1>Aventuria Abenteuer-Helfer</h1>
+            <p id="loading-status">Bereit.</p>
         </header>
 
-        <main>
-            <section id="story-area"></section>
+        <div class="top-bar">
+            <div class="config-item">
+                <label for="adventurePicker"><strong>Abenteuer:</strong></label>
+                <select id="adventurePicker">
+                    <option value="">Bitte wählen ...</option>
+                    <option value="leute_die_nicht_spielen">Leute, die nicht spielen</option>
+                    <option value="silvanas_befreiung">Silvanas Befreiung</option>
+                    <option value="wildenstein_akt_1">Das Erbe von Wildenstein - Akt I</option>
+                    <option value="wildenstein_akt_2">Das Erbe von Wildenstein - Akt II</option>
+                    <option value="wildenstein_akt_3">Das Erbe von Wildenstein - Akt III</option>
+                </select>
+            </div>
 
-            <div id="setup-display" class="hidden">
-                <h2 id="title"></h2>
+            <div class="config-item">
+                <label for="heroCount"><strong>Helden:</strong></label>
+                <select id="heroCount">
+                    <option value="1">1</option>
+                    <option value="2" selected>2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+
+            <div class="config-item">
+                <label for="difficulty"><strong>Schwierigkeit:</strong></label>
+                <select id="difficulty">
+                    <option value="easy">Leicht</option>
+                    <option value="normal" selected>Normal</option>
+                    <option value="hard">Schwer</option>
+                </select>
+            </div>
+
+            <div class="button-group">
+                <button id="saveStateBtn" class="btn" type="button">Speichern</button>
+                <button id="clearStateBtn" class="btn-outline" type="button">Zurücksetzen</button>
+                <button class="btn-outline" type="button" onclick="window.Archive?.open()">Archiv</button>
+                <button class="btn-outline" type="button" onclick="window.Rulebook?.open?.()">Regelbuch</button>
+            </div>
+        </div>
+
+        <section id="story-wrapper" class="card-list">
+            <h2 id="title">Abenteuer</h2>
+            <div id="story-area"></div>
+        </section>
+
+        <section id="setup-display" class="hidden">
+            <div id="danger-value"></div>
+
+            <div class="grid-container">
+                <div class="card-list" id="blue-cards">
+                    <h3>Abenteuerkarten</h3>
+                    <ul></ul>
+                </div>
+
+                <div class="card-list" id="minions">
+                    <h3>Schergen</h3>
+                    <ul></ul>
+                </div>
+
+                <div class="card-list hidden" id="special">
+                    <h3>Spezialkarten</h3>
+                    <ul></ul>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="card-list" id="victory-defeat-box">
+                <h3>Sieg &amp; Niederlage</h3>
+                <p id="victory-text"><strong>Sieg:</strong> —</p>
+                <p id="defeat-text"><strong>Niederlage:</strong> —</p>
+            </div>
+        </section>
+
+        <div class="toggle-section">
+            <button class="btn-outline" type="button" onclick="document.getElementById('combat-tools-section')?.classList.toggle('show')">
+                Kampf-Hilfen ein/ausblenden
+            </button>
+            <button class="btn-outline" type="button" onclick="document.getElementById('intermission-section')?.classList.toggle('show')">
+                Atempause ein/ausblenden
+            </button>
+        </div>
+
+        <section class="hero-dashboard" id="heroDashboard"></section>
+
+        <section id="combat-tools-section" class="hidden-section show">
+            <div class="card-list">
+                <h3>Kampf-Hilfen</h3>
+
+                <div class="phase-steps" id="phaseTracker">
+                    <div class="step active">1. Heldenphase</div>
+                    <div class="step">2. Schergenphase</div>
+                    <div class="step">3. Anführerphase</div>
+                    <div class="step">4. Zeitphase</div>
+                </div>
 
                 <div class="grid-container">
-                    <div class="card-list" id="blue-cards">
-                        <h3>Abenteuerkarten (Blau)</h3>
-                        <ul></ul>
-                    </div>
-
-                    <div class="card-list" id="minions">
-                        <h3>Schergendeck (Monster)</h3>
-                        <p id="danger-value"></p>
-                        <ul></ul>
-                    </div>
-
-                    <div class="card-list" id="special">
-                        <h3>Spezialkarten</h3>
-                        <ul></ul>
-                    </div>
-                </div>
-
-                <div class="toggle-section">
-                    <button class="btn-outline" onclick="window.UI.toggleSection('combat-tools')">
-                        Kampf-Hilfen ein/ausblenden
-                    </button>
-                    <button class="btn-outline" onclick="window.UI.toggleSection('intermission-display')">
-                        ⚖️ Atempause
-                    </button>
-                </div>
-
-                <div id="combat-tools" class="hidden-section">
-                    <div class="grid-container">
-                        <div class="card-list">
-                            <h3>Phasen-Tracker</h3>
-                            <div class="phase-steps">
-                                <div id="phase1" class="step">1. Vorbereitung</div>
-                                <div id="phase2" class="step">2. Helden</div>
-                                <div id="phase3" class="step">3. Gegner</div>
-                                <div id="phase4" class="step">4. Zeit</div>
-                                <div id="phase5" class="step">5. Ende</div>
-                            </div>
-                            <button onclick="window.Combat.nextPhase()" class="btn" type="button">Nächste Phase ➔</button>
-                        </div>
-
-                        <div class="card-list">
-                            <h3>Zufalls-Ziel</h3>
-                            <button onclick="window.Combat.randomTarget()" class="btn" type="button">Ziel ermitteln 🎯</button>
-                            <p id="targetResult">--</p>
+                    <div class="card-list">
+                        <h3>Zeitmarken</h3>
+                        <div class="config-item">
+                            <label for="remainingTime"><strong>Verbleibend:</strong></label>
+                            <input id="remainingTime" type="number" min="0" value="0">
                         </div>
                     </div>
 
-                    <div class="hero-dashboard" id="heroDashboard"></div>
+                    <div class="card-list">
+                        <h3>EP-Ergebnis</h3>
+                        <div id="ep-result" class="result-badge">2 EP</div>
+                    </div>
+
+                    <div class="card-list">
+                        <h3>Zufallsziel</h3>
+                        <div id="targetResult" class="result-badge">--</div>
+                    </div>
                 </div>
 
-                <div id="intermission-display" class="hidden-section">
-                    <div class="intermission-area">
-                        <div class="intermission-card">
-                            <h3>⚖️ Atempause</h3>
-                            <div class="config-item" style="justify-content: center; margin-bottom: 15px;">
-                                <label for="remainingTime">Zeitmarken:</label>
-                                <input
-                                    type="number"
-                                    id="remainingTime"
-                                    value="0"
-                                    min="0"
-                                    onchange="window.Combat.calculateIntermission()"
-                                >
-                            </div>
-                            <div class="result-badge" id="ep-result">2 EP</div>
-                        </div>
+                <div class="button-group" style="margin-top: 20px;">
+                    <button class="btn" type="button" onclick="window.Combat?.prevPhase?.()">Phase zurück</button>
+                    <button class="btn" type="button" onclick="window.Combat?.nextPhase?.()">Nächste Phase</button>
+                    <button class="btn-outline" type="button" onclick="window.Combat?.rollTarget?.()">Zufallsziel würfeln</button>
+                    <button class="btn-outline" type="button" onclick="window.Combat?.updateEpResult?.()">EP neu berechnen</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="intermission-section" class="hidden-section show">
+            <div class="intermission-area">
+                <div class="intermission-card">
+                    <h3>Atempause</h3>
+                    <p>Nutze diesen Bereich für Zwischenstände, Erholung und Abenteuer-Notizen.</p>
+                    <div class="button-group" style="justify-content: center; margin-top: 16px;">
+                        <button class="btn-outline" type="button" onclick="window.Combat?.applyIntermission?.()">Atempause anwenden</button>
                     </div>
                 </div>
             </div>
-        </main>
+        </section>
     </div>
 
-    <div id="archive-modal" class="modal-backdrop">
+    <div class="card-tooltip" id="card-tooltip">
+        <div class="tooltip-inner">
+            <img id="tooltip-image" src="" alt="Kartenvorschau">
+        </div>
+    </div>
+
+    <div class="modal-backdrop" id="archive-modal">
         <div class="modal-content archive-modal-size">
-            <span class="close-modal" onclick="window.Archive.close()">&times;</span>
-            <div class="modal-layout">
-                <nav class="modal-sidebar">
-                    <h4>Sammlung</h4>
-                    <ul id="archive-sets">
-                        <li onclick="window.Archive.loadSet('base_game')">📦 Grundbox</li>
-                    </ul>
-                </nav>
+            <span class="close-modal" onclick="window.Archive?.close()">&times;</span>
+            <div class="tab-content">
+                <div class="archive-header">
+                    <h2>Kartenarchiv</h2>
+                    <input
+                        id="archive-search"
+                        class="search-bar"
+                        type="text"
+                        placeholder="Karten suchen..."
+                        onkeyup="window.Archive?.handleSearch?.(this.value)"
+                    >
+                </div>
 
-                <div class="modal-main">
-                    <header class="modal-nav">
-                        <h2>Karten-Archiv</h2>
-                        <input
-                            type="text"
-                            class="search-bar"
-                            placeholder="Karte suchen..."
-                            onkeyup="window.Archive.filter(this.value)"
-                        >
-                    </header>
-                    <div class="archive-grid" id="archive-grid"></div>
+                <div class="button-group" style="margin-bottom: 20px;">
+                    <button class="btn-outline" type="button" onclick="window.Archive?.loadSet?.('base_game')">Grundbox</button>
+                </div>
+
+                <div id="archive-grid" class="archive-grid">
+                    <p class="placeholder-text">Archiv wird geladen ...</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="rule-modal" class="modal-backdrop">
+    <div class="modal-backdrop" id="rulebook-modal">
         <div class="modal-content">
-            <span class="close-modal" onclick="window.closeRulebook()">&times;</span>
+            <span class="close-modal" onclick="window.Rulebook?.close?.()">&times;</span>
+
             <div class="modal-layout">
-                <nav class="modal-sidebar">
-                    <h4>Kodex & Regeln</h4>
-                    <ul id="manual-index"></ul>
-                </nav>
+                <aside class="modal-sidebar">
+                    <h4>Regelbuch</h4>
+                    <ul id="manual-page-list"></ul>
+                </aside>
 
                 <div class="modal-main">
-                    <header class="modal-nav">
-                        <button id="btn-search" class="tab-btn active" onclick="window.switchTab('search')">🔍 Kodex</button>
-                        <button id="btn-reader" class="tab-btn" onclick="window.switchTab('reader')">📖 Regelbuch</button>
-                    </header>
-
-                    <div id="tab-search" class="tab-content">
-                        <input
-                            type="text"
-                            class="search-bar"
-                            placeholder="Regel suchen..."
-                            onkeyup="window.filterRules(this.value)"
-                        >
-                        <div id="rules-results"></div>
+                    <div class="modal-nav">
+                        <h2 id="manual-title">Regelbuch</h2>
+                        <button class="tab-btn active" type="button" onclick="window.Rulebook?.showTab?.('reader')">Leser</button>
+                        <button class="tab-btn" type="button" onclick="window.Rulebook?.showTab?.('codex')">Kodex</button>
                     </div>
 
-                    <div id="tab-reader" class="tab-content hidden">
-                        <div id="page-content" class="reader-container"></div>
-                        <footer class="reader-footer">
-                            <button onclick="window.prevPage()" type="button">⬅ Zurück</button>
-                            <span>Seite <span id="currentPageNum">1</span> / 24</span>
-                            <button onclick="window.nextPage()" type="button">Weiter ➡</button>
-                        </footer>
+                    <div class="tab-content">
+                        <div id="reader-tab">
+                            <div class="reader-container">
+                                <div class="reader-page" id="manual-content"></div>
+                                <div class="reader-footer">
+                                    <button type="button" onclick="window.Rulebook?.prevPage?.()">Zurück</button>
+                                    <span id="manual-page-indicator">Seite 0 / 0</span>
+                                    <button type="button" onclick="window.Rulebook?.nextPage?.()">Weiter</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="codex-tab" class="hidden">
+                            <input
+                                id="codex-search"
+                                class="search-bar"
+                                type="text"
+                                placeholder="Regeln durchsuchen..."
+                                onkeyup="window.Rulebook?.filterRules?.(this.value)"
+                            >
+                            <div id="codex-results"></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <div id="card-tooltip" class="card-tooltip"></div>
-
-    <div style="position: fixed; bottom: 10px; right: 10px; z-index: 9999;">
-        <button onclick="window.SystemCheck.run(true)" class="btn-sm" style="background: #2e241f; color: white;" type="button">
-            ⚙️ Check
-        </button>
     </div>
 
     <script src="js/config.js"></script>
     <script src="js/api.js"></script>
-    <script src="js/storage.js"></script>
-    <script src="js/ui-helper.js"></script>
-    <script src="js/combat.js"></script>
-    <script src="js/archive.js"></script>
-    <script src="js/rulebook.js"></script>
+    <script src="js/ui.js"></script>
     <script src="js/ui-renderer.js"></script>
     <script src="js/narrative.js"></script>
+    <script src="js/combat.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/archive.js"></script>
+    <script src="js/rulebook.js"></script>
     <script src="js/validator.js"></script>
     <script src="js/app.js"></script>
 </body>
