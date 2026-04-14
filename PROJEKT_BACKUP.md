@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 9:54:32 AM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 9:54:43 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -1298,17 +1298,22 @@ hr {
 {
   "id": "wildenstein_akt_3",
   "name": "Das Erbe von Wildenstein - Akt III",
+  "status": "playable",
+  "set": {
+    "id": "base_game",
+    "name": "Aventuria Grundbox"
+  },
   "danger_calc": 7,
   "narrative": {
-    "intro": "Ihr habt den Geheimgang gefunden. Die Spuren des Barons führen in einen schaurigen Forst. Es ist genau die Art Wald in den Schattenlanden, vor der man euch immer gewarnt hat [cite: 975-987].",
+    "intro": "Ihr habt den Geheimgang gefunden. Die Spuren des Barons führen in einen schaurigen Forst. Es ist genau die Art Wald in den Schattenlanden, vor der man euch immer gewarnt hat.",
     "checks": [
       {
         "id": "abseilen",
         "skill": "Körperbeherrschung",
         "text": "Seilt euch am Wehrgang in den Forst ab.",
         "results": {
-          "success": "Du seilst dich erfolgreich ab [cite: 982].",
-          "fail": "Du stürzt oder rutschst ab und verlierst LP [cite: 983-984]."
+          "success": "Du seilst dich erfolgreich ab.",
+          "fail": "Du stürzt oder rutschst ab und verlierst Lebenspunkte."
         }
       },
       {
@@ -1316,8 +1321,8 @@ hr {
         "skill": "Wildnisleben",
         "text": "Folgt den Spuren des Barons im Dickicht.",
         "results": {
-          "success": "Du findest eine Abkürzung (+1 Schicksalspunkt) [cite: 990-992].",
-          "fail": "Du verlierst die Spur (Zeitmarke wird entfernt) [cite: 995-996]."
+          "success": "Du findest eine Abkürzung (+1 Schicksalspunkt).",
+          "fail": "Du verlierst die Spur (eine Zeitmarke wird entfernt)."
         }
       }
     ]
@@ -1335,9 +1340,13 @@ hr {
       { "id": "special_anfuehrer_aktionen_nekromantie", "label": "Anführer-Aktionen: Nekromantie" },
       { "id": "special_untotenbeschwoerung", "label": "Ereignisse: Untotenbeschwörung" }
     ],
-    "victory": "Grautax, der falsche Baron, wurde besiegt[cite: 1031].",
-    "defeat": "Anzahl Verderbensmarken = Anzahl Helden[cite: 1030]."
-  }
+    "victory": "Grautax, der falsche Baron, wurde besiegt.",
+    "defeat": "Anzahl Verderbensmarken = Anzahl Helden."
+  },
+  "source": {
+    "book": "Aventuria Das Abenteuerkartenspiel Anleitung"
+  },
+  "notes": "Auf neues Abenteuerformat vereinheitlicht. Textstellen wurden bereinigt und von Extraktionsmarkierungen befreit."
 }
 
 ```
