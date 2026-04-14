@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 7:48:50 AM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 7:49:05 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -5572,67 +5572,58 @@ window.Rulebook = {
     ],
 
     indexData: [
-        { p: 1, title: "Titelblatt" },
-        { p: 2, title: "Was ist Aventurien?" },
-        { p: 4, title: "Südosten & ferne Regionen" },
-        { p: 5, title: "Religionen, Kulturen & Gefahren" },
-        { p: 6, title: "Vorbereitung" },
-        { p: 7, title: "Spielmaterial" },
-        { p: 9, title: "Das Abenteuer" },
-        { p: 10, title: "Der Kampf (Setup)" },
-        { p: 13, title: "Kampfablauf" },
-        { p: 15, title: "Sieg & Atempause" },
-        { p: 17, title: "Silvanas Befreiung" },
-        { p: 19, title: "Leute, die nicht spielen" },
-        { p: 20, title: "Wildenstein Akt I" },
-        { p: 21, title: "Wildenstein Akt II" },
-        { p: 23, title: "Wildenstein Akt III" },
-        { p: 24, title: "Übersichten" }
+        { p: 1, title: 'Titelblatt' },
+        { p: 2, title: 'Was ist Aventurien?' },
+        { p: 4, title: 'Südosten & ferne Regionen' },
+        { p: 5, title: 'Religionen, Kulturen & Gefahren' },
+        { p: 6, title: 'Vorbereitung' },
+        { p: 7, title: 'Spielmaterial' },
+        { p: 9, title: 'Das Abenteuer' },
+        { p: 10, title: 'Der Kampf (Setup)' },
+        { p: 13, title: 'Kampfablauf' },
+        { p: 15, title: 'Sieg & Atempause' },
+        { p: 17, title: 'Silvanas Befreiung' },
+        { p: 19, title: 'Leute, die nicht spielen' },
+        { p: 20, title: 'Wildenstein Akt I' },
+        { p: 21, title: 'Wildenstein Akt II' },
+        { p: 23, title: 'Wildenstein Akt III' },
+        { p: 24, title: 'Übersichten' }
     ],
-
-    escapeHtml(value) {
-        return String(value ?? '')
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#39;');
-    },
 
     stripCitationMarkers(text) {
         return String(text ?? '').replace(/\s*\[cite:\s*[\d\- ,]+\]/gi, '').trim();
     },
 
     getModal() {
-        return document.getElementById('rulebook-modal');
+        return Utils.byId('rulebook-modal');
     },
 
     getReaderTab() {
-        return document.getElementById('reader-tab');
+        return Utils.byId('reader-tab');
     },
 
     getCodexTab() {
-        return document.getElementById('codex-tab');
+        return Utils.byId('codex-tab');
     },
 
     getManualContent() {
-        return document.getElementById('manual-content');
+        return Utils.byId('manual-content');
     },
 
     getPageIndicator() {
-        return document.getElementById('manual-page-indicator');
+        return Utils.byId('manual-page-indicator');
     },
 
     getManualPageList() {
-        return document.getElementById('manual-page-list');
+        return Utils.byId('manual-page-list');
     },
 
     getCodexResults() {
-        return document.getElementById('codex-results');
+        return Utils.byId('codex-results');
     },
 
     getCodexSearch() {
-        return document.getElementById('codex-search');
+        return Utils.byId('codex-search');
     },
 
     open() {
@@ -5672,7 +5663,7 @@ window.Rulebook = {
             codexTab.classList.toggle('hidden', tab !== 'codex');
         }
 
-        const buttons = document.querySelectorAll('#rulebook-modal .tab-btn');
+        const buttons = Utils.qsa('#rulebook-modal .tab-btn');
         buttons.forEach(btn => btn.classList.remove('active'));
 
         if (tab === 'reader' && buttons[0]) {
@@ -5717,8 +5708,8 @@ window.Rulebook = {
             }
 
             const data = await res.json();
-            const title = this.escapeHtml(this.stripCitationMarkers(data?.title ?? `Seite ${nr}`));
-            const content = this.escapeHtml(this.stripCitationMarkers(data?.content ?? '')).replace(/\n/g, '<br>');
+            const title = Utils.escapeHtml(this.stripCitationMarkers(data?.title ?? `Seite ${nr}`));
+            const content = Utils.escapeHtml(this.stripCitationMarkers(data?.content ?? '')).replace(/\n/g, '<br>');
             const image = String(data?.image ?? '').trim();
 
             container.innerHTML = `
@@ -5727,7 +5718,7 @@ window.Rulebook = {
                     ${image ? `
                         <div class="img-wrapper">
                             <img
-                                src="${this.escapeHtml(image)}"
+                                src="${Utils.escapeHtml(image)}"
                                 alt="${title}"
                                 class="manual-page-img"
                                 loading="lazy"
@@ -5742,9 +5733,9 @@ window.Rulebook = {
                 indicator.textContent = `Seite ${nr} / ${this.validManualPages.length}`;
             }
 
-            const titleEl = document.getElementById('manual-title');
+            const titleEl = Utils.byId('manual-title');
             if (titleEl) {
-                titleEl.textContent = title;
+                titleEl.textContent = this.stripCitationMarkers(data?.title ?? `Seite ${nr}`);
             }
 
             this.currentPage = nr;
@@ -5792,8 +5783,8 @@ window.Rulebook = {
         results.innerHTML = filtered.length
             ? filtered.map(rule => `
                 <div class="rule-entry">
-                    <h4>${this.escapeHtml(rule.title)}</h4>
-                    <p>${this.escapeHtml(rule.text)}</p>
+                    <h4>${Utils.escapeHtml(rule.title)}</h4>
+                    <p>${Utils.escapeHtml(rule.text)}</p>
                 </div>
             `).join('')
             : '<p>Kein Treffer im Kodex.</p>';
