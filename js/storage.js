@@ -1,13 +1,9 @@
-/**
- * js/storage.js
- * Persistenter Spielstand für Aventuria Setup-Guide
- */
 window.StorageManager = {
-    storageKey: 'aventuria_save_v1',
+    storageKey: 'aventuria_helper_state_v2',
 
     getDefaultState() {
         return {
-            version: 1,
+            version: 2,
             selectedAdventure: '',
             heroCount: 2,
             difficulty: 'normal',
@@ -15,8 +11,13 @@ window.StorageManager = {
             heroStats: {},
             checklist: {},
             sections: {
-                combatToolsOpen: false,
-                intermissionOpen: false
+                combatToolsOpen: true,
+                intermissionOpen: true
+            },
+            combatState: {
+                remainingTime: 0,
+                epResult: '2 EP',
+                targetResult: '--'
             }
         };
     },
@@ -27,27 +28,20 @@ window.StorageManager = {
             if (!raw) return this.getDefaultState();
 
             const parsed = JSON.parse(raw);
-            return {
-                ...this.getDefaultState(),
-                ...parsed,
-                sections: {
-                    ...this.getDefaultState().sections,
-                    ...(parsed.sections || {})
-                },
-                heroStats: parsed.heroStats || {},
-                checklist: parsed.checklist || {}
-            };
+            return this.mergeWithDefaults(parsed);
         } catch (error) {
-            console.warn('Spielstand konnte nicht geladen werden. Nutze Standardwerte.', error);
+            console.error('Fehler beim Laden des Spielstands:', error);
             return this.getDefaultState();
         }
     },
 
     saveState(state) {
         try {
-            localStorage.setItem(this.storageKey, JSON.stringify(state));
+            localStorage.setItem(this.storageKey, JSON.stringify(this.mergeWithDefaults(state)));
+            return true;
         } catch (error) {
-            console.warn('Spielstand konnte nicht gespeichert werden.', error);
+            console.error('Fehler beim Speichern des Spielstands:', error);
+            return false;
         }
     },
 
@@ -55,53 +49,105 @@ window.StorageManager = {
         try {
             localStorage.removeItem(this.storageKey);
         } catch (error) {
-            console.warn('Spielstand konnte nicht gelöscht werden.', error);
+            console.error('Fehler beim Löschen des Spielstands:', error);
         }
     },
 
+    mergeWithDefaults(state) {
+        const defaults = this.getDefaultState();
+        const incoming = state && typeof state === 'object' ? state : {};
+
+        return {
+            ...defaults,
+            ...incoming,
+            sections: {
+                ...defaults.sections,
+                ...(incoming.sections || {})
+            },
+            combatState: {
+                ...defaults.combatState,
+                ...(incoming.combatState || {})
+            },
+            heroStats: incoming.heroStats && typeof incoming.heroStats === 'object'
+                ? incoming.heroStats
+                : {},
+            checklist: incoming.checklist && typeof incoming.checklist === 'object'
+                ? incoming.checklist
+                : {}
+        };
+    },
+
+    getNumericValue(value, fallback = 0) {
+        const numeric = Number(value);
+        return Number.isFinite(numeric) ? numeric : fallback;
+    },
+
     collectHeroStats() {
+        const heroCards = document.querySelectorAll('#heroDashboard .hero-card');
         const result = {};
-        document.querySelectorAll('[id^="lp"]').forEach(el => {
-            const id = el.id;
-            result[id] = parseInt(el.innerText, 10) || 0;
+
+        heroCards.forEach((card, index) => {
+            const heroIndex = index + 1;
+            const lpEl = card.querySelector('[data-stat="lp"]');
+            const fateEl = card.querySelector('[data-stat="fate"]');
+
+            result[heroIndex] = {
+                lp: this.getNumericValue(lpEl?.textContent, 40),
+                fate: this.getNumericValue(fateEl?.textContent, 0)
+            };
         });
+
         return result;
+    },
+
+    applyHeroStats(heroStats) {
+        if (!window.Combat || typeof window.Combat.updateDashboard !== 'function') {
+            return;
+        }
+
+        window.Combat.updateDashboard(heroStats || {});
     },
 
     collectChecklistState() {
         const result = {};
-        document.querySelectorAll('.checklist-item input[type="checkbox"]').forEach((checkbox, index) => {
-            result[`check_${index}`] = checkbox.checked;
+        const items = document.querySelectorAll('.checklist-item');
+
+        items.forEach((item, index) => {
+            const checkbox = item.querySelector('input[type="checkbox"]');
+            const cardId = item.dataset.cardId || `item_${index}`;
+
+            result[cardId] = Boolean(checkbox?.checked);
         });
+
         return result;
     },
 
-    applyChecklistState(checklistState) {
-        const entries = document.querySelectorAll('.checklist-item input[type="checkbox"]');
-        entries.forEach((checkbox, index) => {
-            checkbox.checked = Boolean(checklistState?.[`check_${index}`]);
-        });
-    },
+    applyChecklistState(checklist) {
+        const state = checklist && typeof checklist === 'object' ? checklist : {};
+        const items = document.querySelectorAll('.checklist-item');
 
-    applyHeroStats(heroStats) {
-        Object.entries(heroStats || {}).forEach(([id, value]) => {
-            const el = document.getElementById(id);
-            if (el) {
-                el.innerText = String(value);
-            }
+        items.forEach((item, index) => {
+            const checkbox = item.querySelector('input[type="checkbox"]');
+            if (!checkbox) return;
+
+            const cardId = item.dataset.cardId || `item_${index}`;
+            checkbox.checked = Boolean(state[cardId]);
         });
     },
 
     collectUIState() {
+        const combatTools = document.getElementById('combat-tools-section');
+        const intermission = document.getElementById('intermission-section');
+
         return {
-            combatToolsOpen: document.getElementById('combat-tools')?.classList.contains('show') || false,
-            intermissionOpen: document.getElementById('intermission-display')?.classList.contains('show') || false
+            combatToolsOpen: combatTools ? combatTools.classList.contains('show') : true,
+            intermissionOpen: intermission ? intermission.classList.contains('show') : true
         };
     },
 
     applyUIState(sections) {
-        const combatTools = document.getElementById('combat-tools');
-        const intermission = document.getElementById('intermission-display');
+        const combatTools = document.getElementById('combat-tools-section');
+        const intermission = document.getElementById('intermission-section');
 
         if (combatTools) {
             combatTools.classList.toggle('show', Boolean(sections?.combatToolsOpen));
@@ -112,16 +158,52 @@ window.StorageManager = {
         }
     },
 
+    collectCombatState() {
+        const remainingTime = document.getElementById('remainingTime');
+        const epResult = document.getElementById('ep-result');
+        const targetResult = document.getElementById('targetResult');
+
+        return {
+            remainingTime: this.getNumericValue(remainingTime?.value, 0),
+            epResult: String(epResult?.textContent ?? '2 EP').trim() || '2 EP',
+            targetResult: String(targetResult?.textContent ?? '--').trim() || '--'
+        };
+    },
+
+    applyCombatState(combatState) {
+        const state = {
+            ...this.getDefaultState().combatState,
+            ...(combatState || {})
+        };
+
+        const remainingTime = document.getElementById('remainingTime');
+        const epResult = document.getElementById('ep-result');
+        const targetResult = document.getElementById('targetResult');
+
+        if (remainingTime) {
+            remainingTime.value = this.getNumericValue(state.remainingTime, 0);
+        }
+
+        if (epResult) {
+            epResult.textContent = String(state.epResult ?? '2 EP');
+        }
+
+        if (targetResult) {
+            targetResult.textContent = String(state.targetResult ?? '--');
+        }
+    },
+
     collectFullState() {
         return {
-            version: 1,
+            version: 2,
             selectedAdventure: document.getElementById('adventurePicker')?.value || '',
             heroCount: parseInt(document.getElementById('heroCount')?.value, 10) || 2,
             difficulty: document.getElementById('difficulty')?.value || 'normal',
             combatPhase: window.Combat?.currentPhase || 0,
             heroStats: this.collectHeroStats(),
             checklist: this.collectChecklistState(),
-            sections: this.collectUIState()
+            sections: this.collectUIState(),
+            combatState: this.collectCombatState()
         };
     },
 
@@ -133,6 +215,7 @@ window.StorageManager = {
     bindAutoSave() {
         document.addEventListener('change', (event) => {
             const target = event.target;
+            if (!target) return;
 
             if (
                 target.matches('#heroCount') ||
@@ -147,6 +230,7 @@ window.StorageManager = {
 
         document.addEventListener('click', (event) => {
             const target = event.target;
+            if (!target) return;
 
             if (
                 target.closest('.btn') ||
