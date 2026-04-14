@@ -46,15 +46,9 @@ window.UI = {
         const { tooltip, image } = this.getTooltipElements();
         if (!tooltip || !image) return;
 
-        const resolvedImage = Utils.resolveImagePath(imageSrc, '');
-        if (!resolvedImage) return;
-
-        image.dataset.fallbackApplied = 'false';
-        image.dataset.fallbackSrc = Utils.getPlaceholderImage();
-        image.src = resolvedImage;
+        const resolvedImage = Utils.resolveImagePath(imageSrc);
+        Utils.setSafeImageSource(image, resolvedImage);
         image.alt = 'Kartenvorschau';
-        Utils.applyImageFallback(image, image.dataset.fallbackSrc);
-
         tooltip.style.display = 'block';
 
         this.movePreview(event);
@@ -90,13 +84,12 @@ window.UI = {
         tooltip.style.display = 'none';
         tooltip.style.left = '-9999px';
         tooltip.style.top = '-9999px';
-        image.src = '';
-        image.alt = '';
+        image.removeAttribute('src');
         image.dataset.fallbackApplied = 'false';
     },
 
     openPreview(imageSrc) {
-        const resolvedImage = Utils.resolveImagePath(imageSrc, '');
+        const resolvedImage = Utils.resolveImagePath(imageSrc);
         if (!resolvedImage) return;
 
         if (window.Renderer?.ensureCardDetailModal) {
@@ -108,17 +101,18 @@ window.UI = {
                     <div class="reader-text">
                         <div class="img-wrapper">
                             <img
-                                src="${Utils.escapeHtml(resolvedImage)}"
+                                id="preview-modal-image"
                                 alt="Kartenvorschau"
                                 class="manual-page-img"
                                 loading="lazy"
-                                decoding="async"
-                                data-fallback-src="${Utils.escapeHtml(Utils.getPlaceholderImage())}"
                             >
                         </div>
                     </div>
                 `;
-                Utils.bindImageFallbacks(content);
+
+                const previewImage = Utils.byId('preview-modal-image');
+                Utils.setSafeImageSource(previewImage, resolvedImage);
+
                 modal.style.display = 'flex';
                 return;
             }
@@ -239,7 +233,6 @@ window.UI = {
 
     init() {
         this.bindGlobalUiEvents();
-        Utils.bindImageFallbacks(document);
     }
 };
 
