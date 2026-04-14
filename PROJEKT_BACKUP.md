@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 7:54:35 AM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 7:54:51 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -7561,6 +7561,7 @@ window.Validator = {
         const status = this.normalizeString(adventure.status);
         const narrative = adventure.narrative ?? {};
         const setup = adventure.setup ?? {};
+        const setId = this.normalizeString(adventure?.set?.id);
 
         if (!id) {
             this.addError(result, 'Abenteuer ohne ID gefunden.');
@@ -7568,6 +7569,10 @@ window.Validator = {
 
         if (!name) {
             this.addError(result, `Abenteuer "${id || 'unbekannt'}" hat keinen Namen.`);
+        }
+
+        if (!setId) {
+            this.addWarning(result, `Abenteuer "${id || name || 'unbekannt'}" hat keine set.id.`);
         }
 
         if (status && !this.allowedAdventureStatuses.includes(status)) {
@@ -7725,6 +7730,11 @@ window.Validator = {
             this.addWarning(result, `Karte "${id || name || 'unbekannt'}" hat ungültige images.`);
         }
 
+        const imagePath = this.normalizeString(card?.images?.front || card?.image || '');
+        if (!imagePath) {
+            this.addWarning(result, `Karte "${id || name || 'unbekannt'}" hat keinen Bildpfad.`);
+        }
+
         const adventureRefs = this.normalizeArray(card.adventure_refs);
         if (card.adventure_refs !== undefined && !Array.isArray(card.adventure_refs)) {
             this.addWarning(result, `Karte "${id || name || 'unbekannt'}" hat adventure_refs nicht als Array.`);
@@ -7757,6 +7767,10 @@ window.Validator = {
         const cards = this.normalizeArray(masterIndex.cards);
         const ids = new Set();
 
+        if (!cards.length) {
+            this.addWarning(result, 'Master-Index enthält keine Karten.');
+        }
+
         cards.forEach((entry, index) => {
             if (!this.isObject(entry)) {
                 this.addWarning(result, `Master-Index enthält ungültigen Karteneintrag an Position ${index}.`);
@@ -7785,6 +7799,10 @@ window.Validator = {
 
             if (entry.detail_path !== undefined && !this.normalizeString(entry.detail_path)) {
                 this.addWarning(result, `Master-Index-Eintrag "${id}" hat leeren detail_path.`);
+            }
+
+            if (entry.detail_path !== undefined && !String(entry.detail_path).includes('/')) {
+                this.addWarning(result, `Master-Index-Eintrag "${id}" hat einen ungewöhnlichen detail_path.`);
             }
         });
 
