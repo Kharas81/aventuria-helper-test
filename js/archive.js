@@ -154,11 +154,16 @@ window.Archive = {
     },
 
     getImageForCard(card) {
-        return (
-            card?.images?.front ||
-            card?.image ||
-            'assets/images/placeholder.jpg'
+        return Utils.resolveImagePath(
+            card?.images?.front,
+            card?.image
         );
+    },
+
+    bindArchiveImageFallbacks(scope = document) {
+        Utils.qsa('img[data-archive-image="true"]', scope).forEach(img => {
+            Utils.attachImageFallback(img);
+        });
     },
 
     render() {
@@ -185,13 +190,15 @@ window.Archive = {
                         src="${Utils.escapeHtml(image)}"
                         alt="${name}"
                         loading="lazy"
-                        onerror="this.onerror=null;this.src='assets/images/placeholder.jpg';"
+                        data-archive-image="true"
                     >
                     <p>${name}</p>
                     <small>${type}${status ? ` • ${status}` : ''}</small>
                 </div>
             `;
         }).join('');
+
+        this.bindArchiveImageFallbacks(grid);
 
         grid.querySelectorAll('.archive-card').forEach(cardEl => {
             cardEl.addEventListener('click', async () => {
