@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 7:51:39 AM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 7:51:51 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -5038,13 +5038,11 @@ window.Combat = {
     currentCards: [],
 
     getHeroCount() {
-        const el = Utils.byId('heroCount');
-        const value = Number(el?.value ?? 2);
-        return Number.isFinite(value) && value > 0 ? value : 2;
+        return window.State.getState().heroCount;
     },
 
     getDifficulty() {
-        return String(Utils.byId('difficulty')?.value ?? 'normal');
+        return window.State.getState().difficulty;
     },
 
     getDefaultHeroLp() {
@@ -5075,26 +5073,34 @@ window.Combat = {
         return Utils.qsa('#phaseTracker .step');
     },
 
+    getCurrentHeroStats() {
+        return window.State.getState().heroStats || {};
+    },
+
+    getCurrentCombatState() {
+        return window.State.getState().combatState || {};
+    },
+
     initializeForAdventure(adventure, cards = []) {
         this.currentAdventure = adventure ?? null;
         this.currentCards = Array.isArray(cards) ? cards : [];
         this.currentPhase = 0;
+        window.State.setCombatPhase(0);
+
+        const currentCombatState = this.getCurrentCombatState();
+        const startValue = this.getTimelineStartValue();
+        const remainingTime = Number(currentCombatState.remainingTime);
+
+        if (!Number.isFinite(remainingTime) || remainingTime <= 0) {
+            window.State.setCombatField('remainingTime', startValue);
+        }
+
+        window.State.setCombatField('targetResult', '--');
 
         this.updateDashboard();
         this.updatePhaseTracker();
-
-        const remainingTime = this.getRemainingTimeInput();
-        const startValue = this.getTimelineStartValue();
-
-        if (remainingTime) {
-            const currentValue = Number(remainingTime.value);
-            remainingTime.value = Number.isFinite(currentValue) && currentValue > 0
-                ? currentValue
-                : startValue;
-        }
-
+        this.renderCombatState();
         this.updateEpResult();
-        this.resetTargetResult();
     },
 
     getTimelineStartValue() {
@@ -5150,7 +5156,7 @@ window.Combat = {
         const heroCount = this.getHeroCount();
         const stats = savedHeroStats && typeof savedHeroStats === 'object'
             ? savedHeroStats
-            : this.readCurrentHeroStats();
+            : this.getCurrentHeroStats();
 
         container.innerHTML = Array.from({ length: heroCount }, (_, i) => {
             const heroIndex = i + 1;
@@ -5158,26 +5164,6 @@ window.Combat = {
         }).join('');
 
         this.bindDashboardButtons();
-    },
-
-    readCurrentHeroStats() {
-        const container = this.getHeroDashboard();
-        const result = {};
-
-        if (!container) return result;
-
-        container.querySelectorAll('.hero-card').forEach(card => {
-            const heroIndex = Number(card.dataset.heroIndex);
-            const lp = Number(card.querySelector('[data-stat="lp"]')?.textContent ?? this.getDefaultHeroLp());
-            const fate = Number(card.querySelector('[data-stat="fate"]')?.textContent ?? this.getDefaultHeroFate());
-
-            result[heroIndex] = {
-                lp: Number.isFinite(lp) ? lp : this.getDefaultHeroLp(),
-                fate: Number.isFinite(fate) ? fate : this.getDefaultHeroFate()
-            };
-        });
-
-        return result;
     },
 
     bindDashboardButtons() {
@@ -5191,25 +5177,28 @@ window.Combat = {
             const heroCard = button.closest('.hero-card');
             if (!heroCard) return;
 
+            const heroIndex = Number(heroCard.dataset.heroIndex);
             const action = button.dataset.action;
-            const lpEl = heroCard.querySelector('[data-stat="lp"]');
-            const fateEl = heroCard.querySelector('[data-stat="fate"]');
+            const heroStats = this.getCurrentHeroStats();
+            const current = heroStats[heroIndex] || { lp: 40, fate: 0 };
 
-            if (action === 'lp-minus' && lpEl) {
-                lpEl.textContent = String(Math.max(0, Number(lpEl.textContent) - 1));
+            if (action === 'lp-minus') {
+                window.State.setHeroStat(heroIndex, 'lp', Math.max(0, Number(current.lp) - 1));
             }
 
-            if (action === 'lp-plus' && lpEl) {
-                lpEl.textContent = String(Number(lpEl.textContent) + 1);
+            if (action === 'lp-plus') {
+                window.State.setHeroStat(heroIndex, 'lp', Number(current.lp) + 1);
             }
 
-            if (action === 'fate-minus' && fateEl) {
-                fateEl.textContent = String(Math.max(0, Number(fateEl.textContent) - 1));
+            if (action === 'fate-minus') {
+                window.State.setHeroStat(heroIndex, 'fate', Math.max(0, Number(current.fate) - 1));
             }
 
-            if (action === 'fate-plus' && fateEl) {
-                fateEl.textContent = String(Number(fateEl.textContent) + 1);
+            if (action === 'fate-plus') {
+                window.State.setHeroStat(heroIndex, 'fate', Number(current.fate) + 1);
             }
+
+            this.updateDashboard();
 
             if (window.StorageManager?.persist) {
                 window.StorageManager.persist();
@@ -5220,6 +5209,8 @@ window.Combat = {
     },
 
     updatePhaseTracker() {
+        this.currentPhase = Number(window.State.getState().combatPhase ?? 0) || 0;
+
         const steps = this.getPhaseSteps();
         steps.forEach((step, index) => {
             step.classList.toggle('active', index === this.currentPhase);
@@ -5228,6 +5219,7 @@ window.Combat = {
 
     prevPhase() {
         this.currentPhase = (this.currentPhase - 1 + this.phaseLabels.length) % this.phaseLabels.length;
+        window.State.setCombatPhase(this.currentPhase);
         this.updatePhaseTracker();
 
         if (window.StorageManager?.persist) {
@@ -5239,6 +5231,7 @@ window.Combat = {
         const wasTimePhase = this.currentPhase === this.phaseLabels.length - 1;
 
         this.currentPhase = (this.currentPhase + 1) % this.phaseLabels.length;
+        window.State.setCombatPhase(this.currentPhase);
         this.updatePhaseTracker();
 
         if (wasTimePhase) {
@@ -5251,24 +5244,21 @@ window.Combat = {
     },
 
     advanceTimeMarker() {
-        const input = this.getRemainingTimeInput();
-        if (!input) return;
-
-        const current = Number(input.value);
+        const combatState = this.getCurrentCombatState();
+        const current = Number(combatState.remainingTime);
         const next = Number.isFinite(current) ? Math.max(0, current - 1) : 0;
 
-        input.value = next;
+        window.State.setCombatField('remainingTime', next);
+        this.renderCombatState();
         this.updateEpResult();
     },
 
     rollTarget() {
-        const el = this.getTargetResultEl();
-        if (!el) return;
-
         const heroCount = this.getHeroCount();
         const result = Math.max(1, Math.ceil(Math.random() * heroCount));
 
-        el.textContent = `Held ${result}`;
+        window.State.setCombatField('targetResult', `Held ${result}`);
+        this.renderCombatState();
 
         if (window.StorageManager?.persist) {
             window.StorageManager.persist();
@@ -5276,18 +5266,13 @@ window.Combat = {
     },
 
     resetTargetResult() {
-        const el = this.getTargetResultEl();
-        if (el) {
-            el.textContent = '--';
-        }
+        window.State.setCombatField('targetResult', '--');
+        this.renderCombatState();
     },
 
     updateEpResult() {
-        const el = this.getEpResultEl();
-        if (!el) return;
-
         const difficulty = this.getDifficulty();
-        const remainingTime = Number(this.getRemainingTimeInput()?.value ?? 0);
+        const remainingTime = Number(this.getCurrentCombatState().remainingTime ?? 0);
 
         let ep = 2;
 
@@ -5299,31 +5284,47 @@ window.Combat = {
 
         ep = Math.max(0, ep);
 
-        el.textContent = `${ep} EP`;
+        window.State.setCombatField('epResult', `${ep} EP`);
+        this.renderCombatState();
 
         if (window.StorageManager?.persist) {
             window.StorageManager.persist();
         }
     },
 
+    renderCombatState() {
+        const state = this.getCurrentCombatState();
+
+        const remainingTime = this.getRemainingTimeInput();
+        const epResult = this.getEpResultEl();
+        const targetResult = this.getTargetResultEl();
+
+        if (remainingTime) {
+            remainingTime.value = Number.isFinite(Number(state.remainingTime))
+                ? Number(state.remainingTime)
+                : 0;
+        }
+
+        if (epResult) {
+            epResult.textContent = String(state.epResult ?? '2 EP');
+        }
+
+        if (targetResult) {
+            targetResult.textContent = String(state.targetResult ?? '--');
+        }
+    },
+
     applyIntermission() {
-        const dashboard = this.getHeroDashboard();
-        if (!dashboard) return;
+        const heroCount = this.getHeroCount();
+        const stats = this.getCurrentHeroStats();
 
-        dashboard.querySelectorAll('.hero-card').forEach(card => {
-            const lpEl = card.querySelector('[data-stat="lp"]');
-            const fateEl = card.querySelector('[data-stat="fate"]');
+        for (let i = 1; i <= heroCount; i += 1) {
+            const current = stats[i] || { lp: 40, fate: 0 };
+            window.State.setHeroStat(i, 'lp', Math.max(0, Number(current.lp) + 3));
+            window.State.setHeroStat(i, 'fate', Math.max(0, Number(current.fate) + 1));
+        }
 
-            if (lpEl) {
-                const currentLp = Number(lpEl.textContent);
-                lpEl.textContent = String(Math.max(0, currentLp + 3));
-            }
-
-            if (fateEl) {
-                const currentFate = Number(fateEl.textContent);
-                fateEl.textContent = String(Math.max(0, currentFate + 1));
-            }
-        });
+        this.updateDashboard();
 
         if (window.StorageManager?.persist) {
             window.StorageManager.persist();
@@ -5332,27 +5333,22 @@ window.Combat = {
 
     bindGlobalCombatInputs() {
         const remainingTime = this.getRemainingTimeInput();
-        const difficulty = Utils.byId('difficulty');
 
         if (remainingTime && !remainingTime.dataset.boundCombat) {
             remainingTime.addEventListener('input', () => {
+                window.State.setCombatField('remainingTime', Number(remainingTime.value) || 0);
                 this.updateEpResult();
             });
             remainingTime.dataset.boundCombat = 'true';
         }
-
-        if (difficulty && !difficulty.dataset.boundCombat) {
-            difficulty.addEventListener('change', () => {
-                this.updateEpResult();
-            });
-            difficulty.dataset.boundCombat = 'true';
-        }
     },
 
     init() {
+        this.currentPhase = Number(window.State.getState().combatPhase ?? 0) || 0;
         this.bindGlobalCombatInputs();
         this.updatePhaseTracker();
         this.updateDashboard();
+        this.renderCombatState();
         this.updateEpResult();
     }
 };
