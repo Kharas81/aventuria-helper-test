@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 7:54:22 AM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 7:54:35 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4662,6 +4662,7 @@ window.App = {
 
                 window.State.reset();
                 this.resetUIToDefaults();
+                window.Diagnostics?.clear?.();
                 window.UI?.setStatus?.('🗑️ Spielstand gelöscht.');
             });
         }
@@ -4793,6 +4794,7 @@ window.App = {
 
         if (!adventureId) {
             this.resetUIToDefaults();
+            window.Diagnostics?.clear?.();
             window.UI?.setStatus?.('Bereit.');
             return;
         }
@@ -4806,8 +4808,9 @@ window.App = {
                 throw new Error('Abenteuer-Datei fehlt.');
             }
 
-            const cardData = await window.API?.getCards?.(advData.id);
+            const cardData = await window.API?.getCards?.(advData.id, advData?.set?.id);
             const allCards = Array.isArray(cardData?.cards) ? cardData.cards : [];
+            const masterIndex = await window.API?.getMasterIndex?.(advData?.set?.id);
 
             if (window.Renderer?.renderSetup) {
                 window.Renderer.renderSetup(advData, allCards);
@@ -4839,6 +4842,12 @@ window.App = {
                 window.StorageManager.applyCombatState(window.State.getState().combatState);
             }
 
+            if (window.Diagnostics?.runAdventureDiagnostics) {
+                window.Diagnostics.runAdventureDiagnostics(advData, allCards, masterIndex, {
+                    setKey: advData?.set?.id || 'base_game'
+                });
+            }
+
             if (!skipPersist && !this.isApplyingSavedState && window.StorageManager) {
                 window.StorageManager.persist();
             }
@@ -4846,6 +4855,14 @@ window.App = {
             window.UI?.setStatus?.(`✅ Abenteuer geladen: ${advData.name}`);
         } catch (error) {
             console.error(error);
+
+            window.Diagnostics?.clear?.();
+            window.Diagnostics?.addMessage?.(
+                'error',
+                'Ladefehler',
+                error?.message || 'Unbekannter Fehler beim Laden des Abenteuers.'
+            );
+
             window.UI?.setStatus?.(`❌ Fehler: ${error.message}`);
         }
     },
@@ -4863,6 +4880,7 @@ window.App = {
                 await this.handleUpdate({ skipPersist: true });
             } else {
                 this.resetUIToDefaults();
+                window.Diagnostics?.clear?.();
             }
 
             if (window.StorageManager.applyHeroStats) {
