@@ -1,7 +1,7 @@
 window.Diagnostics = {
     state: {
         visible: false,
-        detailsOpen: true,
+        detailsOpen: false,
         summary: {
             errorCount: 0,
             warningCount: 0,
@@ -25,7 +25,7 @@ window.Diagnostics = {
     reset() {
         this.state = {
             visible: false,
-            detailsOpen: true,
+            detailsOpen: false,
             summary: {
                 errorCount: 0,
                 warningCount: 0,
@@ -57,7 +57,13 @@ window.Diagnostics = {
 
         this.state.sections.push(normalized);
         this.recalculateSummary();
-        this.state.visible = this.state.sections.length > 0;
+
+        const hasAnyMessages =
+            this.state.summary.errorCount > 0 ||
+            this.state.summary.warningCount > 0 ||
+            this.state.summary.infoCount > 0;
+
+        this.state.visible = hasAnyMessages;
         this.render();
     },
 
@@ -90,30 +96,61 @@ window.Diagnostics = {
         };
     },
 
+    getStatusText() {
+        const { errorCount, warningCount } = this.state.summary;
+
+        if (errorCount > 0) {
+            return '❌ Fehler gefunden';
+        }
+
+        if (warningCount > 0) {
+            return '⚠ Warnungen vorhanden';
+        }
+
+        return '✅ Keine Probleme';
+    },
+
+    getStatusClassName() {
+        const { errorCount, warningCount } = this.state.summary;
+
+        if (errorCount > 0) return 'error';
+        if (warningCount > 0) return 'warning';
+        return 'success';
+    },
+
     renderSummary() {
         const summaryEl = this.getSummaryEl();
         if (!summaryEl) return;
-
-        const { errorCount, warningCount, infoCount } = this.state.summary;
 
         if (!this.state.visible) {
             summaryEl.innerHTML = '';
             return;
         }
 
-        const overallState = errorCount > 0
-            ? 'Fehler gefunden'
-            : warningCount > 0
-                ? 'Warnungen vorhanden'
-                : 'Keine kritischen Probleme';
+        const { errorCount, warningCount, infoCount } = this.state.summary;
+        const statusText = this.getStatusText();
+        const toggleLabel = this.state.detailsOpen ? 'Diagnose schließen' : 'Diagnose öffnen';
 
         summaryEl.innerHTML = `
-            <div class="card-list" style="padding:12px; margin:0;">
-                <p style="margin:0 0 8px 0;"><strong>Status:</strong> ${Utils.escapeHtml(overallState)}</p>
-                <div style="display:flex; gap:12px; flex-wrap:wrap;">
-                    <span><strong>Fehler:</strong> ${Utils.escapeHtml(errorCount)}</span>
-                    <span><strong>Warnungen:</strong> ${Utils.escapeHtml(warningCount)}</span>
-                    <span><strong>Infos:</strong> ${Utils.escapeHtml(infoCount)}</span>
+            <div class="card-list diagnostics-summary-bar diagnostics-${Utils.escapeHtml(this.getStatusClassName())}" style="padding:12px; margin:0;">
+                <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;">
+                    <div>
+                        <div style="font-weight:bold; margin-bottom:6px;">${Utils.escapeHtml(statusText)}</div>
+                        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+                            <span><strong>Fehler:</strong> ${Utils.escapeHtml(errorCount)}</span>
+                            <span><strong>Warnungen:</strong> ${Utils.escapeHtml(warningCount)}</span>
+                            <span><strong>Infos:</strong> ${Utils.escapeHtml(infoCount)}</span>
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-outline" type="button" data-action="toggle-diagnostics-details">
+                            ${Utils.escapeHtml(toggleLabel)}
+                        </button>
+                        <button class="btn-outline" type="button" data-action="clear-diagnostics">
+                            Diagnose leeren
+                        </button>
+                    </div>
                 </div>
             </div>
         `;
@@ -122,6 +159,8 @@ window.Diagnostics = {
     renderDetails() {
         const detailsEl = this.getDetailsEl();
         if (!detailsEl) return;
+
+        detailsEl.classList.toggle('hidden', !this.state.detailsOpen);
 
         if (!this.state.visible || !this.state.detailsOpen) {
             detailsEl.innerHTML = '';
@@ -319,6 +358,9 @@ window.Diagnostics = {
                 info: ['Alle Setup-Referenzen wurden im Kartenpool gefunden.']
             });
         }
+
+        this.state.detailsOpen = false;
+        this.render();
     },
 
     init() {
