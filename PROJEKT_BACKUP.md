@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 9:50:14 AM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 9:50:36 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4245,6 +4245,7 @@ hr {
 window.API = {
     cache: {
         adventures: {},
+        adventureLists: {},
         masterIndexes: {},
         catalogCards: {},
         cardPayloads: {}
@@ -4279,6 +4280,15 @@ window.API = {
         }
     },
 
+    extractAdventureIdFromRedirect(redirectValue = '') {
+        const normalized = this.normalizeString(redirectValue);
+        if (!normalized) return '';
+
+        const withoutQuery = normalized.split('?')[0].split('#')[0];
+        const lastSegment = withoutQuery.split('/').pop() || '';
+        return this.normalizeString(lastSegment.replace(/\.json$/i, ''));
+    },
+
     normalizeAdventure(rawData, fallbackId = '', fallbackSetKey = '') {
         const setup = rawData?.setup ?? {};
         const narrative = rawData?.narrative ?? {};
@@ -4291,6 +4301,7 @@ window.API = {
             id: this.normalizeString(rawData?.id || fallbackId),
             name: this.normalizeString(rawData?.name || fallbackId),
             status: this.normalizeString(rawData?.status || ''),
+            redirect_to: this.normalizeString(rawData?.redirect_to || ''),
             set: {
                 id: this.normalizeString(resolvedSet?.id || fallbackSetKey || 'base_game'),
                 name: this.normalizeString(
@@ -4315,6 +4326,41 @@ window.API = {
             },
             source: rawData?.source ?? {},
             notes: this.normalizeString(rawData?.notes ?? rawData?.note ?? '')
+        };
+    },
+
+    normalizeAdventureIndexEntry(rawEntry, fallbackSetKey = '') {
+        if (!rawEntry || typeof rawEntry !== 'object') {
+            return null;
+        }
+
+        const id = this.normalizeString(rawEntry.id);
+        if (!id) {
+            return null;
+        }
+
+        const setId = this.normalizeString(rawEntry?.set?.id || rawEntry?.set_id || fallbackSetKey || 'base_game');
+
+        return {
+            id,
+            name: this.normalizeString(rawEntry.name || id),
+            status: this.normalizeString(rawEntry.status || 'canonical'),
+            hidden: Boolean(rawEntry.hidden),
+            order: Number(rawEntry.order ?? Number.MAX_SAFE_INTEGER),
+            set: {
+                id: setId,
+                name: this.normalizeString(
+                    rawEntry?.set?.name ||
+                    window.CONFIG?.getSetDisplayName?.(setId) ||
+                    setId
+                ),
+                shortName: this.normalizeString(
+                    rawEntry?.set?.shortName ||
+                    window.CONFIG?.getSetShortName?.(setId) ||
+                    rawEntry?.set?.name ||
+                    setId
+                )
+            }
         };
     },
 
@@ -4375,9 +4421,68 @@ window.API = {
         return this.getConfig()?.defaultSet || 'base_game';
     },
 
-    async getAdventure(id, setKey = null) {
+    async getAdventureIndex(setKey = null) {
+        const config = this.getConfig();
+        const resolvedSetKey = this.normalizeString(setKey || config?.defaultSet || 'base_game');
+
+        if (this.cache.adventureLists[resolvedSetKey]) {
+            return this.cache.adventureLists[resolvedSetKey];
+        }
+
+        const path = config?.getAdventureIndexPath
+            ? config.getAdventureIndexPath(resolvedSetKey)
+            : `data/adventures/${resolvedSetKey}/index.json`;
+
+        const rawData = await this.loadJSON(path);
+
+        if (!rawData) {
+            const fallback = [];
+            this.cache.adventureLists[resolvedSetKey] = fallback;
+            return fallback;
+        }
+
+        const entries = this.normalizeArray(rawData?.adventures)
+            .map(entry => this.normalizeAdventureIndexEntry(entry, resolvedSetKey))
+            .filter(Boolean);
+
+        this.cache.adventureLists[resolvedSetKey] = entries;
+        return entries;
+    },
+
+    async getAvailableAdventures() {
+        const config = this.getConfig();
+        const enabledSets = config?.getEnabledSets?.() || [{ id: config?.defaultSet || 'base_game' }];
+
+        const allEntries = [];
+
+        for (const setConfig of enabledSets) {
+            const entries = await this.getAdventureIndex(setConfig.id);
+            allEntries.push(...entries);
+        }
+
+        return allEntries
+            .filter(entry => !entry.hidden)
+            .filter(entry => entry.status !== 'deprecated_alias')
+            .sort((a, b) => {
+                if (a.order !== b.order) {
+                    return a.order - b.order;
+                }
+
+                if (a.set.id !== b.set.id) {
+                    return a.set.name.localeCompare(b.set.name, 'de');
+                }
+
+                return a.name.localeCompare(b.name, 'de');
+            });
+    },
+
+    async getAdventure(id, setKey = null, visitedIds = new Set()) {
         const adventureId = this.normalizeString(id);
         if (!adventureId) return null;
+
+        if (visitedIds.has(adventureId)) {
+            throw new Error(`Alias-Schleife erkannt bei Abenteuer "${adventureId}".`);
+        }
 
         if (this.cache.adventures[adventureId]) {
             return this.cache.adventures[adventureId];
@@ -4394,6 +4499,30 @@ window.API = {
         if (!rawData) {
             console.error('Abenteuer-Datei fehlt:', path);
             return null;
+        }
+
+        const status = this.normalizeString(rawData?.status);
+
+        if (status === 'deprecated_alias') {
+            const redirectAdventureId = this.extractAdventureIdFromRedirect(rawData?.redirect_to);
+
+            if (!redirectAdventureId) {
+                throw new Error(`Alias-Abenteuer "${adventureId}" hat kein gültiges redirect_to.`);
+            }
+
+            visitedIds.add(adventureId);
+
+            const redirectedAdventure = await this.getAdventure(
+                redirectAdventureId,
+                resolvedSetKey,
+                visitedIds
+            );
+
+            if (redirectedAdventure) {
+                this.cache.adventures[adventureId] = redirectedAdventure;
+            }
+
+            return redirectedAdventure;
         }
 
         const normalized = this.normalizeAdventure(rawData, adventureId, resolvedSetKey);
