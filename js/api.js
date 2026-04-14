@@ -14,6 +14,10 @@ window.API = {
         return Array.isArray(value) ? value : [];
     },
 
+    getConfig() {
+        return window.CONFIG || null;
+    },
+
     async fetchJson(path) {
         const res = await fetch(path);
         if (!res.ok) {
@@ -38,6 +42,8 @@ window.API = {
         return {
             id: this.normalizeString(rawData?.id || fallbackId),
             name: this.normalizeString(rawData?.name || fallbackId),
+            status: this.normalizeString(rawData?.status || ''),
+            set: rawData?.set ?? { id: 'base_game', name: 'Aventuria Grundbox' },
             danger_calc: Number(rawData?.danger_calc ?? 0),
             narrative: {
                 intro: this.normalizeString(narrative?.intro),
@@ -68,7 +74,7 @@ window.API = {
             subtypes: this.normalizeArray(rawData.subtypes),
             status: this.normalizeString(rawData.status),
             adventure_refs: this.normalizeArray(rawData.adventure_refs).map(ref => {
-                if (typeof ref === 'string') return ref;
+                if (typeof ref === 'string') return this.normalizeString(ref);
                 return ref?.id ? this.normalizeString(ref.id) : ref;
             }),
             images: rawData.images ?? { front: '', back: null, alt: [] },
@@ -95,7 +101,13 @@ window.API = {
         };
     },
 
-    async getAdventure(id) {
+    getAdventureSetKey(adventureId, fallbackSetKey = 'base_game') {
+        const adventure = this.cache.adventures[this.normalizeString(adventureId)];
+        const setId = this.normalizeString(adventure?.set?.id);
+        return setId || fallbackSetKey || this.getConfig()?.defaultSet || 'base_game';
+    },
+
+    async getAdventure(id, setKey = null) {
         const adventureId = this.normalizeString(id);
         if (!adventureId) return null;
 
@@ -103,7 +115,12 @@ window.API = {
             return this.cache.adventures[adventureId];
         }
 
-        const path = `data/adventures/base_game/${adventureId}.json`;
+        const config = this.getConfig();
+        const resolvedSetKey = this.normalizeString(setKey || config?.defaultSet || 'base_game');
+        const path = config?.getAdventurePath
+            ? config.getAdventurePath(adventureId, resolvedSetKey)
+            : `data/adventures/${resolvedSetKey}/${adventureId}.json`;
+
         const rawData = await this.loadJSON(path);
 
         if (!rawData) {
@@ -116,33 +133,38 @@ window.API = {
         return normalized;
     },
 
-    async getMasterIndex(setKey = 'base_game') {
-        const normalizedSetKey = this.normalizeString(setKey || 'base_game');
+    async getMasterIndex(setKey = null) {
+        const config = this.getConfig();
+        const resolvedSetKey = this.normalizeString(setKey || config?.defaultSet || 'base_game');
 
-        if (this.cache.masterIndexes[normalizedSetKey]) {
-            return this.cache.masterIndexes[normalizedSetKey];
+        if (this.cache.masterIndexes[resolvedSetKey]) {
+            return this.cache.masterIndexes[resolvedSetKey];
         }
 
+        const path = config?.getMasterIndexPath
+            ? config.getMasterIndexPath(resolvedSetKey)
+            : `data/cards/${resolvedSetKey}/master_${resolvedSetKey}.json`;
+
         try {
-            const rawData = await this.fetchJson(`data/cards/base_game/master_${normalizedSetKey}.json`);
+            const rawData = await this.fetchJson(path);
             const normalized = {
-                set: rawData?.set || { id: normalizedSetKey, name: normalizedSetKey },
+                set: rawData?.set || { id: resolvedSetKey, name: resolvedSetKey },
                 catalog_version: Number(rawData?.catalog_version ?? 1),
                 cards: this.normalizeArray(rawData?.cards)
             };
 
-            this.cache.masterIndexes[normalizedSetKey] = normalized;
+            this.cache.masterIndexes[resolvedSetKey] = normalized;
             return normalized;
         } catch (err) {
             console.error('Fehler beim Laden des Master-Index:', err);
 
             const fallback = {
-                set: { id: normalizedSetKey, name: normalizedSetKey },
+                set: { id: resolvedSetKey, name: resolvedSetKey },
                 catalog_version: 1,
                 cards: []
             };
 
-            this.cache.masterIndexes[normalizedSetKey] = fallback;
+            this.cache.masterIndexes[resolvedSetKey] = fallback;
             return fallback;
         }
     },
@@ -162,7 +184,7 @@ window.API = {
         return normalized;
     },
 
-    async getCards(adventureId) {
+    async getCards(adventureId, setKey = null) {
         const normalizedAdventureId = this.normalizeString(adventureId);
         if (!normalizedAdventureId) {
             return this.normalizeCardPayload({ cards: [] }, '');
@@ -172,9 +194,11 @@ window.API = {
             return this.cache.cardPayloads[normalizedAdventureId];
         }
 
-        const master = await this.getMasterIndex('base_game');
+        const config = this.getConfig();
+        const resolvedSetKey = this.getAdventureSetKey(normalizedAdventureId, setKey || config?.defaultSet || 'base_game');
+        const master = await this.getMasterIndex(resolvedSetKey);
 
-        const migratedMasterCards = master.cards.filter(card =>
+        const migratedMasterCards = this.normalizeArray(master.cards).filter(card =>
             Array.isArray(card?.adventure_refs) &&
             card.adventure_refs.includes(normalizedAdventureId) &&
             typeof card?.detail_path === 'string' &&
@@ -205,8 +229,12 @@ window.API = {
             return payload;
         }
 
+        const legacyPath = config?.getLegacyAdventureCardsPath
+            ? config.getLegacyAdventureCardsPath(normalizedAdventureId, resolvedSetKey)
+            : `data/cards/${resolvedSetKey}/${normalizedAdventureId}/${normalizedAdventureId}.json`;
+
         try {
-            const rawData = await this.fetchJson(`data/cards/base_game/${normalizedAdventureId}/${normalizedAdventureId}.json`);
+            const rawData = await this.fetchJson(legacyPath);
             const payload = this.normalizeCardPayload(rawData, normalizedAdventureId);
 
             this.cache.cardPayloads[normalizedAdventureId] = payload;
@@ -220,18 +248,20 @@ window.API = {
         }
     },
 
-    async preloadCardsForAdventure(adventureId) {
-        return await this.getCards(adventureId);
+    async preloadCardsForAdventure(adventureId, setKey = null) {
+        return await this.getCards(adventureId, setKey);
     },
 
-    async findCardById(id, setKey = 'base_game') {
+    async findCardById(id, setKey = null) {
         const targetId = this.normalizeString(id);
         if (!targetId) return null;
 
         const cachedCatalogCard = Object.values(this.cache.catalogCards).find(card => card?.id === targetId);
         if (cachedCatalogCard) return cachedCatalogCard;
 
-        const master = await this.getMasterIndex(setKey);
+        const config = this.getConfig();
+        const resolvedSetKey = this.normalizeString(setKey || config?.defaultSet || 'base_game');
+        const master = await this.getMasterIndex(resolvedSetKey);
         const entry = this.normalizeArray(master.cards).find(card => this.normalizeString(card?.id) === targetId);
 
         if (entry?.detail_path) {
