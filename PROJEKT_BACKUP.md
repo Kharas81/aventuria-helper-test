@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 6:08:33 AM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 6:17:45 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -5425,29 +5425,6 @@ window.CONFIG = {
     }
 };
 
-```
-
----
-
-## 📄 Datei: js/loader.js
-```js
-/**
- * js/loader.js
- * Lädt Abenteuer-Daten basierend auf dem Pfad
- */
-async function fetchAdventureData(path) {
-    try {
-        const response = await fetch(`data/adventures/${path}.json`);
-        if (!response.ok) {
-            throw new Error(`Abenteuer unter ${path} nicht gefunden.`);
-        }
-        return await response.json();
-    } catch (error) {
-        console.error("Ladefehler:", error);
-        alert("Fehler beim Laden des Abenteuers. Prüfe die Konsole.");
-        return null;
-    }
-}
 ```
 
 ---
