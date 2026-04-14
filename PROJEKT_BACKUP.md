@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 3:24:32 PM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 3:24:57 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -7017,6 +7017,31 @@ window.StorageManager = {
         window.addEventListener('beforeunload', () => {
             this.persist();
         });
+    }
+};
+
+```
+
+---
+
+## 📄 Datei: js/ui-modals.js
+```js
+window.UIModals = {
+    closeAll() {
+        // Alle Modal-Backdrops ausblenden
+        Utils.qsa('.modal-backdrop').forEach(modal => {
+            modal.style.display = 'none';
+        });
+
+        // Eventuelle Previews schließen
+        if (window.UIPreview) {
+            window.UIPreview.close();
+        }
+
+        // Falls die Karten-Detailansicht offen ist, sicherstellen dass sie resettet wird
+        if (window.Renderer?.closeCardDetail) {
+            window.Renderer.closeCardDetail();
+        }
     }
 };
 
