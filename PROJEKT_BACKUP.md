@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 3:44:22 AM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 4:03:06 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4220,81 +4220,260 @@ hr {
 window.API = {
     cache: {
         adventures: {},
-        cards: []
+        masterIndexes: {},
+        catalogCards: {},
+        cardPayloads: {}
+    },
+
+    normalizeString(value) {
+        return String(value ?? '').trim();
+    },
+
+    normalizeArray(value) {
+        return Array.isArray(value) ? value : [];
+    },
+
+    async fetchJson(path) {
+        const res = await fetch(path);
+        if (!res.ok) {
+            throw new Error(`${path} → HTTP ${res.status}`);
+        }
+        return await res.json();
     },
 
     async loadJSON(path) {
         try {
-            const res = await fetch(path);
-            if (!res.ok) throw new Error(`HTTP ${res.status}`);
-            return await res.json();
+            return await this.fetchJson(path);
         } catch (err) {
-            console.error("Fehler beim Laden:", path, err);
+            console.error('Fehler beim Laden:', path, err);
             return null;
         }
     },
 
-    // -----------------------------
-    // 🧭 ADVENTURES (FIXED PATH!)
-    // -----------------------------
+    normalizeAdventure(rawData, fallbackId = '') {
+        const setup = rawData?.setup ?? {};
+        const narrative = rawData?.narrative ?? {};
+
+        return {
+            id: this.normalizeString(rawData?.id || fallbackId),
+            name: this.normalizeString(rawData?.name || fallbackId),
+            danger_calc: Number(rawData?.danger_calc ?? 0),
+            narrative: {
+                intro: this.normalizeString(narrative?.intro),
+                checks: this.normalizeArray(narrative?.checks)
+            },
+            setup: {
+                card_refs: setup?.card_refs ?? {},
+                blue_cards: this.normalizeArray(setup?.blue_cards),
+                minion_cards: this.normalizeArray(setup?.minion_cards),
+                special_cards: this.normalizeArray(setup?.special_cards),
+                victory: this.normalizeString(setup?.victory),
+                defeat: this.normalizeString(setup?.defeat)
+            },
+            source: rawData?.source ?? {},
+            notes: this.normalizeString(rawData?.notes ?? rawData?.note ?? '')
+        };
+    },
+
+    normalizeCatalogCard(rawData) {
+        if (!rawData || typeof rawData !== 'object') return null;
+
+        return {
+            id: this.normalizeString(rawData.id),
+            name: this.normalizeString(rawData.name),
+            set: rawData.set ?? { id: 'base_game', name: 'Aventuria Grundbox' },
+            card_category: this.normalizeString(rawData.card_category),
+            type: this.normalizeString(rawData.type),
+            subtypes: this.normalizeArray(rawData.subtypes),
+            status: this.normalizeString(rawData.status),
+            adventure_refs: this.normalizeArray(rawData.adventure_refs).map(ref => {
+                if (typeof ref === 'string') return ref;
+                return ref?.id ? this.normalizeString(ref.id) : ref;
+            }),
+            images: rawData.images ?? { front: '', back: null, alt: [] },
+            image: this.normalizeString(rawData?.images?.front || rawData?.image || ''),
+            tags: this.normalizeArray(rawData.tags),
+            custom_tags: this.normalizeArray(rawData.custom_tags),
+            keywords: this.normalizeArray(rawData.keywords),
+            search_text: this.normalizeString(rawData.search_text),
+            stats: rawData.stats ?? {},
+            rules: rawData.rules ?? {},
+            source: rawData.source ?? {},
+            note: this.normalizeString(rawData.note ?? rawData.notes ?? ''),
+            notes: this.normalizeString(rawData.notes ?? rawData.note ?? '')
+        };
+    },
+
+    normalizeCardPayload(rawData, adventureId = '') {
+        return {
+            adventure_id: this.normalizeString(rawData?.adventure_id || adventureId),
+            adventure_name: this.normalizeString(rawData?.adventure_name || ''),
+            cards: this.normalizeArray(rawData?.cards)
+                .map(card => this.normalizeCatalogCard(card))
+                .filter(Boolean)
+        };
+    },
+
     async getAdventure(id) {
-        if (!id) return null;
+        const adventureId = this.normalizeString(id);
+        if (!adventureId) return null;
 
-        if (this.cache.adventures[id]) {
-            return this.cache.adventures[id];
+        if (this.cache.adventures[adventureId]) {
+            return this.cache.adventures[adventureId];
         }
 
-        const path = `data/adventures/base_game/${id}.json`;
-        const data = await this.loadJSON(path);
+        const path = `data/adventures/base_game/${adventureId}.json`;
+        const rawData = await this.loadJSON(path);
 
-        if (!data) {
-            console.error("Abenteuer-Datei fehlt:", path);
+        if (!rawData) {
+            console.error('Abenteuer-Datei fehlt:', path);
             return null;
         }
 
-        this.cache.adventures[id] = data;
-        return data;
+        const normalized = this.normalizeAdventure(rawData, adventureId);
+        this.cache.adventures[adventureId] = normalized;
+        return normalized;
     },
 
-    // -----------------------------
-    // 🧩 MASTER CARD INDEX
-    // -----------------------------
-    async getMasterIndex(setKey = "base_game") {
-        if (this.cache.cards.length) {
-            return this.cache.cards;
+    async getMasterIndex(setKey = 'base_game') {
+        const normalizedSetKey = this.normalizeString(setKey || 'base_game');
+
+        if (this.cache.masterIndexes[normalizedSetKey]) {
+            return this.cache.masterIndexes[normalizedSetKey];
         }
 
-        const path = `data/cards/${setKey}/catalog/`;
-        const files = [
-            "zs_leute.json",
-            "kg_risiko_gewinn.json",
-            "lg_leute_idol.json",
-            "ha_das_spiel_spielen.json"
-        ];
+        try {
+            const rawData = await this.fetchJson(`data/cards/base_game/master_${normalizedSetKey}.json`);
+            const normalized = {
+                set: rawData?.set || { id: normalizedSetKey, name: normalizedSetKey },
+                catalog_version: Number(rawData?.catalog_version ?? 1),
+                cards: this.normalizeArray(rawData?.cards)
+            };
 
-        const results = await Promise.all(
-            files.map(file => this.loadJSON(path + file))
+            this.cache.masterIndexes[normalizedSetKey] = normalized;
+            return normalized;
+        } catch (err) {
+            console.error('Fehler beim Laden des Master-Index:', err);
+
+            const fallback = {
+                set: { id: normalizedSetKey, name: normalizedSetKey },
+                catalog_version: 1,
+                cards: []
+            };
+
+            this.cache.masterIndexes[normalizedSetKey] = fallback;
+            return fallback;
+        }
+    },
+
+    async getCatalogCard(detailPath) {
+        const normalizedPath = this.normalizeString(detailPath);
+        if (!normalizedPath) return null;
+
+        if (this.cache.catalogCards[normalizedPath]) {
+            return this.cache.catalogCards[normalizedPath];
+        }
+
+        const rawData = await this.fetchJson(normalizedPath);
+        const normalized = this.normalizeCatalogCard(rawData);
+
+        this.cache.catalogCards[normalizedPath] = normalized;
+        return normalized;
+    },
+
+    async getCards(adventureId) {
+        const normalizedAdventureId = this.normalizeString(adventureId);
+        if (!normalizedAdventureId) {
+            return this.normalizeCardPayload({ cards: [] }, '');
+        }
+
+        if (this.cache.cardPayloads[normalizedAdventureId]) {
+            return this.cache.cardPayloads[normalizedAdventureId];
+        }
+
+        const master = await this.getMasterIndex('base_game');
+
+        const migratedMasterCards = master.cards.filter(card =>
+            Array.isArray(card?.adventure_refs) &&
+            card.adventure_refs.includes(normalizedAdventureId) &&
+            typeof card?.detail_path === 'string' &&
+            card.detail_path.trim().length > 0
         );
 
-        this.cache.cards = results.filter(Boolean);
-        return this.cache.cards;
+        if (migratedMasterCards.length > 0) {
+            const loadedCards = [];
+
+            for (const entry of migratedMasterCards) {
+                try {
+                    const detail = await this.getCatalogCard(entry.detail_path);
+                    if (detail) {
+                        loadedCards.push(detail);
+                    }
+                } catch (err) {
+                    console.warn(`⚠️ Katalogkarte konnte nicht geladen werden: ${entry?.id}`, err);
+                }
+            }
+
+            const payload = {
+                adventure_id: normalizedAdventureId,
+                adventure_name: '',
+                cards: loadedCards
+            };
+
+            this.cache.cardPayloads[normalizedAdventureId] = payload;
+            return payload;
+        }
+
+        try {
+            const rawData = await this.fetchJson(`data/cards/base_game/${normalizedAdventureId}/${normalizedAdventureId}.json`);
+            const payload = this.normalizeCardPayload(rawData, normalizedAdventureId);
+
+            this.cache.cardPayloads[normalizedAdventureId] = payload;
+            return payload;
+        } catch (err) {
+            console.warn(`⚠️ Karten nicht gefunden für "${normalizedAdventureId}"`, err);
+
+            const fallback = this.normalizeCardPayload({ cards: [] }, normalizedAdventureId);
+            this.cache.cardPayloads[normalizedAdventureId] = fallback;
+            return fallback;
+        }
     },
 
-    // -----------------------------
-    // 🔎 FIND CARD
-    // -----------------------------
-    findCardById(id) {
-        return this.cache.cards.find(c => c.id === id) || null;
+    async preloadCardsForAdventure(adventureId) {
+        return await this.getCards(adventureId);
     },
 
-    // -----------------------------
-    // 🔍 CARD DETAIL MODAL
-    // -----------------------------
-    openCardDetailById(id) {
-        const card = this.findCardById(id);
+    async findCardById(id, setKey = 'base_game') {
+        const targetId = this.normalizeString(id);
+        if (!targetId) return null;
+
+        const cachedCatalogCard = Object.values(this.cache.catalogCards).find(card => card?.id === targetId);
+        if (cachedCatalogCard) return cachedCatalogCard;
+
+        const master = await this.getMasterIndex(setKey);
+        const entry = this.normalizeArray(master.cards).find(card => this.normalizeString(card?.id) === targetId);
+
+        if (entry?.detail_path) {
+            try {
+                return await this.getCatalogCard(entry.detail_path);
+            } catch (err) {
+                console.warn(`⚠️ Detailkarte konnte nicht geladen werden: ${targetId}`, err);
+            }
+        }
+
+        for (const payload of Object.values(this.cache.cardPayloads)) {
+            const found = this.normalizeArray(payload?.cards).find(card => this.normalizeString(card?.id) === targetId);
+            if (found) return found;
+        }
+
+        return null;
+    },
+
+    async openCardDetailById(id) {
+        const card = await this.findCardById(id);
         if (!card) return;
 
-        if (window.Renderer) {
+        if (window.Renderer && typeof window.Renderer.openCardDetail === 'function') {
             window.Renderer.openCardDetail(card);
         }
     }
