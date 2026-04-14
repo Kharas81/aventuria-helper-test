@@ -12,44 +12,96 @@ window.CONFIG = {
         base_game: {
             id: 'base_game',
             name: 'Aventuria Grundbox',
+            shortName: 'Grundbox',
+            enabled: true,
             adventurePath: 'data/adventures/base_game',
             cardRoot: 'data/cards/base_game',
             catalogRoot: 'data/cards/base_game/catalog',
             manualRoot: 'data/manual/base_game',
             masterIndex: 'data/cards/base_game/master_base_game.json'
         }
+
+        /*
+        Beispiel für weitere Boxen:
+        ,
+        irgend_eine_box: {
+            id: 'irgend_eine_box',
+            name: 'Aventuria Irgendeine Box',
+            shortName: 'Irgendeine Box',
+            enabled: true,
+            adventurePath: 'data/adventures/irgend_eine_box',
+            cardRoot: 'data/cards/irgend_eine_box',
+            catalogRoot: 'data/cards/irgend_eine_box/catalog',
+            manualRoot: 'data/manual/irgend_eine_box',
+            masterIndex: 'data/cards/irgend_eine_box/master_irgend_eine_box.json'
+        }
+        */
     },
 
-    getSet(setKey = 'base_game') {
-        const normalizedKey = String(setKey || this.defaultSet).trim() || this.defaultSet;
+    normalizeSetKey(setKey = '') {
+        const normalized = String(setKey || '').trim();
+        return normalized || this.defaultSet;
+    },
+
+    getSet(setKey = '') {
+        const normalizedKey = this.normalizeSetKey(setKey);
         return this.sets[normalizedKey] || this.sets[this.defaultSet];
     },
 
-    getAdventurePath(adventureId, setKey = 'base_game') {
+    getEnabledSets() {
+        return Object.values(this.sets)
+            .filter(setConfig => setConfig?.enabled !== false)
+            .map(setConfig => ({
+                id: String(setConfig.id ?? '').trim(),
+                name: String(setConfig.name ?? setConfig.id ?? '').trim(),
+                shortName: String(setConfig.shortName ?? setConfig.name ?? setConfig.id ?? '').trim()
+            }))
+            .filter(setConfig => setConfig.id);
+    },
+
+    hasSet(setKey = '') {
+        const normalizedKey = this.normalizeSetKey(setKey);
+        return Boolean(this.sets[normalizedKey]);
+    },
+
+    getAdventurePath(adventureId, setKey = '') {
         const setConfig = this.getSet(setKey);
         const id = String(adventureId ?? '').trim();
         return `${setConfig.adventurePath}/${id}.json`;
     },
 
-    getLegacyAdventureCardsPath(adventureId, setKey = 'base_game') {
+    getLegacyAdventureCardsPath(adventureId, setKey = '') {
         const setConfig = this.getSet(setKey);
         const id = String(adventureId ?? '').trim();
         return `${setConfig.cardRoot}/${id}/${id}.json`;
     },
 
-    getMasterIndexPath(setKey = 'base_game') {
+    getMasterIndexPath(setKey = '') {
         const setConfig = this.getSet(setKey);
         return setConfig.masterIndex;
     },
 
-    getCatalogRoot(setKey = 'base_game') {
+    getCatalogRoot(setKey = '') {
         const setConfig = this.getSet(setKey);
         return setConfig.catalogRoot;
     },
 
-    getManualPagePath(pageNumber, setKey = 'base_game') {
+    getManualRoot(setKey = '') {
+        const setConfig = this.getSet(setKey);
+        return setConfig.manualRoot;
+    },
+
+    getManualPagePath(pageNumber, setKey = '') {
         const setConfig = this.getSet(setKey);
         const page = String(pageNumber).padStart(2, '0');
         return `${setConfig.manualRoot}/page_${page}.json`;
+    },
+
+    getSetDisplayName(setKey = '') {
+        return this.getSet(setKey)?.name || this.getSet(this.defaultSet)?.name || 'Aventuria';
+    },
+
+    getSetShortName(setKey = '') {
+        return this.getSet(setKey)?.shortName || this.getSet(setKey)?.name || 'Set';
     }
 };
