@@ -1,30 +1,33 @@
 window.Rulebook = {
     rulesData: [],
     currentPage: 1,
+    currentSet: '',
 
     validManualPages: [
         1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
         13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24
     ],
 
-    indexData: [
-        { p: 1, title: 'Titelblatt' },
-        { p: 2, title: 'Was ist Aventurien?' },
-        { p: 4, title: 'Südosten & ferne Regionen' },
-        { p: 5, title: 'Religionen, Kulturen & Gefahren' },
-        { p: 6, title: 'Vorbereitung' },
-        { p: 7, title: 'Spielmaterial' },
-        { p: 9, title: 'Das Abenteuer' },
-        { p: 10, title: 'Der Kampf (Setup)' },
-        { p: 13, title: 'Kampfablauf' },
-        { p: 15, title: 'Sieg & Atempause' },
-        { p: 17, title: 'Silvanas Befreiung' },
-        { p: 19, title: 'Leute, die nicht spielen' },
-        { p: 20, title: 'Wildenstein Akt I' },
-        { p: 21, title: 'Wildenstein Akt II' },
-        { p: 23, title: 'Wildenstein Akt III' },
-        { p: 24, title: 'Übersichten' }
-    ],
+    indexDataBySet: {
+        base_game: [
+            { p: 1, title: 'Titelblatt' },
+            { p: 2, title: 'Was ist Aventurien?' },
+            { p: 4, title: 'Südosten & ferne Regionen' },
+            { p: 5, title: 'Religionen, Kulturen & Gefahren' },
+            { p: 6, title: 'Vorbereitung' },
+            { p: 7, title: 'Spielmaterial' },
+            { p: 9, title: 'Das Abenteuer' },
+            { p: 10, title: 'Der Kampf (Setup)' },
+            { p: 13, title: 'Kampfablauf' },
+            { p: 15, title: 'Sieg & Atempause' },
+            { p: 17, title: 'Silvanas Befreiung' },
+            { p: 19, title: 'Leute, die nicht spielen' },
+            { p: 20, title: 'Wildenstein Akt I' },
+            { p: 21, title: 'Wildenstein Akt II' },
+            { p: 23, title: 'Wildenstein Akt III' },
+            { p: 24, title: 'Übersichten' }
+        ]
+    },
 
     stripCitationMarkers(text) {
         return String(text ?? '').replace(/\s*\[cite:\s*[\d\- ,]+\]/gi, '').trim();
@@ -62,22 +65,81 @@ window.Rulebook = {
         return Utils.byId('codex-search');
     },
 
-    open() {
+    getManualSetLabel() {
+        return Utils.byId('manual-set-label');
+    },
+
+    resolveSetKey(preferredSetKey = '') {
+        const normalizedPreferred = Utils.normalizeString(preferredSetKey);
+        if (normalizedPreferred && window.CONFIG?.hasSet?.(normalizedPreferred)) {
+            return normalizedPreferred;
+        }
+
+        const activeSet = window.API?.getActiveSetKey?.();
+        if (activeSet && window.CONFIG?.hasSet?.(activeSet)) {
+            return activeSet;
+        }
+
+        return window.CONFIG?.defaultSet || 'base_game';
+    },
+
+    getIndexDataForSet(setKey = '') {
+        const resolvedSetKey = this.resolveSetKey(setKey);
+        return this.indexDataBySet[resolvedSetKey] || this.indexDataBySet[window.CONFIG?.defaultSet || 'base_game'] || [];
+    },
+
+    updateSetLabel() {
+        const label = this.getManualSetLabel();
+        if (!label) return;
+
+        label.textContent = window.CONFIG?.getSetDisplayName?.(this.currentSet) || 'Regelbuch';
+    },
+
+    async ensureSet(setKey = '') {
+        const resolvedSetKey = this.resolveSetKey(setKey);
+
+        if (this.currentSet === resolvedSetKey && this.rulesData.length) {
+            this.updateSetLabel();
+            return;
+        }
+
+        this.currentSet = resolvedSetKey;
+        this.rulesData = [];
+        this.updateSetLabel();
+
+        const list = this.getManualPageList();
+        if (list) {
+            list.innerHTML = '';
+
+            const fragment = document.createDocumentFragment();
+
+            this.getIndexDataForSet(this.currentSet).forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = `S. ${item.p} – ${item.title}`;
+                li.addEventListener('click', () => this.jumpToPage(item.p));
+                fragment.appendChild(li);
+            });
+
+            list.appendChild(fragment);
+        }
+
+        await this.buildRulesData(this.currentSet);
+    },
+
+    async open() {
         const modal = this.getModal();
         if (!modal) return;
 
         modal.style.display = 'flex';
         this.showTab('reader');
 
-        if (!this.getManualPageList()?.children.length) {
-            this.init();
-        }
+        await this.ensureSet();
 
         if (!this.currentPage || !this.validManualPages.includes(this.currentPage)) {
             this.currentPage = this.validManualPages[0];
         }
 
-        this.loadPage(this.currentPage);
+        await this.loadPage(this.currentPage);
     },
 
     close() {
@@ -138,13 +200,17 @@ window.Rulebook = {
         container.innerHTML = '<div class="reader-text">Lade Schriftrolle...</div>';
 
         try {
-            const res = await fetch(`data/manual/base_game/page_${String(nr).padStart(2, '0')}.json`);
+            const path = window.CONFIG?.getManualPagePath?.(nr, this.currentSet)
+                || `data/manual/base_game/page_${String(nr).padStart(2, '0')}.json`;
+
+            const res = await fetch(path);
             if (!res.ok) {
                 throw new Error(`HTTP ${res.status}`);
             }
 
             const data = await res.json();
-            const title = Utils.escapeHtml(this.stripCitationMarkers(data?.title ?? `Seite ${nr}`));
+            const rawTitle = this.stripCitationMarkers(data?.title ?? `Seite ${nr}`);
+            const title = Utils.escapeHtml(rawTitle);
             const content = Utils.escapeHtml(this.stripCitationMarkers(data?.content ?? '')).replace(/\n/g, '<br>');
             const image = String(data?.image ?? '').trim();
 
@@ -171,7 +237,7 @@ window.Rulebook = {
 
             const titleEl = Utils.byId('manual-title');
             if (titleEl) {
-                titleEl.textContent = this.stripCitationMarkers(data?.title ?? `Seite ${nr}`);
+                titleEl.textContent = rawTitle;
             }
 
             this.currentPage = nr;
@@ -226,12 +292,16 @@ window.Rulebook = {
             : '<p>Kein Treffer im Kodex.</p>';
     },
 
-    async buildRulesData() {
+    async buildRulesData(setKey = '') {
+        const resolvedSetKey = this.resolveSetKey(setKey);
         const pages = [];
 
         for (const nr of this.validManualPages) {
             try {
-                const res = await fetch(`data/manual/base_game/page_${String(nr).padStart(2, '0')}.json`);
+                const path = window.CONFIG?.getManualPagePath?.(nr, resolvedSetKey)
+                    || `data/manual/base_game/page_${String(nr).padStart(2, '0')}.json`;
+
+                const res = await fetch(path);
                 if (!res.ok) continue;
 
                 const data = await res.json();
@@ -249,23 +319,7 @@ window.Rulebook = {
     },
 
     async init() {
-        const list = this.getManualPageList();
-        if (list) {
-            list.innerHTML = '';
-
-            const fragment = document.createDocumentFragment();
-
-            this.indexData.forEach(item => {
-                const li = document.createElement('li');
-                li.textContent = `S. ${item.p} – ${item.title}`;
-                li.addEventListener('click', () => this.jumpToPage(item.p));
-                fragment.appendChild(li);
-            });
-
-            list.appendChild(fragment);
-        }
-
-        await this.buildRulesData();
+        await this.ensureSet();
 
         const search = this.getCodexSearch();
         if (search && !search.dataset.bound) {
