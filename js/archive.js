@@ -3,21 +3,12 @@ window.Archive = {
     allCards: [],
     filteredCards: [],
 
-    escapeHtml(value) {
-        return String(value ?? '')
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#39;');
-    },
-
     normalizeArray(value) {
-        return Array.isArray(value) ? value : [];
+        return Utils.normalizeArray(value);
     },
 
     async open() {
-        const modal = document.getElementById('archive-modal');
+        const modal = Utils.byId('archive-modal');
         if (!modal) return;
 
         modal.style.display = 'flex';
@@ -30,7 +21,7 @@ window.Archive = {
     },
 
     close() {
-        const modal = document.getElementById('archive-modal');
+        const modal = Utils.byId('archive-modal');
         if (!modal) return;
 
         modal.style.display = 'none';
@@ -39,7 +30,7 @@ window.Archive = {
     async loadSet(setKey = 'base_game') {
         this.currentSet = String(setKey || 'base_game').trim() || 'base_game';
 
-        const grid = document.getElementById('archive-grid');
+        const grid = Utils.byId('archive-grid');
         if (grid) {
             grid.innerHTML = '<p class="placeholder-text">Archiv wird geladen ...</p>';
         }
@@ -75,7 +66,7 @@ window.Archive = {
             this.filteredCards = [...loadedCards];
             this.render();
 
-            const searchInput = document.getElementById('archive-search');
+            const searchInput = Utils.byId('archive-search');
             if (searchInput) {
                 searchInput.value = '';
             }
@@ -133,7 +124,7 @@ window.Archive = {
     },
 
     render() {
-        const grid = document.getElementById('archive-grid');
+        const grid = Utils.byId('archive-grid');
         if (!grid) return;
 
         if (!this.filteredCards.length) {
@@ -143,15 +134,15 @@ window.Archive = {
 
         grid.innerHTML = this.filteredCards.map(card => {
             const image = this.getImageForCard(card);
-            const id = this.escapeHtml(card?.id ?? '');
-            const name = this.escapeHtml(card?.name ?? 'Unbenannte Karte');
-            const type = this.escapeHtml(card?.type ?? 'karte');
-            const status = this.escapeHtml(card?.status ?? '');
+            const id = Utils.escapeHtml(card?.id ?? '');
+            const name = Utils.escapeHtml(card?.name ?? 'Unbenannte Karte');
+            const type = Utils.escapeHtml(card?.type ?? 'karte');
+            const status = Utils.escapeHtml(card?.status ?? '');
 
             return `
                 <div class="archive-card" data-card-id="${id}">
                     <img
-                        src="${this.escapeHtml(image)}"
+                        src="${Utils.escapeHtml(image)}"
                         alt="${name}"
                         loading="lazy"
                         onerror="this.onerror=null;this.src='assets/images/placeholder.jpg';"
@@ -173,8 +164,8 @@ window.Archive = {
     },
 
     init() {
-        const searchInput = document.getElementById('archive-search');
-        const modal = document.getElementById('archive-modal');
+        const searchInput = Utils.byId('archive-search');
+        const modal = Utils.byId('archive-modal');
 
         if (searchInput && !searchInput.dataset.bound) {
             searchInput.addEventListener('input', event => {
