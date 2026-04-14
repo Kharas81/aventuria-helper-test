@@ -5,6 +5,8 @@ window.App = {
         const savedState = window.StorageManager?.loadState?.() || window.State.getDefaultState();
         window.State.replaceState(savedState);
 
+        await this.populateAdventurePicker();
+
         const picker = Utils.byId('adventurePicker');
         const heroCount = Utils.byId('heroCount');
         const difficulty = Utils.byId('difficulty');
@@ -75,6 +77,39 @@ window.App = {
         await this.restoreSavedState();
 
         console.log('App initialisiert.');
+    },
+
+    async populateAdventurePicker() {
+        const picker = Utils.byId('adventurePicker');
+        if (!picker) return;
+
+        const previouslySelected = window.State?.getState?.()?.selectedAdventure || '';
+
+        picker.innerHTML = '';
+        picker.appendChild(new Option('Bitte wählen ...', ''));
+
+        try {
+            const adventures = await window.API?.getAvailableAdventures?.();
+            const enabledSets = window.CONFIG?.getEnabledSets?.() || [];
+            const showSetPrefix = enabledSets.length > 1;
+
+            (adventures || []).forEach(adventure => {
+                const label = showSetPrefix
+                    ? `${adventure.set.shortName} · ${adventure.name}`
+                    : adventure.name;
+
+                picker.appendChild(new Option(label, adventure.id));
+            });
+
+            if (previouslySelected && !Array.from(picker.options).some(option => option.value === previouslySelected)) {
+                picker.appendChild(new Option(`${previouslySelected} (alt/extern)`, previouslySelected));
+            }
+
+            picker.value = previouslySelected || '';
+        } catch (error) {
+            console.error('Fehler beim Aufbau der Abenteuerliste:', error);
+            window.UI?.setStatus?.('⚠️ Abenteuerliste konnte nicht geladen werden.');
+        }
     },
 
     setVictoryDefeat(adventure) {
@@ -191,9 +226,9 @@ window.App = {
     async handleUpdate(options = {}) {
         const { skipPersist = false } = options;
 
-        const adventureId = window.State.getState().selectedAdventure || '';
+        const requestedAdventureId = window.State.getState().selectedAdventure || '';
 
-        if (!adventureId) {
+        if (!requestedAdventureId) {
             this.resetUIToDefaults();
             window.Diagnostics?.clear?.();
             window.UI?.setStatus?.('Bereit.');
@@ -203,10 +238,19 @@ window.App = {
         window.UI?.setStatus?.('⏳ Abenteuer wird geladen...');
 
         try {
-            const advData = await window.API?.getAdventure?.(adventureId);
+            const advData = await window.API?.getAdventure?.(requestedAdventureId);
 
             if (!advData) {
                 throw new Error('Abenteuer-Datei fehlt.');
+            }
+
+            if (advData.id && advData.id !== requestedAdventureId) {
+                window.State.setSelectedAdventure(advData.id);
+
+                const picker = Utils.byId('adventurePicker');
+                if (picker) {
+                    picker.value = advData.id;
+                }
             }
 
             const cardData = await window.API?.getCards?.(advData.id, advData?.set?.id);
