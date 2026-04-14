@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 8:08:09 AM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 8:19:27 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4023,20 +4023,8 @@ hr {
         </div>
 
         <section id="diagnostics-section" class="card-list hidden">
-            <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;">
-                <h2 style="margin:0;">Diagnose</h2>
-                <div class="button-group">
-                    <button class="btn-outline" type="button" data-action="toggle-diagnostics-details">
-                        Details ein/ausblenden
-                    </button>
-                    <button class="btn-outline" type="button" data-action="clear-diagnostics">
-                        Diagnose leeren
-                    </button>
-                </div>
-            </div>
-
-            <div id="diagnostics-summary" style="margin-top:12px;"></div>
-            <div id="diagnostics-details" style="margin-top:12px;"></div>
+            <div id="diagnostics-summary"></div>
+            <div id="diagnostics-details" class="hidden" style="margin-top:12px;"></div>
         </section>
 
         <section id="story-wrapper" class="card-list">
