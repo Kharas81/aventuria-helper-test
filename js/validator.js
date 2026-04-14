@@ -1,302 +1,323 @@
-/**
- * js/validator.js
- * Grundvalidierung für Karten- und Abenteuerdaten.
- */
-window.SystemCheck = {
-    allowedTypes: [
-        'timeline',
-        'leader',
-        'minion',
-        'hero_action',
-        'special',
-        'reward',
-        'training',
-        'adventure_card',
-        'environment',
-        'unknown'
-    ],
-
-    allowedStatus: [
+window.Validator = {
+    allowedAdventureStatuses: [
+        'canonical',
+        'deprecated_alias',
+        'migrated',
         'raw',
         'basic',
         'playable',
         'verified'
     ],
 
-    async fetchJson(path) {
-        const res = await fetch(path);
-        if (!res.ok) {
-            throw new Error(`${path} → HTTP ${res.status}`);
-        }
-        return await res.json();
-    },
+    allowedCardStatuses: [
+        'raw',
+        'basic',
+        'playable',
+        'verified',
+        'migrated',
+        'canonical',
+        'deprecated_alias',
+        'complete'
+    ],
 
     normalizeArray(value) {
         return Array.isArray(value) ? value : [];
     },
 
-    addIssue(list, severity, area, message) {
-        list.push({ severity, area, message });
+    normalizeString(value) {
+        return String(value ?? '').trim();
     },
 
-    validateMasterCards(masterCards) {
-        const issues = [];
-        const seenIds = new Set();
-
-        this.normalizeArray(masterCards).forEach((card, index) => {
-            const cardId = String(card?.id ?? '').trim();
-            const cardName = String(card?.name ?? '').trim();
-            const cardType = String(card?.type ?? '').trim();
-            const cardStatus = String(card?.status ?? '').trim();
-
-            if (!cardId) {
-                this.addIssue(issues, 'error', 'master_base_game', `Eintrag #${index + 1} hat keine ID.`);
-            } else {
-                if (seenIds.has(cardId)) {
-                    this.addIssue(issues, 'error', 'master_base_game', `Doppelte Karten-ID gefunden: "${cardId}".`);
-                }
-                seenIds.add(cardId);
-            }
-
-            if (!cardName) {
-                this.addIssue(issues, 'warn', cardId || `entry_${index + 1}`, 'Name fehlt.');
-            }
-
-            if (!cardType) {
-                this.addIssue(issues, 'warn', cardId || `entry_${index + 1}`, 'Typ fehlt.');
-            } else if (!this.allowedTypes.includes(cardType)) {
-                this.addIssue(issues, 'warn', cardId || `entry_${index + 1}`, `Unbekannter Typ: "${cardType}".`);
-            }
-
-            if (!cardStatus) {
-                this.addIssue(issues, 'warn', cardId || `entry_${index + 1}`, 'Status fehlt.');
-            } else if (!this.allowedStatus.includes(cardStatus)) {
-                this.addIssue(issues, 'warn', cardId || `entry_${index + 1}`, `Unbekannter Status: "${cardStatus}".`);
-            }
-
-            if (!String(card?.image ?? '').trim()) {
-                this.addIssue(issues, 'info', cardId || `entry_${index + 1}`, 'Bildpfad leer.');
-            }
-        });
-
-        return issues;
+    isObject(value) {
+        return value !== null && typeof value === 'object' && !Array.isArray(value);
     },
 
-    validateAdventureReferences(adventure, cardIds, sourceLabel) {
-        const issues = [];
-        const setup = adventure?.setup || {};
+    createResult() {
+        return {
+            ok: true,
+            errors: [],
+            warnings: [],
+            info: []
+        };
+    },
 
-        const groups = [
-            { key: 'blue_cards', label: 'blue_cards' },
-            { key: 'minion_cards', label: 'minion_cards' },
-            { key: 'special_cards', label: 'special_cards' }
-        ];
+    addError(result, message) {
+        result.ok = false;
+        result.errors.push(message);
+    },
 
-        groups.forEach(group => {
-            this.normalizeArray(setup[group.key]).forEach((entry, index) => {
-                const refId = typeof entry === 'string'
-                    ? entry
-                    : String(entry?.id ?? '').trim();
+    addWarning(result, message) {
+        result.warnings.push(message);
+    },
 
-                if (!refId) {
-                    this.addIssue(
-                        issues,
-                        'warn',
-                        sourceLabel,
-                        `${group.label}[${index}] hat keine Karten-ID.`
-                    );
+    addInfo(result, message) {
+        result.info.push(message);
+    },
+
+    validateAdventure(adventure) {
+        const result = this.createResult();
+
+        if (!this.isObject(adventure)) {
+            this.addError(result, 'Abenteuerdaten fehlen oder sind kein Objekt.');
+            return result;
+        }
+
+        const id = this.normalizeString(adventure.id);
+        const name = this.normalizeString(adventure.name);
+        const status = this.normalizeString(adventure.status);
+        const narrative = adventure.narrative ?? {};
+        const setup = adventure.setup ?? {};
+
+        if (!id) {
+            this.addError(result, 'Abenteuer ohne ID gefunden.');
+        }
+
+        if (!name) {
+            this.addError(result, `Abenteuer "${id || 'unbekannt'}" hat keinen Namen.`);
+        }
+
+        if (status && !this.allowedAdventureStatuses.includes(status)) {
+            this.addWarning(
+                result,
+                `Abenteuer "${id || name || 'unbekannt'}" nutzt unbekannten Status "${status}".`
+            );
+        }
+
+        if (status === 'deprecated_alias') {
+            if (!this.normalizeString(adventure.redirect_to)) {
+                this.addError(
+                    result,
+                    `Alias-Abenteuer "${id || name || 'unbekannt'}" hat kein redirect_to.`
+                );
+            }
+
+            return result;
+        }
+
+        if (!this.isObject(narrative)) {
+            this.addError(result, `Abenteuer "${id || name || 'unbekannt'}" hat kein gültiges narrative-Objekt.`);
+        } else {
+            if (!this.normalizeString(narrative.intro)) {
+                this.addWarning(result, `Abenteuer "${id || name || 'unbekannt'}" hat keine Einleitung.`);
+            }
+
+            const checks = this.normalizeArray(narrative.checks);
+            checks.forEach((check, index) => {
+                if (!this.isObject(check)) {
+                    this.addWarning(result, `Abenteuer "${id}" enthält eine ungültige Probe an Position ${index}.`);
                     return;
                 }
 
-                if (!cardIds.has(refId)) {
-                    this.addIssue(
-                        issues,
-                        'warn',
-                        sourceLabel,
-                        `${group.label}[${index}] verweist auf unbekannte Karte: "${refId}".`
-                    );
+                if (!this.normalizeString(check.id)) {
+                    this.addWarning(result, `Abenteuer "${id}" hat eine Probe ohne ID an Position ${index}.`);
+                }
+
+                if (!this.normalizeString(check.skill)) {
+                    this.addWarning(result, `Abenteuer "${id}" hat eine Probe ohne Skill an Position ${index}.`);
+                }
+
+                if (!this.normalizeString(check.text)) {
+                    this.addWarning(result, `Abenteuer "${id}" hat eine Probe ohne Text an Position ${index}.`);
+                }
+
+                if (!this.isObject(check.results)) {
+                    this.addWarning(result, `Abenteuer "${id}" hat eine Probe ohne results-Objekt an Position ${index}.`);
                 }
             });
-        });
+        }
 
-        return issues;
+        if (!this.isObject(setup)) {
+            this.addError(result, `Abenteuer "${id || name || 'unbekannt'}" hat kein gültiges setup-Objekt.`);
+        } else {
+            const blueCards = this.normalizeArray(setup.blue_cards);
+            const minionCards = this.normalizeArray(setup.minion_cards);
+            const specialCards = this.normalizeArray(setup.special_cards);
+
+            if (!blueCards.length) {
+                this.addWarning(result, `Abenteuer "${id}" hat keine blue_cards.`);
+            }
+
+            if (!this.normalizeString(setup.victory)) {
+                this.addWarning(result, `Abenteuer "${id}" hat keine Siegbedingung.`);
+            }
+
+            if (!this.normalizeString(setup.defeat)) {
+                this.addWarning(result, `Abenteuer "${id}" hat keine Niederlagebedingung.`);
+            }
+
+            const cardRefs = setup.card_refs;
+            if (cardRefs && !this.isObject(cardRefs)) {
+                this.addWarning(result, `Abenteuer "${id}" hat card_refs, aber nicht als Objekt.`);
+            }
+
+            this.validateSetupCardEntries(result, id, 'blue_cards', blueCards);
+            this.validateSetupCardEntries(result, id, 'minion_cards', minionCards);
+            this.validateSetupCardEntries(result, id, 'special_cards', specialCards);
+        }
+
+        const danger = Number(adventure.danger_calc);
+        if (!Number.isFinite(danger)) {
+            this.addWarning(result, `Abenteuer "${id || name || 'unbekannt'}" hat keinen gültigen danger_calc.`);
+        }
+
+        return result;
     },
 
-    validateAdventureCardFile(cardFile, sourceLabel) {
-        const issues = [];
-        const cards = this.normalizeArray(cardFile?.cards);
-        const seen = new Set();
-
-        cards.forEach((card, index) => {
-            const id = String(card?.id ?? '').trim();
-            const name = String(card?.name ?? '').trim();
-            const type = String(card?.type ?? '').trim();
-            const status = String(card?.status ?? '').trim();
-
-            if (!id) {
-                this.addIssue(issues, 'error', sourceLabel, `cards[${index}] hat keine ID.`);
-            } else {
-                if (seen.has(id)) {
-                    this.addIssue(issues, 'error', sourceLabel, `Doppelte ID in Kartendatei: "${id}".`);
+    validateSetupCardEntries(result, adventureId, sectionName, entries) {
+        entries.forEach((entry, index) => {
+            if (typeof entry === 'string') {
+                if (!this.normalizeString(entry)) {
+                    this.addWarning(result, `Abenteuer "${adventureId}" enthält leeren String in ${sectionName}[${index}].`);
                 }
-                seen.add(id);
+                return;
             }
 
-            if (!name) {
-                this.addIssue(issues, 'warn', sourceLabel, `Karte "${id || index}" hat keinen Namen.`);
+            if (!this.isObject(entry)) {
+                this.addWarning(result, `Abenteuer "${adventureId}" enthält ungültigen Eintrag in ${sectionName}[${index}].`);
+                return;
             }
 
-            if (!type) {
-                this.addIssue(issues, 'warn', sourceLabel, `Karte "${id || index}" hat keinen Typ.`);
-            } else if (!this.allowedTypes.includes(type)) {
-                this.addIssue(issues, 'warn', sourceLabel, `Karte "${id || index}" hat unbekannten Typ "${type}".`);
-            }
-
-            if (!status) {
-                this.addIssue(issues, 'warn', sourceLabel, `Karte "${id || index}" hat keinen Status.`);
-            } else if (!this.allowedStatus.includes(status)) {
-                this.addIssue(issues, 'warn', sourceLabel, `Karte "${id || index}" hat unbekannten Status "${status}".`);
-            }
-
-            if (!String(card?.image ?? '').trim()) {
-                this.addIssue(issues, 'info', sourceLabel, `Karte "${id || index}" hat keinen Bildpfad.`);
-            }
-        });
-
-        return issues;
-    },
-
-    compareMasterAndAdventureCards(masterCards, adventureCardFile, sourceLabel) {
-        const issues = [];
-
-        const masterIds = new Set(this.normalizeArray(masterCards).map(card => String(card?.id ?? '').trim()).filter(Boolean));
-        const fileIds = new Set(this.normalizeArray(adventureCardFile?.cards).map(card => String(card?.id ?? '').trim()).filter(Boolean));
-
-        fileIds.forEach(id => {
-            if (!masterIds.has(id)) {
-                this.addIssue(
-                    issues,
-                    'warn',
-                    sourceLabel,
-                    `Karte "${id}" ist in der Abenteuer-Kartendatei vorhanden, aber nicht im Master-Archiv.`
+            if (!this.normalizeString(entry.id) && !this.normalizeString(entry.label)) {
+                this.addWarning(
+                    result,
+                    `Abenteuer "${adventureId}" hat in ${sectionName}[${index}] weder id noch label.`
                 );
             }
         });
-
-        return issues;
     },
 
-    buildReport(issues) {
-        if (!issues.length) {
-            return '✅ Keine Probleme gefunden.';
+    validateCard(card) {
+        const result = this.createResult();
+
+        if (!this.isObject(card)) {
+            this.addError(result, 'Kartendaten fehlen oder sind kein Objekt.');
+            return result;
         }
 
-        const errors = issues.filter(item => item.severity === 'error');
-        const warns = issues.filter(item => item.severity === 'warn');
-        const infos = issues.filter(item => item.severity === 'info');
+        const id = this.normalizeString(card.id);
+        const name = this.normalizeString(card.name);
+        const status = this.normalizeString(card.status);
+        const type = this.normalizeString(card.type);
 
-        const lines = [
-            `Prüfung abgeschlossen.`,
-            `Fehler: ${errors.length}`,
-            `Warnungen: ${warns.length}`,
-            `Hinweise: ${infos.length}`,
-            '',
-            ...issues.map(item => {
-                const icon =
-                    item.severity === 'error' ? '❌' :
-                    item.severity === 'warn' ? '⚠️' :
-                    'ℹ️';
+        if (!id) {
+            this.addError(result, 'Karte ohne ID gefunden.');
+        }
 
-                return `${icon} [${item.area}] ${item.message}`;
-            })
-        ];
+        if (!name) {
+            this.addError(result, `Karte "${id || 'unbekannt'}" hat keinen Namen.`);
+        }
 
-        return lines.join('\n');
+        if (!type) {
+            this.addWarning(result, `Karte "${id || name || 'unbekannt'}" hat keinen Typ.`);
+        }
+
+        if (status && !this.allowedCardStatuses.includes(status)) {
+            this.addWarning(
+                result,
+                `Karte "${id || name || 'unbekannt'}" nutzt unbekannten Status "${status}".`
+            );
+        }
+
+        if (!this.isObject(card.stats)) {
+            this.addWarning(result, `Karte "${id || name || 'unbekannt'}" hat kein stats-Objekt.`);
+        }
+
+        if (!this.isObject(card.rules)) {
+            this.addWarning(result, `Karte "${id || name || 'unbekannt'}" hat kein rules-Objekt.`);
+        }
+
+        const images = card.images;
+        if (images && !this.isObject(images)) {
+            this.addWarning(result, `Karte "${id || name || 'unbekannt'}" hat ungültige images.`);
+        }
+
+        const adventureRefs = this.normalizeArray(card.adventure_refs);
+        if (card.adventure_refs !== undefined && !Array.isArray(card.adventure_refs)) {
+            this.addWarning(result, `Karte "${id || name || 'unbekannt'}" hat adventure_refs nicht als Array.`);
+        } else {
+            adventureRefs.forEach((ref, index) => {
+                if (typeof ref === 'string') {
+                    if (!this.normalizeString(ref)) {
+                        this.addWarning(result, `Karte "${id}" hat leeren adventure_ref an Position ${index}.`);
+                    }
+                    return;
+                }
+
+                if (!this.isObject(ref) || !this.normalizeString(ref.id)) {
+                    this.addWarning(result, `Karte "${id}" hat ungültigen adventure_ref an Position ${index}.`);
+                }
+            });
+        }
+
+        return result;
     },
 
-    async run(showAlert = false) {
-        const issues = [];
+    validateMasterIndex(masterIndex) {
+        const result = this.createResult();
 
-        try {
-            const master = await this.fetchJson('data/cards/base_game/master_base_game.json');
-            const masterCards = this.normalizeArray(master?.cards);
-            const masterIds = new Set(masterCards.map(card => String(card?.id ?? '').trim()).filter(Boolean));
-
-            issues.push(...this.validateMasterCards(masterCards));
-
-            const adventureConfigs = [
-                {
-                    adventurePath: 'data/adventures/base_game/leute_die_nicht_spielen.json',
-                    cardsPath: 'data/cards/base_game/leute_die_nicht_spielen/leute_die_nicht_spielen.json',
-                    label: 'leute_die_nicht_spielen'
-                },
-                {
-                    adventurePath: 'data/adventures/base_game/silvanas_befreiung.json',
-                    cardsPath: 'data/cards/base_game/silvanas_befreiung/silvanas_befreiung.json',
-                    label: 'silvanas_befreiung'
-                },
-                {
-                    adventurePath: 'data/adventures/base_game/wildenstein_akt_1.json',
-                    cardsPath: 'data/cards/base_game/wildenstein_akt_1/wildenstein_akt_1.json',
-                    label: 'wildenstein_akt_1'
-                },
-                {
-                    adventurePath: 'data/adventures/base_game/wildenstein_akt_2.json',
-                    cardsPath: 'data/cards/base_game/wildenstein_akt_2/wildenstein_akt_2.json',
-                    label: 'wildenstein_akt_2'
-                },
-                {
-                    adventurePath: 'data/adventures/base_game/wildenstein_akt_3.json',
-                    cardsPath: 'data/cards/base_game/wildenstein_akt_3/wildenstein_akt_3.json',
-                    label: 'wildenstein_akt_3'
-                }
-            ];
-
-            for (const config of adventureConfigs) {
-                try {
-                    const [adventure, cardFile] = await Promise.all([
-                        this.fetchJson(config.adventurePath),
-                        this.fetchJson(config.cardsPath)
-                    ]);
-
-                    issues.push(...this.validateAdventureReferences(adventure, masterIds, `${config.label}:setup`));
-                    issues.push(...this.validateAdventureCardFile(cardFile, `${config.label}:cards`));
-                    issues.push(...this.compareMasterAndAdventureCards(masterCards, cardFile, `${config.label}:master_compare`));
-                } catch (error) {
-                    this.addIssue(
-                        issues,
-                        'error',
-                        config.label,
-                        `Datei konnte nicht geprüft werden: ${error.message}`
-                    );
-                }
-            }
-
-            const report = this.buildReport(issues);
-            console.log(report);
-
-            if (showAlert) {
-                alert(report);
-            }
-
-            return {
-                ok: issues.every(item => item.severity !== 'error'),
-                issues,
-                report
-            };
-        } catch (error) {
-            const message = `Validierung fehlgeschlagen: ${error.message}`;
-            console.error(message);
-
-            if (showAlert) {
-                alert(message);
-            }
-
-            return {
-                ok: false,
-                issues: [{ severity: 'error', area: 'validator', message }],
-                report: message
-            };
+        if (!this.isObject(masterIndex)) {
+            this.addError(result, 'Master-Index fehlt oder ist kein Objekt.');
+            return result;
         }
+
+        const cards = this.normalizeArray(masterIndex.cards);
+        const ids = new Set();
+
+        cards.forEach((entry, index) => {
+            if (!this.isObject(entry)) {
+                this.addWarning(result, `Master-Index enthält ungültigen Karteneintrag an Position ${index}.`);
+                return;
+            }
+
+            const id = this.normalizeString(entry.id);
+            if (!id) {
+                this.addWarning(result, `Master-Index enthält Karteneintrag ohne ID an Position ${index}.`);
+                return;
+            }
+
+            if (ids.has(id)) {
+                this.addWarning(result, `Master-Index enthält doppelte Karten-ID "${id}".`);
+            }
+
+            ids.add(id);
+
+            if (!this.normalizeString(entry.name)) {
+                this.addWarning(result, `Master-Index-Eintrag "${id}" hat keinen Namen.`);
+            }
+
+            if (!this.normalizeString(entry.type)) {
+                this.addWarning(result, `Master-Index-Eintrag "${id}" hat keinen Typ.`);
+            }
+
+            if (entry.detail_path !== undefined && !this.normalizeString(entry.detail_path)) {
+                this.addWarning(result, `Master-Index-Eintrag "${id}" hat leeren detail_path.`);
+            }
+        });
+
+        return result;
+    },
+
+    summarize(result) {
+        return {
+            ok: result.ok,
+            errorCount: result.errors.length,
+            warningCount: result.warnings.length,
+            infoCount: result.info.length,
+            errors: [...result.errors],
+            warnings: [...result.warnings],
+            info: [...result.info]
+        };
+    },
+
+    logResult(label, result) {
+        const summary = this.summarize(result);
+
+        if (summary.ok) {
+            console.log(`✅ ${label}`, summary);
+        } else {
+            console.warn(`⚠️ ${label}`, summary);
+        }
+
+        return summary;
     }
 };
