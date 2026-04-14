@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 6:40:12 AM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 7:46:00 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4017,8 +4017,20 @@ hr {
             <div class="button-group">
                 <button id="saveStateBtn" class="btn" type="button">Speichern</button>
                 <button id="clearStateBtn" class="btn-outline" type="button">Zurücksetzen</button>
-                <button class="btn-outline" type="button" onclick="window.Archive?.open()">Archiv</button>
-                <button class="btn-outline" type="button" onclick="window.Rulebook?.open?.()">Regelbuch</button>
+                <button
+                    class="btn-outline"
+                    type="button"
+                    data-action="open-archive"
+                >
+                    Archiv
+                </button>
+                <button
+                    class="btn-outline"
+                    type="button"
+                    data-action="open-rulebook"
+                >
+                    Regelbuch
+                </button>
             </div>
         </div>
 
@@ -4057,10 +4069,20 @@ hr {
         </section>
 
         <div class="toggle-section">
-            <button class="btn-outline" type="button" onclick="document.getElementById('combat-tools-section')?.classList.toggle('show')">
+            <button
+                class="btn-outline"
+                type="button"
+                data-action="toggle-section"
+                data-target="combat-tools-section"
+            >
                 Kampf-Hilfen ein/ausblenden
             </button>
-            <button class="btn-outline" type="button" onclick="document.getElementById('intermission-section')?.classList.toggle('show')">
+            <button
+                class="btn-outline"
+                type="button"
+                data-action="toggle-section"
+                data-target="intermission-section"
+            >
                 Atempause ein/ausblenden
             </button>
         </div>
@@ -4099,10 +4121,10 @@ hr {
                 </div>
 
                 <div class="button-group" style="margin-top: 20px;">
-                    <button class="btn" type="button" onclick="window.Combat?.prevPhase?.()">Phase zurück</button>
-                    <button class="btn" type="button" onclick="window.Combat?.nextPhase?.()">Nächste Phase</button>
-                    <button class="btn-outline" type="button" onclick="window.Combat?.rollTarget?.()">Zufallsziel würfeln</button>
-                    <button class="btn-outline" type="button" onclick="window.Combat?.updateEpResult?.()">EP neu berechnen</button>
+                    <button class="btn" type="button" data-action="combat-prev-phase">Phase zurück</button>
+                    <button class="btn" type="button" data-action="combat-next-phase">Nächste Phase</button>
+                    <button class="btn-outline" type="button" data-action="combat-roll-target">Zufallsziel würfeln</button>
+                    <button class="btn-outline" type="button" data-action="combat-update-ep">EP neu berechnen</button>
                 </div>
             </div>
         </section>
@@ -4113,7 +4135,9 @@ hr {
                     <h3>Atempause</h3>
                     <p>Nutze diesen Bereich für Zwischenstände, Erholung und Abenteuer-Notizen.</p>
                     <div class="button-group" style="justify-content: center; margin-top: 16px;">
-                        <button class="btn-outline" type="button" onclick="window.Combat?.applyIntermission?.()">Atempause anwenden</button>
+                        <button class="btn-outline" type="button" data-action="combat-apply-intermission">
+                            Atempause anwenden
+                        </button>
                     </div>
                 </div>
             </div>
@@ -4128,7 +4152,7 @@ hr {
 
     <div class="modal-backdrop" id="archive-modal">
         <div class="modal-content archive-modal-size">
-            <span class="close-modal" onclick="window.Archive?.close()">&times;</span>
+            <span class="close-modal" data-action="close-archive">&times;</span>
             <div class="tab-content">
                 <div class="archive-header">
                     <h2>Kartenarchiv</h2>
@@ -4137,12 +4161,18 @@ hr {
                         class="search-bar"
                         type="text"
                         placeholder="Karten suchen..."
-                        onkeyup="window.Archive?.handleSearch?.(this.value)"
                     >
                 </div>
 
                 <div class="button-group" style="margin-bottom: 20px;">
-                    <button class="btn-outline" type="button" onclick="window.Archive?.loadSet?.('base_game')">Grundbox</button>
+                    <button
+                        class="btn-outline"
+                        type="button"
+                        data-action="archive-load-set"
+                        data-set="base_game"
+                    >
+                        Grundbox
+                    </button>
                 </div>
 
                 <div id="archive-grid" class="archive-grid">
@@ -4154,7 +4184,7 @@ hr {
 
     <div class="modal-backdrop" id="rulebook-modal">
         <div class="modal-content">
-            <span class="close-modal" onclick="window.Rulebook?.close?.()">&times;</span>
+            <span class="close-modal" data-action="close-rulebook">&times;</span>
 
             <div class="modal-layout">
                 <aside class="modal-sidebar">
@@ -4165,8 +4195,22 @@ hr {
                 <div class="modal-main">
                     <div class="modal-nav">
                         <h2 id="manual-title">Regelbuch</h2>
-                        <button class="tab-btn active" type="button" onclick="window.Rulebook?.showTab?.('reader')">Leser</button>
-                        <button class="tab-btn" type="button" onclick="window.Rulebook?.showTab?.('codex')">Kodex</button>
+                        <button
+                            class="tab-btn active"
+                            type="button"
+                            data-action="rulebook-tab"
+                            data-tab="reader"
+                        >
+                            Leser
+                        </button>
+                        <button
+                            class="tab-btn"
+                            type="button"
+                            data-action="rulebook-tab"
+                            data-tab="codex"
+                        >
+                            Kodex
+                        </button>
                     </div>
 
                     <div class="tab-content">
@@ -4174,9 +4218,9 @@ hr {
                             <div class="reader-container">
                                 <div class="reader-page" id="manual-content"></div>
                                 <div class="reader-footer">
-                                    <button type="button" onclick="window.Rulebook?.prevPage?.()">Zurück</button>
+                                    <button type="button" data-action="rulebook-prev-page">Zurück</button>
                                     <span id="manual-page-indicator">Seite 0 / 0</span>
-                                    <button type="button" onclick="window.Rulebook?.nextPage?.()">Weiter</button>
+                                    <button type="button" data-action="rulebook-next-page">Weiter</button>
                                 </div>
                             </div>
                         </div>
@@ -4187,7 +4231,6 @@ hr {
                                 class="search-bar"
                                 type="text"
                                 placeholder="Regeln durchsuchen..."
-                                onkeyup="window.Rulebook?.filterRules?.(this.value)"
                             >
                             <div id="codex-results"></div>
                         </div>
@@ -4198,6 +4241,7 @@ hr {
     </div>
 
     <script src="js/config.js"></script>
+    <script src="js/utils.js"></script>
     <script src="js/api.js"></script>
     <script src="js/ui.js"></script>
     <script src="js/ui-renderer.js"></script>
