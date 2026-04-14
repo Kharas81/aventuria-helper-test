@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 9:54:07 AM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 9:54:32 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -1237,17 +1237,22 @@ hr {
 {
   "id": "wildenstein_akt_2",
   "name": "Das Erbe von Wildenstein - Akt II",
+  "status": "playable",
+  "set": {
+    "id": "base_game",
+    "name": "Aventuria Grundbox"
+  },
   "danger_calc": 6,
   "narrative": {
-    "intro": "Dorf Wildenstein, im Spätherbst: Bei Sonnenaufgang werdet ihr durch den Ruf von Raben geweckt. Sie fliegen zur Burg, deren Silhouette bedrohlich auf einem fernen Fels thront. Ein Gefühl der Beklommenheit überkommt euch [cite: 906-909].",
+    "intro": "Dorf Wildenstein, im Spätherbst: Bei Sonnenaufgang werdet ihr durch den Ruf von Raben geweckt. Sie fliegen zur Burg, deren Silhouette bedrohlich auf einem fernen Fels thront. Ein Gefühl der Beklommenheit überkommt euch.",
     "checks": [
       {
         "id": "beklommenheit",
         "skill": "Willenskraft",
         "text": "Könnt ihr der Beklommenheit widerstehen?",
         "results": {
-          "success": "Du schöpfst Mut (+1 Schicksalspunkt) [cite: 911].",
-          "fail": "Du bist nervös und zweifelnd (Lege 1 Schicksalspunkt ab)[cite: 913]."
+          "success": "Du schöpfst Mut (+1 Schicksalspunkt).",
+          "fail": "Du bist nervös und zweifelnd (lege 1 Schicksalspunkt ab)."
         }
       },
       {
@@ -1255,8 +1260,8 @@ hr {
         "skill": "Handwerk",
         "text": "Helft den Dorfbewohnern bei Reparaturen.",
         "results": {
-          "success": "Du erhältst ein Zwölfgötter-Amulett [cite: 922-924].",
-          "fail": "Du stümperst herum und verlierst 1W6 LP [cite: 925-926]."
+          "success": "Du erhältst ein Zwölfgötter-Amulett.",
+          "fail": "Du stümperst herum und verlierst 1W6 LP."
         }
       }
     ]
@@ -1275,9 +1280,13 @@ hr {
       { "id": "special_anfuehrer_aktionen_uebernatuerlich", "label": "Anführer-Aktionen: Übernatürlich" },
       { "id": "special_nekromantie", "label": "Nekromantie" }
     ],
-    "victory": "Alle Gegner besiegt oder Baron vertrieben[cite: 958].",
-    "defeat": "Der Erbe wird ausgeschaltet[cite: 957]."
-  }
+    "victory": "Alle Gegner besiegt oder Baron vertrieben.",
+    "defeat": "Der Erbe wird ausgeschaltet."
+  },
+  "source": {
+    "book": "Aventuria Das Abenteuerkartenspiel Anleitung"
+  },
+  "notes": "Auf neues Abenteuerformat vereinheitlicht. Textstellen wurden bereinigt und von Extraktionsmarkierungen befreit."
 }
 
 ```
