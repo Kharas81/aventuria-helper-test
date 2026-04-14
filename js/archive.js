@@ -1,37 +1,7 @@
 window.Archive = {
-    currentCards: [],
-    filteredCards: [],
     currentSet: 'base_game',
-    currentQuery: '',
-
-    open() {
-        const modal = document.getElementById('archive-modal');
-        if (modal) {
-            modal.style.display = 'flex';
-        }
-
-        if (!this.currentCards.length) {
-            this.loadSet(this.currentSet);
-        }
-    },
-
-    close() {
-        const modal = document.getElementById('archive-modal');
-        if (modal) {
-            modal.style.display = 'none';
-        }
-
-        if (window.UI && typeof window.UI.closePreview === 'function') {
-            window.UI.closePreview();
-        }
-    },
-
-    normalizeText(value) {
-        return String(value ?? '')
-            .toLowerCase()
-            .normalize('NFD')
-            .replace(/[\u0300-\u036f]/g, '');
-    },
+    allCards: [],
+    filteredCards: [],
 
     escapeHtml(value) {
         return String(value ?? '')
@@ -42,183 +12,190 @@ window.Archive = {
             .replace(/'/g, '&#39;');
     },
 
-    async loadSet(setKey) {
-        this.currentSet = setKey;
+    normalizeArray(value) {
+        return Array.isArray(value) ? value : [];
+    },
 
-        const grid = document.getElementById('archive-grid');
-        if (!grid) return;
+    async open() {
+        const modal = document.getElementById('archive-modal');
+        if (!modal) return;
 
-        grid.innerHTML = '<p class="placeholder-text">Lade Karten-Archiv...</p>';
+        modal.style.display = 'flex';
 
-        try {
-            const res = await fetch(`data/cards/base_game/master_${setKey}.json`);
-            if (!res.ok) {
-                throw new Error(`HTTP ${res.status}`);
-            }
-
-            const data = await res.json();
-            this.currentCards = Array.isArray(data.cards) ? data.cards : [];
-            this.filteredCards = [...this.currentCards];
-
-            this.renderCards(this.filteredCards);
-        } catch (error) {
-            console.error('Fehler beim Laden des Karten-Archivs:', error);
-            grid.innerHTML = '<p class="placeholder-text">Fehler beim Laden des Karten-Archivs.</p>';
+        if (!this.allCards.length) {
+            await this.loadSet(this.currentSet);
+        } else {
+            this.render();
         }
     },
 
-    filter(term) {
-        this.currentQuery = String(term ?? '').trim();
-        const normalizedQuery = this.normalizeText(this.currentQuery);
+    close() {
+        const modal = document.getElementById('archive-modal');
+        if (!modal) return;
 
-        if (!normalizedQuery) {
-            this.filteredCards = [...this.currentCards];
-            this.renderCards(this.filteredCards);
+        modal.style.display = 'none';
+    },
+
+    async loadSet(setKey = 'base_game') {
+        this.currentSet = String(setKey || 'base_game').trim() || 'base_game';
+
+        const grid = document.getElementById('archive-grid');
+        if (grid) {
+            grid.innerHTML = '<p class="placeholder-text">Archiv wird geladen ...</p>';
+        }
+
+        try {
+            const master = await window.API?.getMasterIndex?.(this.currentSet);
+            const entries = this.normalizeArray(master?.cards);
+
+            const loadedCards = [];
+
+            for (const entry of entries) {
+                try {
+                    if (entry?.detail_path) {
+                        const detail = await window.API.getCatalogCard(entry.detail_path);
+                        if (detail) {
+                            loadedCards.push(detail);
+                            continue;
+                        }
+                    }
+
+                    if (entry?.id) {
+                        const fallbackCard = await window.API.findCardById(entry.id, this.currentSet);
+                        if (fallbackCard) {
+                            loadedCards.push(fallbackCard);
+                        }
+                    }
+                } catch (error) {
+                    console.warn('Archivkarte konnte nicht geladen werden:', entry?.id, error);
+                }
+            }
+
+            this.allCards = loadedCards;
+            this.filteredCards = [...loadedCards];
+            this.render();
+
+            const searchInput = document.getElementById('archive-search');
+            if (searchInput) {
+                searchInput.value = '';
+            }
+        } catch (error) {
+            console.error('Fehler beim Laden des Archivs:', error);
+
+            if (grid) {
+                grid.innerHTML = '<p class="placeholder-text">Fehler beim Laden des Archivs.</p>';
+            }
+        }
+    },
+
+    handleSearch(searchTerm = '') {
+        const term = String(searchTerm ?? '').trim().toLowerCase();
+
+        if (!term) {
+            this.filteredCards = [...this.allCards];
+            this.render();
             return;
         }
 
-        this.filteredCards = this.currentCards.filter(card => {
-            const haystackParts = [
-                card.id,
-                card.name,
-                card.card_category,
-                card.type,
-                card.status,
-                card.note,
-                card.search_text,
-                ...(Array.isArray(card.tags) ? card.tags : []),
-                ...(Array.isArray(card.keywords) ? card.keywords : []),
-                ...(Array.isArray(card.adventure_refs) ? card.adventure_refs : [])
-            ];
+        this.filteredCards = this.allCards.filter(card => {
+            const name = String(card?.name ?? '').toLowerCase();
+            const type = String(card?.type ?? '').toLowerCase();
+            const category = String(card?.card_category ?? '').toLowerCase();
+            const status = String(card?.status ?? '').toLowerCase();
+            const searchText = String(card?.search_text ?? '').toLowerCase();
+            const tags = this.normalizeArray(card?.tags).join(' ').toLowerCase();
+            const customTags = this.normalizeArray(card?.custom_tags).join(' ').toLowerCase();
+            const keywords = this.normalizeArray(card?.keywords).join(' ').toLowerCase();
+            const notes = String(card?.note ?? card?.notes ?? '').toLowerCase();
 
-            const haystack = haystackParts
-                .map(entry => this.normalizeText(entry))
-                .join(' ');
-
-            return haystack.includes(normalizedQuery);
+            return (
+                name.includes(term) ||
+                type.includes(term) ||
+                category.includes(term) ||
+                status.includes(term) ||
+                searchText.includes(term) ||
+                tags.includes(term) ||
+                customTags.includes(term) ||
+                keywords.includes(term) ||
+                notes.includes(term)
+            );
         });
 
-        this.renderCards(this.filteredCards);
+        this.render();
     },
 
-    buildMeta(card) {
-        const meta = [];
-
-        if (card.card_category) meta.push(card.card_category);
-        if (card.type) meta.push(card.type);
-        if (card.status) meta.push(card.status);
-
-        if (Array.isArray(card.adventure_refs) && card.adventure_refs.length) {
-            meta.push(`Abenteuer: ${card.adventure_refs.join(', ')}`);
-        }
-
-        return meta;
+    getImageForCard(card) {
+        return (
+            card?.images?.front ||
+            card?.image ||
+            'assets/images/placeholder.jpg'
+        );
     },
 
-    renderCards(cards) {
+    render() {
         const grid = document.getElementById('archive-grid');
         if (!grid) return;
 
-        grid.innerHTML = '';
-
-        if (!cards.length) {
+        if (!this.filteredCards.length) {
             grid.innerHTML = '<p class="placeholder-text">Keine Karten gefunden.</p>';
             return;
         }
 
-        const fragment = document.createDocumentFragment();
+        grid.innerHTML = this.filteredCards.map(card => {
+            const image = this.getImageForCard(card);
+            const id = this.escapeHtml(card?.id ?? '');
+            const name = this.escapeHtml(card?.name ?? 'Unbenannte Karte');
+            const type = this.escapeHtml(card?.type ?? 'karte');
+            const status = this.escapeHtml(card?.status ?? '');
 
-        cards.forEach(card => {
-            const wrapper = document.createElement('div');
-            wrapper.className = 'archive-card';
-
-            const imageSrc = String(card.image ?? '').trim();
-            const hasImage = imageSrc.length > 0;
-
-            const title = this.escapeHtml(card.name || card.id || 'Unbenannte Karte');
-            const meta = this.buildMeta(card)
-                .map(entry => this.escapeHtml(entry))
-                .join(' • ');
-
-            wrapper.innerHTML = `
-                ${
-                    hasImage
-                        ? `<img src="${this.escapeHtml(imageSrc)}" alt="${title}" loading="lazy">`
-                        : `<div style="width:100%; aspect-ratio:5/7; display:flex; align-items:center; justify-content:center; border:2px solid #8b4513; border-radius:5px; background:#f4e7d3; color:#8b4513; font-weight:bold;">Kein Bild</div>`
-                }
-                <p>${title}</p>
-                ${meta ? `<small style="display:block; margin-top:6px; color:#6b4f3a;">${meta}</small>` : ''}
+            return `
+                <div class="archive-card" data-card-id="${id}">
+                    <img
+                        src="${this.escapeHtml(image)}"
+                        alt="${name}"
+                        loading="lazy"
+                        onerror="this.onerror=null;this.src='assets/images/placeholder.jpg';"
+                    >
+                    <p>${name}</p>
+                    <small>${type}${status ? ` • ${status}` : ''}</small>
+                </div>
             `;
+        }).join('');
 
-            wrapper.addEventListener('click', () => this.openCard(card));
+        grid.querySelectorAll('.archive-card').forEach(cardEl => {
+            cardEl.addEventListener('click', async () => {
+                const cardId = cardEl.dataset.cardId;
+                if (!cardId) return;
 
-            fragment.appendChild(wrapper);
+                await window.API?.openCardDetailById?.(cardId);
+            });
         });
-
-        grid.appendChild(fragment);
-    },
-
-    async openCard(card) {
-        const imageSrc = String(card.image ?? '').trim();
-
-        if (!card.detail_path) {
-            if (imageSrc && window.UI && typeof window.UI.openPreview === 'function') {
-                window.UI.openPreview(imageSrc);
-            }
-            return;
-        }
-
-        try {
-            const res = await fetch(card.detail_path);
-            if (!res.ok) {
-                throw new Error(`HTTP ${res.status}`);
-            }
-
-            const detail = await res.json();
-
-            if (window.Renderer && typeof window.Renderer.openCardDetail === 'function') {
-                window.Renderer.openCardDetail(detail);
-                return;
-            }
-
-            if (imageSrc && window.UI && typeof window.UI.openPreview === 'function') {
-                window.UI.openPreview(imageSrc);
-            }
-        } catch (error) {
-            console.error(`Fehler beim Laden der Kartendetails für "${card.id}":`, error);
-
-            if (imageSrc && window.UI && typeof window.UI.openPreview === 'function') {
-                window.UI.openPreview(imageSrc);
-            }
-        }
     },
 
     init() {
-        const input = document.getElementById('archive-search');
-        if (input) {
-            input.addEventListener('input', (event) => {
-                this.filter(event.target.value);
-            });
-        }
-
-        const closeBtn = document.getElementById('close-archive-modal');
-        if (closeBtn) {
-            closeBtn.addEventListener('click', () => this.close());
-        }
-
+        const searchInput = document.getElementById('archive-search');
         const modal = document.getElementById('archive-modal');
-        if (modal) {
-            modal.addEventListener('click', (event) => {
+
+        if (searchInput && !searchInput.dataset.bound) {
+            searchInput.addEventListener('input', event => {
+                this.handleSearch(event.target.value);
+            });
+            searchInput.dataset.bound = 'true';
+        }
+
+        if (modal && !modal.dataset.bound) {
+            modal.addEventListener('click', event => {
                 if (event.target === modal) {
                     this.close();
                 }
             });
+            modal.dataset.bound = 'true';
         }
     }
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    if (window.Archive) {
+    if (window.Archive?.init) {
         window.Archive.init();
     }
 });
