@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 7:48:16 AM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 7:48:28 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -5075,23 +5075,14 @@ window.Combat = {
     currentAdventure: null,
     currentCards: [],
 
-    escapeHtml(value) {
-        return String(value ?? '')
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#39;');
-    },
-
     getHeroCount() {
-        const el = document.getElementById('heroCount');
+        const el = Utils.byId('heroCount');
         const value = Number(el?.value ?? 2);
         return Number.isFinite(value) && value > 0 ? value : 2;
     },
 
     getDifficulty() {
-        return String(document.getElementById('difficulty')?.value ?? 'normal');
+        return String(Utils.byId('difficulty')?.value ?? 'normal');
     },
 
     getDefaultHeroLp() {
@@ -5103,23 +5094,23 @@ window.Combat = {
     },
 
     getHeroDashboard() {
-        return document.getElementById('heroDashboard');
+        return Utils.byId('heroDashboard');
     },
 
     getRemainingTimeInput() {
-        return document.getElementById('remainingTime');
+        return Utils.byId('remainingTime');
     },
 
     getEpResultEl() {
-        return document.getElementById('ep-result');
+        return Utils.byId('ep-result');
     },
 
     getTargetResultEl() {
-        return document.getElementById('targetResult');
+        return Utils.byId('targetResult');
     },
 
     getPhaseSteps() {
-        return Array.from(document.querySelectorAll('#phaseTracker .step'));
+        return Utils.qsa('#phaseTracker .step');
     },
 
     initializeForAdventure(adventure, cards = []) {
@@ -5175,14 +5166,14 @@ window.Combat = {
 
                 <div class="stat">
                     <span aria-hidden="true">💗</span>
-                    <span data-stat="lp">${this.escapeHtml(lp)}</span>
+                    <span data-stat="lp">${Utils.escapeHtml(lp)}</span>
                     <button type="button" data-action="lp-minus" aria-label="Lebenspunkte verringern">-</button>
                     <button type="button" data-action="lp-plus" aria-label="Lebenspunkte erhöhen">+</button>
                 </div>
 
                 <div class="stat" style="margin-top: 8px;">
                     <span aria-hidden="true">🍀</span>
-                    <span data-stat="fate">${this.escapeHtml(fate)}</span>
+                    <span data-stat="fate">${Utils.escapeHtml(fate)}</span>
                     <button type="button" data-action="fate-minus" aria-label="Schicksalspunkte verringern">-</button>
                     <button type="button" data-action="fate-plus" aria-label="Schicksalspunkte erhöhen">+</button>
                 </div>
@@ -5229,38 +5220,41 @@ window.Combat = {
 
     bindDashboardButtons() {
         const container = this.getHeroDashboard();
-        if (!container) return;
+        if (!container || container.dataset.boundCombatDashboard === 'true') return;
 
-        container.querySelectorAll('button[data-action]').forEach(button => {
-            button.addEventListener('click', () => {
-                const heroCard = button.closest('.hero-card');
-                if (!heroCard) return;
+        container.addEventListener('click', event => {
+            const button = event.target.closest('button[data-action]');
+            if (!button) return;
 
-                const action = button.dataset.action;
-                const lpEl = heroCard.querySelector('[data-stat="lp"]');
-                const fateEl = heroCard.querySelector('[data-stat="fate"]');
+            const heroCard = button.closest('.hero-card');
+            if (!heroCard) return;
 
-                if (action === 'lp-minus' && lpEl) {
-                    lpEl.textContent = String(Math.max(0, Number(lpEl.textContent) - 1));
-                }
+            const action = button.dataset.action;
+            const lpEl = heroCard.querySelector('[data-stat="lp"]');
+            const fateEl = heroCard.querySelector('[data-stat="fate"]');
 
-                if (action === 'lp-plus' && lpEl) {
-                    lpEl.textContent = String(Number(lpEl.textContent) + 1);
-                }
+            if (action === 'lp-minus' && lpEl) {
+                lpEl.textContent = String(Math.max(0, Number(lpEl.textContent) - 1));
+            }
 
-                if (action === 'fate-minus' && fateEl) {
-                    fateEl.textContent = String(Math.max(0, Number(fateEl.textContent) - 1));
-                }
+            if (action === 'lp-plus' && lpEl) {
+                lpEl.textContent = String(Number(lpEl.textContent) + 1);
+            }
 
-                if (action === 'fate-plus' && fateEl) {
-                    fateEl.textContent = String(Number(fateEl.textContent) + 1);
-                }
+            if (action === 'fate-minus' && fateEl) {
+                fateEl.textContent = String(Math.max(0, Number(fateEl.textContent) - 1));
+            }
 
-                if (window.StorageManager?.persist) {
-                    window.StorageManager.persist();
-                }
-            });
+            if (action === 'fate-plus' && fateEl) {
+                fateEl.textContent = String(Number(fateEl.textContent) + 1);
+            }
+
+            if (window.StorageManager?.persist) {
+                window.StorageManager.persist();
+            }
         });
+
+        container.dataset.boundCombatDashboard = 'true';
     },
 
     updatePhaseTracker() {
@@ -5376,7 +5370,7 @@ window.Combat = {
 
     bindGlobalCombatInputs() {
         const remainingTime = this.getRemainingTimeInput();
-        const difficulty = document.getElementById('difficulty');
+        const difficulty = Utils.byId('difficulty');
 
         if (remainingTime && !remainingTime.dataset.boundCombat) {
             remainingTime.addEventListener('input', () => {
