@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 9:50:03 AM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 9:50:14 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -5508,6 +5508,7 @@ window.CONFIG = {
             shortName: 'Grundbox',
             enabled: true,
             adventurePath: 'data/adventures/base_game',
+            adventureIndex: 'data/adventures/base_game/index.json',
             cardRoot: 'data/cards/base_game',
             catalogRoot: 'data/cards/base_game/catalog',
             manualRoot: 'data/manual/base_game',
@@ -5523,6 +5524,7 @@ window.CONFIG = {
             shortName: 'Irgendeine Box',
             enabled: true,
             adventurePath: 'data/adventures/irgend_eine_box',
+            adventureIndex: 'data/adventures/irgend_eine_box/index.json',
             cardRoot: 'data/cards/irgend_eine_box',
             catalogRoot: 'data/cards/irgend_eine_box/catalog',
             manualRoot: 'data/manual/irgend_eine_box',
@@ -5561,6 +5563,11 @@ window.CONFIG = {
         const setConfig = this.getSet(setKey);
         const id = String(adventureId ?? '').trim();
         return `${setConfig.adventurePath}/${id}.json`;
+    },
+
+    getAdventureIndexPath(setKey = '') {
+        const setConfig = this.getSet(setKey);
+        return setConfig.adventureIndex;
     },
 
     getLegacyAdventureCardsPath(adventureId, setKey = '') {
