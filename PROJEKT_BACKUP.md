@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 7:50:33 AM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 7:50:49 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -5988,36 +5988,21 @@ window.State.init();
 ## 📄 Datei: js/storage.js
 ```js
 window.StorageManager = {
-    storageKey: 'aventuria_helper_state_v2',
+    storageKey: 'aventuria_helper_state_v3',
 
     getDefaultState() {
-        return {
-            version: 2,
-            selectedAdventure: '',
-            heroCount: 2,
-            difficulty: 'normal',
-            combatPhase: 0,
-            heroStats: {},
-            checklist: {},
-            sections: {
-                combatToolsOpen: true,
-                intermissionOpen: true
-            },
-            combatState: {
-                remainingTime: 0,
-                epResult: '2 EP',
-                targetResult: '--'
-            }
-        };
+        return window.State.getDefaultState();
     },
 
     loadState() {
         try {
             const raw = localStorage.getItem(this.storageKey);
-            if (!raw) return this.getDefaultState();
+            if (!raw) {
+                return this.getDefaultState();
+            }
 
             const parsed = JSON.parse(raw);
-            return this.mergeWithDefaults(parsed);
+            return window.State.mergeState(parsed);
         } catch (error) {
             console.error('Fehler beim Laden des Spielstands:', error);
             return this.getDefaultState();
@@ -6026,7 +6011,8 @@ window.StorageManager = {
 
     saveState(state) {
         try {
-            localStorage.setItem(this.storageKey, JSON.stringify(this.mergeWithDefaults(state)));
+            const normalized = window.State.mergeState(state);
+            localStorage.setItem(this.storageKey, JSON.stringify(normalized));
             return true;
         } catch (error) {
             console.error('Fehler beim Speichern des Spielstands:', error);
@@ -6042,77 +6028,16 @@ window.StorageManager = {
         }
     },
 
-    mergeWithDefaults(state) {
-        const defaults = this.getDefaultState();
-        const incoming = state && typeof state === 'object' ? state : {};
-
-        return {
-            ...defaults,
-            ...incoming,
-            sections: {
-                ...defaults.sections,
-                ...(incoming.sections || {})
-            },
-            combatState: {
-                ...defaults.combatState,
-                ...(incoming.combatState || {})
-            },
-            heroStats: incoming.heroStats && typeof incoming.heroStats === 'object'
-                ? incoming.heroStats
-                : {},
-            checklist: incoming.checklist && typeof incoming.checklist === 'object'
-                ? incoming.checklist
-                : {}
-        };
-    },
-
-    getNumericValue(value, fallback = 0) {
-        const numeric = Number(value);
-        return Number.isFinite(numeric) ? numeric : fallback;
-    },
-
-    collectHeroStats() {
-        const heroCards = document.querySelectorAll('#heroDashboard .hero-card');
-        const result = {};
-
-        heroCards.forEach((card, index) => {
-            const heroIndex = index + 1;
-            const lpEl = card.querySelector('[data-stat="lp"]');
-            const fateEl = card.querySelector('[data-stat="fate"]');
-
-            result[heroIndex] = {
-                lp: this.getNumericValue(lpEl?.textContent, 40),
-                fate: this.getNumericValue(fateEl?.textContent, 0)
-            };
-        });
-
-        return result;
-    },
-
     applyHeroStats(heroStats) {
         if (!window.Combat || typeof window.Combat.updateDashboard !== 'function') {
             return;
         }
 
-        window.Combat.updateDashboard(heroStats || {});
-    },
-
-    collectChecklistState() {
-        const result = {};
-        const items = document.querySelectorAll('.checklist-item');
-
-        items.forEach((item, index) => {
-            const checkbox = item.querySelector('input[type="checkbox"]');
-            const cardId = item.dataset.cardId || `item_${index}`;
-
-            result[cardId] = Boolean(checkbox?.checked);
-        });
-
-        return result;
+        window.Combat.updateDashboard(heroStats || window.State.getState().heroStats);
     },
 
     applyChecklistState(checklist) {
-        const state = checklist && typeof checklist === 'object' ? checklist : {};
+        const state = Utils.isObject(checklist) ? checklist : {};
         const items = document.querySelectorAll('.checklist-item');
 
         items.forEach((item, index) => {
@@ -6124,53 +6049,38 @@ window.StorageManager = {
         });
     },
 
-    collectUIState() {
-        const combatTools = document.getElementById('combat-tools-section');
-        const intermission = document.getElementById('intermission-section');
-
-        return {
-            combatToolsOpen: combatTools ? combatTools.classList.contains('show') : true,
-            intermissionOpen: intermission ? intermission.classList.contains('show') : true
-        };
-    },
-
     applyUIState(sections) {
-        const combatTools = document.getElementById('combat-tools-section');
-        const intermission = document.getElementById('intermission-section');
+        const safeSections = {
+            ...window.State.getDefaultState().sections,
+            ...(Utils.isObject(sections) ? sections : {})
+        };
+
+        const combatTools = Utils.byId('combat-tools-section');
+        const intermission = Utils.byId('intermission-section');
 
         if (combatTools) {
-            combatTools.classList.toggle('show', Boolean(sections?.combatToolsOpen));
+            combatTools.classList.toggle('show', Boolean(safeSections.combatToolsOpen));
         }
 
         if (intermission) {
-            intermission.classList.toggle('show', Boolean(sections?.intermissionOpen));
+            intermission.classList.toggle('show', Boolean(safeSections.intermissionOpen));
         }
-    },
-
-    collectCombatState() {
-        const remainingTime = document.getElementById('remainingTime');
-        const epResult = document.getElementById('ep-result');
-        const targetResult = document.getElementById('targetResult');
-
-        return {
-            remainingTime: this.getNumericValue(remainingTime?.value, 0),
-            epResult: String(epResult?.textContent ?? '2 EP').trim() || '2 EP',
-            targetResult: String(targetResult?.textContent ?? '--').trim() || '--'
-        };
     },
 
     applyCombatState(combatState) {
         const state = {
-            ...this.getDefaultState().combatState,
-            ...(combatState || {})
+            ...window.State.getDefaultState().combatState,
+            ...(Utils.isObject(combatState) ? combatState : {})
         };
 
-        const remainingTime = document.getElementById('remainingTime');
-        const epResult = document.getElementById('ep-result');
-        const targetResult = document.getElementById('targetResult');
+        const remainingTime = Utils.byId('remainingTime');
+        const epResult = Utils.byId('ep-result');
+        const targetResult = Utils.byId('targetResult');
 
         if (remainingTime) {
-            remainingTime.value = this.getNumericValue(state.remainingTime, 0);
+            remainingTime.value = Number.isFinite(Number(state.remainingTime))
+                ? Number(state.remainingTime)
+                : 0;
         }
 
         if (epResult) {
@@ -6182,52 +6092,26 @@ window.StorageManager = {
         }
     },
 
-    collectFullState() {
-        return {
-            version: 2,
-            selectedAdventure: document.getElementById('adventurePicker')?.value || '',
-            heroCount: parseInt(document.getElementById('heroCount')?.value, 10) || 2,
-            difficulty: document.getElementById('difficulty')?.value || 'normal',
-            combatPhase: window.Combat?.currentPhase || 0,
-            heroStats: this.collectHeroStats(),
-            checklist: this.collectChecklistState(),
-            sections: this.collectUIState(),
-            combatState: this.collectCombatState()
-        };
-    },
-
     persist() {
-        const state = this.collectFullState();
-        this.saveState(state);
+        this.saveState(window.State.getState());
     },
 
     bindAutoSave() {
-        document.addEventListener('change', (event) => {
+        document.addEventListener('change', event => {
             const target = event.target;
             if (!target) return;
 
-            if (
-                target.matches('#heroCount') ||
-                target.matches('#difficulty') ||
-                target.matches('#adventurePicker') ||
-                target.matches('.checklist-item input[type="checkbox"]') ||
-                target.matches('#remainingTime')
-            ) {
+            if (target.matches('.checklist-item input[type="checkbox"]')) {
+                const item = target.closest('.checklist-item');
+                const cardId = item?.dataset?.cardId || '';
+                window.State.setChecklistItem(cardId, Boolean(target.checked));
                 this.persist();
+                return;
             }
-        });
 
-        document.addEventListener('click', (event) => {
-            const target = event.target;
-            if (!target) return;
-
-            if (
-                target.closest('.btn') ||
-                target.closest('.btn-outline') ||
-                target.closest('.info-btn') ||
-                target.closest('.stat button')
-            ) {
-                setTimeout(() => this.persist(), 0);
+            if (target.matches('#remainingTime')) {
+                window.State.setCombatField('remainingTime', Number(target.value) || 0);
+                this.persist();
             }
         });
 
