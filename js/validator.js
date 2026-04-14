@@ -20,6 +20,13 @@ window.Validator = {
         'complete'
     ],
 
+    placeholderPatterns: [
+        /^minions?_eurer_wahl$/i,
+        /^schergen?_eurer_wahl$/i,
+        /^special_/i,
+        /^story_/i
+    ],
+
     normalizeArray(value) {
         return Array.isArray(value) ? value : [];
     },
@@ -52,6 +59,37 @@ window.Validator = {
 
     addInfo(result, message) {
         result.info.push(message);
+    },
+
+    isPlaceholderCardRef(refId = '') {
+        const normalized = this.normalizeString(refId);
+        if (!normalized) return false;
+
+        return this.placeholderPatterns.some(pattern => pattern.test(normalized));
+    },
+
+    getSetupEntryId(entry) {
+        if (typeof entry === 'string') {
+            return this.normalizeString(entry);
+        }
+
+        if (this.isObject(entry)) {
+            return this.normalizeString(entry.id);
+        }
+
+        return '';
+    },
+
+    getSetupEntryLabel(entry) {
+        if (typeof entry === 'string') {
+            return this.normalizeString(entry);
+        }
+
+        if (this.isObject(entry)) {
+            return this.normalizeString(entry.label || entry.id);
+        }
+
+        return '';
     },
 
     validateAdventure(adventure) {
@@ -182,10 +220,28 @@ window.Validator = {
                 return;
             }
 
-            if (!this.normalizeString(entry.id) && !this.normalizeString(entry.label)) {
+            const entryId = this.normalizeString(entry.id);
+            const entryLabel = this.normalizeString(entry.label);
+
+            if (!entryId && !entryLabel) {
                 this.addWarning(
                     result,
                     `Abenteuer "${adventureId}" hat in ${sectionName}[${index}] weder id noch label.`
+                );
+                return;
+            }
+
+            if (!entryId && entryLabel) {
+                this.addInfo(
+                    result,
+                    `Abenteuer "${adventureId}" nutzt in ${sectionName}[${index}] nur ein Label ("${entryLabel}").`
+                );
+            }
+
+            if (entryId && this.isPlaceholderCardRef(entryId)) {
+                this.addInfo(
+                    result,
+                    `Abenteuer "${adventureId}" nutzt Platzhalter in ${sectionName}[${index}]: ${entryId}`
                 );
             }
         });
