@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 7:53:24 AM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 7:53:42 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4022,6 +4022,23 @@ hr {
             </div>
         </div>
 
+        <section id="diagnostics-section" class="card-list hidden">
+            <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;">
+                <h2 style="margin:0;">Diagnose</h2>
+                <div class="button-group">
+                    <button class="btn-outline" type="button" data-action="toggle-diagnostics-details">
+                        Details ein/ausblenden
+                    </button>
+                    <button class="btn-outline" type="button" data-action="clear-diagnostics">
+                        Diagnose leeren
+                    </button>
+                </div>
+            </div>
+
+            <div id="diagnostics-summary" style="margin-top:12px;"></div>
+            <div id="diagnostics-details" style="margin-top:12px;"></div>
+        </section>
+
         <section id="story-wrapper" class="card-list">
             <h2 id="title">Abenteuer</h2>
             <div id="story-area"></div>
@@ -4231,6 +4248,7 @@ hr {
     <script src="js/archive.js"></script>
     <script src="js/rulebook.js"></script>
     <script src="js/validator.js"></script>
+    <script src="js/diagnostics.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>
