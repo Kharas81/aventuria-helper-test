@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 3:53:14 PM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 3:53:35 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4301,13 +4301,10 @@ hr {
     <script src="js/utils.js"></script>
     <script src="js/state.js"></script>
     
-    <!-- NEU: Entflochtene API-Bausteine -->
     <script src="js/api-cache.js"></script>
     <script src="js/api-normalizers.js"></script>
     <script src="js/api-fetch.js"></script>
     <script src="js/api-card-lookup.js"></script>
-    
-    <!-- API Fassade (muss nach den neuen Bausteinen kommen) -->
     <script src="js/api.js"></script>
     
     <script src="js/ui-preview.js"></script>
@@ -4325,10 +4322,17 @@ hr {
     <script src="js/archive.js"></script>
     <script src="js/rulebook.js"></script>
     <script src="js/validator.js"></script>
-    <script src="js/diagnostics.js"></script>
-    <script src="js/app.js"></script>
 
-</body> 
+    <!-- NEU: Entflochtene Diagnostics-Bausteine -->
+    <script src="js/diagnostics-renderer.js"></script>
+    <script src="js/diagnostics-runner.js"></script>
+    
+    <!-- Diagnostics Fassade (muss nach den neuen Bausteinen kommen) -->
+    <script src="js/diagnostics.js"></script>
+    
+    <script src="js/app.js"></script>
+    
+</body>
 </html>
 
 ```
