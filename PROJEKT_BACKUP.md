@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 3:42:49 PM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 3:43:26 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4300,22 +4300,25 @@ hr {
     <script src="js/config.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/state.js"></script>
+    
+    <!-- NEU: Entflochtene API-Bausteine -->
+    <script src="js/api-cache.js"></script>
+    <script src="js/api-normalizers.js"></script>
+    <script src="js/api-fetch.js"></script>
+    <script src="js/api-card-lookup.js"></script>
+    
+    <!-- API Fassade (muss nach den neuen Bausteinen kommen) -->
     <script src="js/api.js"></script>
     
-    <!-- UI-Bausteine -->
     <script src="js/ui-preview.js"></script>
     <script src="js/ui-modals.js"></script>
     <script src="js/ui.js"></script>
     
-    <!-- NEU: Entflochtene Render-Bausteine -->
     <script src="js/render-common.js"></script>
     <script src="js/render-setup.js"></script>
     <script src="js/render-card-detail.js"></script>
-    
-    <!-- Renderer Fassade (muss nach den neuen Bausteinen kommen) -->
     <script src="js/ui-renderer.js"></script>
     
-    <!-- Restliche Anwendung -->
     <script src="js/narrative.js"></script>
     <script src="js/combat.js"></script>
     <script src="js/storage.js"></script>
@@ -4324,9 +4327,8 @@ hr {
     <script src="js/validator.js"></script>
     <script src="js/diagnostics.js"></script>
     <script src="js/app.js"></script>
-</body>
-</html>
-</body>
+
+</body> 
 </html>
 
 ```
