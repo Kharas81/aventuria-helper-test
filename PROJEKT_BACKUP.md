@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 7:52:54 AM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 7:53:09 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4901,15 +4901,52 @@ window.Archive = {
         return Utils.normalizeArray(value);
     },
 
+    getSetButtonsContainer() {
+        return Utils.byId('archive-set-buttons');
+    },
+
+    getSuggestedSetKey() {
+        const activeSet = window.API?.getActiveSetKey?.();
+        if (activeSet && window.CONFIG?.hasSet?.(activeSet)) {
+            return activeSet;
+        }
+
+        return this.currentSet || window.CONFIG?.defaultSet || 'base_game';
+    },
+
+    renderSetButtons() {
+        const container = this.getSetButtonsContainer();
+        if (!container) return;
+
+        const sets = window.CONFIG?.getEnabledSets?.() || [];
+        if (!sets.length) {
+            container.innerHTML = '';
+            return;
+        }
+
+        container.innerHTML = sets.map(setConfig => `
+            <button
+                class="btn-outline${setConfig.id === this.currentSet ? ' active' : ''}"
+                type="button"
+                data-action="archive-load-set"
+                data-set="${Utils.escapeHtml(setConfig.id)}"
+            >
+                ${Utils.escapeHtml(setConfig.shortName || setConfig.name)}
+            </button>
+        `).join('');
+    },
+
     async open() {
         const modal = Utils.byId('archive-modal');
         if (!modal) return;
 
         modal.style.display = 'flex';
 
-        if (!this.allCards.length) {
-            await this.loadSet(this.currentSet);
+        const nextSet = this.getSuggestedSetKey();
+        if (nextSet !== this.currentSet || !this.allCards.length) {
+            await this.loadSet(nextSet);
         } else {
+            this.renderSetButtons();
             this.render();
         }
     },
@@ -4922,7 +4959,8 @@ window.Archive = {
     },
 
     async loadSet(setKey = 'base_game') {
-        this.currentSet = String(setKey || 'base_game').trim() || 'base_game';
+        this.currentSet = String(setKey || window.CONFIG?.defaultSet || 'base_game').trim() || 'base_game';
+        this.renderSetButtons();
 
         const grid = Utils.byId('archive-grid');
         if (grid) {
@@ -5021,6 +5059,8 @@ window.Archive = {
         const grid = Utils.byId('archive-grid');
         if (!grid) return;
 
+        this.renderSetButtons();
+
         if (!this.filteredCards.length) {
             grid.innerHTML = '<p class="placeholder-text">Keine Karten gefunden.</p>';
             return;
@@ -5060,6 +5100,8 @@ window.Archive = {
     init() {
         const searchInput = Utils.byId('archive-search');
         const modal = Utils.byId('archive-modal');
+
+        this.renderSetButtons();
 
         if (searchInput && !searchInput.dataset.bound) {
             searchInput.addEventListener('input', event => {
