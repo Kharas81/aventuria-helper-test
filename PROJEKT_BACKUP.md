@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 9:51:17 AM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 9:51:26 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -1080,9 +1080,7 @@ hr {
     "id": "base_game",
     "name": "Aventuria Grundbox"
   },
-
   "danger_calc": 4,
-
   "narrative": {
     "intro": "Chorhop, 1024 BF: Die Stadt ist bei Nacht ein gefährliches Pflaster. Ihr eskortiert das Glücks-Idol zum Spielhaus Karfunkel-Stein. Als ihr es betretet, beginnt die Statue plötzlich Goldstücke zu weinen...",
     "checks": [
@@ -1097,7 +1095,6 @@ hr {
       }
     ]
   },
-
   "setup": {
     "card_refs": {
       "blue_cards": [
@@ -1114,33 +1111,27 @@ hr {
         "special_anfuehrer_aktionen"
       ]
     },
-
     "blue_cards": [
       { "id": "zs_leute" },
       { "id": "kg_risiko_gewinn" },
       { "id": "lg_leute_idol" },
       { "id": "ha_das_spiel_spielen" }
     ],
-
     "minion_cards": [
       { "id": "minions_eurer_wahl", "label": "Schergen eurer Wahl" }
     ],
-
     "special_cards": [
       { "id": "special_ereignisse", "label": "Ereignisse" },
       { "id": "special_anfuehrer_aktionen", "label": "Anführer-Aktionen" }
     ],
-
-    "victory": "Aktion 'Das Spiel beenden' erfolgreich durchgeführt.",
+    "victory": "Aktion „Das Spiel beenden“ erfolgreich durchgeführt.",
     "defeat": "Letzte Zeitmarke entfernt, während Kampf noch läuft."
   },
-
   "source": {
     "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
     "page": 19,
     "note": "Kanonische Abenteuerdatei für die langfristige Migration. Karten werden schrittweise in Einzeldateien überführt."
   },
-
   "notes": "Diese Datei ist die führende Abenteuerquelle. Kartenlogik wird nicht mehr in konkurrierenden Abenteuerdateien gepflegt, sondern über card_refs und den Kartenkatalog referenziert."
 }
 
