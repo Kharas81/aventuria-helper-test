@@ -197,6 +197,14 @@ window.UI = {
                 window.Renderer?.closeCardDetail?.();
                 break;
 
+            case 'toggle-diagnostics-details':
+                window.Diagnostics?.toggleDetails?.();
+                break;
+
+            case 'clear-diagnostics':
+                window.Diagnostics?.clear?.();
+                break;
+
             default:
                 break;
         }
