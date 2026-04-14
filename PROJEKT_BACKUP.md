@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 7:52:39 AM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 7:52:54 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4250,11 +4250,11 @@ window.API = {
     },
 
     normalizeString(value) {
-        return String(value ?? '').trim();
+        return Utils.normalizeString(value);
     },
 
     normalizeArray(value) {
-        return Array.isArray(value) ? value : [];
+        return Utils.normalizeArray(value);
     },
 
     getConfig() {
@@ -4278,15 +4278,26 @@ window.API = {
         }
     },
 
-    normalizeAdventure(rawData, fallbackId = '') {
+    normalizeAdventure(rawData, fallbackId = '', fallbackSetKey = '') {
         const setup = rawData?.setup ?? {};
         const narrative = rawData?.narrative ?? {};
+        const resolvedSet = rawData?.set ?? {
+            id: fallbackSetKey || 'base_game',
+            name: window.CONFIG?.getSetDisplayName?.(fallbackSetKey || 'base_game') || 'Aventuria Grundbox'
+        };
 
         return {
             id: this.normalizeString(rawData?.id || fallbackId),
             name: this.normalizeString(rawData?.name || fallbackId),
             status: this.normalizeString(rawData?.status || ''),
-            set: rawData?.set ?? { id: 'base_game', name: 'Aventuria Grundbox' },
+            set: {
+                id: this.normalizeString(resolvedSet?.id || fallbackSetKey || 'base_game'),
+                name: this.normalizeString(
+                    resolvedSet?.name ||
+                    window.CONFIG?.getSetDisplayName?.(resolvedSet?.id || fallbackSetKey || 'base_game') ||
+                    'Aventuria Grundbox'
+                )
+            },
             danger_calc: Number(rawData?.danger_calc ?? 0),
             narrative: {
                 intro: this.normalizeString(narrative?.intro),
@@ -4298,7 +4309,8 @@ window.API = {
                 minion_cards: this.normalizeArray(setup?.minion_cards),
                 special_cards: this.normalizeArray(setup?.special_cards),
                 victory: this.normalizeString(setup?.victory),
-                defeat: this.normalizeString(setup?.defeat)
+                defeat: this.normalizeString(setup?.defeat),
+                start_value: Number(setup?.start_value ?? 0)
             },
             source: rawData?.source ?? {},
             notes: this.normalizeString(rawData?.notes ?? rawData?.note ?? '')
@@ -4311,7 +4323,10 @@ window.API = {
         return {
             id: this.normalizeString(rawData.id),
             name: this.normalizeString(rawData.name),
-            set: rawData.set ?? { id: 'base_game', name: 'Aventuria Grundbox' },
+            set: rawData.set ?? {
+                id: 'base_game',
+                name: window.CONFIG?.getSetDisplayName?.('base_game') || 'Aventuria Grundbox'
+            },
             card_category: this.normalizeString(rawData.card_category),
             type: this.normalizeString(rawData.type),
             subtypes: this.normalizeArray(rawData.subtypes),
@@ -4344,10 +4359,19 @@ window.API = {
         };
     },
 
-    getAdventureSetKey(adventureId, fallbackSetKey = 'base_game') {
+    getAdventureSetKey(adventureId, fallbackSetKey = '') {
         const adventure = this.cache.adventures[this.normalizeString(adventureId)];
         const setId = this.normalizeString(adventure?.set?.id);
         return setId || fallbackSetKey || this.getConfig()?.defaultSet || 'base_game';
+    },
+
+    getActiveSetKey() {
+        const selectedAdventure = window.State?.getState?.()?.selectedAdventure || '';
+        if (selectedAdventure) {
+            return this.getAdventureSetKey(selectedAdventure, this.getConfig()?.defaultSet || 'base_game');
+        }
+
+        return this.getConfig()?.defaultSet || 'base_game';
     },
 
     async getAdventure(id, setKey = null) {
@@ -4371,7 +4395,7 @@ window.API = {
             return null;
         }
 
-        const normalized = this.normalizeAdventure(rawData, adventureId);
+        const normalized = this.normalizeAdventure(rawData, adventureId, resolvedSetKey);
         this.cache.adventures[adventureId] = normalized;
         return normalized;
     },
@@ -4391,7 +4415,10 @@ window.API = {
         try {
             const rawData = await this.fetchJson(path);
             const normalized = {
-                set: rawData?.set || { id: resolvedSetKey, name: resolvedSetKey },
+                set: rawData?.set || {
+                    id: resolvedSetKey,
+                    name: config?.getSetDisplayName?.(resolvedSetKey) || resolvedSetKey
+                },
                 catalog_version: Number(rawData?.catalog_version ?? 1),
                 cards: this.normalizeArray(rawData?.cards)
             };
@@ -4402,7 +4429,10 @@ window.API = {
             console.error('Fehler beim Laden des Master-Index:', err);
 
             const fallback = {
-                set: { id: resolvedSetKey, name: resolvedSetKey },
+                set: {
+                    id: resolvedSetKey,
+                    name: config?.getSetDisplayName?.(resolvedSetKey) || resolvedSetKey
+                },
                 catalog_version: 1,
                 cards: []
             };
@@ -4433,12 +4463,17 @@ window.API = {
             return this.normalizeCardPayload({ cards: [] }, '');
         }
 
-        if (this.cache.cardPayloads[normalizedAdventureId]) {
-            return this.cache.cardPayloads[normalizedAdventureId];
+        const cacheKey = `${setKey || 'auto'}::${normalizedAdventureId}`;
+        if (this.cache.cardPayloads[cacheKey]) {
+            return this.cache.cardPayloads[cacheKey];
         }
 
         const config = this.getConfig();
-        const resolvedSetKey = this.getAdventureSetKey(normalizedAdventureId, setKey || config?.defaultSet || 'base_game');
+        const resolvedSetKey = this.getAdventureSetKey(
+            normalizedAdventureId,
+            setKey || config?.defaultSet || 'base_game'
+        );
+
         const master = await this.getMasterIndex(resolvedSetKey);
 
         const migratedMasterCards = this.normalizeArray(master.cards).filter(card =>
@@ -4468,7 +4503,7 @@ window.API = {
                 cards: loadedCards
             };
 
-            this.cache.cardPayloads[normalizedAdventureId] = payload;
+            this.cache.cardPayloads[cacheKey] = payload;
             return payload;
         }
 
@@ -4480,13 +4515,13 @@ window.API = {
             const rawData = await this.fetchJson(legacyPath);
             const payload = this.normalizeCardPayload(rawData, normalizedAdventureId);
 
-            this.cache.cardPayloads[normalizedAdventureId] = payload;
+            this.cache.cardPayloads[cacheKey] = payload;
             return payload;
         } catch (err) {
             console.warn(`⚠️ Karten nicht gefunden für "${normalizedAdventureId}"`, err);
 
             const fallback = this.normalizeCardPayload({ cards: [] }, normalizedAdventureId);
-            this.cache.cardPayloads[normalizedAdventureId] = fallback;
+            this.cache.cardPayloads[cacheKey] = fallback;
             return fallback;
         }
     },
@@ -4503,15 +4538,20 @@ window.API = {
         if (cachedCatalogCard) return cachedCatalogCard;
 
         const config = this.getConfig();
-        const resolvedSetKey = this.normalizeString(setKey || config?.defaultSet || 'base_game');
-        const master = await this.getMasterIndex(resolvedSetKey);
-        const entry = this.normalizeArray(master.cards).find(card => this.normalizeString(card?.id) === targetId);
+        const setsToSearch = setKey
+            ? [this.normalizeString(setKey)]
+            : config?.getEnabledSets?.().map(setConfig => setConfig.id) || [config?.defaultSet || 'base_game'];
 
-        if (entry?.detail_path) {
-            try {
-                return await this.getCatalogCard(entry.detail_path);
-            } catch (err) {
-                console.warn(`⚠️ Detailkarte konnte nicht geladen werden: ${targetId}`, err);
+        for (const currentSetKey of setsToSearch) {
+            const master = await this.getMasterIndex(currentSetKey);
+            const entry = this.normalizeArray(master.cards).find(card => this.normalizeString(card?.id) === targetId);
+
+            if (entry?.detail_path) {
+                try {
+                    return await this.getCatalogCard(entry.detail_path);
+                } catch (err) {
+                    console.warn(`⚠️ Detailkarte konnte nicht geladen werden: ${targetId}`, err);
+                }
             }
         }
 
