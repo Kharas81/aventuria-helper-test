@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 7:52:07 AM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 7:52:21 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4152,16 +4152,7 @@ hr {
                     >
                 </div>
 
-                <div class="button-group" style="margin-bottom: 20px;">
-                    <button
-                        class="btn-outline"
-                        type="button"
-                        data-action="archive-load-set"
-                        data-set="base_game"
-                    >
-                        Grundbox
-                    </button>
-                </div>
+                <div id="archive-set-buttons" class="button-group" style="margin-bottom: 20px;"></div>
 
                 <div id="archive-grid" class="archive-grid">
                     <p class="placeholder-text">Archiv wird geladen ...</p>
@@ -4176,7 +4167,7 @@ hr {
 
             <div class="modal-layout">
                 <aside class="modal-sidebar">
-                    <h4>Regelbuch</h4>
+                    <h4 id="manual-set-label">Regelbuch</h4>
                     <ul id="manual-page-list"></ul>
                 </aside>
 
