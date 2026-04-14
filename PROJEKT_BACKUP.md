@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 10:03:31 AM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 10:10:27 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -1073,30 +1073,66 @@ hr {
 ## 📄 Datei: data/adventures/base_game/leute_die_nicht_spielen.json
 ```json
 {
-  "id": "leute_nicht_spielen",
+  "id": "leute_die_nicht_spielen",
   "name": "Leute, die nicht spielen",
-  "status": "deprecated_alias",
+  "status": "canonical",
   "set": {
     "id": "base_game",
     "name": "Aventuria Grundbox"
   },
-  "redirect_to": "data/adventures/base_game/leute_die_nicht_spielen.json",
-  "danger_calc": 0,
+  "danger_calc": 4,
   "narrative": {
-    "intro": "DEPRECATED_ALIAS",
-    "checks": []
+    "intro": "Chorhop, 1024 BF: Die Stadt ist bei Nacht ein gefährliches Pflaster. Ihr eskortiert das Glücks-Idol zum Spielhaus Karfunkel-Stein. Als ihr es betretet, beginnt die Statue plötzlich Goldstücke zu weinen...",
+    "checks": [
+      {
+        "id": "will_check",
+        "skill": "Willenskraft",
+        "text": "Könnt ihr dem Bann des Glücks-Idols widerstehen?",
+        "results": {
+          "success": "Du kannst dich dem Einfluss vollständig widersetzen.",
+          "fail": "Du verlierst 1W6 Lebenspunkte, bevor du den Bann brichst."
+        }
+      }
+    ]
   },
   "setup": {
-    "blue_cards": [],
-    "minion_cards": [],
-    "special_cards": [],
-    "victory": "Siehe kanonische Datei.",
-    "defeat": "Siehe kanonische Datei."
+    "card_refs": {
+      "blue_cards": [
+        "zs_leute",
+        "kg_risiko_gewinn",
+        "lg_leute_idol",
+        "ha_das_spiel_spielen"
+      ],
+      "minion_cards": [
+        "minions_eurer_wahl"
+      ],
+      "special_cards": [
+        "special_ereignisse",
+        "special_anfuehrer_aktionen"
+      ]
+    },
+    "blue_cards": [
+      { "id": "zs_leute" },
+      { "id": "kg_risiko_gewinn" },
+      { "id": "lg_leute_idol" },
+      { "id": "ha_das_spiel_spielen" }
+    ],
+    "minion_cards": [
+      { "id": "minions_eurer_wahl", "label": "Schergen eurer Wahl" }
+    ],
+    "special_cards": [
+      { "id": "special_ereignisse", "label": "Ereignisse" },
+      { "id": "special_anfuehrer_aktionen", "label": "Anführer-Aktionen" }
+    ],
+    "victory": "Aktion „Das Spiel beenden“ erfolgreich durchgeführt.",
+    "defeat": "Letzte Zeitmarke entfernt, während Kampf noch läuft."
   },
   "source": {
-    "note": "Altname für Kompatibilität mit älteren Spielständen und Referenzen."
+    "book": "Aventuria Das Abenteuerkartenspiel Anleitung",
+    "page": 19,
+    "note": "Kanonische Abenteuerdatei für die langfristige Migration. Karten werden schrittweise in Einzeldateien überführt."
   },
-  "notes": "Diese Datei ist nur noch ein Kompatibilitätseintrag. Pflege und Änderungen ausschließlich in der kanonischen Datei leute_die_nicht_spielen.json."
+  "notes": "Diese Datei ist die führende Abenteuerquelle. Kartenlogik wird nicht mehr in konkurrierenden Abenteuerdateien gepflegt, sondern über card_refs und den Kartenkatalog referenziert."
 }
 
 ```
