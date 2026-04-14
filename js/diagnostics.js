@@ -245,6 +245,49 @@ window.Diagnostics = {
         return warnings;
     },
 
+    classifySetupReferences(adventure, cards) {
+        const sections = [
+            { name: 'blue_cards', entries: Array.isArray(adventure?.setup?.blue_cards) ? adventure.setup.blue_cards : [] },
+            { name: 'minion_cards', entries: Array.isArray(adventure?.setup?.minion_cards) ? adventure.setup.minion_cards : [] },
+            { name: 'special_cards', entries: Array.isArray(adventure?.setup?.special_cards) ? adventure.setup.special_cards : [] }
+        ];
+
+        const loadedCardIds = new Set(
+            (Array.isArray(cards) ? cards : [])
+                .map(card => Utils.normalizeString(card?.id))
+                .filter(Boolean)
+        );
+
+        const missing = [];
+        const placeholders = [];
+        const resolved = [];
+
+        sections.forEach(section => {
+            section.entries.forEach(entry => {
+                const refId = window.Validator?.getSetupEntryId?.(entry) || '';
+                const label = window.Validator?.getSetupEntryLabel?.(entry) || refId || 'unbekannt';
+
+                if (!refId) {
+                    return;
+                }
+
+                if (loadedCardIds.has(refId)) {
+                    resolved.push(`${section.name}: ${refId}`);
+                    return;
+                }
+
+                if (window.Validator?.isPlaceholderCardRef?.(refId)) {
+                    placeholders.push(`${section.name}: ${refId}${label && label !== refId ? ` (${label})` : ''}`);
+                    return;
+                }
+
+                missing.push(`${section.name}: ${refId}${label && label !== refId ? ` (${label})` : ''}`);
+            });
+        });
+
+        return { missing, placeholders, resolved };
+    },
+
     runAdventureDiagnostics(adventure, cards, masterIndex, context = {}) {
         this.clear();
 
@@ -318,46 +361,27 @@ window.Diagnostics = {
             });
         }
 
-        const setupRefs = [
-            ...(Array.isArray(adventure?.setup?.blue_cards) ? adventure.setup.blue_cards : []),
-            ...(Array.isArray(adventure?.setup?.minion_cards) ? adventure.setup.minion_cards : []),
-            ...(Array.isArray(adventure?.setup?.special_cards) ? adventure.setup.special_cards : [])
-        ];
+        const setupRefs = this.classifySetupReferences(adventure, cardsArray);
 
-        const missingCards = [];
-
-        setupRefs.forEach(entry => {
-            const refId = typeof entry === 'string'
-                ? Utils.normalizeString(entry)
-                : Utils.normalizeString(entry?.id);
-
-            if (!refId) return;
-
-            const exists = cardsArray.some(card => Utils.normalizeString(card?.id) === refId);
-            if (!exists) {
-                missingCards.push(refId);
+        this.addSection('Setup-Referenzen', {
+            ok: setupRefs.missing.length === 0,
+            errors: [],
+            warnings: setupRefs.missing.map(entry => `Nicht im geladenen Kartenpool gefunden: ${entry}`),
+            info: [
+                ...(setupRefs.placeholders.length
+                    ? setupRefs.placeholders.map(entry => `Platzhalter/variable Referenz erkannt: ${entry}`)
+                    : ['Keine Platzhalter-Referenzen erkannt.']),
+                ...(setupRefs.missing.length === 0
+                    ? ['Keine echten fehlenden Setup-Karten erkannt.']
+                    : [])
+            ]
+        }, {
+            meta: {
+                'Gelöste Referenzen': setupRefs.resolved.length,
+                Platzhalter: setupRefs.placeholders.length,
+                'Fehlende Referenzen': setupRefs.missing.length
             }
         });
-
-        if (missingCards.length) {
-            this.addSection('Setup-Referenzen', {
-                ok: false,
-                errors: [],
-                warnings: missingCards.map(id => `Karte aus Setup nicht im geladenen Kartenpool gefunden: ${id}`),
-                info: []
-            }, {
-                meta: {
-                    'Fehlende Referenzen': missingCards.length
-                }
-            });
-        } else {
-            this.addSection('Setup-Referenzen', {
-                ok: true,
-                errors: [],
-                warnings: [],
-                info: ['Alle Setup-Referenzen wurden im Kartenpool gefunden.']
-            });
-        }
 
         this.state.detailsOpen = false;
         this.render();
