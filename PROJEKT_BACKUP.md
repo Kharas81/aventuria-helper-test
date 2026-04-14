@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 3:34:23 PM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 3:41:41 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4328,6 +4328,20 @@ hr {
 </html>
 </body>
 </html>
+
+```
+
+---
+
+## 📄 Datei: js/api-cache.js
+```js
+window.ApiCache = {
+    adventures: {},
+    adventureLists: {},
+    masterIndexes: {},
+    catalogCards: {},
+    cardPayloads: {}
+};
 
 ```
 
