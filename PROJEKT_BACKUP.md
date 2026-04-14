@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 3:53:35 PM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 5:58:52 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -5219,6 +5219,53 @@ document.addEventListener('DOMContentLoaded', () => {
         window.App.init();
     }
 });
+
+```
+
+---
+
+## 📄 Datei: js/archive-loader.js
+```js
+window.ArchiveLoader = {
+    getSuggestedSetKey(currentSet) {
+        const activeSet = window.API?.getActiveSetKey?.();
+        if (activeSet && window.CONFIG?.hasSet?.(activeSet)) {
+            return activeSet;
+        }
+
+        return currentSet || window.CONFIG?.defaultSet || 'base_game';
+    },
+
+    async fetchCardsForSet(setKey) {
+        const master = await window.API?.getMasterIndex?.(setKey);
+        const entries = Utils.normalizeArray(master?.cards);
+
+        const loadedCards = [];
+
+        for (const entry of entries) {
+            try {
+                if (entry?.detail_path) {
+                    const detail = await window.API.getCatalogCard(entry.detail_path);
+                    if (detail) {
+                        loadedCards.push(detail);
+                        continue;
+                    }
+                }
+
+                if (entry?.id) {
+                    const fallbackCard = await window.API.findCardById(entry.id, setKey);
+                    if (fallbackCard) {
+                        loadedCards.push(fallbackCard);
+                    }
+                }
+            } catch (error) {
+                console.warn('Archivkarte konnte nicht geladen werden:', entry?.id, error);
+            }
+        }
+
+        return loadedCards;
+    }
+};
 
 ```
 
