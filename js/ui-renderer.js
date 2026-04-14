@@ -1,8 +1,3 @@
-/**
- * js/ui-renderer.js
- * Rendert Abenteuer-Setup und Karten-Details.
- * Kompatibel mit altem Setup-Flow und neuem Karten-Katalog.
- */
 window.Renderer = {
     escapeHtml(value) {
         return String(value ?? '')
@@ -17,314 +12,384 @@ window.Renderer = {
         return Array.isArray(value) ? value : [];
     },
 
-    normalizeCard(rawCard) {
+    normalizeCard(card) {
+        const fallbackImage =
+            card?.images?.front ||
+            card?.image ||
+            '';
+
         return {
-            id: rawCard?.id || '',
-            name: rawCard?.name || '',
-            card_category: rawCard?.card_category || rawCard?.type || 'unknown',
-            type: rawCard?.type || 'unknown',
-            status: rawCard?.status || 'basic',
-            image: rawCard?.image || rawCard?.images?.front || '',
-            images: rawCard?.images || {
-                front: rawCard?.image || '',
-                back: null,
-                alt: []
-            },
-            subtypes: Array.isArray(rawCard?.subtypes) ? rawCard.subtypes : [],
-            tags: Array.isArray(rawCard?.tags) ? rawCard.tags : [],
-            keywords: Array.isArray(rawCard?.keywords) ? rawCard.keywords : [],
-            note: rawCard?.note || rawCard?.notes || '',
-            stats: rawCard?.stats || {},
-            rules: rawCard?.rules || {},
-            source: rawCard?.source || {}
+            id: String(card?.id ?? '').trim(),
+            name: String(card?.name ?? 'Unbenannte Karte').trim(),
+            type: String(card?.type ?? '').trim(),
+            status: String(card?.status ?? '').trim(),
+            image: String(fallbackImage ?? '').trim(),
+            note: String(card?.note ?? card?.notes ?? '').trim(),
+            rules: card?.rules ?? {},
+            stats: card?.stats ?? {},
+            tags: this.normalizeArray(card?.tags),
+            keywords: this.normalizeArray(card?.keywords),
+            source: card?.source ?? {}
         };
     },
 
-    getCardById(cards, id) {
-        const match = (Array.isArray(cards) ? cards : []).find(card => card?.id === id);
-        return match ? this.normalizeCard(match) : null;
+    getCardLabel(card) {
+        const normalized = this.normalizeCard(card);
+        return normalized.name || normalized.id || 'Unbenannte Karte';
     },
 
-    getDisplayName(entry, cards) {
-        const ref = typeof entry === 'string' ? { id: entry } : (entry || {});
-        const card = this.getCardById(cards, ref.id);
-        return ref.label || card?.name || ref.name || ref.id || '⚠️ Unbekannte Karte';
+    getCardImage(card) {
+        const normalized = this.normalizeCard(card);
+        return normalized.image || '';
     },
 
-    buildMetaLine(card) {
-        if (!card) return '';
+    getCardTypeLabel(card) {
+        const type = String(card?.type ?? '').trim();
 
-        const parts = [];
+        const map = {
+            timeline: 'Zeitskala',
+            leader: 'Anführer',
+            minion: 'Scherge',
+            hero_action: 'Heldenaktion',
+            special: 'Spezialkarte',
+            reward: 'Belohnung',
+            training: 'Training',
+            adventure_card: 'Abenteuerkarte',
+            environment: 'Kampfumgebung'
+        };
 
-        if (card.card_category) parts.push(card.card_category);
-        if (card.type) parts.push(card.type);
-        if (card.status) parts.push(card.status);
-
-        if (!parts.length) return '';
-
-        return `
-            <small style="display:block; margin-top:4px; color:#8b4513;">
-                ${this.escapeHtml(parts.join(' • '))}
-            </small>
-        `;
+        return map[type] || (type || 'Karte');
     },
 
-    buildNoteLine(card) {
-        if (!card?.note) return '';
-
-        return `
-            <small style="display:block; margin-top:4px; color:#6b4b36;">
-                ${this.escapeHtml(card.note)}
-            </small>
-        `;
+    findCardById(cards, id) {
+        const targetId = String(id ?? '').trim();
+        return this.normalizeArray(cards).find(card => String(card?.id ?? '').trim() === targetId) || null;
     },
 
-    buildList(items, cards, listType = 'generic') {
-        const safeItems = this.normalizeArray(items);
+    resolveCardEntry(entry, allCards) {
+        if (!entry) return null;
 
-        if (!safeItems.length) {
-            return '<li><em>Keine Einträge vorhanden.</em></li>';
+        if (typeof entry === 'string') {
+            const found = this.findCardById(allCards, entry);
+            if (found) return found;
+
+            return {
+                id: entry,
+                name: entry,
+                type: '',
+                status: 'missing',
+                image: '',
+                note: 'Karte konnte im geladenen Kartenpool nicht gefunden werden.'
+            };
         }
 
-        return safeItems.map((item, index) => {
-            const entry = typeof item === 'string' ? { id: item } : item;
-            const card = this.getCardById(cards, entry?.id);
-            const label = this.escapeHtml(this.getDisplayName(entry, cards));
-            const metaLine = this.buildMetaLine(card);
-            const noteLine = this.buildNoteLine(card);
-            const imageSrc = card?.image ? this.escapeHtml(card.image) : '';
+        const entryId = String(entry?.id ?? '').trim();
+        if (entryId) {
+            const found = this.findCardById(allCards, entryId);
+            if (found) {
+                return {
+                    ...found,
+                    label: entry?.label ?? found?.label ?? null
+                };
+            }
+        }
 
-            const dataAttrs = [
-                `data-list-type="${this.escapeHtml(listType)}"`,
-                `data-list-index="${index}"`,
-                `data-card-id="${this.escapeHtml(entry?.id || '')}"`
-            ].join(' ');
-
-            return `
-                <li>
-                    <label class="checklist-item" ${dataAttrs}>
-                        <input type="checkbox">
-                        <span ${imageSrc ? `class="has-preview" data-preview-src="${imageSrc}"` : ''}>
-                            ${label}
-                            ${metaLine}
-                            ${noteLine}
-                        </span>
-                        ${
-                            card
-                                ? `<button
-                                        type="button"
-                                        class="info-btn"
-                                        data-card-id="${this.escapeHtml(card.id)}"
-                                        title="Kartendetails anzeigen"
-                                   >i</button>`
-                                : ''
-                        }
-                    </label>
-                </li>
-            `;
-        }).join('');
+        return entry;
     },
 
-    bindSetupInteractions(root, cards) {
-        if (!root) return;
+    normalizeSetupEntries(entries, allCards) {
+        return this.normalizeArray(entries)
+            .map(entry => this.resolveCardEntry(entry, allCards))
+            .filter(Boolean);
+    },
 
-        root.querySelectorAll('[data-preview-src]').forEach(el => {
-            const imageSrc = el.dataset.previewSrc;
-            if (!imageSrc) return;
+    buildChecklistItem(card) {
+        const normalized = this.normalizeCard(card);
+        const label = card?.label ? String(card.label).trim() : this.getCardLabel(normalized);
+        const safeLabel = this.escapeHtml(label);
+        const imageSrc = this.getCardImage(normalized);
+        const cardId = this.escapeHtml(normalized.id || label);
+        const hasPreview = Boolean(imageSrc);
+        const isMissing = normalized.status === 'missing';
 
-            if (window.UI?.isTouchDevice) {
-                el.addEventListener('click', (event) => {
-                    event.preventDefault();
-                    if (window.UI?.openPreview) {
-                        window.UI.openPreview(imageSrc);
-                    }
-                });
-            } else {
-                el.addEventListener('mouseenter', (event) => {
-                    if (window.UI?.showPreview) {
-                        window.UI.showPreview(event, imageSrc);
-                    }
-                });
+        const previewAttr = hasPreview
+            ? ` data-image="${this.escapeHtml(imageSrc)}" data-card-id="${cardId}" class="has-preview"`
+            : '';
 
-                el.addEventListener('mousemove', (event) => {
-                    if (window.UI?.movePreview) {
-                        window.UI.movePreview(event);
-                    }
-                });
+        const infoButton = `
+            <button
+                class="info-btn"
+                type="button"
+                title="Kartendetails anzeigen"
+                ${normalized.id ? `onclick="window.API?.openCardDetailById('${cardId}')"` : 'disabled'}
+            >i</button>
+        `;
 
-                el.addEventListener('mouseleave', () => {
-                    if (window.UI?.closePreview) {
-                        window.UI.closePreview();
-                    }
-                });
-            }
-        });
+        return `
+            <li class="checklist-item" data-card-id="${cardId}">
+                <input type="checkbox">
+                <span${previewAttr}>${safeLabel}${isMissing ? ' ⚠️' : ''}</span>
+                ${infoButton}
+            </li>
+        `;
+    },
 
-        root.querySelectorAll('.info-btn[data-card-id]').forEach(btn => {
-            btn.addEventListener('click', (event) => {
-                event.preventDefault();
-                event.stopPropagation();
+    bindCardPreviews(scope = document) {
+        const previewTargets = scope.querySelectorAll('.has-preview[data-image]');
 
-                const cardId = btn.dataset.cardId;
-                const card = this.getCardById(cards, cardId);
-                if (!card) return;
+        previewTargets.forEach(el => {
+            if (el.dataset.previewBound === 'true') return;
+            el.dataset.previewBound = 'true';
 
-                this.openCardDetail(card);
+            el.addEventListener('mouseenter', event => {
+                const imageSrc = el.dataset.image;
+                if (window.UI && typeof window.UI.showPreview === 'function') {
+                    window.UI.showPreview(event, imageSrc);
+                }
+            });
+
+            el.addEventListener('mousemove', event => {
+                if (window.UI && typeof window.UI.movePreview === 'function') {
+                    window.UI.movePreview(event);
+                }
+            });
+
+            el.addEventListener('mouseleave', () => {
+                if (window.UI && typeof window.UI.closePreview === 'function') {
+                    window.UI.closePreview();
+                }
+            });
+
+            el.addEventListener('click', () => {
+                const imageSrc = el.dataset.image;
+                if (imageSrc && window.UI && typeof window.UI.openPreview === 'function') {
+                    window.UI.openPreview(imageSrc);
+                }
             });
         });
     },
 
-    renderSetup(adventureData, cards) {
+    renderListInto(containerSelector, cards) {
+        const list = document.querySelector(containerSelector);
+        if (!list) return;
+
+        list.innerHTML = this.normalizeArray(cards)
+            .map(card => this.buildChecklistItem(card))
+            .join('');
+
+        this.bindCardPreviews(list);
+    },
+
+    renderSpecialSection(cards) {
+        const specialSection = document.getElementById('special');
+        if (!specialSection) return;
+
+        const ul = specialSection.querySelector('ul');
+        if (!ul) return;
+
+        ul.innerHTML = this.normalizeArray(cards)
+            .map(card => this.buildChecklistItem(card))
+            .join('');
+
+        specialSection.classList.toggle('hidden', cards.length === 0);
+        this.bindCardPreviews(ul);
+    },
+
+    renderDanger(adventure) {
+        const dangerValue = document.getElementById('danger-value');
+        if (!dangerValue) return;
+
+        const danger = Number(adventure?.danger_calc ?? 0);
+        dangerValue.innerHTML = danger > 0
+            ? `<strong>Gefahrenstufe:</strong> ${this.escapeHtml(danger)}`
+            : '';
+    },
+
+    renderTitle(adventure) {
+        const title = document.getElementById('title');
+        if (!title) return;
+
+        title.innerText = String(adventure?.name ?? '').trim();
+    },
+
+    renderSetup(adventure, allCards) {
         const setupDisplay = document.getElementById('setup-display');
         if (!setupDisplay) return;
 
-        const setup = adventureData?.setup || {};
-        const blueCards = this.normalizeArray(setup.blue_cards);
-        const minionCards = this.normalizeArray(setup.minion_cards);
-        const specialCards = this.normalizeArray(setup.special_cards);
+        const setup = adventure?.setup ?? {};
 
-        setupDisplay.innerHTML = `
-            <div id="danger-value">
-                <strong>Gefahrenwert:</strong> ${this.escapeHtml(adventureData?.danger_calc ?? '—')}
-            </div>
+        const blueCards = this.normalizeSetupEntries(setup.blue_cards, allCards);
+        const minionCards = this.normalizeSetupEntries(setup.minion_cards, allCards);
+        const specialCards = this.normalizeSetupEntries(setup.special_cards, allCards);
 
-            <div class="grid-container">
-                <div class="card-list" id="blue-cards">
-                    <h3>Abenteuerkarten</h3>
-                    <ul>
-                        ${this.buildList(blueCards, cards, 'blue_cards')}
-                    </ul>
-                </div>
+        this.renderTitle(adventure);
+        this.renderDanger(adventure);
+        this.renderListInto('#blue-cards ul', blueCards);
+        this.renderListInto('#minions ul', minionCards);
+        this.renderSpecialSection(specialCards);
 
-                <div class="card-list" id="minions">
-                    <h3>Schergen</h3>
-                    <ul>
-                        ${this.buildList(minionCards, cards, 'minion_cards')}
-                    </ul>
-                </div>
+        setupDisplay.classList.remove('hidden');
+    },
 
-                <div class="card-list" id="special">
-                    <h3>Spezialkarten</h3>
-                    <ul>
-                        ${this.buildList(specialCards, cards, 'special_cards')}
-                    </ul>
-                </div>
-            </div>
+    normalizeCardDetail(card) {
+        const normalized = this.normalizeCard(card);
 
-            <hr>
+        return {
+            ...normalized,
+            card_category: String(card?.card_category ?? '').trim(),
+            subtypes: this.normalizeArray(card?.subtypes),
+            source: card?.source ?? {},
+            rules: {
+                passive: String(card?.rules?.passive ?? '').trim(),
+                success: String(card?.rules?.success ?? '').trim(),
+                fail: String(card?.rules?.fail ?? '').trim(),
+                draw_effect: String(card?.rules?.draw_effect ?? '').trim(),
+                flavor: String(card?.rules?.flavor ?? '').trim(),
+                timed_effects: this.normalizeArray(card?.rules?.timed_effects),
+                milestones: this.normalizeArray(card?.rules?.milestones),
+                action_table: this.normalizeArray(card?.rules?.action_table)
+            },
+            stats: {
+                gp: card?.stats?.gp ?? null,
+                lp: card?.stats?.lp ?? null,
+                armor: card?.stats?.armor ?? null,
+                evasion: card?.stats?.evasion ?? null,
+                actions: card?.stats?.actions ?? null,
+                start_value: card?.stats?.start_value ?? null,
+                cost: card?.stats?.cost ?? null
+            }
+        };
+    },
 
-            <div class="card-list">
-                <h3>Sieg & Niederlage</h3>
-                <p><strong>Sieg:</strong> ${this.escapeHtml(setup.victory || '—')}</p>
-                <p><strong>Niederlage:</strong> ${this.escapeHtml(setup.defeat || '—')}</p>
-            </div>
+    renderStatsTable(stats) {
+        const rows = [
+            ['GP', stats?.gp],
+            ['LP', stats?.lp],
+            ['Rüstung', stats?.armor],
+            ['Ausweichen', stats?.evasion],
+            ['Aktionen', stats?.actions],
+            ['Startwert', stats?.start_value],
+            ['Kosten', stats?.cost]
+        ].filter(([, value]) => value !== null && value !== undefined && value !== '');
+
+        if (!rows.length) return '';
+
+        return `
+            <h4>Werte</h4>
+            <table style="width:100%; border-collapse: collapse; margin-top: 8px;">
+                <tbody>
+                    ${rows.map(([label, value]) => `
+                        <tr>
+                            <td style="border:1px solid #8b4513; padding:8px; width:140px;"><strong>${this.escapeHtml(label)}</strong></td>
+                            <td style="border:1px solid #8b4513; padding:8px;">${this.escapeHtml(value)}</td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>
         `;
+    },
 
-        this.bindSetupInteractions(setupDisplay, cards);
+    renderActionTable(actionTable) {
+        if (!actionTable.length) return '';
+
+        return `
+            <h4>Aktionstabelle</h4>
+            <table style="width:100%; border-collapse: collapse; margin-top: 8px;">
+                <tbody>
+                    ${actionTable.map(row => `
+                        <tr>
+                            <td style="border:1px solid #8b4513; padding:8px; width:110px; vertical-align: top;">
+                                <strong>${this.escapeHtml(row?.roll ?? row?.roll_min ?? '')}</strong>
+                            </td>
+                            <td style="border:1px solid #8b4513; padding:8px;">
+                                <strong>${this.escapeHtml(row?.title ?? '')}</strong><br>
+                                ${this.escapeHtml(row?.description ?? row?.text ?? '')}
+                            </td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+        `;
+    },
+
+    renderTextList(title, values) {
+        const filtered = this.normalizeArray(values).filter(Boolean);
+        if (!filtered.length) return '';
+
+        return `
+            <h4>${this.escapeHtml(title)}</h4>
+            <ul>
+                ${filtered.map(value => `<li>${this.escapeHtml(typeof value === 'string' ? value : JSON.stringify(value))}</li>`).join('')}
+            </ul>
+        `;
     },
 
     renderCardDetail(card) {
-        if (!card) {
-            return '<p>Keine Kartendaten vorhanden.</p>';
-        }
+        const safeCard = this.normalizeCardDetail(card);
 
-        const safeCard = this.normalizeCard(card);
-        const imageSrc = safeCard.image;
-        const milestones = this.normalizeArray(safeCard.rules?.milestones);
-        const actionTable = this.normalizeArray(safeCard.rules?.action_table);
-        const timedEffects = this.normalizeArray(safeCard.rules?.timed_effects);
+        let html = `<div class="reader-text">`;
 
-        let html = `
-            <div class="card-list">
-                <h3>${this.escapeHtml(safeCard.name)}</h3>
-                <p>
-                    <strong>Kategorie:</strong> ${this.escapeHtml(safeCard.card_category || '—')}<br>
-                    <strong>Typ:</strong> ${this.escapeHtml(safeCard.type || '—')}<br>
-                    <strong>Status:</strong> ${this.escapeHtml(safeCard.status || '—')}
-                </p>
-        `;
+        html += `<h2 style="margin-top:0;">${this.escapeHtml(safeCard.name)}</h2>`;
 
-        if (safeCard.subtypes.length) {
-            html += `<p><strong>Untertypen:</strong> ${safeCard.subtypes.map(v => this.escapeHtml(v)).join(', ')}</p>`;
-        }
-
-        if (imageSrc) {
+        if (safeCard.image) {
             html += `
-                <div style="margin: 16px 0;">
+                <div class="img-wrapper">
                     <img
-                        src="${this.escapeHtml(imageSrc)}"
+                        src="${this.escapeHtml(safeCard.image)}"
                         alt="${this.escapeHtml(safeCard.name)}"
-                        style="max-width: 320px; width: 100%; border: 2px solid #8b4513; border-radius: 6px; display: block;"
+                        class="manual-page-img"
+                        loading="lazy"
                     >
                 </div>
             `;
         }
 
+        html += `<p><strong>ID:</strong> ${this.escapeHtml(safeCard.id || '—')}</p>`;
+        html += `<p><strong>Typ:</strong> ${this.escapeHtml(this.getCardTypeLabel(safeCard))}</p>`;
+
+        if (safeCard.card_category) {
+            html += `<p><strong>Kategorie:</strong> ${this.escapeHtml(safeCard.card_category)}</p>`;
+        }
+
+        if (safeCard.status) {
+            html += `<p><strong>Status:</strong> ${this.escapeHtml(safeCard.status)}</p>`;
+        }
+
+        if (safeCard.subtypes.length) {
+            html += `<p><strong>Untertypen:</strong> ${safeCard.subtypes.map(v => this.escapeHtml(v)).join(', ')}</p>`;
+        }
+
+        html += this.renderStatsTable(safeCard.stats);
+
         if (safeCard.rules?.passive) {
             html += `<p><strong>Passiv:</strong> ${this.escapeHtml(safeCard.rules.passive)}</p>`;
         }
 
-        if (safeCard.rules?.success || safeCard.rules?.fail) {
-            html += `<h4>Ergebnisse</h4>`;
-            if (safeCard.rules?.success) {
-                html += `<p><strong>Erfolg:</strong> ${this.escapeHtml(safeCard.rules.success)}</p>`;
-            }
-            if (safeCard.rules?.fail) {
-                html += `<p><strong>Misserfolg:</strong> ${this.escapeHtml(safeCard.rules.fail)}</p>`;
-            }
+        if (safeCard.rules?.success) {
+            html += `<p><strong>Erfolg:</strong> ${this.escapeHtml(safeCard.rules.success)}</p>`;
         }
 
-        if (milestones.length) {
-            html += `<h4>Meilensteine</h4><ul>`;
-            milestones.forEach(item => {
-                if (typeof item === 'object') {
-                    html += `<li><strong>${this.escapeHtml(item.value)}:</strong> ${this.escapeHtml(item.text)}</li>`;
-                } else {
-                    html += `<li>${this.escapeHtml(item)}</li>`;
-                }
-            });
-            html += `</ul>`;
+        if (safeCard.rules?.fail) {
+            html += `<p><strong>Misserfolg:</strong> ${this.escapeHtml(safeCard.rules.fail)}</p>`;
         }
 
-        if (timedEffects.length) {
-            html += `<h4>Zeitlich eintretende Effekte</h4><ul>`;
-            timedEffects.forEach(item => {
-                if (typeof item === 'object') {
-                    const trigger = item.trigger ? `<strong>${this.escapeHtml(item.trigger)}:</strong> ` : '';
-                    html += `<li>${trigger}${this.escapeHtml(item.text || '')}</li>`;
-                } else {
-                    html += `<li>${this.escapeHtml(item)}</li>`;
-                }
-            });
-            html += `</ul>`;
-        }
+        html += this.renderTextList('Zeit-/Sondereffekte', safeCard.rules?.timed_effects);
 
-        if (actionTable.length) {
+        if (safeCard.rules?.milestones?.length) {
             html += `
-                <h4>Aktionstabelle</h4>
-                <table style="width:100%; border-collapse: collapse; margin-top: 8px;">
-                    <tbody>
-            `;
-
-            actionTable.forEach(row => {
-                html += `
-                    <tr>
-                        <td style="border:1px solid #8b4513; padding:8px; width:110px; vertical-align: top;">
-                            <strong>${this.escapeHtml(row.roll)}</strong>
-                        </td>
-                        <td style="border:1px solid #8b4513; padding:8px;">
-                            <strong>${this.escapeHtml(row.title)}</strong><br>
-                            ${this.escapeHtml(row.description)}
-                        </td>
-                    </tr>
-                `;
-            });
-
-            html += `
-                    </tbody>
-                </table>
+                <h4>Meilensteine</h4>
+                <ul>
+                    ${safeCard.rules.milestones.map(item => `
+                        <li>
+                            <strong>${this.escapeHtml(item?.value ?? '')}</strong>
+                            ${item?.text ? `: ${this.escapeHtml(item.text)}` : ''}
+                        </li>
+                    `).join('')}
+                </ul>
             `;
         }
+
+        html += this.renderActionTable(safeCard.rules?.action_table || []);
 
         if (safeCard.rules?.draw_effect) {
             html += `<p><strong>Zugeffekt:</strong> ${this.escapeHtml(safeCard.rules.draw_effect)}</p>`;
@@ -381,7 +446,7 @@ window.Renderer = {
 
         document.body.appendChild(modal);
 
-        modal.addEventListener('click', (event) => {
+        modal.addEventListener('click', event => {
             if (event.target === modal) {
                 this.closeCardDetail();
             }
