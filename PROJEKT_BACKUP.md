@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 7:46:33 AM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 7:46:55 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -6153,17 +6153,8 @@ window.StorageManager = {
 ## 📄 Datei: js/ui-renderer.js
 ```js
 window.Renderer = {
-    escapeHtml(value) {
-        return String(value ?? '')
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#39;');
-    },
-
     normalizeArray(value) {
-        return Array.isArray(value) ? value : [];
+        return Utils.normalizeArray(value);
     },
 
     normalizeCard(card) {
@@ -6173,12 +6164,12 @@ window.Renderer = {
             '';
 
         return {
-            id: String(card?.id ?? '').trim(),
-            name: String(card?.name ?? 'Unbenannte Karte').trim(),
-            type: String(card?.type ?? '').trim(),
-            status: String(card?.status ?? '').trim(),
-            image: String(fallbackImage ?? '').trim(),
-            note: String(card?.note ?? card?.notes ?? '').trim(),
+            id: Utils.normalizeString(card?.id),
+            name: Utils.normalizeString(card?.name || 'Unbenannte Karte'),
+            type: Utils.normalizeString(card?.type),
+            status: Utils.normalizeString(card?.status),
+            image: Utils.normalizeString(fallbackImage),
+            note: Utils.normalizeString(card?.note ?? card?.notes ?? ''),
             rules: card?.rules ?? {},
             stats: card?.stats ?? {},
             tags: this.normalizeArray(card?.tags),
@@ -6198,7 +6189,7 @@ window.Renderer = {
     },
 
     getCardTypeLabel(card) {
-        const type = String(card?.type ?? '').trim();
+        const type = Utils.normalizeString(card?.type);
 
         const map = {
             timeline: 'Zeitskala',
@@ -6216,8 +6207,8 @@ window.Renderer = {
     },
 
     findCardById(cards, id) {
-        const targetId = String(id ?? '').trim();
-        return this.normalizeArray(cards).find(card => String(card?.id ?? '').trim() === targetId) || null;
+        const targetId = Utils.normalizeString(id);
+        return this.normalizeArray(cards).find(card => Utils.normalizeString(card?.id) === targetId) || null;
     },
 
     resolveCardEntry(entry, allCards) {
@@ -6237,7 +6228,7 @@ window.Renderer = {
             };
         }
 
-        const entryId = String(entry?.id ?? '').trim();
+        const entryId = Utils.normalizeString(entry?.id);
         if (entryId) {
             const found = this.findCardById(allCards, entryId);
             if (found) {
@@ -6259,15 +6250,15 @@ window.Renderer = {
 
     buildChecklistItem(card) {
         const normalized = this.normalizeCard(card);
-        const label = card?.label ? String(card.label).trim() : this.getCardLabel(normalized);
-        const safeLabel = this.escapeHtml(label);
+        const label = card?.label ? Utils.normalizeString(card.label) : this.getCardLabel(normalized);
+        const safeLabel = Utils.escapeHtml(label);
         const imageSrc = this.getCardImage(normalized);
-        const cardId = this.escapeHtml(normalized.id || label);
+        const cardId = Utils.escapeHtml(normalized.id || label);
         const hasPreview = Boolean(imageSrc);
         const isMissing = normalized.status === 'missing';
 
         const previewAttr = hasPreview
-            ? ` data-image="${this.escapeHtml(imageSrc)}" data-card-id="${cardId}" class="has-preview"`
+            ? ` data-image="${Utils.escapeHtml(imageSrc)}" data-card-id="${cardId}" class="has-preview"`
             : '';
 
         const infoButton = `
@@ -6275,7 +6266,9 @@ window.Renderer = {
                 class="info-btn"
                 type="button"
                 title="Kartendetails anzeigen"
-                ${normalized.id ? `onclick="window.API?.openCardDetailById('${cardId}')"` : 'disabled'}
+                data-action="open-card-detail"
+                data-card-id="${cardId}"
+                ${normalized.id ? '' : 'disabled'}
             >i</button>
         `;
 
@@ -6297,26 +6290,26 @@ window.Renderer = {
 
             el.addEventListener('mouseenter', event => {
                 const imageSrc = el.dataset.image;
-                if (window.UI && typeof window.UI.showPreview === 'function') {
+                if (window.UI?.showPreview) {
                     window.UI.showPreview(event, imageSrc);
                 }
             });
 
             el.addEventListener('mousemove', event => {
-                if (window.UI && typeof window.UI.movePreview === 'function') {
+                if (window.UI?.movePreview) {
                     window.UI.movePreview(event);
                 }
             });
 
             el.addEventListener('mouseleave', () => {
-                if (window.UI && typeof window.UI.closePreview === 'function') {
+                if (window.UI?.closePreview) {
                     window.UI.closePreview();
                 }
             });
 
             el.addEventListener('click', () => {
                 const imageSrc = el.dataset.image;
-                if (imageSrc && window.UI && typeof window.UI.openPreview === 'function') {
+                if (imageSrc && window.UI?.openPreview) {
                     window.UI.openPreview(imageSrc);
                 }
             });
@@ -6324,7 +6317,7 @@ window.Renderer = {
     },
 
     renderListInto(containerSelector, cards) {
-        const list = document.querySelector(containerSelector);
+        const list = Utils.qs(containerSelector);
         if (!list) return;
 
         list.innerHTML = this.normalizeArray(cards)
@@ -6335,7 +6328,7 @@ window.Renderer = {
     },
 
     renderSpecialSection(cards) {
-        const specialSection = document.getElementById('special');
+        const specialSection = Utils.byId('special');
         if (!specialSection) return;
 
         const ul = specialSection.querySelector('ul');
@@ -6350,24 +6343,24 @@ window.Renderer = {
     },
 
     renderDanger(adventure) {
-        const dangerValue = document.getElementById('danger-value');
+        const dangerValue = Utils.byId('danger-value');
         if (!dangerValue) return;
 
         const danger = Number(adventure?.danger_calc ?? 0);
         dangerValue.innerHTML = danger > 0
-            ? `<strong>Gefahrenstufe:</strong> ${this.escapeHtml(danger)}`
+            ? `<strong>Gefahrenstufe:</strong> ${Utils.escapeHtml(danger)}`
             : '';
     },
 
     renderTitle(adventure) {
-        const title = document.getElementById('title');
+        const title = Utils.byId('title');
         if (!title) return;
 
-        title.innerText = String(adventure?.name ?? '').trim();
+        title.innerText = Utils.normalizeString(adventure?.name);
     },
 
     renderSetup(adventure, allCards) {
-        const setupDisplay = document.getElementById('setup-display');
+        const setupDisplay = Utils.byId('setup-display');
         if (!setupDisplay) return;
 
         const setup = adventure?.setup ?? {};
@@ -6390,15 +6383,15 @@ window.Renderer = {
 
         return {
             ...normalized,
-            card_category: String(card?.card_category ?? '').trim(),
+            card_category: Utils.normalizeString(card?.card_category),
             subtypes: this.normalizeArray(card?.subtypes),
             source: card?.source ?? {},
             rules: {
-                passive: String(card?.rules?.passive ?? '').trim(),
-                success: String(card?.rules?.success ?? '').trim(),
-                fail: String(card?.rules?.fail ?? '').trim(),
-                draw_effect: String(card?.rules?.draw_effect ?? '').trim(),
-                flavor: String(card?.rules?.flavor ?? '').trim(),
+                passive: Utils.normalizeString(card?.rules?.passive),
+                success: Utils.normalizeString(card?.rules?.success),
+                fail: Utils.normalizeString(card?.rules?.fail),
+                draw_effect: Utils.normalizeString(card?.rules?.draw_effect),
+                flavor: Utils.normalizeString(card?.rules?.flavor),
                 timed_effects: this.normalizeArray(card?.rules?.timed_effects),
                 milestones: this.normalizeArray(card?.rules?.milestones),
                 action_table: this.normalizeArray(card?.rules?.action_table)
@@ -6434,8 +6427,8 @@ window.Renderer = {
                 <tbody>
                     ${rows.map(([label, value]) => `
                         <tr>
-                            <td style="border:1px solid #8b4513; padding:8px; width:140px;"><strong>${this.escapeHtml(label)}</strong></td>
-                            <td style="border:1px solid #8b4513; padding:8px;">${this.escapeHtml(value)}</td>
+                            <td style="border:1px solid #8b4513; padding:8px; width:140px;"><strong>${Utils.escapeHtml(label)}</strong></td>
+                            <td style="border:1px solid #8b4513; padding:8px;">${Utils.escapeHtml(value)}</td>
                         </tr>
                     `).join('')}
                 </tbody>
@@ -6453,11 +6446,11 @@ window.Renderer = {
                     ${actionTable.map(row => `
                         <tr>
                             <td style="border:1px solid #8b4513; padding:8px; width:110px; vertical-align: top;">
-                                <strong>${this.escapeHtml(row?.roll ?? row?.roll_min ?? '')}</strong>
+                                <strong>${Utils.escapeHtml(row?.roll ?? row?.roll_min ?? '')}</strong>
                             </td>
                             <td style="border:1px solid #8b4513; padding:8px;">
-                                <strong>${this.escapeHtml(row?.title ?? '')}</strong><br>
-                                ${this.escapeHtml(row?.description ?? row?.text ?? '')}
+                                <strong>${Utils.escapeHtml(row?.title ?? '')}</strong><br>
+                                ${Utils.escapeHtml(row?.description ?? row?.text ?? '')}
                             </td>
                         </tr>
                     `).join('')}
@@ -6471,9 +6464,9 @@ window.Renderer = {
         if (!filtered.length) return '';
 
         return `
-            <h4>${this.escapeHtml(title)}</h4>
+            <h4>${Utils.escapeHtml(title)}</h4>
             <ul>
-                ${filtered.map(value => `<li>${this.escapeHtml(typeof value === 'string' ? value : JSON.stringify(value))}</li>`).join('')}
+                ${filtered.map(value => `<li>${Utils.escapeHtml(typeof value === 'string' ? value : JSON.stringify(value))}</li>`).join('')}
             </ul>
         `;
     },
@@ -6483,14 +6476,14 @@ window.Renderer = {
 
         let html = `<div class="reader-text">`;
 
-        html += `<h2 style="margin-top:0;">${this.escapeHtml(safeCard.name)}</h2>`;
+        html += `<h2 style="margin-top:0;">${Utils.escapeHtml(safeCard.name)}</h2>`;
 
         if (safeCard.image) {
             html += `
                 <div class="img-wrapper">
                     <img
-                        src="${this.escapeHtml(safeCard.image)}"
-                        alt="${this.escapeHtml(safeCard.name)}"
+                        src="${Utils.escapeHtml(safeCard.image)}"
+                        alt="${Utils.escapeHtml(safeCard.name)}"
                         class="manual-page-img"
                         loading="lazy"
                     >
@@ -6498,33 +6491,33 @@ window.Renderer = {
             `;
         }
 
-        html += `<p><strong>ID:</strong> ${this.escapeHtml(safeCard.id || '—')}</p>`;
-        html += `<p><strong>Typ:</strong> ${this.escapeHtml(this.getCardTypeLabel(safeCard))}</p>`;
+        html += `<p><strong>ID:</strong> ${Utils.escapeHtml(safeCard.id || '—')}</p>`;
+        html += `<p><strong>Typ:</strong> ${Utils.escapeHtml(this.getCardTypeLabel(safeCard))}</p>`;
 
         if (safeCard.card_category) {
-            html += `<p><strong>Kategorie:</strong> ${this.escapeHtml(safeCard.card_category)}</p>`;
+            html += `<p><strong>Kategorie:</strong> ${Utils.escapeHtml(safeCard.card_category)}</p>`;
         }
 
         if (safeCard.status) {
-            html += `<p><strong>Status:</strong> ${this.escapeHtml(safeCard.status)}</p>`;
+            html += `<p><strong>Status:</strong> ${Utils.escapeHtml(safeCard.status)}</p>`;
         }
 
         if (safeCard.subtypes.length) {
-            html += `<p><strong>Untertypen:</strong> ${safeCard.subtypes.map(v => this.escapeHtml(v)).join(', ')}</p>`;
+            html += `<p><strong>Untertypen:</strong> ${safeCard.subtypes.map(v => Utils.escapeHtml(v)).join(', ')}</p>`;
         }
 
         html += this.renderStatsTable(safeCard.stats);
 
         if (safeCard.rules?.passive) {
-            html += `<p><strong>Passiv:</strong> ${this.escapeHtml(safeCard.rules.passive)}</p>`;
+            html += `<p><strong>Passiv:</strong> ${Utils.escapeHtml(safeCard.rules.passive)}</p>`;
         }
 
         if (safeCard.rules?.success) {
-            html += `<p><strong>Erfolg:</strong> ${this.escapeHtml(safeCard.rules.success)}</p>`;
+            html += `<p><strong>Erfolg:</strong> ${Utils.escapeHtml(safeCard.rules.success)}</p>`;
         }
 
         if (safeCard.rules?.fail) {
-            html += `<p><strong>Misserfolg:</strong> ${this.escapeHtml(safeCard.rules.fail)}</p>`;
+            html += `<p><strong>Misserfolg:</strong> ${Utils.escapeHtml(safeCard.rules.fail)}</p>`;
         }
 
         html += this.renderTextList('Zeit-/Sondereffekte', safeCard.rules?.timed_effects);
@@ -6535,8 +6528,8 @@ window.Renderer = {
                 <ul>
                     ${safeCard.rules.milestones.map(item => `
                         <li>
-                            <strong>${this.escapeHtml(item?.value ?? '')}</strong>
-                            ${item?.text ? `: ${this.escapeHtml(item.text)}` : ''}
+                            <strong>${Utils.escapeHtml(item?.value ?? '')}</strong>
+                            ${item?.text ? `: ${Utils.escapeHtml(item.text)}` : ''}
                         </li>
                     `).join('')}
                 </ul>
@@ -6546,37 +6539,37 @@ window.Renderer = {
         html += this.renderActionTable(safeCard.rules?.action_table || []);
 
         if (safeCard.rules?.draw_effect) {
-            html += `<p><strong>Zugeffekt:</strong> ${this.escapeHtml(safeCard.rules.draw_effect)}</p>`;
+            html += `<p><strong>Zugeffekt:</strong> ${Utils.escapeHtml(safeCard.rules.draw_effect)}</p>`;
         }
 
         if (safeCard.rules?.flavor) {
-            html += `<p><strong>Beschreibung:</strong> <em>${this.escapeHtml(safeCard.rules.flavor)}</em></p>`;
+            html += `<p><strong>Beschreibung:</strong> <em>${Utils.escapeHtml(safeCard.rules.flavor)}</em></p>`;
         }
 
         if (safeCard.tags.length) {
-            html += `<p><strong>Tags:</strong> ${safeCard.tags.map(tag => `#${this.escapeHtml(tag)}`).join(' ')}</p>`;
+            html += `<p><strong>Tags:</strong> ${safeCard.tags.map(tag => `#${Utils.escapeHtml(tag)}`).join(' ')}</p>`;
         }
 
         if (safeCard.keywords.length) {
-            html += `<p><strong>Keywords:</strong> ${safeCard.keywords.map(v => this.escapeHtml(v)).join(', ')}</p>`;
+            html += `<p><strong>Keywords:</strong> ${safeCard.keywords.map(v => Utils.escapeHtml(v)).join(', ')}</p>`;
         }
 
         if (safeCard.source?.book || safeCard.source?.page || safeCard.source?.note) {
             html += `<h4>Quelle</h4><p>`;
             if (safeCard.source?.book) {
-                html += `<strong>Buch:</strong> ${this.escapeHtml(safeCard.source.book)}<br>`;
+                html += `<strong>Buch:</strong> ${Utils.escapeHtml(safeCard.source.book)}<br>`;
             }
             if (safeCard.source?.page !== null && safeCard.source?.page !== undefined && safeCard.source?.page !== '') {
-                html += `<strong>Seite:</strong> ${this.escapeHtml(safeCard.source.page)}<br>`;
+                html += `<strong>Seite:</strong> ${Utils.escapeHtml(safeCard.source.page)}<br>`;
             }
             if (safeCard.source?.note) {
-                html += `<strong>Hinweis:</strong> ${this.escapeHtml(safeCard.source.note)}`;
+                html += `<strong>Hinweis:</strong> ${Utils.escapeHtml(safeCard.source.note)}`;
             }
             html += `</p>`;
         }
 
         if (safeCard.note) {
-            html += `<p><strong>Notiz:</strong> ${this.escapeHtml(safeCard.note)}</p>`;
+            html += `<p><strong>Notiz:</strong> ${Utils.escapeHtml(safeCard.note)}</p>`;
         }
 
         html += `</div>`;
@@ -6584,7 +6577,7 @@ window.Renderer = {
     },
 
     ensureCardDetailModal() {
-        let modal = document.getElementById('card-detail-modal');
+        let modal = Utils.byId('card-detail-modal');
 
         if (modal) return modal;
 
@@ -6593,7 +6586,7 @@ window.Renderer = {
         modal.className = 'modal-backdrop';
         modal.innerHTML = `
             <div class="modal-content">
-                <span class="close-modal" id="close-card-detail-modal">&times;</span>
+                <span class="close-modal" data-action="close-card-detail">&times;</span>
                 <div class="tab-content" id="card-detail-content"></div>
             </div>
         `;
@@ -6606,17 +6599,12 @@ window.Renderer = {
             }
         });
 
-        const closeBtn = document.getElementById('close-card-detail-modal');
-        if (closeBtn) {
-            closeBtn.addEventListener('click', () => this.closeCardDetail());
-        }
-
         return modal;
     },
 
     openCardDetail(card) {
         const modal = this.ensureCardDetailModal();
-        const content = document.getElementById('card-detail-content');
+        const content = Utils.byId('card-detail-content');
 
         if (!modal || !content) return;
 
@@ -6625,7 +6613,7 @@ window.Renderer = {
     },
 
     closeCardDetail() {
-        const modal = document.getElementById('card-detail-modal');
+        const modal = Utils.byId('card-detail-modal');
         if (modal) {
             modal.style.display = 'none';
         }
