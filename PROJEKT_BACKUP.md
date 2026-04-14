@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 3:25:25 PM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 3:26:16 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4301,7 +4301,11 @@ hr {
     <script src="js/utils.js"></script>
     <script src="js/state.js"></script>
     <script src="js/api.js"></script>
+    
+    <script src="js/ui-preview.js"></script>
+    <script src="js/ui-modals.js"></script>
     <script src="js/ui.js"></script>
+    
     <script src="js/ui-renderer.js"></script>
     <script src="js/narrative.js"></script>
     <script src="js/combat.js"></script>
