@@ -227,7 +227,7 @@ window.Diagnostics = {
         this.addSection('Master-Index-Prüfung', masterResult, {
             meta: {
                 Set: masterIndex?.set?.name || context.setKey || 'unbekannt',
-                Karten im Index: Array.isArray(masterIndex?.cards) ? masterIndex.cards.length : 0
+                'Karten im Index': Array.isArray(masterIndex?.cards) ? masterIndex.cards.length : 0
             }
         });
 
@@ -246,12 +246,15 @@ window.Diagnostics = {
 
             cardsArray.forEach(card => {
                 const result = window.Validator.validateCard(card);
+
                 result.errors.forEach(error => {
                     cardErrors.push(`${card?.id || card?.name || 'unbekannt'}: ${error}`);
                 });
+
                 result.warnings.forEach(warning => {
                     cardWarnings.push(`${card?.id || card?.name || 'unbekannt'}: ${warning}`);
                 });
+
                 result.info.forEach(info => {
                     cardInfos.push(`${card?.id || card?.name || 'unbekannt'}: ${info}`);
                 });
@@ -305,7 +308,7 @@ window.Diagnostics = {
                 info: []
             }, {
                 meta: {
-                    Fehlende Referenzen: missingCards.length
+                    'Fehlende Referenzen': missingCards.length
                 }
             });
         } else {
