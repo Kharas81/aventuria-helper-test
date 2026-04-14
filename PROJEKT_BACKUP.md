@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 9:58:14 AM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 9:58:25 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -7547,10 +7547,17 @@ window.UI = {
 
     showPreview(event, imageSrc) {
         const { tooltip, image } = this.getTooltipElements();
-        if (!tooltip || !image || !imageSrc) return;
+        if (!tooltip || !image) return;
 
-        image.src = imageSrc;
+        const resolvedImage = Utils.resolveImagePath(imageSrc, '');
+        if (!resolvedImage) return;
+
+        image.dataset.fallbackApplied = 'false';
+        image.dataset.fallbackSrc = Utils.getPlaceholderImage();
+        image.src = resolvedImage;
         image.alt = 'Kartenvorschau';
+        Utils.applyImageFallback(image, image.dataset.fallbackSrc);
+
         tooltip.style.display = 'block';
 
         this.movePreview(event);
@@ -7587,10 +7594,13 @@ window.UI = {
         tooltip.style.left = '-9999px';
         tooltip.style.top = '-9999px';
         image.src = '';
+        image.alt = '';
+        image.dataset.fallbackApplied = 'false';
     },
 
     openPreview(imageSrc) {
-        if (!imageSrc) return;
+        const resolvedImage = Utils.resolveImagePath(imageSrc, '');
+        if (!resolvedImage) return;
 
         if (window.Renderer?.ensureCardDetailModal) {
             const modal = window.Renderer.ensureCardDetailModal();
@@ -7601,20 +7611,23 @@ window.UI = {
                     <div class="reader-text">
                         <div class="img-wrapper">
                             <img
-                                src="${Utils.escapeHtml(imageSrc)}"
+                                src="${Utils.escapeHtml(resolvedImage)}"
                                 alt="Kartenvorschau"
                                 class="manual-page-img"
                                 loading="lazy"
+                                decoding="async"
+                                data-fallback-src="${Utils.escapeHtml(Utils.getPlaceholderImage())}"
                             >
                         </div>
                     </div>
                 `;
+                Utils.bindImageFallbacks(content);
                 modal.style.display = 'flex';
                 return;
             }
         }
 
-        window.open(imageSrc, '_blank', 'noopener,noreferrer');
+        window.open(resolvedImage, '_blank', 'noopener,noreferrer');
     },
 
     closeAllModals() {
@@ -7729,6 +7742,7 @@ window.UI = {
 
     init() {
         this.bindGlobalUiEvents();
+        Utils.bindImageFallbacks(document);
     }
 };
 
