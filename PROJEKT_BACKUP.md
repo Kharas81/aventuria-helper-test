@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 7:46:55 AM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 7:48:16 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -5476,21 +5476,12 @@ window.CONFIG = {
 ## 📄 Datei: js/narrative.js
 ```js
 window.Narrative = {
-    escapeHtml(value) {
-        return String(value ?? '')
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#39;');
-    },
-
     normalizeChecks(checks) {
-        return Array.isArray(checks) ? checks : [];
+        return Utils.normalizeArray(checks);
     },
 
     renderStory(data) {
-        const container = document.getElementById('story-area');
+        const container = Utils.byId('story-area');
 
         if (!container || !data || !data.narrative) {
             if (container) {
@@ -5499,7 +5490,7 @@ window.Narrative = {
             return;
         }
 
-        const intro = this.escapeHtml(data.narrative.intro ?? '');
+        const intro = Utils.escapeHtml(data.narrative.intro ?? '');
         const checks = this.normalizeChecks(data.narrative.checks);
 
         container.innerHTML = `
@@ -5514,8 +5505,8 @@ window.Narrative = {
                         ? checks.map((check, index) => `
                             <div class="probe-item" data-check-index="${index}">
                                 <p>
-                                    <strong>${this.escapeHtml(check?.skill ?? 'Probe')}:</strong>
-                                    ${this.escapeHtml(check?.text ?? '')}
+                                    <strong>${Utils.escapeHtml(check?.skill ?? 'Probe')}:</strong>
+                                    ${Utils.escapeHtml(check?.text ?? '')}
                                 </p>
 
                                 <div class="probe-buttons">
@@ -5550,7 +5541,7 @@ window.Narrative = {
 
         resultBox.innerHTML = `
             <strong>${type === 'success' ? 'Erfolg:' : 'Misserfolg:'}</strong>
-            ${this.escapeHtml(resultText)}
+            ${Utils.escapeHtml(resultText)}
         `;
 
         resultBox.classList.add(type === 'success' ? 'success' : 'fail');
