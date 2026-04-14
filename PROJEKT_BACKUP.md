@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 9:53:31 AM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 9:54:07 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -1135,18 +1135,22 @@ hr {
 {
   "id": "silvanas_befreiung",
   "name": "Silvanas Befreiung",
+  "status": "playable",
+  "set": {
+    "id": "base_game",
+    "name": "Aventuria Grundbox"
+  },
   "danger_calc": 5,
-  "expansion": "Grundbox [cite: 146]",
   "narrative": {
-    "intro": "Euer Freund Alrik hat euch herbeigerufen... Hinter der Tür blickt ihr in das Gesicht eines Kobolds... [cite: 715-718]",
+    "intro": "Euer Freund Alrik hat euch herbeigerufen. Hinter der Tür blickt ihr in das Gesicht eines Kobolds...",
     "checks": [
       {
         "id": "chase_goblins",
-        "skill": "Körperbeherrschung [cite: 722]",
-        "text": "Die Goblins ergreifen die Flucht! Setzt ihnen nach.",
+        "skill": "Körperbeherrschung",
+        "text": "Die Goblins ergreifen die Flucht. Setzt ihnen nach.",
         "results": {
-          "success": "Ein Goblin weniger im Kampf [cite: 725-726].",
-          "fail": "Füge 'Feiger Goblin' zum Schergendeck hinzu [cite: 727-729]."
+          "success": "Ein Goblin weniger im Kampf.",
+          "fail": "Füge „Feiger Goblin“ zum Schergendeck hinzu."
         }
       }
     ]
@@ -1163,9 +1167,13 @@ hr {
       { "id": "minion_feiger_goblin", "label": "Feiger Goblin (falls benötigt)" }
     ],
     "special_cards": [],
-    "victory": "Alle Gegner besiegt oder vertrieben[cite: 774].",
-    "defeat": "Verderbensmarken = Anzahl Helden[cite: 773]."
-  }
+    "victory": "Alle Gegner besiegt oder vertrieben.",
+    "defeat": "Verderbensmarken = Anzahl Helden."
+  },
+  "source": {
+    "book": "Aventuria Das Abenteuerkartenspiel Anleitung"
+  },
+  "notes": "Auf neues Abenteuerformat vereinheitlicht. Textstellen wurden bereinigt und von Extraktionsmarkierungen befreit."
 }
 
 ```
@@ -1177,17 +1185,22 @@ hr {
 {
   "id": "wildenstein_akt_1",
   "name": "Das Erbe von Wildenstein - Akt I",
+  "status": "playable",
+  "set": {
+    "id": "base_game",
+    "name": "Aventuria Grundbox"
+  },
   "danger_calc": 5,
   "narrative": {
-    "intro": "In Perainefurten erreicht euch ein Brief eurer Mutter: Ihr sollt das Erbe des verstorbenen Barons Wildenstein antreten. Doch der Weg dorthin ist gefährlich und führt durch die Schattenlande... [cite: 837-854]",
+    "intro": "In Perainefurten erreicht euch ein Brief eurer Mutter: Ihr sollt das Erbe des verstorbenen Barons Wildenstein antreten. Doch der Weg dorthin ist gefährlich und führt durch die Schattenlande...",
     "checks": [
       {
         "id": "scout",
         "skill": "Sinnesschärfe",
-        "text": "Ihr erreicht eine Furt. Ist dort ein Hinterhalt? [cite: 872-874]",
+        "text": "Ihr erreicht eine Furt. Ist dort ein Hinterhalt?",
         "results": {
-          "success": "Du reagierst blitzschnell! Starte mit +1 Handkarte. [cite: 875]",
-          "fail": "Du wirst überrascht! Starte mit -1 Handkarte. [cite: 877]"
+          "success": "Du reagierst blitzschnell. Starte mit +1 Handkarte.",
+          "fail": "Du wirst überrascht. Starte mit -1 Handkarte."
         }
       }
     ]
@@ -1206,9 +1219,13 @@ hr {
       { "id": "special_ereignisse_gewaesser", "label": "Ereignisse: Gewässer" },
       { "id": "special_ereignisse_wald", "label": "Ereignisse: Wald" }
     ],
-    "victory": "Alle Gegner besiegt UND der Erbe lebt noch. [cite: 889]",
-    "defeat": "Der Erbe wird ausgeschaltet. [cite: 888]"
-  }
+    "victory": "Alle Gegner besiegt und der Erbe lebt noch.",
+    "defeat": "Der Erbe wird ausgeschaltet."
+  },
+  "source": {
+    "book": "Aventuria Das Abenteuerkartenspiel Anleitung"
+  },
+  "notes": "Auf neues Abenteuerformat vereinheitlicht. Textstellen wurden bereinigt und von Extraktionsmarkierungen befreit."
 }
 
 ```
