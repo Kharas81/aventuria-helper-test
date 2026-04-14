@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 3:24:57 PM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 3:25:25 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -7680,16 +7680,30 @@ window.Renderer = {
 ## 📄 Datei: js/ui.js
 ```js
 window.UI = {
-    previewOffsetX: 18,
-    previewOffsetY: 18,
-
-    getTooltipElements() {
-        return {
-            tooltip: Utils.byId('card-tooltip'),
-            image: Utils.byId('tooltip-image')
-        };
+    // --- FASSADE FÜR PREVIEW (Damit alte Aufrufe nicht brechen) ---
+    showPreview(event, imageSrc) {
+        window.UIPreview?.show(event, imageSrc);
     },
 
+    movePreview(event) {
+        window.UIPreview?.move(event);
+    },
+
+    closePreview() {
+        window.UIPreview?.close();
+    },
+
+    openPreview(imageSrc) {
+        window.UIPreview?.open(imageSrc);
+    },
+
+    // --- FASSADE FÜR MODALS ---
+    closeAllModals() {
+        window.UIModals?.closeAll();
+    },
+
+
+    // --- KERN-UI-ZUSTÄNDE & ROUTING ---
     setStatus(message) {
         const status = Utils.byId('loading-status');
         if (status) {
@@ -7702,7 +7716,6 @@ window.UI = {
             'combat-tools-section': 'combatToolsOpen',
             'intermission-section': 'intermissionOpen'
         };
-
         return map[sectionId] || null;
     },
 
@@ -7720,97 +7733,6 @@ window.UI = {
 
         if (window.StorageManager?.persist) {
             window.StorageManager.persist();
-        }
-    },
-
-    showPreview(event, imageSrc) {
-        const { tooltip, image } = this.getTooltipElements();
-        if (!tooltip || !image) return;
-
-        const resolvedImage = Utils.resolveImagePath(imageSrc);
-        Utils.setSafeImageSource(image, resolvedImage);
-        image.alt = 'Kartenvorschau';
-        tooltip.style.display = 'block';
-
-        this.movePreview(event);
-    },
-
-    movePreview(event) {
-        const { tooltip } = this.getTooltipElements();
-        if (!tooltip || tooltip.style.display !== 'block' || !event) return;
-
-        const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
-        const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-
-        const rect = tooltip.getBoundingClientRect();
-        let left = event.clientX + this.previewOffsetX;
-        let top = event.clientY + this.previewOffsetY;
-
-        if (left + rect.width > viewportWidth - 12) {
-            left = Math.max(12, event.clientX - rect.width - this.previewOffsetX);
-        }
-
-        if (top + rect.height > viewportHeight - 12) {
-            top = Math.max(12, event.clientY - rect.height - this.previewOffsetY);
-        }
-
-        tooltip.style.left = `${left}px`;
-        tooltip.style.top = `${top}px`;
-    },
-
-    closePreview() {
-        const { tooltip, image } = this.getTooltipElements();
-        if (!tooltip || !image) return;
-
-        tooltip.style.display = 'none';
-        tooltip.style.left = '-9999px';
-        tooltip.style.top = '-9999px';
-        image.removeAttribute('src');
-        image.dataset.fallbackApplied = 'false';
-    },
-
-    openPreview(imageSrc) {
-        const resolvedImage = Utils.resolveImagePath(imageSrc);
-        if (!resolvedImage) return;
-
-        if (window.Renderer?.ensureCardDetailModal) {
-            const modal = window.Renderer.ensureCardDetailModal();
-            const content = Utils.byId('card-detail-content');
-
-            if (modal && content) {
-                content.innerHTML = `
-                    <div class="reader-text">
-                        <div class="img-wrapper">
-                            <img
-                                id="preview-modal-image"
-                                alt="Kartenvorschau"
-                                class="manual-page-img"
-                                loading="lazy"
-                            >
-                        </div>
-                    </div>
-                `;
-
-                const previewImage = Utils.byId('preview-modal-image');
-                Utils.setSafeImageSource(previewImage, resolvedImage);
-
-                modal.style.display = 'flex';
-                return;
-            }
-        }
-
-        window.open(resolvedImage, '_blank', 'noopener,noreferrer');
-    },
-
-    closeAllModals() {
-        Utils.qsa('.modal-backdrop').forEach(modal => {
-            modal.style.display = 'none';
-        });
-
-        this.closePreview();
-
-        if (window.Renderer?.closeCardDetail) {
-            window.Renderer.closeCardDetail();
         }
     },
 
