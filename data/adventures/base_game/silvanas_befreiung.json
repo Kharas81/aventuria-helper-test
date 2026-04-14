@@ -1,18 +1,22 @@
 {
   "id": "silvanas_befreiung",
   "name": "Silvanas Befreiung",
+  "status": "playable",
+  "set": {
+    "id": "base_game",
+    "name": "Aventuria Grundbox"
+  },
   "danger_calc": 5,
-  "expansion": "Grundbox [cite: 146]",
   "narrative": {
-    "intro": "Euer Freund Alrik hat euch herbeigerufen... Hinter der Tür blickt ihr in das Gesicht eines Kobolds... [cite: 715-718]",
+    "intro": "Euer Freund Alrik hat euch herbeigerufen. Hinter der Tür blickt ihr in das Gesicht eines Kobolds...",
     "checks": [
       {
         "id": "chase_goblins",
-        "skill": "Körperbeherrschung [cite: 722]",
-        "text": "Die Goblins ergreifen die Flucht! Setzt ihnen nach.",
+        "skill": "Körperbeherrschung",
+        "text": "Die Goblins ergreifen die Flucht. Setzt ihnen nach.",
         "results": {
-          "success": "Ein Goblin weniger im Kampf [cite: 725-726].",
-          "fail": "Füge 'Feiger Goblin' zum Schergendeck hinzu [cite: 727-729]."
+          "success": "Ein Goblin weniger im Kampf.",
+          "fail": "Füge „Feiger Goblin“ zum Schergendeck hinzu."
         }
       }
     ]
@@ -29,7 +33,11 @@
       { "id": "minion_feiger_goblin", "label": "Feiger Goblin (falls benötigt)" }
     ],
     "special_cards": [],
-    "victory": "Alle Gegner besiegt oder vertrieben[cite: 774].",
-    "defeat": "Verderbensmarken = Anzahl Helden[cite: 773]."
-  }
+    "victory": "Alle Gegner besiegt oder vertrieben.",
+    "defeat": "Verderbensmarken = Anzahl Helden."
+  },
+  "source": {
+    "book": "Aventuria Das Abenteuerkartenspiel Anleitung"
+  },
+  "notes": "Auf neues Abenteuerformat vereinheitlicht. Textstellen wurden bereinigt und von Extraktionsmarkierungen befreit."
 }
