@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 7:51:24 AM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 7:51:39 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -6601,65 +6601,234 @@ window.Renderer = {
 
 ## 📄 Datei: js/ui.js
 ```js
-window.Utils = {
-    escapeHtml(value) {
-        return String(value ?? '')
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#39;');
+window.UI = {
+    previewOffsetX: 18,
+    previewOffsetY: 18,
+
+    getTooltipElements() {
+        return {
+            tooltip: Utils.byId('card-tooltip'),
+            image: Utils.byId('tooltip-image')
+        };
     },
 
-    normalizeArray(value) {
-        return Array.isArray(value) ? value : [];
-    },
-
-    normalizeString(value) {
-        return String(value ?? '').trim();
-    },
-
-    normalizeObject(value) {
-        return value && typeof value === 'object' && !Array.isArray(value)
-            ? value
-            : {};
-    },
-
-    toNumber(value, fallback = 0) {
-        const numeric = Number(value);
-        return Number.isFinite(numeric) ? numeric : fallback;
-    },
-
-    clamp(value, min, max) {
-        const numeric = this.toNumber(value, min);
-        return Math.min(Math.max(numeric, min), max);
-    },
-
-    isObject(value) {
-        return value !== null && typeof value === 'object' && !Array.isArray(value);
-    },
-
-    byId(id) {
-        return document.getElementById(id);
-    },
-
-    qs(selector, scope = document) {
-        return scope.querySelector(selector);
-    },
-
-    qsa(selector, scope = document) {
-        return Array.from(scope.querySelectorAll(selector));
-    },
-
-    toggleClass(element, className, force) {
-        if (!element) return;
-        if (typeof force === 'boolean') {
-            element.classList.toggle(className, force);
-            return;
+    setStatus(message) {
+        const status = Utils.byId('loading-status');
+        if (status) {
+            status.innerText = String(message ?? '');
         }
-        element.classList.toggle(className);
+    },
+
+    getSectionStateKey(sectionId) {
+        const map = {
+            'combat-tools-section': 'combatToolsOpen',
+            'intermission-section': 'intermissionOpen'
+        };
+
+        return map[sectionId] || null;
+    },
+
+    toggleSection(sectionId) {
+        const section = Utils.byId(sectionId);
+        if (!section) return;
+
+        const isOpen = !section.classList.contains('show');
+        section.classList.toggle('show', isOpen);
+
+        const sectionKey = this.getSectionStateKey(sectionId);
+        if (sectionKey) {
+            window.State.setSectionOpen(sectionKey, isOpen);
+        }
+
+        if (window.StorageManager?.persist) {
+            window.StorageManager.persist();
+        }
+    },
+
+    showPreview(event, imageSrc) {
+        const { tooltip, image } = this.getTooltipElements();
+        if (!tooltip || !image || !imageSrc) return;
+
+        image.src = imageSrc;
+        image.alt = 'Kartenvorschau';
+        tooltip.style.display = 'block';
+
+        this.movePreview(event);
+    },
+
+    movePreview(event) {
+        const { tooltip } = this.getTooltipElements();
+        if (!tooltip || tooltip.style.display !== 'block' || !event) return;
+
+        const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+        const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+
+        const rect = tooltip.getBoundingClientRect();
+        let left = event.clientX + this.previewOffsetX;
+        let top = event.clientY + this.previewOffsetY;
+
+        if (left + rect.width > viewportWidth - 12) {
+            left = Math.max(12, event.clientX - rect.width - this.previewOffsetX);
+        }
+
+        if (top + rect.height > viewportHeight - 12) {
+            top = Math.max(12, event.clientY - rect.height - this.previewOffsetY);
+        }
+
+        tooltip.style.left = `${left}px`;
+        tooltip.style.top = `${top}px`;
+    },
+
+    closePreview() {
+        const { tooltip, image } = this.getTooltipElements();
+        if (!tooltip || !image) return;
+
+        tooltip.style.display = 'none';
+        tooltip.style.left = '-9999px';
+        tooltip.style.top = '-9999px';
+        image.src = '';
+    },
+
+    openPreview(imageSrc) {
+        if (!imageSrc) return;
+
+        if (window.Renderer?.ensureCardDetailModal) {
+            const modal = window.Renderer.ensureCardDetailModal();
+            const content = Utils.byId('card-detail-content');
+
+            if (modal && content) {
+                content.innerHTML = `
+                    <div class="reader-text">
+                        <div class="img-wrapper">
+                            <img
+                                src="${Utils.escapeHtml(imageSrc)}"
+                                alt="Kartenvorschau"
+                                class="manual-page-img"
+                                loading="lazy"
+                            >
+                        </div>
+                    </div>
+                `;
+                modal.style.display = 'flex';
+                return;
+            }
+        }
+
+        window.open(imageSrc, '_blank', 'noopener,noreferrer');
+    },
+
+    closeAllModals() {
+        Utils.qsa('.modal-backdrop').forEach(modal => {
+            modal.style.display = 'none';
+        });
+
+        this.closePreview();
+
+        if (window.Renderer?.closeCardDetail) {
+            window.Renderer.closeCardDetail();
+        }
+    },
+
+    handleActionTrigger(trigger) {
+        const action = String(trigger?.dataset?.action ?? '').trim();
+        if (!action) return;
+
+        switch (action) {
+            case 'open-archive':
+                window.Archive?.open?.();
+                break;
+
+            case 'close-archive':
+                window.Archive?.close?.();
+                break;
+
+            case 'open-rulebook':
+                window.Rulebook?.open?.();
+                break;
+
+            case 'close-rulebook':
+                window.Rulebook?.close?.();
+                break;
+
+            case 'toggle-section':
+                this.toggleSection(trigger.dataset.target);
+                break;
+
+            case 'combat-prev-phase':
+                window.Combat?.prevPhase?.();
+                break;
+
+            case 'combat-next-phase':
+                window.Combat?.nextPhase?.();
+                break;
+
+            case 'combat-roll-target':
+                window.Combat?.rollTarget?.();
+                break;
+
+            case 'combat-update-ep':
+                window.Combat?.updateEpResult?.();
+                break;
+
+            case 'combat-apply-intermission':
+                window.Combat?.applyIntermission?.();
+                break;
+
+            case 'rulebook-tab':
+                window.Rulebook?.showTab?.(trigger.dataset.tab);
+                break;
+
+            case 'rulebook-prev-page':
+                window.Rulebook?.prevPage?.();
+                break;
+
+            case 'rulebook-next-page':
+                window.Rulebook?.nextPage?.();
+                break;
+
+            case 'archive-load-set':
+                window.Archive?.loadSet?.(trigger.dataset.set);
+                break;
+
+            case 'open-card-detail':
+                if (trigger.dataset.cardId) {
+                    window.API?.openCardDetailById?.(trigger.dataset.cardId);
+                }
+                break;
+
+            case 'close-card-detail':
+                window.Renderer?.closeCardDetail?.();
+                break;
+
+            default:
+                break;
+        }
+    },
+
+    bindGlobalUiEvents() {
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape') {
+                this.closeAllModals();
+            }
+        });
+
+        document.addEventListener('click', event => {
+            const trigger = event.target.closest('[data-action]');
+            if (!trigger) return;
+            this.handleActionTrigger(trigger);
+        });
+    },
+
+    init() {
+        this.bindGlobalUiEvents();
     }
 };
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (window.UI?.init) {
+        window.UI.init();
+    }
+});
 
 ```
 
