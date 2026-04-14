@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 9:50:54 AM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 9:51:17 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -1018,6 +1018,52 @@ hr {
         font-size: 0.96rem;
         line-height: 1.55;
     }
+}
+
+```
+
+---
+
+## 📄 Datei: data/adventures/base_game/index.json
+```json
+{
+  "set": {
+    "id": "base_game",
+    "name": "Aventuria Grundbox",
+    "shortName": "Grundbox"
+  },
+  "adventures": [
+    {
+      "id": "leute_die_nicht_spielen",
+      "name": "Leute, die nicht spielen",
+      "status": "canonical",
+      "order": 10
+    },
+    {
+      "id": "silvanas_befreiung",
+      "name": "Silvanas Befreiung",
+      "status": "canonical",
+      "order": 20
+    },
+    {
+      "id": "wildenstein_akt_1",
+      "name": "Das Erbe von Wildenstein - Akt I",
+      "status": "canonical",
+      "order": 30
+    },
+    {
+      "id": "wildenstein_akt_2",
+      "name": "Das Erbe von Wildenstein - Akt II",
+      "status": "canonical",
+      "order": 40
+    },
+    {
+      "id": "wildenstein_akt_3",
+      "name": "Das Erbe von Wildenstein - Akt III",
+      "status": "canonical",
+      "order": 50
+    }
+  ]
 }
 
 ```
