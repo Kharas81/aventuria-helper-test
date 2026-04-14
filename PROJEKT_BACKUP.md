@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 7:54:07 AM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 7:54:22 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -7362,6 +7362,14 @@ window.UI = {
 
             case 'close-card-detail':
                 window.Renderer?.closeCardDetail?.();
+                break;
+
+            case 'toggle-diagnostics-details':
+                window.Diagnostics?.toggleDetails?.();
+                break;
+
+            case 'clear-diagnostics':
+                window.Diagnostics?.clear?.();
                 break;
 
             default:
