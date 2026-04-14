@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 7:51:51 AM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 7:52:07 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4552,6 +4552,9 @@ window.App = {
     isApplyingSavedState: false,
 
     async init() {
+        const savedState = window.StorageManager?.loadState?.() || window.State.getDefaultState();
+        window.State.replaceState(savedState);
+
         const picker = Utils.byId('adventurePicker');
         const heroCount = Utils.byId('heroCount');
         const difficulty = Utils.byId('difficulty');
@@ -4559,11 +4562,16 @@ window.App = {
         const clearBtn = Utils.byId('clearStateBtn');
 
         if (picker) {
-            picker.addEventListener('change', () => this.handleUpdate());
+            picker.addEventListener('change', () => {
+                window.State.setSelectedAdventure(picker.value);
+                this.handleUpdate();
+            });
         }
 
         if (heroCount) {
             heroCount.addEventListener('change', () => {
+                window.State.setHeroCount(heroCount.value);
+
                 if (window.Combat?.updateDashboard) {
                     window.Combat.updateDashboard();
                 }
@@ -4576,6 +4584,12 @@ window.App = {
 
         if (difficulty) {
             difficulty.addEventListener('change', () => {
+                window.State.setDifficulty(difficulty.value);
+
+                if (window.Combat?.updateEpResult) {
+                    window.Combat.updateEpResult();
+                }
+
                 if (!this.isApplyingSavedState && window.StorageManager) {
                     window.StorageManager.persist();
                 }
@@ -4597,13 +4611,10 @@ window.App = {
                     window.StorageManager.clearState();
                 }
 
+                window.State.reset();
                 this.resetUIToDefaults();
                 window.UI?.setStatus?.('🗑️ Spielstand gelöscht.');
             });
-        }
-
-        if (window.Combat?.updateDashboard) {
-            window.Combat.updateDashboard();
         }
 
         if (window.StorageManager?.bindAutoSave) {
@@ -4656,10 +4667,29 @@ window.App = {
         }
     },
 
-    resetUIToDefaults() {
+    applyStateToControls() {
+        const state = window.State.getState();
+
         const picker = Utils.byId('adventurePicker');
         const heroCount = Utils.byId('heroCount');
         const difficulty = Utils.byId('difficulty');
+
+        if (picker) {
+            picker.value = state.selectedAdventure || '';
+        }
+
+        if (heroCount) {
+            heroCount.value = String(state.heroCount ?? 2);
+        }
+
+        if (difficulty) {
+            difficulty.value = state.difficulty || 'normal';
+        }
+    },
+
+    resetUIToDefaults() {
+        this.applyStateToControls();
+
         const setupDisplay = Utils.byId('setup-display');
         const storyArea = Utils.byId('story-area');
         const title = Utils.byId('title');
@@ -4667,13 +4697,6 @@ window.App = {
         const minions = Utils.qs('#minions ul');
         const special = Utils.byId('special');
         const dangerValue = Utils.byId('danger-value');
-        const remainingTime = Utils.byId('remainingTime');
-        const epResult = Utils.byId('ep-result');
-        const targetResult = Utils.byId('targetResult');
-
-        if (picker) picker.value = '';
-        if (heroCount) heroCount.value = '2';
-        if (difficulty) difficulty.value = 'normal';
 
         if (setupDisplay) setupDisplay.classList.add('hidden');
         if (storyArea) storyArea.innerHTML = '';
@@ -4686,28 +4709,38 @@ window.App = {
             special.classList.add('hidden');
         }
         if (dangerValue) dangerValue.innerHTML = '';
-        if (remainingTime) remainingTime.value = 0;
-        if (epResult) epResult.textContent = '2 EP';
-        if (targetResult) targetResult.textContent = '--';
 
         this.clearVictoryDefeat();
 
         if (window.Combat) {
-            window.Combat.currentPhase = 0;
+            window.Combat.currentPhase = Number(window.State.getState().combatPhase ?? 0) || 0;
+
             if (window.Combat.updatePhaseTracker) {
                 window.Combat.updatePhaseTracker();
             }
+
             if (window.Combat.updateDashboard) {
-                window.Combat.updateDashboard();
+                window.Combat.updateDashboard(window.State.getState().heroStats);
             }
+
+            if (window.Combat.renderCombatState) {
+                window.Combat.renderCombatState();
+            }
+
+            if (window.Combat.updateEpResult) {
+                window.Combat.updateEpResult();
+            }
+        }
+
+        if (window.StorageManager?.applyUIState) {
+            window.StorageManager.applyUIState(window.State.getState().sections);
         }
     },
 
     async handleUpdate(options = {}) {
         const { skipPersist = false } = options;
 
-        const picker = Utils.byId('adventurePicker');
-        const adventureId = picker?.value || '';
+        const adventureId = window.State.getState().selectedAdventure || '';
 
         if (!adventureId) {
             this.resetUIToDefaults();
@@ -4738,11 +4771,23 @@ window.App = {
                 window.Combat.initializeForAdventure(advData, allCards);
             } else {
                 if (window.Combat?.updateDashboard) {
-                    window.Combat.updateDashboard();
+                    window.Combat.updateDashboard(window.State.getState().heroStats);
                 }
                 if (window.Combat?.updatePhaseTracker) {
                     window.Combat.updatePhaseTracker();
                 }
+            }
+
+            if (window.StorageManager?.applyChecklistState) {
+                window.StorageManager.applyChecklistState(window.State.getState().checklist);
+            }
+
+            if (window.StorageManager?.applyUIState) {
+                window.StorageManager.applyUIState(window.State.getState().sections);
+            }
+
+            if (window.StorageManager?.applyCombatState) {
+                window.StorageManager.applyCombatState(window.State.getState().combatState);
             }
 
             if (!skipPersist && !this.isApplyingSavedState && window.StorageManager) {
@@ -4757,30 +4802,15 @@ window.App = {
     },
 
     async restoreSavedState() {
-        if (!window.StorageManager) {
-            return;
-        }
-
-        const state = window.StorageManager.loadState();
+        const state = window.State.getState();
         if (!state) return;
-
-        const picker = Utils.byId('adventurePicker');
-        const heroCount = Utils.byId('heroCount');
-        const difficulty = Utils.byId('difficulty');
 
         this.isApplyingSavedState = true;
 
         try {
-            if (heroCount) {
-                heroCount.value = String(state.heroCount ?? 2);
-            }
+            this.applyStateToControls();
 
-            if (difficulty) {
-                difficulty.value = state.difficulty || 'normal';
-            }
-
-            if (picker && state.selectedAdventure) {
-                picker.value = state.selectedAdventure;
+            if (state.selectedAdventure) {
                 await this.handleUpdate({ skipPersist: true });
             } else {
                 this.resetUIToDefaults();
@@ -4807,6 +4837,10 @@ window.App = {
 
                 if (window.Combat.updatePhaseTracker) {
                     window.Combat.updatePhaseTracker();
+                }
+
+                if (window.Combat.updateDashboard) {
+                    window.Combat.updateDashboard(state.heroStats);
                 }
             }
         } finally {
