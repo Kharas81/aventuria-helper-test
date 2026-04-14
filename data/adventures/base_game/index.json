@@ -1,0 +1,39 @@
+{
+  "set": {
+    "id": "base_game",
+    "name": "Aventuria Grundbox",
+    "shortName": "Grundbox"
+  },
+  "adventures": [
+    {
+      "id": "leute_die_nicht_spielen",
+      "name": "Leute, die nicht spielen",
+      "status": "canonical",
+      "order": 10
+    },
+    {
+      "id": "silvanas_befreiung",
+      "name": "Silvanas Befreiung",
+      "status": "canonical",
+      "order": 20
+    },
+    {
+      "id": "wildenstein_akt_1",
+      "name": "Das Erbe von Wildenstein - Akt I",
+      "status": "canonical",
+      "order": 30
+    },
+    {
+      "id": "wildenstein_akt_2",
+      "name": "Das Erbe von Wildenstein - Akt II",
+      "status": "canonical",
+      "order": 40
+    },
+    {
+      "id": "wildenstein_akt_3",
+      "name": "Das Erbe von Wildenstein - Akt III",
+      "status": "canonical",
+      "order": 50
+    }
+  ]
+}
