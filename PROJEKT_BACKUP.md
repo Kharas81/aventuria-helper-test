@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 9:57:40 AM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 9:57:54 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -7036,6 +7036,44 @@ window.Renderer = {
         return this.normalizeArray(cards).find(card => Utils.normalizeString(card?.id) === targetId) || null;
     },
 
+    createPlaceholderEntry(entry) {
+        const entryId = typeof entry === 'string'
+            ? Utils.normalizeString(entry)
+            : Utils.normalizeString(entry?.id);
+
+        const entryLabel = typeof entry === 'string'
+            ? Utils.normalizeString(entry)
+            : Utils.normalizeString(entry?.label || entry?.id || 'Variable Karte');
+
+        return {
+            id: entryId,
+            name: entryLabel || entryId || 'Variable Karte',
+            type: '',
+            status: 'placeholder',
+            image: '',
+            note: 'Diese Referenz ist ein Platzhalter oder eine variable Setup-Vorgabe und keine feste Karten-Detaildatei.'
+        };
+    },
+
+    createMissingEntry(entry) {
+        const entryId = typeof entry === 'string'
+            ? Utils.normalizeString(entry)
+            : Utils.normalizeString(entry?.id);
+
+        const entryLabel = typeof entry === 'string'
+            ? Utils.normalizeString(entry)
+            : Utils.normalizeString(entry?.label || entry?.id || 'Fehlende Karte');
+
+        return {
+            id: entryId,
+            name: entryLabel || entryId || 'Fehlende Karte',
+            type: '',
+            status: 'missing',
+            image: '',
+            note: 'Karte konnte im geladenen Kartenpool nicht gefunden werden.'
+        };
+    },
+
     resolveCardEntry(entry, allCards) {
         if (!entry) return null;
 
@@ -7043,14 +7081,11 @@ window.Renderer = {
             const found = this.findCardById(allCards, entry);
             if (found) return found;
 
-            return {
-                id: entry,
-                name: entry,
-                type: '',
-                status: 'missing',
-                image: '',
-                note: 'Karte konnte im geladenen Kartenpool nicht gefunden werden.'
-            };
+            if (window.Validator?.isPlaceholderCardRef?.(entry)) {
+                return this.createPlaceholderEntry(entry);
+            }
+
+            return this.createMissingEntry(entry);
         }
 
         const entryId = Utils.normalizeString(entry?.id);
@@ -7062,6 +7097,14 @@ window.Renderer = {
                     label: entry?.label ?? found?.label ?? null
                 };
             }
+
+            if (window.Validator?.isPlaceholderCardRef?.(entryId)) {
+                return this.createPlaceholderEntry(entry);
+            }
+        }
+
+        if (entryId || entry?.label) {
+            return this.createMissingEntry(entry);
         }
 
         return entry;
@@ -7081,6 +7124,7 @@ window.Renderer = {
         const cardId = Utils.escapeHtml(normalized.id || label);
         const hasPreview = Boolean(imageSrc);
         const isMissing = normalized.status === 'missing';
+        const isPlaceholder = normalized.status === 'placeholder';
 
         const previewAttr = hasPreview
             ? ` data-image="${Utils.escapeHtml(imageSrc)}" data-card-id="${cardId}" class="has-preview"`
@@ -7093,14 +7137,20 @@ window.Renderer = {
                 title="Kartendetails anzeigen"
                 data-action="open-card-detail"
                 data-card-id="${cardId}"
-                ${normalized.id ? '' : 'disabled'}
+                ${normalized.id && !isPlaceholder ? '' : 'disabled'}
             >i</button>
         `;
+
+        const suffix = isMissing
+            ? ' ⚠️'
+            : isPlaceholder
+                ? ' 🛈'
+                : '';
 
         return `
             <li class="checklist-item" data-card-id="${cardId}">
                 <input type="checkbox">
-                <span${previewAttr}>${safeLabel}${isMissing ? ' ⚠️' : ''}</span>
+                <span${previewAttr}>${safeLabel}${suffix}</span>
                 ${infoButton}
             </li>
         `;
