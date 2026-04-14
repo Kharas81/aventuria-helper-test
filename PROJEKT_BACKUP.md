@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 10:10:27 AM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 10:10:55 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -1145,21 +1145,27 @@ hr {
   "id": "leute_nicht_spielen",
   "name": "Leute, die nicht spielen",
   "status": "deprecated_alias",
+  "set": {
+    "id": "base_game",
+    "name": "Aventuria Grundbox"
+  },
   "redirect_to": "data/adventures/base_game/leute_die_nicht_spielen.json",
-  "note": "Diese Datei ist nur noch ein Altname/Kompatibilitätseintrag. Die kanonische Abenteuerdatei ist data/adventures/base_game/leute_die_nicht_spielen.json. Pflege und Änderungen nur noch dort vornehmen.",
-
+  "danger_calc": 0,
   "narrative": {
     "intro": "DEPRECATED_ALIAS",
     "checks": []
   },
-
   "setup": {
     "blue_cards": [],
     "minion_cards": [],
     "special_cards": [],
     "victory": "Siehe kanonische Datei.",
     "defeat": "Siehe kanonische Datei."
-  }
+  },
+  "source": {
+    "note": "Altname für Kompatibilität mit älteren Spielständen und Referenzen."
+  },
+  "notes": "Diese Datei ist nur noch ein Kompatibilitätseintrag. Pflege und Änderungen ausschließlich in der kanonischen Datei leute_die_nicht_spielen.json."
 }
 
 ```
