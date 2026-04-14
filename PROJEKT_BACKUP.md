@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 7:49:21 AM
+# 🛡️ Aventuria Projekt-Backup - 4/14/2026, 7:49:34 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4017,20 +4017,8 @@ hr {
             <div class="button-group">
                 <button id="saveStateBtn" class="btn" type="button">Speichern</button>
                 <button id="clearStateBtn" class="btn-outline" type="button">Zurücksetzen</button>
-                <button
-                    class="btn-outline"
-                    type="button"
-                    data-action="open-archive"
-                >
-                    Archiv
-                </button>
-                <button
-                    class="btn-outline"
-                    type="button"
-                    data-action="open-rulebook"
-                >
-                    Regelbuch
-                </button>
+                <button class="btn-outline" type="button" data-action="open-archive">Archiv</button>
+                <button class="btn-outline" type="button" data-action="open-rulebook">Regelbuch</button>
             </div>
         </div>
 
@@ -4242,6 +4230,7 @@ hr {
 
     <script src="js/config.js"></script>
     <script src="js/utils.js"></script>
+    <script src="js/state.js"></script>
     <script src="js/api.js"></script>
     <script src="js/ui.js"></script>
     <script src="js/ui-renderer.js"></script>
