@@ -3,6 +3,7 @@ window.__AVENTURIA_SKIP_AUTO_INIT__ = true;
 const SCRIPT_LOAD_ORDER = [
     'js/config.js',
     'js/constants.js',
+    'js/events.js',
     'js/assets.js',
     'js/utils.js',
     'js/state.js',
