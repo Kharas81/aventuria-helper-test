@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:33:26 PM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:33:54 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -6726,7 +6726,8 @@ window.Constants = {
         validationFinished: 'validation:finished',
         diagnosticsRequested: 'diagnostics:requested',
         archiveSetChanged: 'archive:setChanged',
-        rulebookIndexLoaded: 'rulebook:indexLoaded'
+        rulebookIndexLoaded: 'rulebook:indexLoaded',
+        setChanged: 'set:changed'
     },
 
     isAllowedAdventureStatus(status = '') {
