@@ -22,6 +22,10 @@ import RenderCommon from './render/common.js';
 import RenderSetup from './render/setup.js';
 import RenderCardDetail from './render/card-detail.js';
 
+import CombatDashboard from './features/combat/dashboard.js';
+import CombatTracker from './features/combat/tracker.js';
+import Combat from './features/combat/combat.js';
+
 import ArchiveLoader from './features/archive/loader.js';
 import ArchiveFilter from './features/archive/filter.js';
 import ArchiveRenderer from './features/archive/renderer.js';
@@ -70,6 +74,10 @@ window.RenderCommon = RenderCommon;
 window.RenderSetup = RenderSetup;
 window.RenderCardDetail = RenderCardDetail;
 
+window.CombatDashboard = CombatDashboard;
+window.CombatTracker = CombatTracker;
+window.Combat = Combat;
+
 window.ArchiveLoader = ArchiveLoader;
 window.ArchiveFilter = ArchiveFilter;
 window.ArchiveRenderer = ArchiveRenderer;
@@ -94,7 +102,6 @@ window.App = App;
 
 const SCRIPT_LOAD_ORDER = [
     'js/narrative.js',
-    'js/combat.js',
     'js/storage.js'
 ];
 
@@ -152,6 +159,7 @@ async function boot() {
 
         Theme.init();
         UI.init();
+        Combat.init();
         Archive.init();
         Diagnostics.init();
         await Rulebook.init();
