@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:28:34 PM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:28:51 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -5013,20 +5013,24 @@ window.AppAdventureFlow = {
 
             window.AppStateSync?.applySavedSubsystems(window.State.getState());
 
-            if (window.Diagnostics?.runAdventureDiagnostics) {
-                window.Diagnostics.runAdventureDiagnostics(advData, allCards, masterIndex, {
-                    setKey: advData?.set?.id || 'base_game'
-                });
-            }
+            window.Diagnostics?.requestAdventureDiagnostics?.(advData, allCards, masterIndex, {
+                setKey: advData?.set?.id || 'base_game'
+            });
 
             if (!skipPersist && !window.App?.isApplyingSavedState && window.StorageManager) {
                 window.StorageManager.persist();
             }
 
-            window.UI?.setStatus?.(`✅ ${advData.name} geladen.`);
+            window.UI?.setStatus?.(`✅ Abenteuer geladen: ${advData.name}`);
         } catch (error) {
-            console.error('Fehler beim Aktualisieren des Abenteuers:', error);
-            window.UI?.setStatus?.('⚠️ Abenteuer konnte nicht geladen werden.');
+            console.error(error);
+            window.Diagnostics?.clear?.();
+            window.Diagnostics?.addMessage?.(
+                'error',
+                'Ladefehler',
+                error?.message || 'Unbekannter Fehler beim Laden des Abenteuers.'
+            );
+            window.UI?.setStatus?.(`❌ Fehler: ${error.message}`);
         }
     }
 };
