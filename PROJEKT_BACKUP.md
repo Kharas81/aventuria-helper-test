@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 4:52:45 AM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 4:54:13 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -1885,7 +1885,7 @@ hr {
     "Kampfumgebung"
   ],
 
-  "status": "raw",
+  "status": "playable_placeholder",
 
   "adventure_refs": [
     {
@@ -1946,7 +1946,7 @@ hr {
     "note": "Im Kurzabenteuer 'Leute, die nicht spielen' als Kampfumgebung referenziert. Genaue Kartentexte und Bilddatei später ergänzen."
   },
 
-  "notes": "Platzhalter im neuen Einzelkartenformat. Sobald Bild oder vollständiger Kartentext vorliegt, diese Datei von 'raw' auf 'playable' oder 'complete' hochziehen."
+  "notes": "Temporärer spielbarer Platzhalter. Karte bleibt im aktiven Abenteuerpfad sichtbar, bis echter Kartentext und echtes Bild vorliegen."
 }
 
 ```
