@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:32:53 PM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:33:04 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -711,42 +711,42 @@ hr {
 .modal-backdrop {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.9);
+    background: var(--color-black-heavy);
     display: none;
     justify-content: center;
     align-items: center;
     z-index: 2000;
-    padding: 12px;
+    padding: var(--space-lg);
     box-sizing: border-box;
 }
 
 .modal-content {
-    background: #f4e7d3;
+    background: var(--color-bg-panel);
     width: 95vw;
-    max-width: 1200px;
+    max-width: var(--modal-max-width);
     height: 90vh;
-    border: 3px solid #5c1e1e;
-    border-radius: 8px;
+    border: var(--border-lg) solid var(--color-primary);
+    border-radius: var(--radius-lg);
     position: relative;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 0 50px rgba(0,0,0,0.5);
+    box-shadow: var(--shadow-2xl);
     overflow: hidden;
 }
 
 /* Spezielle Breite für das Archiv */
 .archive-modal-size {
-    max-width: 1400px;
+    max-width: var(--modal-max-width-archive);
 }
 
 .close-modal {
     position: absolute;
-    top: 10px;
-    right: 20px;
+    top: var(--space-md);
+    right: var(--space-2xl);
     font-size: 2.5em;
     line-height: 1;
     cursor: pointer;
-    color: #5c1e1e;
+    color: var(--color-primary);
     z-index: 100;
 }
 
@@ -759,19 +759,19 @@ hr {
 }
 
 .modal-sidebar {
-    width: 280px;
-    min-width: 240px;
-    background: #e6dec9;
-    border-right: 2px solid #8b4513;
-    padding: 20px;
+    width: var(--sidebar-width);
+    min-width: var(--sidebar-min-width);
+    background: var(--color-bg-panel-alt);
+    border-right: var(--border-md) solid var(--color-secondary);
+    padding: var(--space-2xl);
     overflow-y: auto;
     box-sizing: border-box;
 }
 
 .modal-sidebar h4 {
     margin-top: 0;
-    color: #5c1e1e;
-    border-bottom: 2px solid #8b4513;
+    color: var(--color-primary);
+    border-bottom: var(--border-md) solid var(--color-secondary);
     padding-bottom: 5px;
     font-variant: small-caps;
 }
@@ -783,8 +783,8 @@ hr {
 }
 
 .modal-sidebar li {
-    padding: 10px 8px;
-    border-bottom: 1px solid rgba(139, 69, 19, 0.1);
+    padding: var(--space-md) var(--space-sm);
+    border-bottom: var(--border-thin) solid var(--color-border-soft);
     font-size: 0.9em;
     cursor: pointer;
     transition: background 0.2s ease;
@@ -792,7 +792,7 @@ hr {
 }
 
 .modal-sidebar li:hover {
-    background: #dcd0ba;
+    background: var(--color-bg-body);
     font-weight: bold;
 }
 
@@ -800,7 +800,7 @@ hr {
     flex: 1;
     display: flex;
     flex-direction: column;
-    background: #f4e7d3;
+    background: var(--color-bg-panel);
     min-width: 0;
     min-height: 0;
 }
@@ -808,38 +808,38 @@ hr {
 .modal-nav {
     display: flex;
     align-items: center;
-    padding: 10px 20px;
-    background: #dcd0ba;
-    border-bottom: 2px solid #8b4513;
-    gap: 15px;
+    padding: var(--space-md) var(--space-2xl);
+    background: var(--color-bg-body);
+    border-bottom: var(--border-md) solid var(--color-secondary);
+    gap: var(--space-xl);
     flex-wrap: wrap;
 }
 
 .modal-nav h2 {
     margin: 0;
-    color: #5c1e1e;
+    color: var(--color-primary);
     font-size: 1.3rem;
 }
 
 .tab-btn {
-    background: #f4e7d3;
-    border: 1px solid #8b4513;
-    padding: 8px 20px;
+    background: var(--color-bg-panel);
+    border: var(--border-thin) solid var(--color-secondary);
+    padding: var(--space-sm) var(--space-2xl);
     cursor: pointer;
     font-weight: bold;
     font-family: inherit;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
 }
 
 .tab-btn.active {
-    background: #5c1e1e;
-    color: white;
-    border-color: #5c1e1e;
+    background: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
 }
 
 .tab-content {
     flex: 1;
-    padding: 25px;
+    padding: var(--space-3xl);
     overflow-y: auto;
     min-height: 0;
     box-sizing: border-box;
@@ -856,13 +856,13 @@ hr {
 .reader-page {
     flex: 1;
     overflow-y: auto;
-    padding-right: 15px;
+    padding-right: var(--space-xl);
 }
 
 .reader-text {
     font-family: 'Georgia', serif;
     line-height: 1.6;
-    color: #2e241f;
+    color: var(--color-text);
     max-width: 850px;
     margin: 0 auto;
     word-break: break-word;
@@ -871,61 +871,61 @@ hr {
 .img-wrapper {
     width: 100%;
     max-width: 800px;
-    margin: 0 auto 25px auto;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    margin: 0 auto var(--space-3xl) auto;
+    box-shadow: var(--shadow-card);
 }
 
 .manual-page-img {
     display: block;
     width: 100%;
     height: auto;
-    border: 1px solid #8b4513;
+    border: var(--border-thin) solid var(--color-secondary);
 }
 
 .reader-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 12px;
-    padding: 15px 0;
-    margin-top: 10px;
-    border-top: 2px solid #8b4513;
+    gap: var(--space-lg);
+    padding: var(--space-xl) 0;
+    margin-top: var(--space-md);
+    border-top: var(--border-md) solid var(--color-secondary);
     flex-wrap: wrap;
 }
 
 .reader-footer button {
-    background: #8b4513;
-    color: white;
+    background: var(--color-secondary);
+    color: var(--color-white);
     border: none;
-    padding: 8px 15px;
-    border-radius: 4px;
+    padding: var(--space-sm) var(--space-xl);
+    border-radius: var(--radius-sm);
     cursor: pointer;
 }
 
 /* --- KODEX SUCHE --- */
 .search-bar {
     width: 100%;
-    padding: 12px;
-    margin-bottom: 20px;
-    border: 2px solid #8b4513;
+    padding: var(--space-lg);
+    margin-bottom: var(--space-2xl);
+    border: var(--border-md) solid var(--color-secondary);
     box-sizing: border-box;
-    background: #fffdf8;
-    color: #2e241f;
+    background: var(--color-ivory);
+    color: var(--color-text);
     font-family: inherit;
 }
 
 .rule-entry {
-    background: rgba(255, 255, 255, 0.4);
-    padding: 15px;
-    margin-bottom: 15px;
-    border-left: 5px solid #5c1e1e;
-    border-radius: 4px;
+    background: var(--color-bg-white-soft);
+    padding: var(--space-xl);
+    margin-bottom: var(--space-xl);
+    border-left: var(--border-xl) solid var(--color-primary);
+    border-radius: var(--radius-sm);
 }
 
 .rule-entry h4 {
     margin-top: 0;
-    margin-bottom: 8px;
-    color: #5c1e1e;
+    margin-bottom: var(--space-sm);
+    color: var(--color-primary);
 }
 
 /* --- ARCHIV SPEZIFISCH --- */
@@ -933,14 +933,14 @@ hr {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-right: 20px;
+    padding-right: var(--space-2xl);
 }
 
 .placeholder-text {
     text-align: center;
-    color: #8b4513;
+    color: var(--color-secondary);
     font-style: italic;
-    margin-top: 50px;
+    margin-top: var(--space-5xl);
     grid-column: 1 / -1;
 }
 
@@ -968,14 +968,14 @@ hr {
 
 @media (max-width: 820px) {
     .modal-backdrop {
-        padding: 8px;
+        padding: var(--space-sm);
     }
 
     .modal-content {
         width: 100%;
         height: 95vh;
-        border-width: 2px;
-        border-radius: 8px;
+        border-width: var(--border-md);
+        border-radius: var(--radius-lg);
     }
 
     .modal-layout {
@@ -987,22 +987,22 @@ hr {
         min-width: 0;
         max-height: 170px;
         border-right: none;
-        border-bottom: 2px solid #8b4513;
+        border-bottom: var(--border-md) solid var(--color-secondary);
         padding: 12px 14px;
     }
 
     .modal-sidebar ul {
         display: flex;
         flex-wrap: wrap;
-        gap: 6px;
+        gap: var(--space-xs);
     }
 
     .modal-sidebar li {
         border-bottom: none;
-        background: rgba(255,255,255,0.35);
-        border: 1px solid rgba(139, 69, 19, 0.18);
+        background: var(--color-bg-soft-strong);
+        border: var(--border-thin) solid var(--color-border-soft-strong);
         border-radius: 6px;
-        padding: 8px 10px;
+        padding: var(--space-sm) var(--space-md);
         font-size: 0.85em;
     }
 
@@ -1011,8 +1011,8 @@ hr {
     }
 
     .modal-nav {
-        padding: 10px 14px;
-        gap: 10px;
+        padding: var(--space-md) 14px;
+        gap: var(--space-md);
     }
 
     .tab-content {
@@ -1020,7 +1020,7 @@ hr {
     }
 
     .close-modal {
-        top: 8px;
+        top: var(--space-sm);
         right: 14px;
         font-size: 2.2em;
     }
@@ -1048,7 +1048,7 @@ hr {
     }
 
     .tab-content {
-        padding: 12px;
+        padding: var(--space-lg);
     }
 
     .reader-footer {
@@ -1065,7 +1065,7 @@ hr {
     }
 
     .search-bar {
-        padding: 10px;
+        padding: var(--space-md);
         font-size: 0.95rem;
     }
 
@@ -1076,16 +1076,16 @@ hr {
 
 @media (max-width: 420px) {
     .modal-backdrop {
-        padding: 4px;
+        padding: var(--space-2xs);
     }
 
     .modal-content {
-        border-radius: 4px;
+        border-radius: var(--radius-sm);
         height: 97vh;
     }
 
     .modal-sidebar {
-        padding: 10px;
+        padding: var(--space-md);
         max-height: 135px;
     }
 
@@ -1095,16 +1095,16 @@ hr {
 
     .modal-sidebar li {
         font-size: 0.8em;
-        padding: 7px 8px;
+        padding: 7px var(--space-sm);
     }
 
     .close-modal {
         font-size: 2em;
-        right: 10px;
+        right: var(--space-md);
     }
 
     .tab-content {
-        padding: 10px;
+        padding: var(--space-md);
     }
 
     .reader-text {
