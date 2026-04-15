@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 3:09:22 PM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 3:10:21 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4281,7 +4281,11 @@ hr {
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/features.css">
     <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/ui-components.css">
+    <link rel="stylesheet" href="css/features.css">
 </head>
+    
 <body>
     <div class="app-container">
         <header>
