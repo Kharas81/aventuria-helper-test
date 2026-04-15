@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:26:09 PM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:26:29 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -8574,8 +8574,8 @@ window.UIPreview = {
         const resolvedImage = Utils.resolveImagePath(imageSrc);
         if (!resolvedImage) return;
 
-        if (window.Renderer?.ensureCardDetailModal) {
-            const modal = window.Renderer.ensureCardDetailModal();
+        if (window.RenderCardDetail?.ensureCardDetailModal) {
+            const modal = window.RenderCardDetail.ensureCardDetailModal();
             const content = Utils.byId('card-detail-content');
 
             if (modal && content) {
