@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:31:36 PM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:31:51 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -5571,9 +5571,7 @@ window.App = {
 
             window.State.replaceState(savedState);
 
-            await window.AppBootstrap?.populateAdventurePicker();
-            window.AppBootstrap?.bindEvents();
-            await window.AppBootstrap?.restoreSavedState();
+            await window.AppBootstrap?.initializeUi?.();
 
             console.log('App initialisiert (Modulare Architektur).');
         } catch (error) {
