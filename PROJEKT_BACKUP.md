@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 3:17:54 PM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 3:18:06 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -12070,6 +12070,7 @@ import Utils from './core/utils.js';
 import State from './core/state.js';
 import Theme from './core/theme.js';
 import Validator from './core/validator.js';
+import StorageManager from './core/storage.js';
 import ApiCache from './core/api-cache.js';
 import ApiNormalizers from './core/api-normalizers.js';
 import ApiFetch from './core/api-fetch.js';
@@ -12089,6 +12090,8 @@ import RenderCardDetail from './render/card-detail.js';
 import CombatDashboard from './features/combat/dashboard.js';
 import CombatTracker from './features/combat/tracker.js';
 import Combat from './features/combat/combat.js';
+
+import Narrative from './features/narrative/narrative.js';
 
 import ArchiveLoader from './features/archive/loader.js';
 import ArchiveFilter from './features/archive/filter.js';
@@ -12122,6 +12125,7 @@ window.Utils = Utils;
 window.State = State;
 window.Theme = Theme;
 window.Validator = Validator;
+window.StorageManager = StorageManager;
 window.ApiCache = ApiCache;
 window.ApiNormalizers = ApiNormalizers;
 window.ApiFetch = ApiFetch;
@@ -12141,6 +12145,8 @@ window.RenderCardDetail = RenderCardDetail;
 window.CombatDashboard = CombatDashboard;
 window.CombatTracker = CombatTracker;
 window.Combat = Combat;
+
+window.Narrative = Narrative;
 
 window.ArchiveLoader = ArchiveLoader;
 window.ArchiveFilter = ArchiveFilter;
@@ -12164,10 +12170,7 @@ window.AppPersistence = AppPersistence;
 window.AppBootstrap = AppBootstrap;
 window.App = App;
 
-const SCRIPT_LOAD_ORDER = [
-    'js/narrative.js',
-    'js/storage.js'
-];
+const SCRIPT_LOAD_ORDER = [];
 
 const loadedScripts = new Set();
 
