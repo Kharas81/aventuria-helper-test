@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:34:24 PM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:34:51 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -6021,6 +6021,16 @@ window.Archive = {
             window.Events?.emit?.(
                 window.Constants?.events?.archiveSetChanged || 'archive:setChanged',
                 {
+                    source: 'archive',
+                    setKey: this.currentSet,
+                    cardCount: this.allCards.length
+                }
+            );
+
+            window.Events?.emit?.(
+                window.Constants?.events?.setChanged || 'set:changed',
+                {
+                    source: 'archive',
                     setKey: this.currentSet,
                     cardCount: this.allCards.length
                 }
@@ -8811,6 +8821,23 @@ window.Rulebook = {
         if (!hasCurrentPage) {
             this.currentPage = firstAvailablePage;
         }
+
+        window.Events?.emit?.(
+            window.Constants?.events?.rulebookIndexLoaded || 'rulebook:indexLoaded',
+            {
+                source: 'rulebook',
+                setKey: this.currentSet,
+                pageCount: window.Utils.normalizeArray(this.manualIndex?.pages).length
+            }
+        );
+
+        window.Events?.emit?.(
+            window.Constants?.events?.setChanged || 'set:changed',
+            {
+                source: 'rulebook',
+                setKey: this.currentSet
+            }
+        );
     },
 
     async ensureRulesData() {
