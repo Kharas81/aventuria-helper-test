@@ -1,11 +1,23 @@
+import CONFIG from './core/config.js';
+import Constants from './core/constants.js';
+import Events from './core/events.js';
+import Assets from './core/assets.js';
+import Utils from './core/utils.js';
+
 window.__AVENTURIA_SKIP_AUTO_INIT__ = true;
 
+/**
+ * Übergangs-Bridge:
+ * Die bestehenden klassischen Dateien arbeiten noch mit window.*.
+ * Deshalb hängen wir die ersten echten ES-Module vorübergehend dort an.
+ */
+window.CONFIG = CONFIG;
+window.Constants = Constants;
+window.Events = Events;
+window.Assets = Assets;
+window.Utils = Utils;
+
 const SCRIPT_LOAD_ORDER = [
-    'js/config.js',
-    'js/constants.js',
-    'js/events.js',
-    'js/assets.js',
-    'js/utils.js',
     'js/state.js',
 
     'js/api-cache.js',
