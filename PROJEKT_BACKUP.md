@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:40:42 PM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:40:59 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -5260,7 +5260,7 @@ window.AppAdventureFlow = {
         window.UI?.setStatus?.('⏳ Abenteuer wird geladen...');
 
         try {
-            const advData = await window.API?.getAdventure?.(requestedAdventureId);
+            const advData = await window.ApiFetch?.getAdventure?.(requestedAdventureId);
 
             if (!advData) {
                 throw new Error('Abenteuer-Datei fehlt.');
@@ -5272,9 +5272,9 @@ window.AppAdventureFlow = {
                 if (picker) picker.value = advData.id;
             }
 
-            const cardData = await window.API?.getCards?.(advData.id, advData?.set?.id);
+            const cardData = await window.ApiCardLookup?.getCards?.(advData.id, advData?.set?.id);
             const allCards = Array.isArray(cardData?.cards) ? cardData.cards : [];
-            const masterIndex = await window.API?.getMasterIndex?.(advData?.set?.id);
+            const masterIndex = await window.ApiFetch?.getMasterIndex?.(advData?.set?.id);
 
             window.RenderSetup?.renderSetup?.(advData, allCards);
             this.renderStory(advData);
