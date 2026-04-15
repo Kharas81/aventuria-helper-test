@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:37:44 PM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:37:56 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -8081,6 +8081,7 @@ import Constants from './core/constants.js';
 import Events from './core/events.js';
 import Assets from './core/assets.js';
 import Utils from './core/utils.js';
+import State from './core/state.js';
 
 window.__AVENTURIA_SKIP_AUTO_INIT__ = true;
 
@@ -8094,10 +8095,9 @@ window.Constants = Constants;
 window.Events = Events;
 window.Assets = Assets;
 window.Utils = Utils;
+window.State = State;
 
 const SCRIPT_LOAD_ORDER = [
-    'js/state.js',
-
     'js/api-cache.js',
     'js/api-normalizers.js',
     'js/api-fetch.js',
