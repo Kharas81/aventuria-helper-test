@@ -13,7 +13,7 @@
     "Kampfumgebung"
   ],
 
-  "status": "raw",
+  "status": "playable_placeholder",
 
   "adventure_refs": [
     {
@@ -74,5 +74,5 @@
     "note": "Im Kurzabenteuer 'Leute, die nicht spielen' als Kampfumgebung referenziert. Genaue Kartentexte und Bilddatei später ergänzen."
   },
 
-  "notes": "Platzhalter im neuen Einzelkartenformat. Sobald Bild oder vollständiger Kartentext vorliegt, diese Datei von 'raw' auf 'playable' oder 'complete' hochziehen."
+  "notes": "Temporärer spielbarer Platzhalter. Karte bleibt im aktiven Abenteuerpfad sichtbar, bis echter Kartentext und echtes Bild vorliegen."
 }
