@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 3:17:05 PM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 3:17:30 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -8322,12 +8322,18 @@ const DEFAULT_STATE = {
         targetResult: '--'
     },
 
+    checklist: {},
+
     combatToolsOpen: true,
     intermissionOpen: true
 };
 
 function clone(value) {
     return JSON.parse(JSON.stringify(value));
+}
+
+function isPlainObject(value) {
+    return value !== null && typeof value === 'object' && !Array.isArray(value);
 }
 
 export const State = {
@@ -8337,28 +8343,63 @@ export const State = {
         return clone(DEFAULT_STATE);
     },
 
+    normalizeHeroStats(heroStats) {
+        if (!isPlainObject(heroStats)) {
+            return {};
+        }
+
+        const normalized = {};
+        Object.entries(heroStats).forEach(([key, value]) => {
+            const index = Number(key);
+            if (!Number.isFinite(index) || index <= 0) return;
+
+            const safeValue = isPlainObject(value) ? value : {};
+            normalized[index] = {
+                lp: Number.isFinite(Number(safeValue.lp)) ? Number(safeValue.lp) : 40,
+                fate: Number.isFinite(Number(safeValue.fate)) ? Number(safeValue.fate) : 0
+            };
+        });
+
+        return normalized;
+    },
+
+    normalizeChecklist(checklist) {
+        if (!isPlainObject(checklist)) {
+            return {};
+        }
+
+        const normalized = {};
+        Object.entries(checklist).forEach(([key, value]) => {
+            const safeKey = String(key ?? '').trim();
+            if (!safeKey) return;
+            normalized[safeKey] = Boolean(value);
+        });
+
+        return normalized;
+    },
+
+    mergeState(nextState = {}) {
+        const defaults = this.getDefaultState();
+        const safeNextState = isPlainObject(nextState) ? nextState : {};
+
+        return {
+            ...defaults,
+            ...safeNextState,
+            heroStats: this.normalizeHeroStats(safeNextState.heroStats),
+            combatState: {
+                ...defaults.combatState,
+                ...(isPlainObject(safeNextState.combatState) ? safeNextState.combatState : {})
+            },
+            checklist: this.normalizeChecklist(safeNextState.checklist)
+        };
+    },
+
     getState() {
         return this.state;
     },
 
     replaceState(nextState = {}) {
-        const defaults = this.getDefaultState();
-        const safeNextState = nextState && typeof nextState === 'object' ? nextState : {};
-
-        this.state = {
-            ...defaults,
-            ...safeNextState,
-            heroStats: safeNextState.heroStats && typeof safeNextState.heroStats === 'object' && !Array.isArray(safeNextState.heroStats)
-                ? safeNextState.heroStats
-                : defaults.heroStats,
-            combatState: safeNextState.combatState && typeof safeNextState.combatState === 'object' && !Array.isArray(safeNextState.combatState)
-                ? {
-                    ...defaults.combatState,
-                    ...safeNextState.combatState
-                }
-                : clone(defaults.combatState)
-        };
-
+        this.state = this.mergeState(nextState);
         return this.state;
     },
 
@@ -8373,7 +8414,9 @@ export const State = {
 
     setHeroCount(value = 2) {
         const numeric = Number(value);
-        this.state.heroCount = Number.isFinite(numeric) ? numeric : 2;
+        this.state.heroCount = Number.isFinite(numeric)
+            ? Math.min(Math.max(numeric, 1), 4)
+            : 2;
     },
 
     setDifficulty(value = 'normal') {
@@ -8381,9 +8424,7 @@ export const State = {
     },
 
     setHeroStats(value = {}) {
-        this.state.heroStats = value && typeof value === 'object' && !Array.isArray(value)
-            ? value
-            : {};
+        this.state.heroStats = this.normalizeHeroStats(value);
     },
 
     setHeroStat(heroIndex, field, value) {
@@ -8394,13 +8435,13 @@ export const State = {
             return;
         }
 
-        const existing = this.state.heroStats[index] && typeof this.state.heroStats[index] === 'object'
+        const existing = isPlainObject(this.state.heroStats[index])
             ? this.state.heroStats[index]
-            : {};
+            : { lp: 40, fate: 0 };
 
         this.state.heroStats[index] = {
             ...existing,
-            [key]: value
+            [key]: Number.isFinite(Number(value)) ? Number(value) : 0
         };
     },
 
@@ -8413,11 +8454,22 @@ export const State = {
         const key = String(field ?? '').trim();
         if (!key) return;
 
-        if (!this.state.combatState || typeof this.state.combatState !== 'object' || Array.isArray(this.state.combatState)) {
+        if (!isPlainObject(this.state.combatState)) {
             this.state.combatState = {};
         }
 
         this.state.combatState[key] = value;
+    },
+
+    setChecklistItem(cardId, checked) {
+        const key = String(cardId ?? '').trim();
+        if (!key) return;
+
+        this.state.checklist[key] = Boolean(checked);
+    },
+
+    replaceChecklist(checklist) {
+        this.state.checklist = this.normalizeChecklist(checklist);
     },
 
     setSectionOpen(key, isOpen) {
@@ -8426,22 +8478,25 @@ export const State = {
     },
 
     patch(partialState = {}) {
-        if (!partialState || typeof partialState !== 'object') {
+        if (!isPlainObject(partialState)) {
             return this.state;
         }
 
         this.state = {
             ...this.state,
             ...partialState,
-            heroStats: partialState.heroStats && typeof partialState.heroStats === 'object' && !Array.isArray(partialState.heroStats)
-                ? partialState.heroStats
+            heroStats: isPlainObject(partialState.heroStats)
+                ? this.normalizeHeroStats(partialState.heroStats)
                 : this.state.heroStats,
-            combatState: partialState.combatState && typeof partialState.combatState === 'object' && !Array.isArray(partialState.combatState)
+            combatState: isPlainObject(partialState.combatState)
                 ? {
                     ...this.state.combatState,
                     ...partialState.combatState
                 }
-                : this.state.combatState
+                : this.state.combatState,
+            checklist: isPlainObject(partialState.checklist)
+                ? this.normalizeChecklist(partialState.checklist)
+                : this.state.checklist
         };
 
         return this.state;
