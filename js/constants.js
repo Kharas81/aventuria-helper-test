@@ -45,7 +45,8 @@ window.Constants = {
         validationFinished: 'validation:finished',
         diagnosticsRequested: 'diagnostics:requested',
         archiveSetChanged: 'archive:setChanged',
-        rulebookIndexLoaded: 'rulebook:indexLoaded'
+        rulebookIndexLoaded: 'rulebook:indexLoaded',
+        setChanged: 'set:changed'
     },
 
     isAllowedAdventureStatus(status = '') {
