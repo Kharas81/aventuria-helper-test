@@ -23,7 +23,7 @@ export const AppStateSync = {
         }
 
         if (remainingTime) {
-            remainingTime.value = String(state.remainingTime ?? 0);
+            remainingTime.value = String(state?.combatState?.remainingTime ?? 0);
         }
     },
 
@@ -94,15 +94,15 @@ export const AppStateSync = {
         }
 
         if (remainingTime) {
-            remainingTime.value = String(safeState.remainingTime ?? 0);
+            remainingTime.value = String(safeState?.combatState?.remainingTime ?? 0);
         }
 
         if (epResult) {
-            epResult.textContent = safeState.epResult || '2 EP';
+            epResult.textContent = safeState?.combatState?.epResult || '2 EP';
         }
 
         if (targetResult) {
-            targetResult.textContent = safeState.targetResult || '--';
+            targetResult.textContent = safeState?.combatState?.targetResult || '--';
         }
 
         if (window.Combat?.updateDashboard) {
@@ -110,7 +110,7 @@ export const AppStateSync = {
         }
 
         if (window.Combat?.updatePhaseTracker) {
-            window.Combat.updatePhaseTracker(safeState.currentPhase ?? 0);
+            window.Combat.updatePhaseTracker(safeState.combatPhase ?? 0);
         }
     }
 };
