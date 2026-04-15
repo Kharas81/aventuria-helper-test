@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:40:59 PM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:41:37 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -11009,7 +11009,7 @@ window.UIActions = {
 
             case 'open-card-detail':
                 if (trigger.dataset.cardId) {
-                    window.API?.openCardDetailById?.(trigger.dataset.cardId);
+                    window.ApiCardLookup?.openCardDetailById?.(trigger.dataset.cardId);
                 }
                 break;
 
