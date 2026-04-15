@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 5:20:39 AM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 5:27:58 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -7036,6 +7036,8 @@ window.RenderSetup = {
 ```js
 window.Rulebook = {
     rulesData: [],
+    rulesDataBuilt: false,
+    isBuildingRulesData: false,
     currentPage: 1,
     currentSet: '',
 
@@ -7121,7 +7123,9 @@ window.Rulebook = {
 
     getIndexDataForSet(setKey = '') {
         const resolvedSetKey = this.resolveSetKey(setKey);
-        return this.indexDataBySet[resolvedSetKey] || this.indexDataBySet[window.CONFIG?.defaultSet || 'base_game'] || [];
+        return this.indexDataBySet[resolvedSetKey]
+            || this.indexDataBySet[window.CONFIG?.defaultSet || 'base_game']
+            || [];
     },
 
     updateSetLabel() {
@@ -7134,13 +7138,15 @@ window.Rulebook = {
     async ensureSet(setKey = '') {
         const resolvedSetKey = this.resolveSetKey(setKey);
 
-        if (this.currentSet === resolvedSetKey && this.rulesData.length) {
+        if (this.currentSet === resolvedSetKey) {
             this.updateSetLabel();
             return;
         }
 
         this.currentSet = resolvedSetKey;
         this.rulesData = [];
+        this.rulesDataBuilt = false;
+        this.isBuildingRulesData = false;
         this.updateSetLabel();
 
         const list = this.getManualPageList();
@@ -7159,7 +7165,30 @@ window.Rulebook = {
             list.appendChild(fragment);
         }
 
-        await this.buildRulesData(this.currentSet);
+        const codexResults = this.getCodexResults();
+        if (codexResults) {
+            codexResults.innerHTML = '';
+        }
+
+        const codexSearch = this.getCodexSearch();
+        if (codexSearch) {
+            codexSearch.value = '';
+        }
+    },
+
+    async ensureRulesData() {
+        if (this.rulesDataBuilt || this.isBuildingRulesData) {
+            return;
+        }
+
+        this.isBuildingRulesData = true;
+
+        try {
+            await this.buildRulesData(this.currentSet);
+            this.rulesDataBuilt = true;
+        } finally {
+            this.isBuildingRulesData = false;
+        }
     },
 
     async open() {
@@ -7167,9 +7196,9 @@ window.Rulebook = {
         if (!modal) return;
 
         modal.style.display = 'flex';
-        this.showTab('reader');
 
         await this.ensureSet();
+        await this.showTab('reader');
 
         if (!this.currentPage || !this.validManualPages.includes(this.currentPage)) {
             this.currentPage = this.validManualPages[0];
@@ -7185,7 +7214,7 @@ window.Rulebook = {
         modal.style.display = 'none';
     },
 
-    showTab(tab) {
+    async showTab(tab) {
         const readerTab = this.getReaderTab();
         const codexTab = this.getCodexTab();
 
@@ -7206,64 +7235,65 @@ window.Rulebook = {
 
         if (tab === 'codex' && buttons[1]) {
             buttons[1].classList.add('active');
+            await this.ensureRulesData();
         }
     },
 
     getNextManualPage(current) {
-        return this.validManualPages.find(page => page > current) ?? current;
+        return this.validManualPages.find(page => page > current)
+            ?? this.validManualPages[this.validManualPages.length - 1];
     },
 
     getPrevManualPage(current) {
-        const prev = [...this.validManualPages].reverse().find(page => page < current);
-        return prev ?? current;
+        return [...this.validManualPages].reverse().find(page => page < current)
+            ?? this.validManualPages[0];
     },
 
-    async loadPage(pageNumber) {
-        const nr = Number(pageNumber);
+    async loadPage(nr) {
         const container = this.getManualContent();
         const indicator = this.getPageIndicator();
 
         if (!container) return;
 
-        if (!this.validManualPages.includes(nr)) {
+        if (!this.validManualPages.includes(Number(nr))) {
             container.innerHTML = '<div class="reader-text">Diese Seite ist aktuell nicht verfügbar.</div>';
-            if (indicator) {
-                indicator.textContent = `Seite ? / ${this.validManualPages.length}`;
-            }
             return;
         }
 
-        container.innerHTML = '<div class="reader-text">Lade Schriftrolle...</div>';
+        container.innerHTML = '<div class="reader-text">Seite wird geladen ...</div>';
 
         try {
             const path = window.CONFIG?.getManualPagePath?.(nr, this.currentSet)
                 || `data/manual/base_game/page_${String(nr).padStart(2, '0')}.json`;
 
             const res = await fetch(path);
+
             if (!res.ok) {
-                throw new Error(`HTTP ${res.status}`);
+                throw new Error(`HTTP ${res.status} beim Laden von ${path}`);
             }
 
             const data = await res.json();
+
             const rawTitle = this.stripCitationMarkers(data?.title ?? `Seite ${nr}`);
-            const title = Utils.escapeHtml(rawTitle);
-            const content = Utils.escapeHtml(this.stripCitationMarkers(data?.content ?? '')).replace(/\n/g, '<br>');
-            const image = String(data?.image ?? '').trim();
+            const content = Utils.escapeHtml(this.stripCitationMarkers(data?.content ?? ''))
+                .replace(/\n/g, '<br>');
+            const image = data?.image ? Utils.resolveImagePath(data.image) : '';
 
             container.innerHTML = `
-                <div class="reader-text">
-                    <h3>${title}</h3>
-                    ${image ? `
-                        <div class="img-wrapper">
-                            <img
-                                src="${Utils.escapeHtml(image)}"
-                                alt="${title}"
-                                class="manual-page-img"
-                                loading="lazy"
-                            >
-                        </div>
-                    ` : ''}
-                    <div class="reader-text">${content}</div>
+                <div class="reader-container">
+                    <div class="reader-page">
+                        ${image ? `
+                            <div class="img-wrapper">
+                                <img
+                                    src="${Utils.escapeHtml(image)}"
+                                    alt="${Utils.escapeHtml(rawTitle)}"
+                                    class="manual-page-img"
+                                    loading="lazy"
+                                >
+                            </div>
+                        ` : ''}
+                        <div class="reader-text">${content}</div>
+                    </div>
                 </div>
             `;
 
@@ -7378,9 +7408,7 @@ window.Rulebook = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    if (window.Rulebook?.init) {
-        window.Rulebook.init();
-    }
+    window.Rulebook?.init?.();
 });
 
 ```
