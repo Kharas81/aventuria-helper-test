@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 3:49:04 PM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 3:58:25 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4360,13 +4360,10 @@ hr {
 
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/features.css">
-    <link rel="stylesheet" href="css/modal.css">
-    <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/ui-components.css">
     <link rel="stylesheet" href="css/features.css">
+    <link rel="stylesheet" href="css/modal.css">
 </head>
-    
 <body>
     <div class="app-container">
         <header>
@@ -4375,6 +4372,11 @@ hr {
         </header>
 
         <div class="top-bar">
+            <div class="button-group">
+                <button type="button" class="btn" data-action="open-archive">Archiv öffnen</button>
+                <button type="button" class="btn" data-action="open-rulebook">Regelbuch öffnen</button>
+            </div>
+
             <div class="config-item">
                 <label for="adventurePicker"><strong>Abenteuer:</strong></label>
                 <select id="adventurePicker">
@@ -4402,29 +4404,18 @@ hr {
             </div>
 
             <div class="button-group">
-                <button id="saveStateBtn" class="btn" type="button">Speichern</button>
-                <button id="clearStateBtn" class="btn-outline" type="button">Zurücksetzen</button>
-                <button class="btn-outline" type="button" data-action="open-archive">Archiv</button>
-                <button class="btn-outline" type="button" data-action="open-rulebook">Regelbuch</button>
+                <button type="button" class="btn-outline" id="saveStateBtn">Speichern</button>
+                <button type="button" class="btn-outline" id="clearStateBtn">Zurücksetzen</button>
             </div>
         </div>
 
-        <section id="diagnostics-section" class="card-list hidden">
-            <div id="diagnostics-summary"></div>
-            <div id="diagnostics-details" class="hidden" style="margin-top:12px;"></div>
-        </section>
-
-        <section id="story-wrapper" class="card-list">
-            <h2 id="title">Abenteuer</h2>
-            <div id="story-area"></div>
-        </section>
-
         <section id="setup-display" class="hidden">
-            <div id="danger-value"></div>
+            <h2 id="title">Abenteuer</h2>
+            <p id="danger-value"></p>
 
             <div class="grid-container">
                 <div class="card-list" id="blue-cards">
-                    <h3>Abenteuerkarten</h3>
+                    <h3>Blaue Karten</h3>
                     <ul></ul>
                 </div>
 
@@ -4434,78 +4425,59 @@ hr {
                 </div>
 
                 <div class="card-list hidden" id="special">
-                    <h3>Spezialkarten</h3>
+                    <h3>Spezial</h3>
                     <ul></ul>
                 </div>
             </div>
-
-            <hr>
-
-            <div class="card-list" id="victory-defeat-box">
-                <h3>Sieg &amp; Niederlage</h3>
-                <p id="victory-text"><strong>Sieg:</strong> —</p>
-                <p id="defeat-text"><strong>Niederlage:</strong> —</p>
-            </div>
         </section>
 
+        <section id="story-area"></section>
+
         <div class="toggle-section">
-            <button
-                class="btn-outline"
-                type="button"
-                data-action="toggle-section"
-                data-target="combat-tools-section"
-            >
-                Kampf-Hilfen ein/ausblenden
+            <button type="button" class="btn-outline" data-action="toggle-section" data-target="combat-tools-section">
+                Kampf-Tools ein-/ausblenden
             </button>
-            <button
-                class="btn-outline"
-                type="button"
-                data-action="toggle-section"
-                data-target="intermission-section"
-            >
-                Atempause ein/ausblenden
+            <button type="button" class="btn-outline" data-action="toggle-section" data-target="intermission-section">
+                Atempause ein-/ausblenden
             </button>
         </div>
 
-        <section class="hero-dashboard" id="heroDashboard"></section>
-
         <section id="combat-tools-section" class="hidden-section show">
             <div class="card-list">
-                <h3>Kampf-Hilfen</h3>
+                <h3>Kampf-Tools</h3>
 
                 <div class="phase-steps" id="phaseTracker">
-                    <div class="step active">1. Heldenphase</div>
-                    <div class="step">2. Schergenphase</div>
-                    <div class="step">3. Anführerphase</div>
-                    <div class="step">4. Zeitphase</div>
+                    <div class="step active">Heldenphase</div>
+                    <div class="step">Schergenphase</div>
+                    <div class="step">Anführerphase</div>
+                    <div class="step">Zeitphase</div>
                 </div>
 
-                <div class="grid-container">
-                    <div class="card-list">
-                        <h3>Zeitmarken</h3>
-                        <div class="config-item">
-                            <label for="remainingTime"><strong>Verbleibend:</strong></label>
-                            <input id="remainingTime" type="number" min="0" value="0">
-                        </div>
+                <div class="button-group" style="justify-content:center; margin-bottom: 20px;">
+                    <button type="button" class="btn-outline" data-action="combat-prev-phase">Phase zurück</button>
+                    <button type="button" class="btn-outline" data-action="combat-next-phase">Nächste Phase</button>
+                    <button type="button" class="btn-outline" data-action="combat-roll-target">Zufallsziel würfeln</button>
+                    <button type="button" class="btn-outline" data-action="combat-update-ep">EP neu berechnen</button>
+                </div>
+
+                <div class="top-bar" style="margin-bottom: 0;">
+                    <div class="config-item">
+                        <label for="remainingTime"><strong>Zeitmarker:</strong></label>
+                        <input type="number" id="remainingTime" min="0" value="0">
                     </div>
 
-                    <div class="card-list">
-                        <h3>EP-Ergebnis</h3>
-                        <div id="ep-result" class="result-badge">2 EP</div>
+                    <div class="config-item">
+                        <strong>Ergebnis:</strong>
+                        <span id="ep-result">2 EP</span>
                     </div>
 
-                    <div class="card-list">
-                        <h3>Zufallsziel</h3>
-                        <div id="targetResult" class="result-badge">--</div>
+                    <div class="config-item">
+                        <strong>Zufallsziel:</strong>
+                        <span id="targetResult">--</span>
                     </div>
                 </div>
 
-                <div class="button-group" style="margin-top: 20px;">
-                    <button class="btn" type="button" data-action="combat-prev-phase">Phase zurück</button>
-                    <button class="btn" type="button" data-action="combat-next-phase">Nächste Phase</button>
-                    <button class="btn-outline" type="button" data-action="combat-roll-target">Zufallsziel würfeln</button>
-                    <button class="btn-outline" type="button" data-action="combat-update-ep">EP neu berechnen</button>
-                </div>
+                <div class="hero-dashboard" id="heroDashboard"></div>
             </div>
         </section>
 
@@ -4513,20 +4485,25 @@ hr {
             <div class="intermission-area">
                 <div class="intermission-card">
                     <h3>Atempause</h3>
-                    <p>Nutze diesen Bereich für Zwischenstände, Erholung und Abenteuer-Notizen.</p>
-                    <div class="button-group" style="justify-content: center; margin-top: 16px;">
-                        <button class="btn-outline" type="button" data-action="combat-apply-intermission">
-                            Atempause anwenden
-                        </button>
+                    <p id="victory-text"><strong>Sieg:</strong> —</p>
+                    <p id="defeat-text"><strong>Niederlage:</strong> —</p>
+                    <div class="result-badge" id="intermission-result">Atempause</div>
+                    <div class="button-group" style="justify-content:center; margin-top: 20px;">
+                        <button type="button" class="btn" data-action="combat-apply-intermission">Atempause anwenden</button>
                     </div>
                 </div>
             </div>
+        </section>
+
+        <section id="diagnostics-section" class="hidden" style="margin-top: 30px;">
+            <div id="diagnostics-summary"></div>
+            <div id="diagnostics-details" class="hidden"></div>
         </section>
     </div>
 
     <div class="card-tooltip" id="card-tooltip">
         <div class="tooltip-inner">
-            <img id="tooltip-image" src="" alt="Kartenvorschau">
+            <img id="tooltip-image" alt="Kartenvorschau">
         </div>
     </div>
 
@@ -4537,18 +4514,14 @@ hr {
                 <div class="archive-header">
                     <h2>Kartenarchiv</h2>
                     <input
+                        type="search"
                         id="archive-search"
                         class="search-bar"
-                        type="text"
-                        placeholder="Karten suchen..."
+                        placeholder="Karten suchen ..."
                     >
                 </div>
-
-                <div id="archive-set-buttons" class="button-group" style="margin-bottom: 20px;"></div>
-
-                <div id="archive-grid" class="archive-grid">
-                    <p class="placeholder-text">Archiv wird geladen ...</p>
-                </div>
+                <div id="archive-set-buttons" class="button-group"></div>
+                <div id="archive-grid" class="archive-grid"></div>
             </div>
         </div>
     </div>
@@ -4566,45 +4539,31 @@ hr {
                 <div class="modal-main">
                     <div class="modal-nav">
                         <h2 id="manual-title">Regelbuch</h2>
-                        <button
-                            class="tab-btn active"
-                            type="button"
-                            data-action="rulebook-tab"
-                            data-tab="reader"
-                        >
+                        <button type="button" class="tab-btn active" data-action="rulebook-tab" data-tab="reader">
                             Leser
                         </button>
-                        <button
-                            class="tab-btn"
-                            type="button"
-                            data-action="rulebook-tab"
-                            data-tab="codex"
-                        >
+                        <button type="button" class="tab-btn" data-action="rulebook-tab" data-tab="codex">
                             Kodex
                         </button>
                     </div>
 
-                    <div class="tab-content">
-                        <div id="reader-tab">
-                            <div class="reader-container">
-                                <div class="reader-page" id="manual-content"></div>
-                                <div class="reader-footer">
-                                    <button type="button" data-action="rulebook-prev-page">Zurück</button>
-                                    <span id="manual-page-indicator">Seite 0 / 0</span>
-                                    <button type="button" data-action="rulebook-next-page">Weiter</button>
-                                </div>
-                            </div>
+                    <div id="reader-tab" class="tab-content">
+                        <div id="manual-content"></div>
+                        <div class="reader-footer">
+                            <button type="button" data-action="rulebook-prev-page">Zurück</button>
+                            <span id="manual-page-indicator">Seite 0 / 0</span>
+                            <button type="button" data-action="rulebook-next-page">Weiter</button>
                         </div>
+                    </div>
 
-                        <div id="codex-tab" class="hidden">
-                            <input
-                                id="codex-search"
-                                class="search-bar"
-                                type="text"
-                                placeholder="Regeln durchsuchen..."
-                            >
-                            <div id="codex-results"></div>
-                        </div>
+                    <div id="codex-tab" class="tab-content hidden">
+                        <input
+                            type="search"
+                            id="codex-search"
+                            class="search-bar"
+                            placeholder="Im Regelbuch suchen ..."
+                        >
+                        <div id="codex-results"></div>
                     </div>
                 </div>
             </div>
