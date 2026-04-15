@@ -2,6 +2,8 @@ window.__AVENTURIA_SKIP_AUTO_INIT__ = true;
 
 const SCRIPT_LOAD_ORDER = [
     'js/config.js',
+    'js/constants.js',
+    'js/assets.js',
     'js/utils.js',
     'js/state.js',
 
@@ -13,12 +15,13 @@ const SCRIPT_LOAD_ORDER = [
 
     'js/ui-preview.js',
     'js/ui-modals.js',
+    'js/ui-status.js',
+    'js/ui-actions.js',
     'js/ui.js',
 
     'js/render-common.js',
     'js/render-setup.js',
     'js/render-card-detail.js',
-    'js/ui-renderer.js',
 
     'js/narrative.js',
     'js/combat.js',
