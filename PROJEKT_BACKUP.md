@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:21:21 PM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:21:52 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -5136,30 +5136,42 @@ window.AppStateSync = {
 ```js
 window.App = {
     isApplyingSavedState: false,
+    isInitialized: false,
 
     async init() {
-        // State initialisieren
-        const savedState = window.StorageManager?.loadState?.() || window.State.getDefaultState();
-        window.State.replaceState(savedState);
+        if (this.isInitialized) {
+            return;
+        }
 
-        // UI aufbauen
-        await window.AppBootstrap?.populateAdventurePicker();
-        
-        // Events binden
-        window.AppBootstrap?.bindEvents();
-        
-        // Gespeicherten Zustand laden
-        await window.AppBootstrap?.restoreSavedState();
+        this.isInitialized = true;
 
-        console.log('App initialisiert (Modulare Architektur).');
+        try {
+            const savedState = window.StorageManager?.loadState?.()
+                || window.State.getDefaultState();
+
+            window.State.replaceState(savedState);
+
+            await window.AppBootstrap?.populateAdventurePicker();
+            window.AppBootstrap?.bindEvents();
+            await window.AppBootstrap?.restoreSavedState();
+
+            console.log('App initialisiert (Modulare Architektur).');
+        } catch (error) {
+            this.isInitialized = false;
+            console.error('Fehler bei App.init():', error);
+            window.UI?.setStatus?.('⚠️ App konnte nicht initialisiert werden.');
+            throw error;
+        }
     }
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-    if (window.App?.init) {
-        window.App.init();
-    }
-});
+if (!window.__AVENTURIA_SKIP_AUTO_INIT__) {
+    document.addEventListener('DOMContentLoaded', () => {
+        if (window.App?.init) {
+            window.App.init();
+        }
+    });
+}
 
 ```
 
@@ -5876,6 +5888,11 @@ window.CONFIG = {
     getManualRoot(setKey = '') {
         const setConfig = this.getSet(setKey);
         return setConfig.manualRoot;
+    },
+
+    getManualIndexPath(setKey = '') {
+        const setConfig = this.getSet(setKey);
+        return `${setConfig.manualRoot}/index.json`;
     },
 
     getManualPagePath(pageNumber, setKey = '') {
