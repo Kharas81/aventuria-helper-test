@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:28:51 PM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:29:03 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -6950,6 +6950,7 @@ window.__AVENTURIA_SKIP_AUTO_INIT__ = true;
 const SCRIPT_LOAD_ORDER = [
     'js/config.js',
     'js/constants.js',
+    'js/events.js',
     'js/assets.js',
     'js/utils.js',
     'js/state.js',
