@@ -5,125 +5,29 @@
     "shortName": "Grundbox"
   },
   "pages": [
-    {
-      "page": 1,
-      "title": "Titelblatt",
-      "path": "data/manual/base_game/page_01.json"
-    },
-    {
-      "page": 2,
-      "title": "Das Schwarze Auge und Aventurien",
-      "path": "data/manual/base_game/page_02.json"
-    },
-    {
-      "page": 3,
-      "title": "Der Süden und Osten Aventuriens",
-      "path": "data/manual/base_game/page_03.json"
-    },
-    {
-      "page": 4,
-      "title": "Südosten & ferne Regionen",
-      "path": "data/manual/base_game/page_04.json"
-    },
-    {
-      "page": 5,
-      "title": "Religionen, Kulturen & Gefahren",
-      "path": "data/manual/base_game/page_05.json"
-    },
-    {
-      "page": 6,
-      "title": "Abenteuer-Regeln & Spielziel",
-      "path": "data/manual/base_game/page_06.json"
-    },
-    {
-      "page": 7,
-      "title": "Spielmaterial: Die verschiedenen Karten",
-      "path": "data/manual/base_game/page_07.json"
-    },
-    {
-      "page": 8,
-      "title": "Spezialkarten & Spielmarken",
-      "path": "data/manual/base_game/page_08.json"
-    },
-    {
-      "page": 9,
-      "title": "Das Abenteuer & Talentproben",
-      "path": "data/manual/base_game/page_09.json"
-    },
-    {
-      "page": 10,
-      "title": "Der Kampf (Vorbereitung)",
-      "path": "data/manual/base_game/page_10.json"
-    },
-    {
-      "page": 11,
-      "title": "Handlung, Spezial- & Schergenkarten",
-      "path": "data/manual/base_game/page_11.json"
-    },
-    {
-      "page": 12,
-      "title": "Schergen & Gefahrenwert (GP)",
-      "path": "data/manual/base_game/page_12.json"
-    },
-    {
-      "page": 13,
-      "title": "Kampfablauf & Helden-Spielzüge",
-      "path": "data/manual/base_game/page_13.json"
-    },
-    {
-      "page": 14,
-      "title": "Gegner-Spielzüge & Zeit-Effekte",
-      "path": "data/manual/base_game/page_14.json"
-    },
-    {
-      "page": 15,
-      "title": "Kampfende & Atempause",
-      "path": "data/manual/base_game/page_15.json"
-    },
-    {
-      "page": 16,
-      "title": "Zusatzregeln & Kampagne",
-      "path": "data/manual/base_game/page_16.json"
-    },
-    {
-      "page": 17,
-      "title": "Abenteuer: Silvanas Befreiung (Teil 1)",
-      "path": "data/manual/base_game/page_17.json"
-    },
-    {
-      "page": 18,
-      "title": "Abenteuer: Silvanas Befreiung (Teil 2)",
-      "path": "data/manual/base_game/page_18.json"
-    },
-    {
-      "page": 19,
-      "title": "Abenteuer: Leute, die nicht spielen",
-      "path": "data/manual/base_game/page_19.json"
-    },
-    {
-      "page": 20,
-      "title": "Wildenstein Akt I: Eine Botschaft",
-      "path": "data/manual/base_game/page_20.json"
-    },
-    {
-      "page": 21,
-      "title": "Wildenstein Akt II: Auf der Burg",
-      "path": "data/manual/base_game/page_21.json"
-    },
-    {
-      "page": 22,
-      "title": "Wildenstein Akt II (Kampf) & Akt III",
-      "path": "data/manual/base_game/page_22.json"
-    },
-    {
-      "page": 23,
-      "title": "Wildenstein Akt III: Das Ritual",
-      "path": "data/manual/base_game/page_23.json"
-    },
-    {
-      "page": 24,
-      "title": "Heldendokument & Symbole",
-      "path": "data/manual/base_game/page_24.json"
-    }
+    { "page": 1, "title": "Titelblatt", "path": "data/manual/base_game/page_01.json" },
+    { "page": 2, "title": "DSA & Aventurien", "path": "data/manual/base_game/page_02.json" },
+    { "page": 3, "title": "Süden & Osten", "path": "data/manual/base_game/page_03.json" },
+    { "page": 4, "title": "Südosten & Ferne", "path": "data/manual/base_game/page_04.json" },
+    { "page": 5, "title": "Religionen & Kulturen", "path": "data/manual/base_game/page_05.json" },
+    { "page": 6, "title": "Regeln & Spielziel", "path": "data/manual/base_game/page_06.json" },
+    { "page": 7, "title": "Spielmaterial", "path": "data/manual/base_game/page_07.json" },
+    { "page": 8, "title": "Spezialkarten & Marker", "path": "data/manual/base_game/page_08.json" },
+    { "page": 9, "title": "Abenteuer & Proben", "path": "data/manual/base_game/page_09.json" },
+    { "page": 10, "title": "Kampf vorbereiten", "path": "data/manual/base_game/page_10.json" },
+    { "page": 11, "title": "Handlung & Schergen", "path": "data/manual/base_game/page_11.json" },
+    { "page": 12, "title": "Schergen & GP", "path": "data/manual/base_game/page_12.json" },
+    { "page": 13, "title": "Kampfablauf", "path": "data/manual/base_game/page_13.json" },
+    { "page": 14, "title": "Gegner & Zeit", "path": "data/manual/base_game/page_14.json" },
+    { "page": 15, "title": "Kampfende & Atempause", "path": "data/manual/base_game/page_15.json" },
+    { "page": 16, "title": "Zusatzregeln", "path": "data/manual/base_game/page_16.json" },
+    { "page": 17, "title": "Silvanas Befreiung I", "path": "data/manual/base_game/page_17.json" },
+    { "page": 18, "title": "Silvanas Befreiung II", "path": "data/manual/base_game/page_18.json" },
+    { "page": 19, "title": "Leute, die nicht spielen", "path": "data/manual/base_game/page_19.json" },
+    { "page": 20, "title": "Wildenstein I", "path": "data/manual/base_game/page_20.json" },
+    { "page": 21, "title": "Wildenstein II", "path": "data/manual/base_game/page_21.json" },
+    { "page": 22, "title": "Wildenstein II – Kampf", "path": "data/manual/base_game/page_22.json" },
+    { "page": 23, "title": "Wildenstein III", "path": "data/manual/base_game/page_23.json" },
+    { "page": 24, "title": "Glossar", "path": "data/manual/base_game/page_24.json" }
   ]
 }
