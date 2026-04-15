@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:41:37 PM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:41:51 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -10346,7 +10346,7 @@ window.Rulebook = {
             return normalizedPreferred;
         }
 
-        const activeSet = window.API?.getActiveSetKey?.();
+        const activeSet = window.ApiCardLookup?.getActiveSetKey?.();
         if (activeSet && window.CONFIG?.hasSet?.(activeSet)) {
             return activeSet;
         }
