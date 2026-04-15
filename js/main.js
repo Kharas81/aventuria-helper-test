@@ -18,6 +18,10 @@ import UIActions from './ui/actions.js';
 import UI from './ui/ui.js';
 import UIComponents from './ui/components.js';
 
+import RenderCommon from './render/common.js';
+import RenderSetup from './render/setup.js';
+import RenderCardDetail from './render/card-detail.js';
+
 import ArchiveLoader from './features/archive/loader.js';
 import ArchiveFilter from './features/archive/filter.js';
 import ArchiveRenderer from './features/archive/renderer.js';
@@ -62,6 +66,10 @@ window.UIActions = UIActions;
 window.UI = UI;
 window.UIComponents = UIComponents;
 
+window.RenderCommon = RenderCommon;
+window.RenderSetup = RenderSetup;
+window.RenderCardDetail = RenderCardDetail;
+
 window.ArchiveLoader = ArchiveLoader;
 window.ArchiveFilter = ArchiveFilter;
 window.ArchiveRenderer = ArchiveRenderer;
@@ -85,10 +93,6 @@ window.AppBootstrap = AppBootstrap;
 window.App = App;
 
 const SCRIPT_LOAD_ORDER = [
-    'js/render-common.js',
-    'js/render-setup.js',
-    'js/render-card-detail.js',
-
     'js/narrative.js',
     'js/combat.js',
     'js/storage.js'
