@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:23:45 PM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:24:17 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -6043,6 +6043,71 @@ window.CONFIG = {
 
     getSetShortName(setKey = '') {
         return this.getSet(setKey)?.shortName || this.getSet(setKey)?.name || 'Set';
+    }
+};
+
+```
+
+---
+
+## 📄 Datei: js/constants.js
+```js
+window.Constants = {
+    statuses: {
+        adventures: [
+            'canonical',
+            'deprecated_alias',
+            'migrated',
+            'raw',
+            'basic',
+            'playable',
+            'verified'
+        ],
+
+        cards: [
+            'raw',
+            'basic',
+            'playable',
+            'playable_placeholder',
+            'verified',
+            'migrated',
+            'canonical',
+            'deprecated_alias',
+            'complete'
+        ]
+    },
+
+    placeholders: {
+        cardRefPatterns: [
+            /^minions?_eurer_wahl$/i,
+            /^schergen?_eurer_wahl$/i,
+            /^special_/i,
+            /^story_/i
+        ]
+    },
+
+    ui: {
+        defaultStatusText: 'Bereit.',
+        sectionStateMap: {
+            'combat-tools-section': 'combatToolsOpen',
+            'intermission-section': 'intermissionOpen'
+        }
+    },
+
+    events: {
+        validationStarted: 'validation:started',
+        validationFinished: 'validation:finished',
+        diagnosticsRequested: 'diagnostics:requested',
+        archiveSetChanged: 'archive:setChanged',
+        rulebookIndexLoaded: 'rulebook:indexLoaded'
+    },
+
+    isAllowedAdventureStatus(status = '') {
+        return this.statuses.adventures.includes(String(status ?? '').trim());
+    },
+
+    isAllowedCardStatus(status = '') {
+        return this.statuses.cards.includes(String(status ?? '').trim());
     }
 };
 
