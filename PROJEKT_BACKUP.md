@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 3:15:20 PM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 3:16:06 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -8313,12 +8313,14 @@ const DEFAULT_STATE = {
     heroCount: 2,
     difficulty: 'normal',
 
-    remainingTime: 0,
-    currentPhase: 0,
-    epResult: '2 EP',
-    targetResult: '--',
+    heroStats: {},
 
-    heroStats: [],
+    combatPhase: 0,
+    combatState: {
+        remainingTime: 0,
+        epResult: '2 EP',
+        targetResult: '--'
+    },
 
     combatToolsOpen: true,
     intermissionOpen: true
@@ -8346,9 +8348,15 @@ export const State = {
         this.state = {
             ...defaults,
             ...safeNextState,
-            heroStats: Array.isArray(safeNextState.heroStats)
+            heroStats: safeNextState.heroStats && typeof safeNextState.heroStats === 'object' && !Array.isArray(safeNextState.heroStats)
                 ? safeNextState.heroStats
-                : defaults.heroStats
+                : defaults.heroStats,
+            combatState: safeNextState.combatState && typeof safeNextState.combatState === 'object' && !Array.isArray(safeNextState.combatState)
+                ? {
+                    ...defaults.combatState,
+                    ...safeNextState.combatState
+                }
+                : clone(defaults.combatState)
         };
 
         return this.state;
@@ -8372,26 +8380,44 @@ export const State = {
         this.state.difficulty = String(value ?? 'normal').trim() || 'normal';
     },
 
-    setRemainingTime(value = 0) {
+    setHeroStats(value = {}) {
+        this.state.heroStats = value && typeof value === 'object' && !Array.isArray(value)
+            ? value
+            : {};
+    },
+
+    setHeroStat(heroIndex, field, value) {
+        const index = Number(heroIndex);
+        const key = String(field ?? '').trim();
+
+        if (!Number.isFinite(index) || index <= 0 || !key) {
+            return;
+        }
+
+        const existing = this.state.heroStats[index] && typeof this.state.heroStats[index] === 'object'
+            ? this.state.heroStats[index]
+            : {};
+
+        this.state.heroStats[index] = {
+            ...existing,
+            [key]: value
+        };
+    },
+
+    setCombatPhase(value = 0) {
         const numeric = Number(value);
-        this.state.remainingTime = Number.isFinite(numeric) ? numeric : 0;
+        this.state.combatPhase = Number.isFinite(numeric) ? numeric : 0;
     },
 
-    setCurrentPhase(value = 0) {
-        const numeric = Number(value);
-        this.state.currentPhase = Number.isFinite(numeric) ? numeric : 0;
-    },
+    setCombatField(field, value) {
+        const key = String(field ?? '').trim();
+        if (!key) return;
 
-    setEpResult(value = '2 EP') {
-        this.state.epResult = String(value ?? '2 EP');
-    },
+        if (!this.state.combatState || typeof this.state.combatState !== 'object' || Array.isArray(this.state.combatState)) {
+            this.state.combatState = {};
+        }
 
-    setTargetResult(value = '--') {
-        this.state.targetResult = String(value ?? '--');
-    },
-
-    setHeroStats(value = []) {
-        this.state.heroStats = Array.isArray(value) ? value : [];
+        this.state.combatState[key] = value;
     },
 
     setSectionOpen(key, isOpen) {
@@ -8407,9 +8433,15 @@ export const State = {
         this.state = {
             ...this.state,
             ...partialState,
-            heroStats: Array.isArray(partialState.heroStats)
+            heroStats: partialState.heroStats && typeof partialState.heroStats === 'object' && !Array.isArray(partialState.heroStats)
                 ? partialState.heroStats
-                : this.state.heroStats
+                : this.state.heroStats,
+            combatState: partialState.combatState && typeof partialState.combatState === 'object' && !Array.isArray(partialState.combatState)
+                ? {
+                    ...this.state.combatState,
+                    ...partialState.combatState
+                }
+                : this.state.combatState
         };
 
         return this.state;
@@ -9982,6 +10014,152 @@ export const ArchiveRenderer = {
 };
 
 export default ArchiveRenderer;
+
+```
+
+---
+
+## 📄 Datei: js/features/combat/dashboard.js
+```js
+import Utils from '../../core/utils.js';
+import State from '../../core/state.js';
+
+export const CombatDashboard = {
+    getDefaultHeroLp() {
+        return 40;
+    },
+
+    getDefaultHeroFate() {
+        return 0;
+    },
+
+    getHeroDashboard() {
+        return Utils.byId('heroDashboard');
+    },
+
+    getHeroCount() {
+        return State.getState().heroCount;
+    },
+
+    getCurrentHeroStats() {
+        return State.getState().heroStats || {};
+    },
+
+    buildHeroCard(heroIndex, heroState = {}) {
+        const lp = Number.isFinite(Number(heroState.lp))
+            ? Number(heroState.lp)
+            : this.getDefaultHeroLp();
+
+        const fate = Number.isFinite(Number(heroState.fate))
+            ? Number(heroState.fate)
+            : this.getDefaultHeroFate();
+
+        return `
+            <div class="hero-card" data-hero-index="${heroIndex}">
+                <h4>Held ${heroIndex}</h4>
+
+                <div class="stat">
+                    <span aria-hidden="true">💗</span>
+                    <span data-stat="lp">${Utils.escapeHtml(lp)}</span>
+                    <button type="button" data-action="lp-minus" aria-label="Lebenspunkte verringern">-</button>
+                    <button type="button" data-action="lp-plus" aria-label="Lebenspunkte erhöhen">+</button>
+                </div>
+
+                <div class="stat" style="margin-top: 8px;">
+                    <span aria-hidden="true">🍀</span>
+                    <span data-stat="fate">${Utils.escapeHtml(fate)}</span>
+                    <button type="button" data-action="fate-minus" aria-label="Schicksalspunkte verringern">-</button>
+                    <button type="button" data-action="fate-plus" aria-label="Schicksalspunkte erhöhen">+</button>
+                </div>
+            </div>
+        `;
+    },
+
+    updateDashboard(savedHeroStats = null) {
+        const container = this.getHeroDashboard();
+        if (!container) return;
+
+        const heroCount = this.getHeroCount();
+        const stats = savedHeroStats && typeof savedHeroStats === 'object'
+            ? savedHeroStats
+            : this.getCurrentHeroStats();
+
+        container.innerHTML = Array.from({ length: heroCount }, (_, i) => {
+            const heroIndex = i + 1;
+            return this.buildHeroCard(heroIndex, stats[heroIndex] || {});
+        }).join('');
+
+        this.bindDashboardButtons();
+    },
+
+    bindDashboardButtons() {
+        const container = this.getHeroDashboard();
+        if (!container || container.dataset.boundCombatDashboard === 'true') return;
+
+        container.addEventListener('click', event => {
+            const button = event.target.closest('button[data-action]');
+            if (!button) return;
+
+            const heroCard = button.closest('.hero-card');
+            if (!heroCard) return;
+
+            const heroIndex = Number(heroCard.dataset.heroIndex);
+            const action = button.dataset.action;
+            const heroStats = this.getCurrentHeroStats();
+            const current = heroStats[heroIndex] || {
+                lp: this.getDefaultHeroLp(),
+                fate: this.getDefaultHeroFate()
+            };
+
+            if (action === 'lp-minus') {
+                State.setHeroStat(heroIndex, 'lp', Math.max(0, Number(current.lp) - 1));
+            }
+
+            if (action === 'lp-plus') {
+                State.setHeroStat(heroIndex, 'lp', Number(current.lp) + 1);
+            }
+
+            if (action === 'fate-minus') {
+                State.setHeroStat(heroIndex, 'fate', Math.max(0, Number(current.fate) - 1));
+            }
+
+            if (action === 'fate-plus') {
+                State.setHeroStat(heroIndex, 'fate', Number(current.fate) + 1);
+            }
+
+            this.updateDashboard();
+
+            if (window.StorageManager?.persist) {
+                window.StorageManager.persist();
+            }
+        });
+
+        container.dataset.boundCombatDashboard = 'true';
+    },
+
+    applyIntermission() {
+        const heroCount = this.getHeroCount();
+        const stats = this.getCurrentHeroStats();
+
+        for (let i = 1; i <= heroCount; i += 1) {
+            const current = stats[i] || {
+                lp: this.getDefaultHeroLp(),
+                fate: this.getDefaultHeroFate()
+            };
+
+            State.setHeroStat(i, 'lp', Math.max(0, Number(current.lp) + 3));
+            State.setHeroStat(i, 'fate', Math.max(0, Number(current.fate) + 1));
+        }
+
+        this.updateDashboard();
+
+        if (window.StorageManager?.persist) {
+            window.StorageManager.persist();
+        }
+    }
+};
+
+export default CombatDashboard;
 
 ```
 
