@@ -7,6 +7,10 @@ window.ArchiveRenderer = {
         return Utils.byId('archive-set-buttons');
     },
 
+    getSearchInput() {
+        return Utils.byId('archive-search');
+    },
+
     showLoading() {
         const grid = this.getGrid();
         if (!grid) return;
@@ -14,14 +18,36 @@ window.ArchiveRenderer = {
         grid.innerHTML = '<p class="placeholder-text">Archiv wird geladen ...</p>';
     },
 
-    showError() {
+    showError(message = '') {
         const grid = this.getGrid();
         if (!grid) return;
 
-        grid.innerHTML = '<p class="placeholder-text">Fehler beim Laden des Archivs.</p>';
+        const safeMessage = Utils.escapeHtml(
+            message || 'Fehler beim Laden des Archivs.'
+        );
+
+        grid.innerHTML = `<p class="placeholder-text">${safeMessage}</p>`;
     },
 
-    renderSetButtons(activeSetKey = 'base_game') {
+    showEmpty(message = '') {
+        const grid = this.getGrid();
+        if (!grid) return;
+
+        const safeMessage = Utils.escapeHtml(
+            message || 'Keine Karten gefunden.'
+        );
+
+        grid.innerHTML = `<p class="placeholder-text">${safeMessage}</p>`;
+    },
+
+    resetSearch() {
+        const searchInput = this.getSearchInput();
+        if (searchInput) {
+            searchInput.value = '';
+        }
+    },
+
+    renderSetButtons(activeSetKey = '') {
         const container = this.getSetButtonsContainer();
         if (!container || !window.CONFIG?.getEnabledSets) return;
 
@@ -29,54 +55,65 @@ window.ArchiveRenderer = {
         container.innerHTML = '';
 
         enabledSets.forEach(setConfig => {
-            const button = document.createElement('button');
-            button.type = 'button';
-            button.className = activeSetKey === setConfig.id ? 'btn' : 'btn-outline';
-            button.textContent = setConfig.shortName || setConfig.name || setConfig.id;
+            const isActive = activeSetKey === setConfig.id;
 
-            button.addEventListener('click', async () => {
-                if (window.Archive?.currentSet !== setConfig.id) {
-                    await window.Archive.loadSet(setConfig.id);
-                }
-            });
-
-            container.appendChild(button);
+            container.insertAdjacentHTML(
+                'beforeend',
+                `
+                <button
+                    type="button"
+                    class="${isActive ? 'btn' : 'btn-outline'}"
+                    data-action="archive-load-set"
+                    data-set="${Utils.escapeHtml(setConfig.id)}"
+                >
+                    ${Utils.escapeHtml(setConfig.shortName || setConfig.name || setConfig.id)}
+                </button>
+                `
+            );
         });
+    },
+
+    resolveCardImage(card) {
+        return Utils.resolveImagePath(
+            card?.images?.front,
+            card?.image,
+            window.Assets?.getSharedCardPlaceholderPath?.(),
+            window.Assets?.getImageFallbackPath?.()
+        );
     },
 
     renderGrid(cards = []) {
         const grid = this.getGrid();
         if (!grid) return;
 
-        if (!Array.isArray(cards) || cards.length === 0) {
-            grid.innerHTML = '<p class="placeholder-text">Keine Karten gefunden.</p>';
+        const safeCards = Utils.normalizeArray(cards);
+
+        if (!safeCards.length) {
+            this.showEmpty();
             return;
         }
 
-        grid.innerHTML = cards.map(card => {
-            const image =
-                card?.images?.front ||
-                card?.image ||
-                'assets/images/cards/shared/card_placeholder.jpg';
-
+        grid.innerHTML = safeCards.map(card => {
+            const image = this.resolveCardImage(card);
             const name = Utils.escapeHtml(card?.name || 'Unbekannte Karte');
-            const safeImage = Utils.escapeHtml(Utils.resolveImagePath(image) || image);
+            const id = Utils.escapeHtml(card?.id || '');
 
             return `
-                <div class="archive-card" data-card-id="${Utils.escapeHtml(card?.id || '')}">
-                    <img src="${safeImage}" alt="${name}" loading="lazy">
+                <button
+                    type="button"
+                    class="archive-card"
+                    data-action="open-card-detail"
+                    data-card-id="${id}"
+                    title="${name}"
+                >
+                    <img src="${Utils.escapeHtml(image)}" alt="${name}" loading="lazy">
                     <p>${name}</p>
-                </div>
+                </button>
             `;
         }).join('');
 
-        grid.querySelectorAll('.archive-card').forEach(cardEl => {
-            cardEl.addEventListener('click', async () => {
-                const cardId = cardEl.dataset.cardId;
-                if (cardId) {
-                    await window.API?.openCardDetailById?.(cardId);
-                }
-            });
+        grid.querySelectorAll('.archive-card img').forEach(img => {
+            Utils.attachImageFallback(img);
         });
     }
 };
