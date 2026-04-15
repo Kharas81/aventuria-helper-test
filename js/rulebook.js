@@ -50,6 +50,23 @@ window.Rulebook = {
         if (!hasCurrentPage) {
             this.currentPage = firstAvailablePage;
         }
+
+        window.Events?.emit?.(
+            window.Constants?.events?.rulebookIndexLoaded || 'rulebook:indexLoaded',
+            {
+                source: 'rulebook',
+                setKey: this.currentSet,
+                pageCount: window.Utils.normalizeArray(this.manualIndex?.pages).length
+            }
+        );
+
+        window.Events?.emit?.(
+            window.Constants?.events?.setChanged || 'set:changed',
+            {
+                source: 'rulebook',
+                setKey: this.currentSet
+            }
+        );
     },
 
     async ensureRulesData() {
