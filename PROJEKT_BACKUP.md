@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:29:26 PM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:29:41 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -5037,37 +5037,101 @@ window.ApiNormalizers = {
 ## 📄 Datei: js/api.js
 ```js
 window.API = {
-    // --- ZUGRIFF AUF CACHE (für Abwärtskompatibilität, falls jemand API.cache direkt aufruft) ---
-    get cache() { return window.ApiCache; },
+    get cache() {
+        return window.ApiCache;
+    },
 
-    // --- HILFSMETHODEN (Fassade zu Utils) ---
-    normalizeString(value) { return Utils.normalizeString(value); },
-    normalizeArray(value)  { return Utils.normalizeArray(value); },
-    getConfig()            { return window.CONFIG || null; },
+    normalizeString(value) {
+        return Utils.normalizeString(value);
+    },
 
-    // --- NORMALISIERUNG (Delegation) ---
-    extractAdventureIdFromRedirect(v)    { return window.ApiNormalizers.extractAdventureIdFromRedirect(v); },
-    normalizeAdventure(d, f, s)          { return window.ApiNormalizers.normalizeAdventure(d, f, s); },
-    normalizeAdventureIndexEntry(e, f)   { return window.ApiNormalizers.normalizeAdventureIndexEntry(e, f); },
-    normalizeCatalogCard(c)              { return window.ApiNormalizers.normalizeCatalogCard(c); },
-    normalizeCardPayload(r, a)           { return window.ApiNormalizers.normalizeCardPayload(r, a); },
+    normalizeArray(value) {
+        return Utils.normalizeArray(value);
+    },
 
-    // --- FETCHING (Delegation) ---
-    async fetchJson(path)                { return await window.ApiFetch.fetchJson(path); },
-    async loadJSON(path)                 { return await window.ApiFetch.loadJSON(path); },
-    async getAdventureIndex(setKey)      { return await window.ApiFetch.getAdventureIndex(setKey); },
-    async getAvailableAdventures()       { return await window.ApiFetch.getAvailableAdventures(); },
-    async getAdventure(id, set, vis)     { return await window.ApiFetch.getAdventure(id, set, vis); },
-    async getMasterIndex(setKey)         { return await window.ApiFetch.getMasterIndex(setKey); },
+    getConfig() {
+        return window.CONFIG || null;
+    },
 
-    // --- CARD LOOKUPS (Delegation) ---
-    getAdventureSetKey(id, fallback)     { return window.ApiCardLookup.getAdventureSetKey(id, fallback); },
-    getActiveSetKey()                    { return window.ApiCardLookup.getActiveSetKey(); },
-    async getCatalogCard(path)           { return await window.ApiCardLookup.getCatalogCard(path); },
-    async getCards(advId, setKey)        { return await window.ApiCardLookup.getCards(advId, setKey); },
-    async preloadCardsForAdventure(i, s) { return await window.ApiCardLookup.preloadCardsForAdventure(i, s); },
-    async findCardById(id, setKey)       { return await window.ApiCardLookup.findCardById(id, setKey); },
-    async openCardDetailById(id)         { return await window.ApiCardLookup.openCardDetailById(id); }
+    extractAdventureIdFromRedirect(value) {
+        return window.ApiNormalizers.extractAdventureIdFromRedirect(value);
+    },
+
+    normalizeAdventure(data, fallbackId, setKey) {
+        return window.ApiNormalizers.normalizeAdventure(data, fallbackId, setKey);
+    },
+
+    normalizeAdventureIndexEntry(entry, fallbackSetKey) {
+        return window.ApiNormalizers.normalizeAdventureIndexEntry(entry, fallbackSetKey);
+    },
+
+    normalizeCatalogCard(card) {
+        return window.ApiNormalizers.normalizeCatalogCard(card);
+    },
+
+    normalizeCardPayload(rawData, adventureId) {
+        return window.ApiNormalizers.normalizeCardPayload(rawData, adventureId);
+    },
+
+    async fetchJson(path) {
+        return await window.ApiFetch.fetchJson(path);
+    },
+
+    async loadJSON(path) {
+        return await window.ApiFetch.loadJSON(path);
+    },
+
+    async getAdventureIndex(setKey) {
+        return await window.ApiFetch.getAdventureIndex(setKey);
+    },
+
+    async getAvailableAdventures() {
+        return await window.ApiFetch.getAvailableAdventures();
+    },
+
+    async getAdventure(id, setKey, visited) {
+        return await window.ApiFetch.getAdventure(id, setKey, visited);
+    },
+
+    async getMasterIndex(setKey) {
+        return await window.ApiFetch.getMasterIndex(setKey);
+    },
+
+    resolveAdventureSetKey(id, fallback) {
+        return window.ApiCardLookup.resolveAdventureSetKey(id, fallback);
+    },
+
+    getAdventureSetKey(id, fallback) {
+        return window.ApiCardLookup.getAdventureSetKey(id, fallback);
+    },
+
+    getActiveSetKey() {
+        return window.ApiCardLookup.getActiveSetKey();
+    },
+
+    buildCardPayload(adventureId, cards, adventureName) {
+        return window.ApiCardLookup.buildCardPayload(adventureId, cards, adventureName);
+    },
+
+    async getCatalogCard(path) {
+        return await window.ApiCardLookup.getCatalogCard(path);
+    },
+
+    async getCards(adventureId, setKey) {
+        return await window.ApiCardLookup.getCards(adventureId, setKey);
+    },
+
+    async preloadCardsForAdventure(adventureId, setKey) {
+        return await window.ApiCardLookup.preloadCardsForAdventure(adventureId, setKey);
+    },
+
+    async findCardById(id, setKey) {
+        return await window.ApiCardLookup.findCardById(id, setKey);
+    },
+
+    async openCardDetailById(id) {
+        return await window.ApiCardLookup.openCardDetailById(id);
+    }
 };
 
 ```
