@@ -3,6 +3,7 @@ import Constants from './core/constants.js';
 import Events from './core/events.js';
 import Assets from './core/assets.js';
 import Utils from './core/utils.js';
+import State from './core/state.js';
 
 window.__AVENTURIA_SKIP_AUTO_INIT__ = true;
 
@@ -16,10 +17,9 @@ window.Constants = Constants;
 window.Events = Events;
 window.Assets = Assets;
 window.Utils = Utils;
+window.State = State;
 
 const SCRIPT_LOAD_ORDER = [
-    'js/state.js',
-
     'js/api-cache.js',
     'js/api-normalizers.js',
     'js/api-fetch.js',
