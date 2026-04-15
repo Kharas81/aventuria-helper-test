@@ -25,6 +25,12 @@ import Archive from './features/archive/archive.js';
 
 import DiagnosticsRenderer from './features/diagnostics/renderer.js';
 
+import RulebookIndexLoader from './features/rulebook/index-loader.js';
+import RulebookReader from './features/rulebook/reader.js';
+import RulebookCodex from './features/rulebook/codex.js';
+import RulebookUI from './features/rulebook/ui.js';
+import Rulebook from './features/rulebook/rulebook.js';
+
 import AppStateSync from './app/state-sync.js';
 import AppAdventureFlow from './app/adventure-flow.js';
 import AppControls from './app/controls.js';
@@ -61,6 +67,12 @@ window.Archive = Archive;
 
 window.DiagnosticsRenderer = DiagnosticsRenderer;
 
+window.RulebookIndexLoader = RulebookIndexLoader;
+window.RulebookReader = RulebookReader;
+window.RulebookCodex = RulebookCodex;
+window.RulebookUI = RulebookUI;
+window.Rulebook = Rulebook;
+
 window.AppStateSync = AppStateSync;
 window.AppAdventureFlow = AppAdventureFlow;
 window.AppControls = AppControls;
@@ -76,12 +88,6 @@ const SCRIPT_LOAD_ORDER = [
     'js/narrative.js',
     'js/combat.js',
     'js/storage.js',
-
-    'js/rulebook-index-loader.js',
-    'js/rulebook-reader.js',
-    'js/rulebook-codex.js',
-    'js/rulebook-ui.js',
-    'js/rulebook.js',
 
     'js/diagnostics-runner.js',
     'js/diagnostics.js'
@@ -142,6 +148,7 @@ async function boot() {
         Theme.init();
         UI.init();
         Archive.init();
+        await Rulebook.init();
 
         if (!App?.init) {
             throw new Error('App.init wurde nicht gefunden.');
