@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 3:18:06 PM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 3:48:14 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -393,12 +393,37 @@ select {
 /* --- ARCHIV GRID --- */
 .archive-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: var(--space-2xl);
-    padding: var(--space-2xl);
+    grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+    gap: var(--space-lg);
+    padding: var(--space-lg) 0;
     align-items: start;
 }
 
+.archive-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-lg);
+    padding-right: var(--space-5xl);
+    margin-bottom: var(--space-lg);
+}
+
+.archive-header h2 {
+    margin: 0;
+    color: var(--color-primary);
+    flex-shrink: 0;
+}
+
+.archive-header .search-bar {
+    margin-bottom: 0;
+    max-width: 360px;
+}
+
+#archive-set-buttons {
+    margin-bottom: var(--space-lg) !important;
+}
+
+/* Rückwärtskompatibilität für alte Archivkarten */
 .archive-card {
     text-align: center;
     cursor: pointer;
@@ -406,26 +431,26 @@ select {
     background: var(--color-bg-soft-strong);
     border: var(--border-thin) solid var(--color-border-soft-card);
     border-radius: var(--radius-lg);
-    padding: var(--space-md);
+    padding: var(--space-sm);
     min-height: 100%;
     box-sizing: border-box;
 }
 
 .archive-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-4px);
 }
 
 .archive-card img {
     width: 100%;
     aspect-ratio: 5 / 7;
     object-fit: cover;
-    border: var(--border-md) solid var(--color-secondary);
+    border: var(--border-thin) solid var(--color-secondary);
     border-radius: var(--radius-md);
     background: var(--color-white);
 }
 
 .archive-card p {
-    font-size: 0.85em;
+    font-size: 0.82em;
     margin-top: var(--space-sm);
     margin-bottom: 0;
     font-weight: bold;
@@ -462,9 +487,19 @@ hr {
     }
 
     .archive-grid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 16px;
-        padding: var(--space-lg);
+        grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+        gap: var(--space-md);
+        padding: var(--space-md) 0;
+    }
+
+    .archive-header {
+        flex-direction: column;
+        align-items: stretch;
+        padding-right: 0;
+    }
+
+    .archive-header .search-bar {
+        max-width: none;
     }
 }
 
@@ -494,12 +529,8 @@ hr {
 
     .archive-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: var(--space-lg);
-        padding: var(--space-sm);
-    }
-
-    .archive-card {
-        padding: var(--space-sm);
+        gap: var(--space-md);
+        padding: var(--space-sm) 0;
     }
 
     .card-tooltip {
@@ -517,7 +548,7 @@ hr {
     }
 
     .archive-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .info-btn {
@@ -1110,6 +1141,157 @@ hr {
     .reader-text {
         font-size: 0.96rem;
         line-height: 1.55;
+    }
+}
+
+```
+
+---
+
+## 📄 Datei: css/ui-components.css
+```css
+.ui-badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    line-height: 1.4;
+    border: 1px solid var(--color-secondary);
+    background: var(--color-bg-panel);
+    color: var(--color-text);
+}
+
+.ui-badge--default {
+    background: var(--color-bg-panel);
+    color: var(--color-text);
+}
+
+.ui-badge--success {
+    background: var(--color-success);
+    color: var(--color-white);
+    border-color: var(--color-success);
+}
+
+.ui-badge--warning {
+    background: var(--color-secondary);
+    color: var(--color-white);
+    border-color: var(--color-secondary);
+}
+
+.ui-badge--danger {
+    background: var(--color-danger);
+    color: var(--color-white);
+    border-color: var(--color-danger);
+}
+
+.ui-badge--info {
+    background: var(--color-info);
+    color: var(--color-white);
+    border-color: var(--color-info);
+}
+
+.ui-section {
+    background: var(--color-bg-white-soft);
+    border: 1px solid var(--color-border-soft-card);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-lg);
+}
+
+.ui-section__header {
+    margin-bottom: var(--space-md);
+}
+
+.ui-section__title {
+    margin: 0;
+    color: var(--color-primary);
+    font-size: 1rem;
+}
+
+.ui-section__body {
+    min-width: 0;
+}
+
+.ui-empty-state {
+    text-align: center;
+    color: var(--color-secondary);
+    font-style: italic;
+    padding: var(--space-3xl) var(--space-lg);
+    border: 1px dashed var(--color-secondary);
+    border-radius: var(--radius-lg);
+    background: var(--color-bg-soft-muted);
+}
+
+.ui-meta-list {
+    margin: 0;
+    display: grid;
+    gap: var(--space-sm);
+}
+
+.ui-meta-list__row {
+    display: grid;
+    grid-template-columns: minmax(110px, 180px) 1fr;
+    gap: var(--space-md);
+    align-items: start;
+}
+
+.ui-meta-list__label {
+    font-weight: bold;
+    color: var(--color-primary);
+    margin: 0;
+}
+
+.ui-meta-list__value {
+    margin: 0;
+    color: var(--color-text);
+    word-break: break-word;
+}
+
+.ui-image-card {
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background: var(--color-bg-soft-strong);
+    border: 1px solid var(--color-border-soft-card);
+    border-radius: var(--radius-lg);
+    padding: var(--space-sm);
+    min-height: 100%;
+    box-sizing: border-box;
+    width: 100%;
+    font: inherit;
+    color: inherit;
+    box-shadow: var(--shadow-sm);
+}
+
+.ui-image-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.ui-image-card__image {
+    width: 100%;
+    aspect-ratio: 5 / 7;
+    object-fit: cover;
+    border: var(--border-thin) solid var(--color-secondary);
+    border-radius: var(--radius-md);
+    background: var(--color-white);
+    display: block;
+}
+
+.ui-image-card__title {
+    font-size: 0.82em;
+    line-height: 1.3;
+    margin-top: var(--space-sm);
+    font-weight: bold;
+    color: var(--color-primary);
+    word-break: break-word;
+}
+
+@media (max-width: 600px) {
+    .ui-meta-list__row {
+        grid-template-columns: 1fr;
+        gap: 2px;
     }
 }
 
