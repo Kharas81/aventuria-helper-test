@@ -47,6 +47,8 @@ const SCRIPT_LOAD_ORDER = [
 
     'js/app-state-sync.js',
     'js/app-adventure-flow.js',
+    'js/app-controls.js',
+    'js/app-persistence.js',
     'js/app-bootstrap.js',
     'js/app.js'
 ];
