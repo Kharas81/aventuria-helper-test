@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 4:52:10 AM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 4:52:45 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -1895,7 +1895,7 @@ hr {
   ],
 
   "images": {
-    "front": "",
+    "front": "assets/images/cards/shared/card_placeholder.jpg",
     "back": null,
     "alt": []
   },
