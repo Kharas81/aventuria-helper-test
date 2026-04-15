@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:38:45 PM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:38:58 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -8415,6 +8415,7 @@ import Assets from './core/assets.js';
 import Utils from './core/utils.js';
 import State from './core/state.js';
 import Theme from './core/theme.js';
+import Validator from './core/validator.js';
 
 window.__AVENTURIA_SKIP_AUTO_INIT__ = true;
 
@@ -8430,6 +8431,7 @@ window.Assets = Assets;
 window.Utils = Utils;
 window.State = State;
 window.Theme = Theme;
+window.Validator = Validator;
 
 const SCRIPT_LOAD_ORDER = [
     'js/api-cache.js',
@@ -8462,8 +8464,6 @@ const SCRIPT_LOAD_ORDER = [
     'js/rulebook-codex.js',
     'js/rulebook-ui.js',
     'js/rulebook.js',
-
-    'js/validator.js',
 
     'js/diagnostics-renderer.js',
     'js/diagnostics-runner.js',
