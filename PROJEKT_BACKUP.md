@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 4:14:01 AM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 4:14:34 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4320,20 +4320,24 @@ hr {
     <script src="js/combat.js"></script>
     <script src="js/storage.js"></script>
     
-    <!-- NEU: Entflochtene Archiv-Bausteine -->
     <script src="js/archive-loader.js"></script>
     <script src="js/archive-filter.js"></script>
     <script src="js/archive-renderer.js"></script>
-    
-    <!-- Archiv Fassade (muss nach den neuen Bausteinen kommen) -->
     <script src="js/archive.js"></script>
     
     <script src="js/rulebook.js"></script>
     <script src="js/validator.js"></script>
+    
     <script src="js/diagnostics-renderer.js"></script>
     <script src="js/diagnostics-runner.js"></script>
     <script src="js/diagnostics.js"></script>
     
+    <!-- NEU: Entflochtene App-Orchestrierung -->
+    <script src="js/app-state-sync.js"></script>
+    <script src="js/app-adventure-flow.js"></script>
+    <script src="js/app-bootstrap.js"></script>
+    
+    <!-- Einstiegspunkt (ganz zum Schluss) -->
     <script src="js/app.js"></script>
 
 </body>
