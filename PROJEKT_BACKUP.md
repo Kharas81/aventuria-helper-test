@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 3:07:53 PM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 3:08:08 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -11459,6 +11459,31 @@ window.Theme = {
 document.addEventListener('DOMContentLoaded', () => {
     window.Theme?.init?.();
 });
+
+```
+
+---
+
+## 📄 Datei: js/ui/modals.js
+```js
+import Utils from '../core/utils.js';
+import UIPreview from './preview.js';
+
+export const UIModals = {
+    closeAll() {
+        Utils.qsa('.modal-backdrop').forEach(modal => {
+            modal.style.display = 'none';
+        });
+
+        UIPreview.close();
+
+        if (window.RenderCardDetail?.closeCardDetail) {
+            window.RenderCardDetail.closeCardDetail();
+        }
+    }
+};
+
+export default UIModals;
 
 ```
 
