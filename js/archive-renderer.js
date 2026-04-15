@@ -77,4 +77,32 @@ window.ArchiveRenderer = {
             const id = Utils.escapeHtml(card?.id ?? '');
             const name = Utils.escapeHtml(card?.name ?? 'Unbenannte Karte');
             const type = Utils.escapeHtml(card?.type ?? 'karte');
-            const status = Utils.escapeHtml(card
+            const status = Utils.escapeHtml(card?.status ?? '');
+
+            return `
+                <div class="archive-card" data-card-id="${id}">
+                    <img
+                        src="${Utils.escapeHtml(image)}"
+                        alt="${name}"
+                        loading="lazy"
+                        data-archive-image="true"
+                    >
+                    <p>${name}</p>
+                    <small>${type}${status ? ` • ${status}` : ''}</small>
+                </div>
+            `;
+        }).join('');
+
+        this.bindArchiveImageFallbacks(grid);
+
+        // Klick-Listener auf die gerenderten Karten binden
+        grid.querySelectorAll('.archive-card').forEach(cardEl => {
+            cardEl.addEventListener('click', async () => {
+                const cardId = cardEl.dataset.cardId;
+                if (!cardId) return;
+
+                await window.API?.openCardDetailById?.(cardId);
+            });
+        });
+    }
+};
