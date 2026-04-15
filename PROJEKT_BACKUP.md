@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:21:52 PM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:22:07 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -6392,7 +6392,12 @@ const SCRIPT_LOAD_ORDER = [
     'js/archive-renderer.js',
     'js/archive.js',
 
+    'js/rulebook-index-loader.js',
+    'js/rulebook-reader.js',
+    'js/rulebook-codex.js',
+    'js/rulebook-ui.js',
     'js/rulebook.js',
+
     'js/validator.js',
 
     'js/diagnostics-renderer.js',
@@ -6472,7 +6477,7 @@ async function boot() {
     }
 }
 
-await boot();
+void boot();
 
 ```
 
