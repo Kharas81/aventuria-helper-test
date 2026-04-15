@@ -6,17 +6,20 @@ import Utils from './core/utils.js';
 import State from './core/state.js';
 import Theme from './core/theme.js';
 import Validator from './core/validator.js';
+import ApiCache from './core/api-cache.js';
 import ApiNormalizers from './core/api-normalizers.js';
 import ApiFetch from './core/api-fetch.js';
 import ApiCardLookup from './core/api-card-lookup.js';
 
+import AppStateSync from './app/state-sync.js';
+import AppAdventureFlow from './app/adventure-flow.js';
+import AppControls from './app/controls.js';
+import AppPersistence from './app/persistence.js';
+import AppBootstrap from './app/bootstrap.js';
+import App from './app/app.js';
+
 window.__AVENTURIA_SKIP_AUTO_INIT__ = true;
 
-/**
- * Übergangs-Bridge:
- * Die bestehenden klassischen Dateien arbeiten noch mit window.*.
- * Deshalb hängen wir die echten ES-Module vorübergehend dort an.
- */
 window.CONFIG = CONFIG;
 window.Constants = Constants;
 window.Events = Events;
@@ -25,13 +28,19 @@ window.Utils = Utils;
 window.State = State;
 window.Theme = Theme;
 window.Validator = Validator;
+window.ApiCache = ApiCache;
 window.ApiNormalizers = ApiNormalizers;
 window.ApiFetch = ApiFetch;
 window.ApiCardLookup = ApiCardLookup;
 
-const SCRIPT_LOAD_ORDER = [
-    'js/api-cache.js',
+window.AppStateSync = AppStateSync;
+window.AppAdventureFlow = AppAdventureFlow;
+window.AppControls = AppControls;
+window.AppPersistence = AppPersistence;
+window.AppBootstrap = AppBootstrap;
+window.App = App;
 
+const SCRIPT_LOAD_ORDER = [
     'js/ui-preview.js',
     'js/ui-modals.js',
     'js/ui-status.js',
@@ -59,14 +68,7 @@ const SCRIPT_LOAD_ORDER = [
 
     'js/diagnostics-renderer.js',
     'js/diagnostics-runner.js',
-    'js/diagnostics.js',
-
-    'js/app-state-sync.js',
-    'js/app-adventure-flow.js',
-    'js/app-controls.js',
-    'js/app-persistence.js',
-    'js/app-bootstrap.js',
-    'js/app.js'
+    'js/diagnostics.js'
 ];
 
 const loadedScripts = new Set();
@@ -123,12 +125,12 @@ async function boot() {
 
         Theme.init();
 
-        if (!window.App?.init) {
-            throw new Error('window.App.init wurde nicht gefunden.');
+        if (!App?.init) {
+            throw new Error('App.init wurde nicht gefunden.');
         }
 
         setStatus('Initialisiere Anwendung ...');
-        await window.App.init();
+        await App.init();
 
         setStatus('Bereit.');
         console.log('Aventuria über js/main.js gestartet.');
