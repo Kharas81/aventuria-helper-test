@@ -1,34 +1,126 @@
+:root {
+    /* Farben */
+    --color-text: #2e241f;
+    --color-primary: #5c1e1e;
+    --color-primary-hover: #7a2828;
+    --color-secondary: #8b4513;
+    --color-secondary-soft: #a0522d;
+
+    --color-bg-body: #dcd0ba;
+    --color-bg-panel: #f4e7d3;
+    --color-bg-panel-alt: #e6dec9;
+    --color-bg-soft: rgba(255, 255, 255, 0.2);
+    --color-bg-soft-strong: rgba(255, 255, 255, 0.35);
+    --color-bg-soft-muted: rgba(255, 255, 255, 0.1);
+    --color-bg-white-soft: rgba(255, 255, 255, 0.4);
+    --color-bg-white-strong: rgba(255, 255, 255, 0.5);
+    --color-bg-white-stronger: rgba(255, 255, 255, 0.6);
+
+    --color-border-soft: rgba(139, 69, 19, 0.1);
+    --color-border-soft-strong: rgba(139, 69, 19, 0.18);
+    --color-border-soft-card: rgba(139, 69, 19, 0.2);
+
+    --color-primary-fade: rgba(92, 30, 30, 0.05);
+    --color-primary-shadow: rgba(92, 30, 30, 0.3);
+    --color-black-soft: rgba(0, 0, 0, 0.2);
+    --color-black-medium: rgba(0, 0, 0, 0.5);
+    --color-black-strong: rgba(0, 0, 0, 0.6);
+    --color-black-heavy: rgba(0, 0, 0, 0.9);
+
+    --color-success: #276749;
+    --color-danger: #9b2c2c;
+    --color-info: #2c5282;
+    --color-muted: #7a7a7a;
+    --color-white: #ffffff;
+    --color-black: #000000;
+    --color-ivory: #fffdf8;
+
+    /* Abstände */
+    --space-2xs: 4px;
+    --space-xs: 6px;
+    --space-sm: 8px;
+    --space-md: 10px;
+    --space-lg: 12px;
+    --space-xl: 15px;
+    --space-2xl: 20px;
+    --space-3xl: 25px;
+    --space-4xl: 30px;
+    --space-5xl: 50px;
+    --space-6xl: 60px;
+
+    /* Radius */
+    --radius-sm: 4px;
+    --radius-md: 5px;
+    --radius-lg: 8px;
+    --radius-xl: 10px;
+    --radius-2xl: 12px;
+    --radius-pill: 20px;
+    --radius-round: 50%;
+
+    /* Rahmen */
+    --border-thin: 1px;
+    --border-md: 2px;
+    --border-lg: 3px;
+    --border-xl: 5px;
+    --border-accent: 6px;
+
+    /* Schatten */
+    --shadow-sm: 1px 1px 3px var(--color-black-soft);
+    --shadow-md: 3px 3px 8px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 3px 3px 10px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 0 25px var(--color-black-soft);
+    --shadow-2xl: 0 0 50px var(--color-black-medium);
+    --shadow-card: 0 10px 30px var(--color-black-soft);
+    --shadow-preview: 0 15px 50px var(--color-black-strong);
+    --shadow-panel: 5px 5px 15px rgba(0, 0, 0, 0.1);
+
+    /* Übergänge */
+    --transition-fast: all 0.2s ease;
+    --transition-medium: all 0.3s ease-out;
+    --transition-slow: all 0.4s ease;
+
+    /* Layout */
+    --container-max-width: 1100px;
+    --modal-max-width: 1200px;
+    --modal-max-width-archive: 1400px;
+    --sidebar-width: 280px;
+    --sidebar-min-width: 240px;
+    --tooltip-width: 450px;
+}
+
 body {
-    background: #dcd0ba radial-gradient(circle, #e6dec9 0%, #dcd0ba 100%);
+    background: var(--color-bg-body) radial-gradient(circle, var(--color-bg-panel-alt) 0%, var(--color-bg-body) 100%);
     font-family: 'Georgia', 'Times New Roman', serif;
-    color: #2e241f;
+    color: var(--color-text);
     margin: 0;
-    padding: 20px;
+    padding: var(--space-2xl);
     min-height: 100vh;
 }
 
 .app-container {
-    max-width: 1100px;
+    max-width: var(--container-max-width);
     margin: 0 auto;
-    background: rgba(255, 255, 255, 0.2);
-    padding: 30px;
-    border: 3px solid #5c1e1e;
-    box-shadow: 0 0 25px rgba(0,0,0,0.2);
-    border-radius: 4px;
+    background: var(--color-bg-soft);
+    padding: var(--space-4xl);
+    border: var(--border-lg) solid var(--color-primary);
+    box-shadow: var(--shadow-xl);
+    border-radius: var(--radius-sm);
 }
 
 header {
     text-align: center;
-    border-bottom: 2px solid #8b4513;
-    margin-bottom: 30px;
-    padding-bottom: 15px;
+    border-bottom: var(--border-md) solid var(--color-secondary);
+    margin-bottom: var(--space-4xl);
+    padding-bottom: var(--space-xl);
 }
 
 h1 {
-    color: #5c1e1e;
+    color: var(--color-primary);
     text-transform: uppercase;
     letter-spacing: 3px;
     margin: 0;
 }
 
-.hidden { display: none; }
+.hidden {
+    display: none;
+}
