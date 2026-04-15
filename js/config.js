@@ -98,6 +98,11 @@ window.CONFIG = {
         return setConfig.manualRoot;
     },
 
+    getManualIndexPath(setKey = '') {
+        const setConfig = this.getSet(setKey);
+        return `${setConfig.manualRoot}/index.json`;
+    },
+
     getManualPagePath(pageNumber, setKey = '') {
         const setConfig = this.getSet(setKey);
         const page = String(pageNumber).padStart(2, '0');
