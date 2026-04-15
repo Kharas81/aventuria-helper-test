@@ -84,7 +84,7 @@ window.UIActions = {
 
             case 'open-card-detail':
                 if (trigger.dataset.cardId) {
-                    window.API?.openCardDetailById?.(trigger.dataset.cardId);
+                    window.ApiCardLookup?.openCardDetailById?.(trigger.dataset.cardId);
                 }
                 break;
 
