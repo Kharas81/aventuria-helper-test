@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 3:48:14 PM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 3:48:27 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -767,7 +767,7 @@ hr {
 
 /* Spezielle Breite für das Archiv */
 .archive-modal-size {
-    max-width: var(--modal-max-width-archive);
+    max-width: 1240px;
 }
 
 .close-modal {
@@ -790,21 +790,23 @@ hr {
 }
 
 .modal-sidebar {
-    width: var(--sidebar-width);
-    min-width: var(--sidebar-min-width);
+    width: 250px;
+    min-width: 220px;
     background: var(--color-bg-panel-alt);
     border-right: var(--border-md) solid var(--color-secondary);
-    padding: var(--space-2xl);
+    padding: var(--space-lg);
     overflow-y: auto;
     box-sizing: border-box;
 }
 
 .modal-sidebar h4 {
     margin-top: 0;
+    margin-bottom: var(--space-md);
     color: var(--color-primary);
     border-bottom: var(--border-md) solid var(--color-secondary);
-    padding-bottom: 5px;
+    padding-bottom: 6px;
     font-variant: small-caps;
+    font-size: 1.05rem;
 }
 
 .modal-sidebar ul {
@@ -814,17 +816,19 @@ hr {
 }
 
 .modal-sidebar li {
-    padding: var(--space-md) var(--space-sm);
+    padding: 9px 8px;
     border-bottom: var(--border-thin) solid var(--color-border-soft);
-    font-size: 0.9em;
+    font-size: 0.92em;
+    line-height: 1.35;
     cursor: pointer;
-    transition: background 0.2s ease;
+    transition: background 0.2s ease, color 0.2s ease;
     word-break: break-word;
 }
 
 .modal-sidebar li:hover {
     background: var(--color-bg-body);
     font-weight: bold;
+    color: var(--color-primary);
 }
 
 .modal-main {
@@ -901,7 +905,7 @@ hr {
 
 .img-wrapper {
     width: 100%;
-    max-width: 800px;
+    max-width: 760px;
     margin: 0 auto var(--space-3xl) auto;
     box-shadow: var(--shadow-card);
 }
@@ -924,15 +928,6 @@ hr {
     flex-wrap: wrap;
 }
 
-.reader-footer button {
-    background: var(--color-secondary);
-    color: var(--color-white);
-    border: none;
-    padding: var(--space-sm) var(--space-xl);
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-}
-
 /* --- KODEX SUCHE --- */
 .search-bar {
     width: 100%;
@@ -943,6 +938,7 @@ hr {
     background: var(--color-ivory);
     color: var(--color-text);
     font-family: inherit;
+    border-radius: var(--radius-sm);
 }
 
 .rule-entry {
@@ -964,7 +960,6 @@ hr {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-right: var(--space-2xl);
 }
 
 .placeholder-text {
@@ -987,9 +982,9 @@ hr {
     }
 
     .modal-sidebar {
-        width: 240px;
-        min-width: 220px;
-        padding: 16px;
+        width: 220px;
+        min-width: 210px;
+        padding: 14px;
     }
 
     .tab-content {
