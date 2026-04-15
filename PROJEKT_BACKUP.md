@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:28:03 PM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:28:17 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -6353,19 +6353,22 @@ window.DiagnosticsRenderer = {
 ## 📄 Datei: js/diagnostics-runner.js
 ```js
 window.DiagnosticsRunner = {
-    state: {
-        visible: false,
-        detailsOpen: false,
-        summary: {
-            errorCount: 0,
-            warningCount: 0,
-            infoCount: 0
-        },
-        sections: []
+    normalizeArray(value) {
+        return Array.isArray(value) ? value : [];
     },
 
-    reset() {
-        this.state = {
+    normalizeObject(value) {
+        return value && typeof value === 'object' && !Array.isArray(value)
+            ? value
+            : {};
+    },
+
+    normalizeString(value) {
+        return String(value ?? '').trim();
+    },
+
+    createEmptyReport() {
+        return {
             visible: false,
             detailsOpen: false,
             summary: {
@@ -6375,87 +6378,83 @@ window.DiagnosticsRunner = {
             },
             sections: []
         };
-        window.DiagnosticsRenderer?.render(this.state);
     },
 
-    clear() {
-        this.reset();
-    },
+    addSection(report, title, result, options = {}) {
+        const safeReport = this.normalizeObject(report);
+        const safeResult = this.normalizeObject(result);
+        const safeMeta = this.normalizeObject(options.meta);
 
-    addSection(title, result, options = {}) {
-        const safeResult = result && typeof result === 'object'
-            ? result
-            : { ok: true, errors: [], warnings: [], info: [] };
+        if (!Array.isArray(safeReport.sections)) {
+            safeReport.sections = [];
+        }
 
-        const normalized = {
-            title: String(title ?? 'Diagnose'),
+        safeReport.sections.push({
+            title: this.normalizeString(title) || 'Diagnose',
             ok: Boolean(safeResult.ok),
-            errors: Array.isArray(safeResult.errors) ? safeResult.errors : [],
-            warnings: Array.isArray(safeResult.warnings) ? safeResult.warnings : [],
-            info: Array.isArray(safeResult.info) ? safeResult.info : [],
-            meta: options.meta && typeof options.meta === 'object' ? options.meta : {}
-        };
+            errors: this.normalizeArray(safeResult.errors),
+            warnings: this.normalizeArray(safeResult.warnings),
+            info: this.normalizeArray(safeResult.info),
+            meta: safeMeta
+        });
 
-        this.state.sections.push(normalized);
-        this.recalculateSummary();
-
-        const hasAnyMessages =
-            this.state.summary.errorCount > 0 ||
-            this.state.summary.warningCount > 0 ||
-            this.state.summary.infoCount > 0;
-
-        this.state.visible = hasAnyMessages;
-        window.DiagnosticsRenderer?.render(this.state);
+        this.recalculateSummary(safeReport);
+        return safeReport;
     },
 
-    addMessage(type, title, message) {
-        const entry = {
-            ok: type !== 'error',
-            errors: type === 'error' ? [message] : [],
-            warnings: type === 'warning' ? [message] : [],
-            info: type === 'info' ? [message] : []
-        };
+    recalculateSummary(report) {
+        const safeReport = this.normalizeObject(report);
+        const sections = this.normalizeArray(safeReport.sections);
 
-        this.addSection(title, entry);
-    },
-
-    recalculateSummary() {
         let errorCount = 0;
         let warningCount = 0;
         let infoCount = 0;
 
-        this.state.sections.forEach(section => {
-            errorCount += section.errors.length;
-            warningCount += section.warnings.length;
-            infoCount += section.info.length;
+        sections.forEach(section => {
+            errorCount += this.normalizeArray(section.errors).length;
+            warningCount += this.normalizeArray(section.warnings).length;
+            infoCount += this.normalizeArray(section.info).length;
         });
 
-        this.state.summary = {
+        safeReport.summary = {
             errorCount,
             warningCount,
             infoCount
         };
+
+        safeReport.visible = errorCount > 0 || warningCount > 0 || infoCount > 0;
+        return safeReport;
     },
 
-    toggleDetails() {
-        this.state.detailsOpen = !this.state.detailsOpen;
-        window.DiagnosticsRenderer?.render(this.state);
+    createSingleMessageReport(type, title, message) {
+        const report = this.createEmptyReport();
+
+        this.addSection(report, title, {
+            ok: type !== 'error',
+            errors: type === 'error' ? [message] : [],
+            warnings: type === 'warning' ? [message] : [],
+            info: type === 'info' ? [message] : []
+        });
+
+        return report;
     },
 
     collectAssetWarnings(cards) {
         const warnings = [];
         const seenIds = new Set();
 
-        (Array.isArray(cards) ? cards : []).forEach(card => {
-            const id = Utils.normalizeString(card?.id || card?.name || '');
+        this.normalizeArray(cards).forEach(card => {
+            const id = this.normalizeString(card?.id || card?.name || '');
+
             if (id && seenIds.has(id)) {
                 warnings.push(`Doppelte Karte im geladenen Satz: ${id}`);
             }
+
             if (id) {
                 seenIds.add(id);
             }
 
-            const image = Utils.normalizeString(card?.images?.front || card?.image || '');
+            const image = this.normalizeString(card?.images?.front || card?.image || '');
             if (!image) {
                 warnings.push(`Karte ohne Bildpfad: ${id || 'unbekannt'}`);
             }
@@ -6465,149 +6464,232 @@ window.DiagnosticsRunner = {
     },
 
     classifySetupReferences(adventure, cards) {
-        const sections = [
-            { name: 'blue_cards', entries: Array.isArray(adventure?.setup?.blue_cards) ? adventure.setup.blue_cards : [] },
-            { name: 'minion_cards', entries: Array.isArray(adventure?.setup?.minion_cards) ? adventure.setup.minion_cards : [] },
-            { name: 'special_cards', entries: Array.isArray(adventure?.setup?.special_cards) ? adventure.setup.special_cards : [] }
-        ];
-
-        const loadedCardIds = new Set(
-            (Array.isArray(cards) ? cards : [])
-                .map(card => Utils.normalizeString(card?.id))
+        const setup = this.normalizeObject(adventure?.setup);
+        const resolvedIds = new Set(
+            this.normalizeArray(cards)
+                .map(card => this.normalizeString(card?.id))
                 .filter(Boolean)
         );
 
-        const missing = [];
-        const placeholders = [];
-        const resolved = [];
+        const groups = [
+            ...this.normalizeArray(setup.blue_cards),
+            ...this.normalizeArray(setup.minion_cards),
+            ...this.normalizeArray(setup.special_cards)
+        ];
 
-        sections.forEach(section => {
-            section.entries.forEach(entry => {
-                const refId = window.Validator?.getSetupEntryId?.(entry) || '';
-                const label = window.Validator?.getSetupEntryLabel?.(entry) || refId || 'unbekannt';
+        const result = {
+            resolved: [],
+            placeholders: [],
+            missing: []
+        };
 
-                if (!refId) {
-                    return;
-                }
+        groups.forEach(entry => {
+            const refId = window.Validator?.getSetupEntryId?.(entry) || this.normalizeString(entry?.id || entry);
+            const refLabel = window.Validator?.getSetupEntryLabel?.(entry) || refId;
 
-                if (loadedCardIds.has(refId)) {
-                    resolved.push(`${section.name}: ${refId}`);
-                    return;
-                }
+            if (!refId) {
+                return;
+            }
 
-                if (window.Validator?.isPlaceholderCardRef?.(refId)) {
-                    placeholders.push(`${section.name}: ${refId}${label && label !== refId ? ` (${label})` : ''}`);
-                    return;
-                }
+            if (window.Validator?.isPlaceholderCardRef?.(refId)) {
+                result.placeholders.push(refLabel);
+                return;
+            }
 
-                missing.push(`${section.name}: ${refId}${label && label !== refId ? ` (${label})` : ''}`);
-            });
+            if (resolvedIds.has(refId)) {
+                result.resolved.push(refLabel);
+                return;
+            }
+
+            result.missing.push(refLabel);
         });
 
-        return { missing, placeholders, resolved };
+        return result;
     },
 
-    runAdventureDiagnostics(adventure, cards, masterIndex, context = {}) {
-        this.clear();
-
-        if (!window.Validator) {
-            this.addMessage('warning', 'Diagnose', 'Validator-Modul fehlt. Es wird nur eine Basisdiagnose angezeigt.');
-            return;
-        }
-
-        const adventureResult = window.Validator.validateAdventure(adventure);
-        const masterResult = window.Validator.validateMasterIndex(masterIndex);
-
-        this.addSection('Abenteuer-Prüfung', adventureResult, {
-            meta: {
-                Abenteuer: adventure?.name || adventure?.id || 'unbekannt',
-                Set: adventure?.set?.name || context.setKey || 'unbekannt'
-            }
-        });
-
-        this.addSection('Master-Index-Prüfung', masterResult, {
-            meta: {
-                Set: masterIndex?.set?.name || context.setKey || 'unbekannt',
-                'Karten im Index': Array.isArray(masterIndex?.cards) ? masterIndex.cards.length : 0
-            }
-        });
-
-        const cardsArray = Array.isArray(cards) ? cards : [];
-
-        if (!cardsArray.length) {
-            this.addMessage(
-                'warning',
-                'Geladene Karten',
-                'Für dieses Abenteuer wurden keine Karten geladen. Prüfe adventure_refs, detail_path oder Legacy-Dateien.'
-            );
-        } else {
-            const cardErrors = [];
-            const cardWarnings = [];
-            const cardInfos = [];
-
-            cardsArray.forEach(card => {
-                const result = window.Validator.validateCard(card);
-
-                result.errors.forEach(error => {
-                    cardErrors.push(`${card?.id || card?.name || 'unbekannt'}: ${error}`);
-                });
-
-                result.warnings.forEach(warning => {
-                    cardWarnings.push(`${card?.id || card?.name || 'unbekannt'}: ${warning}`);
-                });
-
-                result.info.forEach(info => {
-                    cardInfos.push(`${card?.id || card?.name || 'unbekannt'}: ${info}`);
-                });
-            });
-
-            const assetWarnings = this.collectAssetWarnings(cardsArray);
-            cardWarnings.push(...assetWarnings);
-
-            this.addSection('Karten-Prüfung', {
-                ok: cardErrors.length === 0,
-                errors: cardErrors,
-                warnings: cardWarnings,
-                info: [
-                    `Geladene Karten: ${cardsArray.length}`,
-                    ...cardInfos
-                ]
-            }, {
-                meta: {
-                    Abenteuer: adventure?.name || adventure?.id || 'unbekannt',
-                    Set: adventure?.set?.name || context.setKey || 'unbekannt'
-                }
-            });
-        }
-
-        const setupRefs = this.classifySetupReferences(adventure, cardsArray);
-
-        this.addSection('Setup-Referenzen', {
-            ok: setupRefs.missing.length === 0,
+    buildAdventureSection(adventure) {
+        return window.Validator?.validateAdventure?.(adventure) || {
+            ok: true,
             errors: [],
-            warnings: setupRefs.missing.map(entry => `Nicht im geladenen Kartenpool gefunden: ${entry}`),
-            info: [
-                ...(setupRefs.placeholders.length
-                    ? setupRefs.placeholders.map(entry => `Platzhalter/variable Referenz erkannt: ${entry}`)
-                    : ['Keine Platzhalter-Referenzen erkannt.']),
-                ...(setupRefs.missing.length === 0
-                    ? ['Keine echten fehlenden Setup-Karten erkannt.']
-                    : [])
-            ]
-        }, {
+            warnings: [],
+            info: []
+        };
+    },
+
+    buildCardsSection(cards) {
+        const cardsArray = this.normalizeArray(cards);
+        const sectionResult = {
+            ok: true,
+            errors: [],
+            warnings: [],
+            info: []
+        };
+
+        if (cardsArray.length === 0) {
+            sectionResult.warnings.push('Es wurden keine Karten für das Abenteuer geladen.');
+            return {
+                result: sectionResult,
+                meta: {
+                    Karten: 0
+                }
+            };
+        }
+
+        cardsArray.forEach(card => {
+            const result = window.Validator?.validateCard?.(card);
+            if (!result) return;
+
+            if (this.normalizeArray(result.errors).length > 0) {
+                sectionResult.ok = false;
+                sectionResult.errors.push(
+                    ...result.errors.map(message => `[${card?.id || card?.name || 'unbekannt'}] ${message}`)
+                );
+            }
+
+            if (this.normalizeArray(result.warnings).length > 0) {
+                sectionResult.warnings.push(
+                    ...result.warnings.map(message => `[${card?.id || card?.name || 'unbekannt'}] ${message}`)
+                );
+            }
+
+            if (this.normalizeArray(result.info).length > 0) {
+                sectionResult.info.push(
+                    ...result.info.map(message => `[${card?.id || card?.name || 'unbekannt'}] ${message}`)
+                );
+            }
+        });
+
+        const assetWarnings = this.collectAssetWarnings(cardsArray);
+        if (assetWarnings.length > 0) {
+            sectionResult.warnings.push(...assetWarnings);
+        }
+
+        if (sectionResult.errors.length === 0 && sectionResult.warnings.length === 0) {
+            sectionResult.info.push('Alle geladenen Karten bestehen die Grundprüfung.');
+        }
+
+        return {
+            result: sectionResult,
+            meta: {
+                Karten: cardsArray.length,
+                'Asset-Warnungen': assetWarnings.length
+            }
+        };
+    },
+
+    buildMasterIndexSection(masterIndex, cards) {
+        const masterCards = this.normalizeArray(masterIndex?.cards);
+        const loadedCardIds = new Set(
+            this.normalizeArray(cards)
+                .map(card => this.normalizeString(card?.id))
+                .filter(Boolean)
+        );
+
+        const missingInMaster = [];
+        loadedCardIds.forEach(id => {
+            const exists = masterCards.some(entry => this.normalizeString(entry?.id) === id);
+            if (!exists) {
+                missingInMaster.push(id);
+            }
+        });
+
+        const result = {
+            ok: missingInMaster.length === 0,
+            errors: [],
+            warnings: missingInMaster.map(id => `Geladene Karte fehlt im Master-Index: ${id}`),
+            info: []
+        };
+
+        if (masterCards.length === 0) {
+            result.warnings.push('Master-Index ist leer oder fehlt.');
+        }
+
+        if (missingInMaster.length === 0 && masterCards.length > 0) {
+            result.info.push('Alle geladenen Karten sind im Master-Index verankert.');
+        }
+
+        return {
+            result,
+            meta: {
+                'Master-Karten': masterCards.length,
+                'Geladene Karten': loadedCardIds.size,
+                'Fehlend im Master': missingInMaster.length
+            }
+        };
+    },
+
+    buildSetupSection(adventure, cards) {
+        const setupRefs = this.classifySetupReferences(adventure, cards);
+
+        return {
+            result: {
+                ok: setupRefs.missing.length === 0,
+                errors: [],
+                warnings: setupRefs.missing.map(entry => `Nicht im geladenen Kartenpool gefunden: ${entry}`),
+                info: [
+                    ...(setupRefs.placeholders.length
+                        ? setupRefs.placeholders.map(entry => `Platzhalter/variable Referenz erkannt: ${entry}`)
+                        : ['Keine Platzhalter-Referenzen erkannt.']),
+                    ...(setupRefs.missing.length === 0
+                        ? ['Keine echten fehlenden Setup-Karten erkannt.']
+                        : [])
+                ]
+            },
             meta: {
                 'Gelöste Referenzen': setupRefs.resolved.length,
                 Platzhalter: setupRefs.placeholders.length,
                 'Fehlende Referenzen': setupRefs.missing.length
             }
-        });
-
-        this.state.detailsOpen = false;
-        window.DiagnosticsRenderer?.render(this.state);
+        };
     },
 
-    init() {
-        window.DiagnosticsRenderer?.render(this.state);
+    runAdventureDiagnostics(adventure, cards, masterIndex, context = {}) {
+        const report = this.createEmptyReport();
+        const safeContext = this.normalizeObject(context);
+
+        window.Events?.emit?.(window.Constants?.events?.validationStarted || 'validation:started', {
+            adventure,
+            cards,
+            masterIndex,
+            context: safeContext
+        });
+
+        const adventureSection = this.buildAdventureSection(adventure);
+        this.addSection(report, 'Abenteuerdatei', adventureSection, {
+            meta: {
+                ID: this.normalizeString(adventure?.id) || '—',
+                Set: this.normalizeString(adventure?.set?.id || safeContext?.setKey) || '—'
+            }
+        });
+
+        const cardsSection = this.buildCardsSection(cards);
+        this.addSection(report, 'Kartenpool', cardsSection.result, {
+            meta: cardsSection.meta
+        });
+
+        const masterSection = this.buildMasterIndexSection(masterIndex, cards);
+        this.addSection(report, 'Master-Index', masterSection.result, {
+            meta: masterSection.meta
+        });
+
+        const setupSection = this.buildSetupSection(adventure, cards);
+        this.addSection(report, 'Setup-Referenzen', setupSection.result, {
+            meta: setupSection.meta
+        });
+
+        report.detailsOpen = false;
+        this.recalculateSummary(report);
+
+        const payload = {
+            report,
+            adventure,
+            cards,
+            masterIndex,
+            context: safeContext
+        };
+
+        window.Events?.emit?.(window.Constants?.events?.validationFinished || 'validation:finished', payload);
+        return report;
     }
 };
 
