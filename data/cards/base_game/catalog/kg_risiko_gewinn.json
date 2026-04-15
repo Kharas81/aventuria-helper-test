@@ -23,7 +23,7 @@
   ],
 
   "images": {
-    "front": "",
+    "front": "assets/images/cards/shared/card_placeholder.jpg",
     "back": null,
     "alt": []
   },
