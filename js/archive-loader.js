@@ -1,40 +1,77 @@
 window.ArchiveLoader = {
-    getSuggestedSetKey(currentSet) {
-        const activeSet = window.API?.getActiveSetKey?.();
+    normalizeSetKey(setKey = '') {
+        return Utils.normalizeString(
+            setKey || window.CONFIG?.defaultSet || 'base_game'
+        );
+    },
+
+    getSuggestedSetKey(currentSet = '') {
+        const activeSet = window.ApiCardLookup?.getActiveSetKey?.();
         if (activeSet && window.CONFIG?.hasSet?.(activeSet)) {
             return activeSet;
         }
 
-        return currentSet || window.CONFIG?.defaultSet || 'base_game';
+        return this.normalizeSetKey(currentSet);
     },
 
-    async fetchCardsForSet(setKey) {
-        const master = await window.API?.getMasterIndex?.(setKey);
-        const entries = Utils.normalizeArray(master?.cards);
+    async getMasterEntries(setKey = '') {
+        const resolvedSetKey = this.normalizeSetKey(setKey);
+        const masterIndex = await window.ApiFetch?.getMasterIndex?.(resolvedSetKey);
 
+        return Utils.normalizeArray(masterIndex?.cards);
+    },
+
+    async loadEntryDetail(entry, setKey = '') {
+        if (entry?.detail_path) {
+            const detail = await window.ApiCardLookup?.getCatalogCard?.(entry.detail_path);
+            if (detail) {
+                return detail;
+            }
+        }
+
+        if (entry?.id) {
+            return await window.ApiCardLookup?.findCardById?.(entry.id, setKey);
+        }
+
+        return null;
+    },
+
+    sortCards(cards = []) {
+        return [...Utils.normalizeArray(cards)].sort((a, b) => {
+            const categoryA = Utils.normalizeString(a?.card_category || a?.type);
+            const categoryB = Utils.normalizeString(b?.card_category || b?.type);
+
+            if (categoryA !== categoryB) {
+                return categoryA.localeCompare(categoryB, 'de');
+            }
+
+            const nameA = Utils.normalizeString(a?.name || a?.id);
+            const nameB = Utils.normalizeString(b?.name || b?.id);
+
+            return nameA.localeCompare(nameB, 'de');
+        });
+    },
+
+    async fetchCardsForSet(setKey = '') {
+        const resolvedSetKey = this.normalizeSetKey(setKey);
+        const entries = await this.getMasterEntries(resolvedSetKey);
         const loadedCards = [];
 
         for (const entry of entries) {
             try {
-                if (entry?.detail_path) {
-                    const detail = await window.API.getCatalogCard(entry.detail_path);
-                    if (detail) {
-                        loadedCards.push(detail);
-                        continue;
-                    }
-                }
-
-                if (entry?.id) {
-                    const fallbackCard = await window.API.findCardById(entry.id, setKey);
-                    if (fallbackCard) {
-                        loadedCards.push(fallbackCard);
-                    }
+                const card = await this.loadEntryDetail(entry, resolvedSetKey);
+                if (card) {
+                    loadedCards.push(card);
                 }
             } catch (error) {
-                console.warn('Archivkarte konnte nicht geladen werden:', entry?.id, error);
+                console.warn(
+                    'Archivkarte konnte nicht geladen werden:',
+                    entry?.id || entry?.detail_path || 'unbekannt',
+                    error
+                );
             }
         }
 
-        return loadedCards;
+        return this.sortCards(loadedCards);
     }
 };
