@@ -18,7 +18,7 @@ window.AppAdventureFlow = {
         if (!requestedAdventureId) {
             window.AppStateSync?.resetUIToDefaults();
             window.Diagnostics?.clear?.();
-            window.UI?.setStatus?.('Bereit.');
+            window.UI?.setStatus?.(window.Constants?.ui?.defaultStatusText ?? 'Bereit.');
             return;
         }
 
@@ -41,7 +41,7 @@ window.AppAdventureFlow = {
             const allCards = Array.isArray(cardData?.cards) ? cardData.cards : [];
             const masterIndex = await window.API?.getMasterIndex?.(advData?.set?.id);
 
-            window.Renderer?.renderSetup?.(advData, allCards);
+            window.RenderSetup?.renderSetup?.(advData, allCards);
             this.renderStory(advData);
             window.AppStateSync?.setVictoryDefeat(advData);
 
@@ -64,16 +64,10 @@ window.AppAdventureFlow = {
                 window.StorageManager.persist();
             }
 
-            window.UI?.setStatus?.(`✅ Abenteuer geladen: ${advData.name}`);
+            window.UI?.setStatus?.(`✅ ${advData.name} geladen.`);
         } catch (error) {
-            console.error(error);
-            window.Diagnostics?.clear?.();
-            window.Diagnostics?.addMessage?.(
-                'error',
-                'Ladefehler',
-                error?.message || 'Unbekannter Fehler beim Laden des Abenteuers.'
-            );
-            window.UI?.setStatus?.(`❌ Fehler: ${error.message}`);
+            console.error('Fehler beim Aktualisieren des Abenteuers:', error);
+            window.UI?.setStatus?.('⚠️ Abenteuer konnte nicht geladen werden.');
         }
     }
 };
