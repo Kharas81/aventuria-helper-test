@@ -45,6 +45,8 @@ const SCRIPT_LOAD_ORDER = [
     'js/diagnostics-runner.js',
     'js/diagnostics.js',
 
+    'js/theme.js',
+
     'js/app-state-sync.js',
     'js/app-adventure-flow.js',
     'js/app-controls.js',
