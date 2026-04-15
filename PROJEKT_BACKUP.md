@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 3:10:56 PM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 3:11:07 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -9826,6 +9826,10 @@ import UIPreview from './ui/preview.js';
 import UIModals from './ui/modals.js';
 import UIActions from './ui/actions.js';
 import UI from './ui/ui.js';
+import UIComponents from './ui/components.js';
+
+import ArchiveRenderer from './features/archive/renderer.js';
+import DiagnosticsRenderer from './features/diagnostics/renderer.js';
 
 import AppStateSync from './app/state-sync.js';
 import AppAdventureFlow from './app/adventure-flow.js';
@@ -9854,6 +9858,10 @@ window.UIPreview = UIPreview;
 window.UIModals = UIModals;
 window.UIActions = UIActions;
 window.UI = UI;
+window.UIComponents = UIComponents;
+
+window.ArchiveRenderer = ArchiveRenderer;
+window.DiagnosticsRenderer = DiagnosticsRenderer;
 
 window.AppStateSync = AppStateSync;
 window.AppAdventureFlow = AppAdventureFlow;
@@ -9873,7 +9881,6 @@ const SCRIPT_LOAD_ORDER = [
 
     'js/archive-loader.js',
     'js/archive-filter.js',
-    'js/archive-renderer.js',
     'js/archive.js',
 
     'js/rulebook-index-loader.js',
@@ -9882,7 +9889,6 @@ const SCRIPT_LOAD_ORDER = [
     'js/rulebook-ui.js',
     'js/rulebook.js',
 
-    'js/diagnostics-renderer.js',
     'js/diagnostics-runner.js',
     'js/diagnostics.js'
 ];
