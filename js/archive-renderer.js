@@ -1,108 +1,89 @@
-window.ArchiveRenderer = {
-    getSetButtonsContainer() {
-        return Utils.byId('archive-set-buttons');
-    },
+window.Archive = {
+    currentSet: 'base_game',
+    allCards: [],
+    filteredCards: [],
 
-    getGridContainer() {
-        return Utils.byId('archive-grid');
-    },
+    async open() {
+        const modal = Utils.byId('archive-modal');
+        if (!modal) return;
 
-    renderSetButtons(currentSet) {
-        const container = this.getSetButtonsContainer();
-        if (!container) return;
+        modal.style.display = 'flex';
 
-        const sets = window.CONFIG?.getEnabledSets?.() || [];
-        if (!sets.length) {
-            container.innerHTML = '';
-            return;
-        }
-
-        container.innerHTML = sets.map(setConfig => `
-            <button
-                class="btn-outline${setConfig.id === currentSet ? ' active' : ''}"
-                type="button"
-                data-action="archive-load-set"
-                data-set="${Utils.escapeHtml(setConfig.id)}"
-            >
-                ${Utils.escapeHtml(setConfig.shortName || setConfig.name)}
-            </button>
-        `).join('');
-    },
-
-    showLoading() {
-        const grid = this.getGridContainer();
-        if (grid) {
-            grid.innerHTML = '<p class="placeholder-text">Archiv wird geladen ...</p>';
+        const nextSet = window.ArchiveLoader?.getSuggestedSetKey(this.currentSet);
+        if (nextSet !== this.currentSet || !this.allCards.length) {
+            await this.loadSet(nextSet);
+        } else {
+            this.render();
         }
     },
 
-    showError() {
-        const grid = this.getGridContainer();
-        if (grid) {
-            grid.innerHTML = '<p class="placeholder-text">Fehler beim Laden des Archivs.</p>';
+    close() {
+        const modal = Utils.byId('archive-modal');
+        if (!modal) return;
+
+        modal.style.display = 'none';
+    },
+
+    async loadSet(setKey = 'base_game') {
+        this.currentSet = String(setKey || window.CONFIG?.defaultSet || 'base_game').trim() || 'base_game';
+        
+        window.ArchiveRenderer?.renderSetButtons(this.currentSet);
+        window.ArchiveRenderer?.showLoading();
+
+        try {
+            const loadedCards = await window.ArchiveLoader?.fetchCardsForSet(this.currentSet);
+            
+            this.allCards = loadedCards || [];
+            this.filteredCards = [...this.allCards];
+            
+            this.render();
+
+            const searchInput = Utils.byId('archive-search');
+            if (searchInput) {
+                searchInput.value = '';
+            }
+        } catch (error) {
+            console.error('Fehler beim Laden des Archivs:', error);
+            window.ArchiveRenderer?.showError();
         }
     },
 
-    showEmpty() {
-        const grid = this.getGridContainer();
-        if (grid) {
-            grid.innerHTML = '<p class="placeholder-text">Keine Karten gefunden.</p>';
-        }
+    handleSearch(searchTerm = '') {
+        this.filteredCards = window.ArchiveFilter?.filterCards(this.allCards, searchTerm) || [];
+        this.render();
     },
 
-    getImageForCard(card) {
-        return Utils.resolveImagePath(
-            card?.images?.front,
-            card?.image
-        );
+    render() {
+        window.ArchiveRenderer?.renderSetButtons(this.currentSet);
+        window.ArchiveRenderer?.renderGrid(this.filteredCards);
     },
 
-    bindArchiveImageFallbacks(scope = document) {
-        Utils.qsa('img[data-archive-image="true"]', scope).forEach(img => {
-            Utils.attachImageFallback(img);
-        });
-    },
+    init() {
+        const searchInput = Utils.byId('archive-search');
+        const modal = Utils.byId('archive-modal');
 
-    renderGrid(filteredCards) {
-        const grid = this.getGridContainer();
-        if (!grid) return;
+        window.ArchiveRenderer?.renderSetButtons(this.currentSet);
 
-        if (!filteredCards.length) {
-            this.showEmpty();
-            return;
-        }
-
-        grid.innerHTML = filteredCards.map(card => {
-            const image = this.getImageForCard(card);
-            const id = Utils.escapeHtml(card?.id ?? '');
-            const name = Utils.escapeHtml(card?.name ?? 'Unbenannte Karte');
-            const type = Utils.escapeHtml(card?.type ?? 'karte');
-            const status = Utils.escapeHtml(card?.status ?? '');
-
-            return `
-                <div class="archive-card" data-card-id="${id}">
-                    <img
-                        src="${Utils.escapeHtml(image)}"
-                        alt="${name}"
-                        loading="lazy"
-                        data-archive-image="true"
-                    >
-                    <p>${name}</p>
-                    <small>${type}${status ? ` • ${status}` : ''}</small>
-                </div>
-            `;
-        }).join('');
-
-        this.bindArchiveImageFallbacks(grid);
-
-        // Klick-Listener auf die gerenderten Karten binden
-        grid.querySelectorAll('.archive-card').forEach(cardEl => {
-            cardEl.addEventListener('click', async () => {
-                const cardId = cardEl.dataset.cardId;
-                if (!cardId) return;
-
-                await window.API?.openCardDetailById?.(cardId);
+        if (searchInput && !searchInput.dataset.bound) {
+            searchInput.addEventListener('input', event => {
+                this.handleSearch(event.target.value);
             });
-        });
+            searchInput.dataset.bound = 'true';
+        }
+
+        if (modal && !modal.dataset.bound) {
+            modal.addEventListener('click', event => {
+                if (event.target === modal) {
+                    this.close();
+                }
+            });
+            modal.dataset.bound = 'true';
+        }
     }
 };
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (window.Archive?.init) {
+        window.Archive.init();
+    }
+});
