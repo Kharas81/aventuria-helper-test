@@ -11,6 +11,12 @@ import ApiNormalizers from './core/api-normalizers.js';
 import ApiFetch from './core/api-fetch.js';
 import ApiCardLookup from './core/api-card-lookup.js';
 
+import UIStatus from './ui/status.js';
+import UIPreview from './ui/preview.js';
+import UIModals from './ui/modals.js';
+import UIActions from './ui/actions.js';
+import UI from './ui/ui.js';
+
 import AppStateSync from './app/state-sync.js';
 import AppAdventureFlow from './app/adventure-flow.js';
 import AppControls from './app/controls.js';
@@ -33,6 +39,12 @@ window.ApiNormalizers = ApiNormalizers;
 window.ApiFetch = ApiFetch;
 window.ApiCardLookup = ApiCardLookup;
 
+window.UIStatus = UIStatus;
+window.UIPreview = UIPreview;
+window.UIModals = UIModals;
+window.UIActions = UIActions;
+window.UI = UI;
+
 window.AppStateSync = AppStateSync;
 window.AppAdventureFlow = AppAdventureFlow;
 window.AppControls = AppControls;
@@ -41,12 +53,6 @@ window.AppBootstrap = AppBootstrap;
 window.App = App;
 
 const SCRIPT_LOAD_ORDER = [
-    'js/ui-preview.js',
-    'js/ui-modals.js',
-    'js/ui-status.js',
-    'js/ui-actions.js',
-    'js/ui.js',
-
     'js/render-common.js',
     'js/render-setup.js',
     'js/render-card-detail.js',
@@ -124,6 +130,7 @@ async function boot() {
         await ensureDomReady();
 
         Theme.init();
+        UI.init();
 
         if (!App?.init) {
             throw new Error('App.init wurde nicht gefunden.');
