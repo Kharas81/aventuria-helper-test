@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:34:07 PM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:34:24 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -5292,6 +5292,15 @@ window.AppAdventureFlow = {
             window.Diagnostics?.requestAdventureDiagnostics?.(advData, allCards, masterIndex, {
                 setKey: advData?.set?.id || 'base_game'
             });
+
+            window.Events?.emit?.(
+                window.Constants?.events?.setChanged || 'set:changed',
+                {
+                    source: 'adventure',
+                    setKey: advData?.set?.id || 'base_game',
+                    adventureId: advData?.id || ''
+                }
+            );
 
             if (!skipPersist && !window.App?.isApplyingSavedState && window.StorageManager) {
                 window.StorageManager.persist();
