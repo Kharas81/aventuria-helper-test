@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 5:27:58 AM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:21:05 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4297,49 +4297,7 @@ hr {
         </div>
     </div>
 
-    <script src="js/config.js"></script>
-    <script src="js/utils.js"></script>
-    <script src="js/state.js"></script>
-    
-    <script src="js/api-cache.js"></script>
-    <script src="js/api-normalizers.js"></script>
-    <script src="js/api-fetch.js"></script>
-    <script src="js/api-card-lookup.js"></script>
-    <script src="js/api.js"></script>
-    
-    <script src="js/ui-preview.js"></script>
-    <script src="js/ui-modals.js"></script>
-    <script src="js/ui.js"></script>
-    
-    <script src="js/render-common.js"></script>
-    <script src="js/render-setup.js"></script>
-    <script src="js/render-card-detail.js"></script>
-    <script src="js/ui-renderer.js"></script>
-    
-    <script src="js/narrative.js"></script>
-    <script src="js/combat.js"></script>
-    <script src="js/storage.js"></script>
-    
-    <script src="js/archive-loader.js"></script>
-    <script src="js/archive-filter.js"></script>
-    <script src="js/archive-renderer.js"></script>
-    <script src="js/archive.js"></script>
-    
-    <script src="js/rulebook.js"></script>
-    <script src="js/validator.js"></script>
-    
-    <script src="js/diagnostics-renderer.js"></script>
-    <script src="js/diagnostics-runner.js"></script>
-    <script src="js/diagnostics.js"></script>
-    
-    <!-- NEU: Entflochtene App-Orchestrierung -->
-    <script src="js/app-state-sync.js"></script>
-    <script src="js/app-adventure-flow.js"></script>
-    <script src="js/app-bootstrap.js"></script>
-    
-    <!-- Einstiegspunkt (ganz zum Schluss) -->
-    <script src="js/app.js"></script>
-
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>
 
