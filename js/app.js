@@ -15,9 +15,7 @@ window.App = {
 
             window.State.replaceState(savedState);
 
-            await window.AppBootstrap?.populateAdventurePicker();
-            window.AppBootstrap?.bindEvents();
-            await window.AppBootstrap?.restoreSavedState();
+            await window.AppBootstrap?.initializeUi?.();
 
             console.log('App initialisiert (Modulare Architektur).');
         } catch (error) {
