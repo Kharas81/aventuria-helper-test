@@ -1,84 +1,128 @@
 window.Archive = {
-    currentSet: 'base_game',
+    currentSet: window.CONFIG?.defaultSet || 'base_game',
     allCards: [],
     filteredCards: [],
+    isLoading: false,
+
+    getModal() {
+        return Utils.byId('archive-modal');
+    },
+
+    getSearchInput() {
+        return Utils.byId('archive-search');
+    },
+
+    getResolvedCurrentSet() {
+        return Utils.normalizeString(
+            this.currentSet || window.CONFIG?.defaultSet || 'base_game'
+        );
+    },
 
     async open() {
-        const modal = Utils.byId('archive-modal');
+        const modal = this.getModal();
         if (!modal) return;
 
         modal.style.display = 'flex';
 
-        const nextSet = window.ArchiveLoader?.getSuggestedSetKey(this.currentSet);
+        const nextSet = window.ArchiveLoader?.getSuggestedSetKey?.(this.currentSet)
+            || this.getResolvedCurrentSet();
+
         if (nextSet !== this.currentSet || !this.allCards.length) {
             await this.loadSet(nextSet);
-        } else {
-            this.render();
+            return;
         }
+
+        this.render();
     },
 
     close() {
-        const modal = Utils.byId('archive-modal');
+        const modal = this.getModal();
         if (!modal) return;
 
         modal.style.display = 'none';
     },
 
-    async loadSet(setKey = 'base_game') {
-        this.currentSet = String(setKey || window.CONFIG?.defaultSet || 'base_game').trim() || 'base_game';
-        
-        window.ArchiveRenderer?.renderSetButtons(this.currentSet);
-        window.ArchiveRenderer?.showLoading();
+    async loadSet(setKey = '') {
+        const resolvedSetKey = Utils.normalizeString(
+            setKey || window.CONFIG?.defaultSet || 'base_game'
+        );
+
+        if (!resolvedSetKey) {
+            return;
+        }
+
+        this.currentSet = resolvedSetKey;
+        this.isLoading = true;
+
+        window.ArchiveRenderer?.renderSetButtons?.(this.currentSet);
+        window.ArchiveRenderer?.showLoading?.();
 
         try {
-            const loadedCards = await window.ArchiveLoader?.fetchCardsForSet(this.currentSet);
-            
-            this.allCards = loadedCards || [];
+            const loadedCards = await window.ArchiveLoader?.fetchCardsForSet?.(this.currentSet);
+
+            this.allCards = Utils.normalizeArray(loadedCards);
             this.filteredCards = [...this.allCards];
-            
+            this.isLoading = false;
+
+            window.ArchiveRenderer?.resetSearch?.();
             this.render();
 
-            const searchInput = Utils.byId('archive-search');
-            if (searchInput) {
-                searchInput.value = '';
-            }
+            window.Events?.emit?.(
+                window.Constants?.events?.archiveSetChanged || 'archive:setChanged',
+                {
+                    setKey: this.currentSet,
+                    cardCount: this.allCards.length
+                }
+            );
         } catch (error) {
+            this.isLoading = false;
             console.error('Fehler beim Laden des Archivs:', error);
-            window.ArchiveRenderer?.showError();
+            window.ArchiveRenderer?.showError?.(error?.message || 'Fehler beim Laden des Archivs.');
         }
     },
 
     handleSearch(searchTerm = '') {
-        this.filteredCards = window.ArchiveFilter?.filterCards(this.allCards, searchTerm) || [];
+        this.filteredCards = window.ArchiveFilter?.filterCards?.(this.allCards, searchTerm) || [];
         this.render();
     },
 
     render() {
-        window.ArchiveRenderer?.renderSetButtons(this.currentSet);
-        window.ArchiveRenderer?.renderGrid(this.filteredCards);
+        window.ArchiveRenderer?.renderSetButtons?.(this.currentSet);
+        window.ArchiveRenderer?.renderGrid?.(this.filteredCards);
+    },
+
+    bindSearch() {
+        const searchInput = this.getSearchInput();
+        if (!searchInput || searchInput.dataset.bound === 'true') {
+            return;
+        }
+
+        searchInput.addEventListener('input', event => {
+            this.handleSearch(event.target.value);
+        });
+
+        searchInput.dataset.bound = 'true';
+    },
+
+    bindModalClose() {
+        const modal = this.getModal();
+        if (!modal || modal.dataset.bound === 'true') {
+            return;
+        }
+
+        modal.addEventListener('click', event => {
+            if (event.target === modal) {
+                this.close();
+            }
+        });
+
+        modal.dataset.bound = 'true';
     },
 
     init() {
-        const searchInput = Utils.byId('archive-search');
-        const modal = Utils.byId('archive-modal');
-
-        window.ArchiveRenderer?.renderSetButtons(this.currentSet);
-
-        if (searchInput && !searchInput.dataset.bound) {
-            searchInput.addEventListener('input', event => {
-                this.handleSearch(event.target.value);
-            });
-            searchInput.dataset.bound = 'true';
-        }
-
-        if (modal && !modal.dataset.bound) {
-            modal.addEventListener('click', event => {
-                if (event.target === modal) {
-                    this.close();
-                }
-            });
-            modal.dataset.bound = 'true';
-        }
+        this.bindSearch();
+        this.bindModalClose();
+        window.ArchiveRenderer?.renderSetButtons?.(this.currentSet);
     }
 };
 
