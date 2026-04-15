@@ -1,20 +1,73 @@
 window.ApiCardLookup = {
-    getAdventureSetKey(adventureId, fallbackSetKey = '') {
-        const adventure = window.ApiCache.adventures[Utils.normalizeString(adventureId)];
+    resolveAdventureSetKey(adventureId, fallbackSetKey = '') {
+        const normalizedAdventureId = Utils.normalizeString(adventureId);
+        const normalizedFallback = Utils.normalizeString(
+            fallbackSetKey || window.CONFIG?.defaultSet || 'base_game'
+        );
+
+        if (!normalizedAdventureId) {
+            return normalizedFallback;
+        }
+
+        const adventure = window.ApiCache.adventures[normalizedAdventureId];
         const setId = Utils.normalizeString(adventure?.set?.id);
-        return setId || fallbackSetKey || window.CONFIG?.defaultSet || 'base_game';
+
+        return setId || normalizedFallback;
+    },
+
+    getAdventureSetKey(adventureId, fallbackSetKey = '') {
+        return this.resolveAdventureSetKey(adventureId, fallbackSetKey);
     },
 
     getActiveSetKey() {
         const selectedAdventure = window.State?.getState?.()?.selectedAdventure || '';
         if (selectedAdventure) {
-            return this.getAdventureSetKey(selectedAdventure, window.CONFIG?.defaultSet || 'base_game');
+            return this.resolveAdventureSetKey(
+                selectedAdventure,
+                window.CONFIG?.defaultSet || 'base_game'
+            );
         }
+
         return window.CONFIG?.defaultSet || 'base_game';
     },
 
-    async getCatalogCard(path) {
-        const normalizedPath = Utils.normalizeString(path);
+    buildCardPayload(adventureId, cards = [], adventureName = '') {
+        return {
+            adventure_id: Utils.normalizeString(adventureId),
+            adventure_name: Utils.normalizeString(adventureName),
+            cards: Utils.normalizeArray(cards)
+        };
+    },
+
+    getCardPayloadCacheKey(adventureId, setKey) {
+        const normalizedAdventureId = Utils.normalizeString(adventureId);
+        const normalizedSetKey = Utils.normalizeString(
+            setKey || window.CONFIG?.defaultSet || 'base_game'
+        );
+
+        return `${normalizedSetKey}::${normalizedAdventureId}`;
+    },
+
+    getLegacyCardsPath(adventureId, setKey) {
+        const normalizedAdventureId = Utils.normalizeString(adventureId);
+        const normalizedSetKey = Utils.normalizeString(
+            setKey || window.CONFIG?.defaultSet || 'base_game'
+        );
+
+        const config = window.CONFIG || null;
+
+        if (config?.getLegacyAdventureCardsPath) {
+            return config.getLegacyAdventureCardsPath(
+                normalizedAdventureId,
+                normalizedSetKey
+            );
+        }
+
+        return `data/cards/${normalizedSetKey}/${normalizedAdventureId}/${normalizedAdventureId}.json`;
+    },
+
+    async getCatalogCard(detailPath) {
+        const normalizedPath = Utils.normalizeString(detailPath);
         if (!normalizedPath) return null;
 
         if (window.ApiCache.catalogCards[normalizedPath]) {
@@ -28,72 +81,98 @@ window.ApiCardLookup = {
         return normalized;
     },
 
+    getMigratedMasterCards(masterIndex, adventureId) {
+        const normalizedAdventureId = Utils.normalizeString(adventureId);
+
+        return Utils.normalizeArray(masterIndex?.cards).filter(card =>
+            Array.isArray(card?.adventure_refs) &&
+            card.adventure_refs.includes(normalizedAdventureId) &&
+            typeof card?.detail_path === 'string' &&
+            card.detail_path.trim().length > 0
+        );
+    },
+
+    async loadMigratedMasterCards(masterCards) {
+        const loadedCards = [];
+
+        for (const entry of Utils.normalizeArray(masterCards)) {
+            try {
+                const detail = await this.getCatalogCard(entry?.detail_path);
+                if (detail) {
+                    loadedCards.push(detail);
+                }
+            } catch (err) {
+                console.warn(
+                    `⚠️ Katalogkarte konnte nicht geladen werden: ${entry?.id || entry?.detail_path || 'unbekannt'}`,
+                    err
+                );
+            }
+        }
+
+        return loadedCards;
+    },
+
+    async loadLegacyCards(adventureId, setKey) {
+        const legacyPath = this.getLegacyCardsPath(adventureId, setKey);
+        const rawData = await window.ApiFetch.fetchJson(legacyPath);
+
+        return window.ApiNormalizers.normalizeCardPayload(rawData, Utils.normalizeString(adventureId));
+    },
+
+    cacheCardPayload(cacheKey, payload) {
+        window.ApiCache.cardPayloads[cacheKey] = payload;
+        return payload;
+    },
+
     async getCards(adventureId, setKey = null) {
         const normalizedAdventureId = Utils.normalizeString(adventureId);
-        const resolvedSetKey = Utils.normalizeString(
-            setKey || this.getAdventureSetKey(normalizedAdventureId, window.CONFIG?.defaultSet || 'base_game')
-        );
-
         if (!normalizedAdventureId) {
             return window.ApiNormalizers.normalizeCardPayload({ cards: [] }, '');
         }
 
-        const cacheKey = `${resolvedSetKey}::${normalizedAdventureId}`;
+        const resolvedSetKey = this.resolveAdventureSetKey(
+            normalizedAdventureId,
+            setKey || window.CONFIG?.defaultSet || 'base_game'
+        );
+
+        const cacheKey = this.getCardPayloadCacheKey(
+            normalizedAdventureId,
+            resolvedSetKey
+        );
+
         if (window.ApiCache.cardPayloads[cacheKey]) {
             return window.ApiCache.cardPayloads[cacheKey];
         }
 
-        const master = await window.ApiFetch.getMasterIndex(resolvedSetKey);
-        const masterCards = Utils.normalizeArray(master?.cards);
+        const masterIndex = await window.ApiFetch.getMasterIndex(resolvedSetKey);
+        const migratedMasterCards = this.getMigratedMasterCards(
+            masterIndex,
+            normalizedAdventureId
+        );
 
-        const matchingEntries = masterCards.filter(entry => {
-            const refs = Utils.normalizeArray(entry?.adventure_refs);
-            return refs.includes(normalizedAdventureId);
-        });
+        if (migratedMasterCards.length > 0) {
+            const loadedCards = await this.loadMigratedMasterCards(migratedMasterCards);
+            const payload = this.buildCardPayload(normalizedAdventureId, loadedCards, '');
 
-        if (matchingEntries.length > 0) {
-            const loadedCards = [];
-
-            for (const entry of matchingEntries) {
-                if (!entry?.detail_path) continue;
-
-                try {
-                    const detail = await this.getCatalogCard(entry.detail_path);
-                    if (detail) {
-                        loadedCards.push(detail);
-                    }
-                } catch (err) {
-                    console.warn(`⚠️ Detailkarte konnte nicht geladen werden: ${entry.detail_path}`, err);
-                }
-            }
-
-            const payload = {
-                adventure_id: normalizedAdventureId,
-                adventure_name: '',
-                cards: loadedCards
-            };
-
-            window.ApiCache.cardPayloads[cacheKey] = payload;
-            return payload;
+            return this.cacheCardPayload(cacheKey, payload);
         }
 
-        const config = window.CONFIG || null;
-        const legacyPath = config?.getLegacyAdventureCardsPath
-            ? config.getLegacyAdventureCardsPath(normalizedAdventureId, resolvedSetKey)
-            : `data/cards/${resolvedSetKey}/${normalizedAdventureId}/${normalizedAdventureId}.json`;
-
         try {
-            const rawData = await window.ApiFetch.fetchJson(legacyPath);
-            const payload = window.ApiNormalizers.normalizeCardPayload(rawData, normalizedAdventureId);
+            const legacyPayload = await this.loadLegacyCards(
+                normalizedAdventureId,
+                resolvedSetKey
+            );
 
-            window.ApiCache.cardPayloads[cacheKey] = payload;
-            return payload;
+            return this.cacheCardPayload(cacheKey, legacyPayload);
         } catch (err) {
             console.warn(`⚠️ Karten nicht gefunden für "${normalizedAdventureId}"`, err);
 
-            const fallback = window.ApiNormalizers.normalizeCardPayload({ cards: [] }, normalizedAdventureId);
-            window.ApiCache.cardPayloads[cacheKey] = fallback;
-            return fallback;
+            const fallbackPayload = window.ApiNormalizers.normalizeCardPayload(
+                { cards: [] },
+                normalizedAdventureId
+            );
+
+            return this.cacheCardPayload(cacheKey, fallbackPayload);
         }
     },
 
@@ -101,41 +180,76 @@ window.ApiCardLookup = {
         return await this.getCards(adventureId, setKey);
     },
 
-    async findCardById(id, setKey = null) {
+    getCachedCatalogCardById(id) {
         const targetId = Utils.normalizeString(id);
         if (!targetId) return null;
 
-        const cachedCatalogCard = Object.values(window.ApiCache.catalogCards)
-            .find(card => card?.id === targetId);
-        if (cachedCatalogCard) return cachedCatalogCard;
+        return Object.values(window.ApiCache.catalogCards)
+            .find(card => card?.id === targetId) || null;
+    },
 
+    getEnabledSetIds(setKey = null) {
+        const normalizedSetKey = Utils.normalizeString(setKey);
         const config = window.CONFIG || null;
-        const setsToSearch = setKey
-            ? [Utils.normalizeString(setKey)]
-            : config?.getEnabledSets?.().map(setConfig => setConfig.id)
-                || [config?.defaultSet || 'base_game'];
+
+        if (normalizedSetKey) {
+            return [normalizedSetKey];
+        }
+
+        return config?.getEnabledSets?.().map(setConfig => setConfig.id)
+            || [config?.defaultSet || 'base_game'];
+    },
+
+    async findCardInMasterIndexes(targetId, setKey = null) {
+        const setsToSearch = this.getEnabledSetIds(setKey);
 
         for (const currentSetKey of setsToSearch) {
             const master = await window.ApiFetch.getMasterIndex(currentSetKey);
             const entry = Utils.normalizeArray(master?.cards)
                 .find(card => Utils.normalizeString(card?.id) === targetId);
 
-            if (entry?.detail_path) {
-                try {
-                    return await this.getCatalogCard(entry.detail_path);
-                } catch (err) {
-                    console.warn(`⚠️ Detailkarte konnte nicht geladen werden: ${targetId}`, err);
-                }
+            if (!entry?.detail_path) {
+                continue;
+            }
+
+            try {
+                return await this.getCatalogCard(entry.detail_path);
+            } catch (err) {
+                console.warn(`⚠️ Detailkarte konnte nicht geladen werden: ${targetId}`, err);
             }
         }
 
+        return null;
+    },
+
+    findCardInLoadedPayloads(targetId) {
         for (const payload of Object.values(window.ApiCache.cardPayloads)) {
             const found = Utils.normalizeArray(payload?.cards)
                 .find(card => Utils.normalizeString(card?.id) === targetId);
-            if (found) return found;
+
+            if (found) {
+                return found;
+            }
         }
 
         return null;
+    },
+
+    async findCardById(id, setKey = null) {
+        const targetId = Utils.normalizeString(id);
+        if (!targetId) return null;
+
+        const cachedCatalogCard = this.getCachedCatalogCardById(targetId);
+        if (cachedCatalogCard) {
+            return cachedCatalogCard;
+        }
+
+        const masterCard = await this.findCardInMasterIndexes(targetId, setKey);
+        if (masterCard) {
+            return masterCard;
+        }
+
+        return this.findCardInLoadedPayloads(targetId);
     },
 
     async openCardDetailById(id) {
@@ -144,6 +258,11 @@ window.ApiCardLookup = {
 
         if (window.RenderCardDetail?.openCardDetail) {
             window.RenderCardDetail.openCardDetail(card);
+            return;
+        }
+
+        if (window.Renderer?.openCardDetail) {
+            window.Renderer.openCardDetail(card);
         }
     }
 };
