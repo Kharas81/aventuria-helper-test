@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:32:26 PM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:32:39 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -140,93 +140,93 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 30px;
-    margin-bottom: 20px;
+    gap: var(--space-4xl);
+    margin-bottom: var(--space-2xl);
     flex-wrap: wrap;
 }
 
 .button-group {
     display: flex;
-    gap: 10px;
+    gap: var(--space-md);
     flex-wrap: wrap;
 }
 
 .config-item {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: var(--space-md);
 }
 
 /* --- FORMULAR ELEMENTE --- */
 input[type="number"],
 select {
-    padding: 8px;
-    background: #f4e7d3;
-    border: 1px solid #8b4513;
+    padding: var(--space-sm);
+    background: var(--color-bg-panel);
+    border: var(--border-thin) solid var(--color-secondary);
     font-family: inherit;
-    border-radius: 4px;
-    color: #2e241f;
+    border-radius: var(--radius-sm);
+    color: var(--color-text);
 }
 
 /* --- BUTTON STYLES --- */
 .btn,
 .btn-outline {
-    padding: 10px 20px;
-    border-radius: 4px;
+    padding: var(--space-md) var(--space-2xl);
+    border-radius: var(--radius-sm);
     cursor: pointer;
     font-weight: bold;
     font-family: inherit;
-    transition: all 0.2s ease;
+    transition: var(--transition-fast);
 }
 
 .btn {
-    background: #5c1e1e;
-    color: white;
+    background: var(--color-primary);
+    color: var(--color-white);
     border: none;
 }
 
 .btn:hover {
-    background: #7a2828;
+    background: var(--color-primary-hover);
 }
 
 .btn-outline {
     background: none;
-    border: 2px solid #8b4513;
-    color: #8b4513;
+    border: var(--border-md) solid var(--color-secondary);
+    color: var(--color-secondary);
 }
 
 .btn-outline:hover {
-    background: #8b4513;
-    color: white;
+    background: var(--color-secondary);
+    color: var(--color-white);
 }
 
 /* Kleine Buttons für Proben/Checks */
 .btn-sm {
-    padding: 6px 12px;
+    padding: var(--space-xs) var(--space-lg);
     font-size: 0.85em;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     border: none;
     cursor: pointer;
     font-weight: bold;
-    margin-right: 5px;
+    margin-right: var(--space-md);
 }
 
 .btn-sm.success {
-    background: #276749;
-    color: white;
+    background: var(--color-success);
+    color: var(--color-white);
 }
 
 .btn-sm.fail {
-    background: #9b2c2c;
-    color: white;
+    background: var(--color-danger);
+    color: var(--color-white);
 }
 
 /* --- DER INFO-BUTTON (i) --- */
 .info-btn {
-    background: #8b4513;
-    color: white;
+    background: var(--color-secondary);
+    color: var(--color-white);
     border: none;
-    border-radius: 50%;
+    border-radius: var(--radius-round);
     width: 22px;
     height: 22px;
     min-width: 22px;
@@ -234,16 +234,16 @@ select {
     font-size: 13px;
     font-weight: bold;
     cursor: pointer;
-    margin-left: 8px;
+    margin-left: var(--space-sm);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    box-shadow: var(--shadow-sm);
     flex-shrink: 0;
 }
 
 .info-btn:hover:not(:disabled) {
-    background: #5c1e1e;
+    background: var(--color-primary);
     transform: scale(1.1);
 }
 
@@ -257,33 +257,33 @@ select {
 .grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 25px;
-    margin-top: 20px;
+    gap: var(--space-3xl);
+    margin-top: var(--space-2xl);
 }
 
 .card-list {
     background: rgba(244, 231, 211, 0.9);
-    padding: 20px;
-    border: 1px solid #a0522d;
-    border-radius: 8px;
-    box-shadow: 3px 3px 10px rgba(0,0,0,0.1);
+    padding: var(--space-2xl);
+    border: var(--border-thin) solid var(--color-secondary-soft);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
 }
 
 .card-list h3 {
     margin-top: 0;
     font-variant: small-caps;
-    border-bottom: 1px solid #a0522d;
-    padding-bottom: 8px;
+    border-bottom: var(--border-thin) solid var(--color-secondary-soft);
+    padding-bottom: var(--space-sm);
 }
 
 #blue-cards h3 {
-    color: #2c5282;
-    border-bottom-color: #2c5282;
+    color: var(--color-info);
+    border-bottom-color: var(--color-info);
 }
 
 #special h3 {
-    color: #276749;
-    border-bottom-color: #276749;
+    color: var(--color-success);
+    border-bottom-color: var(--color-success);
 }
 
 .card-list ul {
@@ -293,15 +293,15 @@ select {
 }
 
 .card-list li {
-    margin-bottom: 12px;
+    margin-bottom: var(--space-lg);
 }
 
 /* --- CHECKLISTE --- */
 .checklist-item {
     display: flex;
     align-items: flex-start;
-    gap: 12px;
-    padding: 8px 0;
+    gap: var(--space-lg);
+    padding: var(--space-sm) 0;
     line-height: 1.4;
     transition: transform 0.2s ease;
 }
@@ -315,7 +315,7 @@ select {
     height: 18px;
     margin-top: 2px;
     cursor: pointer;
-    accent-color: #5c1e1e;
+    accent-color: var(--color-primary);
     flex-shrink: 0;
 }
 
@@ -327,28 +327,28 @@ select {
 }
 
 .checklist-item input:checked + span {
-    text-decoration: line-through #5c1e1e 2px;
-    color: #7a7a7a;
+    text-decoration: line-through var(--color-primary) 2px;
+    color: var(--color-muted);
     opacity: 0.6;
 }
 
 .has-preview {
-    color: #5c1e1e;
+    color: var(--color-primary);
     cursor: help;
     font-weight: 500;
 }
 
 /* --- PROBEN FEEDBACK (INLINE) --- */
 .check-result {
-    margin-top: 10px;
-    padding: 12px;
-    border-radius: 4px;
+    margin-top: var(--space-md);
+    padding: var(--space-lg);
+    border-radius: var(--radius-sm);
     display: none;
     font-size: 0.9em;
-    border-left: 5px solid #8b4513;
-    background: rgba(255, 255, 255, 0.6);
+    border-left: var(--border-xl) solid var(--color-secondary);
+    background: var(--color-bg-white-stronger);
     line-height: 1.4;
-    color: #2e241f;
+    color: var(--color-text);
 }
 
 .check-result.show {
@@ -357,11 +357,11 @@ select {
 }
 
 .check-result.success {
-    border-color: #276749;
+    border-color: var(--color-success);
 }
 
 .check-result.fail {
-    border-color: #9b2c2c;
+    border-color: var(--color-danger);
 }
 
 /* --- TOOLTIP / GROSSE VORSCHAU --- */
@@ -369,12 +369,12 @@ select {
     position: fixed;
     display: none;
     z-index: 9999;
-    width: 450px;
-    max-width: min(450px, 90vw);
-    border: 5px solid #5c1e1e;
-    border-radius: 12px;
-    box-shadow: 0 15px 50px rgba(0,0,0,0.6);
-    background: #000;
+    width: var(--tooltip-width);
+    max-width: min(var(--tooltip-width), 90vw);
+    border: var(--border-xl) solid var(--color-primary);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-preview);
+    background: var(--color-black);
     overflow: hidden;
 }
 
@@ -387,15 +387,15 @@ select {
 .card-tooltip img {
     width: 100%;
     display: block;
-    border-radius: 7px;
+    border-radius: calc(var(--radius-lg) - 1px);
 }
 
 /* --- ARCHIV GRID --- */
 .archive-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 20px;
-    padding: 20px;
+    gap: var(--space-2xl);
+    padding: var(--space-2xl);
     align-items: start;
 }
 
@@ -403,10 +403,10 @@ select {
     text-align: center;
     cursor: pointer;
     transition: transform 0.2s ease;
-    background: rgba(255,255,255,0.35);
-    border: 1px solid rgba(139, 69, 19, 0.2);
-    border-radius: 8px;
-    padding: 10px;
+    background: var(--color-bg-soft-strong);
+    border: var(--border-thin) solid var(--color-border-soft-card);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
     min-height: 100%;
     box-sizing: border-box;
 }
@@ -419,34 +419,34 @@ select {
     width: 100%;
     aspect-ratio: 5 / 7;
     object-fit: cover;
-    border: 2px solid #8b4513;
-    border-radius: 5px;
-    background: #fff;
+    border: var(--border-md) solid var(--color-secondary);
+    border-radius: var(--radius-md);
+    background: var(--color-white);
 }
 
 .archive-card p {
     font-size: 0.85em;
-    margin-top: 8px;
+    margin-top: var(--space-sm);
     margin-bottom: 0;
     font-weight: bold;
-    color: #5c1e1e;
+    color: var(--color-primary);
     word-break: break-word;
 }
 
 /* --- DANGER / HINWEISE --- */
 #danger-value {
     font-size: 1.15em;
-    color: #5c1e1e;
-    margin-bottom: 15px;
-    padding: 10px;
-    background: rgba(92, 30, 30, 0.05);
-    border-radius: 4px;
+    color: var(--color-primary);
+    margin-bottom: var(--space-xl);
+    padding: var(--space-md);
+    background: var(--color-primary-fade);
+    border-radius: var(--radius-sm);
 }
 
 hr {
     border: 0;
-    border-top: 1px solid #a0522d;
-    margin: 20px 0;
+    border-top: var(--border-thin) solid var(--color-secondary-soft);
+    margin: var(--space-2xl) 0;
 }
 
 /* --- ANIMATIONEN --- */
@@ -464,7 +464,7 @@ hr {
     .archive-grid {
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
         gap: 16px;
-        padding: 12px;
+        padding: var(--space-lg);
     }
 }
 
@@ -488,24 +488,24 @@ hr {
     }
 
     .checklist-item {
-        gap: 10px;
-        padding: 10px 0;
+        gap: var(--space-md);
+        padding: var(--space-md) 0;
     }
 
     .archive-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 12px;
-        padding: 8px;
+        gap: var(--space-lg);
+        padding: var(--space-sm);
     }
 
     .archive-card {
-        padding: 8px;
+        padding: var(--space-sm);
     }
 
     .card-tooltip {
         max-width: calc(100vw - 24px);
-        border-width: 3px;
-        border-radius: 10px;
+        border-width: var(--border-lg);
+        border-radius: var(--radius-xl);
     }
 }
 
