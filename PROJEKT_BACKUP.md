@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:31:51 PM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:32:02 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -7392,6 +7392,8 @@ const SCRIPT_LOAD_ORDER = [
 
     'js/app-state-sync.js',
     'js/app-adventure-flow.js',
+    'js/app-controls.js',
+    'js/app-persistence.js',
     'js/app-bootstrap.js',
     'js/app.js'
 ];
