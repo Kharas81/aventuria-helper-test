@@ -19,23 +19,58 @@ window.CONFIG = {
             cardRoot: 'data/cards/base_game',
             catalogRoot: 'data/cards/base_game/catalog',
             manualRoot: 'data/manual/base_game',
-            masterIndex: 'data/cards/base_game/master_base_game.json'
+            masterIndex: 'data/cards/base_game/master_base_game.json',
+
+            theme: {
+                cssVars: {
+                    '--color-primary': '#5c1e1e',
+                    '--color-primary-hover': '#7a2828',
+                    '--color-secondary': '#8b4513',
+                    '--color-secondary-soft': '#a0522d',
+                    '--color-bg-body': '#dcd0ba',
+                    '--color-bg-panel': '#f4e7d3',
+                    '--color-bg-panel-alt': '#e6dec9',
+                    '--color-text': '#2e241f',
+                    '--color-info': '#2c5282',
+                    '--color-success': '#276749',
+                    '--color-danger': '#9b2c2c'
+                },
+                meta: {
+                    bodyClass: 'theme-base-game',
+                    themeName: 'Klassisch Aventurisch'
+                }
+            }
         }
 
         /*
         Beispiel für weitere Boxen:
         ,
-        irgend_eine_box: {
-            id: 'irgend_eine_box',
-            name: 'Aventuria Irgendeine Box',
-            shortName: 'Irgendeine Box',
+        wildenstein_box: {
+            id: 'wildenstein_box',
+            name: 'Aventuria Wildenstein',
+            shortName: 'Wildenstein',
             enabled: true,
-            adventurePath: 'data/adventures/irgend_eine_box',
-            adventureIndex: 'data/adventures/irgend_eine_box/index.json',
-            cardRoot: 'data/cards/irgend_eine_box',
-            catalogRoot: 'data/cards/irgend_eine_box/catalog',
-            manualRoot: 'data/manual/irgend_eine_box',
-            masterIndex: 'data/cards/irgend_eine_box/master_irgend_eine_box.json'
+            adventurePath: 'data/adventures/wildenstein_box',
+            adventureIndex: 'data/adventures/wildenstein_box/index.json',
+            cardRoot: 'data/cards/wildenstein_box',
+            catalogRoot: 'data/cards/wildenstein_box/catalog',
+            manualRoot: 'data/manual/wildenstein_box',
+            masterIndex: 'data/cards/wildenstein_box/master_wildenstein_box.json',
+            theme: {
+                cssVars: {
+                    '--color-primary': '#3f2a4d',
+                    '--color-primary-hover': '#523664',
+                    '--color-secondary': '#6d5a87',
+                    '--color-bg-body': '#d7d0e2',
+                    '--color-bg-panel': '#eee8f6',
+                    '--color-bg-panel-alt': '#e2dced',
+                    '--color-text': '#241d2d'
+                },
+                meta: {
+                    bodyClass: 'theme-wildenstein',
+                    themeName: 'Düster & Mystisch'
+                }
+            }
         }
         */
     },
@@ -115,5 +150,9 @@ window.CONFIG = {
 
     getSetShortName(setKey = '') {
         return this.getSet(setKey)?.shortName || this.getSet(setKey)?.name || 'Set';
+    },
+
+    getSetTheme(setKey = '') {
+        return this.getSet(setKey)?.theme || { cssVars: {}, meta: {} };
     }
 };
