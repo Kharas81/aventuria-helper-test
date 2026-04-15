@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 4:46:00 AM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 4:52:10 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -2479,11 +2479,11 @@ hr {
       "name": "Kampfumgebung: Risiko und Gewinn",
       "card_category": "abenteuerkarte",
       "type": "environment",
-      "status": "raw",
+      "status": "playable_placeholder",
       "adventure_refs": [
         "leute_die_nicht_spielen"
       ],
-      "image": "",
+      "image": "assets/images/cards/shared/card_placeholder.jpg",
       "tags": [
         "abenteuerkarte",
         "kampfumgebung",
@@ -2503,11 +2503,11 @@ hr {
       "name": "Heldenaktion: Das Spiel spielen",
       "card_category": "abenteuerkarte",
       "type": "hero_action",
-      "status": "raw",
+      "status": "playable_placeholder",
       "adventure_refs": [
         "leute_die_nicht_spielen"
       ],
-      "image": "",
+      "image": "assets/images/cards/shared/card_placeholder.jpg",
       "tags": [
         "abenteuerkarte",
         "heldenaktion",
