@@ -58,6 +58,15 @@ window.AppAdventureFlow = {
                 setKey: advData?.set?.id || 'base_game'
             });
 
+            window.Events?.emit?.(
+                window.Constants?.events?.setChanged || 'set:changed',
+                {
+                    source: 'adventure',
+                    setKey: advData?.set?.id || 'base_game',
+                    adventureId: advData?.id || ''
+                }
+            );
+
             if (!skipPersist && !window.App?.isApplyingSavedState && window.StorageManager) {
                 window.StorageManager.persist();
             }
