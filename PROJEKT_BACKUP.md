@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:39:52 PM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 2:40:42 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -9044,13 +9044,16 @@ import Utils from './core/utils.js';
 import State from './core/state.js';
 import Theme from './core/theme.js';
 import Validator from './core/validator.js';
+import ApiNormalizers from './core/api-normalizers.js';
+import ApiFetch from './core/api-fetch.js';
+import ApiCardLookup from './core/api-card-lookup.js';
 
 window.__AVENTURIA_SKIP_AUTO_INIT__ = true;
 
 /**
  * Übergangs-Bridge:
  * Die bestehenden klassischen Dateien arbeiten noch mit window.*.
- * Deshalb hängen wir die ersten echten ES-Module vorübergehend dort an.
+ * Deshalb hängen wir die echten ES-Module vorübergehend dort an.
  */
 window.CONFIG = CONFIG;
 window.Constants = Constants;
@@ -9060,13 +9063,12 @@ window.Utils = Utils;
 window.State = State;
 window.Theme = Theme;
 window.Validator = Validator;
+window.ApiNormalizers = ApiNormalizers;
+window.ApiFetch = ApiFetch;
+window.ApiCardLookup = ApiCardLookup;
 
 const SCRIPT_LOAD_ORDER = [
     'js/api-cache.js',
-    'js/api-normalizers.js',
-    'js/api-fetch.js',
-    'js/api-card-lookup.js',
-    'js/api.js',
 
     'js/ui-preview.js',
     'js/ui-modals.js',
