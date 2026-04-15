@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 3:17:30 PM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 3:17:54 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -8509,6 +8509,151 @@ export default State;
 
 ---
 
+## 📄 Datei: js/core/storage.js
+```js
+import Utils from './utils.js';
+import State from './state.js';
+
+export const StorageManager = {
+    storageKey: 'aventuria_helper_state_v3',
+    autoSaveBound: false,
+
+    getDefaultState() {
+        return State.getDefaultState();
+    },
+
+    loadState() {
+        try {
+            const raw = localStorage.getItem(this.storageKey);
+            if (!raw) {
+                return this.getDefaultState();
+            }
+
+            const parsed = JSON.parse(raw);
+            return State.mergeState(parsed);
+        } catch (error) {
+            console.error('Fehler beim Laden des Spielstands:', error);
+            return this.getDefaultState();
+        }
+    },
+
+    saveState(state) {
+        try {
+            const normalized = State.mergeState(state);
+            localStorage.setItem(this.storageKey, JSON.stringify(normalized));
+            return true;
+        } catch (error) {
+            console.error('Fehler beim Speichern des Spielstands:', error);
+            return false;
+        }
+    },
+
+    clearState() {
+        try {
+            localStorage.removeItem(this.storageKey);
+        } catch (error) {
+            console.error('Fehler beim Löschen des Spielstands:', error);
+        }
+    },
+
+    applyHeroStats(heroStats) {
+        if (!window.Combat || typeof window.Combat.updateDashboard !== 'function') {
+            return;
+        }
+
+        window.Combat.updateDashboard(heroStats || State.getState().heroStats);
+    },
+
+    applyChecklistState(checklist) {
+        const safeChecklist = checklist && typeof checklist === 'object' && !Array.isArray(checklist)
+            ? checklist
+            : {};
+
+        const items = document.querySelectorAll('.checklist-item');
+
+        items.forEach((item, index) => {
+            const checkbox = item.querySelector('input[type="checkbox"]');
+            if (!checkbox) return;
+
+            const cardId = item.dataset.cardId || `item_${index}`;
+            checkbox.checked = Boolean(safeChecklist[cardId]);
+        });
+    },
+
+    applyUIState(state) {
+        const safeState = state && typeof state === 'object' ? state : {};
+
+        const combatTools = Utils.byId('combat-tools-section');
+        const intermission = Utils.byId('intermission-section');
+
+        if (combatTools) {
+            combatTools.classList.toggle('show', Boolean(safeState.combatToolsOpen));
+        }
+
+        if (intermission) {
+            intermission.classList.toggle('show', Boolean(safeState.intermissionOpen));
+        }
+    },
+
+    applyCombatState(combatState) {
+        const state = {
+            ...State.getDefaultState().combatState,
+            ...(combatState && typeof combatState === 'object' && !Array.isArray(combatState)
+                ? combatState
+                : {})
+        };
+
+        const remainingTime = Utils.byId('remainingTime');
+        const epResult = Utils.byId('ep-result');
+        const targetResult = Utils.byId('targetResult');
+
+        if (remainingTime) {
+            remainingTime.value = Number.isFinite(Number(state.remainingTime))
+                ? Number(state.remainingTime)
+                : 0;
+        }
+
+        if (epResult) {
+            epResult.textContent = String(state.epResult ?? '2 EP');
+        }
+
+        if (targetResult) {
+            targetResult.textContent = String(state.targetResult ?? '--');
+        }
+    },
+
+    persist() {
+        this.saveState(State.getState());
+    },
+
+    bindAutoSave() {
+        if (this.autoSaveBound) {
+            return;
+        }
+
+        document.addEventListener('change', event => {
+            const target = event.target;
+            if (!target) return;
+
+            const checklistItem = target.closest?.('.checklist-item');
+            if (checklistItem && target.matches?.('input[type="checkbox"]')) {
+                const cardId = checklistItem.dataset.cardId || '';
+                State.setChecklistItem(cardId, target.checked);
+            }
+
+            this.persist();
+        });
+
+        this.autoSaveBound = true;
+    }
+};
+
+export default StorageManager;
+
+```
+
+---
+
 ## 📄 Datei: js/core/theme.js
 ```js
 import CONFIG from './config.js';
@@ -11139,6 +11284,118 @@ export const DiagnosticsRunner = {
 };
 
 export default DiagnosticsRunner;
+
+```
+
+---
+
+## 📄 Datei: js/features/narrative/narrative.js
+```js
+import Utils from '../../core/utils.js';
+
+export const Narrative = {
+    normalizeChecks(checks) {
+        return Utils.normalizeArray(checks);
+    },
+
+    renderStory(data) {
+        const container = Utils.byId('story-area');
+
+        if (!container || !data || !data.narrative) {
+            if (container) {
+                container.innerHTML = '';
+            }
+            return;
+        }
+
+        const intro = Utils.escapeHtml(data.narrative.intro ?? '');
+        const checks = this.normalizeChecks(data.narrative.checks);
+
+        container.innerHTML = `
+            <div class="card-list">
+                <h3>📖 Die Geschichte</h3>
+                <p class="story-text">${intro}</p>
+
+                <div class="probes-area">
+                    <h4>Interaktive Proben:</h4>
+
+                    ${checks.length
+                        ? checks.map((check, index) => `
+                            <div class="probe-item" data-check-index="${index}">
+                                <p>
+                                    <strong>${Utils.escapeHtml(check?.skill ?? 'Probe')}:</strong>
+                                    ${Utils.escapeHtml(check?.text ?? '')}
+                                </p>
+
+                                <div class="probe-buttons">
+                                    <button type="button" class="btn-sm success" data-check-result="success">
+                                        Erfolg
+                                    </button>
+                                    <button type="button" class="btn-sm fail" data-check-result="fail">
+                                        Misserfolg
+                                    </button>
+                                </div>
+
+                                <div class="check-result" aria-live="polite"></div>
+                            </div>
+                        `).join('')
+                        : '<p>Keine Proben vorhanden.</p>'
+                    }
+                </div>
+            </div>
+        `;
+
+        this.bindCheckButtons(checks);
+    },
+
+    showCheckResult(button, type, resultText) {
+        const probeItem = button.closest('.probe-item');
+        if (!probeItem) return;
+
+        const resultBox = probeItem.querySelector('.check-result');
+        if (!resultBox) return;
+
+        resultBox.classList.remove('success', 'fail', 'show');
+
+        resultBox.innerHTML = `
+            <strong>${type === 'success' ? 'Erfolg:' : 'Misserfolg:'}</strong>
+            ${Utils.escapeHtml(resultText)}
+        `;
+
+        resultBox.classList.add(type === 'success' ? 'success' : 'fail');
+        resultBox.classList.add('show');
+    },
+
+    bindCheckButtons(checks) {
+        document.querySelectorAll('.probe-item').forEach(item => {
+            const index = parseInt(item.dataset.checkIndex, 10);
+            const check = checks[index];
+
+            if (!check || !check.results) return;
+
+            item.querySelectorAll('[data-check-result]').forEach(button => {
+                if (button.dataset.boundNarrative === 'true') {
+                    return;
+                }
+
+                button.addEventListener('click', () => {
+                    const type = button.dataset.checkResult;
+                    const resultText = check.results?.[type] ?? 'Kein Ergebnis vorhanden.';
+
+                    this.showCheckResult(button, type, resultText);
+
+                    if (window.StorageManager?.persist) {
+                        window.StorageManager.persist();
+                    }
+                });
+
+                button.dataset.boundNarrative = 'true';
+            });
+        });
+    }
+};
+
+export default Narrative;
 
 ```
 
