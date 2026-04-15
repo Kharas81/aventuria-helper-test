@@ -18,7 +18,11 @@ import UIActions from './ui/actions.js';
 import UI from './ui/ui.js';
 import UIComponents from './ui/components.js';
 
+import ArchiveLoader from './features/archive/loader.js';
+import ArchiveFilter from './features/archive/filter.js';
 import ArchiveRenderer from './features/archive/renderer.js';
+import Archive from './features/archive/archive.js';
+
 import DiagnosticsRenderer from './features/diagnostics/renderer.js';
 
 import AppStateSync from './app/state-sync.js';
@@ -50,7 +54,11 @@ window.UIActions = UIActions;
 window.UI = UI;
 window.UIComponents = UIComponents;
 
+window.ArchiveLoader = ArchiveLoader;
+window.ArchiveFilter = ArchiveFilter;
 window.ArchiveRenderer = ArchiveRenderer;
+window.Archive = Archive;
+
 window.DiagnosticsRenderer = DiagnosticsRenderer;
 
 window.AppStateSync = AppStateSync;
@@ -68,10 +76,6 @@ const SCRIPT_LOAD_ORDER = [
     'js/narrative.js',
     'js/combat.js',
     'js/storage.js',
-
-    'js/archive-loader.js',
-    'js/archive-filter.js',
-    'js/archive.js',
 
     'js/rulebook-index-loader.js',
     'js/rulebook-reader.js',
@@ -137,6 +141,7 @@ async function boot() {
 
         Theme.init();
         UI.init();
+        Archive.init();
 
         if (!App?.init) {
             throw new Error('App.init wurde nicht gefunden.');
