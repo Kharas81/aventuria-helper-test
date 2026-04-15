@@ -4,6 +4,7 @@ import Events from './core/events.js';
 import Assets from './core/assets.js';
 import Utils from './core/utils.js';
 import State from './core/state.js';
+import Theme from './core/theme.js';
 
 window.__AVENTURIA_SKIP_AUTO_INIT__ = true;
 
@@ -18,6 +19,7 @@ window.Events = Events;
 window.Assets = Assets;
 window.Utils = Utils;
 window.State = State;
+window.Theme = Theme;
 
 const SCRIPT_LOAD_ORDER = [
     'js/api-cache.js',
@@ -56,8 +58,6 @@ const SCRIPT_LOAD_ORDER = [
     'js/diagnostics-renderer.js',
     'js/diagnostics-runner.js',
     'js/diagnostics.js',
-
-    'js/theme.js',
 
     'js/app-state-sync.js',
     'js/app-adventure-flow.js',
@@ -118,6 +118,8 @@ async function boot() {
         }
 
         await ensureDomReady();
+
+        Theme.init();
 
         if (!window.App?.init) {
             throw new Error('window.App.init wurde nicht gefunden.');
