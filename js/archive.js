@@ -70,6 +70,16 @@ window.Archive = {
             window.Events?.emit?.(
                 window.Constants?.events?.archiveSetChanged || 'archive:setChanged',
                 {
+                    source: 'archive',
+                    setKey: this.currentSet,
+                    cardCount: this.allCards.length
+                }
+            );
+
+            window.Events?.emit?.(
+                window.Constants?.events?.setChanged || 'set:changed',
+                {
+                    source: 'archive',
                     setKey: this.currentSet,
                     cardCount: this.allCards.length
                 }
