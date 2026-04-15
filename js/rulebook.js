@@ -16,7 +16,7 @@ window.Rulebook = {
             return normalizedPreferred;
         }
 
-        const activeSet = window.API?.getActiveSetKey?.();
+        const activeSet = window.ApiCardLookup?.getActiveSetKey?.();
         if (activeSet && window.CONFIG?.hasSet?.(activeSet)) {
             return activeSet;
         }
