@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 3:05:11 PM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 3:05:33 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -6757,6 +6757,43 @@ window.Constants = {
         return this.statuses.cards.includes(String(status ?? '').trim());
     }
 };
+
+```
+
+---
+
+## 📄 Datei: js/core/api-cache.js
+```js
+export const ApiCache = {
+    adventures: {},
+    adventureLists: {},
+    cardPayloads: {},
+    catalogCards: {},
+    masterIndexes: {},
+
+    clear() {
+        this.adventures = {};
+        this.adventureLists = {};
+        this.cardPayloads = {};
+        this.catalogCards = {};
+        this.masterIndexes = {};
+    },
+
+    clearSet(setKey) {
+        const key = String(setKey ?? '').trim();
+
+        delete this.adventureLists[key];
+        delete this.masterIndexes[key];
+
+        Object.keys(this.cardPayloads).forEach(cacheKey => {
+            if (cacheKey.startsWith(key + '::')) {
+                delete this.cardPayloads[cacheKey];
+            }
+        });
+    }
+};
+
+export default ApiCache;
 
 ```
 
