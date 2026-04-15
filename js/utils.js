@@ -58,33 +58,27 @@ window.Utils = {
     },
 
     getImageFallbackPath() {
-        return 'assets/images/placeholder.jpg';
+        return window.Assets?.getImageFallbackPath?.()
+            || 'assets/images/placeholder.jpg';
     },
 
     isUsableImagePath(path) {
-        const normalized = this.normalizeString(path);
-        if (!normalized) return false;
-
-        const lowered = normalized.toLowerCase();
-
-        if (
-            lowered === 'null' ||
-            lowered === 'undefined' ||
-            lowered === 'false' ||
-            lowered === 'n/a' ||
-            lowered === '-' ||
-            lowered === 'assets/images/placeholder.jpg'
-        ) {
-            return false;
+        if (window.Assets?.isUsableImagePath) {
+            return window.Assets.isUsableImagePath(path);
         }
 
-        return true;
+        const normalized = this.normalizeString(path);
+        return Boolean(normalized);
     },
 
     resolveImagePath(...candidates) {
+        if (window.Assets?.resolveImagePath) {
+            return window.Assets.resolveImagePath(...candidates);
+        }
+
         for (const candidate of candidates) {
             const normalized = this.normalizeString(candidate);
-            if (this.isUsableImagePath(normalized)) {
+            if (normalized) {
                 return normalized;
             }
         }
@@ -93,42 +87,26 @@ window.Utils = {
     },
 
     hasRealImage(...candidates) {
-        for (const candidate of candidates) {
-            if (this.isUsableImagePath(candidate)) {
-                return true;
-            }
+        if (window.Assets?.hasRealImage) {
+            return window.Assets.hasRealImage(...candidates);
         }
 
-        return false;
+        return candidates.some(candidate => this.isUsableImagePath(candidate));
     },
 
     attachImageFallback(img, fallbackSrc = null) {
-        if (!img || img.dataset.fallbackBound === 'true') return;
-
-        const resolvedFallback = this.resolveImagePath(fallbackSrc || this.getImageFallbackPath());
-
-        img.addEventListener('error', () => {
-            if (img.dataset.fallbackApplied === 'true') {
-                return;
-            }
-
-            img.dataset.fallbackApplied = 'true';
-            img.src = resolvedFallback;
-        });
-
-        img.dataset.fallbackBound = 'true';
+        if (window.Assets?.attachImageFallback) {
+            window.Assets.attachImageFallback(img, fallbackSrc);
+        }
     },
 
     setSafeImageSource(img, src, fallbackSrc = null) {
+        if (window.Assets?.setSafeImageSource) {
+            window.Assets.setSafeImageSource(img, src, fallbackSrc);
+            return;
+        }
+
         if (!img) return;
-
-        const resolvedFallback = this.resolveImagePath(fallbackSrc || this.getImageFallbackPath());
-        const resolvedSrc = this.isUsableImagePath(src)
-            ? this.normalizeString(src)
-            : resolvedFallback;
-
-        img.dataset.fallbackApplied = 'false';
-        this.attachImageFallback(img, resolvedFallback);
-        img.src = resolvedSrc;
+        img.src = this.resolveImagePath(src, fallbackSrc);
     }
 };
