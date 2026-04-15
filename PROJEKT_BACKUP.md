@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 3:14:10 PM
+# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 3:14:24 PM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -11318,7 +11318,9 @@ import ArchiveFilter from './features/archive/filter.js';
 import ArchiveRenderer from './features/archive/renderer.js';
 import Archive from './features/archive/archive.js';
 
+import DiagnosticsRunner from './features/diagnostics/runner.js';
 import DiagnosticsRenderer from './features/diagnostics/renderer.js';
+import Diagnostics from './features/diagnostics/diagnostics.js';
 
 import RulebookIndexLoader from './features/rulebook/index-loader.js';
 import RulebookReader from './features/rulebook/reader.js';
@@ -11360,7 +11362,9 @@ window.ArchiveFilter = ArchiveFilter;
 window.ArchiveRenderer = ArchiveRenderer;
 window.Archive = Archive;
 
+window.DiagnosticsRunner = DiagnosticsRunner;
 window.DiagnosticsRenderer = DiagnosticsRenderer;
+window.Diagnostics = Diagnostics;
 
 window.RulebookIndexLoader = RulebookIndexLoader;
 window.RulebookReader = RulebookReader;
@@ -11382,10 +11386,7 @@ const SCRIPT_LOAD_ORDER = [
 
     'js/narrative.js',
     'js/combat.js',
-    'js/storage.js',
-
-    'js/diagnostics-runner.js',
-    'js/diagnostics.js'
+    'js/storage.js'
 ];
 
 const loadedScripts = new Set();
@@ -11443,6 +11444,7 @@ async function boot() {
         Theme.init();
         UI.init();
         Archive.init();
+        Diagnostics.init();
         await Rulebook.init();
 
         if (!App?.init) {
