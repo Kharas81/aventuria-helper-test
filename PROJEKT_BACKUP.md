@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 3:33:59 AM
+# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 3:34:16 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -5168,33 +5168,6 @@ window.AppAdventureFlow = {
             );
             window.UI?.setStatus?.(`❌ Fehler: ${error.message}`);
         }
-    }
-};
-
-```
-
----
-
-## 📄 Datei: js/app-bootstrap.js
-```js
-window.AppBootstrap = {
-    async populateAdventurePicker() {
-        await window.AppControls?.populateAdventurePicker?.();
-    },
-
-    bindEvents() {
-        window.AppControls?.bindEvents?.();
-        window.AppPersistence?.bindAutoSave?.();
-    },
-
-    async restoreSavedState() {
-        await window.AppPersistence?.restoreSavedState?.();
-    },
-
-    async initializeUi() {
-        await this.populateAdventurePicker();
-        this.bindEvents();
-        await this.restoreSavedState();
     }
 };
 
