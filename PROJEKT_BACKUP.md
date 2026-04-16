@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 6:29:27 AM
+# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 6:29:41 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4226,9 +4226,11 @@ hr {
 ```json
 {
   "pageNumber": 16,
-  "title": "Zusatzregeln & Kampagne",
-  "content": "<h3>Ausgeschaltete Helden</h3><p>Ein Held bei 0 LP setzt aus, behält aber seine Karten [cite: 672-674]. <b>Wiederbelebung:</b> Ein Mitspieler erschöpft X Ausdauerkarten; bei W20 <= X kehrt der Held mit X LP zurück [cite: 678-680].</p><h3>Kampagnenspiel</h3><p>Helden können Belohnungen und Talentwerte im Heldendokument notieren[cite: 697]. Vor jedem neuen Abenteuer dürfen bis zu 3 Belohnungskarten ins Deck gemischt werden[cite: 698].</p><h3>Zufallsbegegnungen</h3><p>Ein spezieller Modus ohne Story. Nutze die Zeitskala 'Zufallsbegegnung'. Gefahrenwert = Helden x 7 [cite: 701-705]. Der Scherge mit den höchsten GP gilt als Anführer[cite: 707].</p>"
+  "title": "Ergänzende Regeln",
+  "image": "assets/images/manual/page_16.png",
+  "content": "<h3>Ausgeschalteter Held</h3><p>Ein Held mit 0 Lebenspunkten gilt als ausgeschaltet. Er wird bei der Zielauswahl ignoriert und kann nicht ins Spiel eingreifen. Ausgeschaltete Helden können durch Heilkarten (5+ Lebenspunkte) oder eine Wiederbelebungsprobe zurückgeholt werden [cite: 672-676].</p><h3>Wiederbelebungsprobe</h3><p>Ein Mitspieler kann versuchen, einen Helden zurückzuholen, indem er X Ausdauerkarten erschöpft und eine W20-Probe gegen X würfelt. Bei Erfolg kehrt der Held mit X Lebenspunkten zurück. Schicksalspunkte dürfen hierfür nicht genutzt werden [cite: 678-682].</p><h3>Aus dem Spiel entfernt</h3><p>Karten oder Schicksalspunkte, die aus dem Spiel entfernt wurden, stehen im nächsten Akt des Abenteuers wieder ganz normal zur Verfügung [cite: 683-687].</p><h3>Belohnungskarten</h3><p>Ein Held kann Belohnungskarten in sein Deck mischen, sofern sie den Kategorien auf seiner Talentkarten-Rückseite entsprechen. Für jede Belohnungskarte muss eine andere Karte entfernt werden, um das 30-Karten-Limit zu wahren [cite: 688-691].</p><h3>Heldentitel</h3><p>Besondere Heldentitel-Karten werden zu Beginn eines Abenteuers neben der Heldenkarte ausgelegt und zählen nicht zum Aktionskartenmaximum [cite: 692-695].</p><h3>Kampagnenspiel</h3><p>Erfolge können im Heldendokument notiert werden. Vor einem neuen Abenteuer darf der Spieler bis zu drei gesammelte Belohnungskarten für sein Deck auswählen [cite: 696-700].</p><h3>Zufallsbegegnungen</h3><p>In diesem Modus tragen Helden einen einzelnen Kampf gegen zufällige Gegner aus. Schergenkarten werden gezogen, bis ein Gefahrenwert von Heldenanzahl x 7 erreicht ist. Ein Anführer wird bei Bedarf durch den stärksten Schergen ersetzt [cite: 701-710].</p>"
 }
+
 ```
 
 ---
