@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/15/2026, 6:02:19 PM
+# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 3:33:59 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -5500,49 +5500,6 @@ window.AppStateSync = {
         }
     }
 };
-
-```
-
----
-
-## 📄 Datei: js/app.js
-```js
-window.App = {
-    isApplyingSavedState: false,
-    isInitialized: false,
-
-    async init() {
-        if (this.isInitialized) {
-            return;
-        }
-
-        this.isInitialized = true;
-
-        try {
-            const savedState = window.StorageManager?.loadState?.()
-                || window.State.getDefaultState();
-
-            window.State.replaceState(savedState);
-
-            await window.AppBootstrap?.initializeUi?.();
-
-            console.log('App initialisiert (Modulare Architektur).');
-        } catch (error) {
-            this.isInitialized = false;
-            console.error('Fehler bei App.init():', error);
-            window.UI?.setStatus?.('⚠️ App konnte nicht initialisiert werden.');
-            throw error;
-        }
-    }
-};
-
-if (!window.__AVENTURIA_SKIP_AUTO_INIT__) {
-    document.addEventListener('DOMContentLoaded', () => {
-        if (window.App?.init) {
-            window.App.init();
-        }
-    });
-}
 
 ```
 
