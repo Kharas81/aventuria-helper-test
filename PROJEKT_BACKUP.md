@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 6:30:32 AM
+# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 6:31:09 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4291,9 +4291,11 @@ hr {
 ```json
 {
   "pageNumber": 21,
-  "title": "Wildenstein Akt II: Auf der Burg",
-  "content": "<h3>Dorf Wildenstein</h3><p>Willenskraft-Probe gegen Beklommenheit [cite: 910-915]. Handwerk-Probe für 'Zwölfgötter-Amulett' [cite: 921-924].</p><h3>Der Ball</h3><p>Überzeugen-Probe für einen eleganten Auftritt (bringt 🍀 oder Handkarten) [cite: 935-941]. Pünktlich zum zehnten Glockenschlag erscheint der Baron. Er ist am Leben und befiehlt: 'Ergreift sie!' [cite: 942-947].</p>"
+  "title": "Das Erbe von Wildenstein - Akt II",
+  "image": "assets/images/manual/page_21.png",
+  "content": "<h3>Kampf an der Furt</h3><p>Der Gefahrenwert beträgt Heldenanzahl x 5[cite: 1971]. Die Helden scheitern sofort, wenn der Erbe ausgeschaltet wird[cite: 1972]. Nach dem Sieg erreicht ihr das Dorf Wildenstein [cite: 1977-1986].</p><h3>Auf Burg Wildenstein</h3><p>Der Anblick der Burg löst Beklommenheit aus (Willenskraft-Probe) [cite: 1990-2000]. Im Dorf helft ihr bei Reparaturen und erhaltet eventuell „Zwölfgötter-Amulette“ (Handwerk-Probe) [cite: 2001-2011]. An der Burg angekommen, werdet ihr von einem alten Diener empfangen und zu einem Ball eingeladen [cite: 2012-2016].</p>"
 }
+
 ```
 
 ---
