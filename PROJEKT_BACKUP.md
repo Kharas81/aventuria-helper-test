@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 6:28:15 AM
+# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 6:28:25 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4200,9 +4200,11 @@ hr {
 ```json
 {
   "pageNumber": 14,
-  "title": "Gegner-Spielzüge & Zeit-Effekte",
-  "content": "<h3>3) Gegner-Spielzüge</h3><p>Gegner handeln von links nach rechts[cite: 574]. Für jede Aktion (⚔️) wird ein W20 gewürfelt und das Ergebnis in der Tabelle abgelesen[cite: 577]. Eine '1' gibt eine Zusatzaktion, eine '20' beendet den Zug des Gegners sofort [cite: 578-581]. Angriffe der Gegner treffen automatisch; Helden dürfen jedoch ausweichen [cite: 585-587].</p><h3>Zielauswahl</h3><ul><li><b>Startspieler:</b> Ziel ist der Held mit der Startspielermarke [cite: 590].</li><li><b>Zufällig:</b> Bestimmung per W6 oder Heldenmarken [cite: 591-593].</li><li><b>Am meisten/wenigsten:</b> Ziel ist der Held mit den entsprechenden Werten (LP, 🍀 etc.) [cite: 607].</li></ul><h3>4) Zeit-Effekte & 5) Rundenende</h3><p>Entferne eine Zeitmarke (⏳) von der Zeitskala und löse den entsprechenden Effekt aus[cite: 617]. Danach gibt der Startspieler die Marke nach links weiter[cite: 621].</p>"
+  "title": "Gegner-Spielzüge und Zeit-Effekte",
+  "image": "assets/images/manual/page_14.png",
+  "content": "<h3>3) Gegner-Spielzüge</h3><p>Die Gegner handeln beginnend mit dem Anführer in der Reihenfolge, in der sie in der Gegnerreihe liegen. Für jede Aktion wird nacheinander ein W20 gewürfelt und das Ergebnis in der Aktionstabelle des Gegners abgelesen [cite: 572-577]. Eine gewürfelte 1 gibt dem Gegner zusätzlich eine weitere Aktion. Eine gewürfelte 20 bedeutet, dass der Zug dieses Gegners sofort endet [cite: 578-582].</p><h3>Angriffe und Zielauswahl</h3><p>Angriffe von Gegnern gelten automatisch als erfolgreich; es wird keine Angriffsprobe durchgeführt. Ein getroffener Held darf wie üblich auf Ausweichen würfeln [cite: 583-587]. Das Ziel eines Angriffs wird auf unterschiedliche Weise bestimmt: der aktuelle Startspieler, ein zufällig ermittelter Held (per W6 oder Heldenmarken) oder der Held mit den meisten/wenigsten Schicksalspunkten oder Lebenspunkten [cite: 588-608].</p><h3>Besondere Gegner-Regeln</h3><p>Wie Helden dürfen auch Schergen und Anführer ihre Lebenspunkte durch Heilung normalerweise nicht über ihren Anfangswert bringen, außer es ist ausdrücklich angemerkt. Mitstreiter meint alle anderen Gegner außer dem gerade handelnden Gegner selbst [cite: 611-614].</p><h3>4) Zeit-Effekte</h3><p>Nun wird eine Zeitmarke von der Zeitskala-Karte entfernt und die Auswirkungen ausgelöst, die der aktuellen Anzahl an Zeitmarken entsprechen. Wurde die letzte Zeitmarke entfernt, treten ab nun in jeder Runde die Auswirkungen bei „0“ ein. Zudem werden zeitlich begrenzte Auswirkungen auf Gegner- oder Abenteuerkarten überprüft [cite: 616-619].</p><h3>5) Ende der Runde</h3><p>Zum Schluss gibt der aktuelle Startspieler die Startspielermarke an den links neben ihm sitzenden Spieler weiter und die nächste Runde beginnt [cite: 620-621].</p>"
 }
+
 ```
 
 ---
