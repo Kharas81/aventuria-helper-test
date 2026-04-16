@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 6:38:27 AM
+# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 6:38:40 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4233,8 +4233,22 @@ hr {
 {
   "pageNumber": 16,
   "title": "Ergänzende Regeln",
-  "image": "assets/images/manual/page_16.png",
-  "content": "<h3>Ausgeschalteter Held</h3><p>Ein Held mit 0 Lebenspunkten gilt als ausgeschaltet. Er wird bei der Zielauswahl ignoriert und kann nicht ins Spiel eingreifen. Ausgeschaltete Helden können durch Heilkarten (5+ Lebenspunkte) oder eine Wiederbelebungsprobe zurückgeholt werden [cite: 672-676].</p><h3>Wiederbelebungsprobe</h3><p>Ein Mitspieler kann versuchen, einen Helden zurückzuholen, indem er X Ausdauerkarten erschöpft und eine W20-Probe gegen X würfelt. Bei Erfolg kehrt der Held mit X Lebenspunkten zurück. Schicksalspunkte dürfen hierfür nicht genutzt werden [cite: 678-682].</p><h3>Aus dem Spiel entfernt</h3><p>Karten oder Schicksalspunkte, die aus dem Spiel entfernt wurden, stehen im nächsten Akt des Abenteuers wieder ganz normal zur Verfügung [cite: 683-687].</p><h3>Belohnungskarten</h3><p>Ein Held kann Belohnungskarten in sein Deck mischen, sofern sie den Kategorien auf seiner Talentkarten-Rückseite entsprechen. Für jede Belohnungskarte muss eine andere Karte entfernt werden, um das 30-Karten-Limit zu wahren [cite: 688-691].</p><h3>Heldentitel</h3><p>Besondere Heldentitel-Karten werden zu Beginn eines Abenteuers neben der Heldenkarte ausgelegt und zählen nicht zum Aktionskartenmaximum [cite: 692-695].</p><h3>Kampagnenspiel</h3><p>Erfolge können im Heldendokument notiert werden. Vor einem neuen Abenteuer darf der Spieler bis zu drei gesammelte Belohnungskarten für sein Deck auswählen [cite: 696-700].</p><h3>Zufallsbegegnungen</h3><p>In diesem Modus tragen Helden einen einzelnen Kampf gegen zufällige Gegner aus. Schergenkarten werden gezogen, bis ein Gefahrenwert von Heldenanzahl x 7 erreicht ist. Ein Anführer wird bei Bedarf durch den stärksten Schergen ersetzt [cite: 701-710].</p>"
+  "keywords": ["Wiederbelebung", "Ausgeschaltet", "Belohnung", "Zufallsbegegnung"],
+  "content": [
+    { 
+      "type": "rule_block", 
+      "header": "Ausgeschalteter Held", 
+      "text": "Ein Held mit 0 Lebenspunkten gilt als ausgeschaltet. Er kann durch Heilkarten oder Wiederbelebung zurückgeholt werden.",
+      "cite": "672-676" 
+    },
+    { 
+      "type": "rule_block", 
+      "header": "Kampagnenspiel", 
+      "text": "Nachdem ein Held Belohnungskarten erhalten und Talentwerte angehoben hat (siehe Seite 15), darf er dies notieren.",
+      "links": [{ "text": "Seite 15", "targetPage": 15 }],
+      "cite": "696-700" 
+    }
+  ]
 }
 
 ```
