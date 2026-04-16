@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 6:21:01 AM
+# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 6:27:15 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4135,9 +4135,11 @@ hr {
 ```json
 {
   "pageNumber": 9,
-  "title": "Das Abenteuer & Talentproben",
-  "content": "<h3>Struktur</h3><p>Ein Abenteuer besteht aus Erzählung (Rahmenhandlung) und Kampf (Regeln)[cite: 277]. Jedes Abenteuer hat vier Schwierigkeitsgrade: einfach, normal, schwer und legendär [cite: 281-282].</p><h3>Talentproben</h3><p>Wird eine Probe verlangt, würfelt der Spieler mit einem W20 gleich oder unter den Wert seines Talents [cite: 293, 299].</p><ul><li><b>Kritischer Erfolg:</b> Eine gewürfelte 1 [cite: 303].</li><li><b>Erfolg:</b> Gleich oder unter dem Talentwert [cite: 304].</li><li><b>Misserfolg:</b> Über dem Talentwert [cite: 304].</li><li><b>Kritischer Patzer:</b> Eine gewürfelte 20 [cite: 305].</li></ul><div class='warning-box'>Helden dürfen Schicksalspunkte (🍀) einsetzen, um Würfe zu wiederholen[cite: 307].</div>"
+  "title": "Das Abenteuer",
+  "image": "assets/images/manual/page_09.png",
+  "content": "<h3>Das Abenteuer</h3><p>Im Gegensatz zum Duellmodus besteht der Abenteuermodus nicht nur aus einem einzelnen Kampf, sondern aus einem kompletten Abenteuer. Hier geht es darum, in die Rolle seines Helden zu schlüpfen, durch seine Augen die Geschichte zu erleben und gemeinsam mit seinen Kumpanen die Herausforderungen zu meistern. Jedes Abenteuer besteht aus zwei Komponenten, der Erzählung und dem Kampf. Kurzabenteuer bestehen in der Regel aus einer Erzählung, gefolgt von einem abschließenden Kampf. Längere Abenteuer sind dagegen oft in mehrere Akte unterteilt [cite: 273-280].</p><h3>Schwierigkeitsgrad</h3><p>Jedes Abenteuer verfügt über vier Schwierigkeitsgrade: einfach, normal, schwer und legendär. Bei Abenteuerbeginn müsst ihr euch für einen davon entscheiden. Wenn der Schwierigkeitsgrad relevant wird, weist das Abenteuer explizit darauf hin [cite: 281-283].</p><h3>Erzählung</h3><p>Um die Helden durch die Geschichte zu führen, bedient sich die Erzählung Vorlesetexten und Spielanweisungen. WICHTIG: Das Deck eines Helden kommt während einer Erzählung nicht zum Einsatz. Helden können sich also zum Beispiel während einer Erzählung nicht mithilfe der Aktionskarte „Heiltrank“ heilen, selbst wenn diese in ihrem Deck enthalten ist [cite: 284-298].</p><h3>Talentproben</h3><p>Wird eine Talentprobe verlangt, muss der Spieler mit einem W20 gleich oder unter dem Wert des genannten Talents (zu finden auf der Talentkarte des Helden) würfeln. Eine Talentprobe kann zu vier verschiedenen Ergebnissen führen: Kritischer Erfolg (1), Erfolg, Misserfolg oder Kritischer Misserfolg (20). Die Helden dürfen bei Talentproben Schicksalspunkte einsetzen, um Würfelwürfe zu wiederholen [cite: 293-307].</p>"
 }
+
 ```
 
 ---
