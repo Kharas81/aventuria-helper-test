@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 4:05:24 AM
+# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 5:40:46 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4057,9 +4057,22 @@ hr {
 ```json
 {
   "pageNumber": 3,
-  "title": "Der Süden und Osten Aventuriens",
-  "content": "<p>Al'Anfa ist eine Stadt voller Dekadenz und Intrigen, in der das Leben eines Fremden oft nur seinen Wert auf dem Sklavenmarkt besitzt[cite: 38]. Der Dschungel des Südens und die Waldinseln werden von Waldmenschen und Utulu bewohnt, die ständig von Sklavenjägern bedroht werden [cite: 40-41]. Weiter südlich locken im Südmeer sagenhafte Schätze und Passagen zu unbekannten Kontinenten Abenteurer an [cite: 42-43].</p><p>Im Osten beherrschen die Novadis die Wüste Khôm. Als stolze Nomaden und Anhänger des Gottes Rastullah belächeln sie die Vielgötterei anderer Völker [cite: 44-45]. Jenseits davon liegen die Tulamidenlande, bekannt für Dschinnenbeschwörer und exotische Basare [cite: 46-47]. Das fruchtbare Aranien ist geprägt durch ein Völkergemisch, in dem Frauen die eigentlichen Machthaber sind [cite: 48-51]. Die Insel Maraskan gilt als Bannland mit einer giftigen Tierwelt und einer einzigartigen Religion um die Zwillingsgötter Rur und Gror [cite: 52-53].</p>"
+  "content": [
+    {
+      "type": "text",
+      "text": "Stadt voller Dekadenz und Intrigen, in der das Leben eines Fremden nicht mehr wert ist, als er auf einem der Sklavenmärkte einbringt. Dieser Moloch wird von Plantagen am Leben gehalten, auf denen Sklaven für den Reichtum ihrer Herren schuften müssen. Der Dschungel des Südens (9) und die Waldinseln werden vom Volk der Waldmenschen und Utulu bewohnt. Sie kämpfen täglich ums Überleben und werden zudem von den Al'Anfanern und anderen Sklavenhaltern bedroht, die immer wieder Menschenjäger ausschicken, um die Dschungelbewohner zu versklaven. Noch weiter im Süden liegt das Südmeer (10), mit seinen unzähligen kleinen Inseln, die von Piraten und Kolonialherren beherrscht werden. Hier sind es vor allem die Gerüchte um sagenhafte Schätze und die Passagen zu unbekannten Kontinenten, die Abenteurer anlocken. Jenseits der Gebirge im Osten des Horasreichs herrschen die Novadis über die Wüste Khôm, in der so manche Karawane Opfer der glühenden Sonne und der stolzen Nomadenstämme des Kalifats (11) geworden ist. Die Novadis sind Anhänger des Gottes Rastullah und belächeln all die ahnungslosen Ungläubigen, die der Vielgötterei anhängen. Noch weiter im Osten liegen die Länder der Tulamiden (12), die von Sultanen und Emiren beherrscht werden. Die vielen Klein- und Stadtstaaten dieses Landstrichs sind berühmt für ihre Dschinnenbeschwörer, listigen Diebe und die exotischen Güter ihrer Basare. Das größte Reich der Tulamiden, sieht man einmal vom Kalifat der Novadis ab, ist Aranien (13). Das Land ist sehr fruchtbar und gehörte viele Jahre zum Mittelreich, bis es sich für unabhängig erklärte. In Aranien verbindet sich die Tradition der Tulamiden mit der Kultur der Mittelreicher zu einem einzigartigen Völkergemisch. Die aranischen Männer gehen vor allem dem Müßiggang nach, während die Frauen die eigentlichen Machthaber im Königreich sind. Östlich der Tulamidenlande, gegenüber dem Golf von Tuzak, liegt Maraskan (14). Die Insel gilt den Tulamiden als Bannland und ist bekannt für ihre giftige Tier- und Pflanzenwelt, für Meuchler und die absonderliche, vom Dualismus geprägte Religion ihrer Bewohner, in deren Zentrum die Verehrung die Zwillingsgötter Rur und Gror steht."
+    },
+    {
+      "type": "metadata",
+      "elements": [
+        "3", "7", "4", "2", "5", "19", "Bjaldorn", "16", "17", "18", 
+        "Dominium Donnerbach", "71", "13", "11", "6", "12", "Mengbilla", 
+        "Chorhop", "9", "8", "Charypso", "Brabak", "10", "Hot-Alem", "15", "14"
+      ]
+    }
+  ]
 }
+
 ```
 
 ---
