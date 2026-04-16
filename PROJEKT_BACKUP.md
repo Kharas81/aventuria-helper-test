@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 3:39:28 AM
+# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 3:39:41 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -13119,32 +13119,6 @@ export const UI = {
 };
 
 export default UI;
-
-```
-
----
-
-## 📄 Datei: js/ui-renderer.js
-```js
-window.Renderer = {
-    // --- FASSADE: Alle Aufrufe werden an die zuständigen Module weitergereicht ---
-
-    renderSetup(adventure, allCards) {
-        window.RenderSetup?.renderSetup(adventure, allCards);
-    },
-
-    openCardDetail(card) {
-        window.RenderCardDetail?.openCardDetail(card);
-    },
-
-    closeCardDetail() {
-        window.RenderCardDetail?.closeCardDetail();
-    },
-
-    ensureCardDetailModal() {
-        return window.RenderCardDetail?.ensureCardDetailModal();
-    }
-};
 
 ```
 
