@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 3:34:30 AM
+# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 3:34:48 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -5167,68 +5167,6 @@ window.AppAdventureFlow = {
                 error?.message || 'Unbekannter Fehler beim Laden des Abenteuers.'
             );
             window.UI?.setStatus?.(`❌ Fehler: ${error.message}`);
-        }
-    }
-};
-
-```
-
----
-
-## 📄 Datei: js/app-persistence.js
-```js
-window.AppPersistence = {
-    autoSaveBound: false,
-
-    bindAutoSave() {
-        if (this.autoSaveBound) {
-            return;
-        }
-
-        window.StorageManager?.bindAutoSave?.();
-        this.autoSaveBound = true;
-    },
-
-    saveCurrentState() {
-        if (!window.StorageManager) {
-            window.UI?.setStatus?.('⚠️ Speichern nicht verfügbar.');
-            return;
-        }
-
-        window.StorageManager.persist();
-        window.UI?.setStatus?.('💾 Spielstand gespeichert.');
-    },
-
-    async clearSavedState() {
-        if (window.StorageManager) {
-            window.StorageManager.clearState();
-        }
-
-        window.State.reset();
-        window.AppStateSync?.resetUIToDefaults();
-        window.Diagnostics?.clear?.();
-        window.UI?.setStatus?.('🗑️ Spielstand gelöscht.');
-    },
-
-    async restoreSavedState() {
-        const state = window.State?.getState?.();
-        if (!state) return;
-
-        window.App.isApplyingSavedState = true;
-
-        try {
-            window.AppStateSync?.applyStateToControls?.();
-
-            if (state.selectedAdventure) {
-                await window.AppAdventureFlow?.handleUpdate?.({ skipPersist: true });
-            } else {
-                window.AppStateSync?.resetUIToDefaults?.();
-                window.Diagnostics?.clear?.();
-            }
-
-            window.AppStateSync?.applySavedSubsystems?.(state);
-        } finally {
-            window.App.isApplyingSavedState = false;
         }
     }
 };
