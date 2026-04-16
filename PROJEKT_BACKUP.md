@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 6:20:45 AM
+# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 6:21:01 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4121,10 +4121,12 @@ hr {
 ## 📄 Datei: data/manual/base_game/page_08.json
 ```json
 {
-  "pageNumber": 8,
-  "title": "Spezialkarten & Spielmarken",
-  "content": "<h3>Spezialkarten (Grün)</h3><p>Diese kommen bei verschiedenen Kämpfen zum Einsatz und machen diese abwechslungsreicher. Dazu gehören Ereignisse, Anführer-Aktionen und Dämoneneigenschaften [cite: 225-227].</p><h3>Spielmarken</h3><ul><li><b>Startspielermarke:</b> Zeigt den aktuellen Startspieler an; wird am Rundenende weitergereicht [cite: 235].</li><li><b>Heldenmarken:</b> Werden für Abenteuersituationen oder zur zufälligen Heldenbestimmung genutzt [cite: 236-237].</li><li><b>Lebenspunkte-/Abenteuermarken:</b> Zeigen LP von Gegnern an oder werden für Effekte auf Abenteuerkarten genutzt [cite: 238-239].</li><li><b>Zeit-/Verderbensmarken:</b> Zeitmarken steuern die Zeitskala, Verderbensmarken führen oft zur Niederlage [cite: 240].</li></ul><h3>Kampfplan</h3><p>Eine ausfaltbare Auslage, die beim Platzieren aller Karten hilft [cite: 241-242].</p>"
+  "pageNumber": 7,
+  "title": "Spielmaterial",
+  "image": "assets/images/manual/page_07.png",
+  "content": "<p>Im Aventuria Abenteuermodus kommen die folgenden Spielmaterialien zum Einsatz: Der Abenteuermodus benutzt alle Heldendecks, Lebenspunkte-Karten, Schicksalspunkte und Würfel aus dem Duellmodus. Jeder Held fügt seiner normalen Heldenkarte seine Talentkarte hinzu. Auf der Vorderseite dieser Karte sind seine Talentwerte aufgeführt, und auf der Rückseite die Maximalzahl an Karten, die er in den verschiedenen Kartenkategorien besitzen darf [cite: 176-180].</p><h3>Schergenkarten</h3><p>Mit den Schergenkarten werden Gegner dargestellt, denen die Helden in größerer Zahl in vielen verschiedenen Abenteuern über den Weg laufen können [cite: 181-182].</p><h3>Abenteuerkarten</h3><p>Diese blauen Karten gelten oft nur für ein einzelnes, bestimmtes Abenteuer bzw. einen bestimmten Akt eines Abenteuers und weisen unten auf der Karte den Namen des Abenteuers und die Nummer des Aktes auf, zu dem sie gehören. Zu den Abenteuerkarten zählen die Zeitskala-Karten, Handlungskarten, Anführer-Karten und weitere ergänzende Karten, wie zum Beispiel die Gräber-Karten [cite: 188-191].</p><h3>Belohnungskarten</h3><p>Belohnungskarten sind besondere Aktionskarten, die man während eines Abenteuers erbeuten kann oder am Ende eines Abenteuers als Belohnung erhält. Sie erhöhen die Kampfkraft eines Helden und können beim Kampagnenspiel in sein Heldendeck aufgenommen werden [cite: 193-194].</p><h3>Übungs- und Trainingskarten</h3><p>Diese Karten können von Helden während einer Atempause erworben werden, um anzuzeigen, dass sie sich auf die kommenden Herausforderungen vorbereitet haben [cite: 218-219].</p>"
 }
+
 ```
 
 ---
