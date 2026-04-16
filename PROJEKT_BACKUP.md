@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 5:45:14 AM
+# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 5:45:31 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4070,8 +4070,9 @@ hr {
 ```json
 {
   "pageNumber": 4,
-  "title": "Südosten & ferne Regionen",
-  "content": "<p>Im Osten Aventuriens prägen Wüsten, Handelsstädte und alte Kulturen das Bild. Jenseits der Khôm liegen die Tulamidenlande mit ihren Basaren, Palästen und Erzählungen von Dschinnen und Magie.</p><p>Weiter im Südosten findet sich Aranien, ein fruchtbares Land mit eigenständiger Kultur und einer starken Stellung weiblicher Herrschaft. Noch weiter östlich und südlich locken fremde Küsten, Inseln und das Südmeer, das für Händler, Piraten und Abenteurer gleichermaßen Chancen und Gefahren birgt.</p>"
+  "title": "Aventurien - Eine Welt der Magie und Götter",
+  "image": "assets/images/manual/page_04.png",
+  "content": "<h3>Die Schattenlande (15)</h3><p>Die Schattenlande (15), einst Provinzen des Mittelreichs, wurden vor einigen Jahren von menschlichen Dienern der Erzdämonen unterworfen. Finstere Dämonenbeschwörer, sinistre Nekromanten und skrupellose Adlige verfolgen hier ungestört ihre Pläne und wandeln abseits der göttlichen Ordnung [cite: 80-81].</p><h3>Die Salamandersteine (16)</h3><p>Die nördlichen Wälder und Steppen rund um die Salamandersteine (16) sind der Lebensraum der Elfen. Orks wie Menschen meiden das Gebirge und die umliegenden Wälder, denn ihre Bewohner mögen es nicht, wenn Fremde ihr Land betreten. Einerseits für ihre Schönheit und ihre Eleganz geschätzt, andererseits für ihren bisweilen grausam anmutenden Umgang mit missliebigen Eindringlingen gefürchtet, gelten die Elfen als magische Wesen [cite: 82-84].</p><h3>Das Svellttal (17)</h3><p>Das Svellttal (17), gelegen zwischen dem Orkland und den elfischen Siedlungsgebieten, war früher ein Bund von Handelsstädten. Schon seit etlichen Jahren herrschen hier die Orks und fordern von der menschlichen Bevölkerung Tribut. Der wilde Landstrich kennt nur das Recht des Stärkeren [cite: 85-87].</p><h3>Das Bornland (18)</h3><p>Im Nordosten liegt das Bornland (18), ein waldreicher Landstrich, der von den Bronnjaren regiert wird. Das Leben hier ist hart und entbehrungsreich. Die Wälder des Bornlands bergen so manches Mysterium aus der Zeit des mächtigen Theaterritterordens [cite: 88-90].</p><h3>Der Hohe Norden (19)</h3><p>Nördlich des Bornlands erstreckt sich der Hohe Norden (19). In den Steppen durchstreifen die Nivesen mit ihren Tierherden das Land, während die Norbarden als Händler von Ort zu Ort ziehen. Einzig die Fjarninger, Yetis und Nachtalben trotzen der eisigen Umgebung [cite: 91-95].</p><h3>Eine Welt voller Magie</h3><p>Aventurien ist eine von Magie durchdrungene Welt. Einige wenige Menschen sind mit „Madas Gabe“ geboren und werden in Akademien oder bei privaten Lehrmeistern unterwiesen. Die bekannteste Tradition sind die Magier, aber auch Hexen und Elfen nutzen die magischen Kräfte auf ihre eigene Weise [cite: 104-111].</p><h3>Eine Welt der Götter</h3><p>Neben der Magie wirkt das Übernatürliche durch die Geweihten der Götter. Am weitesten verbreitet ist der Glaube an die Zwölfgötter. Doch selbst die Götter haben Feinde: die Erzdämonen in den Schattenlanden und den Namenlosen Gott, der die Macht der Götter heimlich unterwandert [cite: 113-116].</p>"
 }
 
 ```
