@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 6:31:32 AM
+# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 6:31:43 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4330,9 +4330,11 @@ hr {
 ```json
 {
   "pageNumber": 24,
-  "title": "Heldendokument & Symbole",
-  "content": "<h3>Kopiervorlage Heldendokument</h3><p>Verwalte Namen, Talentsteigerungen (+1 bis max +4) und Belohnungen [cite: 1051-1057].</p><h3>Symbol-Legende</h3><p>⚔️ Nahkampf, 🏹 Fernkampf, ✨ Magie, 🛡️ Ausweichen, 🍀 Schicksalspunkt, ❤️ Lebenspunkt, 💥 Trefferpunkt, ⏳ Zeit, 💀 Verderben [cite: 1054].</p><h3>Rundenablauf Zusammenfassung</h3><ol><li>Vorbereitung (Helden zeitgleich) [cite: 1072].</li><li>Helden-Spielzüge [cite: 1073].</li><li>Gegner-Spielzüge [cite: 1074].</li><li>Zeit-Effekte [cite: 1075].</li><li>Ende der Runde[cite: 1077].</li></ol>"
+  "title": "Heldendokument & Rundenablauf",
+  "image": "assets/images/manual/page_24.png",
+  "content": "<h3>Kopiervorlage Heldendokument</h3><p>Hier können Name, Talentwerte und Belohnungskarten notiert werden [cite: 2135-2141]. Zudem findet ihr eine Übersicht aller Spielsymbole wie Ausdauer, Lebenspunkte oder Schicksalspunkte [cite: 2137-2138].</p><h3>Rundenablauf Zusammenfassung</h3><p>Der Kampf gliedert sich in Vorbereitung (Karten ziehen, Ausdauer spielen), Helden-Spielzüge, Gegner-Spielzüge (Reihenfolge von links nach rechts), Zeit-Effekte und das Ende der Runde [cite: 2146-2161]. In der Atempause können Erholungspunkte für Heilung, Schicksalspunkte oder Training genutzt werden [cite: 2162-2168].</p>"
 }
+
 ```
 
 ---
