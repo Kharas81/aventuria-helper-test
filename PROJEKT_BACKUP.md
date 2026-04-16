@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 6:31:43 AM
+# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 6:38:17 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4239,9 +4239,30 @@ hr {
 ```json
 {
   "pageNumber": 17,
-  "title": "Kurzabenteuer: Silvanas Befreiung",
+  "title": "Silvanas Befreiung",
+  "keywords": ["Havena", "Alrik", "Goblins", "Körperbeherrschung"],
   "image": "assets/images/manual/page_17.png",
-  "content": "<h3>Havena, im Jahre 993 BF</h3><p>Euer Freund Alrik hat euch herbeigerufen, um ihm bei der Befreiung der schönen Silvana zu helfen, die von heimtückischen Piraten entführt wurde. Die Spuren führen über eine Leiter in eine unterirdische Kelleranlage. Unterdessen verabschiedet sich Alrik eilig für eine dringende Angelegenheit. Hinter der Tür begegnet ihr einem runzligen Kobold und einer Gruppe Goblins. Der Kobold hetzt die Goblins auf euch und macht sich unsichtbar, während die Goblins die Flucht ergreifen.</p><h3>Erkundung des Kellers</h3><p>Jeder Held führt eine Körperbeherrschung-Probe durch. Je nach Ergebnis erhaltet ihr Informationen oder müsst zusätzliche Goblins bekämpfen. Im Inneren findet ihr Gefängniszellen und führt eine Sinnesschärfe-Probe durch. Bei Erfolg entdeckt ihr einen Geheimgang oder nützliche Ausrüstung. Schließlich stoßt ihr auf ein Wandgemälde, hinter dem sich der geheime Raum der Schurken befindet.</p>"
+  "content": [
+    { "type": "location", "text": "Havena, im Jahre 993 BF", "cite": "712" },
+    { "type": "header", "level": 2, "text": "Kurzabenteuer: Silvanas Befreiung", "cite": "713, 714" },
+    { 
+      "type": "narrative", 
+      "text": "Euer Freund Alrik hat euch herbeigerufen... Hinter der Tür blickt ihr in das Gesicht eines Kobolds... Die Goblins ergreifen hastig die Flucht!", 
+      "cite": "715-721" 
+    },
+    {
+      "type": "instruction_box",
+      "title": "Spielanweisung",
+      "action": "Jeder Held führt eine Körperbeherrschung-Probe durch.",
+      "cite": "722",
+      "results": [
+        { "outcome": "Kritischer Erfolg", "text": "Du schnappst dir einen Goblin... Du bekommst 1 Schicksalspunkt.", "cite": "723, 724" },
+        { "outcome": "Erfolg", "text": "Ein Goblin weniger, den ihr bekämpfen müsst.", "cite": "725, 726" },
+        { "outcome": "Misserfolg", "text": "Einer der Goblins entkommt! Er wird als zusätzlicher Scherge eingesetzt.", "cite": "727-729" },
+        { "outcome": "Kritischer Patzer", "text": "Du verlierst 2 Lebenspunkte. Zusätzlich treten Auswirkungen wie bei Misserfolg ein.", "cite": "730, 731" }
+      ]
+    }
+  ]
 }
 
 ```
