@@ -1,5 +1,6 @@
 {
   "pageNumber": 18,
-  "title": "Abenteuer: Silvanas Befreiung (Teil 2)",
-  "content": "<h3>Das Gemälde</h3><p>Ein Held würfelt Wissen. Bei Erfolg startet jeder Held mit einer zusätzlichen Handkarte [cite: 750-754]. Bei Misserfolg startet jeder mit einer Karte weniger [cite: 758].</p><h3>Kampf-Vorgaben</h3><ul><li><b>Schergen:</b> Piraten oder Orks [cite: 770].</li><li><b>Gefahrenwert:</b> Helden x 5 (+ eventuelle Feige Goblins) [cite: 771].</li><li><b>Heldenaktion:</b> Namen erraten [cite: 772].</li><li><b>Niederlage:</b> Verderbensmarken (💀) = Heldenanzahl[cite: 773].</li></ul><p><b>Sieg:</b> Alle Gegner besiegt oder vertrieben. Belohnung: 1 Abenteuerpunkt[cite: 774, 786].</p>"
+  "title": "Kurzabenteuer: Silvanas Befreiung",
+  "image": "assets/images/manual/page_18.png",
+  "content": "<h3>Der Kampf gegen den Kobold</h3><p>Ein Held versucht per Wissen-Probe den Mechanismus der Geheimtür zu finden. Im Raum dahinter trefft ihr auf Piraten, Orks und den Kobold, dessen Magie ihn schützt, bis ihr seinen Namen herausfindet.</p><h3>Kampfvorgaben</h3><p>Bildet einen Stapel aus Schergen mit dem Schlagwort „Pirat“ oder „Ork“. Der Gefahrenwert beträgt Heldenanzahl x 5. Die Heldenaktion ist „Namen erraten“. Die Niederlage tritt ein, wenn ihr Verderbensmarken in Höhe der Heldenanzahl sammelt. Der Sieg ist errungen, wenn alle Gegner besiegt oder vertrieben sind.</p><h3>Abschluss</h3><p>Nach einem Sieg befreit ihr die dankbare Silvana und jeder Held erhält 1 Abenteuerpunkt. Im Falle einer Niederlage entkommen die Entführer.</p>"
 }
