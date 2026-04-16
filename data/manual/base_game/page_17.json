@@ -1,5 +1,6 @@
 {
   "pageNumber": 17,
-  "title": "Abenteuer: Silvanas Befreiung (Teil 1)",
-  "content": "<h3>Havena, 993 BF</h3><p>Euer Freund Alrik bittet um Hilfe bei der Befreiung Silvanas von Piraten [cite: 712-715].</p><h3>Interaktive Abschnitte</h3><ul><li><b>Goblins verfolgen:</b> Jeder Held würfelt Körperbeherrschung. Bei Misserfolg wird die Karte 'Feiger Goblin' zum Schergendeck hinzugefügt [cite: 722-729].</li><li><b>Keller durchsuchen:</b> Ein Held würfelt Sinnesschärfe. Bei Erfolg startet jeder Held mit einer zusätzlichen Handkarte in den Kampf [cite: 734-741].</li></ul><p>Ein Wandgemälde verbirgt eine Geheimtür zum Raum der Entführer [cite: 746-748].</p>"
+  "title": "Kurzabenteuer: Silvanas Befreiung",
+  "image": "assets/images/manual/page_17.png",
+  "content": "<h3>Havena, im Jahre 993 BF</h3><p>Euer Freund Alrik hat euch herbeigerufen, um ihm bei der Befreiung der schönen Silvana zu helfen, die von heimtückischen Piraten entführt wurde. Die Spuren führen über eine Leiter in eine unterirdische Kelleranlage. Unterdessen verabschiedet sich Alrik eilig für eine dringende Angelegenheit. Hinter der Tür begegnet ihr einem runzligen Kobold und einer Gruppe Goblins. Der Kobold hetzt die Goblins auf euch und macht sich unsichtbar, während die Goblins die Flucht ergreifen.</p><h3>Erkundung des Kellers</h3><p>Jeder Held führt eine Körperbeherrschung-Probe durch. Je nach Ergebnis erhaltet ihr Informationen oder müsst zusätzliche Goblins bekämpfen. Im Inneren findet ihr Gefängniszellen und führt eine Sinnesschärfe-Probe durch. Bei Erfolg entdeckt ihr einen Geheimgang oder nützliche Ausrüstung. Schließlich stoßt ihr auf ein Wandgemälde, hinter dem sich der geheime Raum der Schurken befindet.</p>"
 }
