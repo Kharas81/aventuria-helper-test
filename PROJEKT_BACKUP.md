@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 6:31:09 AM
+# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 6:31:20 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4304,9 +4304,11 @@ hr {
 ```json
 {
   "pageNumber": 22,
-  "title": "Wildenstein Akt II (Kampf) & Akt III",
-  "content": "<h3>Kampf im Ballsaal</h3><ul><li><b>Gegner:</b> Wächter oder Diener. Anführer: Baron von Wildenstein [cite: 951-956].</li><li><b>Gefahrenwert:</b> Helden x 6 [cite: 957].</li><li><b>Aktionen:</b> Bad in der Menge, Sprung an den Kronleuchter, Hypnose brechen[cite: 957].</li></ul><h3>Akt III: Verfolgung</h3><p>Verfolgung des Barons in den Forst. Körperbeherrschung-Probe zum Abseilen [cite: 979-984]. Wildnisleben-Probe zum Spurenlesen beeinflusst die Zeitmarken (⏳) im Finale [cite: 990-996].</p>"
+  "title": "Das Erbe von Wildenstein - Akt III",
+  "image": "assets/images/manual/page_22.png",
+  "content": "<h3>Der Ballsaal</h3><p>Ihr bereitet euch auf das Fest vor (Überzeugen-Probe) [cite: 2018-2025]. Im Ballsaal stellt sich heraus, dass der Baron noch lebt – doch er lässt euch sofort angreifen [cite: 2026-2031]. Um ihn zu erreichen, müsst ihr einen „Sprung an den Kronleuchter“ wagen[cite: 2038]. Nach dem Sieg flieht der Baron durch eine Geheimtür [cite: 2047-2051].</p><h3>Das Ritual des Beschwörers</h3><p>Ihr verfolgt den Baron in den schaurigen Forst [cite: 2059-2062]. Ihr müsst euch abseilen (Körperbeherrschung-Probe) und den Spuren im Wald folgen (Wildnisleben-Probe) [cite: 2063-2080].</p>"
 }
+
 ```
 
 ---
