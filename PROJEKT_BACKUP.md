@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 7:02:17 AM
+# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 8:01:21 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -8995,13 +8995,13 @@ export const RulebookReader = {
     },
 
     /**
-     * Wandelt die neuen Inhalts-Blöcke in HTML um.
+     * Wandelt Inhalts-Blöcke in HTML um.
      * Unterstützt Abwärtskompatibilität für alte HTML-Strings.
      */
     renderContentBlocks(rulebook, content) {
         if (!content) return '<p>Kein Inhalt vorhanden.</p>';
         
-        // Falls es noch ein alter String ist, direkt zurückgeben
+        // Abwärtskompatibilität: Falls es noch ein alter String ist
         if (typeof content === 'string') {
             return rulebook.stripCitationMarkers(content);
         }
@@ -9011,14 +9011,18 @@ export const RulebookReader = {
             const text = rulebook.stripCitationMarkers(block.text || '');
             
             switch (block.type) {
+                case 'location':
+                    return `<span class="location-info">${text}</span>`;
+
                 case 'header':
                     const level = block.level || 3;
                     return `<h${level}>${text}</h${level}>`;
                 
                 case 'paragraph':
+                    return `<p>${text}</p>`;
+
                 case 'narrative':
-                    const cssClass = block.type === 'narrative' ? 'class="narrative-text"' : '';
-                    return `<p ${cssClass}>${text}</p>`;
+                    return `<p class="narrative-text">${text}</p>`;
                 
                 case 'instruction_box':
                     const title = rulebook.stripCitationMarkers(block.title || 'Spielanweisung');
@@ -9061,12 +9065,16 @@ export const RulebookReader = {
         const indicator = rulebook.ui.getPageIndicator();
         const titleEl = rulebook.ui.getManualTitle();
 
-        if (!container) return;
+        if (!container) {
+            return;
+        }
 
         const entry = this.getPageEntry(rulebook, pageNumber);
         if (!entry) {
             container.innerHTML = '<div class="reader-text">Diese Seite ist aktuell nicht verfügbar.</div>';
-            if (indicator) indicator.textContent = 'Seite nicht verfügbar';
+            if (indicator) {
+                indicator.textContent = 'Seite nicht verfügbar';
+            }
             return;
         }
 
@@ -9074,12 +9082,14 @@ export const RulebookReader = {
 
         try {
             const response = await fetch(entry.path);
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status} beim Laden von ${entry.path}`);
+            }
 
             const data = await response.json();
-            const rawTitle = rulebook.stripCitationMarkers(data?.title ?? `Seite ${entry.page}`);
+            const rawTitle = rulebook.stripCitationMarkers(data?.title ?? `Seite ${entry.page}`) || `Seite ${entry.page}`;
             
-            // Neues Rendering-System nutzen
+            // Nutzt die neue Block-Rendering-Logik
             const contentHtml = this.renderContentBlocks(rulebook, data?.content);
             
             const imagePath = Utils.normalizeString(data?.image);
@@ -9091,7 +9101,12 @@ export const RulebookReader = {
                     <div class="reader-page">
                         ${hasImage ? `
                             <div class="img-wrapper">
-                                <img id="rulebook-page-image" alt="${Utils.escapeHtml(rawTitle)}" class="manual-page-img" loading="lazy">
+                                <img
+                                    id="rulebook-page-image"
+                                    alt="${Utils.escapeHtml(rawTitle)}"
+                                    class="manual-page-img"
+                                    loading="lazy"
+                                >
                             </div>
                         ` : ''}
                         <div class="reader-text">${contentHtml}</div>
@@ -9100,15 +9115,21 @@ export const RulebookReader = {
             `;
 
             if (hasImage) {
-                Utils.setSafeImageSource(container.querySelector('#rulebook-page-image'), resolvedImage);
+                const imageEl = container.querySelector('#rulebook-page-image');
+                Utils.setSafeImageSource(imageEl, resolvedImage);
             }
 
-            if (indicator) indicator.textContent = this.buildIndicatorText(rulebook, entry.page);
-            if (titleEl) titleEl.textContent = rawTitle;
-            rulebook.currentPage = entry.page;
+            if (indicator) {
+                indicator.textContent = this.buildIndicatorText(rulebook, entry.page);
+            }
 
+            if (titleEl) {
+                titleEl.textContent = rawTitle;
+            }
+
+            rulebook.currentPage = entry.page;
         } catch (error) {
-            console.error('Fehler:', error);
+            console.error('Fehler beim Laden der Regelbuch-Seite:', error);
             container.innerHTML = '<div class="reader-text">Fehler beim Laden der Seite.</div>';
         }
     }
