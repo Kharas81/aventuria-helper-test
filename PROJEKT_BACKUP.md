@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 6:20:20 AM
+# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 6:20:32 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4096,9 +4096,11 @@ hr {
 ```json
 {
   "pageNumber": 6,
-  "title": "Abenteuer-Regeln & Spielziel",
-  "content": "<h2>Aventuria Abenteuer-Regeln</h2><p>In diesem Modus bestreitet ihr kooperative Abenteuer für 1 bis 4 Spieler ab 10 Jahren[cite: 138].</p><h3>Spielziel</h3><p>Die Helden versuchen gemeinsam, Abenteuer in Aventurien zu bestehen. Dabei müsst ihr euch gut absprechen und euch im Kampf gegenseitig unterstützen[cite: 142, 143]. Nur gemeinsam könnt ihr Ziele erreichen, Schätze sammeln und Erfahrungen anhäufen, um euch größeren Herausforderungen zu stellen [cite: 144].</p><div class='warning-box'><strong>ACHTUNG!</strong> Wir empfehlen, erst einige Partien nach den Duell-Regeln zu spielen, bevor ihr euch ins Abenteuer wagt [cite: 145].</div><h3>Vorbereitung der Helden</h3><p>Bereitet eure Heldendecks und Lebenspunkte-Karten wie im Duell-Modus vor[cite: 149]. Zusätzlich verwendet ihr nun die <strong>Talentkarte</strong> eures Helden[cite: 150]. Platziert pro Spieler zwei Schicksalspunkte (🍀) und ausreichend Würfel in der Tischmitte[cite: 151]. Ein Spieler wird Startspieler und erhält die entsprechende Marke[cite: 152].</p>"
+  "title": "Einführung in die Abenteuer-Regeln",
+  "image": "assets/images/manual/page_06.png",
+  "content": "<h3>Abenteuer-Regeln</h3><p>Kooperative Abenteuer für 1-4 Spieler ab 10 Jahren von Lukas Zach, Michael Palm, Markus Plötz und Christian Lonsing[cite: 138].</p><h3>Spielziel</h3><p>Die Helden versuchen, als Gruppe Abenteuer in der Welt von Aventurien zu bestehen. Dabei gilt es, sich gut abzusprechen und im Kampf gegen die Widersacher gegenseitig zu unterstützen. Nur gemeinsam können sie ihr Ziel erreichen, Schätze und Erfahrungen anhäufen und sich so immer größeren Herausforderungen stellen. ACHTUNG! Wir empfehlen, dass die Spieler zunächst einige Partien nach den Duell-Regeln spielen, bevor sie sich ins Abenteuer wagen [cite: 141-145].</p><h3>Vorbereitung der Helden</h3><p>Die Spieler bereiten ihre Heldendecks und Lebenspunkte-Karten wie in den Duell-Regeln beschrieben vor. Zusätzlich verwenden sie nun die Talentkarte ihres Helden. Außerdem platzieren sie pro Spieler zwei Schicksalspunkte und ausreichend Würfel in der Tischmitte. Die Spieler einigen sich, wer von ihnen Startspieler wird. Dieser bekommt die Startspielermarke. Die anderen Spieler erhalten im Gegensatz zum Duell-Spiel keine Schicksalspunkte [cite: 148-153].</p><h3>Impressum</h3><p>Aventuria – Kartenspiel-Duelle und -Abenteuer in der Welt des Schwarzen Auges. Grundregeln Version 1.3. Autoren: Lukas Zach, Michael Palm, Markus Plötz, Christian Lonsing. Mit Texten von Nicolas Mendrek und Mháire Stritter. Coverbild: Nadine Schäkel. Layout & Gestaltung: Christian Lonsing, Nadine Schäkel. Copyright 2019 by Ulisses Spiele GmbH, Waldems [cite: 154-174].</p>"
 }
+
 ```
 
 ---
