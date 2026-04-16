@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 3:38:34 AM
+# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 3:38:50 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -13395,29 +13395,6 @@ window.Renderer = {
 
     ensureCardDetailModal() {
         return window.RenderCardDetail?.ensureCardDetailModal();
-    }
-};
-
-```
-
----
-
-## 📄 Datei: js/ui-status.js
-```js
-window.UIStatus = {
-    getElement() {
-        return Utils.byId('loading-status');
-    },
-
-    set(message) {
-        const status = this.getElement();
-        if (status) {
-            status.innerText = String(message ?? window.Constants?.ui?.defaultStatusText ?? 'Bereit.');
-        }
-    },
-
-    reset() {
-        this.set(window.Constants?.ui?.defaultStatusText ?? 'Bereit.');
     }
 };
 
