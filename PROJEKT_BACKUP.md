@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 5:57:23 AM
+# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 6:20:20 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4083,8 +4083,9 @@ hr {
 ```json
 {
   "pageNumber": 5,
-  "title": "Religionen, Kulturen & Gefahren",
-  "content": "<p>Aventurien ist geprägt von einer Vielzahl von Glaubensrichtungen, regionalen Traditionen und unterschiedlichen Lebensweisen. Diese Vielfalt beeinflusst Städte, Reiche, Handel, Recht und den Alltag der Helden.</p><p>Gleichzeitig ist der Kontinent voller Gefahren: politische Intrigen, uralte Ruinen, wilde Kreaturen, übernatürliche Bedrohungen und Konflikte zwischen Reichen. Gerade diese Mischung aus Kultur, Mythos und Gefahr macht Aventurien zum Schauplatz unzähliger Abenteuer.</p>"
+  "title": "Götter, Zeit und Währung",
+  "image": "assets/images/manual/page_05.png",
+  "content": "<h3>Die Götter Aventuriens</h3><p>Die nachfolgende Auflistung verschafft dir einen schnellen Überblick über die Zwölfgötter und für welche Aspekte sie jeweils stehen. Die Zwölfe werden im Mittelreich ebenso verehrt wie im Horasreich, in den Tulamidenlanden und Nord- und Südaventurien, dort jedoch gelegentlich mit anderen Schwerpunkten oder vermischt mit anderen Gottheiten [cite: 118-119].</p><p>Widersacher der Götter sind der Namenlose, der in fast allen Kulturen und unter unterschiedlichsten Bezeichnungen bekannt ist, und die Erzdämonen, groteske Zerrbilder der Götter. Die Zwerge verehren vor allem Angrosch, der bei den Zwölfgöttergläubigen als Ingerimm bekannt ist. Die Elfen hingegen wandten sich nach dem Fall ihrer Hochkultur von ihren alten Göttern ab und beten nicht mehr zu ihnen. Neben diesen Göttern gibt es noch weitere, etwa Rastullah, den das Wüstenvolk der Novadis als einzigen Gott verehrt, Rur und Gror, die zweigeschlechtlichen Zwillingsgötter der Maraskaner, oder Swafnir, den Walgott der Thorwaler [cite: 120-123].</p><h3>Zeitrechnung</h3><p>Die Völker Aventuriens haben unterschiedliche Zeitrechnungen und Kalender. Am gebräuchlichsten unter den Zwölfgöttergläubigen ist jedoch die Zeitrechnung nach „Bosparans Fall“. Bosparan war vor über 1.000 Jahren die mächtigste Stadt des Kontinents, ging aber durch Aufstände unter. Die aktuelle Spielzeit ist um das Jahr 1040 BF angesiedelt [cite: 124-125].</p><h3>Geld und Währung</h3><p>Beinahe überall in Aventurien wird die Währung des Mittelreichs akzeptiert, das in gleicher Aufteilung, nur anders geprägt, auch im Horasreich Verwendung findet. Münzen aus Gold, Silber, Bronze und Eisen sind im Umlauf, genannt Dukaten, Silbertaler, Heller und Kreuzer. Ein Golddukat entspricht 10 Silbertalern, 100 Bronzehellern oder 1.000 Eisenkreuzern. Die gängigsten Münzen in den Mittellanden und eigentlich in ganz Aventurien sind fraglos der Silbertaler und der Heller. Mancher Bauer sieht in seinem Leben keine einzige Goldmünze, zu gering ist der Gegenwert der Waren, die er erwirtschaftet [cite: 127-132].</p>"
 }
 
 ```
