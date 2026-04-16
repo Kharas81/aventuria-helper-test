@@ -9,34 +9,52 @@ export const RulebookCodex = {
             .trim();
     },
 
+    /**
+     * Extrahiert den Text aus den neuen Inhalts-Blöcken für die Suche.
+     */
+    extractPlainText(rulebook, content) {
+        if (!content) return '';
+        if (typeof content === 'string') return this.htmlToPlainText(rulebook.stripCitationMarkers(content));
+
+        const blocks = Utils.normalizeArray(content);
+        return blocks.map(block => {
+            let combinedText = block.text || block.action || block.title || block.header || '';
+            
+            // Auch Texte in Proben-Ergebnissen einbeziehen
+            if (block.results) {
+                combinedText += ' ' + block.results.map(r => `${r.outcome} ${r.text}`).join(' ');
+            }
+            
+            // Map-Elemente einbeziehen
+            if (block.elements) {
+                combinedText += ' ' + block.elements.join(' ');
+            }
+
+            return rulebook.stripCitationMarkers(combinedText);
+        }).join(' ');
+    },
+
     getExcerpt(text, maxLength = 220) {
         const normalized = Utils.normalizeString(text);
-        if (normalized.length <= maxLength) {
-            return normalized;
-        }
-
+        if (normalized.length <= maxLength) return normalized;
         return `${normalized.slice(0, maxLength).trim()} …`;
     },
 
     async buildRulesData(rulebook) {
-        const indexData = rulebook.manualIndex
-            || await rulebook.indexLoader.load(rulebook.currentSet);
+        const indexData = rulebook.manualIndex || await rulebook.indexLoader.load(rulebook.currentSet);
         const pages = Utils.normalizeArray(indexData?.pages);
         const rules = [];
 
         for (const entry of pages) {
             try {
                 const response = await fetch(entry.path);
-                if (!response.ok) {
-                    continue;
-                }
+                if (!response.ok) continue;
 
                 const data = await response.json();
-                const title = rulebook.stripCitationMarkers(data?.title ?? entry.title ?? `Seite ${entry.page}`)
-                    || `Seite ${entry.page}`;
-                const text = this.htmlToPlainText(
-                    rulebook.stripCitationMarkers(data?.content ?? '') ?? ''
-                );
+                const title = rulebook.stripCitationMarkers(data?.title ?? entry.title ?? `Seite ${entry.page}`);
+                
+                // Nutzt die neue Extraktions-Logik
+                const text = this.extractPlainText(rulebook, data?.content);
 
                 rules.push({
                     page: entry.page,
@@ -44,38 +62,28 @@ export const RulebookCodex = {
                     text
                 });
             } catch (error) {
-                console.warn(`Kodex-Seite ${entry.page} konnte nicht geladen werden.`, error);
+                console.warn(`Kodex-Seite ${entry.page} Fehler`, error);
             }
         }
-
         rulebook.rulesData = rules;
     },
 
     bindPageJumpActions(scope, rulebook) {
         scope.querySelectorAll('[data-rulebook-page]').forEach(button => {
-            if (button.dataset.bound === 'true') {
-                return;
-            }
-
+            if (button.dataset.bound === 'true') return;
             button.addEventListener('click', () => {
                 const page = Number(button.dataset.rulebookPage);
-                if (page > 0) {
-                    rulebook.jumpToPage(page);
-                }
+                if (page > 0) rulebook.jumpToPage(page);
             });
-
             button.dataset.bound = 'true';
         });
     },
 
     filterRules(rulebook, term = '') {
         const results = rulebook.ui.getCodexResults();
-        if (!results) {
-            return;
-        }
+        if (!results) return;
 
         const normalizedTerm = Utils.normalizeString(term).toLowerCase();
-
         if (!normalizedTerm) {
             results.innerHTML = '';
             return;
@@ -86,9 +94,7 @@ export const RulebookCodex = {
             const title = String(rule?.title ?? '').toLowerCase();
             const text = String(rule?.text ?? '').toLowerCase();
 
-            return title.includes(normalizedTerm)
-                || text.includes(normalizedTerm)
-                || page.includes(normalizedTerm);
+            return title.includes(normalizedTerm) || text.includes(normalizedTerm) || page.includes(normalizedTerm);
         });
 
         results.innerHTML = filtered.length
