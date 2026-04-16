@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 6:27:44 AM
+# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 6:27:57 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4174,9 +4174,11 @@ hr {
 ```json
 {
   "pageNumber": 12,
-  "title": "Schergen & Gefahrenwert (GP)",
-  "content": "<h3>GP-Beispiel</h3><p>Im Abenteuer 'Wildenstein II' gilt: GP = Helden x 6. Bei 2 Helden also 12 GP. Es werden Schergen (Wächter/Diener) gezogen, bis die Summe ihrer GP mindestens 12 beträgt [cite: 477-480].</p><h3>Schergen-Details</h3><p>Die Karten zeigen: Name, Schlagworte, Sonderregeln, Gefahrenpunkte (GP), LP, Ausweichen, Rüstung und Aktionen [cite: 491-502].</p><div class='warning-box'><b>Zeitlich eintretende Ereignisse:</b> Einige Schergen haben Effekte, die wie bei der Zeitskala in bestimmten Runden eintreten[cite: 503].</div>"
+  "title": "Schergen und Vorbereitung",
+  "image": "assets/images/manual/page_12.png",
+  "content": "<h3>Schergenkarten Details</h3><p>Bei Kampfbeginn wird ein Zugkartendeck aus Schergenkarten gebildet, deren Schlagworte mit der Spielanweisung übereinstimmen. Es werden solange Karten gezogen und in die Gegnerreihe gelegt, bis ihr Gesamtwert den geforderten Gefahrenwert (GP) erreicht oder übertrifft. Auf jeder Karte werden Lebenspunktemarken platziert [cite: 463-471].</p><p>Eine Schergenkarte enthält den Namen des Gegners, Schlagworte zur Identifizierung, Sonderregeln in einem grauen Kasten und die Gefahrenpunkte. Die Kampfwerte umfassen Lebenspunkte, Ausweichen (oft „-“), Rüstungsschutz und die Anzahl der Aktionen. Eine Aktionstabelle (1-20) beschreibt die Effekte bei einem Aktionswurf. Manche Karten enthalten zudem zeitlich eintretende Ereignisse [cite: 491-503].</p><h3>Ergänzende Vorbereitungen</h3><p>Nachdem alle Karten vorbereitet wurden, werden Reserve-Spielmarken (Verderben, Abenteuer, Spezialmarken) bereitgelegt. Anschließend zieht jeder Held 5 Handkarten von seinem Heldendeck und darf sie nach den üblichen Regeln einmalig austauschen [cite: 472-475].</p><h3>Beispiel: Auslegen von Anführern und Schergen</h3><p>Im zweiten Akt von „Das Erbe von Wildenstein“ beträgt der Gefahrenwert bei zwei Helden 12 (2 x 6). Zuerst wird der Anführer „Baron von Wildenstein“ platziert. Danach werden Schergen gezogen: Ein „Treuer Leibwächter“ (5 GP) und ein weiterer (insgesamt 10 GP) liegen unter dem Wert. Erst der folgende „Zähe Wächter“ (7 GP) bringt die Summe auf 17. Damit ist der Gefahrenwert von 12 überschritten und das Auslegen beendet .</p>"
 }
+
 ```
 
 ---
