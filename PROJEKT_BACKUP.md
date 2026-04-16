@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 6:27:57 AM
+# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 6:28:15 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4187,9 +4187,11 @@ hr {
 ```json
 {
   "pageNumber": 13,
-  "title": "Kampfablauf & Helden-Spielzüge",
-  "content": "<h3>Kampfablauf</h3><p>Ein Kampf besteht aus Runden mit fünf Schritten: 1) Vorbereitung, 2) Helden-Spielzüge, 3) Gegner-Spielzüge, 4) Zeit-Effekte, 5) Ende der Runde [cite: 524-528].</p><h3>1) Vorbereitung</h3><p>Alle Helden führen zeitgleich die Phasen 1 bis 4 der Duell-Regeln aus: Karten bereit machen, 2 Karten ziehen, Ausdauer spielen [cite: 530].</p><h3>2) Helden-Spielzüge</h3><p>Beginnend beim Startspieler führt jeder Held seinen Zug aus (Phasen 5 & 6 der Duell-Regeln) [cite: 532-533]. Gegner werden wie Helden im Duell anvisiert. Ein Gegner bei 0 LP ist ausgeschaltet [cite: 535-540]. Für jeden ausgeschalteten Gegner erhält der Held sofort 1 Schicksalspunkt (🍀) [cite: 545].</p><div class='warning-box'><b>Besonderheit:</b> Karten mit dem Absatz 'Im Abenteuer' verwenden diese Regeln anstelle der normalen Duell-Regeln [cite: 556, 569-570].</div>"
+  "title": "Kampfablauf",
+  "image": "assets/images/manual/page_13.png",
+  "content": "<h3>Kampfablauf</h3><p>Der Kampfablauf im Abenteuermodus unterscheidet sich in einigen wesentlichen Punkten von dem des Duellmodus. Im Gegensatz zum Duell wechseln sich im Abenteuerkampf nicht Spielzüge ab, sondern alle Züge der Helden sowie die Spielzüge der Gegner bilden eine Runde [cite: 522-523]. Jede Runde besteht aus den folgenden Schritten: 1) Vorbereitung, 2) Helden-Spielzüge, 3) Gegner-Spielzüge, 4) Zeit-Effekte, 5) Ende der Runde [cite: 524-528].</p><h3>1) Vorbereitung</h3><p>Dieser Schritt umfasst die Phasen 1 bis 4 der Duell-Regeln, mit dem Unterschied, dass alle Helden sie zeitgleich ausführen. Alle Spieler machen ihre erschöpften Karten bereit, ziehen danach 2 Aktionskarten und entscheiden sich, ob und welche Karten sie als Ausdauerkarten spielen möchten [cite: 529-530].</p><h3>2) Helden-Spielzüge</h3><p>Nun ist jeder Held einmal am Zug, beginnend beim aktuellen Startspieler, und kann Karten ausspielen, dauerhafte Karten aktivieren und Angriffe durchführen. Gegner können auf dieselbe Weise angegriffen werden wie im Duellmodus gegnerische Helden. Ein Gegner, dessen Lebenspunkte auf 0 oder darunter sinken, zählt als ausgeschaltet. Für jeden Gegner, den ein Held ausschaltet, bekommt er sofort 1 Schicksalspunkt [cite: 531-546].</p><p>Heldenaktionen auf Handlungskarten sind meistens mit einer Talentprobe verbunden, die gelingen muss, um die Aktion zu nutzen. Aktionskarten der Heldendecks, die einen Absatz „Im Abenteuer“ enthalten, verwenden die dort genannten Regeln anstelle ihrer normalen Regeln [cite: 553-556]. Ein Spieler darf seine Schicksalspunkte auch nutzen, um einem Mitspieler die Wiederholung eines misslungenen Wurfes für eine Angriffs- oder Talentprobe zu ermöglichen [cite: 558-561].</p>"
 }
+
 ```
 
 ---
