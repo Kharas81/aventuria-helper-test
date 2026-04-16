@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 6:57:50 AM
+# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 7:02:17 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4259,16 +4259,25 @@ hr {
 ```json
 {
   "pageNumber": 17,
-  "title": "Silvanas Befreiung",
-  "keywords": ["Havena", "Alrik", "Goblins", "Körperbeherrschung"],
+  "title": "Kurzabenteuer: Silvanas Befreiung",
+  "keywords": ["Havena", "Alrik", "Goblins", "Körperbeherrschung", "Sinnesschärfe"],
   "image": "assets/images/manual/page_17.png",
   "content": [
-    { "type": "location", "text": "Havena, im Jahre 993 BF", "cite": "712" },
-    { "type": "header", "level": 2, "text": "Kurzabenteuer: Silvanas Befreiung", "cite": "713, 714" },
-    { 
-      "type": "narrative", 
-      "text": "Euer Freund Alrik hat euch herbeigerufen... Hinter der Tür blickt ihr in das Gesicht eines Kobolds... Die Goblins ergreifen hastig die Flucht!", 
-      "cite": "715-721" 
+    {
+      "type": "location",
+      "text": "Havena, im Jahre 993 BF",
+      "cite": "712"
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "text": "Kurzabenteuer: Silvanas Befreiung",
+      "cite": "713, 714"
+    },
+    {
+      "type": "narrative",
+      "text": "Euer Freund Alrik hat euch herbeigerufen, um ihm bei der Befreiung der schönen Silvana zu helfen, die von heimtückischen Piraten entführt wurde. Die Spuren führen über eine Leiter in eine unterirdische Kelleranlage. Unterdessen fällt Alrik ein, dass er eine dringende Angelegenheit zu erledigen hat, und er verabschiedet sich eilig... Hinter der Tür blickt ihr in das Gesicht eines runzligen, blauhäutigen Kobolds... Die Goblins schauen sich einen Moment unsicher an – und ergreifen dann hastig die Flucht! Schnell setzt ihr ihnen nach.",
+      "cite": "715-721"
     },
     {
       "type": "instruction_box",
@@ -4276,11 +4285,33 @@ hr {
       "action": "Jeder Held führt eine Körperbeherrschung-Probe durch.",
       "cite": "722",
       "results": [
-        { "outcome": "Kritischer Erfolg", "text": "Du schnappst dir einen Goblin... Du bekommst 1 Schicksalspunkt.", "cite": "723, 724" },
-        { "outcome": "Erfolg", "text": "Ein Goblin weniger, den ihr bekämpfen müsst.", "cite": "725, 726" },
-        { "outcome": "Misserfolg", "text": "Einer der Goblins entkommt! Er wird als zusätzlicher Scherge eingesetzt.", "cite": "727-729" },
-        { "outcome": "Kritischer Patzer", "text": "Du verlierst 2 Lebenspunkte. Zusätzlich treten Auswirkungen wie bei Misserfolg ein.", "cite": "730, 731" }
+        { "outcome": "Kritischer Erfolg", "text": "Du schnappst dir einen Goblin und presst ein paar Informationen aus ihm heraus... Du bekommst 1 [S-PUNKT].", "cite": "723, 724" },
+        { "outcome": "Erfolg", "text": "Du schnappst dir einen Goblin, aber er reißt sich los... Ein Goblin weniger, den ihr bekämpfen müsst.", "cite": "725, 726" },
+        { "outcome": "Misserfolg", "text": "Du bist nicht schnell genug und einer der Goblins entkommt! Er wird beim folgenden Kampf als zusätzlicher Scherge eingesetzt.", "cite": "727-729" },
+        { "outcome": "Kritischer Patzer", "text": "Du stolperst und stößt dir den Kopf... Du verlierst 2 [LEBEN]. Zusätzlich treten die Auswirkungen wie unter „Misserfolg“ ein.", "cite": "730, 731" }
       ]
+    },
+    {
+      "type": "narrative",
+      "text": "Ihr dringt tiefer in die Kelleranlage vor. Der Tumult mit den Goblins scheint die anderen Bewohner aufgeschreckt zu haben... Ihr findet verlassene Unterkünfte und eine Reihe von Gefängniszellen, die aber leider alle leer sind, wenn man einmal vom zerfallenen Skelett eines unglückseligen Ex-Insassen absieht.",
+      "cite": "732, 733"
+    },
+    {
+      "type": "instruction_box",
+      "title": "Spielanweisung",
+      "action": "Ein einzelner Held führt eine Sinnesschärfe-Probe durch. Entscheidet euch gemeinsam, welcher Held die Probe durchführen soll.",
+      "cite": "734",
+      "results": [
+        { "outcome": "Kritischer Erfolg", "text": "Du findest einen geschickt versteckten Gegenstand. Ziehe solange Belohnungskarten, bis du eine Ausrüstung gezogen hast... Außerdem findest du noch einen Geheimgang.", "cite": "735-739" },
+        { "outcome": "Erfolg", "text": "Du findest einen Geheimgang! Beim folgenden Kampf startet jeder Held mit einer Handkarte mehr als üblich.", "cite": "740-742" },
+        { "outcome": "Misserfolg", "text": "Hier gibt es nicht das Geringste zu finden! Keine Auswirkung.", "cite": "743" },
+        { "outcome": "Kritischer Patzer", "text": "Bei deiner Suche brichst du durch ein Loch im Boden und verstauchst dir den Knöchel. Du verlierst 5 [LEBEN].", "cite": "744" }
+      ]
+    },
+    {
+      "type": "narrative",
+      "text": "Ihr durchsucht alles, findet aber keine Spur von Silvana oder ihren Entführern. Allein ein großes Wandgemälde in einem der Räume fällt euch ins Auge. Hinter dem Gemälde könnt ihr leise Geräusche vernehmen... Am besten schaut sich einer von euch das mal aus der Nähe an.",
+      "cite": "745-748"
     }
   ]
 }
