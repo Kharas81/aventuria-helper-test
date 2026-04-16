@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 6:31:20 AM
+# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 6:31:32 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4317,9 +4317,11 @@ hr {
 ```json
 {
   "pageNumber": 23,
-  "title": "Wildenstein Akt III: Das Ritual",
-  "content": "<h3>Der Boronanger</h3><p>Heimlichkeit-Probe beeinflusst die Start-Handkarten [cite: 1000-1004]. Der falsche Baron Grautax bedroht die Mutter des Erben [cite: 1005-1015].</p><h3>Kampf-Vorgaben</h3><ul><li><b>Gegner:</b> Skelette. Anführer: Grautax. Dämon: Irrhalk [cite: 1018-1027].</li><li><b>Gefahrenwert:</b> Helden x 3 [cite: 1027].</li><li><b>Heldenaktionen:</b> Mutter befreien, Grab segnen [cite: 1028].</li></ul><p><b>Belohnung:</b> 2 Abenteuerpunkte (+1 Bonus für die Rettung der Mutter) [cite: 1047-1048].</p>"
+  "title": "Das Erbe von Wildenstein - Akt III",
+  "image": "assets/images/manual/page_23.png",
+  "content": "<h3>Der Boronanger</h3><p>Ihr erreicht eine Lichtung mit verfallenen Gräbern (Heimlichkeit-Probe) [cite: 2081-2088]. Ihr seht den falschen Baron Grautax, der die Mutter des Erben zwingt, Gräber auszuheben [cite: 2089-2099].</p><h3>Der Endkampf</h3><p>Skelette greifen an und ein Dämon erscheint [cite: 2100-2108]. Der Gefahrenwert beträgt Heldenanzahl x 3 [cite: 2110-2111]. Siegbedingung ist das Besiegen von Grautax[cite: 2115]. Nach dem Sieg rettet ihr die Mutter und übernehmt die Burg [cite: 2120-2130]. Jeder erhält 2 Abenteuerpunkte, plus 1 Punkt bei Rettung der Mutter [cite: 2131-2134].</p>"
 }
+
 ```
 
 ---
