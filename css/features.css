@@ -1,3 +1,136 @@
+/* --- Rulebook Reader & Aventuria Design --- */
+
+:root {
+    --manual-parchment: #fdf6e3;    /* Heller Pergament-Hintergrund */
+    --manual-dark-blue: #003366;    /* Dunkelblau der Box-Header */
+    --manual-gold: #b8860b;         /* Goldton für Titel */
+    --manual-text: #2c3e50;         /* Haupttextfarbe */
+    --manual-border: #d3c6a3;       /* Dezente Rahmen */
+    --manual-narrative: #5d4037;    /* Braun für Erzähltexte */
+}
+
+/* Container-Styling */
+.reader-container {
+    background-color: var(--manual-parchment);
+    color: var(--manual-text);
+    padding: 20px;
+    border-radius: 4px;
+    line-height: 1.6;
+    font-family: 'Crimson Text', 'Georgia', serif;
+}
+
+/* Titel & Überschriften */
+.reader-text h2 {
+    color: var(--manual-gold);
+    border-bottom: 2px solid var(--manual-gold);
+    padding-bottom: 5px;
+    margin-top: 0;
+    text-transform: uppercase;
+    font-size: 1.6rem;
+}
+
+.reader-text h3 {
+    color: var(--manual-dark-blue);
+    margin-top: 1.5rem;
+    font-size: 1.3rem;
+}
+
+.location-info {
+    display: block;
+    font-style: italic;
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+    color: var(--manual-narrative);
+}
+
+/* Erzähltexte (Eingerückt und kursiv) */
+.narrative-text {
+    color: var(--manual-narrative);
+    font-style: italic;
+    margin: 1.2rem 0;
+    padding-left: 15px;
+    border-left: 3px solid var(--manual-border);
+}
+
+/* Die blauen Spielanweisungs-Boxen (Seite 17 Style) */
+.instruction-box {
+    border: 1px solid var(--manual-dark-blue);
+    background-color: rgba(255, 255, 255, 0.4);
+    margin: 20px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.box-header {
+    background-color: var(--manual-dark-blue);
+    color: #ffffff;
+    padding: 6px 15px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.box-content {
+    padding: 15px;
+}
+
+.box-action {
+    color: var(--manual-dark-blue);
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.box-results {
+    list-style: none;
+    padding-left: 0;
+    margin: 10px 0 0 0;
+    border-top: 1px solid var(--manual-border);
+}
+
+.box-results li {
+    padding: 5px 0;
+    font-size: 0.95rem;
+    border-bottom: 1px dotted var(--manual-border);
+}
+
+.box-results li:last-child {
+    border-bottom: none;
+}
+
+.box-results li strong {
+    color: var(--manual-dark-blue);
+    min-width: 140px;
+    display: inline-block;
+}
+
+/* Map Index & Small Info */
+.map-index {
+    margin-top: 20px;
+    padding: 10px;
+    background: rgba(0,0,0,0.03);
+    border-radius: 4px;
+}
+
+.rule-block {
+    margin-bottom: 1.5rem;
+    padding: 10px;
+    background: rgba(184, 134, 11, 0.05);
+    border-left: 4px solid var(--manual-gold);
+}
+
+/* Bilder im Regelbuch */
+.img-wrapper {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.manual-page-img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--manual-border);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
 /* --- SEKTIONS-STEUERUNG (Ein/Ausblenden) --- */
 .hidden-section {
     display: none;
