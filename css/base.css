@@ -1,11 +1,12 @@
 :root {
-    /* Farben */
+    /* Grundfarben */
     --color-text: #2e241f;
     --color-primary: #5c1e1e;
     --color-primary-hover: #7a2828;
     --color-secondary: #8b4513;
     --color-secondary-soft: #a0522d;
 
+    /* Hintergrundfarben */
     --color-bg-body: #dcd0ba;
     --color-bg-panel: #f4e7d3;
     --color-bg-panel-alt: #e6dec9;
@@ -16,10 +17,19 @@
     --color-bg-white-strong: rgba(255, 255, 255, 0.5);
     --color-bg-white-stronger: rgba(255, 255, 255, 0.6);
 
+    /* Regelbuch-spezifische Farben (Aventuria Design) */
+    --color-manual-parchment: #fdf6e3;    /* Heller Pergament-Hintergrund */
+    --color-manual-blue: #003366;         /* Blau für Boxen und Titel */
+    --color-manual-gold: #b8860b;         /* Gold für Akzente */
+    --color-manual-narrative: #5d4037;    /* Braun für Erzähltexte */
+    --color-manual-border: #d3c6a3;       /* Rahmenfarbe für Boxen */
+
+    /* Rahmen- & Linienfarben */
     --color-border-soft: rgba(139, 69, 19, 0.1);
     --color-border-soft-strong: rgba(139, 69, 19, 0.18);
     --color-border-soft-card: rgba(139, 69, 19, 0.2);
 
+    /* Schatten & Transparenzen */
     --color-primary-fade: rgba(92, 30, 30, 0.05);
     --color-primary-shadow: rgba(92, 30, 30, 0.3);
     --color-black-soft: rgba(0, 0, 0, 0.2);
@@ -27,6 +37,7 @@
     --color-black-strong: rgba(0, 0, 0, 0.6);
     --color-black-heavy: rgba(0, 0, 0, 0.9);
 
+    /* Statusfarben */
     --color-success: #276749;
     --color-danger: #9b2c2c;
     --color-info: #2c5282;
@@ -57,14 +68,14 @@
     --radius-pill: 20px;
     --radius-round: 50%;
 
-    /* Rahmen */
+    /* Rahmenstärken */
     --border-thin: 1px;
     --border-md: 2px;
     --border-lg: 3px;
     --border-xl: 5px;
     --border-accent: 6px;
 
-    /* Schatten */
+    /* Schatten-Vorgaben */
     --shadow-sm: 1px 1px 3px var(--color-black-soft);
     --shadow-md: 3px 3px 8px rgba(0, 0, 0, 0.1);
     --shadow-lg: 3px 3px 10px rgba(0, 0, 0, 0.1);
@@ -79,7 +90,7 @@
     --transition-medium: all 0.3s ease-out;
     --transition-slow: all 0.4s ease;
 
-    /* Layout */
+    /* Layout-Maße */
     --container-max-width: 1100px;
     --modal-max-width: 1200px;
     --modal-max-width-archive: 1400px;
@@ -90,11 +101,12 @@
 
 body {
     background: var(--color-bg-body) radial-gradient(circle, var(--color-bg-panel-alt) 0%, var(--color-bg-body) 100%);
-    font-family: 'Georgia', 'Times New Roman', serif;
+    font-family: 'Crimson Text', 'Georgia', 'Times New Roman', serif;
     color: var(--color-text);
     margin: 0;
     padding: var(--space-2xl);
     min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
 }
 
 .app-container {
