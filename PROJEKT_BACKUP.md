@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 6:30:10 AM
+# 🛡️ Aventuria Projekt-Backup - 4/16/2026, 6:30:32 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4265,9 +4265,11 @@ hr {
 ```json
 {
   "pageNumber": 19,
-  "title": "Abenteuer: Leute, die nicht spielen",
-  "content": "<h3>Chorhop, 1024 BF</h3><p>Eskorte des 'Glücks-Idols' zum Spielhaus 'Karfunkel-Stein' [cite: 789-791].</p><h3>Das Gold-Dilemma</h3><p>Die Statue weint Goldstücke. Wer Gold nimmt, erhält Schicksalspunkte (🍀), muss aber eine erschwerte Willenskraft-Probe bestehen [cite: 797-815].</p><h3>Kampf-Vorgaben</h3><ul><li><b>Karten:</b> Alle 'Leute, die nicht spielen'-Karten, Ereignis-Deck, Anführer-Aktionsdeck [cite: 817-819].</li><li><b>Gefahrenwert:</b> (Helden x 4) + gesammelte Schicksalspunkte vom Gold [cite: 823].</li><li><b>Sieg:</b> Heldenaktion 'Das Spiel beenden' erfolgreich durchführen[cite: 825].</li></ul>"
+  "title": "Kurzabenteuer: Leute, die nicht spielen",
+  "image": "assets/images/manual/page_19.png",
+  "content": "<h3>Chorhop, 1024 BF</h3><p>Ihr eskortiert das verschleierte „Glücks-Idol“ zum Spielhaus „Karfunkel-Stein“ [cite: 1873-1875]. Dort führt das Idol einen magischen Tanz auf[cite: 1878]. Ihr könnt entscheiden, ob ihr bleibt oder euch zurückzieht [cite: 1879-1880]. Plötzlich weint eine Statue Goldmünzen, doch gleichzeitig kriechen Monster aus den Büchern der ehemaligen Bibliothek [cite: 1881-1888].</p><h3>Der Bann des Idols</h3><p>Helden müssen eine Willenskraft-Probe bestehen, um dem Bann des Idols zu widerstehen [cite: 1892-1899]. Der folgende Kampf nutzt spezielle Karten wie „Risiko und Gewinn“ [cite: 1900-1901]. Siegbedingung ist die Heldenaktion „Das Spiel beenden“[cite: 1909]. Ein Sieg rettet die Gäste, während bei einer Niederlage das Spielhaus niederbrennt [cite: 1911-1917].</p>"
 }
+
 ```
 
 ---
@@ -4276,9 +4278,11 @@ hr {
 ```json
 {
   "pageNumber": 20,
-  "title": "Wildenstein Akt I: Eine Botschaft",
-  "content": "<h3>Perainefurten, 1039 BF</h3><p>Ein Brief ruft einen zufälligen Helden (den Erben) zum Antritt des Erbes von Baron Wildenstein auf [cite: 837-856].</p><h3>Der Weg zur Burg</h3><ul><li><b>Wissen-Probe:</b> Erfolg bringt Schicksalspunkte [cite: 858-859].</li><li><b>Wildnisleben-Probe:</b> Misserfolg kostet 2 LP [cite: 866-869].</li><li><b>Sinnesschärfe-Probe:</b> Erfolg/Misserfolg beeinflusst die Start-Handkarten im Hinterhalt [cite: 874-879].</li></ul><h3>Kampf-Vorgaben</h3><p>Gegner: Räuber. Anführer: Greifbart Gichthain. Gefahrenwert: Helden x 5 [cite: 881-887]. <b>Niederlage:</b> Wenn der Erbe ausgeschaltet wird[cite: 888].</p>"
+  "title": "Das Erbe von Wildenstein - Akt I",
+  "image": "assets/images/manual/page_20.png",
+  "content": "<h3>Eine unerwartete Botschaft</h3><p>In Perainefurten erhält einer von euch einen Brief seiner Mutter [cite: 1922-1929]. Sie bittet inständig darum, das Erbe des verstorbenen Barons Wildenstein anzutreten [cite: 1930-1938]. Einer von euch wird als „Der Erbe“ bestimmt [cite: 1939-1940].</p><h3>Die Reise nach Süden</h3><p>Nach Erkundigungen in den Archiven (Wissen-Probe) reitet ihr zur Baronie [cite: 1941-1947]. Unterwegs müsst ihr ein Lager in der Wildnis errichten (Wildnisleben-Probe) [cite: 1949-1955]. An einer Furt geratet ihr in einen Hinterhalt (Sinnesschärfe-Probe) [cite: 1956-1963]. Ein Haufen Räuber greift euch an [cite: 1964-1968].</p>"
 }
+
 ```
 
 ---
