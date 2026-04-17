@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/17/2026, 8:47:42 AM
+# 🛡️ Aventuria Projekt-Backup - 4/17/2026, 8:48:01 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -11686,6 +11686,55 @@ export const RulebookUIRender = {
 };
 
 export default RulebookUIRender;
+
+```
+
+---
+
+## 📄 Datei: js/features/rulebook/rulebook-ui-tabs.js
+```js
+import Utils from '../../core/utils.js';
+import RulebookUIDom from './rulebook-ui-dom.js';
+
+export const RulebookUITabs = {
+    showModal() {
+        const modal = RulebookUIDom.getModal();
+        if (modal) {
+            modal.style.display = 'flex';
+        }
+    },
+
+    closeModal() {
+        const modal = RulebookUIDom.getModal();
+        if (modal) {
+            modal.style.display = 'none';
+        }
+    },
+
+    async showTab(tabName, rulebook) {
+        const readerTab = RulebookUIDom.getReaderTab();
+        const codexTab = RulebookUIDom.getCodexTab();
+
+        if (readerTab) {
+            readerTab.classList.toggle('hidden', tabName !== 'reader');
+        }
+
+        if (codexTab) {
+            codexTab.classList.toggle('hidden', tabName !== 'codex');
+        }
+
+        const buttons = Utils.qsa('#rulebook-modal .tab-btn');
+        buttons.forEach(button => {
+            button.classList.toggle('active', button.dataset.tab === tabName);
+        });
+
+        if (tabName === 'codex') {
+            await rulebook.ensureRulesData();
+        }
+    }
+};
+
+export default RulebookUITabs;
 
 ```
 
