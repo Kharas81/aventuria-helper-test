@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/17/2026, 7:42:34 AM
+# 🛡️ Aventuria Projekt-Backup - 4/17/2026, 7:42:47 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -153,6 +153,111 @@ hr {
     .checklist-item {
         gap: var(--space-md);
         padding: var(--space-md) 0;
+    }
+}
+
+```
+
+---
+
+## 📄 Datei: css/archive.css
+```css
+.archive-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+    gap: var(--space-lg);
+    padding: var(--space-lg) 0;
+    align-items: start;
+}
+
+.archive-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-lg);
+    padding-right: var(--space-5xl);
+    margin-bottom: var(--space-lg);
+}
+
+.archive-header h2 {
+    margin: 0;
+    color: var(--color-primary);
+    flex-shrink: 0;
+}
+
+.archive-header .search-bar {
+    margin-bottom: 0;
+    max-width: 360px;
+}
+
+#archive-set-buttons {
+    margin-bottom: var(--space-lg) !important;
+}
+
+/* Rückwärtskompatibilität für alte Archivkarten */
+.archive-card {
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    background: var(--color-bg-soft-strong);
+    border: var(--border-thin) solid var(--color-border-soft-card);
+    border-radius: var(--radius-lg);
+    padding: var(--space-sm);
+    min-height: 100%;
+    box-sizing: border-box;
+}
+
+.archive-card:hover {
+    transform: translateY(-4px);
+}
+
+.archive-card img {
+    width: 100%;
+    aspect-ratio: 5 / 7;
+    object-fit: cover;
+    border: var(--border-thin) solid var(--color-secondary);
+    border-radius: var(--radius-md);
+    background: var(--color-white);
+}
+
+.archive-card p {
+    font-size: 0.82em;
+    margin-top: var(--space-sm);
+    margin-bottom: 0;
+    font-weight: bold;
+    color: var(--color-primary);
+    word-break: break-word;
+}
+
+@media (max-width: 900px) {
+    .archive-grid {
+        grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+        gap: var(--space-md);
+        padding: var(--space-md) 0;
+    }
+
+    .archive-header {
+        flex-direction: column;
+        align-items: stretch;
+        padding-right: 0;
+    }
+
+    .archive-header .search-bar {
+        max-width: none;
+    }
+}
+
+@media (max-width: 700px) {
+    .archive-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--space-md);
+        padding: var(--space-sm) 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .archive-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
