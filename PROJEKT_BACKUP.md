@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/17/2026, 7:43:54 AM
+# 🛡️ Aventuria Projekt-Backup - 4/17/2026, 7:46:42 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -10294,68 +10294,178 @@ export const RulebookReader = {
         return `Seite ${pageNumber} · ${position + 1} / ${total}`;
     },
 
+    renderTocBlock(rulebook, block) {
+        const title = rulebook.stripCitationMarkers(block.title || block.header || 'Inhaltsverzeichnis');
+        const items = Utils.normalizeArray(block.items);
+
+        const itemsHtml = items.map(item => {
+            if (typeof item === 'string') {
+                return `<li>${rulebook.stripCitationMarkers(item)}</li>`;
+            }
+
+            const label = rulebook.stripCitationMarkers(item?.label || item?.text || '');
+            const page = Number(item?.page);
+
+            if (page > 0) {
+                return `
+                    <li>
+                        <button
+                            type="button"
+                            class="btn-outline btn-sm"
+                            data-rulebook-page="${page}"
+                        >
+                            ${Utils.escapeHtml(label || `Seite ${page}`)}
+                        </button>
+                    </li>
+                `;
+            }
+
+            return `<li>${Utils.escapeHtml(label)}</li>`;
+        }).join('');
+
+        return `
+            <div class="toc-box">
+                <h3>${Utils.escapeHtml(title)}</h3>
+                <ul class="toc-list">
+                    ${itemsHtml}
+                </ul>
+            </div>
+        `;
+    },
+
+    renderTableBlock(rulebook, block) {
+        const headers = Utils.normalizeArray(block.headers).map(header =>
+            rulebook.stripCitationMarkers(header)
+        );
+        const rows = Utils.normalizeArray(block.rows);
+
+        if (headers.length === 0 && rows.length === 0) {
+            return '';
+        }
+
+        const theadHtml = headers.length > 0
+            ? `
+                <thead>
+                    <tr>
+                        ${headers.map(header => `<th>${Utils.escapeHtml(header)}</th>`).join('')}
+                    </tr>
+                </thead>
+            `
+            : '';
+
+        const tbodyHtml = rows.map(row => {
+            const cells = Utils.normalizeArray(row).map(cell =>
+                `<td>${Utils.escapeHtml(rulebook.stripCitationMarkers(cell))}</td>`
+            ).join('');
+
+            return `<tr>${cells}</tr>`;
+        }).join('');
+
+        return `
+            <div class="manual-table-wrap">
+                <table class="manual-table">
+                    ${theadHtml}
+                    <tbody>
+                        ${tbodyHtml}
+                    </tbody>
+                </table>
+            </div>
+        `;
+    },
+
     /**
      * Wandelt Inhalts-Blöcke in HTML um.
      * Unterstützt Abwärtskompatibilität für alte HTML-Strings.
      */
     renderContentBlocks(rulebook, content) {
         if (!content) return '<p>Kein Inhalt vorhanden.</p>';
-        
-        // Abwärtskompatibilität: Falls es noch ein alter String ist
+
         if (typeof content === 'string') {
             return rulebook.stripCitationMarkers(content);
         }
 
         const blocks = Utils.normalizeArray(content);
+
         return blocks.map(block => {
             const text = rulebook.stripCitationMarkers(block.text || '');
-            
+
             switch (block.type) {
                 case 'location':
-                    return `<span class="location-info">${text}</span>`;
+                    return `<span class="location-info">${Utils.escapeHtml(text)}</span>`;
 
-                case 'header':
-                    const level = block.level || 3;
-                    return `<h${level}>${text}</h${level}>`;
-                
+                case 'header': {
+                    const rawLevel = Number(block.level || 3);
+                    const level = Math.min(6, Math.max(1, rawLevel));
+                    return `<h${level}>${Utils.escapeHtml(text)}</h${level}>`;
+                }
+
                 case 'paragraph':
-                    return `<p>${text}</p>`;
+                    return `<p>${Utils.escapeHtml(text)}</p>`;
 
                 case 'narrative':
-                    return `<p class="narrative-text">${text}</p>`;
-                
-                case 'instruction_box':
+                    return `<p class="narrative-text">${Utils.escapeHtml(text)}</p>`;
+
+                case 'instruction_box': {
                     const title = rulebook.stripCitationMarkers(block.title || 'Spielanweisung');
                     const action = rulebook.stripCitationMarkers(block.action || '');
-                    const resultsHtml = Utils.normalizeArray(block.results).map(res => 
-                        `<li><strong>${rulebook.stripCitationMarkers(res.outcome)}:</strong> ${rulebook.stripCitationMarkers(res.text)}</li>`
-                    ).join('');
-                    
+                    const resultsHtml = Utils.normalizeArray(block.results).map(result => {
+                        const outcome = rulebook.stripCitationMarkers(result?.outcome || '');
+                        const resultText = rulebook.stripCitationMarkers(result?.text || '');
+
+                        return `
+                            <li>
+                                <strong>${Utils.escapeHtml(outcome)}:</strong>
+                                ${Utils.escapeHtml(resultText)}
+                            </li>
+                        `;
+                    }).join('');
+
                     return `
                         <div class="instruction-box">
-                            <div class="box-header">${title}</div>
+                            <div class="box-header">${Utils.escapeHtml(title)}</div>
                             <div class="box-content">
-                                <p class="box-action">${action}</p>
+                                <p class="box-action">${Utils.escapeHtml(action)}</p>
                                 ${resultsHtml ? `<ul class="box-results">${resultsHtml}</ul>` : ''}
                             </div>
                         </div>
                     `;
+                }
 
-                case 'rule_block':
-                    const ruleHeader = rulebook.stripCitationMarkers(block.header || '');
+                case 'rule_block': {
+                    const header = rulebook.stripCitationMarkers(block.header || '');
                     return `
                         <div class="rule-block">
-                            ${ruleHeader ? `<h4>${ruleHeader}</h4>` : ''}
-                            <p>${text}</p>
+                            ${header ? `<strong>${Utils.escapeHtml(header)}:</strong> ` : ''}
+                            ${Utils.escapeHtml(text)}
                         </div>
                     `;
+                }
 
-                case 'map_index':
-                    const elements = Utils.normalizeArray(block.elements).join(', ');
-                    return `<div class="map-index"><small>Orte: ${elements}</small></div>`;
+                case 'map_index': {
+                    const elements = Utils.normalizeArray(block.elements)
+                        .map(entry => rulebook.stripCitationMarkers(entry))
+                        .join(', ');
+                    return `<div class="map-index"><small>Orte: ${Utils.escapeHtml(elements)}</small></div>`;
+                }
+
+                case 'warning_box': {
+                    const header = rulebook.stripCitationMarkers(block.header || 'Wichtig');
+                    return `
+                        <div class="warning-box">
+                            <strong>${Utils.escapeHtml(header)}:</strong>
+                            ${Utils.escapeHtml(text)}
+                        </div>
+                    `;
+                }
+
+                case 'toc':
+                    return this.renderTocBlock(rulebook, block);
+
+                case 'table':
+                    return this.renderTableBlock(rulebook, block);
 
                 default:
-                    return text ? `<p>${text}</p>` : '';
+                    return text ? `<p>${Utils.escapeHtml(text)}</p>` : '';
             }
         }).join('');
     },
@@ -10388,10 +10498,9 @@ export const RulebookReader = {
 
             const data = await response.json();
             const rawTitle = rulebook.stripCitationMarkers(data?.title ?? `Seite ${entry.page}`) || `Seite ${entry.page}`;
-            
-            // Nutzt die neue Block-Rendering-Logik
+
             const contentHtml = this.renderContentBlocks(rulebook, data?.content);
-            
+
             const imagePath = Utils.normalizeString(data?.image);
             const hasImage = Utils.hasRealImage(imagePath);
             const resolvedImage = hasImage ? Utils.resolveImagePath(imagePath) : '';
@@ -10419,6 +10528,8 @@ export const RulebookReader = {
                 Utils.setSafeImageSource(imageEl, resolvedImage);
             }
 
+            this.bindInlinePageActions(container, rulebook);
+
             if (indicator) {
                 indicator.textContent = this.buildIndicatorText(rulebook, entry.page);
             }
@@ -10432,6 +10543,21 @@ export const RulebookReader = {
             console.error('Fehler beim Laden der Regelbuch-Seite:', error);
             container.innerHTML = '<div class="reader-text">Fehler beim Laden der Seite.</div>';
         }
+    },
+
+    bindInlinePageActions(scope, rulebook) {
+        scope.querySelectorAll('[data-rulebook-page]').forEach(button => {
+            if (button.dataset.boundRulebookPage === 'true') return;
+
+            button.addEventListener('click', () => {
+                const page = Number(button.dataset.rulebookPage);
+                if (page > 0) {
+                    rulebook.jumpToPage(page);
+                }
+            });
+
+            button.dataset.boundRulebookPage = 'true';
+        });
     }
 };
 
