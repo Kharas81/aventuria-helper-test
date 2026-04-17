@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/17/2026, 3:21:33 PM
+# 🛡️ Aventuria Projekt-Backup - 4/17/2026, 3:21:57 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -11577,6 +11577,31 @@ export const RulebookReader = {
 };
 
 export default RulebookReader;
+
+```
+
+---
+
+## 📄 Datei: js/features/rulebook/rulebook-rules-data.js
+```js
+export const RulebookRulesData = {
+    async ensureRulesData(rulebook) {
+        if (rulebook.rulesDataBuilt || rulebook.isBuildingRulesData) {
+            return;
+        }
+
+        rulebook.isBuildingRulesData = true;
+
+        try {
+            await rulebook.codex.buildRulesData(rulebook);
+            rulebook.rulesDataBuilt = true;
+        } finally {
+            rulebook.isBuildingRulesData = false;
+        }
+    }
+};
+
+export default RulebookRulesData;
 
 ```
 
