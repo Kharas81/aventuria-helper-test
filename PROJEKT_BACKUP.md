@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/17/2026, 8:24:38 AM
+# 🛡️ Aventuria Projekt-Backup - 4/17/2026, 8:24:52 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -10818,6 +10818,33 @@ export const Narrative = {
 };
 
 export default Narrative;
+
+```
+
+---
+
+## 📄 Datei: js/features/rulebook/codex-actions.js
+```js
+export const RulebookCodexActions = {
+    bindPageJumpActions(scope, rulebook) {
+        if (!scope) return;
+
+        scope.querySelectorAll('[data-rulebook-page]').forEach(button => {
+            if (button.dataset.bound === 'true') return;
+
+            button.addEventListener('click', () => {
+                const page = Number(button.dataset.rulebookPage);
+                if (page > 0) {
+                    rulebook.jumpToPage(page);
+                }
+            });
+
+            button.dataset.bound = 'true';
+        });
+    }
+};
+
+export default RulebookCodexActions;
 
 ```
 
