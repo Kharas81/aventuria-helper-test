@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/17/2026, 7:53:35 AM
+# 🛡️ Aventuria Projekt-Backup - 4/17/2026, 7:53:45 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5583,7 +5583,83 @@ select {
     "Aventurien"
   ],
   "image": "assets/images/manual/page_05.png",
-  "content": "<h2>Die Götter Aventuriens</h2><p>Die nachfolgende Auflistung verschafft dir einen schnellen Überblick über die Zwölfgötter und für welche Aspekte sie jeweils stehen. Die Zwölfe werden im Mittelreich ebenso verehrt wie im Horasreich, in den Tulamidenlanden und Nord- und Südaventurien, dort jedoch gelegentlich mit anderen Schwerpunkten oder vermischt mit anderen Gottheiten.</p><p>Widersacher der Götter sind der Namenlose, der in fast allen Kulturen und unter unterschiedlichsten Bezeichnungen bekannt ist, und die Erzdämonen, groteske Zerrbilder der Götter. Die Zwerge verehren vor allem Angrosch, der bei den Zwölfgöttergläubigen als Ingerimm bekannt ist. Die Elfen hingegen wandten sich nach dem Fall ihrer Hochkultur von ihren alten Göttern ab und beten nicht mehr zu ihnen. Neben diesen Göttern gibt es noch weitere, etwa Rastullah, den das Wüstenvolk der Novadis als einzigen Gott verehrt, Rur und Gror, die zweigeschlechtlichen Zwillingsgötter der Maraskaner, oder Swafnir, den Walgott der Thorwaler, der als Halbgott und Kind Rondras und Efferds Einzug ins Zwölfgötterpantheon erhielt.</p><table><thead><tr><th>Zwölfgötter</th><th>Aspekte</th><th>Heilige Tiere/Gegenstände</th></tr></thead><tbody><tr><td>Praios</td><td>Gerechtigkeit, Magiebann, Wahrheit</td><td>Greif</td></tr><tr><td>Rondra</td><td>Ehre, Kampf, Mut</td><td>Löwin</td></tr><tr><td>Efferd</td><td>Stürme, Wasser, Wind</td><td>Delphin</td></tr><tr><td>Travia</td><td>Ehe, Gastfreundschaft, Treue</td><td>Wildgans</td></tr><tr><td>Boron</td><td>Schlaf, Tod, Vergessen</td><td>Rabe</td></tr><tr><td>Hesinde</td><td>Kunsthandwerk, Magie, Wissen</td><td>Schlange</td></tr><tr><td>Firun</td><td>Eis, Jagd, Natur</td><td>Polarbär</td></tr><tr><td>Tsa</td><td>Jugend, Leben, Wiedergeburt</td><td>Eidechse</td></tr><tr><td>Phex</td><td>Diebe, Glück, Handel</td><td>Fuchs</td></tr><tr><td>Peraine</td><td>Ackerbau, Heilung, Viehzucht</td><td>Storch</td></tr><tr><td>Ingerimm</td><td>Feuer, Handwerk, Schmiedekunst</td><td>Hammer und Amboss</td></tr><tr><td>Rahja</td><td>Liebe, Rausch, Schönheit</td><td>Pferd</td></tr></tbody></table><h2>Zeitrechnung</h2><p>Die Völker Aventuriens haben unterschiedliche Zeitrechnungen und Kalender. Am gebräuchlichsten unter den Zwölfgöttergläubigen ist jedoch die Zeitrechnung „nach Bosparans Fall“. Bosparan war vor über 1.000 Jahren die mächtigste Stadt des Kontinents, ging aber durch Aufstände unter. Die aktuelle Spielzeit ist um das Jahr 1040 BF angesiedelt.</p><h2>Geld und Währung</h2><p>Beinahe überall in Aventurien wird die Währung des Mittelreichs akzeptiert, das in gleicher Aufteilung, nur anders geprägt, auch im Horasreich Verwendung findet. Münzen aus Gold, Silber, Bronze und Eisen sind im Umlauf, genannt Dukaten, Silbertaler, Heller und Kreuzer. Ein Golddukat entspricht 10 Silbertalern, 100 Bronzehellern oder 1.000 Eisenkreuzern. Die gängigsten Münzen in den Mittellanden und eigentlich in ganz Aventurien sind fraglos der Silbertaler und der Heller. Mancher Bauer sieht in seinem Leben keine einzige Goldmünze, zu gering ist der Gegenwert der Waren, die er erwirtschaftet.</p><table><thead><tr><th>Erzdämonen</th><th>Aspekte</th><th>Zweitname</th></tr></thead><tbody><tr><td>Blakharaz</td><td>Folter, Dunkelheit, Rache</td><td>Tyakra'Man</td></tr><tr><td>Belhahar</td><td>Blutrausch, Heimtücke, Massaker</td><td>Xarfai</td></tr><tr><td>Charyptoroth</td><td>Meeresungeheuer, Stürme, verdorbenes Wasser</td><td>Gal'k'Zuul</td></tr><tr><td>Lolgramoth</td><td>Rastlosigkeit, Ruhelosigkeit, Treuelosigkeit</td><td>Thezzphai</td></tr><tr><td>Thargunitoth</td><td>Alpträume, Nekromantie, Untote</td><td>Tijakool</td></tr><tr><td>Amazeroth</td><td>Illusionen, Täuschung, Wahnsinn</td><td>Iribaar</td></tr><tr><td>Nagrach</td><td>Gnadenlosigkeit, Kälte, Unbarmherzigkeit</td><td>Belshirash</td></tr><tr><td>Asfaloth</td><td>Chaos, Chimären, Verwandlungen</td><td>Calijnaar</td></tr><tr><td>Tasfarelel</td><td>Geld, Habgier, Neid</td><td>Zholvar</td></tr><tr><td>Mishkara</td><td>Krankheiten, Missernten, Unfruchtbarkeit</td><td>Belzhorash</td></tr><tr><td>Agrimoth</td><td>Konstruktionen, Unelemente</td><td>Widharcal</td></tr><tr><td>Belkelel</td><td>Orgien, Perversion, Selbstsucht</td><td>Dar-Klajid</td></tr></tbody></table>"
+  "content": [
+    {
+      "type": "header",
+      "level": 2,
+      "text": "Die Götter Aventuriens"
+    },
+    {
+      "type": "paragraph",
+      "text": "Die nachfolgende Auflistung verschafft dir einen schnellen Überblick über die Zwölfgötter und für welche Aspekte sie jeweils stehen. Die Zwölfe werden im Mittelreich ebenso verehrt wie im Horasreich, in den Tulamidenlanden und Nord- und Südaventurien, dort jedoch gelegentlich mit anderen Schwerpunkten oder vermischt mit anderen Gottheiten."
+    },
+    {
+      "type": "paragraph",
+      "text": "Widersacher der Götter sind der Namenlose, der in fast allen Kulturen und unter unterschiedlichsten Bezeichnungen bekannt ist, und die Erzdämonen, groteske Zerrbilder der Götter. Die Zwerge verehren vor allem Angrosch, der bei den Zwölfgöttergläubigen als Ingerimm bekannt ist. Die Elfen hingegen wandten sich nach dem Fall ihrer Hochkultur von ihren alten Göttern ab und beten nicht mehr zu ihnen. Neben diesen Göttern gibt es noch weitere, etwa Rastullah, den das Wüstenvolk der Novadis als einzigen Gott verehrt, Rur und Gror, die zweigeschlechtlichen Zwillingsgötter der Maraskaner, oder Swafnir, den Walgott der Thorwaler, der als Halbgott und Kind Rondras und Efferds Einzug ins Zwölfgötterpantheon erhielt."
+    },
+    {
+      "type": "table",
+      "headers": [
+        "Zwölfgott",
+        "Aspekte",
+        "Heilige Tiere / Gegenstände"
+      ],
+      "rows": [
+        ["Praios", "Gerechtigkeit, Magiebann, Wahrheit", "Greif"],
+        ["Rondra", "Ehre, Kampf, Mut", "Löwin"],
+        ["Efferd", "Stürme, Wasser, Wind", "Delphin"],
+        ["Travia", "Ehe, Gastfreundschaft, Treue", "Wildgans"],
+        ["Boron", "Schlaf, Tod, Vergessen", "Rabe"],
+        ["Hesinde", "Kunsthandwerk, Magie, Wissen", "Schlange"],
+        ["Firun", "Eis, Jagd, Natur", "Polarbär"],
+        ["Tsa", "Jugend, Leben, Wiedergeburt", "Eidechse"],
+        ["Phex", "Diebe, Glück, Handel", "Fuchs"],
+        ["Peraine", "Ackerbau, Heilung, Viehzucht", "Storch"],
+        ["Ingerimm", "Feuer, Handwerk, Schmiedekunst", "Hammer und Amboss"],
+        ["Rahja", "Liebe, Rausch, Schönheit", "Pferd"]
+      ]
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "text": "Zeitrechnung"
+    },
+    {
+      "type": "paragraph",
+      "text": "Die Völker Aventuriens haben unterschiedliche Zeitrechnungen und Kalender. Am gebräuchlichsten unter den Zwölfgöttergläubigen ist jedoch die Zeitrechnung „nach Bosparans Fall“. Bosparan war vor über 1.000 Jahren die mächtigste Stadt des Kontinents, ging aber durch Aufstände unter. Die aktuelle Spielzeit ist um das Jahr 1040 BF angesiedelt."
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "text": "Geld und Währung"
+    },
+    {
+      "type": "paragraph",
+      "text": "Beinahe überall in Aventurien wird die Währung des Mittelreichs akzeptiert, das in gleicher Aufteilung, nur anders geprägt, auch im Horasreich Verwendung findet. Münzen aus Gold, Silber, Bronze und Eisen sind im Umlauf, genannt Dukaten, Silbertaler, Heller und Kreuzer. Ein Golddukat entspricht 10 Silbertalern, 100 Bronzehellern oder 1.000 Eisenkreuzern. Die gängigsten Münzen in den Mittellanden und eigentlich in ganz Aventurien sind fraglos der Silbertaler und der Heller. Mancher Bauer sieht in seinem Leben keine einzige Goldmünze, zu gering ist der Gegenwert der Waren, die er erwirtschaftet."
+    },
+    {
+      "type": "table",
+      "headers": [
+        "Erzdämon",
+        "Aspekte",
+        "Zweitname"
+      ],
+      "rows": [
+        ["Blakharaz", "Folter, Dunkelheit, Rache", "Tyakra’Man"],
+        ["Belhahar", "Blutrausch, Heimtücke, Massaker", "Xarfai"],
+        ["Charyptoroth", "Meeresungeheuer, Stürme, verdorbenes Wasser", "Gal’k’Zuul"],
+        ["Lolgramoth", "Rastlosigkeit, Ruhelosigkeit, Treuelosigkeit", "Thezzphai"],
+        ["Thargunitoth", "Alpträume, Nekromantie, Untote", "Tijakool"],
+        ["Amazeroth", "Illusionen, Täuschung, Wahnsinn", "Iribaar"],
+        ["Nagrach", "Gnadenlosigkeit, Kälte, Unbarmherzigkeit", "Belshirash"],
+        ["Asfaloth", "Chaos, Chimären, Verwandlungen", "Calijnaar"],
+        ["Tasfarelel", "Geld, Habgier, Neid", "Zholvar"],
+        ["Mishkara", "Krankheiten, Missernten, Unfruchtbarkeit", "Belzhorash"],
+        ["Agrimoth", "Konstruktionen, Unelemente", "Widharcal"],
+        ["Belkelel", "Orgien, Perversion, Selbstsucht", "Dar-Klajid"]
+      ]
+    }
+  ]
 }
 
 ```
