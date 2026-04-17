@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/17/2026, 7:42:47 AM
+# 🛡️ Aventuria Projekt-Backup - 4/17/2026, 7:43:11 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -1585,6 +1585,107 @@ hr {
         max-width: calc(100vw - 24px);
         border-width: var(--border-lg);
         border-radius: var(--radius-xl);
+    }
+}
+
+```
+
+---
+
+## 📄 Datei: css/rulebook-layout.css
+```css
+:root {
+    --manual-parchment: #fdf6e3;
+    --manual-dark-blue: #003366;
+    --manual-gold: #b8860b;
+    --manual-text: #2c3e50;
+    --manual-border: #d3c6a3;
+    --manual-narrative: #5d4037;
+}
+
+.reader-container {
+    background-color: var(--manual-parchment);
+    color: var(--manual-text);
+    padding: 20px;
+    border-radius: 4px;
+    line-height: 1.6;
+    font-family: 'Crimson Text', 'Georgia', serif;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+}
+
+.reader-page {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: var(--space-xl);
+}
+
+.reader-text {
+    font-family: 'Georgia', serif;
+    line-height: 1.6;
+    color: var(--color-text);
+    max-width: 850px;
+    margin: 0 auto;
+    word-break: break-word;
+}
+
+.location-info {
+    display: block;
+    font-style: italic;
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+    color: var(--manual-narrative);
+}
+
+.img-wrapper {
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto var(--space-3xl) auto;
+    text-align: center;
+    box-shadow: var(--shadow-card);
+}
+
+.manual-page-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: var(--border-thin) solid var(--color-secondary);
+    max-width: 100%;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.reader-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-lg);
+    padding: var(--space-xl) 0;
+    margin-top: var(--space-md);
+    border-top: var(--border-md) solid var(--color-secondary);
+    flex-wrap: wrap;
+}
+
+@media (max-width: 600px) {
+    .reader-footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .reader-footer button {
+        width: 100%;
+    }
+
+    .reader-footer span {
+        text-align: center;
+    }
+}
+
+@media (max-width: 420px) {
+    .reader-text {
+        font-size: 0.96rem;
+        line-height: 1.55;
     }
 }
 
