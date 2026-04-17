@@ -1,4 +1,164 @@
-# 🛡️ Aventuria Projekt-Backup - 4/17/2026, 4:56:04 AM
+# 🛡️ Aventuria Projekt-Backup - 4/17/2026, 7:41:31 AM
+
+## 📄 Datei: css/app-layout.css
+```css
+.top-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-4xl);
+    margin-bottom: var(--space-2xl);
+    flex-wrap: wrap;
+}
+
+.button-group {
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+}
+
+.config-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+/* --- KARTEN-LISTEN & GRID --- */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-3xl);
+    margin-top: var(--space-2xl);
+}
+
+.card-list {
+    background: rgba(244, 231, 211, 0.9);
+    padding: var(--space-2xl);
+    border: var(--border-thin) solid var(--color-secondary-soft);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+}
+
+.card-list h3 {
+    margin-top: 0;
+    font-variant: small-caps;
+    border-bottom: var(--border-thin) solid var(--color-secondary-soft);
+    padding-bottom: var(--space-sm);
+}
+
+#blue-cards h3 {
+    color: var(--color-info);
+    border-bottom-color: var(--color-info);
+}
+
+#special h3 {
+    color: var(--color-success);
+    border-bottom-color: var(--color-success);
+}
+
+.card-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.card-list li {
+    margin-bottom: var(--space-lg);
+}
+
+/* --- CHECKLISTE / SETUP-LISTEN --- */
+.checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-lg);
+    padding: var(--space-sm) 0;
+    line-height: 1.4;
+    transition: transform 0.2s ease;
+}
+
+.checklist-item:hover {
+    transform: translateX(5px);
+}
+
+.checklist-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    cursor: pointer;
+    accent-color: var(--color-primary);
+    flex-shrink: 0;
+}
+
+.checklist-item span {
+    display: block;
+    min-width: 0;
+    word-break: break-word;
+    flex: 1;
+}
+
+.checklist-item input:checked + span {
+    text-decoration: line-through var(--color-primary) 2px;
+    color: var(--color-muted);
+    opacity: 0.6;
+}
+
+.has-preview {
+    color: var(--color-primary);
+    cursor: help;
+    font-weight: 500;
+}
+
+/* --- DANGER / HINWEISE --- */
+#danger-value {
+    font-size: 1.15em;
+    color: var(--color-primary);
+    margin-bottom: var(--space-xl);
+    padding: var(--space-md);
+    background: var(--color-primary-fade);
+    border-radius: var(--radius-sm);
+}
+
+hr {
+    border: 0;
+    border-top: var(--border-thin) solid var(--color-secondary-soft);
+    margin: var(--space-2xl) 0;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 900px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 700px) {
+    .top-bar {
+        gap: 16px;
+    }
+
+    .button-group {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .config-item {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .card-list {
+        padding: 16px;
+    }
+
+    .checklist-item {
+        gap: var(--space-md);
+        padding: var(--space-md) 0;
+    }
+}
+
+```
+
+---
 
 ## 📄 Datei: css/base.css
 ```css
