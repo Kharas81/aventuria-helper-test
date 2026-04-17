@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/17/2026, 7:47:16 AM
+# 🛡️ Aventuria Projekt-Backup - 4/17/2026, 7:52:40 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5275,9 +5275,36 @@ select {
 {
   "pageNumber": 1,
   "title": "Titelblatt",
+  "keywords": [
+    "Titelblatt",
+    "Aventuria",
+    "Abenteuer-Regeln",
+    "Duell-Regeln"
+  ],
   "image": "assets/images/manual/page_01.png",
-  "content": "<h1>AVENTURIA</h1><h3>Das Schwarze Auge</h3><p>VON LUKAS ZACH UND MICHAEL PALM</p><div class='warning-box'><strong>Achtung!</strong> Bitte Duell-Regeln zuerst lesen! [cite: 1]</div><h2>ABENTEUER-REGELN</h2>"
+  "content": [
+    {
+      "type": "header",
+      "level": 1,
+      "text": "AVENTURIA"
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "text": "Abenteuer-Regeln"
+    },
+    {
+      "type": "warning_box",
+      "header": "Achtung",
+      "text": "Bitte Duell-Regeln zuerst lesen."
+    },
+    {
+      "type": "paragraph",
+      "text": "Titelblatt der Aventuria-Abenteuer-Regeln."
+    }
+  ]
 }
+
 ```
 
 ---
