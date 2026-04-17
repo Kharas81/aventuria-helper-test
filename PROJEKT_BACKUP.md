@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/17/2026, 7:43:26 AM
+# 🛡️ Aventuria Projekt-Backup - 4/17/2026, 7:43:40 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -404,6 +404,173 @@ h1 {
 
 .hidden {
     display: none;
+}
+
+```
+
+---
+
+## 📄 Datei: css/combat-tools.css
+```css
+.hidden-section {
+    display: none;
+    margin-top: var(--space-2xl);
+    padding: var(--space-2xl);
+    border: var(--border-thin) dashed var(--color-secondary);
+    background: var(--color-bg-soft-muted);
+    border-radius: var(--radius-lg);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.hidden-section.show {
+    display: block;
+}
+
+.toggle-section {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-lg);
+    margin-top: var(--space-4xl);
+    flex-wrap: wrap;
+}
+
+/* --- PHASEN-TRACKER --- */
+.phase-steps {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: var(--space-2xl) 0;
+    gap: var(--space-md);
+}
+
+.step {
+    padding: var(--space-md) var(--space-xl);
+    background: var(--color-bg-white-strong);
+    border: var(--border-thin) solid var(--color-secondary);
+    border-radius: var(--radius-pill);
+    font-size: 0.85em;
+    font-weight: bold;
+    opacity: 0.3;
+    transition: var(--transition-slow);
+}
+
+.step.active {
+    opacity: 1;
+    background: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+    transform: scale(1.1);
+    box-shadow: 0 4px 10px var(--color-primary-shadow);
+}
+
+/* --- HELDEN-DASHBOARD --- */
+.hero-dashboard {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-2xl);
+    margin-top: var(--space-4xl);
+    flex-wrap: wrap;
+}
+
+.hero-card {
+    background: var(--color-bg-panel);
+    border: var(--border-thin) solid var(--color-secondary);
+    border-top: var(--border-accent) solid var(--color-primary);
+    padding: var(--space-xl);
+    min-width: 160px;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-md);
+    text-align: center;
+}
+
+.hero-card h4 {
+    margin: 0 0 var(--space-md) 0;
+    color: var(--color-primary);
+    font-variant: small-caps;
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.stat button {
+    background: var(--color-secondary);
+    color: var(--color-white);
+    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* --- STORY / PROBEN --- */
+.story-text {
+    line-height: 1.6;
+    margin-bottom: var(--space-2xl);
+}
+
+.probes-area {
+    margin-top: var(--space-2xl);
+}
+
+.probe-item {
+    padding: var(--space-xl);
+    margin-bottom: var(--space-xl);
+    background: var(--color-bg-soft-strong);
+    border-left: var(--space-2xs) solid var(--color-secondary);
+    border-radius: var(--radius-sm);
+}
+
+.probe-item p {
+    margin: 0 0 var(--space-md) 0;
+}
+
+.probe-buttons {
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+}
+
+/* --- INLINE PROBEN-FEEDBACK --- */
+.check-result {
+    margin-top: var(--space-md);
+    padding: var(--space-lg);
+    border-radius: var(--radius-sm);
+    display: none;
+    font-size: 0.9em;
+    border-left: var(--border-xl) solid var(--color-secondary);
+    background: var(--color-bg-white-stronger);
+    line-height: 1.4;
+    color: var(--color-text);
+}
+
+.check-result.show {
+    display: block;
+    animation: slideIn 0.3s ease-out;
+}
+
+.check-result.success {
+    border-color: var(--color-success);
+}
+
+.check-result.fail {
+    border-color: var(--color-danger);
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 ```
