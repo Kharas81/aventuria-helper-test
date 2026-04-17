@@ -41,7 +41,7 @@ import Diagnostics from './features/diagnostics/diagnostics.js';
 import RulebookIndexLoader from './features/rulebook/index-loader.js';
 import RulebookReader from './features/rulebook/reader.js';
 import RulebookCodex from './features/rulebook/codex.js';
-import RulebookUI from './features/rulebook/ui.js';
+import RulebookUI from './features/rulebook/rulebook-ui.js';
 import Rulebook from './features/rulebook/rulebook.js';
 
 import AppStateSync from './app/state-sync.js';
