@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/17/2026, 7:53:45 AM
+# 🛡️ Aventuria Projekt-Backup - 4/17/2026, 7:54:04 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5673,14 +5673,109 @@ select {
   "title": "Abenteuer-Regeln",
   "keywords": [
     "Abenteuer-Regeln",
+    "Inhaltsverzeichnis",
     "Spielziel",
     "Vorbereitung der Helden",
-    "Inhaltsverzeichnis",
-    "Impressum",
-    "Aventuria"
+    "Impressum"
   ],
   "image": "assets/images/manual/page_06.png",
-  "content": "<h1>Aventuria Abenteuerkartenspiel: Abenteuer-Regeln</h1><p>Kooperative Abenteuer für 1-4* Spieler ab 10 Jahren von Lukas Zach, Michael Palm, Markus Plötz und Christian Lonsing.</p><h2>Inhaltsverzeichnis</h2><ul><li>Spielmaterial – Seite 07</li><li>Das Abenteuer – Seite 09</li><li>Der Kampf (Vorbereitung) – Seite 10</li><li>Kampfablauf – Seite 13</li><li>Kampfende – Seite 15</li><li>Atempause – Seite 15</li><li>Ergänzende Regeln – Seite 16</li><li>Kurzabenteuer: Silvanas Befreiung – Seite 17</li><li>Kurzabenteuer: Leute, die nicht spielen – Seite 19</li><li>Abenteuer: Das Erbe von Wildenstein – Seite 20</li><li>Kopiervorlage Heldendokument – Seite 24</li></ul><h2>Spielziel</h2><p>Die Helden versuchen, als Gruppe Abenteuer in der Welt von Aventurien zu bestehen. Dabei gilt es, sich gut abzusprechen und im Kampf gegen die Widersacher gegenseitig zu unterstützen. Nur gemeinsam können sie ihr Ziel erreichen, Schätze und Erfahrungen anhäufen und sich so immer größeren Herausforderungen stellen.</p><blockquote><p><strong>ACHTUNG!</strong> Wir empfehlen, dass die Spieler zunächst einige Partien nach den Duell-Regeln spielen, bevor sie sich ins Abenteuer wagen.</p></blockquote><blockquote><p>*Mit den Materialien in dieser Box können bis zu 4 Spieler dieses Spiel spielen. Durch spätere Erweiterungen wird eine größere Spieleranzahl von 6 oder mehr Spielern möglich.</p></blockquote><h2>Vorbereitung der Helden</h2><p>Die Spieler bereiten ihre Heldendecks und Lebenspunkte-Karten wie in den Duell-Regeln beschrieben vor. Zusätzlich verwenden sie nun die Talentkarte (Seite 7) ihres Helden. Außerdem platzieren sie pro Spieler zwei Schicksalspunkte und ausreichend Würfel in der Tischmitte.</p><p>Die Spieler einigen sich, wer von ihnen Startspieler wird. Dieser bekommt die Startspielermarke (Seite 8). Die anderen Spieler erhalten im Gegensatz zum Duell-Spiel keine Schicksalspunkte.</p><h2>Impressum</h2><p><strong>Aventuria</strong></p><p>Kartenspiel-Duelle und -Abenteuer in der Welt des Schwarzen Auges<br>Grundregeln Version 1.3</p><p><strong>Duell-Regeln</strong><br>Lukas Zach und Michael Palm</p><p><strong>Abenteuer-Regeln und Abenteuer</strong><br>Lukas Zach und Michael Palm, Markus Plötz, Christian Lonsing</p><p><strong>mit Texten von</strong><br>Nicolas Mendrek und Mháire Stritter</p><p><strong>Lektorat</strong><br>Thomas Echelmeyer, Frank Gerken, Christian Lonsing, Michael Mingers, Michael Palm, Markus Plötz, Timo Roth und Lukas Zach</p><p><strong>Coverbild</strong><br>Nadine Schäkel</p><p><strong>Layout &amp; Gestaltung</strong><br>Christian Lonsing, Nadine Schäkel</p><p><strong>Innenillustrationen</strong><br>Anja DiPaolo, Nele Klumpe, Ben Maier, Julia Metzger, Nadine Schäkel, Fabian Schempp, Wiebke Scholz, Elif Siebenpfeiffer</p><p>Die Autoren danken den zahlreichen Helden, die das Spiel getestet haben. Insbesondere Andreas, Arne, Arthur, Axel, Babs, Benne, Caro, Demian, Florian, Jan, Janek, Katja, Lisa, Lucas, Lukas, Marco, Mike, Nici, Philipp, Sebastian, Silas, Stefan, Stoffel, Thilini, Thomas, Ü-Säxle, Valerie und Werner.</p><p>Vielen Dank an Frauke Forster für die Zitate.</p><p><strong>Copyright der Deutschen Ausgabe</strong><br>© 2019 by Ulisses Spiele GmbH, Waldems.</p><p>DAS SCHWARZE AUGE, AVENTURIEN, DERE, MYRANOR, RIESLAND, THARUN und UTHURIA sind eingetragene Marken der Significant GbR.</p><p>Alle Rechte von Ulisses Spiele GmbH vorbehalten. Titel und Inhalte dieses Werkes sind urheberrechtlich geschützt. Der Nachdruck, auch auszugsweise, die Bearbeitung, Verarbeitung, Verbreitung und Vervielfältigung des Werkes in jedweder Form, insbesondere die Vervielfältigung auf photomechanischem, elektronischem oder ähnlichem Weg, sind nur mit schriftlicher Genehmigung der Ulisses Spiele GmbH, Waldems, gestattet.</p><p><strong>EAN</strong> 4260091156376<br><strong>Artikelnummer</strong> US25504</p>"
+  "content": [
+    {
+      "type": "header",
+      "level": 1,
+      "text": "Aventuria Abenteuerkartenspiel: Abenteuer-Regeln"
+    },
+    {
+      "type": "paragraph",
+      "text": "Kooperative Abenteuer für 1–4 Spieler ab 10 Jahren von Lukas Zach, Michael Palm, Markus Plötz und Christian Lonsing."
+    },
+    {
+      "type": "toc",
+      "title": "Inhaltsverzeichnis",
+      "items": [
+        { "label": "Spielmaterial", "page": 7 },
+        { "label": "Das Abenteuer", "page": 9 },
+        { "label": "Der Kampf (Vorbereitung)", "page": 10 },
+        { "label": "Kampfablauf", "page": 13 },
+        { "label": "Kampfende", "page": 15 },
+        { "label": "Atempause", "page": 15 },
+        { "label": "Ergänzende Regeln", "page": 16 },
+        { "label": "Kurzabenteuer: Silvanas Befreiung", "page": 17 },
+        { "label": "Kurzabenteuer: Leute, die nicht spielen", "page": 19 },
+        { "label": "Abenteuer: Das Erbe von Wildenstein", "page": 20 },
+        { "label": "Kopiervorlage Heldendokument", "page": 24 }
+      ]
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "text": "Spielziel"
+    },
+    {
+      "type": "paragraph",
+      "text": "Die Helden versuchen, als Gruppe Abenteuer in der Welt von Aventurien zu bestehen. Dabei gilt es, sich gut abzusprechen und im Kampf gegen die Widersacher gegenseitig zu unterstützen. Nur gemeinsam können sie ihr Ziel erreichen, Schätze und Erfahrungen anhäufen und sich so immer größeren Herausforderungen stellen."
+    },
+    {
+      "type": "warning_box",
+      "header": "Achtung",
+      "text": "Wir empfehlen, dass die Spieler zunächst einige Partien nach den Duell-Regeln spielen, bevor sie sich ins Abenteuer wagen."
+    },
+    {
+      "type": "rule_block",
+      "header": "Spielerzahl",
+      "text": "Mit den Materialien in dieser Box können bis zu 4 Spieler dieses Spiel spielen. Durch spätere Erweiterungen wird eine größere Spieleranzahl von 6 oder mehr Spielern möglich."
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "text": "Vorbereitung der Helden"
+    },
+    {
+      "type": "paragraph",
+      "text": "Die Spieler bereiten ihre Heldendecks und Lebenspunkte-Karten wie in den Duell-Regeln beschrieben vor. Zusätzlich verwenden sie nun die Talentkarte ihres Helden. Außerdem platzieren sie pro Spieler zwei Schicksalspunkte und ausreichend Würfel in der Tischmitte."
+    },
+    {
+      "type": "paragraph",
+      "text": "Die Spieler einigen sich, wer von ihnen Startspieler wird. Dieser bekommt die Startspielermarke. Die anderen Spieler erhalten im Gegensatz zum Duell-Spiel keine Schicksalspunkte."
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "text": "Impressum"
+    },
+    {
+      "type": "paragraph",
+      "text": "Aventuria — Kartenspiel-Duelle und -Abenteuer in der Welt des Schwarzen Auges. Grundregeln Version 1.3."
+    },
+    {
+      "type": "paragraph",
+      "text": "Duell-Regeln: Lukas Zach und Michael Palm. Abenteuer-Regeln und Abenteuer: Lukas Zach und Michael Palm, Markus Plötz, Christian Lonsing. Mit Texten von Nicolas Mendrek und Mháire Stritter."
+    },
+    {
+      "type": "paragraph",
+      "text": "Lektorat: Thomas Echelmeyer, Frank Gerken, Christian Lonsing, Michael Mingers, Michael Palm, Markus Plötz, Timo Roth und Lukas Zach."
+    },
+    {
+      "type": "paragraph",
+      "text": "Coverbild: Nadine Schäkel. Layout & Gestaltung: Christian Lonsing, Nadine Schäkel. Innenillustrationen: Anja DiPaolo, Nele Klumpe, Ben Maier, Julia Metzger, Nadine Schäkel, Fabian Schempp, Wiebke Scholz, Elif Siebenpfeiffer."
+    },
+    {
+      "type": "paragraph",
+      "text": "Die Autoren danken den zahlreichen Helden, die das Spiel getestet haben. Vielen Dank an Frauke Forster für die Zitate."
+    },
+    {
+      "type": "paragraph",
+      "text": "Copyright der Deutschen Ausgabe © 2019 by Ulisses Spiele GmbH, Waldems. DAS SCHWARZE AUGE, AVENTURIEN, DERE, MYRANOR, RIESLAND, THARUN und UTHURIA sind eingetragene Marken der Significant GbR."
+    },
+    {
+      "type": "paragraph",
+      "text": "Alle Rechte von Ulisses Spiele GmbH vorbehalten. Titel und Inhalte dieses Werkes sind urheberrechtlich geschützt. Der Nachdruck, auch auszugsweise, die Bearbeitung, Verarbeitung, Verbreitung und Vervielfältigung des Werkes in jedweder Form, insbesondere die Vervielfältigung auf photomechanischem, elektronischem oder ähnlichem Weg, sind nur mit schriftlicher Genehmigung der Ulisses Spiele GmbH, Waldems, gestattet."
+    },
+    {
+      "type": "paragraph",
+      "text": "EAN 4260091156376. Artikelnummer US25504."
+    }
+  ]
 }
 
 ```
