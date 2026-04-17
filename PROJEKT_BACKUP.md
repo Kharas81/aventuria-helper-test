@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/17/2026, 4:50:26 AM
+# 🛡️ Aventuria Projekt-Backup - 4/17/2026, 4:55:27 AM
 
 ## 📄 Datei: css/base.css
 ```css
@@ -4286,8 +4286,17 @@ hr {
 {
   "pageNumber": 7,
   "title": "Spielmaterial",
+  "keywords": [
+    "Spielmaterial",
+    "Talentkarten",
+    "Schergenkarten",
+    "Abenteuerkarten",
+    "Belohnungskarten",
+    "Übungskarten",
+    "Trainingskarten"
+  ],
   "image": "assets/images/manual/page_07.png",
-  "content": "<p>Im Aventuria Abenteuermodus kommen die folgenden Spielmaterialien zum Einsatz: Der Abenteuermodus benutzt alle Heldendecks, Lebenspunkte-Karten, Schicksalspunkte und Würfel aus dem Duellmodus. Jeder Held fügt seiner normalen Heldenkarte seine Talentkarte hinzu. Auf der Vorderseite dieser Karte sind seine Talentwerte aufgeführt, und auf der Rückseite die Maximalzahl an Karten, die er in den verschiedenen Kartenkategorien besitzen darf [cite: 176-180].</p><h3>Schergenkarten</h3><p>Mit den Schergenkarten werden Gegner dargestellt, denen die Helden in größerer Zahl in vielen verschiedenen Abenteuern über den Weg laufen können [cite: 181-182].</p><h3>Abenteuerkarten</h3><p>Diese blauen Karten gelten oft nur für ein einzelnes, bestimmtes Abenteuer bzw. einen bestimmten Akt eines Abenteuers und weisen unten auf der Karte den Namen des Abenteuers und die Nummer des Aktes auf, zu dem sie gehören. Zu den Abenteuerkarten zählen die Zeitskala-Karten, Handlungskarten, Anführer-Karten und weitere ergänzende Karten, wie zum Beispiel die Gräber-Karten [cite: 188-191].</p><h3>Belohnungskarten</h3><p>Belohnungskarten sind besondere Aktionskarten, die man während eines Abenteuers erbeuten kann oder am Ende eines Abenteuers als Belohnung erhält. Sie erhöhen die Kampfkraft eines Helden und können beim Kampagnenspiel in sein Heldendeck aufgenommen werden [cite: 193-194].</p><h3>Übungs- und Trainingskarten</h3><p>Diese Karten können von Helden während einer Atempause erworben werden, um anzuzeigen, dass sie sich auf die kommenden Herausforderungen vorbereitet haben [cite: 218-219].</p>"
+  "content": "<h1>Spielmaterial</h1><p>Im Aventuria Duellmodus kommen die folgenden Spielmaterialien zum Einsatz:</p><h2>Alle Materialien aus dem Duellspiel</h2><p>Der Abenteuermodus benutzt alle Heldendecks, Lebenspunkte-Karten, Schicksalspunkte und Würfel aus dem Duellmodus (siehe Duell-Regeln, Seite 3).</p><ul><li>Heldenkarte</li><li>Heldenkarte Rückseite</li><li>Aktionskarte</li><li>Aktionskarte Rückseite</li><li>Lebenspunkte-Karten</li><li>Schicksalspunkte</li><li>Würfel (W20 &amp; W6)</li></ul><h2>Talentkarten</h2><p>Jeder Held fügt seiner normalen Heldenkarte seine Talentkarte hinzu. Auf der Vorderseite dieser Karte sind seine Talentwerte aufgeführt, und auf der Rückseite die Maximalzahl an Karten, die er in den verschiedenen Kartenkategorien besitzen darf.</p><ul><li>Talentkarte</li><li>Talentkarte Rückseite</li></ul><h2>Schergenkarten</h2><p>Mit den Schergenkarten (Seite 12) werden Gegner dargestellt, denen die Helden in größerer Zahl in vielen verschiedenen Abenteuern über den Weg laufen können.</p><ul><li>Schergenkarte</li><li>Schergenkarte Rückseite</li></ul><h2>Abenteuerkarten</h2><p>Diese blauen Karten gelten oft nur für ein einzelnes, bestimmtes Abenteuer bzw. einen bestimmten Akt eines Abenteuers und weisen unten auf der Karte den Namen des Abenteuers und die Nummer des Aktes auf, zu dem sie gehören.</p><p>Zu den Abenteuerkarten zählen die Zeitskala-Karten (Seite 10), Handlungskarten (Seite 11), Anführer-Karten (Seite 10) und weitere ergänzende Karten, wie zum Beispiel die Gräber-Karten.</p><ul><li>Zeitskala</li><li>Gräber-Karte</li><li>Heldenaktion</li><li>Anführer</li><li>Abenteuerkarte Rückseite</li></ul><h2>Belohnungskarten</h2><p>Belohnungskarten (Seite 16) sind besondere Aktionskarten, die man während eines Abenteuers erbeuten kann oder am Ende eines Abenteuers als Belohnung erhält. Sie erhöhen die Kampfkraft eines Helden und können beim Kampagnenspiel (Seite 16) in sein Heldendeck aufgenommen werden.</p><ul><li>Belohnungskarte</li><li>Belohnungskarte Rückseite</li></ul><h2>Übungs- und Trainingskarten</h2><p>Diese Karten können von Helden während einer Atempause (Seite 15) erworben werden, um anzuzeigen, dass sie sich auf die kommenden Herausforderungen vorbereitet haben.</p><ul><li>Übungskarte</li><li>Trainingskarte</li></ul>"
 }
 
 ```
