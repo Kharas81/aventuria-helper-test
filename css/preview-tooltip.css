@@ -1,0 +1,32 @@
+.card-tooltip {
+    position: fixed;
+    display: none;
+    z-index: 9999;
+    width: var(--tooltip-width);
+    max-width: min(var(--tooltip-width), 90vw);
+    border: var(--border-xl) solid var(--color-primary);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-preview);
+    background: var(--color-black);
+    overflow: hidden;
+}
+
+.card-tooltip .tooltip-inner {
+    width: 100%;
+    max-height: calc(100vh - 24px);
+    overflow: auto;
+}
+
+.card-tooltip img {
+    width: 100%;
+    display: block;
+    border-radius: calc(var(--radius-lg) - 1px);
+}
+
+@media (max-width: 700px) {
+    .card-tooltip {
+        max-width: calc(100vw - 24px);
+        border-width: var(--border-lg);
+        border-radius: var(--radius-xl);
+    }
+}
