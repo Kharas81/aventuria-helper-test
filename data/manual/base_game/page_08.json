@@ -5,11 +5,73 @@
     "Spezialkarten",
     "Spielmarken",
     "Kampfplan",
+    "Ereigniskarte",
+    "Anführer-Aktion-Karte",
+    "Dämoneneigenschaft-Karte",
     "Startspielermarke",
     "Heldenmarken",
     "Zeitmarke",
     "Verderbensmarke"
   ],
   "image": "assets/images/manual/page_08.png",
-  "content": "<h2>Spezialkarten</h2><p>Die grünen Spezialkarten (Seite 11) sind Karten, die bei verschiedenen Kämpfen zum Einsatz kommen können, wodurch diese abwechslungsreicher und tödlicher werden. Zu den Spezialkarten gehören Ereigniskarten, Anführer-Aktion-Karten, Dämoneneigenschaft-Karten und andere Karten, die üblicherweise zu Zugkarten-Decks zusammengestellt werden.</p><ul><li>Ereigniskarte</li><li>Anführer-Aktion-Karte</li><li>Dämoneneigenschaft-Karte</li></ul><h2>Spielmarken</h2><p>Beim Abenteuermodus kommen alle Spielmarken zum Einsatz:</p><p><strong>Startspielermarke:</strong> Diese Marke zeigt den aktuellen Startspieler (Seite 6) an. Sie wird am Ende jeder Runde weitergereicht (Seite 14).</p><p><strong>Heldenmarken:</strong> Die Heldenmarken kommen bei bestimmten Abenteuersituationen zum Einsatz. Außerdem können sie genutzt werden, um zufällig einen Helden zu bestimmen (Seite 14).</p><p><strong>Lebenspunkte-/Abenteuermarken:</strong> Die Lebenspunktemarken werden genutzt, um die aktuellen Lebenspunkte von Gegnern anzuzeigen. Die Abenteuermarken kommen dagegen bei den Spieleffekten auf Abenteuerkarten zum Einsatz (siehe Seite 11).</p><p><strong>Zeit-/Verderbensmarken:</strong> Die Zeitmarken werden im Zusammenhang mit der Zeitskala (Seite 10) eingesetzt, während die Verderbensmarken bei den Spieleffekten von Gegnerkarten (Seite 14) genutzt werden, und oft im Zusammenhang mit der Niederlage-Bedingung von Abenteuern zum Einsatz kommen.</p><ul><li>Startspielermarke</li><li>Heldenmarken</li><li>Abenteuermarken (5er und 1er)</li><li>Lebenspunktemarken (5er und 1er)</li><li>Zeitmarke</li><li>Verderbensmarke</li></ul><h2>Kampfplan</h2><p>Diese ausfaltbare Auslage hilft beim Platzieren und Auffinden aller im Abenteuermodus benutzter Karten.</p><ul><li>Schergenablage</li><li>Schergenstapel</li><li>Ereigniskartenstapel</li><li>Zeitskala</li><li>Handlungskarte</li><li>Anführer</li><li>Schergen</li></ul>"
+  "content": [
+    {
+      "type": "header",
+      "level": 2,
+      "text": "Spezialkarten"
+    },
+    {
+      "type": "paragraph",
+      "text": "Die grünen Spezialkarten sind Karten, die bei verschiedenen Kämpfen zum Einsatz kommen können, wodurch diese abwechslungsreicher und tödlicher werden. Zu den Spezialkarten gehören Ereigniskarten, Anführer-Aktion-Karten, Dämoneneigenschaft-Karten und andere Karten, die üblicherweise zu Zugkarten-Decks zusammengestellt werden."
+    },
+    {
+      "type": "rule_block",
+      "header": "Beispiele",
+      "text": "Ereigniskarte, Anführer-Aktion-Karte, Dämoneneigenschaft-Karte."
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "text": "Spielmarken"
+    },
+    {
+      "type": "paragraph",
+      "text": "Beim Abenteuermodus kommen alle Spielmarken zum Einsatz."
+    },
+    {
+      "type": "paragraph",
+      "text": "Startspielermarke: Diese Marke zeigt den aktuellen Startspieler an. Sie wird am Ende jeder Runde weitergereicht."
+    },
+    {
+      "type": "paragraph",
+      "text": "Heldenmarken: Die Heldenmarken kommen bei bestimmten Abenteuersituationen zum Einsatz. Außerdem können sie genutzt werden, um zufällig einen Helden zu bestimmen."
+    },
+    {
+      "type": "paragraph",
+      "text": "Lebenspunkte- und Abenteuermarken: Die Lebenspunktemarken werden genutzt, um die aktuellen Lebenspunkte von Gegnern anzuzeigen. Die Abenteuermarken kommen dagegen bei den Spieleffekten auf Abenteuerkarten zum Einsatz."
+    },
+    {
+      "type": "paragraph",
+      "text": "Zeit- und Verderbensmarken: Die Zeitmarken werden im Zusammenhang mit der Zeitskala eingesetzt, während die Verderbensmarken bei den Spieleffekten von Gegnerkarten genutzt werden und oft im Zusammenhang mit der Niederlage-Bedingung von Abenteuern zum Einsatz kommen."
+    },
+    {
+      "type": "rule_block",
+      "header": "Marken im Überblick",
+      "text": "Startspielermarke, Heldenmarken, Abenteuermarken (5er und 1er), Lebenspunktemarken (5er und 1er), Zeitmarke, Verderbensmarke."
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "text": "Kampfplan"
+    },
+    {
+      "type": "paragraph",
+      "text": "Diese ausfaltbare Auslage hilft beim Platzieren und Auffinden aller im Abenteuermodus benutzter Karten."
+    },
+    {
+      "type": "rule_block",
+      "header": "Wichtige Bereiche",
+      "text": "Schergenablage, Schergenstapel, Ereigniskartenstapel, Zeitskala, Handlungskarte, Anführer, Schergen."
+    }
+  ]
 }
