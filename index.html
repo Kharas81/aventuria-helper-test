@@ -5,161 +5,258 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aventuria Abenteuer-Helfer</title>
 
+    <!-- Basis & Layout -->
     <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/ui-components.css">
-    <link rel="stylesheet" href="css/features.css">
+    <link rel="stylesheet" href="css/app-layout.css">
+
+    <!-- Wiederverwendbare UI-Bausteine -->
+    <link rel="stylesheet" href="css/ui-buttons.css">
+    <link rel="stylesheet" href="css/ui-forms.css">
+    <link rel="stylesheet" href="css/ui-shared.css">
+
+    <!-- Spezifische Bereiche -->
+    <link rel="stylesheet" href="css/preview-tooltip.css">
+    <link rel="stylesheet" href="css/archive.css">
+    <link rel="stylesheet" href="css/rulebook-layout.css">
+    <link rel="stylesheet" href="css/rulebook-blocks.css">
+    <link rel="stylesheet" href="css/combat-tools.css">
+    <link rel="stylesheet" href="css/intermission.css">
     <link rel="stylesheet" href="css/modal.css">
 </head>
 <body>
     <div class="app-container">
+        <!-- =========================================================
+             APP-HEADER
+        ========================================================== -->
         <header>
             <h1>Aventuria Abenteuer-Helfer</h1>
-            <p id="loading-status">Bereit.</p>
+            <p id="loading-status" aria-live="polite">Bereit.</p>
         </header>
 
-        <div class="top-bar">
-            <div class="button-group">
-                <button type="button" class="btn" data-action="open-archive">Archiv öffnen</button>
-                <button type="button" class="btn" data-action="open-rulebook">Regelbuch öffnen</button>
-            </div>
-
-            <div class="config-item">
-                <label for="adventurePicker"><strong>Abenteuer:</strong></label>
-                <select id="adventurePicker">
-                    <option value="">Bitte wählen ...</option>
-                </select>
-            </div>
-
-            <div class="config-item">
-                <label for="heroCount"><strong>Helden:</strong></label>
-                <select id="heroCount">
-                    <option value="1">1</option>
-                    <option value="2" selected>2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                </select>
-            </div>
-
-            <div class="config-item">
-                <label for="difficulty"><strong>Schwierigkeit:</strong></label>
-                <select id="difficulty">
-                    <option value="easy">Leicht</option>
-                    <option value="normal" selected>Normal</option>
-                    <option value="hard">Schwer</option>
-                </select>
-            </div>
-
-            <div class="button-group">
-                <button type="button" class="btn-outline" id="saveStateBtn">Speichern</button>
-                <button type="button" class="btn-outline" id="clearStateBtn">Zurücksetzen</button>
-            </div>
-        </div>
-
-        <section id="setup-display" class="hidden">
-            <h2 id="title">Abenteuer</h2>
-            <p id="danger-value"></p>
-
-            <div class="grid-container">
-                <div class="card-list" id="blue-cards">
-                    <h3>Blaue Karten</h3>
-                    <ul></ul>
+        <!-- =========================================================
+             HAUPTSTEUERUNG
+        ========================================================== -->
+        <section aria-label="Hauptsteuerung">
+            <div class="top-bar">
+                <div class="button-group">
+                    <button type="button" class="btn" data-action="open-archive">
+                        Archiv öffnen
+                    </button>
+                    <button type="button" class="btn" data-action="open-rulebook">
+                        Regelbuch öffnen
+                    </button>
                 </div>
 
-                <div class="card-list" id="minions">
-                    <h3>Schergen</h3>
-                    <ul></ul>
+                <div class="config-item">
+                    <label for="adventurePicker"><strong>Abenteuer:</strong></label>
+                    <select id="adventurePicker">
+                        <option value="">Bitte wählen ...</option>
+                    </select>
                 </div>
 
-                <div class="card-list hidden" id="special">
-                    <h3>Spezial</h3>
-                    <ul></ul>
+                <div class="config-item">
+                    <label for="heroCount"><strong>Helden:</strong></label>
+                    <select id="heroCount">
+                        <option value="1">1</option>
+                        <option value="2" selected>2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+
+                <div class="config-item">
+                    <label for="difficulty"><strong>Schwierigkeit:</strong></label>
+                    <select id="difficulty">
+                        <option value="easy">Leicht</option>
+                        <option value="normal" selected>Normal</option>
+                        <option value="hard">Schwer</option>
+                    </select>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="btn-outline" id="saveStateBtn">
+                        Speichern
+                    </button>
+                    <button type="button" class="btn-outline" id="clearStateBtn">
+                        Zurücksetzen
+                    </button>
                 </div>
             </div>
         </section>
 
-        <section id="story-area"></section>
+        <!-- =========================================================
+             HAUPTINHALT
+        ========================================================== -->
+        <main id="app-main">
+            <!-- -----------------------------------------------------
+                 ABENTEUER-SETUP / KARTENÜBERSICHT
+            ------------------------------------------------------ -->
+            <section id="setup-display" class="hidden" aria-label="Abenteuer-Setup">
+                <h2 id="title">Abenteuer</h2>
+                <p id="danger-value"></p>
 
-        <div class="toggle-section">
-            <button type="button" class="btn-outline" data-action="toggle-section" data-target="combat-tools-section">
-                Kampf-Tools ein-/ausblenden
-            </button>
-            <button type="button" class="btn-outline" data-action="toggle-section" data-target="intermission-section">
-                Atempause ein-/ausblenden
-            </button>
-        </div>
-
-        <section id="combat-tools-section" class="hidden-section show">
-            <div class="card-list">
-                <h3>Kampf-Tools</h3>
-
-                <div class="phase-steps" id="phaseTracker">
-                    <div class="step active">Heldenphase</div>
-                    <div class="step">Schergenphase</div>
-                    <div class="step">Anführerphase</div>
-                    <div class="step">Zeitphase</div>
-                </div>
-
-                <div class="button-group" style="justify-content:center; margin-bottom: 20px;">
-                    <button type="button" class="btn-outline" data-action="combat-prev-phase">Phase zurück</button>
-                    <button type="button" class="btn-outline" data-action="combat-next-phase">Nächste Phase</button>
-                    <button type="button" class="btn-outline" data-action="combat-roll-target">Zufallsziel würfeln</button>
-                    <button type="button" class="btn-outline" data-action="combat-update-ep">EP neu berechnen</button>
-                </div>
-
-                <div class="top-bar" style="margin-bottom: 0;">
-                    <div class="config-item">
-                        <label for="remainingTime"><strong>Zeitmarker:</strong></label>
-                        <input type="number" id="remainingTime" min="0" value="0">
+                <div class="grid-container">
+                    <div class="card-list" id="blue-cards">
+                        <h3>Blaue Karten</h3>
+                        <ul></ul>
                     </div>
 
-                    <div class="config-item">
-                        <strong>Ergebnis:</strong>
-                        <span id="ep-result">2 EP</span>
+                    <div class="card-list" id="minions">
+                        <h3>Schergen</h3>
+                        <ul></ul>
                     </div>
 
-                    <div class="config-item">
-                        <strong>Zufallsziel:</strong>
-                        <span id="targetResult">--</span>
-                    </div>
-                </div>
-
-                <div class="hero-dashboard" id="heroDashboard"></div>
-            </div>
-        </section>
-
-        <section id="intermission-section" class="hidden-section show">
-            <div class="intermission-area">
-                <div class="intermission-card">
-                    <h3>Atempause</h3>
-                    <p id="victory-text"><strong>Sieg:</strong> —</p>
-                    <p id="defeat-text"><strong>Niederlage:</strong> —</p>
-                    <div class="result-badge" id="intermission-result">Atempause</div>
-                    <div class="button-group" style="justify-content:center; margin-top: 20px;">
-                        <button type="button" class="btn" data-action="combat-apply-intermission">Atempause anwenden</button>
+                    <div class="card-list hidden" id="special">
+                        <h3>Spezial</h3>
+                        <ul></ul>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="diagnostics-section" class="hidden" style="margin-top: 30px;">
-            <div id="diagnostics-summary"></div>
-            <div id="diagnostics-details" class="hidden"></div>
-        </section>
+            <!-- -----------------------------------------------------
+                 STORY / NARRATIVE
+            ------------------------------------------------------ -->
+            <section id="story-area" aria-label="Abenteuertext"></section>
+
+            <!-- -----------------------------------------------------
+                 TOGGLE-BEREICH FÜR ZUSATZPANELS
+            ------------------------------------------------------ -->
+            <section aria-label="Zusatzbereiche">
+                <div class="toggle-section">
+                    <button
+                        type="button"
+                        class="btn-outline"
+                        data-action="toggle-section"
+                        data-target="combat-tools-section"
+                    >
+                        Kampf-Tools ein-/ausblenden
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn-outline"
+                        data-action="toggle-section"
+                        data-target="intermission-section"
+                    >
+                        Atempause ein-/ausblenden
+                    </button>
+                </div>
+            </section>
+
+            <!-- -----------------------------------------------------
+                 KAMPF-TOOLS
+            ------------------------------------------------------ -->
+            <section
+                id="combat-tools-section"
+                class="hidden-section show"
+                aria-label="Kampf-Tools"
+            >
+                <div class="card-list">
+                    <h3>Kampf-Tools</h3>
+
+                    <div class="phase-steps" id="phaseTracker" aria-label="Phasenanzeige">
+                        <div class="step active">Heldenphase</div>
+                        <div class="step">Schergenphase</div>
+                        <div class="step">Anführerphase</div>
+                        <div class="step">Zeitphase</div>
+                    </div>
+
+                    <div class="button-group" style="justify-content:center; margin-bottom: 20px;">
+                        <button type="button" class="btn-outline" data-action="combat-prev-phase">
+                            Phase zurück
+                        </button>
+                        <button type="button" class="btn-outline" data-action="combat-next-phase">
+                            Nächste Phase
+                        </button>
+                        <button type="button" class="btn-outline" data-action="combat-roll-target">
+                            Zufallsziel würfeln
+                        </button>
+                        <button type="button" class="btn-outline" data-action="combat-update-ep">
+                            EP neu berechnen
+                        </button>
+                    </div>
+
+                    <div class="top-bar" style="margin-bottom: 0;">
+                        <div class="config-item">
+                            <label for="remainingTime"><strong>Zeitmarker:</strong></label>
+                            <input type="number" id="remainingTime" min="0" value="0">
+                        </div>
+
+                        <div class="config-item">
+                            <strong>Ergebnis:</strong>
+                            <span id="ep-result">2 EP</span>
+                        </div>
+
+                        <div class="config-item">
+                            <strong>Zufallsziel:</strong>
+                            <span id="targetResult">--</span>
+                        </div>
+                    </div>
+
+                    <div class="hero-dashboard" id="heroDashboard"></div>
+                </div>
+            </section>
+
+            <!-- -----------------------------------------------------
+                 ATEMPAUSE / ZWISCHENPHASE
+            ------------------------------------------------------ -->
+            <section
+                id="intermission-section"
+                class="hidden-section show"
+                aria-label="Atempause"
+            >
+                <div class="intermission-area">
+                    <div class="intermission-card">
+                        <h3>Atempause</h3>
+                        <p id="victory-text"><strong>Sieg:</strong> —</p>
+                        <p id="defeat-text"><strong>Niederlage:</strong> —</p>
+
+                        <div class="result-badge" id="intermission-result">Atempause</div>
+
+                        <div class="button-group" style="justify-content:center; margin-top: 20px;">
+                            <button type="button" class="btn" data-action="combat-apply-intermission">
+                                Atempause anwenden
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- -----------------------------------------------------
+                 DIAGNOSTICS
+            ------------------------------------------------------ -->
+            <section id="diagnostics-section" class="hidden" style="margin-top: 30px;" aria-label="Diagnosebereich">
+                <div id="diagnostics-summary"></div>
+                <div id="diagnostics-details" class="hidden"></div>
+            </section>
+        </main>
     </div>
 
-    <div class="card-tooltip" id="card-tooltip">
+    <!-- =============================================================
+         TOOLTIP / PREVIEW
+    ============================================================== -->
+    <div class="card-tooltip" id="card-tooltip" aria-hidden="true">
         <div class="tooltip-inner">
             <img id="tooltip-image" alt="Kartenvorschau">
         </div>
     </div>
 
-    <div class="modal-backdrop" id="archive-modal">
+    <!-- =============================================================
+         ARCHIV-MODAL
+    ============================================================== -->
+    <div
+        class="modal-backdrop"
+        id="archive-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="archive-modal-title"
+    >
         <div class="modal-content archive-modal-size">
-            <span class="close-modal" data-action="close-archive">&times;</span>
+            <span class="close-modal" data-action="close-archive" aria-label="Archiv schließen">&times;</span>
+
             <div class="tab-content">
                 <div class="archive-header">
-                    <h2>Kartenarchiv</h2>
+                    <h2 id="archive-modal-title">Kartenarchiv</h2>
                     <input
                         type="search"
                         id="archive-search"
@@ -167,35 +264,60 @@
                         placeholder="Karten suchen ..."
                     >
                 </div>
+
                 <div id="archive-set-buttons" class="button-group"></div>
                 <div id="archive-grid" class="archive-grid"></div>
             </div>
         </div>
     </div>
 
-    <div class="modal-backdrop" id="rulebook-modal">
+    <!-- =============================================================
+         REGELBUCH-MODAL
+    ============================================================== -->
+    <div
+        class="modal-backdrop"
+        id="rulebook-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="manual-title"
+    >
         <div class="modal-content">
-            <span class="close-modal" data-action="close-rulebook">&times;</span>
+            <span class="close-modal" data-action="close-rulebook" aria-label="Regelbuch schließen">&times;</span>
 
             <div class="modal-layout">
-                <aside class="modal-sidebar">
+                <!-- Seitenliste -->
+                <aside class="modal-sidebar" aria-label="Regelbuch-Seiten">
                     <h4 id="manual-set-label">Regelbuch</h4>
                     <ul id="manual-page-list"></ul>
                 </aside>
 
+                <!-- Reader / Kodex -->
                 <div class="modal-main">
                     <div class="modal-nav">
                         <h2 id="manual-title">Regelbuch</h2>
-                        <button type="button" class="tab-btn active" data-action="rulebook-tab" data-tab="reader">
+
+                        <button
+                            type="button"
+                            class="tab-btn active"
+                            data-action="rulebook-tab"
+                            data-tab="reader"
+                        >
                             Leser
                         </button>
-                        <button type="button" class="tab-btn" data-action="rulebook-tab" data-tab="codex">
+
+                        <button
+                            type="button"
+                            class="tab-btn"
+                            data-action="rulebook-tab"
+                            data-tab="codex"
+                        >
                             Kodex
                         </button>
                     </div>
 
                     <div id="reader-tab" class="tab-content">
                         <div id="manual-content"></div>
+
                         <div class="reader-footer">
                             <button type="button" data-action="rulebook-prev-page">Zurück</button>
                             <span id="manual-page-indicator">Seite 0 / 0</span>
