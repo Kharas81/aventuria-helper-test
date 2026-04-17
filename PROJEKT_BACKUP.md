@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/17/2026, 7:43:40 AM
+# 🛡️ Aventuria Projekt-Backup - 4/17/2026, 7:43:54 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -1307,6 +1307,46 @@ hr {
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+```
+
+---
+
+## 📄 Datei: css/intermission.css
+```css
+.intermission-area {
+    margin-top: var(--space-6xl);
+    display: flex;
+    justify-content: center;
+}
+
+.intermission-card {
+    background: linear-gradient(145deg, var(--color-bg-panel), var(--color-bg-panel-alt));
+    border: var(--border-md) solid var(--color-secondary);
+    padding: var(--space-3xl);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-panel);
+    text-align: center;
+    max-width: 450px;
+}
+
+.intermission-card h3 {
+    margin-top: 0;
+    color: var(--color-primary);
+    font-size: 1.5em;
+}
+
+.result-badge {
+    margin-top: var(--space-2xl);
+    font-size: 2em;
+    color: var(--color-primary);
+    font-weight: bold;
+    background: var(--color-bg-white-strong);
+    display: inline-block;
+    padding: 5px var(--space-2xl);
+    border-radius: var(--radius-lg);
+    border: var(--border-thin) solid var(--color-secondary);
 }
 
 ```
