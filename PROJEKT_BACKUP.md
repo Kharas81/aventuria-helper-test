@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/17/2026, 7:41:31 AM
+# 🛡️ Aventuria Projekt-Backup - 4/17/2026, 7:41:45 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -1441,6 +1441,111 @@ hr {
     .reader-text {
         font-size: 0.96rem;
         line-height: 1.55;
+    }
+}
+
+```
+
+---
+
+## 📄 Datei: css/ui-buttons.css
+```css
+.btn,
+.btn-outline {
+    padding: var(--space-md) var(--space-2xl);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-weight: bold;
+    font-family: inherit;
+    transition: var(--transition-fast);
+}
+
+.btn {
+    background: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+}
+
+.btn:hover {
+    background: var(--color-primary-hover);
+}
+
+.btn-outline {
+    background: none;
+    border: var(--border-md) solid var(--color-secondary);
+    color: var(--color-secondary);
+}
+
+.btn-outline:hover {
+    background: var(--color-secondary);
+    color: var(--color-white);
+}
+
+/* Kleine Buttons für Proben/Checks */
+.btn-sm {
+    padding: var(--space-xs) var(--space-lg);
+    font-size: 0.85em;
+    border-radius: var(--radius-sm);
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    margin-right: var(--space-md);
+}
+
+.btn-sm.success {
+    background: var(--color-success);
+    color: var(--color-white);
+}
+
+.btn-sm.fail {
+    background: var(--color-danger);
+    color: var(--color-white);
+}
+
+/* --- INFO-BUTTON --- */
+.info-btn {
+    background: var(--color-secondary);
+    color: var(--color-white);
+    border: none;
+    border-radius: var(--radius-round);
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    min-height: 22px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: var(--space-sm);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-sm);
+    flex-shrink: 0;
+}
+
+.info-btn:hover:not(:disabled) {
+    background: var(--color-primary);
+    transform: scale(1.1);
+}
+
+.info-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+}
+
+@media (max-width: 480px) {
+    .btn,
+    .btn-outline {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .info-btn {
+        width: 24px;
+        height: 24px;
+        min-width: 24px;
+        min-height: 24px;
     }
 }
 
