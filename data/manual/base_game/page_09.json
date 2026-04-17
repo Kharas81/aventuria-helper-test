@@ -2,13 +2,126 @@
   "pageNumber": 9,
   "title": "Das Abenteuer",
   "keywords": [
-    "Das Abenteuer",
+    "Abenteuer",
     "Schwierigkeitsgrad",
     "Erzählung",
-    "Talentproben",
+    "Talentprobe",
     "Vorlesetext",
-    "Spielanweisungen"
+    "Spielanweisung",
+    "Schicksalspunkt"
   ],
   "image": "assets/images/manual/page_09.png",
-  "content": "<h1>Das Abenteuer</h1><p>Im Gegensatz zum Duellmodus besteht der Abenteuermodus nicht nur aus einem einzelnen Kampf, sondern aus einem kompletten Abenteuer. Hier geht es darum, in die Rolle seines Helden zu schlüpfen, durch seine Augen die Geschichte zu erleben und gemeinsam mit seinen Kumpanen die Herausforderungen zu meistern.</p><p>Im zweiten Teil dieses Buches befinden sich drei Abenteuer unterschiedlicher Länge und Komplexität. Diese müsst ihr euch vor Spielbeginn noch nicht durchlesen. Im Gegenteil ist es sogar spannender, wenn sich die Geschichte des Abenteuers erst während des eigentlichen Spiels entfaltet.</p><p>Jedes Abenteuer besteht aus zwei Komponenten, der Erzählung und dem Kampf. Die Erzählung stellt die Rahmenhandlung des Abenteuers dar, während bei Kämpfen auf die Aventuria-Grundregeln aus dem Duellmodus zurückgegriffen wird, erweitert um die ab Seite 10 aufgeführten Kampfregeln des Abenteuermodus.</p><p>Kurzabenteuer bestehen in der Regel aus einer Erzählung, gefolgt von einem abschließenden Kampf. Längere Abenteuer, wie das auf Seite 20 beginnende Abenteuer „Das Erbe von Wildenstein“, sind dagegen oft in mehrere Akte unterteilt. Jeder einzelne Akt besteht hierbei üblicherweise aus einer Erzählung, gefolgt von einem Kampf, und hat dadurch in etwa die Länge eines Kurzabenteuers.</p><h2>Schwierigkeitsgrad</h2><p>Jedes Abenteuer verfügt über vier Schwierigkeitsgrade: <strong>einfach</strong>, <strong>normal</strong>, <strong>schwer</strong> und <strong>legendär</strong>. Bei Abenteuerbeginn müsst ihr euch für einen davon entscheiden. Wenn der Schwierigkeitsgrad relevant wird, weist das Abenteuer explizit darauf hin.</p><h2>Erzählung</h2><p>Um die Helden durch die Geschichte des Abenteuers zu führen, bedient sich die Erzählung Vorlesetexten und Spielanweisungen. Die Vorlesetexte bilden hierbei den Rahmen, wohingegen die Spielanweisungen die regeltechnischen Details festlegen. Vorlesetexte sind kursiv geschrieben, Spielanweisungen stehen in Kästen.</p><p>Entscheidet euch, wer aus der Gruppe die Vorlesetexte laut vorliest. Manchmal stehen mehrere Vorlesetexte zur Auswahl, je nachdem welche von mehreren Möglichkeiten eingetreten ist (z. B. Sieg oder Niederlage in einem Kampf); in diesem Fall wird nur der zutreffende vorgelesen.</p><p>Spielanweisungen werden ebenfalls laut vorgelesen und müssen entsprechend von euch durchgeführt werden. Hierbei werden oft Talentproben verlangt – siehe unten.</p><p>Eine besondere Spielanweisung stellt der Beginn eines Kampfes dar. Auch hier werden die Spielanweisungen komplett vorgelesen und ausgeführt. Die weiteren Details werden im Abschnitt <strong>Der Kampf</strong> (Seite 10) beschrieben.</p><blockquote><p><strong>WICHTIG:</strong> Das Deck eines Helden kommt während einer Erzählung nicht zum Einsatz. Helden können sich also zum Beispiel während einer Erzählung nicht mithilfe der Aktionskarte „Heiltrank“ heilen, selbst wenn diese in ihrem Deck enthalten ist.</p></blockquote><h2>Talentproben</h2><p>Wird eine Talentprobe verlangt, muss der Spieler mit einem W20 gleich oder unter dem Wert des genannten Talents (zu finden auf der Talentkarte des Helden) würfeln. Folgt eine Zahl mit einem „+“, ist die Probe erleichtert. Ein „-“ erschwert die Probe. Wird beispielsweise eine „Wissen-Probe +5“ verlangt, addiert der Spieler zu seinem aktuellen Wissen-Wert „+5“ und versucht dann gleich oder unter diesen Wert zu würfeln.</p><p>Die Talentprobe kann zu vier verschiedenen Ergebnissen führen:</p><ul><li><strong>Kritischer Erfolg:</strong> Der Spieler hat eine „1“ gewürfelt.</li><li><strong>Erfolg:</strong> Der Spieler hat gleich oder unter seinem modifizierten Talentwert, jedoch keine „1“ gewürfelt.</li><li><strong>Misserfolg:</strong> Der Spieler hat über seinem modifizierten Talentwert, jedoch keine „20“ gewürfelt.</li><li><strong>Kritischer Misserfolg:</strong> Der Spieler hat eine „20“ gewürfelt.</li></ul><p>Je nachdem wie gut ein Held bei einer Probe abschneidet, muss er die entsprechende Spielanweisung befolgen.</p><blockquote><p><strong>WICHTIG:</strong> Die Helden dürfen bei Talentproben Schicksalspunkte einsetzen, um Würfelwürfe zu wiederholen.</p></blockquote><h2>Vorlesetext und Spielanweisungen</h2><blockquote><p><em>Bevor ihr aufbrecht, zieht ihr in den Archiven der Tempel und beim Konzil von Perainefurten erst einmal Erkundigungen bezüglich der Baronie Wildenstein ein. Vielleicht können euch diese Informationen später weiterhelfen?</em></p></blockquote><div><p><strong>Jeder Held führt eine Wissen-Probe durch.</strong></p><ul><li><strong>Kritischer Erfolg:</strong> Du bist hervorragend vorbereitet. Nimm dir 2.</li><li><strong>Erfolg:</strong> Du findest ein paar brauchbare Informationen. Nimm dir 1.</li><li><strong>Misserfolg:</strong> Du findest nichts Wichtiges heraus. Keine Auswirkung.</li><li><strong>Kritischer Patzer:</strong> Du sammelst irreführende Informationen. Entferne 1 aus der Tischmitte aus dem Spiel.</li></ul></div>"
+  "content": [
+    {
+      "type": "header",
+      "level": 1,
+      "text": "Das Abenteuer"
+    },
+    {
+      "type": "paragraph",
+      "text": "Im Gegensatz zum Duellmodus besteht der Abenteuermodus nicht nur aus einem einzelnen Kampf, sondern aus einem kompletten Abenteuer. Hier geht es darum, in die Rolle seines Helden zu schlüpfen, durch seine Augen die Geschichte zu erleben und gemeinsam mit seinen Kumpanen die Herausforderungen zu meistern."
+    },
+    {
+      "type": "paragraph",
+      "text": "Im zweiten Teil dieses Buches befinden sich drei Abenteuer unterschiedlicher Länge und Komplexität. Diese müsst ihr euch vor Spielbeginn noch nicht durchlesen. Im Gegenteil ist es sogar spannender, wenn sich die Geschichte des Abenteuers erst während des eigentlichen Spiels entfaltet."
+    },
+    {
+      "type": "paragraph",
+      "text": "Jedes Abenteuer besteht aus zwei Komponenten, der Erzählung und dem Kampf. Die Erzählung stellt die Rahmenhandlung des Abenteuers dar, während bei Kämpfen auf die Aventuria-Grundregeln aus dem Duellmodus zurückgegriffen wird, erweitert um die ab Seite 10 aufgeführten Kampfregeln des Abenteuermodus."
+    },
+    {
+      "type": "paragraph",
+      "text": "Kurzabenteuer bestehen in der Regel aus einer Erzählung, gefolgt von einem abschließenden Kampf. Längere Abenteuer, wie das auf Seite 20 beginnende Abenteuer „Das Erbe von Wildenstein“, sind dagegen oft in mehrere Akte unterteilt. Jeder einzelne Akt besteht hierbei üblicherweise aus einer Erzählung, gefolgt von einem Kampf, und hat dadurch in etwa die Länge eines Kurzabenteuers."
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "text": "Schwierigkeitsgrad"
+    },
+    {
+      "type": "paragraph",
+      "text": "Jedes Abenteuer verfügt über vier Schwierigkeitsgrade: einfach, normal, schwer und legendär. Bei Abenteuerbeginn müsst ihr euch für einen davon entscheiden. Wenn der Schwierigkeitsgrad relevant wird, weist das Abenteuer explizit darauf hin."
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "text": "Erzählung"
+    },
+    {
+      "type": "paragraph",
+      "text": "Um die Helden durch die Geschichte des Abenteuers zu führen, bedient sich die Erzählung Vorlesetexten und Spielanweisungen. Die Vorlesetexte bilden hierbei den Rahmen, wohingegen die Spielanweisungen die regeltechnischen Details festlegen. Vorlesetexte sind kursiv geschrieben, Spielanweisungen stehen in Kästen."
+    },
+    {
+      "type": "paragraph",
+      "text": "Entscheidet euch, wer aus der Gruppe die Vorlesetexte laut vorliest. Manchmal stehen mehrere Vorlesetexte zur Auswahl, je nachdem welche von mehreren Möglichkeiten eingetreten ist, zum Beispiel Sieg oder Niederlage in einem Kampf. In diesem Fall wird nur der zutreffende vorgelesen."
+    },
+    {
+      "type": "paragraph",
+      "text": "Spielanweisungen werden ebenfalls laut vorgelesen und müssen entsprechend von euch durchgeführt werden. Hierbei werden oft Talentproben verlangt."
+    },
+    {
+      "type": "paragraph",
+      "text": "Eine besondere Spielanweisung stellt der Beginn eines Kampfes dar. Auch hier werden die Spielanweisungen komplett vorgelesen und ausgeführt. Die weiteren Details werden im Abschnitt „Der Kampf“ beschrieben."
+    },
+    {
+      "type": "warning_box",
+      "header": "Wichtig",
+      "text": "Das Deck eines Helden kommt während einer Erzählung nicht zum Einsatz. Helden können sich also zum Beispiel während einer Erzählung nicht mithilfe der Aktionskarte „Heiltrank“ heilen, selbst wenn diese in ihrem Deck enthalten ist."
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "text": "Talentproben"
+    },
+    {
+      "type": "paragraph",
+      "text": "Wird eine Talentprobe verlangt, muss der Spieler mit einem W20 gleich oder unter dem Wert des genannten Talents würfeln. Folgt eine Zahl mit einem „+“, ist die Probe erleichtert. Ein „-“ erschwert die Probe. Wird beispielsweise eine „Wissen-Probe +5“ verlangt, addiert der Spieler zu seinem aktuellen Wissen-Wert „+5“ und versucht dann gleich oder unter diesen Wert zu würfeln."
+    },
+    {
+      "type": "rule_block",
+      "header": "Ergebnisse einer Talentprobe",
+      "text": "Kritischer Erfolg: Der Spieler hat eine „1“ gewürfelt. Erfolg: Der Spieler hat gleich oder unter seinem modifizierten Talentwert, jedoch keine „1“ gewürfelt. Misserfolg: Der Spieler hat über seinem modifizierten Talentwert, jedoch keine „20“ gewürfelt. Kritischer Misserfolg: Der Spieler hat eine „20“ gewürfelt."
+    },
+    {
+      "type": "paragraph",
+      "text": "Je nachdem wie gut ein Held bei einer Probe abschneidet, muss er die entsprechende Spielanweisung befolgen."
+    },
+    {
+      "type": "warning_box",
+      "header": "Wichtig",
+      "text": "Die Helden dürfen bei Talentproben Schicksalspunkte einsetzen, um Würfelwürfe zu wiederholen."
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "text": "Vorlesetext und Spielanweisungen"
+    },
+    {
+      "type": "narrative",
+      "text": "Bevor ihr aufbrecht, zieht ihr in den Archiven der Tempel und beim Konzil von Perainefurten erst einmal Erkundigungen bezüglich der Baronie Wildenstein ein. Vielleicht können euch diese Informationen später weiterhelfen?"
+    },
+    {
+      "type": "instruction_box",
+      "title": "Spielanweisung",
+      "action": "Jeder Held führt eine Wissen-Probe durch.",
+      "results": [
+        {
+          "outcome": "Kritischer Erfolg",
+          "text": "Du bist hervorragend vorbereitet. Nimm dir 2."
+        },
+        {
+          "outcome": "Erfolg",
+          "text": "Du findest ein paar brauchbare Informationen. Nimm dir 1."
+        },
+        {
+          "outcome": "Misserfolg",
+          "text": "Du findest nichts Wichtiges heraus. Keine Auswirkung."
+        },
+        {
+          "outcome": "Kritischer Patzer",
+          "text": "Du sammelst irreführende Informationen. Entferne 1 aus der Tischmitte aus dem Spiel."
+        }
+      ]
+    }
+  ]
 }
