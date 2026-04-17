@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/17/2026, 8:48:26 AM
+# 🛡️ Aventuria Projekt-Backup - 4/17/2026, 8:48:46 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -11862,15 +11862,14 @@ export default RulebookUI;
 
 ## 📄 Datei: js/features/rulebook/rulebook.js
 ```js
-import Utils from '../../core/utils.js';
-import Constants from '../../core/constants.js';
-import Events from '../../core/events.js';
-import ApiCardLookup from '../../core/api-card-lookup.js';
-
 import RulebookIndexLoader from './index-loader.js';
 import RulebookReader from './reader.js';
 import RulebookCodex from './codex.js';
-import RulebookUI from './ui.js';
+import RulebookUI from './rulebook-ui.js';
+
+import RulebookSetManager from './rulebook-set-manager.js';
+import RulebookRulesData from './rulebook-rules-data.js';
+import RulebookNavigation from './rulebook-navigation.js';
 
 export const Rulebook = {
     rulesData: [],
@@ -11886,149 +11885,55 @@ export const Rulebook = {
     ui: RulebookUI,
 
     stripCitationMarkers(text) {
-        return String(text ?? '').replace(/\s*\[cite:\s*[\d\- ,]+\]/gi, '').trim();
+        return RulebookSetManager.stripCitationMarkers(text);
     },
 
     resolveSetKey(preferredSetKey = '') {
-        const normalizedPreferred = Utils.normalizeString(preferredSetKey);
-        if (normalizedPreferred && window.CONFIG?.hasSet?.(normalizedPreferred)) {
-            return normalizedPreferred;
-        }
-
-        const activeSet = ApiCardLookup.getActiveSetKey?.();
-        if (activeSet && window.CONFIG?.hasSet?.(activeSet)) {
-            return activeSet;
-        }
-
-        return window.CONFIG?.defaultSet || 'base_game';
+        return RulebookSetManager.resolveSetKey(preferredSetKey);
     },
 
     async ensureSet(setKey = '') {
-        const resolvedSetKey = this.resolveSetKey(setKey);
-
-        if (this.currentSet === resolvedSetKey && this.manualIndex) {
-            this.ui.updateSetLabel(this.currentSet);
-            return;
-        }
-
-        this.currentSet = resolvedSetKey;
-        this.rulesData = [];
-        this.rulesDataBuilt = false;
-        this.isBuildingRulesData = false;
-        this.manualIndex = await this.indexLoader.load(resolvedSetKey);
-
-        this.ui.updateSetLabel(this.currentSet);
-        this.ui.renderPageList(this.manualIndex, page => this.jumpToPage(page));
-        this.ui.clearCodexResults();
-        this.ui.resetCodexSearch();
-
-        const firstAvailablePage = Utils.normalizeArray(this.manualIndex?.pages)[0]?.page ?? null;
-        const hasCurrentPage = Utils.normalizeArray(this.manualIndex?.pages)
-            .some(entry => entry.page === Number(this.currentPage));
-
-        if (!hasCurrentPage) {
-            this.currentPage = firstAvailablePage;
-        }
-
-        Events.emit(
-            Constants.events?.rulebookIndexLoaded || 'rulebook:indexLoaded',
-            {
-                source: 'rulebook',
-                setKey: this.currentSet,
-                pageCount: Utils.normalizeArray(this.manualIndex?.pages).length
-            }
-        );
-
-        Events.emit(
-            Constants.events?.setChanged || 'set:changed',
-            {
-                source: 'rulebook',
-                setKey: this.currentSet
-            }
-        );
+        return RulebookSetManager.ensureSet(this, setKey);
     },
 
     async ensureRulesData() {
-        if (this.rulesDataBuilt || this.isBuildingRulesData) {
-            return;
-        }
-
-        this.isBuildingRulesData = true;
-
-        try {
-            await this.codex.buildRulesData(this);
-            this.rulesDataBuilt = true;
-        } finally {
-            this.isBuildingRulesData = false;
-        }
+        return RulebookRulesData.ensureRulesData(this);
     },
 
     async open() {
-        const modal = this.ui.getModal();
-        if (!modal) {
-            return;
-        }
-
-        this.ui.showModal();
-
-        await this.ensureSet();
-        await this.showTab('reader');
-
-        const pageToLoad = this.currentPage ?? this.reader.getFirstPage(this);
-        if (pageToLoad !== null && pageToLoad !== undefined) {
-            await this.reader.loadPage(this, pageToLoad);
-            return;
-        }
-
-        const container = this.ui.getManualContent();
-        if (container) {
-            container.innerHTML = '<div class="reader-text">Kein Regelbuch-Index gefunden.</div>';
-        }
+        return RulebookNavigation.open(this);
     },
 
     close() {
-        this.ui.closeModal();
+        return RulebookNavigation.close(this);
     },
 
     async showTab(tabName) {
-        await this.ui.showTab(tabName, this);
+        return RulebookNavigation.showTab(this, tabName);
     },
 
     async loadPage(pageNumber) {
-        await this.reader.loadPage(this, pageNumber);
+        return RulebookNavigation.loadPage(this, pageNumber);
     },
 
     nextPage() {
-        const nextPage = this.reader.getNextPage(this, this.currentPage);
-        if (nextPage !== null) {
-            this.reader.loadPage(this, nextPage);
-        }
+        return RulebookNavigation.nextPage(this);
     },
 
     prevPage() {
-        const prevPage = this.reader.getPrevPage(this, this.currentPage);
-        if (prevPage !== null) {
-            this.reader.loadPage(this, prevPage);
-        }
+        return RulebookNavigation.prevPage(this);
     },
 
     jumpToPage(pageNumber) {
-        const page = Number(pageNumber);
-        if (!this.reader.getPageEntry(this, page)) {
-            return;
-        }
-
-        this.showTab('reader');
-        this.reader.loadPage(this, page);
+        return RulebookNavigation.jumpToPage(this, pageNumber);
     },
 
     filterRules(term = '') {
-        this.codex.filterRules(this, term);
+        return RulebookNavigation.filterRules(this, term);
     },
 
     async init() {
-        this.ui.bind(this);
-        await this.ensureSet();
+        return RulebookNavigation.init(this);
     }
 };
 
