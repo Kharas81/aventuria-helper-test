@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/17/2026, 7:41:45 AM
+# 🛡️ Aventuria Projekt-Backup - 4/17/2026, 7:42:04 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -1697,6 +1697,41 @@ hr {
     .ui-meta-list__row {
         grid-template-columns: 1fr;
         gap: 2px;
+    }
+}
+
+```
+
+---
+
+## 📄 Datei: css/ui-forms.css
+```css
+input[type="number"],
+select {
+    padding: var(--space-sm);
+    background: var(--color-bg-panel);
+    border: var(--border-thin) solid var(--color-secondary);
+    font-family: inherit;
+    border-radius: var(--radius-sm);
+    color: var(--color-text);
+}
+
+.search-bar {
+    width: 100%;
+    padding: var(--space-lg);
+    margin-bottom: var(--space-2xl);
+    border: var(--border-md) solid var(--color-secondary);
+    box-sizing: border-box;
+    background: var(--color-ivory);
+    color: var(--color-text);
+    font-family: inherit;
+    border-radius: var(--radius-sm);
+}
+
+@media (max-width: 600px) {
+    .search-bar {
+        padding: var(--space-md);
+        font-size: 0.95rem;
     }
 }
 
