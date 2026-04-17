@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/17/2026, 7:43:11 AM
+# 🛡️ Aventuria Projekt-Backup - 4/17/2026, 7:43:26 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -1586,6 +1586,177 @@ hr {
         border-width: var(--border-lg);
         border-radius: var(--radius-xl);
     }
+}
+
+```
+
+---
+
+## 📄 Datei: css/rulebook-blocks.css
+```css
+.reader-text h2 {
+    color: var(--manual-gold);
+    border-bottom: 2px solid var(--manual-gold);
+    padding-bottom: 5px;
+    margin-top: 0;
+    text-transform: uppercase;
+    font-size: 1.6rem;
+}
+
+.reader-text h3 {
+    color: var(--manual-dark-blue);
+    margin-top: 1.5rem;
+    font-size: 1.3rem;
+}
+
+.narrative-text {
+    color: var(--manual-narrative);
+    font-style: italic;
+    margin: 1.2rem 0;
+    padding-left: 15px;
+    border-left: 3px solid var(--manual-border);
+}
+
+.instruction-box {
+    border: 1px solid var(--manual-dark-blue);
+    background-color: rgba(255, 255, 255, 0.4);
+    margin: 20px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.box-header {
+    background-color: var(--manual-dark-blue);
+    color: #ffffff;
+    padding: 6px 15px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.box-content {
+    padding: 15px;
+}
+
+.box-action {
+    color: var(--manual-dark-blue);
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.box-results {
+    list-style: none;
+    padding-left: 0;
+    margin: 10px 0 0 0;
+    border-top: 1px solid var(--manual-border);
+}
+
+.box-results li {
+    padding: 5px 0;
+    font-size: 0.95rem;
+    border-bottom: 1px dotted var(--manual-border);
+}
+
+.box-results li:last-child {
+    border-bottom: none;
+}
+
+.box-results li strong {
+    color: var(--manual-dark-blue);
+    min-width: 140px;
+    display: inline-block;
+}
+
+.map-index {
+    margin-top: 20px;
+    padding: 10px;
+    background: rgba(0,0,0,0.03);
+    border-radius: 4px;
+}
+
+.rule-block {
+    margin-bottom: 1.5rem;
+    padding: 10px;
+    background: rgba(184, 134, 11, 0.05);
+    border-left: 4px solid var(--manual-gold);
+}
+
+/* --- NEU: Warnbox für wichtige Hinweise --- */
+.warning-box {
+    margin: 1.25rem 0;
+    padding: 12px 14px;
+    border-left: 5px solid var(--color-danger);
+    background: rgba(155, 44, 44, 0.08);
+    color: var(--color-text);
+    border-radius: var(--radius-sm);
+}
+
+.warning-box strong {
+    color: var(--color-danger);
+}
+
+/* --- NEU: Inhaltsverzeichnis-Box --- */
+.toc-box {
+    margin: 1.25rem 0;
+    padding: 14px 16px;
+    border: 1px solid var(--manual-border);
+    background: rgba(255, 255, 255, 0.35);
+    border-radius: var(--radius-sm);
+}
+
+.toc-box h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: var(--manual-dark-blue);
+}
+
+.toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.toc-list li {
+    padding: 6px 0;
+    border-bottom: 1px dotted var(--manual-border);
+}
+
+.toc-list li:last-child {
+    border-bottom: none;
+}
+
+/* --- NEU: Tabellen für Nachschlagewerk --- */
+.manual-table-wrap {
+    overflow-x: auto;
+    margin: 1.25rem 0;
+    border: 1px solid var(--manual-border);
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.35);
+}
+
+.manual-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 560px;
+    font-size: 0.96rem;
+}
+
+.manual-table th,
+.manual-table td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--manual-border);
+    vertical-align: top;
+}
+
+.manual-table th {
+    background: rgba(0, 51, 102, 0.08);
+    color: var(--manual-dark-blue);
+    font-weight: bold;
+}
+
+.manual-table tr:last-child td {
+    border-bottom: none;
 }
 
 ```
