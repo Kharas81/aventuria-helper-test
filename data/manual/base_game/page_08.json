@@ -1,6 +1,15 @@
 {
-  "pageNumber": 7,
-  "title": "Spielmaterial",
-  "image": "assets/images/manual/page_07.png",
-  "content": "<p>Im Aventuria Abenteuermodus kommen die folgenden Spielmaterialien zum Einsatz: Der Abenteuermodus benutzt alle Heldendecks, Lebenspunkte-Karten, Schicksalspunkte und Würfel aus dem Duellmodus. Jeder Held fügt seiner normalen Heldenkarte seine Talentkarte hinzu. Auf der Vorderseite dieser Karte sind seine Talentwerte aufgeführt, und auf der Rückseite die Maximalzahl an Karten, die er in den verschiedenen Kartenkategorien besitzen darf [cite: 176-180].</p><h3>Schergenkarten</h3><p>Mit den Schergenkarten werden Gegner dargestellt, denen die Helden in größerer Zahl in vielen verschiedenen Abenteuern über den Weg laufen können [cite: 181-182].</p><h3>Abenteuerkarten</h3><p>Diese blauen Karten gelten oft nur für ein einzelnes, bestimmtes Abenteuer bzw. einen bestimmten Akt eines Abenteuers und weisen unten auf der Karte den Namen des Abenteuers und die Nummer des Aktes auf, zu dem sie gehören. Zu den Abenteuerkarten zählen die Zeitskala-Karten, Handlungskarten, Anführer-Karten und weitere ergänzende Karten, wie zum Beispiel die Gräber-Karten [cite: 188-191].</p><h3>Belohnungskarten</h3><p>Belohnungskarten sind besondere Aktionskarten, die man während eines Abenteuers erbeuten kann oder am Ende eines Abenteuers als Belohnung erhält. Sie erhöhen die Kampfkraft eines Helden und können beim Kampagnenspiel in sein Heldendeck aufgenommen werden [cite: 193-194].</p><h3>Übungs- und Trainingskarten</h3><p>Diese Karten können von Helden während einer Atempause erworben werden, um anzuzeigen, dass sie sich auf die kommenden Herausforderungen vorbereitet haben [cite: 218-219].</p>"
+  "pageNumber": 8,
+  "title": "Spezialkarten, Spielmarken und Kampfplan",
+  "keywords": [
+    "Spezialkarten",
+    "Spielmarken",
+    "Kampfplan",
+    "Startspielermarke",
+    "Heldenmarken",
+    "Zeitmarke",
+    "Verderbensmarke"
+  ],
+  "image": "assets/images/manual/page_08.png",
+  "content": "<h2>Spezialkarten</h2><p>Die grünen Spezialkarten (Seite 11) sind Karten, die bei verschiedenen Kämpfen zum Einsatz kommen können, wodurch diese abwechslungsreicher und tödlicher werden. Zu den Spezialkarten gehören Ereigniskarten, Anführer-Aktion-Karten, Dämoneneigenschaft-Karten und andere Karten, die üblicherweise zu Zugkarten-Decks zusammengestellt werden.</p><ul><li>Ereigniskarte</li><li>Anführer-Aktion-Karte</li><li>Dämoneneigenschaft-Karte</li></ul><h2>Spielmarken</h2><p>Beim Abenteuermodus kommen alle Spielmarken zum Einsatz:</p><p><strong>Startspielermarke:</strong> Diese Marke zeigt den aktuellen Startspieler (Seite 6) an. Sie wird am Ende jeder Runde weitergereicht (Seite 14).</p><p><strong>Heldenmarken:</strong> Die Heldenmarken kommen bei bestimmten Abenteuersituationen zum Einsatz. Außerdem können sie genutzt werden, um zufällig einen Helden zu bestimmen (Seite 14).</p><p><strong>Lebenspunkte-/Abenteuermarken:</strong> Die Lebenspunktemarken werden genutzt, um die aktuellen Lebenspunkte von Gegnern anzuzeigen. Die Abenteuermarken kommen dagegen bei den Spieleffekten auf Abenteuerkarten zum Einsatz (siehe Seite 11).</p><p><strong>Zeit-/Verderbensmarken:</strong> Die Zeitmarken werden im Zusammenhang mit der Zeitskala (Seite 10) eingesetzt, während die Verderbensmarken bei den Spieleffekten von Gegnerkarten (Seite 14) genutzt werden, und oft im Zusammenhang mit der Niederlage-Bedingung von Abenteuern zum Einsatz kommen.</p><ul><li>Startspielermarke</li><li>Heldenmarken</li><li>Abenteuermarken (5er und 1er)</li><li>Lebenspunktemarken (5er und 1er)</li><li>Zeitmarke</li><li>Verderbensmarke</li></ul><h2>Kampfplan</h2><p>Diese ausfaltbare Auslage hilft beim Platzieren und Auffinden aller im Abenteuermodus benutzter Karten.</p><ul><li>Schergenablage</li><li>Schergenstapel</li><li>Ereigniskartenstapel</li><li>Zeitskala</li><li>Handlungskarte</li><li>Anführer</li><li>Schergen</li></ul>"
 }
