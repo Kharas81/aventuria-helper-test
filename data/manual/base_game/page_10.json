@@ -2,13 +2,118 @@
   "pageNumber": 10,
   "title": "Der Kampf (Vorbereitung)",
   "keywords": [
-    "Der Kampf",
+    "Kampf",
     "Vorbereitung",
     "Zeitskala",
     "Anführerkarte",
-    "Kampfplan",
-    "Abenteuermodus"
+    "Handlungskarten",
+    "Spezialkarten",
+    "Schergenkarten",
+    "Kampfplan"
   ],
   "image": "assets/images/manual/page_10.png",
-  "content": "<h1>Der Kampf (Vorbereitung)</h1><p>Der Kampf im Abenteuermodus folgt weitestgehend den Regeln des Duellmodus, nur dass die Spieler nicht gegeneinander, sondern gemeinsam gegen Feinde aus dem Abenteuer kämpfen.</p><p>Platziert zunächst den Kampfplan in der Tischmitte und lest anschließend den zum Kampf gehörenden Spielanweisungs-Kasten des Abenteuers durch. Platziert nun anhand dieser Spielanweisungen die folgenden Karten auf dem Kampfplan:</p><ol><li>Zeitskala-Karte</li><li>Anführerkarte</li><li>Handlungskarten</li><li>Spezialkarten</li><li>Schergenkarten</li></ol><p>Die Karten-Typen 1 bis 3 sind hierbei abenteuerspezifisch und stets mit dem Namen des Abenteuers und ggf. der Nummer des Aktes versehen.</p><h2>Zeitskala</h2><p>Die Zeitskala zeigt den zeitlichen Ablauf eines Kampfes und mögliche Effekte in bestimmten Runden.</p><ul><li><strong>Kartentitel:</strong> Die vollständige Bezeichnung der Karte.</li><li><strong>Zeitmarken bei Kampfbeginn:</strong> Gibt an, wie viele Zeitmarken bei Kampfbeginn auf dieser Karte platziert werden.</li><li><strong>Spieleffekte:</strong> Ein solcher Spieleffekt tritt ein, wenn nach dem Entfernen einer Zeitmarke im Schritt 4 einer Runde (Seite 14) eine Anzahl Zeitmarken in Höhe der vor dem Symbol aufgeführten Zahl auf dieser Karte liegt.</li><li><strong>Abenteuername:</strong> Der Name des Abenteuers sowie, falls vorhanden, die Nummer des Aktes, zu dem diese Zeitskala gehört.</li></ul><h3>1) Zeitskala-Karte</h3><p>Wählt aus den vier Zeitskalen diejenige aus, die eurem gewählten Schwierigkeitsgrad (Seite 9) entspricht und legt sie auf das dafür vorgesehene Feld des Kampfplans. Platziert auf dieser Karte die angegebene Anzahl an Zeitmarken.</p><h2>Anführerkarte</h2><ul><li><strong>Name des Gegners:</strong> Der vollständige Name des Anführers.</li><li><strong>Schlagworte:</strong> Diese Schlagworte identifizieren die genaue Art des Gegners. Sie kommen im Zusammenhang mit Spieleffekten zum Einsatz.</li><li><strong>Sonderregeln des Gegners:</strong> In einem grau unterlegten Kasten sind besondere Regeln aufgeführt, die für diesen Anführer gelten.</li><li><strong>Abenteuername:</strong> Der Name des Abenteuers sowie, falls vorhanden, die Nummer des Aktes, zu dem dieser Anführer gehört.</li><li><strong>Lebenspunkte:</strong> Die Lebenspunkte des Anführers bei Kampfbeginn. Legt diese in Form von Lebenspunkte-Marken auf die Karte. Bei Anführern errechnen sich die Lebenspunkte oft aus der Anzahl der teilnehmenden Helden.</li><li><strong>Ausweichen:</strong> Der Ausweichen-Wert des Anführers funktioniert genau so wie bei Helden.</li><li><strong>Rüstung:</strong> Dieser Wert wird von allem Schaden abgezogen, den der Anführer durch Angriffe der Helden erleidet.</li><li><strong>Aktionen:</strong> Die Anzahl der Aktionen, die der Anführer durchführen darf, wenn er an der Reihe ist. Bei Anführern errechnet sich diese Zahl oft aus der Anzahl der teilnehmenden Helden.</li><li><strong>Aktionstabelle:</strong> Diese Würfeltabelle deckt alle Zahlen von 1 bis 20 ab, die der Gegner bei einem W20-Würfelwurf erzielen kann, und beschreibt die Spieleffekte, die er dadurch auslöst.</li></ul><h3>2) Anführerkarte</h3><p>Nehmt die Anführerkarte und platziert sie auf das dafür vorgesehene Feld des Kampfplans. Je nach Kampf können auch mehrere Anführerkarten oder keine Anführerkarte zum Einsatz kommen. Bei mehreren Anführern werden diese entsprechend der Reihenfolge in der Spielanweisung von links nach rechts platziert.</p><p>Die Anführerkarten stellen den Beginn der Gegnerreihe (Seite 12) dar, die üblicherweise mit Schergenkarten fortgeführt wird.</p><p>Auf jeder Anführer-Karte werden nun Lebenspunktmarken in Höhe der Anfangs-Lebenspunkte des Anführers platziert. Bei vielen Anführern handelt es sich um eine variable Anzahl von Lebenspunkten, die von der Anzahl der Helden abhängt.</p>"
+  "content": [
+    {
+      "type": "header",
+      "level": 1,
+      "text": "Der Kampf (Vorbereitung)"
+    },
+    {
+      "type": "paragraph",
+      "text": "Der Kampf im Abenteuermodus folgt weitestgehend den Regeln des Duellmodus, nur dass die Spieler nicht gegeneinander, sondern gemeinsam gegen Feinde aus dem Abenteuer kämpfen."
+    },
+    {
+      "type": "paragraph",
+      "text": "Platziert zunächst den Kampfplan in der Tischmitte und lest anschließend den zum Kampf gehörenden Spielanweisungs-Kasten des Abenteuers durch. Platziert nun anhand dieser Spielanweisungen die folgenden Karten auf dem Kampfplan:"
+    },
+    {
+      "type": "rule_block",
+      "header": "Reihenfolge",
+      "text": "1) Zeitskala-Karte. 2) Anführerkarte. 3) Handlungskarten. 4) Spezialkarten. 5) Schergenkarten."
+    },
+    {
+      "type": "paragraph",
+      "text": "Die Karten-Typen 1 bis 3 sind hierbei abenteuerspezifisch und stets mit dem Namen des Abenteuers und gegebenenfalls der Nummer des Aktes versehen."
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "text": "Zeitskala"
+    },
+    {
+      "type": "paragraph",
+      "text": "Kartentitel: Die vollständige Bezeichnung der Karte."
+    },
+    {
+      "type": "paragraph",
+      "text": "Zeitmarken bei Kampfbeginn: Gibt an, wie viele Zeitmarken bei Kampfbeginn auf dieser Karte platziert werden."
+    },
+    {
+      "type": "paragraph",
+      "text": "Spieleffekte: Ein solcher Spieleffekt tritt ein, wenn nach dem Entfernen einer Zeitmarke im Schritt 4 einer Runde eine Anzahl Zeitmarken in Höhe der vor dem Symbol aufgeführten Zahl auf dieser Karte liegt."
+    },
+    {
+      "type": "paragraph",
+      "text": "Abenteuername: Der Name des Abenteuers sowie, falls vorhanden, die Nummer des Aktes, zu dem diese Zeitskala gehört."
+    },
+    {
+      "type": "rule_block",
+      "header": "1) Zeitskala-Karte",
+      "text": "Wählt aus den vier Zeitskalen diejenige aus, die eurem gewählten Schwierigkeitsgrad entspricht und legt sie auf das dafür vorgesehene Feld des Kampfplans. Platziert auf dieser Karte die angegebene Anzahl an Zeitmarken."
+    },
+    {
+      "type": "header",
+      "level": 2,
+      "text": "Anführerkarte"
+    },
+    {
+      "type": "paragraph",
+      "text": "Name des Gegners: Der vollständige Name des Anführers."
+    },
+    {
+      "type": "paragraph",
+      "text": "Schlagworte: Diese Schlagworte identifizieren die genaue Art des Gegners. Sie kommen im Zusammenhang mit Spieleffekten zum Einsatz."
+    },
+    {
+      "type": "paragraph",
+      "text": "Sonderregeln des Gegners: In einem grau unterlegten Kasten sind besondere Regeln aufgeführt, die für diesen Anführer gelten."
+    },
+    {
+      "type": "paragraph",
+      "text": "Abenteuername: Der Name des Abenteuers sowie, falls vorhanden, die Nummer des Aktes, zu dem dieser Anführer gehört."
+    },
+    {
+      "type": "paragraph",
+      "text": "Lebenspunkte: Die Lebenspunkte des Anführers bei Kampfbeginn. Legt diese in Form von Lebenspunkte-Marken auf die Karte. Bei Anführern errechnen sich die Lebenspunkte oft aus der Anzahl der teilnehmenden Helden."
+    },
+    {
+      "type": "paragraph",
+      "text": "Ausweichen: Der Ausweichen-Wert des Anführers funktioniert genau so wie bei Helden."
+    },
+    {
+      "type": "paragraph",
+      "text": "Rüstung: Dieser Wert wird von allem Schaden abgezogen, den der Anführer durch Angriffe der Helden erleidet."
+    },
+    {
+      "type": "paragraph",
+      "text": "Aktionen: Die Anzahl der Aktionen, die der Anführer durchführen darf, wenn er an der Reihe ist. Bei Anführern errechnet sich diese Zahl oft aus der Anzahl der teilnehmenden Helden."
+    },
+    {
+      "type": "paragraph",
+      "text": "Aktionstabelle: Diese Würfeltabelle deckt alle Zahlen von 1 bis 20 ab, die der Gegner bei einem W20-Würfelwurf erzielen kann, und beschreibt die Spieleffekte, die er dadurch auslöst."
+    },
+    {
+      "type": "rule_block",
+      "header": "2) Anführerkarte",
+      "text": "Nehmt die Anführerkarte und platziert sie auf das dafür vorgesehene Feld des Kampfplans. Je nach Kampf können auch mehrere Anführerkarten oder keine Anführerkarte zum Einsatz kommen. Bei mehreren Anführern werden diese entsprechend der Reihenfolge in der Spielanweisung von links nach rechts platziert."
+    },
+    {
+      "type": "paragraph",
+      "text": "Die Anführerkarten stellen den Beginn der Gegnerreihe dar, die üblicherweise mit Schergenkarten fortgeführt wird."
+    },
+    {
+      "type": "paragraph",
+      "text": "Auf jeder Anführer-Karte werden nun Lebenspunktmarken in Höhe der Anfangs-Lebenspunkte des Anführers platziert. Bei vielen Anführern handelt es sich um eine variable Anzahl von Lebenspunkten, die von der Anzahl der Helden abhängt."
+    }
+  ]
 }
