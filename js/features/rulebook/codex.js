@@ -9,29 +9,76 @@ export const RulebookCodex = {
             .trim();
     },
 
+    collectBlockText(rulebook, block) {
+        let combinedText = '';
+
+        const push = value => {
+            const normalized = rulebook.stripCitationMarkers(String(value ?? '')).trim();
+            if (normalized) {
+                combinedText += ` ${normalized}`;
+            }
+        };
+
+        push(block?.text);
+        push(block?.action);
+        push(block?.title);
+        push(block?.header);
+
+        if (block?.results) {
+            Utils.normalizeArray(block.results).forEach(result => {
+                push(result?.outcome);
+                push(result?.text);
+            });
+        }
+
+        if (block?.elements) {
+            Utils.normalizeArray(block.elements).forEach(push);
+        }
+
+        if (block?.items) {
+            Utils.normalizeArray(block.items).forEach(item => {
+                if (typeof item === 'string') {
+                    push(item);
+                    return;
+                }
+
+                push(item?.label);
+                push(item?.text);
+                if (item?.page) {
+                    push(`Seite ${item.page}`);
+                }
+            });
+        }
+
+        if (block?.headers) {
+            Utils.normalizeArray(block.headers).forEach(push);
+        }
+
+        if (block?.rows) {
+            Utils.normalizeArray(block.rows).forEach(row => {
+                Utils.normalizeArray(row).forEach(push);
+            });
+        }
+
+        return combinedText.trim();
+    },
+
     /**
-     * Extrahiert den Text aus den neuen Inhalts-Blöcken für die Suche.
+     * Extrahiert den Text aus den Inhalts-Blöcken für die Suche.
      */
     extractPlainText(rulebook, content) {
         if (!content) return '';
-        if (typeof content === 'string') return this.htmlToPlainText(rulebook.stripCitationMarkers(content));
+
+        if (typeof content === 'string') {
+            return this.htmlToPlainText(rulebook.stripCitationMarkers(content));
+        }
 
         const blocks = Utils.normalizeArray(content);
-        return blocks.map(block => {
-            let combinedText = block.text || block.action || block.title || block.header || '';
-            
-            // Auch Texte in Proben-Ergebnissen einbeziehen
-            if (block.results) {
-                combinedText += ' ' + block.results.map(r => `${r.outcome} ${r.text}`).join(' ');
-            }
-            
-            // Map-Elemente einbeziehen
-            if (block.elements) {
-                combinedText += ' ' + block.elements.join(' ');
-            }
 
-            return rulebook.stripCitationMarkers(combinedText);
-        }).join(' ');
+        return blocks
+            .map(block => this.collectBlockText(rulebook, block))
+            .filter(Boolean)
+            .join(' ');
     },
 
     getExcerpt(text, maxLength = 220) {
@@ -52,8 +99,6 @@ export const RulebookCodex = {
 
                 const data = await response.json();
                 const title = rulebook.stripCitationMarkers(data?.title ?? entry.title ?? `Seite ${entry.page}`);
-                
-                // Nutzt die neue Extraktions-Logik
                 const text = this.extractPlainText(rulebook, data?.content);
 
                 rules.push({
@@ -65,16 +110,19 @@ export const RulebookCodex = {
                 console.warn(`Kodex-Seite ${entry.page} Fehler`, error);
             }
         }
+
         rulebook.rulesData = rules;
     },
 
     bindPageJumpActions(scope, rulebook) {
         scope.querySelectorAll('[data-rulebook-page]').forEach(button => {
             if (button.dataset.bound === 'true') return;
+
             button.addEventListener('click', () => {
                 const page = Number(button.dataset.rulebookPage);
                 if (page > 0) rulebook.jumpToPage(page);
             });
+
             button.dataset.bound = 'true';
         });
     },
@@ -89,26 +137,30 @@ export const RulebookCodex = {
             return;
         }
 
-        const filtered = Utils.normalizeArray(rulebook.rulesData).filter(rule => {
-            const page = String(rule?.page ?? '');
-            const title = String(rule?.title ?? '').toLowerCase();
-            const text = String(rule?.text ?? '').toLowerCase();
-
-            return title.includes(normalizedTerm) || text.includes(normalizedTerm) || page.includes(normalizedTerm);
+        const matches = Utils.normalizeArray(rulebook.rulesData).filter(entry => {
+            const title = Utils.normalizeString(entry?.title).toLowerCase();
+            const text = Utils.normalizeString(entry?.text).toLowerCase();
+            return title.includes(normalizedTerm) || text.includes(normalizedTerm);
         });
 
-        results.innerHTML = filtered.length
-            ? filtered.map(rule => `
-                <div class="rule-entry">
-                    <h4>${Utils.escapeHtml(rule.title)}</h4>
-                    <p><strong>Seite:</strong> ${Utils.escapeHtml(rule.page)}</p>
-                    <p>${Utils.escapeHtml(this.getExcerpt(rule.text))}</p>
-                    <button type="button" class="btn-outline" data-rulebook-page="${Utils.escapeHtml(rule.page)}">
-                        Zur Seite
-                    </button>
-                </div>
-            `).join('')
-            : '<p>Kein Treffer im Kodex.</p>';
+        if (matches.length === 0) {
+            results.innerHTML = '<p class="placeholder-text">Keine Treffer gefunden.</p>';
+            return;
+        }
+
+        results.innerHTML = matches.map(entry => `
+            <div class="rule-entry">
+                <h4>${Utils.escapeHtml(entry.title)} <span class="ui-badge ui-badge--info">S. ${entry.page}</span></h4>
+                <p>${Utils.escapeHtml(this.getExcerpt(entry.text))}</p>
+                <button
+                    type="button"
+                    class="btn-outline btn-sm"
+                    data-rulebook-page="${entry.page}"
+                >
+                    Zur Seite springen
+                </button>
+            </div>
+        `).join('');
 
         this.bindPageJumpActions(results, rulebook);
     }
