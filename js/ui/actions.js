@@ -125,19 +125,29 @@ export const UIActions = {
             },
 
             'open-card-detail': async trigger => {
-                const cardId = Utils.normalizeString(trigger?.dataset?.cardId);
-
-                const hostElement = typeof trigger?.closest === 'function'
-                    ? trigger.closest('[data-card-label]')
-                    : null;
+                const preferArchiveSearch = String(
+                    trigger?.dataset?.preferArchiveSearch || ''
+                ).toLowerCase() === 'true';
 
                 const fallbackQuery = this.normalizeArchiveQuery(
-                    trigger?.dataset?.cardQuery
+                    trigger?.dataset?.archiveQuery
+                    || trigger?.dataset?.cardQuery
                     || trigger?.dataset?.cardLabel
-                    || hostElement?.dataset?.cardQuery
-                    || hostElement?.dataset?.cardLabel
                     || ''
                 );
+
+                const archiveSource = Utils.normalizeString(trigger?.dataset?.archiveSource);
+                const archiveSet = Utils.normalizeString(trigger?.dataset?.archiveSet);
+                const cardId = Utils.normalizeString(trigger?.dataset?.cardId);
+
+                if (preferArchiveSearch && fallbackQuery) {
+                    this.openArchiveWithSearch({
+                        query: fallbackQuery,
+                        sourceFilter: archiveSource,
+                        setKey: archiveSet
+                    });
+                    return;
+                }
 
                 if (cardId) {
                     const openedCard = await ApiCardLookup.openCardDetailById(cardId);
@@ -147,7 +157,11 @@ export const UIActions = {
                 }
 
                 if (fallbackQuery) {
-                    this.openArchiveWithSearch({ query: fallbackQuery });
+                    this.openArchiveWithSearch({
+                        query: fallbackQuery,
+                        sourceFilter: archiveSource,
+                        setKey: archiveSet
+                    });
                 }
             },
 
