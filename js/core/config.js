@@ -8,6 +8,24 @@ export const CONFIG = {
         manualRoot: 'data/manual'
     },
 
+    github: {
+        enabled: true,
+        owner: 'Kharas81',
+        repo: 'aventuria-helper',
+        branch: 'main',
+
+        catalogs: {
+            schergen: {
+                key: 'schergen',
+                dataDir: 'data/cards/catalog/schergen',
+                imageDir: 'assets/images/cards/schergen',
+                defaultType: 'minion',
+                defaultCardCategory: 'schergenkarte',
+                enabled: true
+            }
+        }
+    },
+
     sets: {
         base_game: {
             id: 'base_game',
@@ -122,6 +140,43 @@ export const CONFIG = {
 
     getSetTheme(setKey = '') {
         return this.getSet(setKey)?.theme || { cssVars: {}, meta: {} };
+    },
+
+    isGitHubEnabled() {
+        const github = this.github || {};
+        return Boolean(
+            github.enabled
+            && github.owner
+            && github.repo
+            && github.branch
+        );
+    },
+
+    getGitHubApiBase() {
+        const github = this.github || {};
+        return `https://api.github.com/repos/${github.owner}/${github.repo}/`;
+    },
+
+    getGitHubRawBase() {
+        const github = this.github || {};
+        return `https://raw.githubusercontent.com/${github.owner}/${github.repo}/${github.branch}`;
+    },
+
+    getGitHubCatalogConfig(catalogKey = '') {
+        const normalizedKey = String(catalogKey || '').trim();
+        if (!normalizedKey) {
+            return null;
+        }
+
+        return this.github?.catalogs?.[normalizedKey] || null;
+    },
+
+    getGitHubCatalogDataDir(catalogKey = '') {
+        return this.getGitHubCatalogConfig(catalogKey)?.dataDir || '';
+    },
+
+    getGitHubCatalogImageDir(catalogKey = '') {
+        return this.getGitHubCatalogConfig(catalogKey)?.imageDir || '';
     }
 };
 
