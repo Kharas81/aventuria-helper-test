@@ -1,6 +1,7 @@
 import CONFIG from './config.js';
 import Utils from './utils.js';
 import ApiNormalizers from './api-normalizers.js';
+import ApiCache from './api-cache.js';
 
 export const ApiFetch = {
     async fetchJson(path) {
@@ -23,8 +24,8 @@ export const ApiFetch = {
     async getAdventureIndex(setKey = null) {
         const resolvedSetKey = Utils.normalizeString(setKey || CONFIG.defaultSet);
 
-        if (window.ApiCache?.adventureLists?.[resolvedSetKey]) {
-            return window.ApiCache.adventureLists[resolvedSetKey];
+        if (ApiCache?.adventureLists?.[resolvedSetKey]) {
+            return ApiCache.adventureLists[resolvedSetKey];
         }
 
         const path = CONFIG.getAdventureIndexPath
@@ -35,8 +36,8 @@ export const ApiFetch = {
 
         if (!rawData) {
             const fallback = [];
-            if (window.ApiCache?.adventureLists) {
-                window.ApiCache.adventureLists[resolvedSetKey] = fallback;
+            if (ApiCache?.adventureLists) {
+                ApiCache.adventureLists[resolvedSetKey] = fallback;
             }
             return fallback;
         }
@@ -45,8 +46,8 @@ export const ApiFetch = {
             .map(entry => ApiNormalizers.normalizeAdventureIndexEntry(entry, resolvedSetKey))
             .filter(Boolean);
 
-        if (window.ApiCache?.adventureLists) {
-            window.ApiCache.adventureLists[resolvedSetKey] = entries;
+        if (ApiCache?.adventureLists) {
+            ApiCache.adventureLists[resolvedSetKey] = entries;
         }
 
         return entries;
@@ -85,8 +86,8 @@ export const ApiFetch = {
             throw new Error(`Zirkuläre Alias-Weiterleitung bei Abenteuer "${adventureId}".`);
         }
 
-        if (window.ApiCache?.adventures?.[adventureId]) {
-            return window.ApiCache.adventures[adventureId];
+        if (ApiCache?.adventures?.[adventureId]) {
+            return ApiCache.adventures[adventureId];
         }
 
         const resolvedSetKey = Utils.normalizeString(setKey || CONFIG.defaultSet);
@@ -118,8 +119,8 @@ export const ApiFetch = {
                 visitedIds
             );
 
-            if (redirectedAdventure && window.ApiCache?.adventures) {
-                window.ApiCache.adventures[adventureId] = redirectedAdventure;
+            if (redirectedAdventure && ApiCache?.adventures) {
+                ApiCache.adventures[adventureId] = redirectedAdventure;
             }
 
             return redirectedAdventure;
@@ -127,8 +128,8 @@ export const ApiFetch = {
 
         const normalized = ApiNormalizers.normalizeAdventure(rawData, adventureId, resolvedSetKey);
 
-        if (window.ApiCache?.adventures) {
-            window.ApiCache.adventures[adventureId] = normalized;
+        if (ApiCache?.adventures) {
+            ApiCache.adventures[adventureId] = normalized;
         }
 
         return normalized;
@@ -137,8 +138,8 @@ export const ApiFetch = {
     async getMasterIndex(setKey = null) {
         const resolvedSetKey = Utils.normalizeString(setKey || CONFIG.defaultSet);
 
-        if (window.ApiCache?.masterIndexes?.[resolvedSetKey]) {
-            return window.ApiCache.masterIndexes[resolvedSetKey];
+        if (ApiCache?.masterIndexes?.[resolvedSetKey]) {
+            return ApiCache.masterIndexes[resolvedSetKey];
         }
 
         const path = CONFIG.getMasterIndexPath
@@ -156,8 +157,8 @@ export const ApiFetch = {
                 cards: Utils.normalizeArray(rawData?.cards)
             };
 
-            if (window.ApiCache?.masterIndexes) {
-                window.ApiCache.masterIndexes[resolvedSetKey] = normalized;
+            if (ApiCache?.masterIndexes) {
+                ApiCache.masterIndexes[resolvedSetKey] = normalized;
             }
 
             return normalized;
@@ -173,8 +174,8 @@ export const ApiFetch = {
                 cards: []
             };
 
-            if (window.ApiCache?.masterIndexes) {
-                window.ApiCache.masterIndexes[resolvedSetKey] = fallback;
+            if (ApiCache?.masterIndexes) {
+                ApiCache.masterIndexes[resolvedSetKey] = fallback;
             }
 
             return fallback;
@@ -189,11 +190,9 @@ export const ApiFetch = {
             return { catalog_key: resolvedCatalogKey, cards: [] };
         }
 
-        if (window.ApiCache) {
-            window.ApiCache.catalogIndexes ??= {};
-            if (window.ApiCache.catalogIndexes[resolvedCatalogKey]) {
-                return window.ApiCache.catalogIndexes[resolvedCatalogKey];
-            }
+        ApiCache.catalogIndexes ??= {};
+        if (ApiCache.catalogIndexes[resolvedCatalogKey]) {
+            return ApiCache.catalogIndexes[resolvedCatalogKey];
         }
 
         const rawData = await this.loadJSON(path);
@@ -205,9 +204,7 @@ export const ApiFetch = {
                 .filter(Boolean)
         };
 
-        if (window.ApiCache?.catalogIndexes) {
-            window.ApiCache.catalogIndexes[resolvedCatalogKey] = normalized;
-        }
+        ApiCache.catalogIndexes[resolvedCatalogKey] = normalized;
 
         return normalized;
     }
