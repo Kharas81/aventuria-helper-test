@@ -1,5 +1,6 @@
 import State from '../core/state.js';
 import AppBootstrap from './bootstrap.js';
+import AppRuntime from './runtime.js';
 
 export const App = {
     isApplyingSavedState: false,
@@ -13,7 +14,7 @@ export const App = {
         this.isInitialized = true;
 
         try {
-            const savedState = window.StorageManager?.loadState?.()
+            const savedState = AppRuntime.getStorageManager()?.loadState?.()
                 || State.getDefaultState();
 
             State.replaceState(savedState);
@@ -24,7 +25,7 @@ export const App = {
         } catch (error) {
             this.isInitialized = false;
             console.error('Fehler bei App.init():', error);
-            window.UI?.setStatus?.('⚠️ App konnte nicht initialisiert werden.');
+            AppRuntime.setStatus('⚠️ App konnte nicht initialisiert werden.');
             throw error;
         }
     }
