@@ -1,5 +1,6 @@
 import Utils from '../core/utils.js';
 import State from '../core/state.js';
+import AppRuntime from './runtime.js';
 
 export const AppStateSync = {
     applyStateToControls() {
@@ -105,12 +106,14 @@ export const AppStateSync = {
             targetResult.textContent = safeState?.combatState?.targetResult || '--';
         }
 
-        if (window.Combat?.updateDashboard) {
-            window.Combat.updateDashboard(safeState.heroStats);
+        const combat = AppRuntime.getCombat();
+
+        if (combat?.updateDashboard) {
+            combat.updateDashboard(safeState.heroStats);
         }
 
-        if (window.Combat?.updatePhaseTracker) {
-            window.Combat.updatePhaseTracker(safeState.combatPhase ?? 0);
+        if (combat?.updatePhaseTracker) {
+            combat.updatePhaseTracker(safeState.combatPhase ?? 0);
         }
     }
 };
