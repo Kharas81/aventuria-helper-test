@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 6:48:25 PM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 6:52:23 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -821,6 +821,10 @@ h1 {
     gap: var(--space-md);
     font-size: 1.2em;
     font-weight: bold;
+}
+
+.stat--spaced {
+    margin-top: 8px;
 }
 
 .stat button {
