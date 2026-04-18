@@ -70,7 +70,9 @@ export const ArchiveRenderer = {
     renderToolbar({
         activeSetKey = '',
         activeSourceFilter = ArchiveFilter.ALL_SOURCE_FILTER,
+        activeCategoryFilter = ArchiveFilter.ALL_CATEGORY_FILTER,
         availableSources = [],
+        availableCategories = [],
         currentQuery = '',
         filteredCount = 0,
         totalCount = 0
@@ -79,8 +81,9 @@ export const ArchiveRenderer = {
         if (!container || !CONFIG.getEnabledSets) return;
 
         const enabledSets = CONFIG.getEnabledSets();
+        const showAreaBlock = enabledSets.length > 1;
 
-        const setButtonsHtml = enabledSets.map(setConfig => {
+        const areaButtonsHtml = enabledSets.map(setConfig => {
             const isActive = activeSetKey === setConfig.id;
 
             return this.renderButton({
@@ -94,7 +97,7 @@ export const ArchiveRenderer = {
 
         const sourceButtons = [
             {
-                label: 'Alle Quellen',
+                label: 'Alle Karten-Sets',
                 value: ArchiveFilter.ALL_SOURCE_FILTER
             },
             ...Utils.normalizeArray(availableSources).map(sourceName => ({
@@ -115,6 +118,29 @@ export const ArchiveRenderer = {
             });
         }).join('');
 
+        const categoryButtons = [
+            {
+                label: 'Alle Kategorien',
+                value: ArchiveFilter.ALL_CATEGORY_FILTER
+            },
+            ...Utils.normalizeArray(availableCategories).map(categoryKey => ({
+                label: ArchiveFilter.getCategoryLabel(categoryKey),
+                value: categoryKey
+            }))
+        ];
+
+        const categoryButtonsHtml = categoryButtons.map(category => {
+            const isActive = Utils.normalizeString(activeCategoryFilter) === Utils.normalizeString(category.value);
+
+            return this.renderButton({
+                text: category.label,
+                variant: isActive ? 'solid' : 'outline',
+                action: 'archive-filter-category',
+                actionValue: category.value,
+                attrName: 'data-category-filter'
+            });
+        }).join('');
+
         const summaryParts = [`${filteredCount} von ${totalCount} Karten`];
 
         if (Utils.normalizeString(currentQuery)) {
@@ -125,22 +151,38 @@ export const ArchiveRenderer = {
             Utils.normalizeString(activeSourceFilter)
             && activeSourceFilter !== ArchiveFilter.ALL_SOURCE_FILTER
         ) {
-            summaryParts.push(`Quelle: ${Utils.normalizeString(activeSourceFilter)}`);
+            summaryParts.push(`Karten-Set: ${Utils.normalizeString(activeSourceFilter)}`);
+        }
+
+        if (
+            Utils.normalizeString(activeCategoryFilter)
+            && activeCategoryFilter !== ArchiveFilter.ALL_CATEGORY_FILTER
+        ) {
+            summaryParts.push(`Kategorie: ${ArchiveFilter.getCategoryLabel(activeCategoryFilter)}`);
         }
 
         container.innerHTML = `
             <div class="archive-controls">
+                ${showAreaBlock ? `
+                    <div class="archive-controls__block">
+                        <div class="archive-controls__label">Bereich</div>
+                        <div class="archive-controls__row">
+                            ${areaButtonsHtml}
+                        </div>
+                    </div>
+                ` : ''}
+
                 <div class="archive-controls__block">
-                    <div class="archive-controls__label">Set</div>
+                    <div class="archive-controls__label">Karten-Set</div>
                     <div class="archive-controls__row">
-                        ${setButtonsHtml}
+                        ${sourceButtonsHtml}
                     </div>
                 </div>
 
                 <div class="archive-controls__block">
-                    <div class="archive-controls__label">Quelle</div>
+                    <div class="archive-controls__label">Kategorie</div>
                     <div class="archive-controls__row">
-                        ${sourceButtonsHtml}
+                        ${categoryButtonsHtml}
                     </div>
                 </div>
 
@@ -174,9 +216,14 @@ export const ArchiveRenderer = {
     buildEmptyMessage(options = {}) {
         const query = Utils.normalizeString(options?.query);
         const sourceFilter = Utils.normalizeString(options?.sourceFilter);
+        const categoryFilter = Utils.normalizeString(options?.categoryFilter);
 
         if (query && sourceFilter && sourceFilter !== ArchiveFilter.ALL_SOURCE_FILTER) {
-            return `Keine Karten gefunden für „${query}“ in „${sourceFilter}“.`;
+            return `Keine Karten gefunden für „${query}“ im Karten-Set „${sourceFilter}“.`;
+        }
+
+        if (query && categoryFilter && categoryFilter !== ArchiveFilter.ALL_CATEGORY_FILTER) {
+            return `Keine Karten gefunden für „${query}“ in der Kategorie „${ArchiveFilter.getCategoryLabel(categoryFilter)}“.`;
         }
 
         if (query) {
@@ -184,7 +231,11 @@ export const ArchiveRenderer = {
         }
 
         if (sourceFilter && sourceFilter !== ArchiveFilter.ALL_SOURCE_FILTER) {
-            return `Keine Karten gefunden für die Quelle „${sourceFilter}“.`;
+            return `Keine Karten gefunden für das Karten-Set „${sourceFilter}“.`;
+        }
+
+        if (categoryFilter && categoryFilter !== ArchiveFilter.ALL_CATEGORY_FILTER) {
+            return `Keine Karten gefunden für die Kategorie „${ArchiveFilter.getCategoryLabel(categoryFilter)}“.`;
         }
 
         return 'Keine Karten gefunden.';
