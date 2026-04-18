@@ -1,4 +1,5 @@
 import Utils from '../core/utils.js';
+import CoreRuntime from '../core/runtime.js';
 
 export const RenderCommon = {
     normalizeArray(value) {
@@ -90,6 +91,7 @@ export const RenderCommon = {
 
     bindCardPreviews(scope = document) {
         const previewTargets = scope.querySelectorAll('.has-preview[data-image]');
+        const ui = CoreRuntime.getUI();
 
         previewTargets.forEach(el => {
             if (el.dataset.previewBound === 'true') return;
@@ -97,27 +99,21 @@ export const RenderCommon = {
 
             el.addEventListener('mouseenter', event => {
                 const imageSrc = el.dataset.image;
-                if (window.UI?.showPreview) {
-                    window.UI.showPreview(event, imageSrc);
-                }
+                ui?.showPreview?.(event, imageSrc);
             });
 
             el.addEventListener('mousemove', event => {
-                if (window.UI?.movePreview) {
-                    window.UI.movePreview(event);
-                }
+                ui?.movePreview?.(event);
             });
 
             el.addEventListener('mouseleave', () => {
-                if (window.UI?.closePreview) {
-                    window.UI.closePreview();
-                }
+                ui?.closePreview?.();
             });
 
             el.addEventListener('click', () => {
                 const imageSrc = el.dataset.image;
-                if (imageSrc && window.UI?.openPreview) {
-                    window.UI.openPreview(imageSrc);
+                if (imageSrc) {
+                    ui?.openPreview?.(imageSrc);
                 }
             });
         });
