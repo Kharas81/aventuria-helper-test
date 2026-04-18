@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 3:22:27 PM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 3:22:54 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -10846,7 +10846,8 @@ export const CatalogCardNormalizer = {
             illustration: Utils.normalizeString(rawCard?.illustration),
             source_images: Utils.normalizeArray(rawCard?.sourceImages),
             reference_images: Utils.normalizeArray(rawCard?.referenceImages),
-            original_source: Utils.normalizeString(rawCard?.source)
+            original_source: Utils.normalizeString(rawCard?.source),
+            catalog_key: Utils.normalizeString(entry?.catalogKey)
         };
     },
 
@@ -10910,6 +10911,9 @@ export const CatalogCardNormalizer = {
             stats: this.normalizeStats(rawCard?.stats),
             rules: this.normalizeRules(rawCard),
             source: this.normalizeSource(rawCard, entry, imagePath),
+
+            source_scope: 'central_catalog',
+            source_key: Utils.normalizeString(entry?.catalogKey),
 
             notes: rawCard?.usedDuplicateForVerification
                 ? 'Dublettenbild zur Verifikation verwendet.'
