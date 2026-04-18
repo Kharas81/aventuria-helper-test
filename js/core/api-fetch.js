@@ -179,6 +179,54 @@ export const ApiFetch = {
 
             return fallback;
         }
+    },
+
+    buildGitHubContentsUrl(directoryPath = '') {
+        const safePath = Utils.normalizeString(directoryPath).replace(/^\/+/, '');
+        const apiBase = CONFIG.getGitHubApiBase?.();
+        const branch = Utils.normalizeString(CONFIG.github?.branch);
+
+        if (!apiBase || !safePath || !branch) {
+            return '';
+        }
+
+        return `${apiBase}contents/${safePath}?ref=${encodeURIComponent(branch)}`;
+    },
+
+    async fetchGitHubDirectory(directoryPath = '') {
+        const url = this.buildGitHubContentsUrl(directoryPath);
+
+        if (!url) {
+            return [];
+        }
+
+        const res = await fetch(url, {
+            headers: {
+                Accept: 'application/vnd.github+json'
+            }
+        });
+
+        if (!res.ok) {
+            throw new Error(
+                `GitHub-Verzeichnis konnte nicht geladen werden: ${directoryPath} → HTTP ${res.status}`
+            );
+        }
+
+        const data = await res.json();
+        return Array.isArray(data) ? data : [];
+    },
+
+    async getGitHubCatalogEntries(catalogKey = '') {
+        if (!CONFIG.isGitHubEnabled?.()) {
+            return [];
+        }
+
+        const catalogConfig = CONFIG.getGitHubCatalogConfig?.(catalogKey);
+        if (!catalogConfig?.enabled || !catalogConfig?.dataDir) {
+            return [];
+        }
+
+        return await this.fetchGitHubDirectory(catalogConfig.dataDir);
     }
 };
 
