@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 4:54:41 PM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 4:57:55 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -6961,6 +6961,30 @@ select {
             </div>
         </div>
     </div>
+
+    <!-- =============================================================
+         CARD-DETAIL-TEMPLATE
+    ============================================================== -->
+    <template id="card-detail-modal-template">
+        <div
+            class="modal-backdrop"
+            id="card-detail-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="card-detail-title"
+            aria-hidden="true"
+        >
+            <div class="modal-content">
+                <span
+                    class="close-modal"
+                    data-action="close-card-detail"
+                    aria-label="Kartendetail schließen"
+                >&times;</span>
+
+                <div class="tab-content" id="card-detail-content"></div>
+            </div>
+        </div>
+    </template>
 
     <script type="module" src="js/main.js"></script>
 </body>
