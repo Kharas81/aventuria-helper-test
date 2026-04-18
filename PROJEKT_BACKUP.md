@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 8:36:26 PM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 8:37:08 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -4812,7 +4812,7 @@ select {
   "setId": "rueckkehr_zum_schwarzen_keiler",
   "setShortName": "Rückkehr zum Schwarzen Keiler",
   "setSymbol": "R",
-  "layout": "portrait",
+  "layout": "landscape",
   "image": "sc_bardin.webp",
   "copies": 2,
   "sourceImages": [
