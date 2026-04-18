@@ -26,6 +26,32 @@ export const UIActions = {
         CoreRuntime.persistIfAllowed();
     },
 
+    normalizeArchiveQuery(value = '') {
+        return Utils.normalizeString(value)
+            .replace(/\s*\([^)]*\)\s*$/g, '')
+            .replace(/\s{2,}/g, ' ')
+            .trim();
+    },
+
+    openArchiveWithSearch({ query = '', sourceFilter = '', setKey = '' } = {}) {
+        const archive = CoreRuntime.getArchive();
+        if (!archive?.open) {
+            return;
+        }
+
+        const safeQuery = this.normalizeArchiveQuery(query);
+        const safeSourceFilter = Utils.normalizeString(sourceFilter);
+        const safeSetKey = Utils.normalizeString(setKey);
+
+        CoreRuntime.getRenderCardDetail()?.closeCardDetail?.();
+
+        archive.open({
+            query: safeQuery,
+            sourceFilter: safeSourceFilter,
+            setKey: safeSetKey
+        });
+    },
+
     getActionMap() {
         return {
             'open-archive': () => {
@@ -81,12 +107,47 @@ export const UIActions = {
             },
 
             'archive-load-set': trigger => {
-                CoreRuntime.getArchive()?.loadSet?.(trigger?.dataset?.set);
+                CoreRuntime.getArchive()?.loadSet?.(trigger?.dataset?.set, {
+                    sourceFilter: '__all__'
+                });
             },
 
-            'open-card-detail': trigger => {
-                if (trigger?.dataset?.cardId) {
-                    ApiCardLookup.openCardDetailById(trigger.dataset.cardId);
+            'archive-filter-source': trigger => {
+                CoreRuntime.getArchive()?.setSourceFilter?.(trigger?.dataset?.sourceFilter || '');
+            },
+
+            'archive-search': trigger => {
+                this.openArchiveWithSearch({
+                    query: trigger?.dataset?.archiveQuery || '',
+                    sourceFilter: trigger?.dataset?.archiveSource || '',
+                    setKey: trigger?.dataset?.archiveSet || ''
+                });
+            },
+
+            'open-card-detail': async trigger => {
+                const cardId = Utils.normalizeString(trigger?.dataset?.cardId);
+
+                const hostElement = typeof trigger?.closest === 'function'
+                    ? trigger.closest('[data-card-label]')
+                    : null;
+
+                const fallbackQuery = this.normalizeArchiveQuery(
+                    trigger?.dataset?.cardQuery
+                    || trigger?.dataset?.cardLabel
+                    || hostElement?.dataset?.cardQuery
+                    || hostElement?.dataset?.cardLabel
+                    || ''
+                );
+
+                if (cardId) {
+                    const openedCard = await ApiCardLookup.openCardDetailById(cardId);
+                    if (openedCard) {
+                        return;
+                    }
+                }
+
+                if (fallbackQuery) {
+                    this.openArchiveWithSearch({ query: fallbackQuery });
                 }
             },
 
@@ -110,7 +171,13 @@ export const UIActions = {
 
         const handler = this.getActionMap()[action];
         if (typeof handler === 'function') {
-            handler(trigger);
+            const result = handler(trigger);
+
+            if (result && typeof result.then === 'function') {
+                result.catch(error => {
+                    console.error(`Fehler bei UI-Aktion "${action}":`, error);
+                });
+            }
         }
     },
 
