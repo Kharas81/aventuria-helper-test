@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 7:03:18 PM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 7:13:49 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -14979,6 +14979,7 @@ export default UIModals;
 ## 📄 Datei: js/ui/preview.js
 ```js
 import Utils from '../core/utils.js';
+import CoreRuntime from '../core/runtime.js';
 
 export const UIPreview = {
     offsetX: 18,
@@ -15041,8 +15042,10 @@ export const UIPreview = {
         const resolvedImage = Utils.resolveImagePath(imageSrc);
         if (!resolvedImage) return;
 
-        if (window.RenderCardDetail?.ensureCardDetailModal) {
-            const modal = window.RenderCardDetail.ensureCardDetailModal();
+        const renderCardDetail = CoreRuntime.getRenderCardDetail();
+
+        if (renderCardDetail?.ensureCardDetailModal) {
+            const modal = renderCardDetail.ensureCardDetailModal();
             const content = Utils.byId('card-detail-content');
 
             if (modal && content) {
@@ -15063,6 +15066,7 @@ export const UIPreview = {
                 Utils.setSafeImageSource(previewImage, resolvedImage);
 
                 modal.style.display = 'flex';
+                modal.setAttribute('aria-hidden', 'false');
                 return;
             }
         }
