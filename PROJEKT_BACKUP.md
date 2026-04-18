@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 6:26:42 PM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 6:27:00 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -14436,6 +14436,7 @@ import Constants from '../core/constants.js';
 import State from '../core/state.js';
 import ApiCardLookup from '../core/api-card-lookup.js';
 import UIModals from './modals.js';
+import CoreRuntime from '../core/runtime.js';
 
 export const UIActions = {
     getSectionStateKey(sectionId) {
@@ -14455,27 +14456,25 @@ export const UIActions = {
             State.setSectionOpen(sectionKey, isOpen);
         }
 
-        if (window.StorageManager?.persist) {
-            window.StorageManager.persist();
-        }
+        CoreRuntime.persistIfAllowed();
     },
 
     getActionMap() {
         return {
             'open-archive': () => {
-                window.Archive?.open?.();
+                CoreRuntime.getArchive()?.open?.();
             },
 
             'close-archive': () => {
-                window.Archive?.close?.();
+                CoreRuntime.getArchive()?.close?.();
             },
 
             'open-rulebook': () => {
-                window.Rulebook?.open?.();
+                CoreRuntime.getRulebook()?.open?.();
             },
 
             'close-rulebook': () => {
-                window.Rulebook?.close?.();
+                CoreRuntime.getRulebook()?.close?.();
             },
 
             'toggle-section': trigger => {
@@ -14483,39 +14482,39 @@ export const UIActions = {
             },
 
             'combat-prev-phase': () => {
-                window.Combat?.prevPhase?.();
+                CoreRuntime.getCombat()?.prevPhase?.();
             },
 
             'combat-next-phase': () => {
-                window.Combat?.nextPhase?.();
+                CoreRuntime.getCombat()?.nextPhase?.();
             },
 
             'combat-roll-target': () => {
-                window.Combat?.rollTarget?.();
+                CoreRuntime.getCombat()?.rollTarget?.();
             },
 
             'combat-update-ep': () => {
-                window.Combat?.updateEpResult?.();
+                CoreRuntime.getCombat()?.updateEpResult?.();
             },
 
             'combat-apply-intermission': () => {
-                window.Combat?.applyIntermission?.();
+                CoreRuntime.getCombat()?.applyIntermission?.();
             },
 
             'rulebook-tab': trigger => {
-                window.Rulebook?.showTab?.(trigger?.dataset?.tab);
+                CoreRuntime.getRulebook()?.showTab?.(trigger?.dataset?.tab);
             },
 
             'rulebook-prev-page': () => {
-                window.Rulebook?.prevPage?.();
+                CoreRuntime.getRulebook()?.prevPage?.();
             },
 
             'rulebook-next-page': () => {
-                window.Rulebook?.nextPage?.();
+                CoreRuntime.getRulebook()?.nextPage?.();
             },
 
             'archive-load-set': trigger => {
-                window.Archive?.loadSet?.(trigger?.dataset?.set);
+                CoreRuntime.getArchive()?.loadSet?.(trigger?.dataset?.set);
             },
 
             'open-card-detail': trigger => {
@@ -14525,15 +14524,15 @@ export const UIActions = {
             },
 
             'close-card-detail': () => {
-                window.RenderCardDetail?.closeCardDetail?.();
+                CoreRuntime.getRenderCardDetail()?.closeCardDetail?.();
             },
 
             'toggle-diagnostics-details': () => {
-                window.Diagnostics?.toggleDetails?.();
+                CoreRuntime.getDiagnostics()?.toggleDetails?.();
             },
 
             'clear-diagnostics': () => {
-                window.Diagnostics?.clear?.();
+                CoreRuntime.getDiagnostics()?.clear?.();
             }
         };
     },
