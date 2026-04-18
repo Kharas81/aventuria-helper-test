@@ -1,8 +1,10 @@
 import Utils from '../core/utils.js';
 import State from '../core/state.js';
+import CONFIG from '../core/config.js';
 import ApiFetch from '../core/api-fetch.js';
 import AppAdventureFlow from './adventure-flow.js';
 import AppPersistence from './persistence.js';
+import AppRuntime from './runtime.js';
 
 export const AppControls = {
     getElements() {
@@ -26,7 +28,7 @@ export const AppControls = {
 
         try {
             const adventures = await ApiFetch.getAvailableAdventures();
-            const enabledSets = window.CONFIG?.getEnabledSets?.() || [];
+            const enabledSets = CONFIG.getEnabledSets?.() || [];
             const showSetPrefix = enabledSets.length > 1;
 
             Utils.normalizeArray(adventures).forEach(adventure => {
@@ -50,7 +52,7 @@ export const AppControls = {
             picker.value = previouslySelected || '';
         } catch (error) {
             console.error('Fehler beim Aufbau der Abenteuerliste:', error);
-            window.UI?.setStatus?.('⚠️ Abenteuerliste konnte nicht geladen werden.');
+            AppRuntime.setStatus('⚠️ Abenteuerliste konnte nicht geladen werden.');
         }
     },
 
@@ -72,11 +74,8 @@ export const AppControls = {
 
         heroCount.addEventListener('change', () => {
             State.setHeroCount(heroCount.value);
-            window.Combat?.updateDashboard?.();
-
-            if (!window.App?.isApplyingSavedState && window.StorageManager) {
-                window.StorageManager.persist();
-            }
+            AppRuntime.getCombat()?.updateDashboard?.();
+            AppRuntime.persistIfAllowed();
         });
 
         heroCount.dataset.boundChange = 'true';
@@ -88,11 +87,8 @@ export const AppControls = {
 
         difficulty.addEventListener('change', () => {
             State.setDifficulty(difficulty.value);
-            window.Combat?.updateEpResult?.();
-
-            if (!window.App?.isApplyingSavedState && window.StorageManager) {
-                window.StorageManager.persist();
-            }
+            AppRuntime.getCombat()?.updateEpResult?.();
+            AppRuntime.persistIfAllowed();
         });
 
         difficulty.dataset.boundChange = 'true';
