@@ -6,6 +6,13 @@ export const RenderCommon = {
         return Array.isArray(value) ? value : [];
     },
 
+    normalizeReferenceQuery(label = '') {
+        return Utils.normalizeString(label)
+            .replace(/\s*\([^)]*\)\s*$/g, '')
+            .replace(/\s{2,}/g, ' ')
+            .trim();
+    },
+
     normalizeCard(card) {
         const raw = card && typeof card === 'object' ? card : {};
 
@@ -27,7 +34,9 @@ export const RenderCommon = {
             imageSrc: resolvedImage,
             hasRealImage: Utils.hasRealImage(imageFront, legacyImage),
             tags: this.normalizeArray(raw?.tags),
-            keywords: this.normalizeArray(raw?.keywords)
+            keywords: this.normalizeArray(raw?.keywords),
+            search_aliases: this.normalizeArray(raw?.search_aliases),
+            layout: Utils.normalizeString(raw?.layout || 'portrait').toLowerCase()
         };
     },
 
@@ -52,25 +61,30 @@ export const RenderCommon = {
             ? Utils.normalizeString(card.label)
             : this.getCardLabel(normalized);
 
+        const referenceQuery = this.normalizeReferenceQuery(label);
+
         const safeLabel = Utils.escapeHtml(label);
         const imageSrc = this.getCardImage(normalized);
-        const cardId = Utils.escapeHtml(normalized.id || label);
+        const cardId = Utils.escapeHtml(normalized.id || '');
+        const safeReferenceQuery = Utils.escapeHtml(referenceQuery);
         const hasPreview = normalized.hasRealImage;
         const isMissing = normalized.status === 'missing';
         const isPlaceholder = normalized.status === 'placeholder';
 
         const previewAttr = hasPreview
-            ? ` data-image="${Utils.escapeHtml(imageSrc)}" data-card-id="${cardId}" class="has-preview"`
+            ? ` data-image="${Utils.escapeHtml(imageSrc)}" data-card-id="${cardId || safeReferenceQuery}" class="has-preview"`
             : '';
 
         const infoButton = `
             <button
                 class="info-btn"
                 type="button"
-                title="Kartendetails anzeigen"
+                title="Kartendetails oder passende Karten anzeigen"
                 data-action="open-card-detail"
                 data-card-id="${cardId}"
-                ${normalized.id && !isPlaceholder ? '' : 'disabled'}
+                data-card-label="${safeLabel}"
+                data-card-query="${safeReferenceQuery}"
+                ${(!cardId && !safeReferenceQuery) ? 'disabled' : ''}
             >i</button>
         `;
 
@@ -81,7 +95,12 @@ export const RenderCommon = {
                 : '';
 
         return `
-            <li class="checklist-item" data-card-id="${cardId}">
+            <li
+                class="checklist-item"
+                data-card-id="${cardId}"
+                data-card-label="${safeLabel}"
+                data-card-query="${safeReferenceQuery}"
+            >
                 <input type="checkbox">
                 <span${previewAttr}>${safeLabel}${suffix}</span>
                 ${infoButton}
