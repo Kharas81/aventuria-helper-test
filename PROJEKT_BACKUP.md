@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 8:41:20 PM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 8:41:42 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -2266,9 +2266,33 @@ select {
       { "id": "leader_kobold" }
     ],
     "minion_cards": [
-      { "id": "minion_pirat", "label": "Pirat" },
-      { "id": "minion_ork", "label": "Ork" },
-      { "id": "minion_feiger_goblin", "label": "Feiger Goblin (falls benötigt)" }
+      {
+        "id": "minion_pirat",
+        "label": "Pirat",
+        "search": {
+          "mode": "archive",
+          "query": "Pirat",
+          "setKey": "base_game"
+        }
+      },
+      {
+        "id": "minion_ork",
+        "label": "Ork",
+        "search": {
+          "mode": "archive",
+          "query": "Ork",
+          "setKey": "base_game"
+        }
+      },
+      {
+        "id": "minion_feiger_goblin",
+        "label": "Feiger Goblin (falls benötigt)",
+        "search": {
+          "mode": "archive",
+          "query": "Goblin",
+          "setKey": "base_game"
+        }
+      }
     ],
     "special_cards": [],
     "victory": "Alle Gegner besiegt oder vertrieben.",
