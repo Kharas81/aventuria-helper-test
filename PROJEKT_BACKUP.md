@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 8:55:10 AM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 9:15:32 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5224,6 +5224,60 @@ select {
       "note": "Deck-Referenz. Später als Deckliste oder Pool ausbauen."
     }
   ]
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_bardin.json
+```json
+{
+  "cardName": "Bardin",
+  "cardType": "Schergenkarte",
+  "set": "Rückkehr zum Schwarzen Keiler",
+  "setSymbol": "R",
+  "image": "sc_bardin.webp",
+  "copies": 2,
+  "sourceImages": [
+    "karte_0008.webp",
+    "karte_0009.webp"
+  ],
+  "referenceImages": [
+    "karte_0008.webp",
+    "karte_0009.webp"
+  ],
+  "usedDuplicateForVerification": true,
+  "keywords": ["Mensch", "Gaukler", "Diener"],
+  "specialRules": [
+    "Liegt sie auf einem Anführer, so darf dieser das Würfergebnis seiner [AKTIONEN]-Würfe um 1 reduzieren."
+  ],
+  "stats": {
+    "gefahrenpunkte": 4,
+    "lebenspunkte": 12,
+    "ausweichen": 5,
+    "ruestung": 0,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-10",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "11-15",
+      "title": "Zuspruch",
+      "text": "Heilt jedem Anführer 2 [LEBEN]."
+    },
+    {
+      "range": "16-20",
+      "title": "Flucht/Schutzschild",
+      "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Ist noch mindestens 1 Anführer anwesend, und dieser hat noch keinen Schergen auf sich liegen, so lege die Bardin auf ihn. Solange sie dort liegt, führt sie keine Aktionen durch und der Anführer kann nicht zum Ziel von Angriffen werden."
+    }
+  ],
+  "illustration": "Anja DiPaolo",
+  "source": "card_image"
 }
 
 ```
