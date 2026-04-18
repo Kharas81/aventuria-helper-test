@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 8:15:09 PM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 8:15:27 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -512,6 +512,15 @@ h1 {
     margin: 0 auto;
 }
 
+.card-detail--landscape .card-detail__top {
+    grid-template-columns: 1fr;
+}
+
+.card-detail--landscape .card-detail__image {
+    max-height: 46vh;
+    aspect-ratio: 16 / 9;
+}
+
 .card-detail__header {
     display: flex;
     flex-direction: column;
@@ -606,6 +615,30 @@ h1 {
     margin: 0;
     color: var(--color-text);
     word-break: break-word;
+}
+
+.card-detail__chip-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+
+.card-detail__chip-button {
+    appearance: none;
+    border: 1px solid var(--color-border-soft-card);
+    border-radius: var(--radius-pill);
+    background: var(--color-bg-body);
+    color: var(--color-primary);
+    padding: 4px 10px;
+    font-size: 0.9rem;
+    line-height: 1.2;
+    cursor: pointer;
+    transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.card-detail__chip-button:hover {
+    transform: translateY(-1px);
+    background: var(--color-bg-panel);
 }
 
 .card-detail__stats {
@@ -800,6 +833,10 @@ h1 {
 
     .card-detail__header {
         padding-right: var(--space-3xl);
+    }
+
+    .card-detail__chip-button {
+        font-size: 0.85rem;
     }
 }
 
