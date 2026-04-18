@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 9:40:46 AM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 9:51:32 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -8853,21 +8853,15 @@ export const CONFIG = {
         manualRoot: 'data/manual'
     },
 
-    github: {
-        enabled: true,
-        owner: 'Kharas81',
-        repo: 'aventuria-helper',
-        branch: 'main',
-
-        catalogs: {
-            schergen: {
-                key: 'schergen',
-                dataDir: 'data/cards/catalog/schergen',
-                imageDir: 'assets/images/cards/schergen',
-                defaultType: 'minion',
-                defaultCardCategory: 'schergenkarte',
-                enabled: true
-            }
+    catalogs: {
+        schergen: {
+            key: 'schergen',
+            enabled: true,
+            dataDir: 'data/cards/catalog/schergen',
+            imageDir: 'assets/images/cards/schergen',
+            indexFile: 'data/cards/catalog/schergen/index.json',
+            defaultType: 'minion',
+            defaultCardCategory: 'schergenkarte'
         }
     },
 
@@ -8987,41 +8981,25 @@ export const CONFIG = {
         return this.getSet(setKey)?.theme || { cssVars: {}, meta: {} };
     },
 
-    isGitHubEnabled() {
-        const github = this.github || {};
-        return Boolean(
-            github.enabled
-            && github.owner
-            && github.repo
-            && github.branch
-        );
-    },
-
-    getGitHubApiBase() {
-        const github = this.github || {};
-        return `https://api.github.com/repos/${github.owner}/${github.repo}/`;
-    },
-
-    getGitHubRawBase() {
-        const github = this.github || {};
-        return `https://raw.githubusercontent.com/${github.owner}/${github.repo}/${github.branch}`;
-    },
-
-    getGitHubCatalogConfig(catalogKey = '') {
+    getCatalogConfig(catalogKey = '') {
         const normalizedKey = String(catalogKey || '').trim();
         if (!normalizedKey) {
             return null;
         }
 
-        return this.github?.catalogs?.[normalizedKey] || null;
+        return this.catalogs?.[normalizedKey] || null;
     },
 
-    getGitHubCatalogDataDir(catalogKey = '') {
-        return this.getGitHubCatalogConfig(catalogKey)?.dataDir || '';
+    getCatalogIndexPath(catalogKey = '') {
+        return this.getCatalogConfig(catalogKey)?.indexFile || '';
     },
 
-    getGitHubCatalogImageDir(catalogKey = '') {
-        return this.getGitHubCatalogConfig(catalogKey)?.imageDir || '';
+    getCatalogDataDir(catalogKey = '') {
+        return this.getCatalogConfig(catalogKey)?.dataDir || '';
+    },
+
+    getCatalogImageDir(catalogKey = '') {
+        return this.getCatalogConfig(catalogKey)?.imageDir || '';
     }
 };
 
