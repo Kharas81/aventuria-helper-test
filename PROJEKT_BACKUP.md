@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 7:14:29 PM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 8:12:52 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -10494,6 +10494,18 @@ export const CatalogCardNormalizer = {
             .filter(Boolean);
     },
 
+    normalizeTags(rawTags = []) {
+        return Utils.normalizeArray(rawTags)
+            .map(value => Utils.normalizeString(value).toLowerCase())
+            .filter(Boolean);
+    },
+
+    normalizeSearchAliases(rawAliases = []) {
+        return Utils.normalizeArray(rawAliases)
+            .map(value => Utils.normalizeString(value))
+            .filter(Boolean);
+    },
+
     normalizeSpecialRules(rawSpecialRules = []) {
         return Utils.normalizeArray(rawSpecialRules)
             .map(value => Utils.normalizeString(value))
@@ -10510,9 +10522,47 @@ export const CatalogCardNormalizer = {
             .filter(row => row.roll || row.title || row.description);
     },
 
+    getRawSetName(rawCard = {}) {
+        if (typeof rawCard?.set === 'object' && rawCard?.set !== null) {
+            return Utils.normalizeString(rawCard?.set?.name);
+        }
+
+        return Utils.normalizeString(rawCard?.set);
+    },
+
+    getRawSetId(rawCard = {}) {
+        if (typeof rawCard?.set === 'object' && rawCard?.set !== null) {
+            return Utils.normalizeString(rawCard?.set?.id);
+        }
+
+        return Utils.normalizeString(rawCard?.setId);
+    },
+
+    getRawSetShortName(rawCard = {}) {
+        if (typeof rawCard?.set === 'object' && rawCard?.set !== null) {
+            return Utils.normalizeString(rawCard?.set?.shortName || rawCard?.set?.name);
+        }
+
+        return Utils.normalizeString(rawCard?.setShortName || rawCard?.setSymbol || rawCard?.set);
+    },
+
+    normalizeLayout(rawCard = {}) {
+        const explicit = Utils.normalizeString(rawCard?.layout || rawCard?.orientation).toLowerCase();
+
+        if (explicit === 'landscape' || explicit === 'portrait') {
+            return explicit;
+        }
+
+        return 'portrait';
+    },
+
     buildSearchText(name = '', rawCard = {}) {
+        const setName = this.getRawSetName(rawCard);
+        const setShortName = this.getRawSetShortName(rawCard);
         const specialRules = this.normalizeSpecialRules(rawCard?.specialRules);
         const keywords = this.normalizeKeywords(rawCard?.keywords);
+        const tags = this.normalizeTags(rawCard?.tags);
+        const aliases = this.normalizeSearchAliases(rawCard?.searchAliases);
 
         const actionTexts = Utils.normalizeArray(rawCard?.actionTable)
             .map(row => [
@@ -10525,10 +10575,13 @@ export const CatalogCardNormalizer = {
 
         return [
             name,
-            rawCard?.set,
+            setName,
+            setShortName,
             rawCard?.setSymbol,
             rawCard?.cardType,
+            ...tags,
             ...keywords,
+            ...aliases,
             ...specialRules,
             ...actionTexts
         ]
@@ -10539,6 +10592,7 @@ export const CatalogCardNormalizer = {
 
     buildTags(rawCard = {}, fallbackCategory = 'unknown') {
         const keywords = this.normalizeKeywords(rawCard?.keywords);
+        const explicitTags = this.normalizeTags(rawCard?.tags);
 
         return Array.from(new Set([
             'schergen',
@@ -10546,8 +10600,9 @@ export const CatalogCardNormalizer = {
                 rawCard?.cardType || rawCard?.card_category,
                 fallbackCategory
             ),
+            ...explicitTags,
             ...keywords.map(value => value.toLowerCase())
-        ].map(value => Utils.normalizeString(value)).filter(Boolean)));
+        ].map(value => Utils.normalizeString(value).toLowerCase()).filter(Boolean)));
     },
 
     normalizeStats(rawStats = {}) {
@@ -10565,19 +10620,29 @@ export const CatalogCardNormalizer = {
     },
 
     normalizeSetInfo(rawCard = {}) {
+        const setName = this.getRawSetName(rawCard)
+            || CONFIG.getSetDisplayName?.(CONFIG.defaultSet);
+
+        const setId = this.getRawSetId(rawCard)
+            || CONFIG.defaultSet
+            || 'base_game';
+
+        const shortName = this.getRawSetShortName(rawCard)
+            || setName
+            || CONFIG.getSetShortName?.(CONFIG.defaultSet);
+
         return {
-            id: CONFIG.defaultSet || 'base_game',
-            name: Utils.normalizeString(rawCard?.set)
-                || CONFIG.getSetDisplayName?.(CONFIG.defaultSet),
-            shortName: Utils.normalizeString(rawCard?.setSymbol)
-                || Utils.normalizeString(rawCard?.set)
-                || CONFIG.getSetShortName?.(CONFIG.defaultSet)
+            id: setId,
+            name: setName,
+            shortName
         };
     },
 
     normalizeSource(rawCard = {}, entry = {}, imagePath = '') {
+        const setName = this.getRawSetName(rawCard);
+
         return {
-            book: Utils.normalizeString(rawCard?.set) || 'Katalog',
+            book: setName || 'Katalog',
             page: '',
             note: `Lokaler Katalog: ${Utils.normalizeString(entry?.filePath)}`,
             file_path: Utils.normalizeString(entry?.filePath),
@@ -10586,7 +10651,9 @@ export const CatalogCardNormalizer = {
             source_images: Utils.normalizeArray(rawCard?.sourceImages),
             reference_images: Utils.normalizeArray(rawCard?.referenceImages),
             original_source: Utils.normalizeString(rawCard?.source),
-            catalog_key: Utils.normalizeString(entry?.catalogKey)
+            catalog_key: Utils.normalizeString(entry?.catalogKey),
+            set_symbol: Utils.normalizeString(rawCard?.setSymbol),
+            set_name: setName
         };
     },
 
@@ -10639,6 +10706,7 @@ export const CatalogCardNormalizer = {
             tags: this.buildTags(rawCard, entry?.defaultCardCategory || 'unknown'),
             custom_tags: [],
             keywords: this.normalizeKeywords(rawCard?.keywords),
+            search_aliases: this.normalizeSearchAliases(rawCard?.searchAliases),
 
             images: {
                 front: imagePath,
@@ -10647,6 +10715,7 @@ export const CatalogCardNormalizer = {
             },
 
             image: imagePath,
+            layout: this.normalizeLayout(rawCard),
             stats: this.normalizeStats(rawCard?.stats),
             rules: this.normalizeRules(rawCard),
             source: this.normalizeSource(rawCard, entry, imagePath),
