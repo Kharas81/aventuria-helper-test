@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 4:57:55 PM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 4:58:18 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -13292,6 +13292,11 @@ void boot({
 import Utils from '../core/utils.js';
 import RenderCommon from './common.js';
 
+const CARD_DETAIL_TEMPLATE_ID = 'card-detail-modal-template';
+const CARD_DETAIL_MODAL_ID = 'card-detail-modal';
+const CARD_DETAIL_CONTENT_ID = 'card-detail-content';
+const CARD_DETAIL_IMAGE_ID = 'card-detail-image';
+
 export const RenderCardDetail = {
     symbolMap: {
         '[NAHKAMPF]': 'Nahkampf',
@@ -13486,134 +13491,170 @@ export const RenderCardDetail = {
         `;
     },
 
-    ensureCardDetailModal() {
-        let modal = Utils.byId('card-detail-modal');
+    buildOverviewPanel(card) {
+        const sourceName = Utils.normalizeString(
+            card?.source?.book
+            || card?.set?.name
+            || card?.set?.shortName
+        );
 
+        const metaHtml = this.renderMetaRows([
+            { label: 'Kategorie', value: card.card_category },
+            { label: 'Typ', value: card.type },
+            { label: 'Tags', value: card.tags?.length ? card.tags.join(', ') : '' },
+            { label: 'Keywords', value: card.keywords?.length ? card.keywords.join(', ') : '' },
+            { label: 'Quelle', value: sourceName },
+            { label: 'Illustration', value: card?.source?.illustration || '' }
+        ]);
+
+        return `
+            <section class="card-detail__panel">
+                <h3 class="card-detail__panel-title">Übersicht</h3>
+                ${metaHtml}
+            </section>
+        `;
+    },
+
+    buildValuesPanel(card) {
+        return `
+            <section class="card-detail__panel">
+                <h3 class="card-detail__panel-title">Werte</h3>
+                ${this.renderStats(card.stats)}
+            </section>
+        `;
+    },
+
+    buildImagePanel(card) {
+        if (!card.hasRealImage) {
+            return `
+                <div class="card-detail__image-panel">
+                    <p class="card-detail__empty">Kein Kartenbild vorhanden.</p>
+                </div>
+            `;
+        }
+
+        return `
+            <div class="card-detail__image-panel">
+                <div class="card-detail__image-wrap">
+                    <img
+                        id="${CARD_DETAIL_IMAGE_ID}"
+                        class="card-detail__image"
+                        alt="${Utils.escapeHtml(card.name)}"
+                    >
+                </div>
+            </div>
+        `;
+    },
+
+    buildRulesSections(card) {
+        const notesHtml = Utils.normalizeString(card.notes)
+            ? `
+                <section class="card-detail__text-block">
+                    <h3>Hinweis</h3>
+                    <p class="card-detail__notes">${this.formatRuleText(card.notes)}</p>
+                </section>
+            `
+            : '';
+
+        return [
+            this.renderTextBlock('Passiv', card.rules.passive),
+            this.renderTextBlock('Erfolg', card.rules.success),
+            this.renderTextBlock('Misserfolg', card.rules.fail),
+            this.renderTextBlock('Zieheffekt', card.rules.draw_effect),
+            this.renderRuleList('Zeiteffekte', card.rules.timed_effects),
+            this.renderRuleList('Meilensteine', card.rules.milestones),
+            this.renderActionBlocks(card.rules.action_table),
+            this.renderTextBlock('Flavour', card.rules.flavor),
+            notesHtml
+        ].filter(Boolean).join('');
+    },
+
+    buildDetailMarkup(card) {
+        return `
+            <div class="card-detail">
+                <header class="card-detail__header">
+                    <h2 class="card-detail__title" id="card-detail-title">${Utils.escapeHtml(card.name)}</h2>
+                    ${this.renderHeaderBadges(card)}
+                </header>
+
+                <section class="card-detail__top">
+                    ${this.buildImagePanel(card)}
+
+                    <div class="card-detail__info">
+                        ${this.buildOverviewPanel(card)}
+                        ${this.buildValuesPanel(card)}
+                    </div>
+                </section>
+
+                <section class="card-detail__sections">
+                    ${this.buildRulesSections(card)}
+                </section>
+            </div>
+        `;
+    },
+
+    getTemplate() {
+        return document.getElementById(CARD_DETAIL_TEMPLATE_ID);
+    },
+
+    ensureCardDetailModal() {
+        let modal = Utils.byId(CARD_DETAIL_MODAL_ID);
         if (modal) {
             return modal;
         }
 
-        const wrapper = document.createElement('div');
-        wrapper.innerHTML = `
-            <div class="modal-backdrop" id="card-detail-modal">
-                <div class="modal-content">
-                    <span class="close-modal" data-action="close-card-detail">&times;</span>
-                    <div class="tab-content" id="card-detail-content"></div>
-                </div>
-            </div>
-        `;
+        const template = this.getTemplate();
+        if (!template) {
+            throw new Error('Card-Detail-Template nicht gefunden.');
+        }
 
-        modal = wrapper.firstElementChild;
-        document.body.appendChild(modal);
+        const fragment = template.content.cloneNode(true);
+        document.body.appendChild(fragment);
 
-        modal.addEventListener('click', event => {
-            if (event.target === modal) {
-                this.closeCardDetail();
-            }
-        });
+        modal = Utils.byId(CARD_DETAIL_MODAL_ID);
+
+        if (modal) {
+            modal.addEventListener('click', event => {
+                if (event.target === modal) {
+                    this.closeCardDetail();
+                }
+            });
+        }
 
         return modal;
     },
 
     closeCardDetail() {
-        const modal = Utils.byId('card-detail-modal');
+        const modal = Utils.byId(CARD_DETAIL_MODAL_ID);
         if (modal) {
             modal.style.display = 'none';
+            modal.setAttribute('aria-hidden', 'true');
         }
+    },
+
+    applyCardImage(card) {
+        if (!card.hasRealImage) {
+            return;
+        }
+
+        const image = Utils.byId(CARD_DETAIL_IMAGE_ID);
+        Utils.setSafeImageSource(image, card.imageSrc);
     },
 
     openCardDetail(card) {
         const normalized = this.normalizeCardDetail(card);
         const modal = this.ensureCardDetailModal();
-        const content = Utils.byId('card-detail-content');
+        const content = Utils.byId(CARD_DETAIL_CONTENT_ID);
 
-        if (!modal || !content) return;
-
-        const sourceName = Utils.normalizeString(
-            normalized?.source?.book
-            || normalized?.set?.name
-            || normalized?.set?.shortName
-        );
-
-        const metaHtml = this.renderMetaRows([
-            { label: 'Kategorie', value: normalized.card_category },
-            { label: 'Typ', value: normalized.type },
-            { label: 'Tags', value: normalized.tags?.length ? normalized.tags.join(', ') : '' },
-            { label: 'Keywords', value: normalized.keywords?.length ? normalized.keywords.join(', ') : '' },
-            { label: 'Quelle', value: sourceName },
-            { label: 'Illustration', value: normalized?.source?.illustration || '' }
-        ]);
-
-        const imageHtml = normalized.hasRealImage
-            ? `
-                <div class="card-detail__image-panel">
-                    <div class="card-detail__image-wrap">
-                        <img
-                            id="card-detail-image"
-                            class="card-detail__image"
-                            alt="${Utils.escapeHtml(normalized.name)}"
-                        >
-                    </div>
-                </div>
-            `
-            : `
-                <div class="card-detail__image-panel">
-                    <p class="card-detail__empty">Kein Kartenbild vorhanden.</p>
-                </div>
-            `;
-
-        const notesHtml = Utils.normalizeString(normalized.notes)
-            ? `
-                <section class="card-detail__text-block">
-                    <h3>Hinweis</h3>
-                    <p class="card-detail__notes">${this.formatRuleText(normalized.notes)}</p>
-                </section>
-            `
-            : '';
-
-        content.innerHTML = `
-            <div class="card-detail">
-                <header class="card-detail__header">
-                    <h2 class="card-detail__title">${Utils.escapeHtml(normalized.name)}</h2>
-                    ${this.renderHeaderBadges(normalized)}
-                </header>
-
-                <section class="card-detail__top">
-                    ${imageHtml}
-
-                    <div class="card-detail__info">
-                        <section class="card-detail__panel">
-                            <h3 class="card-detail__panel-title">Übersicht</h3>
-                            ${metaHtml}
-                        </section>
-
-                        <section class="card-detail__panel">
-                            <h3 class="card-detail__panel-title">Werte</h3>
-                            ${this.renderStats(normalized.stats)}
-                        </section>
-                    </div>
-                </section>
-
-                <section class="card-detail__sections">
-                    ${this.renderTextBlock('Passiv', normalized.rules.passive)}
-                    ${this.renderTextBlock('Erfolg', normalized.rules.success)}
-                    ${this.renderTextBlock('Misserfolg', normalized.rules.fail)}
-                    ${this.renderTextBlock('Zieheffekt', normalized.rules.draw_effect)}
-                    ${this.renderRuleList('Zeiteffekte', normalized.rules.timed_effects)}
-                    ${this.renderRuleList('Meilensteine', normalized.rules.milestones)}
-                    ${this.renderActionBlocks(normalized.rules.action_table)}
-                    ${this.renderTextBlock('Flavour', normalized.rules.flavor)}
-                    ${notesHtml}
-                </section>
-            </div>
-        `;
-
-        if (normalized.hasRealImage) {
-            const image = Utils.byId('card-detail-image');
-            Utils.setSafeImageSource(image, normalized.imageSrc);
+        if (!modal || !content) {
+            return;
         }
 
+        content.innerHTML = this.buildDetailMarkup(normalized);
+        this.applyCardImage(normalized);
+
         modal.style.display = 'flex';
+        modal.setAttribute('aria-hidden', 'false');
     }
 };
 
