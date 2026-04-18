@@ -119,7 +119,8 @@ export const CatalogCardNormalizer = {
             illustration: Utils.normalizeString(rawCard?.illustration),
             source_images: Utils.normalizeArray(rawCard?.sourceImages),
             reference_images: Utils.normalizeArray(rawCard?.referenceImages),
-            original_source: Utils.normalizeString(rawCard?.source)
+            original_source: Utils.normalizeString(rawCard?.source),
+            catalog_key: Utils.normalizeString(entry?.catalogKey)
         };
     },
 
@@ -183,6 +184,9 @@ export const CatalogCardNormalizer = {
             stats: this.normalizeStats(rawCard?.stats),
             rules: this.normalizeRules(rawCard),
             source: this.normalizeSource(rawCard, entry, imagePath),
+
+            source_scope: 'central_catalog',
+            source_key: Utils.normalizeString(entry?.catalogKey),
 
             notes: rawCard?.usedDuplicateForVerification
                 ? 'Dublettenbild zur Verifikation verwendet.'
