@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 4:54:23 PM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 4:54:41 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -6780,7 +6780,7 @@ select {
                         <div class="step">Zeitphase</div>
                     </div>
 
-                    <div class="button-group" style="justify-content:center; margin-bottom: 20px;">
+                    <div class="button-group button-group--center button-group--mb-lg">
                         <button type="button" class="btn-outline" data-action="combat-prev-phase">
                             Phase zurück
                         </button>
@@ -6795,7 +6795,7 @@ select {
                         </button>
                     </div>
 
-                    <div class="top-bar" style="margin-bottom: 0;">
+                    <div class="top-bar top-bar--compact">
                         <div class="config-item">
                             <label for="remainingTime"><strong>Zeitmarker:</strong></label>
                             <input type="number" id="remainingTime" min="0" value="0">
@@ -6832,7 +6832,7 @@ select {
 
                         <div class="result-badge" id="intermission-result">Atempause</div>
 
-                        <div class="button-group" style="justify-content:center; margin-top: 20px;">
+                        <div class="button-group button-group--center button-group--mt-lg">
                             <button type="button" class="btn" data-action="combat-apply-intermission">
                                 Atempause anwenden
                             </button>
@@ -6844,7 +6844,11 @@ select {
             <!-- -----------------------------------------------------
                  DIAGNOSTICS
             ------------------------------------------------------ -->
-            <section id="diagnostics-section" class="hidden" style="margin-top: 30px;" aria-label="Diagnosebereich">
+            <section
+                id="diagnostics-section"
+                class="hidden section-spacer-top"
+                aria-label="Diagnosebereich"
+            >
                 <div id="diagnostics-summary"></div>
                 <div id="diagnostics-details" class="hidden"></div>
             </section>
