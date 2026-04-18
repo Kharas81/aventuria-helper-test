@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 7:13:49 PM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 7:14:03 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -13406,6 +13406,7 @@ export default RulebookUIDom;
 ## 📄 Datei: js/features/rulebook/rulebook-ui-render.js
 ```js
 import Utils from '../../core/utils.js';
+import CONFIG from '../../core/config.js';
 import RulebookUIDom from './rulebook-ui-dom.js';
 
 export const RulebookUIRender = {
@@ -13415,7 +13416,7 @@ export const RulebookUIRender = {
             return;
         }
 
-        label.textContent = window.CONFIG?.getSetDisplayName?.(setKey) || 'Regelbuch';
+        label.textContent = CONFIG.getSetDisplayName?.(setKey) || 'Regelbuch';
     },
 
     renderPageList(indexData, onJump) {
