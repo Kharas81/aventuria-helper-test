@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 6:28:29 PM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 6:40:30 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -11392,6 +11392,22 @@ export const CombatDashboard = {
 };
 
 export default CombatDashboard;
+
+```
+
+---
+
+## 📄 Datei: js/features/combat/runtime.js
+```js
+import CoreRuntime from '../../core/runtime.js';
+
+export const CombatRuntime = {
+    persistIfAllowed() {
+        CoreRuntime.persistIfAllowed();
+    }
+};
+
+export default CombatRuntime;
 
 ```
 
