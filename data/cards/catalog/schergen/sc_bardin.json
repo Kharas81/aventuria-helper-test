@@ -5,7 +5,7 @@
   "setId": "rueckkehr_zum_schwarzen_keiler",
   "setShortName": "Rückkehr zum Schwarzen Keiler",
   "setSymbol": "R",
-  "layout": "portrait",
+  "layout": "landscape",
   "image": "sc_bardin.webp",
   "copies": 2,
   "sourceImages": [
