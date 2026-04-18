@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 6:26:27 PM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 6:26:42 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -7378,64 +7378,59 @@ export default AppPersistence;
 
 ## 📄 Datei: js/app/runtime.js
 ```js
+import CoreRuntime from '../core/runtime.js';
+
 export const AppRuntime = {
     getGlobal(name) {
-        return window?.[name] ?? null;
+        return CoreRuntime.getGlobal(name);
     },
 
     getApp() {
-        return this.getGlobal('App');
+        return CoreRuntime.getApp();
     },
 
     getUI() {
-        return this.getGlobal('UI');
+        return CoreRuntime.getUI();
     },
 
     getStorageManager() {
-        return this.getGlobal('StorageManager');
+        return CoreRuntime.getStorageManager();
     },
 
     getDiagnostics() {
-        return this.getGlobal('Diagnostics');
+        return CoreRuntime.getDiagnostics();
     },
 
     getCombat() {
-        return this.getGlobal('Combat');
+        return CoreRuntime.getCombat();
     },
 
     getRenderSetup() {
-        return this.getGlobal('RenderSetup');
+        return CoreRuntime.getRenderSetup();
     },
 
     getNarrative() {
-        return this.getGlobal('Narrative');
+        return CoreRuntime.getNarrative();
     },
 
     setStatus(message) {
-        this.getUI()?.setStatus?.(message);
+        CoreRuntime.setStatus(message);
     },
 
     clearDiagnostics() {
-        this.getDiagnostics()?.clear?.();
+        CoreRuntime.clearDiagnostics();
     },
 
     isApplyingSavedState() {
-        return Boolean(this.getApp()?.isApplyingSavedState);
+        return CoreRuntime.isApplyingSavedState();
     },
 
     setApplyingSavedState(value) {
-        const app = this.getApp();
-        if (app) {
-            app.isApplyingSavedState = Boolean(value);
-        }
+        CoreRuntime.setApplyingSavedState(value);
     },
 
     persistIfAllowed() {
-        if (this.isApplyingSavedState()) {
-            return;
-        }
-
-        this.getStorageManager()?.persist?.();
+        CoreRuntime.persistIfAllowed();
     }
 };
 
