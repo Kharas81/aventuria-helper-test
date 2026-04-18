@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 7:14:03 PM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 7:14:29 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -13243,6 +13243,7 @@ export default RulebookRulesData;
 ## 📄 Datei: js/features/rulebook/rulebook-set-manager.js
 ```js
 import Utils from '../../core/utils.js';
+import CONFIG from '../../core/config.js';
 import Constants from '../../core/constants.js';
 import Events from '../../core/events.js';
 import ApiCardLookup from '../../core/api-card-lookup.js';
@@ -13254,16 +13255,16 @@ export const RulebookSetManager = {
 
     resolveSetKey(preferredSetKey = '') {
         const normalizedPreferred = Utils.normalizeString(preferredSetKey);
-        if (normalizedPreferred && window.CONFIG?.hasSet?.(normalizedPreferred)) {
+        if (normalizedPreferred && CONFIG.hasSet?.(normalizedPreferred)) {
             return normalizedPreferred;
         }
 
         const activeSet = ApiCardLookup.getActiveSetKey?.();
-        if (activeSet && window.CONFIG?.hasSet?.(activeSet)) {
+        if (activeSet && CONFIG.hasSet?.(activeSet)) {
             return activeSet;
         }
 
-        return window.CONFIG?.defaultSet || 'base_game';
+        return CONFIG.defaultSet || 'base_game';
     },
 
     async ensureSet(rulebook, setKey = '') {
