@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 8:13:08 PM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 8:13:33 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -10320,6 +10320,8 @@ import ArchiveRenderer from './renderer.js';
 
 export const Archive = {
     currentSet: CONFIG.defaultSet || 'base_game',
+    currentSearchTerm: '',
+    currentSourceFilter: ArchiveFilter.ALL_SOURCE_FILTER,
     allCards: [],
     filteredCards: [],
     isLoading: false,
@@ -10338,21 +10340,55 @@ export const Archive = {
         );
     },
 
-    async open() {
+    normalizeSourceFilter(sourceFilter = '') {
+        const normalized = Utils.normalizeString(sourceFilter);
+        return normalized || ArchiveFilter.ALL_SOURCE_FILTER;
+    },
+
+    applyFilters() {
+        this.filteredCards = ArchiveFilter.filterCards(this.allCards, {
+            searchTerm: this.currentSearchTerm,
+            sourceFilter: this.currentSourceFilter
+        });
+
+        this.render();
+    },
+
+    async open(options = {}) {
         const modal = this.getModal();
         if (!modal) return;
 
         modal.style.display = 'flex';
 
-        const nextSet = ArchiveLoader.getSuggestedSetKey(this.currentSet)
-            || this.getResolvedCurrentSet();
+        const desiredSet = Utils.normalizeString(
+            options?.setKey
+            || ArchiveLoader.getSuggestedSetKey(this.currentSet)
+            || this.getResolvedCurrentSet()
+        );
 
-        if (nextSet !== this.currentSet || !this.allCards.length) {
-            await this.loadSet(nextSet);
+        const hasExplicitQuery = Object.prototype.hasOwnProperty.call(options, 'query');
+        const hasExplicitSource = Object.prototype.hasOwnProperty.call(options, 'sourceFilter');
+
+        if (desiredSet !== this.currentSet || !this.allCards.length) {
+            await this.loadSet(desiredSet, {
+                query: hasExplicitQuery ? Utils.normalizeString(options.query) : this.currentSearchTerm,
+                sourceFilter: hasExplicitSource
+                    ? this.normalizeSourceFilter(options.sourceFilter)
+                    : ArchiveFilter.ALL_SOURCE_FILTER
+            });
             return;
         }
 
-        this.render();
+        if (hasExplicitQuery) {
+            this.currentSearchTerm = Utils.normalizeString(options.query);
+        }
+
+        if (hasExplicitSource) {
+            this.currentSourceFilter = this.normalizeSourceFilter(options.sourceFilter);
+        }
+
+        ArchiveRenderer.setSearchValue(this.currentSearchTerm);
+        this.applyFilters();
     },
 
     close() {
@@ -10362,7 +10398,7 @@ export const Archive = {
         modal.style.display = 'none';
     },
 
-    async loadSet(setKey = '') {
+    async loadSet(setKey = '', options = {}) {
         const resolvedSetKey = Utils.normalizeString(
             setKey || CONFIG.defaultSet || 'base_game'
         );
@@ -10371,21 +10407,42 @@ export const Archive = {
             return;
         }
 
+        const previousSet = this.currentSet;
+        const hasExplicitQuery = Object.prototype.hasOwnProperty.call(options, 'query');
+        const hasExplicitSource = Object.prototype.hasOwnProperty.call(options, 'sourceFilter');
+
         this.currentSet = resolvedSetKey;
         this.isLoading = true;
 
-        ArchiveRenderer.renderSetButtons(this.currentSet);
+        ArchiveRenderer.renderToolbar({
+            activeSetKey: this.currentSet,
+            activeSourceFilter: this.currentSourceFilter,
+            availableSources: [],
+            currentQuery: this.currentSearchTerm,
+            filteredCount: 0,
+            totalCount: 0
+        });
+
         ArchiveRenderer.showLoading();
 
         try {
             const loadedCards = await ArchiveLoader.fetchCardsForSet(this.currentSet);
 
             this.allCards = Utils.normalizeArray(loadedCards);
-            this.filteredCards = [...this.allCards];
             this.isLoading = false;
 
-            ArchiveRenderer.resetSearch();
-            this.render();
+            if (hasExplicitQuery) {
+                this.currentSearchTerm = Utils.normalizeString(options.query);
+            }
+
+            if (hasExplicitSource) {
+                this.currentSourceFilter = this.normalizeSourceFilter(options.sourceFilter);
+            } else if (resolvedSetKey !== previousSet) {
+                this.currentSourceFilter = ArchiveFilter.ALL_SOURCE_FILTER;
+            }
+
+            ArchiveRenderer.setSearchValue(this.currentSearchTerm);
+            this.applyFilters();
 
             Events.emit(
                 Constants.events?.archiveSetChanged || 'archive:setChanged',
@@ -10412,13 +10469,29 @@ export const Archive = {
     },
 
     handleSearch(searchTerm = '') {
-        this.filteredCards = ArchiveFilter.filterCards(this.allCards, searchTerm) || [];
-        this.render();
+        this.currentSearchTerm = Utils.normalizeString(searchTerm);
+        this.applyFilters();
+    },
+
+    setSourceFilter(sourceFilter = '') {
+        this.currentSourceFilter = this.normalizeSourceFilter(sourceFilter);
+        this.applyFilters();
     },
 
     render() {
-        ArchiveRenderer.renderSetButtons(this.currentSet);
-        ArchiveRenderer.renderGrid(this.filteredCards);
+        ArchiveRenderer.renderToolbar({
+            activeSetKey: this.currentSet,
+            activeSourceFilter: this.currentSourceFilter,
+            availableSources: ArchiveFilter.getAvailableSources(this.allCards),
+            currentQuery: this.currentSearchTerm,
+            filteredCount: this.filteredCards.length,
+            totalCount: this.allCards.length
+        });
+
+        ArchiveRenderer.renderGrid(this.filteredCards, {
+            query: this.currentSearchTerm,
+            sourceFilter: this.currentSourceFilter
+        });
     },
 
     bindSearch() {
@@ -10452,7 +10525,15 @@ export const Archive = {
     init() {
         this.bindSearch();
         this.bindModalClose();
-        ArchiveRenderer.renderSetButtons(this.currentSet);
+
+        ArchiveRenderer.renderToolbar({
+            activeSetKey: this.currentSet,
+            activeSourceFilter: this.currentSourceFilter,
+            availableSources: [],
+            currentQuery: '',
+            filteredCount: 0,
+            totalCount: 0
+        });
     }
 };
 
