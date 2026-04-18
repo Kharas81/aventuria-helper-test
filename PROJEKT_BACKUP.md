@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 8:50:36 AM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 8:50:46 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5294,7 +5294,10 @@ select {
   "cardType": "Schergenkarte",
   "set": "Aventuria Grundbox",
   "setSymbol": "A",
-  "image": "karte_0002_gross_90.webp",
+  "image": "sc_geruestetes_skelett.webp",
+  "sourceImages": [
+    "karte_0002.webp"
+  ],
   "keywords": ["Untot", "Skelett"],
   "specialRules": [
     "Bei [FERNKAMPF]-Angriffen gegen das Skelett wird das Ergebnis, das die Würfel beim Schadenswurf zeigen, halbiert (aufrunden)."
@@ -5334,9 +5337,7 @@ select {
     }
   ],
   "illustration": "Elif Siebenpfeiffer",
-  "source": "card_image",
-  "copies": 1,
-  "sourceImages": ["karte_0002_gross_90.webp"]
+  "source": "card_image"
 }
 
 ```
