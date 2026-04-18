@@ -84,6 +84,10 @@
     font-weight: bold;
 }
 
+.stat--spaced {
+    margin-top: 8px;
+}
+
 .stat button {
     background: var(--color-secondary);
     color: var(--color-white);
