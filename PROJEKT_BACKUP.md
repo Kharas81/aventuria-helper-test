@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 9:16:30 AM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 9:16:48 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5370,6 +5370,62 @@ select {
       "range": "6-12",
       "title": "Brenne, toter Stoff",
       "text": "Der Held mit den meisten [UNSICHERES_SYMBOL_ROT_OVAL] verliert für jede vor ihm liegende dauerhafte Karte 1 [LEBEN]. Die Laienmagierin verliert 1W6 [LEBEN]."
+    },
+    {
+      "range": "13-17",
+      "title": "Ausruhen",
+      "text": "Heilt bei sich 2 [LEBEN]."
+    },
+    {
+      "range": "18-20",
+      "title": "Nichts",
+      "text": "Starrt düster vor sich hin."
+    }
+  ],
+  "illustration": "Luisa Preißler",
+  "source": "card_image",
+  "uncertain": true,
+  "uncertainFields": [
+    "actionTable[1].text"
+  ],
+  "uncertainNotes": [
+    "Auf der Karte steht ein noch nicht sicher zugeordnetes rotes ovales Symbol. Vorläufiger Platzhalter: [UNSICHERES_SYMBOL_ROT_OVAL]."
+  ]
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_borbaradianische_laienmagierin_goldgier_uebermanne_dich.json
+```json
+{
+  "cardName": "Borbaradianische Laienmagierin",
+  "cardType": "Schergenkarte",
+  "set": "Rückkehr zum Schwarzen Keiler",
+  "setSymbol": "R",
+  "image": "sc_borbaradianische_laienmagierin_goldgier_uebermanne_dich.webp",
+  "sourceImages": [
+    "karte_0014.webp"
+  ],
+  "keywords": ["Mensch", "Borbaradianer", "Zauberer"],
+  "stats": {
+    "gefahrenpunkte": 3,
+    "lebenspunkte": 13,
+    "ausweichen": "-",
+    "ruestung": 2,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-5",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein Held nach Wahl der Helden erhält 1W6+1 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "6-12",
+      "title": "Goldgier übermanne dich",
+      "text": "Der Held mit den meisten [UNSICHERES_SYMBOL_ROT_OVAL] muss 2 Handkarten seiner Wahl abwerfen. Die Laienmagierin verliert 1W6 [LEBEN]."
     },
     {
       "range": "13-17",
