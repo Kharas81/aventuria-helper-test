@@ -1,4 +1,5 @@
 import Utils from '../../core/utils.js';
+import CoreRuntime from '../../core/runtime.js';
 
 export const Narrative = {
     normalizeChecks(checks) {
@@ -90,10 +91,7 @@ export const Narrative = {
                     const resultText = check.results?.[type] ?? 'Kein Ergebnis vorhanden.';
 
                     this.showCheckResult(button, type, resultText);
-
-                    if (window.StorageManager?.persist) {
-                        window.StorageManager.persist();
-                    }
+                    CoreRuntime.persistIfAllowed();
                 });
 
                 button.dataset.boundNarrative = 'true';
