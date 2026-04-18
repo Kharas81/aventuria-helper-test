@@ -33,7 +33,7 @@ export const UIActions = {
             .trim();
     },
 
-    openArchiveWithSearch({ query = '', sourceFilter = '', setKey = '' } = {}) {
+    openArchiveWithSearch({ query = '', sourceFilter = '', categoryFilter = '', setKey = '' } = {}) {
         const archive = CoreRuntime.getArchive();
         if (!archive?.open) {
             return;
@@ -41,6 +41,7 @@ export const UIActions = {
 
         const safeQuery = this.normalizeArchiveQuery(query);
         const safeSourceFilter = Utils.normalizeString(sourceFilter);
+        const safeCategoryFilter = Utils.normalizeString(categoryFilter);
         const safeSetKey = Utils.normalizeString(setKey);
 
         CoreRuntime.getRenderCardDetail()?.closeCardDetail?.();
@@ -48,6 +49,7 @@ export const UIActions = {
         archive.open({
             query: safeQuery,
             sourceFilter: safeSourceFilter,
+            categoryFilter: safeCategoryFilter,
             setKey: safeSetKey
         });
     },
@@ -108,7 +110,8 @@ export const UIActions = {
 
             'archive-load-set': trigger => {
                 CoreRuntime.getArchive()?.loadSet?.(trigger?.dataset?.set, {
-                    sourceFilter: '__all__'
+                    sourceFilter: '__all__',
+                    categoryFilter: '__all__'
                 });
             },
 
@@ -116,10 +119,15 @@ export const UIActions = {
                 CoreRuntime.getArchive()?.setSourceFilter?.(trigger?.dataset?.sourceFilter || '');
             },
 
+            'archive-filter-category': trigger => {
+                CoreRuntime.getArchive()?.setCategoryFilter?.(trigger?.dataset?.categoryFilter || '');
+            },
+
             'archive-search': trigger => {
                 this.openArchiveWithSearch({
                     query: trigger?.dataset?.archiveQuery || '',
                     sourceFilter: trigger?.dataset?.archiveSource || '',
+                    categoryFilter: trigger?.dataset?.archiveCategory || '',
                     setKey: trigger?.dataset?.archiveSet || ''
                 });
             },
@@ -137,6 +145,7 @@ export const UIActions = {
                 );
 
                 const archiveSource = Utils.normalizeString(trigger?.dataset?.archiveSource);
+                const archiveCategory = Utils.normalizeString(trigger?.dataset?.archiveCategory);
                 const archiveSet = Utils.normalizeString(trigger?.dataset?.archiveSet);
                 const cardId = Utils.normalizeString(trigger?.dataset?.cardId);
 
@@ -144,6 +153,7 @@ export const UIActions = {
                     this.openArchiveWithSearch({
                         query: fallbackQuery,
                         sourceFilter: archiveSource,
+                        categoryFilter: archiveCategory,
                         setKey: archiveSet
                     });
                     return;
@@ -160,6 +170,7 @@ export const UIActions = {
                     this.openArchiveWithSearch({
                         query: fallbackQuery,
                         sourceFilter: archiveSource,
+                        categoryFilter: archiveCategory,
                         setKey: archiveSet
                     });
                 }
