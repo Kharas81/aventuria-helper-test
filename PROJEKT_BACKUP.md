@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 6:16:06 PM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 6:16:22 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -7314,6 +7314,7 @@ export default AppControls;
 import State from '../core/state.js';
 import AppStateSync from './state-sync.js';
 import AppAdventureFlow from './adventure-flow.js';
+import AppRuntime from './runtime.js';
 
 export const AppPersistence = {
     autoSaveBound: false,
@@ -7323,38 +7324,36 @@ export const AppPersistence = {
             return;
         }
 
-        window.StorageManager?.bindAutoSave?.();
+        AppRuntime.getStorageManager()?.bindAutoSave?.();
         this.autoSaveBound = true;
     },
 
     saveCurrentState() {
-        if (!window.StorageManager) {
-            window.UI?.setStatus?.('⚠️ Speichern nicht verfügbar.');
+        const storageManager = AppRuntime.getStorageManager();
+
+        if (!storageManager) {
+            AppRuntime.setStatus('⚠️ Speichern nicht verfügbar.');
             return;
         }
 
-        window.StorageManager.persist();
-        window.UI?.setStatus?.('💾 Spielstand gespeichert.');
+        storageManager.persist();
+        AppRuntime.setStatus('💾 Spielstand gespeichert.');
     },
 
     async clearSavedState() {
-        if (window.StorageManager) {
-            window.StorageManager.clearState();
-        }
+        AppRuntime.getStorageManager()?.clearState?.();
 
         State.reset();
         AppStateSync.resetUIToDefaults();
-        window.Diagnostics?.clear?.();
-        window.UI?.setStatus?.('🗑️ Spielstand gelöscht.');
+        AppRuntime.clearDiagnostics();
+        AppRuntime.setStatus('🗑️ Spielstand gelöscht.');
     },
 
     async restoreSavedState() {
         const state = State.getState();
         if (!state) return;
 
-        if (window.App) {
-            window.App.isApplyingSavedState = true;
-        }
+        AppRuntime.setApplyingSavedState(true);
 
         try {
             AppStateSync.applyStateToControls();
@@ -7363,12 +7362,10 @@ export const AppPersistence = {
                 await AppAdventureFlow.handleUpdate({ skipPersist: true });
             } else {
                 AppStateSync.resetUIToDefaults();
-                window.Diagnostics?.clear?.();
+                AppRuntime.clearDiagnostics();
             }
         } finally {
-            if (window.App) {
-                window.App.isApplyingSavedState = false;
-            }
+            AppRuntime.setApplyingSavedState(false);
         }
     }
 };
