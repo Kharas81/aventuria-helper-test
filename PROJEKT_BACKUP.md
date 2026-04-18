@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 11:05:31 AM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 3:20:22 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -8345,6 +8345,8 @@ export const ApiCache = {
     cardPayloads: {},
     catalogCards: {},
     masterIndexes: {},
+    catalogIndexes: {},
+    catalogCollections: {},
 
     clear() {
         this.adventures = {};
@@ -8352,6 +8354,8 @@ export const ApiCache = {
         this.cardPayloads = {};
         this.catalogCards = {};
         this.masterIndexes = {};
+        this.catalogIndexes = {};
+        this.catalogCollections = {};
     },
 
     clearSet(setKey) {
@@ -8363,6 +8367,20 @@ export const ApiCache = {
         Object.keys(this.cardPayloads).forEach(cacheKey => {
             if (cacheKey.startsWith(key + '::')) {
                 delete this.cardPayloads[cacheKey];
+            }
+        });
+    },
+
+    clearCatalog(catalogKey) {
+        const key = String(catalogKey ?? '').trim();
+        if (!key) return;
+
+        delete this.catalogIndexes[key];
+        delete this.catalogCollections[key];
+
+        Object.keys(this.catalogCards).forEach(cacheKey => {
+            if (cacheKey.includes(`/catalog/${key}/`)) {
+                delete this.catalogCards[cacheKey];
             }
         });
     }
