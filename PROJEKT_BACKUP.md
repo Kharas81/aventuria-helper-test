@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 9:15:46 AM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 9:16:01 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5335,6 +5335,62 @@ select {
   ],
   "illustration": "Malte Zirbel",
   "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_borbaradianischer_laienmagier_hoellenpein_zerreisse_dich.json
+```json
+{
+  "cardName": "Borbaradianischer Laienmagier",
+  "cardType": "Schergenkarte",
+  "set": "Rückkehr zum Schwarzen Keiler",
+  "setSymbol": "R",
+  "image": "sc_borbaradianischer_laienmagier_hoellenpein_zerreisse_dich.webp",
+  "sourceImages": [
+    "karte_0013.webp"
+  ],
+  "keywords": ["Mensch", "Borbaradianer", "Zauberer"],
+  "stats": {
+    "gefahrenpunkte": 3,
+    "lebenspunkte": 13,
+    "ausweichen": "-",
+    "ruestung": 2,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-5",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein Held nach Wahl der Helden erhält 1W6+1 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "6-12",
+      "title": "Höllenpein zerreiße dich",
+      "text": "Der Held mit den meisten [UNSICHERES_SYMBOL_ROT_OVAL] verliert 2W6 [LEBEN]. Der Laienmagier verliert 1W6 [LEBEN]."
+    },
+    {
+      "range": "13-17",
+      "title": "Ausruhen",
+      "text": "Heilt bei sich 2 [LEBEN]."
+    },
+    {
+      "range": "18-20",
+      "title": "Nichts",
+      "text": "Starrt düster vor sich hin."
+    }
+  ],
+  "illustration": "Verena Biskup",
+  "source": "card_image",
+  "uncertain": true,
+  "uncertainFields": [
+    "actionTable[1].text"
+  ],
+  "uncertainNotes": [
+    "Auf der Karte steht ein noch nicht sicher zugeordnetes rotes ovales Symbol. Vorläufiger Platzhalter: [UNSICHERES_SYMBOL_ROT_OVAL]."
+  ]
 }
 
 ```
