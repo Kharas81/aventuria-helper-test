@@ -40,6 +40,28 @@ export const RenderSetup = {
             : '';
     },
 
+    normalizeSearchConfig(entry = {}, adventure = {}) {
+        const search = entry?.search && typeof entry.search === 'object'
+            ? entry.search
+            : {};
+
+        const label = Utils.normalizeString(entry?.label || entry?.name || entry?.id || '');
+
+        return {
+            preferArchiveSearch: Boolean(
+                search?.mode === 'archive'
+                || search?.preferArchiveSearch
+            ),
+            archiveQuery: Utils.normalizeString(search?.query || label),
+            archiveSource: Utils.normalizeString(search?.sourceFilter || ''),
+            archiveSet: Utils.normalizeString(
+                search?.setKey
+                || adventure?.set?.id
+                || ''
+            )
+        };
+    },
+
     splitCardsBySetup(adventure, allCards = []) {
         const cardsById = new Map(
             RenderCommon.normalizeArray(allCards)
@@ -48,25 +70,31 @@ export const RenderSetup = {
         );
 
         const mapEntries = entries => RenderCommon.normalizeArray(entries).map(entry => {
-            const refId = Utils.normalizeString(
-                typeof entry === 'string' ? entry : entry?.id
-            );
-            const label = Utils.normalizeString(
-                typeof entry === 'object' ? entry?.label : ''
-            );
+            const entryObject = typeof entry === 'object' && entry !== null
+                ? entry
+                : { id: entry };
+
+            const refId = Utils.normalizeString(entryObject?.id);
+            const label = Utils.normalizeString(entryObject?.label);
+            const searchConfig = this.normalizeSearchConfig(entryObject, adventure);
 
             if (!refId) {
                 return {
                     id: '',
                     name: label || 'Unbekannter Eintrag',
                     label: label || 'Unbekannter Eintrag',
-                    status: 'missing'
+                    status: 'missing',
+                    ...searchConfig
                 };
             }
 
             const existing = cardsById.get(refId);
             if (existing) {
-                return label ? { ...existing, label } : existing;
+                return {
+                    ...existing,
+                    label: label || existing?.label || existing?.name || refId,
+                    ...searchConfig
+                };
             }
 
             return {
@@ -75,7 +103,8 @@ export const RenderSetup = {
                 label: label || refId,
                 status: /^special_|^story_|^minions?_eurer_wahl$/i.test(refId)
                     ? 'placeholder'
-                    : 'missing'
+                    : 'missing',
+                ...searchConfig
             };
         });
 
