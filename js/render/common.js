@@ -57,16 +57,25 @@ export const RenderCommon = {
 
     buildChecklistItem(card) {
         const normalized = this.normalizeCard(card);
+
         const label = card?.label
             ? Utils.normalizeString(card.label)
             : this.getCardLabel(normalized);
 
-        const referenceQuery = this.normalizeReferenceQuery(label);
+        const explicitArchiveQuery = Utils.normalizeString(card?.archiveQuery);
+        const referenceQuery = explicitArchiveQuery || this.normalizeReferenceQuery(label);
+
+        const archiveSource = Utils.normalizeString(card?.archiveSource);
+        const archiveSet = Utils.normalizeString(card?.archiveSet);
+        const preferArchiveSearch = Boolean(card?.preferArchiveSearch);
 
         const safeLabel = Utils.escapeHtml(label);
         const imageSrc = this.getCardImage(normalized);
         const cardId = Utils.escapeHtml(normalized.id || '');
         const safeReferenceQuery = Utils.escapeHtml(referenceQuery);
+        const safeArchiveSource = Utils.escapeHtml(archiveSource);
+        const safeArchiveSet = Utils.escapeHtml(archiveSet);
+
         const hasPreview = normalized.hasRealImage;
         const isMissing = normalized.status === 'missing';
         const isPlaceholder = normalized.status === 'placeholder';
@@ -84,6 +93,10 @@ export const RenderCommon = {
                 data-card-id="${cardId}"
                 data-card-label="${safeLabel}"
                 data-card-query="${safeReferenceQuery}"
+                data-archive-query="${safeReferenceQuery}"
+                data-archive-source="${safeArchiveSource}"
+                data-archive-set="${safeArchiveSet}"
+                data-prefer-archive-search="${preferArchiveSearch ? 'true' : 'false'}"
                 ${(!cardId && !safeReferenceQuery) ? 'disabled' : ''}
             >i</button>
         `;
@@ -100,6 +113,9 @@ export const RenderCommon = {
                 data-card-id="${cardId}"
                 data-card-label="${safeLabel}"
                 data-card-query="${safeReferenceQuery}"
+                data-archive-source="${safeArchiveSource}"
+                data-archive-set="${safeArchiveSet}"
+                data-prefer-archive-search="${preferArchiveSearch ? 'true' : 'false'}"
             >
                 <input type="checkbox">
                 <span${previewAttr}>${safeLabel}${suffix}</span>
