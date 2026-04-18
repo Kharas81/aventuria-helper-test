@@ -27,87 +27,91 @@ export const UIActions = {
         }
     },
 
+    getActionMap() {
+        return {
+            'open-archive': () => {
+                window.Archive?.open?.();
+            },
+
+            'close-archive': () => {
+                window.Archive?.close?.();
+            },
+
+            'open-rulebook': () => {
+                window.Rulebook?.open?.();
+            },
+
+            'close-rulebook': () => {
+                window.Rulebook?.close?.();
+            },
+
+            'toggle-section': trigger => {
+                this.toggleSection(trigger?.dataset?.target || '');
+            },
+
+            'combat-prev-phase': () => {
+                window.Combat?.prevPhase?.();
+            },
+
+            'combat-next-phase': () => {
+                window.Combat?.nextPhase?.();
+            },
+
+            'combat-roll-target': () => {
+                window.Combat?.rollTarget?.();
+            },
+
+            'combat-update-ep': () => {
+                window.Combat?.updateEpResult?.();
+            },
+
+            'combat-apply-intermission': () => {
+                window.Combat?.applyIntermission?.();
+            },
+
+            'rulebook-tab': trigger => {
+                window.Rulebook?.showTab?.(trigger?.dataset?.tab);
+            },
+
+            'rulebook-prev-page': () => {
+                window.Rulebook?.prevPage?.();
+            },
+
+            'rulebook-next-page': () => {
+                window.Rulebook?.nextPage?.();
+            },
+
+            'archive-load-set': trigger => {
+                window.Archive?.loadSet?.(trigger?.dataset?.set);
+            },
+
+            'open-card-detail': trigger => {
+                if (trigger?.dataset?.cardId) {
+                    ApiCardLookup.openCardDetailById(trigger.dataset.cardId);
+                }
+            },
+
+            'close-card-detail': () => {
+                window.RenderCardDetail?.closeCardDetail?.();
+            },
+
+            'toggle-diagnostics-details': () => {
+                window.Diagnostics?.toggleDetails?.();
+            },
+
+            'clear-diagnostics': () => {
+                window.Diagnostics?.clear?.();
+            }
+        };
+    },
+
     handleActionTrigger(trigger) {
         const action = String(trigger?.dataset?.action ?? '').trim();
         if (!action) return;
 
-        switch (action) {
-            case 'open-archive':
-                window.Archive?.open?.();
-                break;
-
-            case 'close-archive':
-                window.Archive?.close?.();
-                break;
-
-            case 'open-rulebook':
-                window.Rulebook?.open?.();
-                break;
-
-            case 'close-rulebook':
-                window.Rulebook?.close?.();
-                break;
-
-            case 'toggle-section':
-                this.toggleSection(trigger.dataset.target);
-                break;
-
-            case 'combat-prev-phase':
-                window.Combat?.prevPhase?.();
-                break;
-
-            case 'combat-next-phase':
-                window.Combat?.nextPhase?.();
-                break;
-
-            case 'combat-roll-target':
-                window.Combat?.rollTarget?.();
-                break;
-
-            case 'combat-update-ep':
-                window.Combat?.updateEpResult?.();
-                break;
-
-            case 'combat-apply-intermission':
-                window.Combat?.applyIntermission?.();
-                break;
-
-            case 'rulebook-tab':
-                window.Rulebook?.showTab?.(trigger.dataset.tab);
-                break;
-
-            case 'rulebook-prev-page':
-                window.Rulebook?.prevPage?.();
-                break;
-
-            case 'rulebook-next-page':
-                window.Rulebook?.nextPage?.();
-                break;
-
-            case 'archive-load-set':
-                window.Archive?.loadSet?.(trigger.dataset.set);
-                break;
-
-            case 'open-card-detail':
-                if (trigger.dataset.cardId) {
-                    ApiCardLookup.openCardDetailById(trigger.dataset.cardId);
-                }
-                break;
-
-            case 'close-card-detail':
-                window.RenderCardDetail?.closeCardDetail?.();
-                break;
-
-            case 'toggle-diagnostics-details':
-                window.Diagnostics?.toggleDetails?.();
-                break;
-
-            case 'clear-diagnostics':
-                window.Diagnostics?.clear?.();
-                break;
-
-            default:
-                break;
+        const handler = this.getActionMap()[action];
+        if (typeof handler === 'function') {
+            handler(trigger);
         }
     },
 
