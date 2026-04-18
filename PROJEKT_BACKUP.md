@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 11:04:37 AM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 11:05:31 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -13688,6 +13688,15 @@ import Utils from '../core/utils.js';
 import RenderCommon from './common.js';
 
 export const RenderCardDetail = {
+    symbolMap: {
+        '[NAHKAMPF]': 'Nahkampf',
+        '[FERNKAMPF]': 'Fernkampf',
+        '[TREFFERPUNKTE]': 'Trefferpunkte',
+        '[LEBEN]': 'Leben',
+        '[AKTIONEN]': 'Aktionen',
+        '[UNSICHERES_SYMBOL_ROT_OVAL]': 'rotes Oval-Symbol'
+    },
+
     normalizeCardDetail(card) {
         const normalized = RenderCommon.normalizeCard(card);
 
@@ -13718,8 +13727,69 @@ export const RenderCardDetail = {
         };
     },
 
-    renderStatsTable(stats) {
-        const rows = [
+    formatRuleText(text = '') {
+        let formatted = Utils.escapeHtml(String(text ?? ''));
+
+        Object.entries(this.symbolMap).forEach(([token, label]) => {
+            const escapedToken = token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            formatted = formatted.replace(
+                new RegExp(escapedToken, 'g'),
+                `<span class="card-detail__symbol">${Utils.escapeHtml(label)}</span>`
+            );
+        });
+
+        return formatted;
+    },
+
+    getStatusBadgeVariant(status = '') {
+        const normalized = Utils.normalizeString(status).toLowerCase();
+
+        if (normalized === 'playable') return 'success';
+        if (normalized.includes('placeholder')) return 'warning';
+        if (normalized === 'missing') return 'danger';
+        return 'default';
+    },
+
+    renderBadge(text = '', variant = 'default') {
+        const safeText = Utils.normalizeString(text);
+        if (!safeText) return '';
+
+        return `<span class="ui-badge ui-badge--${variant}">${Utils.escapeHtml(safeText)}</span>`;
+    },
+
+    renderHeaderBadges(card) {
+        const badges = [
+            this.renderBadge(card?.card_category || '', 'info'),
+            this.renderBadge(card?.type || '', 'default'),
+            this.renderBadge(card?.status || '', this.getStatusBadgeVariant(card?.status))
+        ].filter(Boolean);
+
+        return badges.length
+            ? `<div class="card-detail__badges">${badges.join('')}</div>`
+            : '';
+    },
+
+    renderMetaRows(items = []) {
+        const safeItems = items.filter(item => Utils.normalizeString(item?.value));
+
+        if (!safeItems.length) {
+            return '<p class="card-detail__empty">Keine Zusatzinfos vorhanden.</p>';
+        }
+
+        return `
+            <dl class="card-detail__meta">
+                ${safeItems.map(item => `
+                    <div class="card-detail__meta-row">
+                        <dt class="card-detail__meta-label">${Utils.escapeHtml(item.label)}</dt>
+                        <dd class="card-detail__meta-value">${Utils.escapeHtml(String(item.value))}</dd>
+                    </div>
+                `).join('')}
+            </dl>
+        `;
+    },
+
+    renderStats(stats = {}) {
+        const entries = [
             ['GP', stats?.gp],
             ['LP', stats?.lp],
             ['Rüstung', stats?.armor],
@@ -13729,19 +13799,31 @@ export const RenderCardDetail = {
             ['Kosten', stats?.cost]
         ].filter(([, value]) => value !== null && value !== undefined && value !== '');
 
-        if (!rows.length) return '';
+        if (!entries.length) {
+            return '<p class="card-detail__empty">Keine Werte vorhanden.</p>';
+        }
 
         return `
-            <table class="detail-table">
-                <tbody>
-                    ${rows.map(([label, value]) => `
-                        <tr>
-                            <th>${Utils.escapeHtml(label)}</th>
-                            <td>${Utils.escapeHtml(String(value))}</td>
-                        </tr>
-                    `).join('')}
-                </tbody>
-            </table>
+            <div class="card-detail__stats">
+                ${entries.map(([label, value]) => `
+                    <div class="card-detail__stat">
+                        <span class="card-detail__stat-label">${Utils.escapeHtml(label)}</span>
+                        <span class="card-detail__stat-value">${Utils.escapeHtml(String(value))}</span>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    },
+
+    renderTextBlock(title = '', text = '') {
+        const safeText = Utils.normalizeString(text);
+        if (!safeText) return '';
+
+        return `
+            <section class="card-detail__text-block">
+                <h3>${Utils.escapeHtml(title)}</h3>
+                <p>${this.formatRuleText(safeText)}</p>
+            </section>
         `;
     },
 
@@ -13750,56 +13832,52 @@ export const RenderCardDetail = {
         if (!safeItems.length) return '';
 
         return `
-            <div class="rule-entry">
-                <h4>${Utils.escapeHtml(title)}</h4>
-                <ul>
+            <section class="card-detail__text-block">
+                <h3>${Utils.escapeHtml(title)}</h3>
+                <div class="card-detail__sections">
                     ${safeItems.map(item => {
                         if (typeof item === 'string') {
-                            return `<li>${Utils.escapeHtml(item)}</li>`;
+                            return `<p>${this.formatRuleText(item)}</p>`;
                         }
 
-                        const value = Utils.escapeHtml(item?.[valueKey] ?? '');
+                        const value = Utils.normalizeString(item?.[valueKey] ?? '');
                         const prefix = item?.value !== undefined && item?.value !== null
-                            ? `<strong>${Utils.escapeHtml(String(item.value))}:</strong> `
+                            ? `${Utils.escapeHtml(String(item.value))}: `
                             : item?.roll
-                                ? `<strong>${Utils.escapeHtml(String(item.roll))}:</strong> `
+                                ? `${Utils.escapeHtml(String(item.roll))}: `
                                 : item?.title
-                                    ? `<strong>${Utils.escapeHtml(String(item.title))}:</strong> `
+                                    ? `${Utils.escapeHtml(String(item.title))}: `
                                     : '';
 
-                        return `<li>${prefix}${value}</li>`;
+                        return `<p>${prefix}${this.formatRuleText(value)}</p>`;
                     }).join('')}
-                </ul>
-            </div>
+                </div>
+            </section>
         `;
     },
 
-    renderActionTable(actionTable) {
+    renderActionBlocks(actionTable) {
         const rows = RenderCommon.normalizeArray(actionTable).filter(Boolean);
         if (!rows.length) return '';
 
         return `
-            <div class="rule-entry">
-                <h4>Aktionstabelle</h4>
-                <table class="detail-table">
-                    <thead>
-                        <tr>
-                            <th>Wurf</th>
-                            <th>Titel</th>
-                            <th>Beschreibung</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${rows.map(row => `
-                            <tr>
-                                <td>${Utils.escapeHtml(row?.roll ?? '')}</td>
-                                <td>${Utils.escapeHtml(row?.title ?? '')}</td>
-                                <td>${Utils.escapeHtml(row?.description ?? '')}</td>
-                            </tr>
-                        `).join('')}
-                    </tbody>
-                </table>
-            </div>
+            <section class="card-detail__text-block">
+                <h3>Aktionen</h3>
+                <div class="card-detail__actions">
+                    ${rows.map(row => `
+                        <article class="card-detail__action">
+                            <div class="card-detail__action-top">
+                                ${row?.roll ? `<span class="card-detail__roll">${Utils.escapeHtml(String(row.roll))}</span>` : ''}
+                                ${row?.title ? `<span class="card-detail__action-title">${this.formatRuleText(String(row.title))}</span>` : ''}
+                            </div>
+                            ${row?.description
+                                ? `<p class="card-detail__action-text">${this.formatRuleText(String(row.description))}</p>`
+                                : '<p class="card-detail__empty">Keine Beschreibung vorhanden.</p>'
+                            }
+                        </article>
+                    `).join('')}
+                </div>
+            </section>
         `;
     },
 
@@ -13846,53 +13924,82 @@ export const RenderCardDetail = {
 
         if (!modal || !content) return;
 
-        const meta = [
-            normalized.card_category && { label: 'Kategorie', value: normalized.card_category },
-            normalized.type && { label: 'Typ', value: normalized.type },
-            normalized.status && { label: 'Status', value: normalized.status },
-            normalized.subtypes?.length && { label: 'Untertypen', value: normalized.subtypes.join(', ') },
-            normalized.tags?.length && { label: 'Tags', value: normalized.tags.join(', ') },
-            normalized.keywords?.length && { label: 'Keywords', value: normalized.keywords.join(', ') },
-            normalized.source?.book && { label: 'Quelle', value: normalized.source.book },
-            normalized.source?.page && { label: 'Seite', value: normalized.source.page }
-        ].filter(Boolean);
+        const sourceName = Utils.normalizeString(
+            normalized?.source?.book
+            || normalized?.set?.name
+            || normalized?.set?.shortName
+        );
 
-        const metaHtml = meta.length
-            ? `
-                <dl class="ui-meta-list">
-                    ${meta.map(item => `
-                        <div class="ui-meta-list__row">
-                            <dt class="ui-meta-list__label">${Utils.escapeHtml(item.label)}</dt>
-                            <dd class="ui-meta-list__value">${Utils.escapeHtml(String(item.value))}</dd>
-                        </div>
-                    `).join('')}
-                </dl>
-            `
-            : '';
+        const metaHtml = this.renderMetaRows([
+            { label: 'Kategorie', value: normalized.card_category },
+            { label: 'Typ', value: normalized.type },
+            { label: 'Tags', value: normalized.tags?.length ? normalized.tags.join(', ') : '' },
+            { label: 'Keywords', value: normalized.keywords?.length ? normalized.keywords.join(', ') : '' },
+            { label: 'Quelle', value: sourceName },
+            { label: 'Illustration', value: normalized?.source?.illustration || '' }
+        ]);
 
         const imageHtml = normalized.hasRealImage
             ? `
-                <div class="img-wrapper">
-                    <img id="card-detail-image" class="manual-page-img" alt="${Utils.escapeHtml(normalized.name)}">
+                <div class="card-detail__image-panel">
+                    <div class="card-detail__image-wrap">
+                        <img
+                            id="card-detail-image"
+                            class="card-detail__image"
+                            alt="${Utils.escapeHtml(normalized.name)}"
+                        >
+                    </div>
                 </div>
+            `
+            : `
+                <div class="card-detail__image-panel">
+                    <p class="card-detail__empty">Kein Kartenbild vorhanden.</p>
+                </div>
+            `;
+
+        const notesHtml = Utils.normalizeString(normalized.notes)
+            ? `
+                <section class="card-detail__text-block">
+                    <h3>Hinweis</h3>
+                    <p class="card-detail__notes">${this.formatRuleText(normalized.notes)}</p>
+                </section>
             `
             : '';
 
         content.innerHTML = `
-            <div class="reader-text">
-                <h2>${Utils.escapeHtml(normalized.name)}</h2>
-                ${imageHtml}
-                ${metaHtml}
-                ${this.renderStatsTable(normalized.stats)}
+            <div class="card-detail">
+                <header class="card-detail__header">
+                    <h2 class="card-detail__title">${Utils.escapeHtml(normalized.name)}</h2>
+                    ${this.renderHeaderBadges(normalized)}
+                </header>
 
-                ${normalized.rules.passive ? `<div class="rule-entry"><h4>Passiv</h4><p>${Utils.escapeHtml(normalized.rules.passive)}</p></div>` : ''}
-                ${normalized.rules.success ? `<div class="rule-entry"><h4>Erfolg</h4><p>${Utils.escapeHtml(normalized.rules.success)}</p></div>` : ''}
-                ${normalized.rules.fail ? `<div class="rule-entry"><h4>Misserfolg</h4><p>${Utils.escapeHtml(normalized.rules.fail)}</p></div>` : ''}
-                ${normalized.rules.draw_effect ? `<div class="rule-entry"><h4>Zieheffekt</h4><p>${Utils.escapeHtml(normalized.rules.draw_effect)}</p></div>` : ''}
-                ${this.renderRuleList('Zeiteffekte', normalized.rules.timed_effects)}
-                ${this.renderRuleList('Meilensteine', normalized.rules.milestones)}
-                ${this.renderActionTable(normalized.rules.action_table)}
-                ${normalized.rules.flavor ? `<div class="rule-entry"><h4>Flavour</h4><p>${Utils.escapeHtml(normalized.rules.flavor)}</p></div>` : ''}
+                <section class="card-detail__top">
+                    ${imageHtml}
+
+                    <div class="card-detail__info">
+                        <section class="card-detail__panel">
+                            <h3 class="card-detail__panel-title">Übersicht</h3>
+                            ${metaHtml}
+                        </section>
+
+                        <section class="card-detail__panel">
+                            <h3 class="card-detail__panel-title">Werte</h3>
+                            ${this.renderStats(normalized.stats)}
+                        </section>
+                    </div>
+                </section>
+
+                <section class="card-detail__sections">
+                    ${this.renderTextBlock('Passiv', normalized.rules.passive)}
+                    ${this.renderTextBlock('Erfolg', normalized.rules.success)}
+                    ${this.renderTextBlock('Misserfolg', normalized.rules.fail)}
+                    ${this.renderTextBlock('Zieheffekt', normalized.rules.draw_effect)}
+                    ${this.renderRuleList('Zeiteffekte', normalized.rules.timed_effects)}
+                    ${this.renderRuleList('Meilensteine', normalized.rules.milestones)}
+                    ${this.renderActionBlocks(normalized.rules.action_table)}
+                    ${this.renderTextBlock('Flavour', normalized.rules.flavor)}
+                    ${notesHtml}
+                </section>
             </div>
         `;
 
