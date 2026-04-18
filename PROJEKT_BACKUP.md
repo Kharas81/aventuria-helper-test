@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 4:54:07 PM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 4:54:23 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -11,16 +11,36 @@
     flex-wrap: wrap;
 }
 
+.top-bar--compact {
+    margin-bottom: 0;
+}
+
 .button-group {
     display: flex;
     gap: var(--space-md);
     flex-wrap: wrap;
 }
 
+.button-group--center {
+    justify-content: center;
+}
+
+.button-group--mt-lg {
+    margin-top: var(--space-2xl);
+}
+
+.button-group--mb-lg {
+    margin-bottom: var(--space-2xl);
+}
+
 .config-item {
     display: flex;
     align-items: center;
     gap: var(--space-md);
+}
+
+.section-spacer-top {
+    margin-top: var(--space-4xl);
 }
 
 /* --- KARTEN-LISTEN & GRID --- */
