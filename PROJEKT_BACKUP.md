@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 4:53:52 PM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 4:54:07 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -7300,7 +7300,9 @@ export const AppPersistence = {
         const state = State.getState();
         if (!state) return;
 
-        window.App.isApplyingSavedState = true;
+        if (window.App) {
+            window.App.isApplyingSavedState = true;
+        }
 
         try {
             AppStateSync.applyStateToControls();
@@ -7311,10 +7313,10 @@ export const AppPersistence = {
                 AppStateSync.resetUIToDefaults();
                 window.Diagnostics?.clear?.();
             }
-
-            AppStateSync.applySavedSubsystems(state);
         } finally {
-            window.App.isApplyingSavedState = false;
+            if (window.App) {
+                window.App.isApplyingSavedState = false;
+            }
         }
     }
 };
