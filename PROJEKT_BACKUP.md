@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 8:50:46 AM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 8:50:57 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5351,7 +5351,10 @@ select {
   "cardType": "Schergenkarte",
   "set": "Aventuria Grundbox",
   "setSymbol": "A",
-  "image": "karte_0003_gross_90.webp",
+  "image": "sc_graeberskelett.webp",
+  "sourceImages": [
+    "karte_0003.webp"
+  ],
   "keywords": ["Untot", "Skelett"],
   "specialRules": [
     "[Nur mit Gräber-Karten einsetzbar.]",
@@ -5387,9 +5390,7 @@ select {
     }
   ],
   "illustration": "Nadine Schäkel",
-  "source": "card_image",
-  "copies": 1,
-  "sourceImages": ["karte_0003_gross_90.webp"]
+  "source": "card_image"
 }
 
 ```
