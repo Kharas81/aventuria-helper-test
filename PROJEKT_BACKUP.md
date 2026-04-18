@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 8:15:47 PM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 8:36:26 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -4809,7 +4809,10 @@ select {
   "cardName": "Bardin",
   "cardType": "Schergenkarte",
   "set": "Rückkehr zum Schwarzen Keiler",
+  "setId": "rueckkehr_zum_schwarzen_keiler",
+  "setShortName": "Rückkehr zum Schwarzen Keiler",
   "setSymbol": "R",
+  "layout": "portrait",
   "image": "sc_bardin.webp",
   "copies": 2,
   "sourceImages": [
@@ -4821,7 +4824,20 @@ select {
     "karte_0009.webp"
   ],
   "usedDuplicateForVerification": true,
-  "keywords": ["Mensch", "Gaukler", "Diener"],
+  "tags": [
+    "mensch",
+    "gaukler",
+    "diener"
+  ],
+  "keywords": [
+    "Mensch",
+    "Gaukler",
+    "Diener"
+  ],
+  "searchAliases": [
+    "Musikerin",
+    "Sängerin"
+  ],
   "specialRules": [
     "Liegt sie auf einem Anführer, so darf dieser das Würfergebnis seiner [AKTIONEN]-Würfe um 1 reduzieren."
   ],
