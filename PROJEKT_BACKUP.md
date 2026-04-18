@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 8:15:27 PM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 8:15:47 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -6723,6 +6723,66 @@ select {
     }
   ]
 }
+```
+
+---
+
+## 📄 Datei: docs/templates/schergenkarte.template.json
+```json
+{
+  "id": "sc_template_beispiel",
+  "cardName": "Beispiel-Scherge",
+  "cardType": "Schergenkarte",
+  "set": "Aventuria Grundbox",
+  "setId": "base_game",
+  "setShortName": "Grundbox",
+  "setSymbol": "A",
+  "layout": "portrait",
+  "image": "sc_template_beispiel.webp",
+  "copies": 1,
+  "sourceImages": [],
+  "referenceImages": [],
+  "usedDuplicateForVerification": false,
+
+  "tags": [
+    "mensch",
+    "pirat",
+    "diener"
+  ],
+  "keywords": [
+    "Mensch",
+    "Pirat",
+    "Diener"
+  ],
+  "searchAliases": [
+    "Seeräuber"
+  ],
+
+  "specialRules": [],
+  "stats": {
+    "gefahrenpunkte": 3,
+    "lebenspunkte": 10,
+    "ausweichen": 4,
+    "ruestung": 1,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-10",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+1 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "11-20",
+      "title": "Nichts",
+      "text": "Er starrt düster vor sich hin."
+    }
+  ],
+
+  "illustration": "",
+  "source": "card_image"
+}
+
 ```
 
 ---
