@@ -1,4 +1,5 @@
 import Utils from '../../core/utils.js';
+import CONFIG from '../../core/config.js';
 import Constants from '../../core/constants.js';
 import Events from '../../core/events.js';
 import ApiCardLookup from '../../core/api-card-lookup.js';
@@ -10,16 +11,16 @@ export const RulebookSetManager = {
 
     resolveSetKey(preferredSetKey = '') {
         const normalizedPreferred = Utils.normalizeString(preferredSetKey);
-        if (normalizedPreferred && window.CONFIG?.hasSet?.(normalizedPreferred)) {
+        if (normalizedPreferred && CONFIG.hasSet?.(normalizedPreferred)) {
             return normalizedPreferred;
         }
 
         const activeSet = ApiCardLookup.getActiveSetKey?.();
-        if (activeSet && window.CONFIG?.hasSet?.(activeSet)) {
+        if (activeSet && CONFIG.hasSet?.(activeSet)) {
             return activeSet;
         }
 
-        return window.CONFIG?.defaultSet || 'base_game';
+        return CONFIG.defaultSet || 'base_game';
     },
 
     async ensureSet(rulebook, setKey = '') {
