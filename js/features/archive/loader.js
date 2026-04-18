@@ -41,15 +41,11 @@ export const ArchiveLoader = {
         return null;
     },
 
-    buildGitHubRawUrl(path = '') {
-        const base = Utils.normalizeString(CONFIG.getGitHubRawBase?.());
-        const safePath = Utils.normalizeString(path).replace(/^\/+/, '');
-
-        if (!base || !safePath) {
-            return '';
-        }
-
-        return `${base}/${safePath}`;
+    buildLocalPath(...parts) {
+        return parts
+            .map(part => Utils.normalizeString(part).replace(/^\/+|\/+$/g, ''))
+            .filter(Boolean)
+            .join('/');
     },
 
     cacheCatalogCard(cacheKey = '', card = null) {
@@ -60,27 +56,27 @@ export const ArchiveLoader = {
         window.ApiCache.catalogCards[cacheKey || card.id] = card;
     },
 
-    normalizeGitHubCardType(rawType = '') {
+    normalizeCatalogCardType(rawType = '', fallbackType = 'unknown') {
         const normalized = Utils.normalizeString(rawType).toLowerCase();
 
         if (normalized.includes('schergen')) {
             return 'minion';
         }
 
-        return normalized || 'unknown';
+        return normalized || fallbackType;
     },
 
-    normalizeGitHubCardCategory(rawType = '') {
+    normalizeCatalogCardCategory(rawType = '', fallbackCategory = 'unknown') {
         const normalized = Utils.normalizeString(rawType).toLowerCase();
 
         if (normalized.includes('schergen')) {
             return 'schergenkarte';
         }
 
-        return normalized || 'unknown';
+        return normalized || fallbackCategory;
     },
 
-    buildGitHubSearchText(name = '', rawCard = {}) {
+    buildSearchText(name = '', rawCard = {}) {
         const specialRules = Utils.normalizeArray(rawCard?.specialRules);
         const keywords = Utils.normalizeArray(rawCard?.keywords);
 
@@ -107,7 +103,7 @@ export const ArchiveLoader = {
             .join(' ');
     },
 
-    normalizeGitHubCatalogCard(rawCard = {}, meta = {}) {
+    normalizeLocalCatalogCard(rawCard = {}, meta = {}) {
         const fileStem = Utils.normalizeString(meta.fileStem);
         const name = Utils.normalizeString(rawCard?.cardName || rawCard?.name || fileStem);
         const id = Utils.normalizeString(rawCard?.id || fileStem);
@@ -118,7 +114,7 @@ export const ArchiveLoader = {
 
         const imageFile = Utils.normalizeString(rawCard?.image);
         const imagePath = imageFile
-            ? this.buildGitHubRawUrl(`${meta.imageDir}/${imageFile}`)
+            ? this.buildLocalPath(meta.imageDir, imageFile)
             : '';
 
         const keywords = Utils.normalizeArray(rawCard?.keywords)
@@ -141,17 +137,24 @@ export const ArchiveLoader = {
 
         const tags = Array.from(new Set([
             'schergen',
-            this.normalizeGitHubCardCategory(rawCard?.cardType || rawCard?.card_category),
+            this.normalizeCatalogCardCategory(
+                rawCard?.cardType || rawCard?.card_category,
+                meta.defaultCardCategory || 'schergenkarte'
+            ),
             ...keywords.map(value => value.toLowerCase())
         ].map(value => Utils.normalizeString(value)).filter(Boolean)));
 
         return {
             id,
             name,
-            type: this.normalizeGitHubCardType(rawCard?.cardType || rawCard?.type),
+            type: this.normalizeCatalogCardType(
+                rawCard?.cardType || rawCard?.type,
+                meta.defaultType || 'minion'
+            ),
             status: 'playable',
-            card_category: this.normalizeGitHubCardCategory(
-                rawCard?.cardType || rawCard?.card_category
+            card_category: this.normalizeCatalogCardCategory(
+                rawCard?.cardType || rawCard?.card_category,
+                meta.defaultCardCategory || 'schergenkarte'
             ),
 
             set: {
@@ -199,9 +202,9 @@ export const ArchiveLoader = {
             },
 
             source: {
-                book: Utils.normalizeString(rawCard?.set) || 'GitHub-Katalog',
+                book: Utils.normalizeString(rawCard?.set) || 'Katalog',
                 page: '',
-                note: `GitHub-Katalog: ${Utils.normalizeString(meta.filePath)}`,
+                note: `Lokaler Katalog: ${Utils.normalizeString(meta.filePath)}`,
                 file_path: Utils.normalizeString(meta.filePath),
                 image_path: Utils.normalizeString(imagePath),
                 illustration: Utils.normalizeString(rawCard?.illustration),
@@ -214,57 +217,46 @@ export const ArchiveLoader = {
                 ? 'Dublettenbild zur Verifikation verwendet.'
                 : '',
 
-            search_text: this.buildGitHubSearchText(name, rawCard)
+            search_text: this.buildSearchText(name, rawCard)
         };
     },
 
-    async fetchGitHubCatalogCards(catalogKey = 'schergen') {
-        const catalogConfig = CONFIG.getGitHubCatalogConfig?.(catalogKey);
+    async fetchLocalCatalogCards(catalogKey = 'schergen') {
+        const catalogConfig = CONFIG.getCatalogConfig?.(catalogKey);
 
         if (!catalogConfig?.enabled) {
             return [];
         }
 
-        let entries = [];
-
-        try {
-            entries = await ApiFetch.getGitHubCatalogEntries(catalogKey);
-        } catch (error) {
-            console.warn(
-                `GitHub-Katalog "${catalogKey}" konnte nicht geladen werden.`,
-                error
-            );
-            return [];
-        }
-
-        const jsonFiles = Utils.normalizeArray(entries)
-            .filter(entry =>
-                entry?.type === 'file'
-                && /\.json$/i.test(Utils.normalizeString(entry?.name))
-            );
+        const indexData = await ApiFetch.getCatalogIndex(catalogKey);
+        const fileNames = Utils.normalizeArray(indexData?.cards);
 
         const loadedCards = [];
 
-        for (const entry of jsonFiles) {
-            try {
-                const rawCard = await ApiFetch.fetchJson(entry.download_url);
+        for (const fileName of fileNames) {
+            const filePath = this.buildLocalPath(catalogConfig.dataDir, fileName);
 
-                const normalizedCard = this.normalizeGitHubCatalogCard(rawCard, {
+            try {
+                const rawCard = await ApiFetch.fetchJson(filePath);
+
+                const normalizedCard = this.normalizeLocalCatalogCard(rawCard, {
                     catalogKey,
-                    filePath: entry.path,
-                    fileName: entry.name,
-                    fileStem: Utils.normalizeString(entry.name).replace(/\.json$/i, ''),
-                    imageDir: catalogConfig.imageDir
+                    filePath,
+                    fileName,
+                    fileStem: Utils.normalizeString(fileName).replace(/\.json$/i, ''),
+                    imageDir: catalogConfig.imageDir,
+                    defaultType: catalogConfig.defaultType,
+                    defaultCardCategory: catalogConfig.defaultCardCategory
                 });
 
                 if (normalizedCard) {
-                    this.cacheCatalogCard(`github:${entry.path}`, normalizedCard);
+                    this.cacheCatalogCard(`local:${filePath}`, normalizedCard);
                     loadedCards.push(normalizedCard);
                 }
             } catch (error) {
                 console.warn(
-                    'GitHub-Katalogkarte konnte nicht geladen werden:',
-                    entry?.path || entry?.name || 'unbekannt',
+                    'Lokale Katalogkarte konnte nicht geladen werden:',
+                    filePath || fileName || 'unbekannt',
                     error
                 );
             }
@@ -324,12 +316,12 @@ export const ArchiveLoader = {
             }
         }
 
-        const githubSchergenCards = await this.fetchGitHubCatalogCards('schergen');
+        const localSchergenCards = await this.fetchLocalCatalogCards('schergen');
 
         return this.sortCards(
             this.mergeCardsById([
                 ...loadedCards,
-                ...githubSchergenCards
+                ...localSchergenCards
             ])
         );
     }
