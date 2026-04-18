@@ -1,3 +1,6 @@
+import registerGlobals from './bootstrap/register-globals.js';
+import { boot } from './bootstrap/boot.js';
+
 import CONFIG from './core/config.js';
 import Constants from './core/constants.js';
 import Events from './core/events.js';
@@ -53,133 +56,68 @@ import App from './app/app.js';
 
 window.__AVENTURIA_SKIP_AUTO_INIT__ = true;
 
-window.CONFIG = CONFIG;
-window.Constants = Constants;
-window.Events = Events;
-window.Assets = Assets;
-window.Utils = Utils;
-window.State = State;
-window.Theme = Theme;
-window.Validator = Validator;
-window.StorageManager = StorageManager;
-window.ApiCache = ApiCache;
-window.ApiNormalizers = ApiNormalizers;
-window.ApiFetch = ApiFetch;
-window.ApiCardLookup = ApiCardLookup;
+registerGlobals({
+    CONFIG,
+    Constants,
+    Events,
+    Assets,
+    Utils,
+    State,
+    Theme,
+    Validator,
+    StorageManager,
+    ApiCache,
+    ApiNormalizers,
+    ApiFetch,
+    ApiCardLookup,
 
-window.UIStatus = UIStatus;
-window.UIPreview = UIPreview;
-window.UIModals = UIModals;
-window.UIActions = UIActions;
-window.UI = UI;
-window.UIComponents = UIComponents;
+    UIStatus,
+    UIPreview,
+    UIModals,
+    UIActions,
+    UI,
+    UIComponents,
 
-window.RenderCommon = RenderCommon;
-window.RenderSetup = RenderSetup;
-window.RenderCardDetail = RenderCardDetail;
+    RenderCommon,
+    RenderSetup,
+    RenderCardDetail,
 
-window.CombatDashboard = CombatDashboard;
-window.CombatTracker = CombatTracker;
-window.Combat = Combat;
+    CombatDashboard,
+    CombatTracker,
+    Combat,
 
-window.Narrative = Narrative;
+    Narrative,
 
-window.ArchiveLoader = ArchiveLoader;
-window.ArchiveFilter = ArchiveFilter;
-window.ArchiveRenderer = ArchiveRenderer;
-window.Archive = Archive;
+    ArchiveLoader,
+    ArchiveFilter,
+    ArchiveRenderer,
+    Archive,
 
-window.DiagnosticsRunner = DiagnosticsRunner;
-window.DiagnosticsRenderer = DiagnosticsRenderer;
-window.Diagnostics = Diagnostics;
+    DiagnosticsRunner,
+    DiagnosticsRenderer,
+    Diagnostics,
 
-window.RulebookIndexLoader = RulebookIndexLoader;
-window.RulebookReader = RulebookReader;
-window.RulebookCodex = RulebookCodex;
-window.RulebookUI = RulebookUI;
-window.Rulebook = Rulebook;
+    RulebookIndexLoader,
+    RulebookReader,
+    RulebookCodex,
+    RulebookUI,
+    Rulebook,
 
-window.AppStateSync = AppStateSync;
-window.AppAdventureFlow = AppAdventureFlow;
-window.AppControls = AppControls;
-window.AppPersistence = AppPersistence;
-window.AppBootstrap = AppBootstrap;
-window.App = App;
+    AppStateSync,
+    AppAdventureFlow,
+    AppControls,
+    AppPersistence,
+    AppBootstrap,
+    App
+});
 
-const SCRIPT_LOAD_ORDER = [];
-
-const loadedScripts = new Set();
-
-function setStatus(message) {
-    const statusEl = document.getElementById('loading-status');
-    if (statusEl) {
-        statusEl.textContent = String(message ?? '');
-    }
-}
-
-function loadClassicScript(src) {
-    return new Promise((resolve, reject) => {
-        if (loadedScripts.has(src)) {
-            resolve();
-            return;
-        }
-
-        const script = document.createElement('script');
-        script.src = src;
-        script.async = false;
-
-        script.onload = () => {
-            loadedScripts.add(src);
-            resolve();
-        };
-
-        script.onerror = () => {
-            reject(new Error(`Script konnte nicht geladen werden: ${src}`));
-        };
-
-        document.head.appendChild(script);
-    });
-}
-
-async function ensureDomReady() {
-    if (document.readyState === 'loading') {
-        await new Promise(resolve => {
-            document.addEventListener('DOMContentLoaded', resolve, { once: true });
-        });
-    }
-}
-
-async function boot() {
-    try {
-        setStatus('Starte Aventuria ...');
-
-        for (const src of SCRIPT_LOAD_ORDER) {
-            setStatus(`Lade ${src} ...`);
-            await loadClassicScript(src);
-        }
-
-        await ensureDomReady();
-
-        Theme.init();
-        UI.init();
-        Combat.init();
-        Archive.init();
-        Diagnostics.init();
-        await Rulebook.init();
-
-        if (!App?.init) {
-            throw new Error('App.init wurde nicht gefunden.');
-        }
-
-        setStatus('Initialisiere Anwendung ...');
-        await App.init();
-
-        setStatus('Bereit.');
-        console.log('Aventuria über js/main.js gestartet.');
-    } catch (error) {
-        console.error('Bootstrap-Fehler in js/main.js:', error);
-        setStatus('⚠️ Start fehlgeschlagen. Details siehe Konsole.');
-    }
-}
-
-void boot();
+void boot({
+    Theme,
+    UI,
+    Combat,
+    Archive,
+    Diagnostics,
+    Rulebook,
+    App,
+    scriptLoadOrder: []
+});
