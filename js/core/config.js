@@ -8,6 +8,13 @@ export const CONFIG = {
         manualRoot: 'data/manual'
     },
 
+    cards: {
+        legacyAdventureCards: {
+            mode: 'allow', // allow | off
+            warnOnFallback: true
+        }
+    },
+
     catalogs: {
         schergen: {
             key: 'schergen',
@@ -109,6 +116,19 @@ export const CONFIG = {
         const setConfig = this.getSet(setKey);
         const id = String(adventureId ?? '').trim();
         return `${setConfig.cardRoot}/${id}/${id}.json`;
+    },
+
+    getLegacyAdventureCardsMode() {
+        const mode = String(this.cards?.legacyAdventureCards?.mode || 'allow').trim().toLowerCase();
+        return mode === 'off' ? 'off' : 'allow';
+    },
+
+    isLegacyAdventureCardsEnabled() {
+        return this.getLegacyAdventureCardsMode() !== 'off';
+    },
+
+    shouldWarnOnLegacyAdventureCardsFallback() {
+        return Boolean(this.cards?.legacyAdventureCards?.warnOnFallback);
     },
 
     getMasterIndexPath(setKey = '') {
