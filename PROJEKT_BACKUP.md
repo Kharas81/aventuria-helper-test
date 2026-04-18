@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 9:51:32 AM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 9:51:53 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -8537,52 +8537,35 @@ export const ApiFetch = {
         }
     },
 
-    buildGitHubContentsUrl(directoryPath = '') {
-        const safePath = Utils.normalizeString(directoryPath).replace(/^\/+/, '');
-        const apiBase = CONFIG.getGitHubApiBase?.();
-        const branch = Utils.normalizeString(CONFIG.github?.branch);
+    async getCatalogIndex(catalogKey = '') {
+        const resolvedCatalogKey = Utils.normalizeString(catalogKey);
+        const path = CONFIG.getCatalogIndexPath?.(resolvedCatalogKey);
 
-        if (!apiBase || !safePath || !branch) {
-            return '';
+        if (!path) {
+            return { catalog_key: resolvedCatalogKey, cards: [] };
         }
 
-        return `${apiBase}contents/${safePath}?ref=${encodeURIComponent(branch)}`;
-    },
-
-    async fetchGitHubDirectory(directoryPath = '') {
-        const url = this.buildGitHubContentsUrl(directoryPath);
-
-        if (!url) {
-            return [];
-        }
-
-        const res = await fetch(url, {
-            headers: {
-                Accept: 'application/vnd.github+json'
+        if (window.ApiCache) {
+            window.ApiCache.catalogIndexes ??= {};
+            if (window.ApiCache.catalogIndexes[resolvedCatalogKey]) {
+                return window.ApiCache.catalogIndexes[resolvedCatalogKey];
             }
-        });
-
-        if (!res.ok) {
-            throw new Error(
-                `GitHub-Verzeichnis konnte nicht geladen werden: ${directoryPath} → HTTP ${res.status}`
-            );
         }
 
-        const data = await res.json();
-        return Array.isArray(data) ? data : [];
-    },
+        const rawData = await this.loadJSON(path);
 
-    async getGitHubCatalogEntries(catalogKey = '') {
-        if (!CONFIG.isGitHubEnabled?.()) {
-            return [];
+        const normalized = {
+            catalog_key: resolvedCatalogKey,
+            cards: Utils.normalizeArray(rawData?.cards)
+                .map(fileName => Utils.normalizeString(fileName))
+                .filter(Boolean)
+        };
+
+        if (window.ApiCache?.catalogIndexes) {
+            window.ApiCache.catalogIndexes[resolvedCatalogKey] = normalized;
         }
 
-        const catalogConfig = CONFIG.getGitHubCatalogConfig?.(catalogKey);
-        if (!catalogConfig?.enabled || !catalogConfig?.dataDir) {
-            return [];
-        }
-
-        return await this.fetchGitHubDirectory(catalogConfig.dataDir);
+        return normalized;
     }
 };
 
