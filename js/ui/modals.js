@@ -1,5 +1,6 @@
 import Utils from '../core/utils.js';
 import UIPreview from './preview.js';
+import CoreRuntime from '../core/runtime.js';
 
 export const UIModals = {
     closeAll() {
@@ -8,10 +9,7 @@ export const UIModals = {
         });
 
         UIPreview.close();
-
-        if (window.RenderCardDetail?.closeCardDetail) {
-            window.RenderCardDetail.closeCardDetail();
-        }
+        CoreRuntime.getRenderCardDetail()?.closeCardDetail?.();
     }
 };
 
