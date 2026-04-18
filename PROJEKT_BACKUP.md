@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/17/2026, 3:45:43 PM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 8:01:05 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5224,6 +5224,62 @@ select {
       "note": "Deck-Referenz. Später als Deckliste oder Pool ausbauen."
     }
   ]
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_belebtes_skelett.json
+```json
+{
+  "cardName": "Belebtes Skelett",
+  "cardType": "Schergenkarte",
+  "set": "Aventuria Grundbox",
+  "setSymbol": "A",
+  "image": "karte_0001_gross_90.webp",
+  "keywords": ["Untot", "Skelett"],
+  "specialRules": [
+    "Bei [FERNKAMPF]-Angriffen gegen das Skelett wird das Ergebnis, das die Würfel beim Schadenswurf zeigen, halbiert (aufrunden)."
+  ],
+  "stats": {
+    "gefahrenpunkte": 2,
+    "lebenspunkte": 8,
+    "ausweichen": "-",
+    "ruestung": 0,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6+4 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "3-10",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein Held nach Wahl der Spieler erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "11-13",
+      "title": "Schattenpakt",
+      "text": "Alle Anführer werden um 2 [LEBEN] geheilt."
+    },
+    {
+      "range": "14-16",
+      "title": "Nichts",
+      "text": "Das Skelett verharrt bewegungslos."
+    },
+    {
+      "range": "17-20",
+      "title": "Zerfällt",
+      "text": "Mischt die Karte zurück in den Schergenstapel."
+    }
+  ],
+  "illustration": "Malte Zibell",
+  "source": "card_image",
+  "copies": 1,
+  "sourceImages": ["karte_0001_gross_90.webp"]
 }
 
 ```
