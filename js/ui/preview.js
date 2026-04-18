@@ -1,4 +1,5 @@
 import Utils from '../core/utils.js';
+import CoreRuntime from '../core/runtime.js';
 
 export const UIPreview = {
     offsetX: 18,
@@ -61,8 +62,10 @@ export const UIPreview = {
         const resolvedImage = Utils.resolveImagePath(imageSrc);
         if (!resolvedImage) return;
 
-        if (window.RenderCardDetail?.ensureCardDetailModal) {
-            const modal = window.RenderCardDetail.ensureCardDetailModal();
+        const renderCardDetail = CoreRuntime.getRenderCardDetail();
+
+        if (renderCardDetail?.ensureCardDetailModal) {
+            const modal = renderCardDetail.ensureCardDetailModal();
             const content = Utils.byId('card-detail-content');
 
             if (modal && content) {
@@ -83,6 +86,7 @@ export const UIPreview = {
                 Utils.setSafeImageSource(previewImage, resolvedImage);
 
                 modal.style.display = 'flex';
+                modal.setAttribute('aria-hidden', 'false');
                 return;
             }
         }
