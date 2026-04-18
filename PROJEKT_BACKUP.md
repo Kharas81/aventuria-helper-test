@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 8:45:53 PM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 8:46:24 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -10531,6 +10531,7 @@ export const Archive = {
     currentSet: CONFIG.defaultSet || 'base_game',
     currentSearchTerm: '',
     currentSourceFilter: ArchiveFilter.ALL_SOURCE_FILTER,
+    currentCategoryFilter: ArchiveFilter.ALL_CATEGORY_FILTER,
     allCards: [],
     filteredCards: [],
     isLoading: false,
@@ -10554,10 +10555,16 @@ export const Archive = {
         return normalized || ArchiveFilter.ALL_SOURCE_FILTER;
     },
 
+    normalizeCategoryFilter(categoryFilter = '') {
+        const normalized = Utils.normalizeString(categoryFilter).toLowerCase();
+        return normalized || ArchiveFilter.ALL_CATEGORY_FILTER;
+    },
+
     applyFilters() {
         this.filteredCards = ArchiveFilter.filterCards(this.allCards, {
             searchTerm: this.currentSearchTerm,
-            sourceFilter: this.currentSourceFilter
+            sourceFilter: this.currentSourceFilter,
+            categoryFilter: this.currentCategoryFilter
         });
 
         this.render();
@@ -10577,13 +10584,17 @@ export const Archive = {
 
         const hasExplicitQuery = Object.prototype.hasOwnProperty.call(options, 'query');
         const hasExplicitSource = Object.prototype.hasOwnProperty.call(options, 'sourceFilter');
+        const hasExplicitCategory = Object.prototype.hasOwnProperty.call(options, 'categoryFilter');
 
         if (desiredSet !== this.currentSet || !this.allCards.length) {
             await this.loadSet(desiredSet, {
                 query: hasExplicitQuery ? Utils.normalizeString(options.query) : this.currentSearchTerm,
                 sourceFilter: hasExplicitSource
                     ? this.normalizeSourceFilter(options.sourceFilter)
-                    : ArchiveFilter.ALL_SOURCE_FILTER
+                    : ArchiveFilter.ALL_SOURCE_FILTER,
+                categoryFilter: hasExplicitCategory
+                    ? this.normalizeCategoryFilter(options.categoryFilter)
+                    : ArchiveFilter.ALL_CATEGORY_FILTER
             });
             return;
         }
@@ -10594,6 +10605,10 @@ export const Archive = {
 
         if (hasExplicitSource) {
             this.currentSourceFilter = this.normalizeSourceFilter(options.sourceFilter);
+        }
+
+        if (hasExplicitCategory) {
+            this.currentCategoryFilter = this.normalizeCategoryFilter(options.categoryFilter);
         }
 
         ArchiveRenderer.setSearchValue(this.currentSearchTerm);
@@ -10619,6 +10634,7 @@ export const Archive = {
         const previousSet = this.currentSet;
         const hasExplicitQuery = Object.prototype.hasOwnProperty.call(options, 'query');
         const hasExplicitSource = Object.prototype.hasOwnProperty.call(options, 'sourceFilter');
+        const hasExplicitCategory = Object.prototype.hasOwnProperty.call(options, 'categoryFilter');
 
         this.currentSet = resolvedSetKey;
         this.isLoading = true;
@@ -10626,7 +10642,9 @@ export const Archive = {
         ArchiveRenderer.renderToolbar({
             activeSetKey: this.currentSet,
             activeSourceFilter: this.currentSourceFilter,
+            activeCategoryFilter: this.currentCategoryFilter,
             availableSources: [],
+            availableCategories: [],
             currentQuery: this.currentSearchTerm,
             filteredCount: 0,
             totalCount: 0
@@ -10648,6 +10666,12 @@ export const Archive = {
                 this.currentSourceFilter = this.normalizeSourceFilter(options.sourceFilter);
             } else if (resolvedSetKey !== previousSet) {
                 this.currentSourceFilter = ArchiveFilter.ALL_SOURCE_FILTER;
+            }
+
+            if (hasExplicitCategory) {
+                this.currentCategoryFilter = this.normalizeCategoryFilter(options.categoryFilter);
+            } else if (resolvedSetKey !== previousSet) {
+                this.currentCategoryFilter = ArchiveFilter.ALL_CATEGORY_FILTER;
             }
 
             ArchiveRenderer.setSearchValue(this.currentSearchTerm);
@@ -10687,11 +10711,18 @@ export const Archive = {
         this.applyFilters();
     },
 
+    setCategoryFilter(categoryFilter = '') {
+        this.currentCategoryFilter = this.normalizeCategoryFilter(categoryFilter);
+        this.applyFilters();
+    },
+
     render() {
         ArchiveRenderer.renderToolbar({
             activeSetKey: this.currentSet,
             activeSourceFilter: this.currentSourceFilter,
+            activeCategoryFilter: this.currentCategoryFilter,
             availableSources: ArchiveFilter.getAvailableSources(this.allCards),
+            availableCategories: ArchiveFilter.getAvailableCategories(this.allCards),
             currentQuery: this.currentSearchTerm,
             filteredCount: this.filteredCards.length,
             totalCount: this.allCards.length
@@ -10699,7 +10730,8 @@ export const Archive = {
 
         ArchiveRenderer.renderGrid(this.filteredCards, {
             query: this.currentSearchTerm,
-            sourceFilter: this.currentSourceFilter
+            sourceFilter: this.currentSourceFilter,
+            categoryFilter: this.currentCategoryFilter
         });
     },
 
@@ -10738,7 +10770,9 @@ export const Archive = {
         ArchiveRenderer.renderToolbar({
             activeSetKey: this.currentSet,
             activeSourceFilter: this.currentSourceFilter,
+            activeCategoryFilter: this.currentCategoryFilter,
             availableSources: [],
+            availableCategories: [],
             currentQuery: '',
             filteredCount: 0,
             totalCount: 0
