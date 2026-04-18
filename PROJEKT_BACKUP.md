@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 6:27:00 PM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 6:27:18 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -14828,6 +14828,7 @@ export default UIComponents;
 ```js
 import Utils from '../core/utils.js';
 import UIPreview from './preview.js';
+import CoreRuntime from '../core/runtime.js';
 
 export const UIModals = {
     closeAll() {
@@ -14836,10 +14837,7 @@ export const UIModals = {
         });
 
         UIPreview.close();
-
-        if (window.RenderCardDetail?.closeCardDetail) {
-            window.RenderCardDetail.closeCardDetail();
-        }
+        CoreRuntime.getRenderCardDetail()?.closeCardDetail?.();
     }
 };
 
