@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 8:50:57 AM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 8:51:23 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5404,11 +5404,18 @@ select {
   "cardType": "Schergenkarte",
   "set": "Rückkehr zum Schwarzen Keiler",
   "setSymbol": "R",
-  "image": "karte_0005_gross_90.webp",
-  "keywords": ["Mensch", "Gaukler", "Diener"],
-  "specialRules": [
-    "Nimm alle [UNSICHERES_SYMBOL_ROTE_LIPPENFORM] aus der Tischmitte, falls vorhanden, und lege sie auf die Hofnärrin. Wird die Närrin ausgeschaltet oder flieht, so lege die [UNSICHERES_SYMBOL_ROTE_LIPPENFORM] wieder zurück in die Tischmitte."
+  "image": "sc_hofnaerrin.webp",
+  "copies": 2,
+  "sourceImages": [
+    "karte_0004.webp",
+    "karte_0005.webp"
   ],
+  "referenceImages": [
+    "karte_0004.webp",
+    "karte_0005.webp"
+  ],
+  "usedDuplicateForVerification": true,
+  "keywords": ["Mensch", "Gaukler", "Diener"],
   "stats": {
     "gefahrenpunkte": 2,
     "lebenspunkte": 15,
@@ -5420,7 +5427,7 @@ select {
     {
       "range": "1-7",
       "title": "Schelmenstreich",
-      "text": "Nimm alle [UNSICHERES_SYMBOL_ROTE_LIPPENFORM] aus der Tischmitte, falls vorhanden, und lege sie auf die Hofnärrin. Wird die Närrin ausgeschaltet oder flieht, so lege die [UNSICHERES_SYMBOL_ROTE_LIPPENFORM] wieder zurück in die Tischmitte."
+      "text": "Nimm alle [SCHICKSALSPUNKT] aus der Tischmitte, falls vorhanden, und lege sie auf die Hofnärrin. Wird die Närrin ausgeschaltet oder flieht, so lege die [SCHICKSALSPUNKT] wieder zurück in die Tischmitte."
     },
     {
       "range": "8-15",
@@ -5433,26 +5440,8 @@ select {
       "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Ist noch mindestens 1 Anführer anwesend, und dieser hat noch keinen Schergen auf sich liegen, so lege die Hofnärrin auf ihn. Solange sie dort liegt, führt sie keine Aktionen durch und der Anführer kann nicht zum Ziel von Angriffen werden."
     }
   ],
-  "illustration": "Ben Marter",
-  "source": "card_image",
-  "copies": 2,
-  "sourceImages": [
-    "karte_0004_gross_90.webp",
-    "karte_0005_gross_90.webp"
-  ],
-  "referenceImages": [
-    "karte_0004_gross_90.webp",
-    "karte_0005_gross_90.webp"
-  ],
-  "usedDuplicateForVerification": true,
-  "uncertain": true,
-  "uncertainFields": [
-    "specialRules[0]",
-    "actionTable[0].text"
-  ],
-  "uncertainNotes": [
-    "Auf der Karte steht ein noch nicht sicher zugeordnetes rotes Lippen-/Mund-Symbol. Vorläufiger Platzhalter: [UNSICHERES_SYMBOL_ROTE_LIPPENFORM]."
-  ]
+  "illustration": "Ben Maier",
+  "source": "card_image"
 }
 
 ```
