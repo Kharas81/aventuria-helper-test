@@ -20,6 +20,19 @@ export const CONFIG = {
         }
     },
 
+    archive: {
+        supplementalCatalogsBySet: {
+            base_game: ['schergen']
+        },
+
+        mergePriority: {
+            adventure_specific: 300,
+            set_catalog: 200,
+            central_catalog: 100,
+            unknown: 0
+        }
+    },
+
     sets: {
         base_game: {
             id: 'base_game',
@@ -155,6 +168,22 @@ export const CONFIG = {
 
     getCatalogImageDir(catalogKey = '') {
         return this.getCatalogConfig(catalogKey)?.imageDir || '';
+    },
+
+    getSupplementalCatalogKeysForSet(setKey = '') {
+        const resolvedSetKey = this.normalizeSetKey(setKey);
+        return Array.isArray(this.archive?.supplementalCatalogsBySet?.[resolvedSetKey])
+            ? [...this.archive.supplementalCatalogsBySet[resolvedSetKey]]
+            : [];
+    },
+
+    getArchiveMergePriority(sourceScope = '') {
+        const normalizedScope = String(sourceScope || '').trim();
+        return Number(
+            this.archive?.mergePriority?.[normalizedScope]
+            ?? this.archive?.mergePriority?.unknown
+            ?? 0
+        );
     }
 };
 
