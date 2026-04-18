@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 6:52:23 PM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 7:02:53 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -11038,6 +11038,8 @@ export default ArchiveLoader;
 ## 📄 Datei: js/features/archive/renderer.js
 ```js
 import Utils from '../../core/utils.js';
+import CONFIG from '../../core/config.js';
+import Assets from '../../core/assets.js';
 import UIComponents from '../../ui/components.js';
 
 export const ArchiveRenderer = {
@@ -11087,9 +11089,9 @@ export const ArchiveRenderer = {
 
     renderSetButtons(activeSetKey = '') {
         const container = this.getSetButtonsContainer();
-        if (!container || !window.CONFIG?.getEnabledSets) return;
+        if (!container || !CONFIG.getEnabledSets) return;
 
-        const enabledSets = window.CONFIG.getEnabledSets();
+        const enabledSets = CONFIG.getEnabledSets();
 
         container.innerHTML = enabledSets.map(setConfig => {
             const isActive = activeSetKey === setConfig.id;
@@ -11107,8 +11109,8 @@ export const ArchiveRenderer = {
         return Utils.resolveImagePath(
             card?.images?.front,
             card?.image,
-            window.Assets?.getSharedCardPlaceholderPath?.(),
-            window.Assets?.getImageFallbackPath?.()
+            Assets.getSharedCardPlaceholderPath?.(),
+            Assets.getImageFallbackPath?.()
         );
     },
 
