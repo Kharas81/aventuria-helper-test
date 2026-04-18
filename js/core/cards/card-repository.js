@@ -9,11 +9,51 @@ import CardCache from './card-cache.js';
 const FALLBACK_SET_KEY = 'base_game';
 
 export const CardRepository = {
-    buildCardPayload(adventureId, cards = [], adventureName = '') {
+    buildCardPayload(adventureId, cards = [], adventureName = '', meta = {}) {
         return {
             adventure_id: Utils.normalizeString(adventureId),
             adventure_name: Utils.normalizeString(adventureName),
-            cards: Utils.normalizeArray(cards)
+            cards: Utils.normalizeArray(cards),
+            meta: {
+                sourceMode: Utils.normalizeString(meta?.sourceMode || ''),
+                setKey: Utils.normalizeString(meta?.setKey || ''),
+                legacyFallbackUsed: Boolean(meta?.legacyFallbackUsed),
+                reason: Utils.normalizeString(meta?.reason || '')
+            }
+        };
+    },
+
+    buildEmptyPayload(adventureId, setKey = '', reason = '') {
+        return this.buildCardPayload(adventureId, [], '', {
+            sourceMode: 'empty',
+            setKey,
+            legacyFallbackUsed: false,
+            reason
+        });
+    },
+
+    buildMigratedPayload(adventureId, cards = [], setKey = '') {
+        return this.buildCardPayload(adventureId, cards, '', {
+            sourceMode: 'master_index',
+            setKey,
+            legacyFallbackUsed: false,
+            reason: 'master_index'
+        });
+    },
+
+    buildLegacyPayload(adventureId, payload, setKey = '') {
+        const safePayload = payload && typeof payload === 'object'
+            ? payload
+            : ApiNormalizers.normalizeCardPayload({ cards: [] }, adventureId);
+
+        return {
+            ...safePayload,
+            meta: {
+                sourceMode: 'legacy',
+                setKey: Utils.normalizeString(setKey),
+                legacyFallbackUsed: true,
+                reason: 'legacy_fallback'
+            }
         };
     },
 
@@ -31,6 +71,27 @@ export const CardRepository = {
         }
 
         return `data/cards/${normalizedSetKey}/${normalizedAdventureId}/${normalizedAdventureId}.json`;
+    },
+
+    canUseLegacyAdventureCards() {
+        return CONFIG.isLegacyAdventureCardsEnabled?.() ?? true;
+    },
+
+    shouldWarnOnLegacyFallback() {
+        return CONFIG.shouldWarnOnLegacyAdventureCardsFallback?.() ?? true;
+    },
+
+    warnLegacyFallback(adventureId, setKey = '') {
+        if (!this.shouldWarnOnLegacyFallback()) {
+            return;
+        }
+
+        const normalizedAdventureId = Utils.normalizeString(adventureId) || 'unbekannt';
+        const normalizedSetKey = Utils.normalizeString(setKey || CONFIG.defaultSet || FALLBACK_SET_KEY);
+
+        console.warn(
+            `ℹ️ Legacy-Kartenfallback aktiv für Abenteuer "${normalizedAdventureId}" im Set "${normalizedSetKey}".`
+        );
     },
 
     async getCatalogCard(detailPath = '') {
@@ -98,7 +159,7 @@ export const CardRepository = {
     async getCards(adventureId, setKey = null) {
         const normalizedAdventureId = Utils.normalizeString(adventureId);
         if (!normalizedAdventureId) {
-            return ApiNormalizers.normalizeCardPayload({ cards: [] }, '');
+            return this.buildEmptyPayload('', '', 'missing_adventure_id');
         }
 
         const resolvedSetKey = CardSetResolver.resolveAdventureSetKey(
@@ -124,24 +185,47 @@ export const CardRepository = {
 
         if (migratedMasterCards.length > 0) {
             const loadedCards = await this.loadMigratedMasterCards(migratedMasterCards);
-            const payload = this.buildCardPayload(normalizedAdventureId, loadedCards, '');
+            const payload = this.buildMigratedPayload(
+                normalizedAdventureId,
+                loadedCards,
+                resolvedSetKey
+            );
 
             return this.cacheCardPayload(cacheKey, payload);
         }
 
+        if (!this.canUseLegacyAdventureCards()) {
+            const disabledPayload = this.buildEmptyPayload(
+                normalizedAdventureId,
+                resolvedSetKey,
+                'legacy_disabled'
+            );
+
+            return this.cacheCardPayload(cacheKey, disabledPayload);
+        }
+
         try {
+            this.warnLegacyFallback(normalizedAdventureId, resolvedSetKey);
+
             const legacyPayload = await this.loadLegacyCards(
                 normalizedAdventureId,
                 resolvedSetKey
             );
 
-            return this.cacheCardPayload(cacheKey, legacyPayload);
+            const normalizedLegacyPayload = this.buildLegacyPayload(
+                normalizedAdventureId,
+                legacyPayload,
+                resolvedSetKey
+            );
+
+            return this.cacheCardPayload(cacheKey, normalizedLegacyPayload);
         } catch (error) {
             console.warn(`⚠️ Karten nicht gefunden für "${normalizedAdventureId}"`, error);
 
-            const fallbackPayload = ApiNormalizers.normalizeCardPayload(
-                { cards: [] },
-                normalizedAdventureId
+            const fallbackPayload = this.buildEmptyPayload(
+                normalizedAdventureId,
+                resolvedSetKey,
+                'no_cards_found'
             );
 
             return this.cacheCardPayload(cacheKey, fallbackPayload);
