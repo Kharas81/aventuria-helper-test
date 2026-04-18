@@ -1,5 +1,6 @@
 import Utils from '../../core/utils.js';
 import State from '../../core/state.js';
+import CombatRuntime from './runtime.js';
 
 export const CombatTracker = {
     phaseLabels: [
@@ -74,10 +75,7 @@ export const CombatTracker = {
 
         State.setCombatPhase(nextPhase);
         this.updatePhaseTracker();
-
-        if (window.StorageManager?.persist) {
-            window.StorageManager.persist();
-        }
+        CombatRuntime.persistIfAllowed();
     },
 
     nextPhase() {
@@ -92,9 +90,7 @@ export const CombatTracker = {
             this.advanceTimeMarker();
         }
 
-        if (window.StorageManager?.persist) {
-            window.StorageManager.persist();
-        }
+        CombatRuntime.persistIfAllowed();
     },
 
     advanceTimeMarker() {
@@ -113,10 +109,7 @@ export const CombatTracker = {
 
         State.setCombatField('targetResult', `Held ${result}`);
         this.renderCombatState();
-
-        if (window.StorageManager?.persist) {
-            window.StorageManager.persist();
-        }
+        CombatRuntime.persistIfAllowed();
     },
 
     resetTargetResult() {
@@ -140,10 +133,7 @@ export const CombatTracker = {
 
         State.setCombatField('epResult', `${ep} EP`);
         this.renderCombatState();
-
-        if (window.StorageManager?.persist) {
-            window.StorageManager.persist();
-        }
+        CombatRuntime.persistIfAllowed();
     },
 
     bindGlobalCombatInputs() {
