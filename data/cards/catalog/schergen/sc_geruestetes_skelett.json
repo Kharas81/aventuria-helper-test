@@ -3,7 +3,10 @@
   "cardType": "Schergenkarte",
   "set": "Aventuria Grundbox",
   "setSymbol": "A",
-  "image": "karte_0002_gross_90.webp",
+  "image": "sc_geruestetes_skelett.webp",
+  "sourceImages": [
+    "karte_0002.webp"
+  ],
   "keywords": ["Untot", "Skelett"],
   "specialRules": [
     "Bei [FERNKAMPF]-Angriffen gegen das Skelett wird das Ergebnis, das die Würfel beim Schadenswurf zeigen, halbiert (aufrunden)."
@@ -43,7 +46,5 @@
     }
   ],
   "illustration": "Elif Siebenpfeiffer",
-  "source": "card_image",
-  "copies": 1,
-  "sourceImages": ["karte_0002_gross_90.webp"]
+  "source": "card_image"
 }
