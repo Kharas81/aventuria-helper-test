@@ -1,4 +1,5 @@
 import Utils from '../../core/utils.js';
+import CONFIG from '../../core/config.js';
 import RulebookUIDom from './rulebook-ui-dom.js';
 
 export const RulebookUIRender = {
@@ -8,7 +9,7 @@ export const RulebookUIRender = {
             return;
         }
 
-        label.textContent = window.CONFIG?.getSetDisplayName?.(setKey) || 'Regelbuch';
+        label.textContent = CONFIG.getSetDisplayName?.(setKey) || 'Regelbuch';
     },
 
     renderPageList(indexData, onJump) {
