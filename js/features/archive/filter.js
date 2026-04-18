@@ -13,12 +13,13 @@ function normalizeArrayValues(values = []) {
         .filter(Boolean);
 }
 
-function buildSearchHaystack(card = {}, sourceName = '') {
+function buildSearchHaystack(card = {}, sourceName = '', categoryLabel = '') {
     const parts = [
         card?.id,
         card?.name,
         card?.type,
         card?.card_category,
+        categoryLabel,
         ...(Utils.normalizeArray(card?.subtypes)),
         ...(Utils.normalizeArray(card?.tags)),
         ...(Utils.normalizeArray(card?.custom_tags)),
@@ -36,7 +37,7 @@ function buildSearchHaystack(card = {}, sourceName = '') {
         .join(' ');
 }
 
-function buildScore(card = {}, terms = [], sourceName = '') {
+function buildScore(card = {}, terms = [], sourceName = '', categoryLabel = '') {
     if (!terms.length) {
         return 0;
     }
@@ -46,7 +47,7 @@ function buildScore(card = {}, terms = [], sourceName = '') {
     const tags = normalizeArrayValues(card?.tags);
     const keywords = normalizeArrayValues(card?.keywords);
     const aliases = normalizeArrayValues(card?.search_aliases);
-    const haystack = buildSearchHaystack(card, sourceName);
+    const haystack = buildSearchHaystack(card, sourceName, categoryLabel);
 
     let score = 0;
 
@@ -69,6 +70,16 @@ function buildScore(card = {}, terms = [], sourceName = '') {
 
 export const ArchiveFilter = {
     ALL_SOURCE_FILTER: '__all__',
+    ALL_CATEGORY_FILTER: '__all__',
+
+    CATEGORY_ORDER: ['schergen', 'anfuehrer', 'abenteuerkarten', 'spezial'],
+
+    CATEGORY_LABELS: {
+        schergen: 'Schergen',
+        anfuehrer: 'Anführer',
+        abenteuerkarten: 'Abenteuerkarten',
+        spezial: 'Spezialkarten'
+    },
 
     normalizeForSearch,
 
@@ -79,6 +90,44 @@ export const ArchiveFilter = {
             || card?.source?.set_name
             || card?.source?.book
         );
+    },
+
+    getCardCategoryKey(card = {}) {
+        const type = Utils.normalizeString(card?.type).toLowerCase();
+        const category = Utils.normalizeString(card?.card_category).toLowerCase();
+        const tags = normalizeArrayValues(card?.tags);
+
+        if (
+            type === 'minion'
+            || category === 'schergenkarte'
+            || tags.includes('scherge')
+            || tags.includes('schergen')
+        ) {
+            return 'schergen';
+        }
+
+        if (
+            type === 'leader'
+            || tags.includes('anfuehrer')
+            || tags.includes('anführer')
+        ) {
+            return 'anfuehrer';
+        }
+
+        if (
+            ['special', 'event', 'story'].includes(type)
+            || tags.includes('spezial')
+            || tags.includes('ereigniskarte')
+        ) {
+            return 'spezial';
+        }
+
+        return 'abenteuerkarten';
+    },
+
+    getCategoryLabel(categoryKey = '') {
+        const normalized = Utils.normalizeString(categoryKey).toLowerCase();
+        return this.CATEGORY_LABELS[normalized] || 'Kategorie';
     },
 
     getAvailableSources(cards = []) {
@@ -94,14 +143,29 @@ export const ArchiveFilter = {
         return Array.from(uniqueNames).sort((a, b) => a.localeCompare(b, 'de'));
     },
 
+    getAvailableCategories(cards = []) {
+        const found = new Set();
+
+        Utils.normalizeArray(cards).forEach(card => {
+            found.add(this.getCardCategoryKey(card));
+        });
+
+        return this.CATEGORY_ORDER.filter(key => found.has(key));
+    },
+
     filterCards(cards = [], criteria = '') {
         const options = typeof criteria === 'string'
-            ? { searchTerm: criteria, sourceFilter: this.ALL_SOURCE_FILTER }
+            ? {
+                searchTerm: criteria,
+                sourceFilter: this.ALL_SOURCE_FILTER,
+                categoryFilter: this.ALL_CATEGORY_FILTER
+            }
             : (criteria || {});
 
         const safeCards = Utils.normalizeArray(cards);
         const searchTerm = Utils.normalizeString(options.searchTerm);
         const normalizedSourceFilter = Utils.normalizeString(options.sourceFilter || this.ALL_SOURCE_FILTER);
+        const normalizedCategoryFilter = Utils.normalizeString(options.categoryFilter || this.ALL_CATEGORY_FILTER);
 
         const terms = normalizeForSearch(searchTerm)
             .split(/\s+/)
@@ -112,6 +176,9 @@ export const ArchiveFilter = {
             const sourceName = this.getCardSourceName(card);
             const normalizedSourceName = normalizeForSearch(sourceName);
 
+            const categoryKey = this.getCardCategoryKey(card);
+            const normalizedCategoryKey = Utils.normalizeString(categoryKey).toLowerCase();
+
             const matchesSource = !normalizedSourceFilter
                 || normalizedSourceFilter === this.ALL_SOURCE_FILTER
                 || normalizedSourceName === normalizeForSearch(normalizedSourceFilter);
@@ -120,11 +187,21 @@ export const ArchiveFilter = {
                 return false;
             }
 
+            const matchesCategory = !normalizedCategoryFilter
+                || normalizedCategoryFilter === this.ALL_CATEGORY_FILTER
+                || normalizedCategoryKey === Utils.normalizeString(normalizedCategoryFilter).toLowerCase();
+
+            if (!matchesCategory) {
+                return false;
+            }
+
             if (!terms.length) {
                 return true;
             }
 
-            const haystack = buildSearchHaystack(card, sourceName);
+            const categoryLabel = this.getCategoryLabel(categoryKey);
+            const haystack = buildSearchHaystack(card, sourceName, categoryLabel);
+
             return terms.every(term => haystack.includes(term));
         });
 
@@ -138,7 +215,12 @@ export const ArchiveFilter = {
             const sourceNameA = this.getCardSourceName(a);
             const sourceNameB = this.getCardSourceName(b);
 
-            const scoreDiff = buildScore(b, terms, sourceNameB) - buildScore(a, terms, sourceNameA);
+            const categoryLabelA = this.getCategoryLabel(this.getCardCategoryKey(a));
+            const categoryLabelB = this.getCategoryLabel(this.getCardCategoryKey(b));
+
+            const scoreDiff = buildScore(b, terms, sourceNameB, categoryLabelB)
+                - buildScore(a, terms, sourceNameA, categoryLabelA);
+
             if (scoreDiff !== 0) {
                 return scoreDiff;
             }
