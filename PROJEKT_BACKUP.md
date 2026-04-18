@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 9:35:50 AM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 9:40:46 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5223,6 +5223,28 @@ select {
       },
       "note": "Deck-Referenz. Später als Deckliste oder Pool ausbauen."
     }
+  ]
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/index.json
+```json
+{
+  "cards": [
+    "sc_bardin.json",
+    "sc_belebtes_skelett.json",
+    "sc_borbaradianische_laienmagierin_brenne_toter_stoff.json",
+    "sc_borbaradianische_laienmagierin_goldgier_uebermanne_dich.json",
+    "sc_borbaradianische_laienmagierin_weiches_erstarre_fliessendes_verharre.json",
+    "sc_borbaradianischer_laienmagier_hoellenpein_zerreisse_dich.json",
+    "sc_borbaradianischer_laienmagier_starres_fliesse_hartes_schmelze.json",
+    "sc_geruestetes_skelett.json",
+    "sc_graeberskelett.json",
+    "sc_hofnaerrin.json",
+    "sc_jongleurin.json"
   ]
 }
 
