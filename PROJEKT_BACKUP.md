@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 11:03:50 AM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 11:04:37 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -7507,6 +7507,7 @@ select {
     <link rel="stylesheet" href="css/combat-tools.css">
     <link rel="stylesheet" href="css/intermission.css">
     <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/card-detail.css">
 </head>
 <body>
     <div class="app-container">
