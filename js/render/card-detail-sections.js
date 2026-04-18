@@ -8,6 +8,7 @@ export const CardDetailSections = {
 
         return {
             ...normalized,
+            layout: Utils.normalizeString(card?.layout || normalized?.layout || 'portrait').toLowerCase(),
             card_category: Utils.normalizeString(card?.card_category),
             subtypes: RenderCommon.normalizeArray(card?.subtypes),
             source: card?.source ?? {},
@@ -33,8 +34,41 @@ export const CardDetailSections = {
         };
     },
 
+    renderSearchChips(items = []) {
+        const safeItems = Array.from(new Set(
+            RenderCommon.normalizeArray(items)
+                .map(value => Utils.normalizeString(value))
+                .filter(Boolean)
+        ));
+
+        if (!safeItems.length) {
+            return '<p class="card-detail__empty">Keine Schlagwörter vorhanden.</p>';
+        }
+
+        return `
+            <div class="card-detail__chip-group">
+                ${safeItems.map(item => `
+                    <button
+                        type="button"
+                        class="card-detail__chip-button"
+                        data-action="archive-search"
+                        data-archive-query="${Utils.escapeHtml(item)}"
+                        title="Ähnliche Karten suchen"
+                    >
+                        ${Utils.escapeHtml(item)}
+                    </button>
+                `).join('')}
+            </div>
+        `;
+    },
+
     renderMetaRows(items = []) {
-        const safeItems = items.filter(item => Utils.normalizeString(item?.value));
+        const safeItems = items.filter(item => {
+            if (!item) return false;
+            return item?.isHtml
+                ? Boolean(Utils.normalizeString(String(item.value)))
+                : Boolean(Utils.normalizeString(item?.value));
+        });
 
         if (!safeItems.length) {
             return '<p class="card-detail__empty">Keine Zusatzinfos vorhanden.</p>';
@@ -42,12 +76,18 @@ export const CardDetailSections = {
 
         return `
             <dl class="card-detail__meta">
-                ${safeItems.map(item => `
-                    <div class="card-detail__meta-row">
-                        <dt class="card-detail__meta-label">${Utils.escapeHtml(item.label)}</dt>
-                        <dd class="card-detail__meta-value">${Utils.escapeHtml(String(item.value))}</dd>
-                    </div>
-                `).join('')}
+                ${safeItems.map(item => {
+                    const valueHtml = item?.isHtml
+                        ? String(item.value)
+                        : Utils.escapeHtml(String(item.value));
+
+                    return `
+                        <div class="card-detail__meta-row">
+                            <dt class="card-detail__meta-label">${Utils.escapeHtml(item.label)}</dt>
+                            <dd class="card-detail__meta-value">${valueHtml}</dd>
+                        </div>
+                    `;
+                }).join('')}
             </dl>
         `;
     },
@@ -158,11 +198,24 @@ export const CardDetailSections = {
             || card?.set?.shortName
         );
 
+        const searchableKeywords = Array.from(new Set([
+            ...RenderCommon.normalizeArray(card?.keywords),
+            ...RenderCommon.normalizeArray(card?.search_aliases)
+        ]));
+
         const metaHtml = this.renderMetaRows([
             { label: 'Kategorie', value: card.card_category },
             { label: 'Typ', value: card.type },
-            { label: 'Tags', value: card.tags?.length ? card.tags.join(', ') : '' },
-            { label: 'Keywords', value: card.keywords?.length ? card.keywords.join(', ') : '' },
+            {
+                label: 'Tags',
+                value: this.renderSearchChips(card.tags),
+                isHtml: true
+            },
+            {
+                label: 'Keywords',
+                value: this.renderSearchChips(searchableKeywords),
+                isHtml: true
+            },
             { label: 'Quelle', value: sourceName },
             { label: 'Illustration', value: card?.source?.illustration || '' }
         ]);
@@ -180,6 +233,27 @@ export const CardDetailSections = {
             <section class="card-detail__panel">
                 <h3 class="card-detail__panel-title">Werte</h3>
                 ${this.renderStats(card.stats)}
+            </section>
+        `;
+    },
+
+    buildExplorePanel(card) {
+        const suggestedQueries = Array.from(new Set([
+            ...RenderCommon.normalizeArray(card?.tags).filter(tag => {
+                const normalized = Utils.normalizeString(tag).toLowerCase();
+                return normalized && !['schergen', 'schergenkarte', card?.type?.toLowerCase()].includes(normalized);
+            }),
+            ...RenderCommon.normalizeArray(card?.keywords).slice(0, 3)
+        ])).filter(Boolean);
+
+        if (!suggestedQueries.length) {
+            return '';
+        }
+
+        return `
+            <section class="card-detail__panel">
+                <h3 class="card-detail__panel-title">Ähnliche Karten finden</h3>
+                ${this.renderSearchChips(suggestedQueries)}
             </section>
         `;
     },
@@ -232,9 +306,10 @@ export const CardDetailSections = {
     buildDetailMarkup(card, options = {}) {
         const titleId = Utils.normalizeString(options.titleId || 'card-detail-title');
         const imageId = Utils.normalizeString(options.imageId || 'card-detail-image');
+        const isLandscape = Utils.normalizeString(card?.layout).toLowerCase() === 'landscape';
 
         return `
-            <div class="card-detail">
+            <div class="card-detail${isLandscape ? ' card-detail--landscape' : ''}">
                 <header class="card-detail__header">
                     <h2 class="card-detail__title" id="${titleId}">${Utils.escapeHtml(card.name)}</h2>
                     ${CardDetailFormatters.renderHeaderBadges(card)}
@@ -246,6 +321,7 @@ export const CardDetailSections = {
                     <div class="card-detail__info">
                         ${this.buildOverviewPanel(card)}
                         ${this.buildValuesPanel(card)}
+                        ${this.buildExplorePanel(card)}
                     </div>
                 </section>
 
