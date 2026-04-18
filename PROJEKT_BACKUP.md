@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 6:27:18 PM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 6:27:42 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -9574,6 +9574,7 @@ export default StorageManager;
 import CONFIG from './config.js';
 import Constants from './constants.js';
 import Events from './events.js';
+import CoreRuntime from './runtime.js';
 
 export const Theme = {
     currentSet: '',
@@ -9658,12 +9659,12 @@ export const Theme = {
     },
 
     resolveInitialSet() {
-        const activeAdventureSet = window.ApiCardLookup?.getActiveSetKey?.();
+        const activeAdventureSet = CoreRuntime.getApiCardLookup()?.getActiveSetKey?.();
         if (activeAdventureSet && CONFIG.hasSet(activeAdventureSet)) {
             return activeAdventureSet;
         }
 
-        const archiveSet = window.Archive?.currentSet;
+        const archiveSet = CoreRuntime.getArchive()?.currentSet;
         if (archiveSet && CONFIG.hasSet(archiveSet)) {
             return archiveSet;
         }
