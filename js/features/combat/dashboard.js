@@ -1,5 +1,6 @@
 import Utils from '../../core/utils.js';
 import State from '../../core/state.js';
+import CombatRuntime from './runtime.js';
 
 export const CombatDashboard = {
     getDefaultHeroLp() {
@@ -22,6 +23,19 @@ export const CombatDashboard = {
         return State.getState().heroStats || {};
     },
 
+    buildHeroStatRow(icon, value, valueKey, minusAction, plusAction, extraClass = '') {
+        const rowClass = extraClass ? `stat ${extraClass}` : 'stat';
+
+        return `
+            <div class="${rowClass}">
+                <span aria-hidden="true">${icon}</span>
+                <span data-stat="${valueKey}">${Utils.escapeHtml(value)}</span>
+                <button type="button" data-action="${minusAction}" aria-label="${valueKey} verringern">-</button>
+                <button type="button" data-action="${plusAction}" aria-label="${valueKey} erhöhen">+</button>
+            </div>
+        `;
+    },
+
     buildHeroCard(heroIndex, heroState = {}) {
         const lp = Number.isFinite(Number(heroState.lp))
             ? Number(heroState.lp)
@@ -35,19 +49,8 @@ export const CombatDashboard = {
             <div class="hero-card" data-hero-index="${heroIndex}">
                 <h4>Held ${heroIndex}</h4>
 
-                <div class="stat">
-                    <span aria-hidden="true">💗</span>
-                    <span data-stat="lp">${Utils.escapeHtml(lp)}</span>
-                    <button type="button" data-action="lp-minus" aria-label="Lebenspunkte verringern">-</button>
-                    <button type="button" data-action="lp-plus" aria-label="Lebenspunkte erhöhen">+</button>
-                </div>
-
-                <div class="stat" style="margin-top: 8px;">
-                    <span aria-hidden="true">🍀</span>
-                    <span data-stat="fate">${Utils.escapeHtml(fate)}</span>
-                    <button type="button" data-action="fate-minus" aria-label="Schicksalspunkte verringern">-</button>
-                    <button type="button" data-action="fate-plus" aria-label="Schicksalspunkte erhöhen">+</button>
-                </div>
+                ${this.buildHeroStatRow('💗', lp, 'lp', 'lp-minus', 'lp-plus')}
+                ${this.buildHeroStatRow('🍀', fate, 'fate', 'fate-minus', 'fate-plus', 'stat--spaced')}
             </div>
         `;
     },
@@ -69,6 +72,24 @@ export const CombatDashboard = {
         this.bindDashboardButtons();
     },
 
+    applyHeroAction(heroIndex, action, current) {
+        if (action === 'lp-minus') {
+            State.setHeroStat(heroIndex, 'lp', Math.max(0, Number(current.lp) - 1));
+        }
+
+        if (action === 'lp-plus') {
+            State.setHeroStat(heroIndex, 'lp', Number(current.lp) + 1);
+        }
+
+        if (action === 'fate-minus') {
+            State.setHeroStat(heroIndex, 'fate', Math.max(0, Number(current.fate) - 1));
+        }
+
+        if (action === 'fate-plus') {
+            State.setHeroStat(heroIndex, 'fate', Number(current.fate) + 1);
+        }
+    },
+
     bindDashboardButtons() {
         const container = this.getHeroDashboard();
         if (!container || container.dataset.boundCombatDashboard === 'true') return;
@@ -88,27 +109,9 @@ export const CombatDashboard = {
                 fate: this.getDefaultHeroFate()
             };
 
-            if (action === 'lp-minus') {
-                State.setHeroStat(heroIndex, 'lp', Math.max(0, Number(current.lp) - 1));
-            }
-
-            if (action === 'lp-plus') {
-                State.setHeroStat(heroIndex, 'lp', Number(current.lp) + 1);
-            }
-
-            if (action === 'fate-minus') {
-                State.setHeroStat(heroIndex, 'fate', Math.max(0, Number(current.fate) - 1));
-            }
-
-            if (action === 'fate-plus') {
-                State.setHeroStat(heroIndex, 'fate', Number(current.fate) + 1);
-            }
-
+            this.applyHeroAction(heroIndex, action, current);
             this.updateDashboard();
-
-            if (window.StorageManager?.persist) {
-                window.StorageManager.persist();
-            }
+            CombatRuntime.persistIfAllowed();
         });
 
         container.dataset.boundCombatDashboard = 'true';
@@ -129,10 +132,7 @@ export const CombatDashboard = {
         }
 
         this.updateDashboard();
-
-        if (window.StorageManager?.persist) {
-            window.StorageManager.persist();
-        }
+        CombatRuntime.persistIfAllowed();
     }
 };
 
