@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 4:52:45 PM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 4:52:56 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -7445,6 +7445,20 @@ export const AppStateSync = {
 };
 
 export default AppStateSync;
+
+```
+
+---
+
+## 📄 Datei: js/bootstrap/register-globals.js
+```js
+export function registerGlobals(globals = {}) {
+    Object.entries(globals).forEach(([key, value]) => {
+        window[key] = value;
+    });
+}
+
+export default registerGlobals;
 
 ```
 
