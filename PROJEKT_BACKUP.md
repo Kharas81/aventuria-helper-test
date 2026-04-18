@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 8:51:23 AM
+# 🛡️ Aventuria Projekt-Backup - 4/18/2026, 8:52:23 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5455,7 +5455,17 @@ select {
   "cardType": "Schergenkarte",
   "set": "Rückkehr zum Schwarzen Keiler",
   "setSymbol": "R",
-  "image": "karte_0007_gross_90.webp",
+  "image": "sc_jongleurin.webp",
+  "copies": 2,
+  "sourceImages": [
+    "karte_0006.webp",
+    "karte_0007.webp"
+  ],
+  "referenceImages": [
+    "karte_0006.webp",
+    "karte_0007.webp"
+  ],
+  "usedDuplicateForVerification": true,
   "keywords": ["Mensch", "Gaukler", "Diener"],
   "specialRules": [
     "Die Jongleurin kann nicht als Ziel für Angriffe gewählt werden, die mehr als 1W6 [TREFFERPUNKTE] verursachen."
@@ -5484,18 +5494,8 @@ select {
       "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Ist noch mindestens 1 Anführer anwesend, und dieser hat noch keinen Schergen auf sich liegen, so lege die Jongleurin auf ihn. Solange sie dort liegt, führt sie keine Aktionen durch und der Anführer kann nicht zum Ziel von Angriffen werden."
     }
   ],
-  "illustration": "Anja Di Paolo",
-  "source": "card_image",
-  "copies": 2,
-  "sourceImages": [
-    "karte_0006_gross_90.webp",
-    "karte_0007_gross_90.webp"
-  ],
-  "referenceImages": [
-    "karte_0006_gross_90.webp",
-    "karte_0007_gross_90.webp"
-  ],
-  "usedDuplicateForVerification": true
+  "illustration": "Anja DiPaolo",
+  "source": "card_image"
 }
 
 ```
