@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 9:16:16 AM
+# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 9:16:31 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -16236,6 +16236,42 @@ export default {
     normalizeArchiveQuery,
     openArchiveWithSearch,
     getArchiveActions
+};
+
+```
+
+---
+
+## 📄 Datei: js/ui/actions-rulebook.js
+```js
+import CoreRuntime from '../core/runtime.js';
+
+export function getRulebookActions() {
+    return {
+        'open-rulebook': () => {
+            CoreRuntime.getRulebook()?.open?.();
+        },
+
+        'close-rulebook': () => {
+            CoreRuntime.getRulebook()?.close?.();
+        },
+
+        'rulebook-tab': trigger => {
+            CoreRuntime.getRulebook()?.showTab?.(trigger?.dataset?.tab);
+        },
+
+        'rulebook-prev-page': () => {
+            CoreRuntime.getRulebook()?.prevPage?.();
+        },
+
+        'rulebook-next-page': () => {
+            CoreRuntime.getRulebook()?.nextPage?.();
+        }
+    };
+}
+
+export default {
+    getRulebookActions
 };
 
 ```
