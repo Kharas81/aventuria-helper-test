@@ -1,10 +1,10 @@
-import Utils from '../../core/utils.js';
 import ArchiveRenderer from './renderer.js';
 import ArchiveController from './archive-controller.js';
+import ArchiveModal from '../../templates/archive-modal.js';
 
 export const ArchiveBindings = {
     getModal() {
-        return Utils.byId('archive-modal');
+        return ArchiveModal.ensure();
     },
 
     bindSearch() {
