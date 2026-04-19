@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 9:07:49 AM
+# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 9:08:00 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -10873,6 +10873,44 @@ export const ArchiveSort = {
 };
 
 export default ArchiveSort;
+
+```
+
+---
+
+## 📄 Datei: js/features/archive/archive-state.js
+```js
+import Utils from '../../core/utils.js';
+import CONFIG from '../../core/config.js';
+import ArchiveFilter from './filter.js';
+
+export const ArchiveState = {
+    currentSet: CONFIG.defaultSet || 'base_game',
+    currentSearchTerm: '',
+    currentSourceFilter: ArchiveFilter.ALL_SOURCE_FILTER,
+    currentCategoryFilter: ArchiveFilter.ALL_CATEGORY_FILTER,
+    allCards: [],
+    filteredCards: [],
+    isLoading: false,
+
+    getResolvedCurrentSet() {
+        return Utils.normalizeString(
+            this.currentSet || CONFIG.defaultSet || 'base_game'
+        );
+    },
+
+    normalizeSourceFilter(sourceFilter = '') {
+        const normalized = Utils.normalizeString(sourceFilter);
+        return normalized || ArchiveFilter.ALL_SOURCE_FILTER;
+    },
+
+    normalizeCategoryFilter(categoryFilter = '') {
+        const normalized = Utils.normalizeString(categoryFilter).toLowerCase();
+        return normalized || ArchiveFilter.ALL_CATEGORY_FILTER;
+    }
+};
+
+export default ArchiveState;
 
 ```
 
