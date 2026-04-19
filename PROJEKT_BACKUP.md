@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 9:16:31 AM
+# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 9:16:43 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -16236,6 +16236,42 @@ export default {
     normalizeArchiveQuery,
     openArchiveWithSearch,
     getArchiveActions
+};
+
+```
+
+---
+
+## 📄 Datei: js/ui/actions-combat.js
+```js
+import CoreRuntime from '../core/runtime.js';
+
+export function getCombatActions() {
+    return {
+        'combat-prev-phase': () => {
+            CoreRuntime.getCombat()?.prevPhase?.();
+        },
+
+        'combat-next-phase': () => {
+            CoreRuntime.getCombat()?.nextPhase?.();
+        },
+
+        'combat-roll-target': () => {
+            CoreRuntime.getCombat()?.rollTarget?.();
+        },
+
+        'combat-update-ep': () => {
+            CoreRuntime.getCombat()?.updateEpResult?.();
+        },
+
+        'combat-apply-intermission': () => {
+            CoreRuntime.getCombat()?.applyIntermission?.();
+        }
+    };
+}
+
+export default {
+    getCombatActions
 };
 
 ```
