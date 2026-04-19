@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 8:43:15 AM
+# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 8:43:30 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -13415,6 +13415,56 @@ export function renderRuleBlock(rulebook, block = {}) {
 }
 
 export default renderRuleBlock;
+
+```
+
+---
+
+## 📄 Datei: js/features/rulebook/block-renderers/render-table.js
+```js
+import Utils from '../../../core/utils.js';
+
+export function renderTable(rulebook, block = {}) {
+    const headers = Utils.normalizeArray(block?.headers).map(header =>
+        rulebook.stripCitationMarkers(header)
+    );
+    const rows = Utils.normalizeArray(block?.rows);
+
+    if (headers.length === 0 && rows.length === 0) {
+        return '';
+    }
+
+    const theadHtml = headers.length > 0
+        ? `
+            <thead>
+                <tr>
+                    ${headers.map(header => `<th>${Utils.escapeHtml(header)}</th>`).join('')}
+                </tr>
+            </thead>
+        `
+        : '';
+
+    const tbodyHtml = rows.map(row => {
+        const cells = Utils.normalizeArray(row).map(cell =>
+            `<td>${Utils.escapeHtml(rulebook.stripCitationMarkers(cell))}</td>`
+        ).join('');
+
+        return `<tr>${cells}</tr>`;
+    }).join('');
+
+    return `
+        <div class="manual-table-wrap">
+            <table class="manual-table">
+                ${theadHtml}
+                <tbody>
+                    ${tbodyHtml}
+                </tbody>
+            </table>
+        </div>
+    `;
+}
+
+export default renderTable;
 
 ```
 
