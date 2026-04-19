@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 9:07:34 AM
+# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 9:07:49 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -10602,6 +10602,40 @@ export const ArchiveEmptyStateRenderer = {
 };
 
 export default ArchiveEmptyStateRenderer;
+
+```
+
+---
+
+## 📄 Datei: js/features/archive/archive-grid-renderer.js
+```js
+import Utils from '../../core/utils.js';
+import ArchiveCardTemplate from './archive-card-template.js';
+import ArchiveEmptyStateRenderer from './archive-empty-state-renderer.js';
+
+export const ArchiveGridRenderer = {
+    renderGrid(grid, cards = [], options = {}) {
+        if (!grid) return;
+
+        const safeCards = Utils.normalizeArray(cards);
+
+        if (!safeCards.length) {
+            ArchiveEmptyStateRenderer.showEmpty(
+                grid,
+                ArchiveEmptyStateRenderer.buildEmptyMessage(options)
+            );
+            return;
+        }
+
+        grid.innerHTML = safeCards.map(card => ArchiveCardTemplate.renderCard(card)).join('');
+
+        grid.querySelectorAll('.archive-card__image').forEach(img => {
+            Utils.attachImageFallback(img);
+        });
+    }
+};
+
+export default ArchiveGridRenderer;
 
 ```
 
