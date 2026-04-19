@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 9:29:06 AM
+# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 9:29:19 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -609,6 +609,132 @@ h1 {
 
     .card-detail__header {
         padding-right: var(--space-3xl);
+    }
+}
+
+```
+
+---
+
+## 📄 Datei: css/card-detail-meta.css
+```css
+.card-detail__meta {
+    margin: 0;
+    display: grid;
+    gap: var(--space-sm);
+}
+
+.card-detail__meta-row {
+    display: grid;
+    grid-template-columns: minmax(110px, 150px) minmax(0, 1fr);
+    gap: var(--space-md);
+    align-items: start;
+}
+
+.card-detail__meta-label {
+    font-weight: bold;
+    color: var(--color-primary);
+    margin: 0;
+}
+
+.card-detail__meta-value {
+    margin: 0;
+    color: var(--color-text);
+    word-break: break-word;
+}
+
+.card-detail__chip-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+
+.card-detail__chip-button {
+    appearance: none;
+    border: 1px solid var(--color-border-soft-card);
+    border-radius: var(--radius-pill);
+    background: var(--color-bg-body);
+    color: var(--color-primary);
+    padding: 4px 10px;
+    font-size: 0.9rem;
+    line-height: 1.2;
+    cursor: pointer;
+    transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.card-detail__chip-button:hover {
+    transform: translateY(-1px);
+    background: var(--color-bg-panel);
+}
+
+.card-detail__stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: var(--space-md);
+}
+
+.card-detail__stat {
+    background: var(--color-bg-panel);
+    border: 1px solid var(--color-border-soft-card);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+}
+
+.card-detail__stat-label {
+    display: block;
+    color: var(--color-primary);
+    font-size: 0.82rem;
+    font-weight: bold;
+    margin-bottom: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.card-detail__stat-value {
+    display: block;
+    color: var(--color-text);
+    font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 1.1;
+}
+
+.card-detail__symbol {
+    display: inline-block;
+    padding: 1px 7px;
+    margin: 0 2px;
+    border-radius: var(--radius-pill);
+    background: var(--color-bg-body);
+    border: 1px solid var(--color-border-soft-card);
+    color: var(--color-primary);
+    font-size: 0.9em;
+    white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+    .card-detail__meta-row {
+        grid-template-columns: 1fr;
+        gap: 2px;
+    }
+
+    .card-detail__stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 520px) {
+    .card-detail__stats {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-sm);
+    }
+
+    .card-detail__stat-value {
+        font-size: 1.3rem;
+    }
+
+    .card-detail__chip-button {
+        font-size: 0.85rem;
     }
 }
 
