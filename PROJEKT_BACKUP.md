@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 9:28:37 AM
+# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 9:28:49 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -496,6 +496,120 @@ h1 {
 
 .hidden {
     display: none;
+}
+
+```
+
+---
+
+## 📄 Datei: css/card-detail-layout.css
+```css
+.card-detail {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xl);
+    max-width: 1160px;
+    margin: 0 auto;
+}
+
+.card-detail--landscape .card-detail__top {
+    grid-template-columns: 1fr;
+}
+
+.card-detail--landscape .card-detail__image {
+    max-height: 46vh;
+    aspect-ratio: 16 / 9;
+}
+
+.card-detail__header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    padding-right: var(--space-5xl);
+}
+
+.card-detail__title {
+    margin: 0;
+    color: var(--color-primary);
+    font-size: 2rem;
+    line-height: 1.1;
+}
+
+.card-detail__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+
+.card-detail__top {
+    display: grid;
+    grid-template-columns: minmax(280px, 430px) minmax(0, 1fr);
+    gap: var(--space-2xl);
+    align-items: start;
+}
+
+.card-detail__image-panel {
+    background: var(--color-bg-white-soft);
+    border: 1px solid var(--color-border-soft-card);
+    border-radius: var(--radius-xl);
+    padding: var(--space-lg);
+    box-shadow: var(--shadow-card);
+}
+
+.card-detail__image-wrap {
+    width: 100%;
+}
+
+.card-detail__image {
+    display: block;
+    width: 100%;
+    max-height: 68vh;
+    object-fit: contain;
+    border: var(--border-thin) solid var(--color-secondary);
+    border-radius: var(--radius-lg);
+    background: var(--color-white);
+    box-shadow: var(--shadow-sm);
+}
+
+.card-detail__info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    min-width: 0;
+}
+
+@media (max-width: 980px) {
+    .card-detail__top {
+        grid-template-columns: 1fr;
+    }
+
+    .card-detail__image {
+        max-height: 52vh;
+    }
+
+    .card-detail__header {
+        padding-right: var(--space-4xl);
+    }
+}
+
+@media (max-width: 700px) {
+    .card-detail__title {
+        font-size: 1.55rem;
+    }
+}
+
+@media (max-width: 520px) {
+    .card-detail {
+        gap: var(--space-lg);
+    }
+
+    .card-detail__image-panel {
+        padding: var(--space-lg);
+    }
+
+    .card-detail__header {
+        padding-right: var(--space-3xl);
+    }
 }
 
 ```
