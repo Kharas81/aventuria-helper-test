@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 8:39:57 AM
+# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 8:41:18 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -13339,6 +13339,24 @@ export function renderLocation(rulebook, block = {}) {
 }
 
 export default renderLocation;
+
+```
+
+---
+
+## 📄 Datei: js/features/rulebook/block-renderers/render-map-index.js
+```js
+import Utils from '../../../core/utils.js';
+
+export function renderMapIndex(rulebook, block = {}) {
+    const elements = Utils.normalizeArray(block?.elements)
+        .map(entry => rulebook.stripCitationMarkers(entry))
+        .join(', ');
+
+    return `<div class="map-index"><small>Orte: ${Utils.escapeHtml(elements)}</small></div>`;
+}
+
+export default renderMapIndex;
 
 ```
 
