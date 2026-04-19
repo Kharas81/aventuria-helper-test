@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 9:31:18 AM
+# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 9:31:35 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -17573,6 +17573,7 @@ export const UIModals = {
     closeAll() {
         Utils.qsa('.modal-backdrop').forEach(modal => {
             modal.style.display = 'none';
+            modal.setAttribute('aria-hidden', 'true');
         });
 
         UIPreview.close();
