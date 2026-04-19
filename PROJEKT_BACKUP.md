@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 9:32:30 AM
+# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 12:59:37 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -4943,12 +4943,25 @@ select {
   "cardName": "Belebtes Skelett",
   "cardType": "Schergenkarte",
   "set": "Aventuria Grundbox",
+  "setId": "aventuria_grundbox",
+  "setShortName": "Aventuria Grundbox",
   "setSymbol": "A",
+  "layout": "landscape",
   "image": "sc_belebtes_skelett.webp",
   "sourceImages": [
     "karte_0001.webp"
   ],
-  "keywords": ["Untot", "Skelett"],
+  "tags": [
+    "untot",
+    "skelett"
+  ],
+  "keywords": [
+    "Untot",
+    "Skelett"
+  ],
+  "searchAliases": [
+    "Untoter"
+  ],
   "specialRules": [
     "Bei [FERNKAMPF]-Angriffen gegen das Skelett wird das Ergebnis, das die Würfel beim Schadenswurf zeigen, halbiert (aufrunden)."
   ],
