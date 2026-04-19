@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 9:16:53 AM
+# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 9:17:09 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -16342,6 +16342,30 @@ export function getCombatActions() {
 
 export default {
     getCombatActions
+};
+
+```
+
+---
+
+## 📄 Datei: js/ui/actions-diagnostics.js
+```js
+import CoreRuntime from '../core/runtime.js';
+
+export function getDiagnosticsActions() {
+    return {
+        'toggle-diagnostics-details': () => {
+            CoreRuntime.getDiagnostics()?.toggleDetails?.();
+        },
+
+        'clear-diagnostics': () => {
+            CoreRuntime.getDiagnostics()?.clear?.();
+        }
+    };
+}
+
+export default {
+    getDiagnosticsActions
 };
 
 ```
