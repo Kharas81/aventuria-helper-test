@@ -1,44 +1,53 @@
-import Utils from '../../core/utils.js';
+import RulebookModal from '../../templates/rulebook-modal.js';
 
 export const RulebookUIDom = {
     getModal() {
-        return Utils.byId('rulebook-modal');
+        return RulebookModal.ensure();
     },
 
     getReaderTab() {
-        return Utils.byId('reader-tab');
+        RulebookModal.ensure();
+        return RulebookModal.getReaderTab();
     },
 
     getCodexTab() {
-        return Utils.byId('codex-tab');
+        RulebookModal.ensure();
+        return RulebookModal.getCodexTab();
     },
 
     getManualContent() {
-        return Utils.byId('manual-content');
+        RulebookModal.ensure();
+        return RulebookModal.getManualContent();
     },
 
     getPageIndicator() {
-        return Utils.byId('manual-page-indicator');
+        RulebookModal.ensure();
+        return RulebookModal.getPageIndicator();
     },
 
     getManualPageList() {
-        return Utils.byId('manual-page-list');
+        RulebookModal.ensure();
+        return RulebookModal.getManualPageList();
     },
 
     getCodexResults() {
-        return Utils.byId('codex-results');
+        RulebookModal.ensure();
+        return RulebookModal.getCodexResults();
     },
 
     getCodexSearch() {
-        return Utils.byId('codex-search');
+        RulebookModal.ensure();
+        return RulebookModal.getCodexSearch();
     },
 
     getManualSetLabel() {
-        return Utils.byId('manual-set-label');
+        RulebookModal.ensure();
+        return RulebookModal.getManualSetLabel();
     },
 
     getManualTitle() {
-        return Utils.byId('manual-title');
+        RulebookModal.ensure();
+        return RulebookModal.getManualTitle();
     }
 };
 
