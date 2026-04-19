@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 9:29:52 AM
+# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 9:30:11 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -10963,10 +10963,11 @@ import ArchiveLoader from './loader.js';
 import ArchiveFilter from './filter.js';
 import ArchiveRenderer from './renderer.js';
 import ArchiveState from './archive-state.js';
+import ArchiveModal from '../../templates/archive-modal.js';
 
 export const ArchiveController = {
     getModal() {
-        return Utils.byId('archive-modal');
+        return ArchiveModal.ensure();
     },
 
     applyFilters() {
@@ -10980,10 +10981,8 @@ export const ArchiveController = {
     },
 
     async open(options = {}) {
-        const modal = this.getModal();
+        const modal = ArchiveModal.open();
         if (!modal) return;
-
-        modal.style.display = 'flex';
 
         const desiredSet = Utils.normalizeString(
             options?.setKey
@@ -11025,10 +11024,7 @@ export const ArchiveController = {
     },
 
     close() {
-        const modal = this.getModal();
-        if (!modal) return;
-
-        modal.style.display = 'none';
+        ArchiveModal.close();
     },
 
     async loadSet(setKey = '', options = {}) {
