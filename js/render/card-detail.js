@@ -1,5 +1,5 @@
 import CardDetailSections from './card-detail-sections.js';
-import CardDetailModal from './card-detail-modal.js';
+import CardDetailModal from '../templates/card-detail-modal.js';
 
 export const RenderCardDetail = {
     normalizeCardDetail(card) {
