@@ -6,6 +6,7 @@ export const UIModals = {
     closeAll() {
         Utils.qsa('.modal-backdrop').forEach(modal => {
             modal.style.display = 'none';
+            modal.setAttribute('aria-hidden', 'true');
         });
 
         UIPreview.close();
