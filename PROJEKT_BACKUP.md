@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 9:17:19 AM
+# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 9:17:46 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -15373,6 +15373,93 @@ export const CardDetailModal = {
 };
 
 export default CardDetailModal;
+
+```
+
+---
+
+## 📄 Datei: js/render/card-detail-normalizer.js
+```js
+import Utils from '../core/utils.js';
+import RenderCommon from './common.js';
+
+export function normalizeCardDetail(card) {
+    const normalized = RenderCommon.normalizeCard(card);
+
+    return {
+        ...normalized,
+        layout: Utils.normalizeString(
+            card?.layout || normalized?.layout || 'portrait'
+        ).toLowerCase(),
+        card_category: Utils.normalizeString(card?.card_category),
+        subtypes: RenderCommon.normalizeArray(card?.subtypes),
+        source: card?.source ?? {},
+        rules: {
+            passive: Utils.normalizeString(card?.rules?.passive),
+            success: Utils.normalizeString(card?.rules?.success),
+            fail: Utils.normalizeString(card?.rules?.fail),
+            draw_effect: Utils.normalizeString(card?.rules?.draw_effect),
+            flavor: Utils.normalizeString(card?.rules?.flavor),
+            timed_effects: RenderCommon.normalizeArray(card?.rules?.timed_effects),
+            milestones: RenderCommon.normalizeArray(card?.rules?.milestones),
+            action_table: RenderCommon.normalizeArray(card?.rules?.action_table)
+        },
+        stats: {
+            gp: card?.stats?.gp ?? null,
+            lp: card?.stats?.lp ?? null,
+            armor: card?.stats?.armor ?? null,
+            evasion: card?.stats?.evasion ?? null,
+            actions: card?.stats?.actions ?? null,
+            start_value: card?.stats?.start_value ?? null,
+            cost: card?.stats?.cost ?? null
+        }
+    };
+}
+
+export default {
+    normalizeCardDetail
+};
+
+```
+
+---
+
+## 📄 Datei: js/render/card-detail-search.js
+```js
+import Utils from '../core/utils.js';
+import RenderCommon from './common.js';
+
+export function renderSearchChips(items = []) {
+    const safeItems = Array.from(new Set(
+        RenderCommon.normalizeArray(items)
+            .map(value => Utils.normalizeString(value))
+            .filter(Boolean)
+    ));
+
+    if (!safeItems.length) {
+        return '<p class="card-detail__empty">Keine Schlagwörter vorhanden.</p>';
+    }
+
+    return `
+        <div class="card-detail__chip-group">
+            ${safeItems.map(item => `
+                <button
+                    type="button"
+                    class="card-detail__chip-button"
+                    data-action="archive-search"
+                    data-archive-query="${Utils.escapeHtml(item)}"
+                    title="Ähnliche Karten suchen"
+                >
+                    ${Utils.escapeHtml(item)}
+                </button>
+            `).join('')}
+        </div>
+    `;
+}
+
+export default {
+    renderSearchChips
+};
 
 ```
 
