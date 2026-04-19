@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 9:29:33 AM
+# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 9:29:52 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -16226,7 +16226,7 @@ export default {
 ## 📄 Datei: js/render/card-detail.js
 ```js
 import CardDetailSections from './card-detail-sections.js';
-import CardDetailModal from './card-detail-modal.js';
+import CardDetailModal from '../templates/card-detail-modal.js';
 
 export const RenderCardDetail = {
     normalizeCardDetail(card) {
