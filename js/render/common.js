@@ -1,5 +1,4 @@
 import Utils from '../core/utils.js';
-import CoreRuntime from '../core/runtime.js';
 
 export const RenderCommon = {
     normalizeArray(value) {
@@ -53,105 +52,6 @@ export const RenderCommon = {
     getCardImage(card) {
         const normalized = this.normalizeCard(card);
         return normalized.imageSrc;
-    },
-
-    buildChecklistItem(card) {
-        const normalized = this.normalizeCard(card);
-
-        const label = card?.label
-            ? Utils.normalizeString(card.label)
-            : this.getCardLabel(normalized);
-
-        const explicitArchiveQuery = Utils.normalizeString(card?.archiveQuery);
-        const referenceQuery = explicitArchiveQuery || this.normalizeReferenceQuery(label);
-
-        const archiveSource = Utils.normalizeString(card?.archiveSource);
-        const archiveSet = Utils.normalizeString(card?.archiveSet);
-        const preferArchiveSearch = Boolean(card?.preferArchiveSearch);
-
-        const safeLabel = Utils.escapeHtml(label);
-        const imageSrc = this.getCardImage(normalized);
-        const cardId = Utils.escapeHtml(normalized.id || '');
-        const safeReferenceQuery = Utils.escapeHtml(referenceQuery);
-        const safeArchiveSource = Utils.escapeHtml(archiveSource);
-        const safeArchiveSet = Utils.escapeHtml(archiveSet);
-
-        const hasPreview = normalized.hasRealImage;
-        const isMissing = normalized.status === 'missing';
-        const isPlaceholder = normalized.status === 'placeholder';
-
-        const previewAttr = hasPreview
-            ? ` data-image="${Utils.escapeHtml(imageSrc)}" data-card-id="${cardId || safeReferenceQuery}" class="has-preview"`
-            : '';
-
-        const infoButton = `
-            <button
-                class="info-btn"
-                type="button"
-                title="Kartendetails oder passende Karten anzeigen"
-                data-action="open-card-detail"
-                data-card-id="${cardId}"
-                data-card-label="${safeLabel}"
-                data-card-query="${safeReferenceQuery}"
-                data-archive-query="${safeReferenceQuery}"
-                data-archive-source="${safeArchiveSource}"
-                data-archive-set="${safeArchiveSet}"
-                data-prefer-archive-search="${preferArchiveSearch ? 'true' : 'false'}"
-                ${(!cardId && !safeReferenceQuery) ? 'disabled' : ''}
-            >i</button>
-        `;
-
-        const suffix = isMissing
-            ? ' ⚠️'
-            : isPlaceholder
-                ? ' 🛈'
-                : '';
-
-        return `
-            <li
-                class="checklist-item"
-                data-card-id="${cardId}"
-                data-card-label="${safeLabel}"
-                data-card-query="${safeReferenceQuery}"
-                data-archive-source="${safeArchiveSource}"
-                data-archive-set="${safeArchiveSet}"
-                data-prefer-archive-search="${preferArchiveSearch ? 'true' : 'false'}"
-            >
-                <input type="checkbox">
-                <span${previewAttr}>${safeLabel}${suffix}</span>
-                ${infoButton}
-            </li>
-        `;
-    },
-
-    bindCardPreviews(scope = document) {
-        const previewTargets = scope.querySelectorAll('.has-preview[data-image]');
-        const ui = CoreRuntime.getUI();
-
-        previewTargets.forEach(el => {
-            if (el.dataset.previewBound === 'true') return;
-            el.dataset.previewBound = 'true';
-
-            el.addEventListener('mouseenter', event => {
-                const imageSrc = el.dataset.image;
-                ui?.showPreview?.(event, imageSrc);
-            });
-
-            el.addEventListener('mousemove', event => {
-                ui?.movePreview?.(event);
-            });
-
-            el.addEventListener('mouseleave', () => {
-                ui?.closePreview?.();
-            });
-
-            el.addEventListener('click', () => {
-                const imageSrc = el.dataset.image;
-                if (imageSrc) {
-                    ui?.openPreview?.(imageSrc);
-                }
-            });
-        });
     }
 };
 
