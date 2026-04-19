@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 9:18:47 AM
+# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 9:19:00 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -16897,195 +16897,36 @@ export default {
 
 ## 📄 Datei: js/ui/actions.js
 ```js
-import Utils from '../core/utils.js';
-import Constants from '../core/constants.js';
-import State from '../core/state.js';
-import ApiCardLookup from '../core/api-card-lookup.js';
 import UIModals from './modals.js';
-import CoreRuntime from '../core/runtime.js';
+import {
+    getSectionStateKey,
+    toggleSection,
+    getLayoutActions
+} from './actions-layout.js';
+import {
+    normalizeArchiveQuery,
+    openArchiveWithSearch,
+    getArchiveActions
+} from './actions-archive.js';
+import { getRulebookActions } from './actions-rulebook.js';
+import { getCombatActions } from './actions-combat.js';
+import { getCardDetailActions } from './actions-card-detail.js';
+import { getDiagnosticsActions } from './actions-diagnostics.js';
 
 export const UIActions = {
-    getSectionStateKey(sectionId) {
-        const map = Constants.ui?.sectionStateMap ?? {};
-        return map[sectionId] || null;
-    },
-
-    toggleSection(sectionId) {
-        const section = Utils.byId(sectionId);
-        if (!section) return;
-
-        const isOpen = !section.classList.contains('show');
-        section.classList.toggle('show', isOpen);
-
-        const sectionKey = this.getSectionStateKey(sectionId);
-        if (sectionKey) {
-            State.setSectionOpen(sectionKey, isOpen);
-        }
-
-        CoreRuntime.persistIfAllowed();
-    },
-
-    normalizeArchiveQuery(value = '') {
-        return Utils.normalizeString(value)
-            .replace(/\s*\([^)]*\)\s*$/g, '')
-            .replace(/\s{2,}/g, ' ')
-            .trim();
-    },
-
-    openArchiveWithSearch({ query = '', sourceFilter = '', categoryFilter = '', setKey = '' } = {}) {
-        const archive = CoreRuntime.getArchive();
-        if (!archive?.open) {
-            return;
-        }
-
-        const safeQuery = this.normalizeArchiveQuery(query);
-        const safeSourceFilter = Utils.normalizeString(sourceFilter);
-        const safeCategoryFilter = Utils.normalizeString(categoryFilter);
-        const safeSetKey = Utils.normalizeString(setKey);
-
-        CoreRuntime.getRenderCardDetail()?.closeCardDetail?.();
-
-        archive.open({
-            query: safeQuery,
-            sourceFilter: safeSourceFilter,
-            categoryFilter: safeCategoryFilter,
-            setKey: safeSetKey
-        });
-    },
+    getSectionStateKey,
+    toggleSection,
+    normalizeArchiveQuery,
+    openArchiveWithSearch,
 
     getActionMap() {
         return {
-            'open-archive': () => {
-                CoreRuntime.getArchive()?.open?.();
-            },
-
-            'close-archive': () => {
-                CoreRuntime.getArchive()?.close?.();
-            },
-
-            'open-rulebook': () => {
-                CoreRuntime.getRulebook()?.open?.();
-            },
-
-            'close-rulebook': () => {
-                CoreRuntime.getRulebook()?.close?.();
-            },
-
-            'toggle-section': trigger => {
-                this.toggleSection(trigger?.dataset?.target || '');
-            },
-
-            'combat-prev-phase': () => {
-                CoreRuntime.getCombat()?.prevPhase?.();
-            },
-
-            'combat-next-phase': () => {
-                CoreRuntime.getCombat()?.nextPhase?.();
-            },
-
-            'combat-roll-target': () => {
-                CoreRuntime.getCombat()?.rollTarget?.();
-            },
-
-            'combat-update-ep': () => {
-                CoreRuntime.getCombat()?.updateEpResult?.();
-            },
-
-            'combat-apply-intermission': () => {
-                CoreRuntime.getCombat()?.applyIntermission?.();
-            },
-
-            'rulebook-tab': trigger => {
-                CoreRuntime.getRulebook()?.showTab?.(trigger?.dataset?.tab);
-            },
-
-            'rulebook-prev-page': () => {
-                CoreRuntime.getRulebook()?.prevPage?.();
-            },
-
-            'rulebook-next-page': () => {
-                CoreRuntime.getRulebook()?.nextPage?.();
-            },
-
-            'archive-load-set': trigger => {
-                CoreRuntime.getArchive()?.loadSet?.(trigger?.dataset?.set, {
-                    sourceFilter: '__all__',
-                    categoryFilter: '__all__'
-                });
-            },
-
-            'archive-filter-source': trigger => {
-                CoreRuntime.getArchive()?.setSourceFilter?.(trigger?.dataset?.sourceFilter || '');
-            },
-
-            'archive-filter-category': trigger => {
-                CoreRuntime.getArchive()?.setCategoryFilter?.(trigger?.dataset?.categoryFilter || '');
-            },
-
-            'archive-search': trigger => {
-                this.openArchiveWithSearch({
-                    query: trigger?.dataset?.archiveQuery || '',
-                    sourceFilter: trigger?.dataset?.archiveSource || '',
-                    categoryFilter: trigger?.dataset?.archiveCategory || '',
-                    setKey: trigger?.dataset?.archiveSet || ''
-                });
-            },
-
-            'open-card-detail': async trigger => {
-                const preferArchiveSearch = String(
-                    trigger?.dataset?.preferArchiveSearch || ''
-                ).toLowerCase() === 'true';
-
-                const fallbackQuery = this.normalizeArchiveQuery(
-                    trigger?.dataset?.archiveQuery
-                    || trigger?.dataset?.cardQuery
-                    || trigger?.dataset?.cardLabel
-                    || ''
-                );
-
-                const archiveSource = Utils.normalizeString(trigger?.dataset?.archiveSource);
-                const archiveCategory = Utils.normalizeString(trigger?.dataset?.archiveCategory);
-                const archiveSet = Utils.normalizeString(trigger?.dataset?.archiveSet);
-                const cardId = Utils.normalizeString(trigger?.dataset?.cardId);
-
-                if (preferArchiveSearch && fallbackQuery) {
-                    this.openArchiveWithSearch({
-                        query: fallbackQuery,
-                        sourceFilter: archiveSource,
-                        categoryFilter: archiveCategory,
-                        setKey: archiveSet
-                    });
-                    return;
-                }
-
-                if (cardId) {
-                    const openedCard = await ApiCardLookup.openCardDetailById(cardId);
-                    if (openedCard) {
-                        return;
-                    }
-                }
-
-                if (fallbackQuery) {
-                    this.openArchiveWithSearch({
-                        query: fallbackQuery,
-                        sourceFilter: archiveSource,
-                        categoryFilter: archiveCategory,
-                        setKey: archiveSet
-                    });
-                }
-            },
-
-            'close-card-detail': () => {
-                CoreRuntime.getRenderCardDetail()?.closeCardDetail?.();
-            },
-
-            'toggle-diagnostics-details': () => {
-                CoreRuntime.getDiagnostics()?.toggleDetails?.();
-            },
-
-            'clear-diagnostics': () => {
-                CoreRuntime.getDiagnostics()?.clear?.();
-            }
+            ...getArchiveActions(),
+            ...getRulebookActions(),
+            ...getCombatActions(),
+            ...getCardDetailActions(),
+            ...getDiagnosticsActions(),
+            ...getLayoutActions()
         };
     },
 
