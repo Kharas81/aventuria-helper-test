@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 9:29:19 AM
+# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 9:29:33 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -496,6 +496,66 @@ h1 {
 
 .hidden {
     display: none;
+}
+
+```
+
+---
+
+## 📄 Datei: css/card-detail-actions.css
+```css
+.card-detail__actions {
+    display: grid;
+    gap: var(--space-md);
+}
+
+.card-detail__action {
+    background: var(--color-bg-white-soft);
+    border: 1px solid var(--color-border-soft-card);
+    border-left: var(--border-xl) solid var(--color-secondary);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.card-detail__action-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm);
+}
+
+.card-detail__roll {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 62px;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+    background: var(--color-primary);
+    color: var(--color-white);
+    font-weight: bold;
+    font-size: 0.9rem;
+    line-height: 1.2;
+}
+
+.card-detail__action-title {
+    font-weight: bold;
+    color: var(--color-primary);
+    font-size: 1.02rem;
+}
+
+.card-detail__action-text {
+    margin: 0;
+    white-space: pre-line;
+    line-height: 1.55;
+}
+
+@media (max-width: 520px) {
+    .card-detail__action {
+        padding: var(--space-lg);
+    }
 }
 
 ```
