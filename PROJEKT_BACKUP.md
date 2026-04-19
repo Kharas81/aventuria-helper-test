@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 8:36:20 AM
+# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 8:36:38 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -13302,6 +13302,26 @@ export function renderLocation(rulebook, block = {}) {
 }
 
 export default renderLocation;
+
+```
+
+---
+
+## 📄 Datei: js/features/rulebook/block-renderers/render-paragraph.js
+```js
+import Utils from '../../../core/utils.js';
+
+export function renderParagraph(rulebook, block = {}) {
+    const rawText = typeof block === 'string'
+        ? block
+        : (block?.text || '');
+
+    const text = rulebook.stripCitationMarkers(rawText);
+
+    return `<p>${Utils.escapeHtml(text)}</p>`;
+}
+
+export default renderParagraph;
 
 ```
 
