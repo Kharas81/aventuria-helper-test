@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 9:18:04 AM
+# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 9:18:17 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -15461,6 +15461,118 @@ export function normalizeCardDetail(card) {
 
 export default {
     normalizeCardDetail
+};
+
+```
+
+---
+
+## 📄 Datei: js/render/card-detail-rules.js
+```js
+import Utils from '../core/utils.js';
+import RenderCommon from './common.js';
+import CardDetailFormatters from './card-detail-formatters.js';
+
+export function renderTextBlock(title = '', text = '') {
+    const safeText = Utils.normalizeString(text);
+    if (!safeText) {
+        return '';
+    }
+
+    return `
+        <section class="card-detail__text-block">
+            <h3>${Utils.escapeHtml(title)}</h3>
+            <p>${CardDetailFormatters.formatRuleText(safeText)}</p>
+        </section>
+    `;
+}
+
+export function renderRuleList(title, items, valueKey = 'text') {
+    const safeItems = RenderCommon.normalizeArray(items).filter(Boolean);
+    if (!safeItems.length) {
+        return '';
+    }
+
+    return `
+        <section class="card-detail__text-block">
+            <h3>${Utils.escapeHtml(title)}</h3>
+            <div class="card-detail__sections">
+                ${safeItems.map(item => {
+                    if (typeof item === 'string') {
+                        return `<p>${CardDetailFormatters.formatRuleText(item)}</p>`;
+                    }
+
+                    const value = Utils.normalizeString(item?.[valueKey] ?? '');
+                    const prefix = item?.value !== undefined && item?.value !== null
+                        ? `${Utils.escapeHtml(String(item.value))}: `
+                        : item?.roll
+                            ? `${Utils.escapeHtml(String(item.roll))}: `
+                            : item?.title
+                                ? `${Utils.escapeHtml(String(item.title))}: `
+                                : '';
+
+                    return `<p>${prefix}${CardDetailFormatters.formatRuleText(value)}</p>`;
+                }).join('')}
+            </div>
+        </section>
+    `;
+}
+
+export function renderActionBlocks(actionTable) {
+    const rows = RenderCommon.normalizeArray(actionTable).filter(Boolean);
+    if (!rows.length) {
+        return '';
+    }
+
+    return `
+        <section class="card-detail__text-block">
+            <h3>Aktionen</h3>
+            <div class="card-detail__actions">
+                ${rows.map(row => `
+                    <article class="card-detail__action">
+                        <div class="card-detail__action-top">
+                            ${row?.roll ? `<span class="card-detail__roll">${Utils.escapeHtml(String(row.roll))}</span>` : ''}
+                            ${row?.title ? `<span class="card-detail__action-title">${CardDetailFormatters.formatRuleText(String(row.title))}</span>` : ''}
+                        </div>
+                        ${row?.description
+                            ? `<p class="card-detail__action-text">${CardDetailFormatters.formatRuleText(String(row.description))}</p>`
+                            : '<p class="card-detail__empty">Keine Beschreibung vorhanden.</p>'
+                        }
+                    </article>
+                `).join('')}
+            </div>
+        </section>
+    `;
+}
+
+export function buildRulesSections(card) {
+    const notesHtml = Utils.normalizeString(card.notes)
+        ? `
+            <section class="card-detail__text-block">
+                <h3>Hinweis</h3>
+                <p class="card-detail__notes">${CardDetailFormatters.formatRuleText(card.notes)}</p>
+            </section>
+        `
+        : '';
+
+    return [
+        renderTextBlock('Passiv', card.rules.passive),
+        renderTextBlock('Erfolg', card.rules.success),
+        renderTextBlock('Misserfolg', card.rules.fail),
+        renderTextBlock('Zieheffekt', card.rules.draw_effect),
+        renderRuleList('Zeiteffekte', card.rules.timed_effects),
+        renderRuleList('Meilensteine', card.rules.milestones),
+        renderActionBlocks(card.rules.action_table),
+        renderTextBlock('Flavour', card.rules.flavor),
+        notesHtml
+    ].filter(Boolean).join('');
+}
+
+export default {
+    renderTextBlock,
+    renderRuleList,
+    renderActionBlocks,
+    buildRulesSections
 };
 
 ```
