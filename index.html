@@ -23,6 +23,10 @@
     <link rel="stylesheet" href="css/intermission.css">
     <link rel="stylesheet" href="css/modal.css">
     <link rel="stylesheet" href="css/card-detail.css">
+    <link rel="stylesheet" href="css/card-detail-layout.css">
+    <link rel="stylesheet" href="css/card-detail-panels.css">
+    <link rel="stylesheet" href="css/card-detail-meta.css">
+    <link rel="stylesheet" href="css/card-detail-actions.css">
 </head>
 <body>
     <div class="app-container">
@@ -247,102 +251,108 @@
     </div>
 
     <!-- =============================================================
-         ARCHIV-MODAL
+         ARCHIV-MODAL-TEMPLATE
     ============================================================== -->
-    <div
-        class="modal-backdrop"
-        id="archive-modal"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="archive-modal-title"
-    >
-        <div class="modal-content archive-modal-size">
-            <span class="close-modal" data-action="close-archive" aria-label="Archiv schließen">&times;</span>
+    <template id="archive-modal-template">
+        <div
+            class="modal-backdrop"
+            id="archive-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="archive-modal-title"
+            aria-hidden="true"
+        >
+            <div class="modal-content archive-modal-size">
+                <span class="close-modal" data-action="close-archive" aria-label="Archiv schließen">&times;</span>
 
-            <div class="tab-content">
-                <div class="archive-header">
-                    <h2 id="archive-modal-title">Kartenarchiv</h2>
-                    <input
-                        type="search"
-                        id="archive-search"
-                        class="search-bar"
-                        placeholder="Karten suchen ..."
-                    >
-                </div>
-
-                <div id="archive-set-buttons" class="button-group"></div>
-                <div id="archive-grid" class="archive-grid"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- =============================================================
-         REGELBUCH-MODAL
-    ============================================================== -->
-    <div
-        class="modal-backdrop"
-        id="rulebook-modal"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="manual-title"
-    >
-        <div class="modal-content">
-            <span class="close-modal" data-action="close-rulebook" aria-label="Regelbuch schließen">&times;</span>
-
-            <div class="modal-layout">
-                <!-- Seitenliste -->
-                <aside class="modal-sidebar" aria-label="Regelbuch-Seiten">
-                    <h4 id="manual-set-label">Regelbuch</h4>
-                    <ul id="manual-page-list"></ul>
-                </aside>
-
-                <!-- Reader / Kodex -->
-                <div class="modal-main">
-                    <div class="modal-nav">
-                        <h2 id="manual-title">Regelbuch</h2>
-
-                        <button
-                            type="button"
-                            class="tab-btn active"
-                            data-action="rulebook-tab"
-                            data-tab="reader"
-                        >
-                            Leser
-                        </button>
-
-                        <button
-                            type="button"
-                            class="tab-btn"
-                            data-action="rulebook-tab"
-                            data-tab="codex"
-                        >
-                            Kodex
-                        </button>
-                    </div>
-
-                    <div id="reader-tab" class="tab-content">
-                        <div id="manual-content"></div>
-
-                        <div class="reader-footer">
-                            <button type="button" data-action="rulebook-prev-page">Zurück</button>
-                            <span id="manual-page-indicator">Seite 0 / 0</span>
-                            <button type="button" data-action="rulebook-next-page">Weiter</button>
-                        </div>
-                    </div>
-
-                    <div id="codex-tab" class="tab-content hidden">
+                <div class="tab-content">
+                    <div class="archive-header">
+                        <h2 id="archive-modal-title">Kartenarchiv</h2>
                         <input
                             type="search"
-                            id="codex-search"
+                            id="archive-search"
                             class="search-bar"
-                            placeholder="Im Regelbuch suchen ..."
+                            placeholder="Karten suchen ..."
                         >
-                        <div id="codex-results"></div>
+                    </div>
+
+                    <div id="archive-set-buttons" class="button-group"></div>
+                    <div id="archive-grid" class="archive-grid"></div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- =============================================================
+         REGELBUCH-MODAL-TEMPLATE
+    ============================================================== -->
+    <template id="rulebook-modal-template">
+        <div
+            class="modal-backdrop"
+            id="rulebook-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="manual-title"
+            aria-hidden="true"
+        >
+            <div class="modal-content">
+                <span class="close-modal" data-action="close-rulebook" aria-label="Regelbuch schließen">&times;</span>
+
+                <div class="modal-layout">
+                    <!-- Seitenliste -->
+                    <aside class="modal-sidebar" aria-label="Regelbuch-Seiten">
+                        <h4 id="manual-set-label">Regelbuch</h4>
+                        <ul id="manual-page-list"></ul>
+                    </aside>
+
+                    <!-- Reader / Kodex -->
+                    <div class="modal-main">
+                        <div class="modal-nav">
+                            <h2 id="manual-title">Regelbuch</h2>
+
+                            <button
+                                type="button"
+                                class="tab-btn active"
+                                data-action="rulebook-tab"
+                                data-tab="reader"
+                            >
+                                Leser
+                            </button>
+
+                            <button
+                                type="button"
+                                class="tab-btn"
+                                data-action="rulebook-tab"
+                                data-tab="codex"
+                            >
+                                Kodex
+                            </button>
+                        </div>
+
+                        <div id="reader-tab" class="tab-content">
+                            <div id="manual-content"></div>
+
+                            <div class="reader-footer">
+                                <button type="button" data-action="rulebook-prev-page">Zurück</button>
+                                <span id="manual-page-indicator">Seite 0 / 0</span>
+                                <button type="button" data-action="rulebook-next-page">Weiter</button>
+                            </div>
+                        </div>
+
+                        <div id="codex-tab" class="tab-content hidden">
+                            <input
+                                type="search"
+                                id="codex-search"
+                                class="search-bar"
+                                placeholder="Im Regelbuch suchen ..."
+                            >
+                            <div id="codex-results"></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </template>
 
     <!-- =============================================================
          CARD-DETAIL-TEMPLATE
