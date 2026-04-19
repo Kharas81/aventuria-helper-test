@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 9:30:11 AM
+# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 9:30:27 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -10829,13 +10829,13 @@ window.DiagnosticsRenderer = {
 
 ## 📄 Datei: js/features/archive/archive-bindings.js
 ```js
-import Utils from '../../core/utils.js';
 import ArchiveRenderer from './renderer.js';
 import ArchiveController from './archive-controller.js';
+import ArchiveModal from '../../templates/archive-modal.js';
 
 export const ArchiveBindings = {
     getModal() {
-        return Utils.byId('archive-modal');
+        return ArchiveModal.ensure();
     },
 
     bindSearch() {
