@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 8:24:04 AM
+# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 8:24:22 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -9417,6 +9417,31 @@ export const AdventureNormalizer = {
 };
 
 export default AdventureNormalizer;
+
+```
+
+---
+
+## 📄 Datei: js/core/normalizers/card-payload-normalizer.js
+```js
+import Utils from '../utils.js';
+import LegacyCardNormalizer from './legacy-card-normalizer.js';
+
+export const CardPayloadNormalizer = {
+    normalizeCardPayload(rawData, adventureId = '') {
+        const raw = rawData && typeof rawData === 'object' ? rawData : {};
+
+        return {
+            adventure_id: Utils.normalizeString(raw.adventure_id || adventureId),
+            adventure_name: Utils.normalizeString(raw.adventure_name),
+            cards: Utils.normalizeArray(raw.cards).map(card =>
+                LegacyCardNormalizer.normalizeLegacyCard(card, adventureId)
+            )
+        };
+    }
+};
+
+export default CardPayloadNormalizer;
 
 ```
 
