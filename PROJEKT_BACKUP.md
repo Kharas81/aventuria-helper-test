@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 9:28:49 AM
+# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 9:29:06 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -609,6 +609,67 @@ h1 {
 
     .card-detail__header {
         padding-right: var(--space-3xl);
+    }
+}
+
+```
+
+---
+
+## 📄 Datei: css/card-detail-panels.css
+```css
+.card-detail__panel {
+    background: var(--color-bg-white-soft);
+    border: 1px solid var(--color-border-soft-card);
+    border-radius: var(--radius-xl);
+    padding: var(--space-xl);
+    box-shadow: var(--shadow-sm);
+}
+
+.card-detail__panel-title {
+    margin: 0 0 var(--space-md) 0;
+    color: var(--color-primary);
+    font-size: 1.05rem;
+}
+
+.card-detail__sections {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.card-detail__text-block {
+    background: var(--color-bg-white-soft);
+    border-left: var(--border-xl) solid var(--color-primary);
+    border-radius: var(--radius-sm);
+    padding: var(--space-xl);
+}
+
+.card-detail__text-block h3 {
+    margin: 0 0 var(--space-sm) 0;
+    color: var(--color-primary);
+    font-size: 1.05rem;
+}
+
+.card-detail__text-block p {
+    margin: 0;
+    white-space: pre-line;
+}
+
+.card-detail__notes {
+    font-style: italic;
+}
+
+.card-detail__empty {
+    color: var(--color-secondary);
+    font-style: italic;
+    margin: 0;
+}
+
+@media (max-width: 520px) {
+    .card-detail__panel,
+    .card-detail__text-block {
+        padding: var(--space-lg);
     }
 }
 
