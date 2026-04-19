@@ -1,19 +1,14 @@
 import Utils from '../../core/utils.js';
 import RulebookUIDom from './rulebook-ui-dom.js';
+import RulebookModal from '../../templates/rulebook-modal.js';
 
 export const RulebookUITabs = {
     showModal() {
-        const modal = RulebookUIDom.getModal();
-        if (modal) {
-            modal.style.display = 'flex';
-        }
+        RulebookModal.open();
     },
 
     closeModal() {
-        const modal = RulebookUIDom.getModal();
-        if (modal) {
-            modal.style.display = 'none';
-        }
+        RulebookModal.close();
     },
 
     async showTab(tabName, rulebook) {
