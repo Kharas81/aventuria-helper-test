@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 9:30:27 AM
+# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 9:30:44 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -12660,28 +12660,31 @@ export default ArchiveLoader;
 
 ## 📄 Datei: js/features/archive/renderer.js
 ```js
-import Utils from '../../core/utils.js';
 import ArchiveToolbarRenderer from './archive-toolbar-renderer.js';
 import ArchiveGridRenderer from './archive-grid-renderer.js';
 import ArchiveEmptyStateRenderer from './archive-empty-state-renderer.js';
+import ArchiveModal from '../../templates/archive-modal.js';
 
 export const ArchiveRenderer = {
     getGrid() {
-        return Utils.byId('archive-grid');
+        ArchiveModal.ensure();
+        return ArchiveModal.getGrid();
     },
 
     getToolbarContainer() {
-        return Utils.byId('archive-set-buttons');
+        ArchiveModal.ensure();
+        return ArchiveModal.getToolbarContainer();
     },
 
     getSearchInput() {
-        return Utils.byId('archive-search');
+        ArchiveModal.ensure();
+        return ArchiveModal.getSearchInput();
     },
 
     setSearchValue(value = '') {
         const searchInput = this.getSearchInput();
         if (searchInput) {
-            searchInput.value = Utils.normalizeString(value);
+            searchInput.value = String(value ?? '').trim();
         }
     },
 
