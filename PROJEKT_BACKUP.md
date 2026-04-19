@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 9:08:47 AM
+# 🛡️ Aventuria Projekt-Backup - 4/19/2026, 9:09:06 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -11328,257 +11328,135 @@ export default ArchiveToolbarRenderer;
 ## 📄 Datei: js/features/archive/archive.js
 ```js
 import Utils from '../../core/utils.js';
-import CONFIG from '../../core/config.js';
-import Constants from '../../core/constants.js';
-import Events from '../../core/events.js';
-import ArchiveLoader from './loader.js';
-import ArchiveFilter from './filter.js';
+import ArchiveState from './archive-state.js';
 import ArchiveRenderer from './renderer.js';
+import ArchiveController from './archive-controller.js';
+import ArchiveBindings from './archive-bindings.js';
 
 export const Archive = {
-    currentSet: CONFIG.defaultSet || 'base_game',
-    currentSearchTerm: '',
-    currentSourceFilter: ArchiveFilter.ALL_SOURCE_FILTER,
-    currentCategoryFilter: ArchiveFilter.ALL_CATEGORY_FILTER,
-    allCards: [],
-    filteredCards: [],
-    isLoading: false,
+    get currentSet() {
+        return ArchiveState.currentSet;
+    },
+
+    set currentSet(value) {
+        ArchiveState.currentSet = Utils.normalizeString(value) || ArchiveState.currentSet;
+    },
+
+    get currentSearchTerm() {
+        return ArchiveState.currentSearchTerm;
+    },
+
+    set currentSearchTerm(value) {
+        ArchiveState.currentSearchTerm = Utils.normalizeString(value);
+    },
+
+    get currentSourceFilter() {
+        return ArchiveState.currentSourceFilter;
+    },
+
+    set currentSourceFilter(value) {
+        ArchiveState.currentSourceFilter = ArchiveState.normalizeSourceFilter(value);
+    },
+
+    get currentCategoryFilter() {
+        return ArchiveState.currentCategoryFilter;
+    },
+
+    set currentCategoryFilter(value) {
+        ArchiveState.currentCategoryFilter = ArchiveState.normalizeCategoryFilter(value);
+    },
+
+    get allCards() {
+        return ArchiveState.allCards;
+    },
+
+    set allCards(value) {
+        ArchiveState.allCards = Utils.normalizeArray(value);
+    },
+
+    get filteredCards() {
+        return ArchiveState.filteredCards;
+    },
+
+    set filteredCards(value) {
+        ArchiveState.filteredCards = Utils.normalizeArray(value);
+    },
+
+    get isLoading() {
+        return ArchiveState.isLoading;
+    },
+
+    set isLoading(value) {
+        ArchiveState.isLoading = Boolean(value);
+    },
 
     getModal() {
-        return Utils.byId('archive-modal');
+        return ArchiveController.getModal();
     },
 
     getSearchInput() {
-        return Utils.byId('archive-search');
+        return ArchiveRenderer.getSearchInput();
     },
 
     getResolvedCurrentSet() {
-        return Utils.normalizeString(
-            this.currentSet || CONFIG.defaultSet || 'base_game'
-        );
+        return ArchiveState.getResolvedCurrentSet();
     },
 
     normalizeSourceFilter(sourceFilter = '') {
-        const normalized = Utils.normalizeString(sourceFilter);
-        return normalized || ArchiveFilter.ALL_SOURCE_FILTER;
+        return ArchiveState.normalizeSourceFilter(sourceFilter);
     },
 
     normalizeCategoryFilter(categoryFilter = '') {
-        const normalized = Utils.normalizeString(categoryFilter).toLowerCase();
-        return normalized || ArchiveFilter.ALL_CATEGORY_FILTER;
+        return ArchiveState.normalizeCategoryFilter(categoryFilter);
     },
 
     applyFilters() {
-        this.filteredCards = ArchiveFilter.filterCards(this.allCards, {
-            searchTerm: this.currentSearchTerm,
-            sourceFilter: this.currentSourceFilter,
-            categoryFilter: this.currentCategoryFilter
-        });
-
-        this.render();
+        return ArchiveController.applyFilters();
     },
 
     async open(options = {}) {
-        const modal = this.getModal();
-        if (!modal) return;
-
-        modal.style.display = 'flex';
-
-        const desiredSet = Utils.normalizeString(
-            options?.setKey
-            || ArchiveLoader.getSuggestedSetKey(this.currentSet)
-            || this.getResolvedCurrentSet()
-        );
-
-        const hasExplicitQuery = Object.prototype.hasOwnProperty.call(options, 'query');
-        const hasExplicitSource = Object.prototype.hasOwnProperty.call(options, 'sourceFilter');
-        const hasExplicitCategory = Object.prototype.hasOwnProperty.call(options, 'categoryFilter');
-
-        if (desiredSet !== this.currentSet || !this.allCards.length) {
-            await this.loadSet(desiredSet, {
-                query: hasExplicitQuery ? Utils.normalizeString(options.query) : this.currentSearchTerm,
-                sourceFilter: hasExplicitSource
-                    ? this.normalizeSourceFilter(options.sourceFilter)
-                    : ArchiveFilter.ALL_SOURCE_FILTER,
-                categoryFilter: hasExplicitCategory
-                    ? this.normalizeCategoryFilter(options.categoryFilter)
-                    : ArchiveFilter.ALL_CATEGORY_FILTER
-            });
-            return;
-        }
-
-        if (hasExplicitQuery) {
-            this.currentSearchTerm = Utils.normalizeString(options.query);
-        }
-
-        if (hasExplicitSource) {
-            this.currentSourceFilter = this.normalizeSourceFilter(options.sourceFilter);
-        }
-
-        if (hasExplicitCategory) {
-            this.currentCategoryFilter = this.normalizeCategoryFilter(options.categoryFilter);
-        }
-
-        ArchiveRenderer.setSearchValue(this.currentSearchTerm);
-        this.applyFilters();
+        return ArchiveController.open(options);
     },
 
     close() {
-        const modal = this.getModal();
-        if (!modal) return;
-
-        modal.style.display = 'none';
+        return ArchiveController.close();
     },
 
     async loadSet(setKey = '', options = {}) {
-        const resolvedSetKey = Utils.normalizeString(
-            setKey || CONFIG.defaultSet || 'base_game'
-        );
-
-        if (!resolvedSetKey) {
-            return;
-        }
-
-        const previousSet = this.currentSet;
-        const hasExplicitQuery = Object.prototype.hasOwnProperty.call(options, 'query');
-        const hasExplicitSource = Object.prototype.hasOwnProperty.call(options, 'sourceFilter');
-        const hasExplicitCategory = Object.prototype.hasOwnProperty.call(options, 'categoryFilter');
-
-        this.currentSet = resolvedSetKey;
-        this.isLoading = true;
-
-        ArchiveRenderer.renderToolbar({
-            activeSetKey: this.currentSet,
-            activeSourceFilter: this.currentSourceFilter,
-            activeCategoryFilter: this.currentCategoryFilter,
-            availableSources: [],
-            availableCategories: [],
-            currentQuery: this.currentSearchTerm,
-            filteredCount: 0,
-            totalCount: 0
-        });
-
-        ArchiveRenderer.showLoading();
-
-        try {
-            const loadedCards = await ArchiveLoader.fetchCardsForSet(this.currentSet);
-
-            this.allCards = Utils.normalizeArray(loadedCards);
-            this.isLoading = false;
-
-            if (hasExplicitQuery) {
-                this.currentSearchTerm = Utils.normalizeString(options.query);
-            }
-
-            if (hasExplicitSource) {
-                this.currentSourceFilter = this.normalizeSourceFilter(options.sourceFilter);
-            } else if (resolvedSetKey !== previousSet) {
-                this.currentSourceFilter = ArchiveFilter.ALL_SOURCE_FILTER;
-            }
-
-            if (hasExplicitCategory) {
-                this.currentCategoryFilter = this.normalizeCategoryFilter(options.categoryFilter);
-            } else if (resolvedSetKey !== previousSet) {
-                this.currentCategoryFilter = ArchiveFilter.ALL_CATEGORY_FILTER;
-            }
-
-            ArchiveRenderer.setSearchValue(this.currentSearchTerm);
-            this.applyFilters();
-
-            Events.emit(
-                Constants.events?.archiveSetChanged || 'archive:setChanged',
-                {
-                    source: 'archive',
-                    setKey: this.currentSet,
-                    cardCount: this.allCards.length
-                }
-            );
-
-            Events.emit(
-                Constants.events?.setChanged || 'set:changed',
-                {
-                    source: 'archive',
-                    setKey: this.currentSet,
-                    cardCount: this.allCards.length
-                }
-            );
-        } catch (error) {
-            this.isLoading = false;
-            console.error('Fehler beim Laden des Archivs:', error);
-            ArchiveRenderer.showError(error?.message || 'Fehler beim Laden des Archivs.');
-        }
+        return ArchiveController.loadSet(setKey, options);
     },
 
     handleSearch(searchTerm = '') {
-        this.currentSearchTerm = Utils.normalizeString(searchTerm);
-        this.applyFilters();
+        return ArchiveController.handleSearch(searchTerm);
     },
 
     setSourceFilter(sourceFilter = '') {
-        this.currentSourceFilter = this.normalizeSourceFilter(sourceFilter);
-        this.applyFilters();
+        return ArchiveController.setSourceFilter(sourceFilter);
     },
 
     setCategoryFilter(categoryFilter = '') {
-        this.currentCategoryFilter = this.normalizeCategoryFilter(categoryFilter);
-        this.applyFilters();
+        return ArchiveController.setCategoryFilter(categoryFilter);
     },
 
     render() {
-        ArchiveRenderer.renderToolbar({
-            activeSetKey: this.currentSet,
-            activeSourceFilter: this.currentSourceFilter,
-            activeCategoryFilter: this.currentCategoryFilter,
-            availableSources: ArchiveFilter.getAvailableSources(this.allCards),
-            availableCategories: ArchiveFilter.getAvailableCategories(this.allCards),
-            currentQuery: this.currentSearchTerm,
-            filteredCount: this.filteredCards.length,
-            totalCount: this.allCards.length
-        });
-
-        ArchiveRenderer.renderGrid(this.filteredCards, {
-            query: this.currentSearchTerm,
-            sourceFilter: this.currentSourceFilter,
-            categoryFilter: this.currentCategoryFilter
-        });
+        return ArchiveController.render();
     },
 
     bindSearch() {
-        const searchInput = this.getSearchInput();
-        if (!searchInput || searchInput.dataset.bound === 'true') {
-            return;
-        }
-
-        searchInput.addEventListener('input', event => {
-            this.handleSearch(event.target.value);
-        });
-
-        searchInput.dataset.bound = 'true';
+        return ArchiveBindings.bindSearch();
     },
 
     bindModalClose() {
-        const modal = this.getModal();
-        if (!modal || modal.dataset.bound === 'true') {
-            return;
-        }
-
-        modal.addEventListener('click', event => {
-            if (event.target === modal) {
-                this.close();
-            }
-        });
-
-        modal.dataset.bound = 'true';
+        return ArchiveBindings.bindModalClose();
     },
 
     init() {
-        this.bindSearch();
-        this.bindModalClose();
+        ArchiveBindings.init();
 
         ArchiveRenderer.renderToolbar({
-            activeSetKey: this.currentSet,
-            activeSourceFilter: this.currentSourceFilter,
-            activeCategoryFilter: this.currentCategoryFilter,
+            activeSetKey: ArchiveState.currentSet,
+            activeSourceFilter: ArchiveState.currentSourceFilter,
+            activeCategoryFilter: ArchiveState.currentCategoryFilter,
             availableSources: [],
             availableCategories: [],
             currentQuery: '',
