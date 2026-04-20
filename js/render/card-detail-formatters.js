@@ -7,6 +7,7 @@ export const CardDetailFormatters = {
         '[TREFFERPUNKTE]': 'Trefferpunkte',
         '[LEBEN]': 'Leben',
         '[AKTIONEN]': 'Aktionen',
+        '[SCHICKSALSPUNKT]': 'Schicksalspunkt',
         '[UNSICHERES_SYMBOL_ROT_OVAL]': 'rotes Oval-Symbol'
     },
 
