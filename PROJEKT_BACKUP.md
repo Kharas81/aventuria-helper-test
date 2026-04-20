@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 11:41:36 AM
+# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 11:52:10 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5045,6 +5045,8 @@ select {
   "setSymbol": "R",
   "layout": "landscape",
   "image": "sc_hofnaerrin.webp",
+  "copies": 2,
+  "usedDuplicateForVerification": true,
   "tags": [
     "mensch",
     "gaukler",
@@ -5068,7 +5070,7 @@ select {
     {
       "range": "1-7",
       "title": "Schelmenstreich",
-      "text": "Nimm alle [UNSICHERES_SYMBOL_ROT_OVAL] aus der Tischmitte, falls vorhanden, und lege sie auf die Hofnärrin. Wird die Närrin ausgeschaltet oder flieht, so lege die [UNSICHERES_SYMBOL_ROT_OVAL] wieder zurück in die Tischmitte."
+      "text": "Nimm alle [SCHICKSALSPUNKT] aus der Tischmitte, falls vorhanden, und lege sie auf die Hofnärrin. Wird die Närrin ausgeschaltet oder flieht, so lege die [SCHICKSALSPUNKT] wieder zurück in die Tischmitte."
     },
     {
       "range": "8-15",
@@ -5082,14 +5084,7 @@ select {
     }
   ],
   "illustration": "Ben Maier",
-  "source": "card_image",
-  "uncertain": true,
-  "uncertainFields": [
-    "actionTable[0].text"
-  ],
-  "uncertainNotes": [
-    "Im Text steht ein rotes ovales Symbol, das auf dem Bild sichtbar ist, aber hier nicht sicher offiziell zugeordnet werden konnte. Deshalb vorläufig als [UNSICHERES_SYMBOL_ROT_OVAL] markiert."
-  ]
+  "source": "card_image"
 }
 
 ```
