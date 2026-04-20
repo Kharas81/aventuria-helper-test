@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 12:18:55 PM
+# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 12:19:21 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -4859,7 +4859,15 @@ select {
   "sc_bardin.json",
   "sc_borbaradianische_laienmagierin_brenne_toter_stoff.json",
   "sc_borbaradianischer_laienmagier_starres_fliesse_hartes_schmelze.json",
-  "sc_zaeher_waechter.json"
+  "sc_zaeher_waechter.json",
+  "sc_borbaradianische_laienmagierin_goldgier_uebermanne_dich.json",
+  "sc_borbaradianische_laienmagierin_weiches_erstarre_fliessendes_verharre.json",
+  "sc_borbaradianischer_laienmagier_erinnerung_verlasse_dich.json",
+  "sc_borbaradianischer_laienmagier_hoellenpein_zerreisse_dich.json",
+  "sc_gewiefter_soeldner.json",
+  "sc_horasischer_duellant.json",
+  "sc_rachsuechtige_leibwaechterin.json",
+  "sc_soeldner_langbogenschuetze.json"
   ]
 }
 
