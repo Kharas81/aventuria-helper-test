@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 11:58:34 AM
+# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 11:58:45 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5440,6 +5440,71 @@ select {
       "range": "12-20",
       "title": "Nichts",
       "text": "Lacht irre."
+    }
+  ],
+  "illustration": "Anna Steinbauer",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_zaeher_waechter.json
+```json
+{
+  "cardName": "Zäher Wächter",
+  "cardType": "Schergenkarte",
+  "set": "Aventuria Grundbox",
+  "setId": "aventuria_grundbox",
+  "setShortName": "Grundbox",
+  "setSymbol": "A",
+  "layout": "landscape",
+  "image": "sc_zaeher_waechter.webp",
+  "tags": [
+    "mensch",
+    "waechter"
+  ],
+  "keywords": [
+    "Mensch",
+    "Wächter"
+  ],
+  "searchAliases": [],
+  "specialRules": [
+    "4 [ZEIT]: Heilt sich 5 [LEBEN]."
+  ],
+  "stats": {
+    "gefahrenpunkte": 7,
+    "lebenspunkte": 20,
+    "ausweichen": 3,
+    "ruestung": "-",
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-5",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+5 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "6-10",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Held mit den meisten [LEBEN] erhält 1W6+4 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "11-14",
+      "title": "Standhaft",
+      "text": "Heilt sich 2 [LEBEN]."
+    },
+    {
+      "range": "15-17",
+      "title": "Nichts",
+      "text": "Schaut sich um und zögert."
+    },
+    {
+      "range": "18-20",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
     }
   ],
   "illustration": "Anna Steinbauer",
