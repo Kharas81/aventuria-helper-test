@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 12:18:29 PM
+# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 12:18:44 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5454,6 +5454,66 @@ select {
     }
   ],
   "illustration": "Elif Siebenpfeiffer",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_gewiefter_soeldner.json
+```json
+{
+  "cardName": "Gewiefter Söldner",
+  "cardType": "Schergenkarte",
+  "set": "Wirtshaus zum Schwarzen Keiler",
+  "setId": "wirtshaus_zum_schwarzen_keiler",
+  "setShortName": "Wirtshaus zum Schwarzen Keiler",
+  "setSymbol": "Keilerkopf",
+  "layout": "landscape",
+  "image": "sc_gewiefter_soeldner.webp",
+  "tags": [
+    "mensch",
+    "soeldner"
+  ],
+  "keywords": [
+    "Mensch",
+    "Söldner"
+  ],
+  "searchAliases": [],
+  "specialRules": [
+    "Wurde er zum Ziel einer Anführeraktion, so bekommt er in der laufenden Runde +1 [AKTIONEN]."
+  ],
+  "stats": {
+    "gefahrenpunkte": 6,
+    "lebenspunkte": 16,
+    "ausweichen": "-",
+    "ruestung": 2,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+4 [TREFFERPUNKTE] und muss 1 [SCHICKSALSPUNKT] ablegen."
+    },
+    {
+      "range": "3-10",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "11-16",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein Held nach Wahl der Spieler erhält 1W6+1 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "17-20",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+    }
+  ],
+  "illustration": "Luisa Preißler",
   "source": "card_image"
 }
 
