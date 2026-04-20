@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 9:00:14 PM
+# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 9:01:24 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -4876,7 +4876,17 @@ select {
   "sc_treuer_leibwaechter.json",
   "sc_boese_magd.json",
   "sc_buckliger.json",
-  "sc_haken_joe.json" 
+  "sc_haken_joe.json",
+  "sc_kraeftiger_yeti.json",
+  "sc_gemeiner_yeti.json",
+  "sc_veraergerter_yeti.json",
+  "sc_flinker_yeti.json",
+  "sc_klammernder_yeti.json",
+  "sc_fluchender_yeti.json",
+  "sc_nachtragender_yeti.json",
+  "sc_freundlicher_yeti.json",
+  "sc_herrischer_yeti.json",
+  "sc_wurfgewandter_yeti.json"    
   ]
 }
 
@@ -6785,6 +6795,58 @@ select {
     }
   ],
   "illustration": "Annalena Weber",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_stoessischer_yeti.json
+```json
+{
+  "cardName": "Stößischer Yeti",
+  "cardType": "Schergenkarte",
+  "set": "Mythische Geschichten",
+  "setId": "mythische_geschichten",
+  "setShortName": "Mythische Geschichten",
+  "setSymbol": "mythische_geschichten_symbol",
+  "layout": "landscape",
+  "image": "sc_stoessischer_yeti.webp",
+  "sourceImages": ["Karte0011.webp"],
+  "tags": ["yeti", "raeuber"],
+  "keywords": ["Yeti", "Räuber"],
+  "specialRules": [],
+  "stats": {
+    "gefahrenpunkte": 5,
+    "lebenspunkte": 40,
+    "ausweichen": "-",
+    "ruestung": 1,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 2W6 [TREFFERPUNKTE] und muss 1 zufällige Ausdauerkarte auf die Hand nehmen."
+    },
+    {
+      "range": "3-8",
+      "title": "Ausholen",
+      "text": "Lege 1 [VERDERBEN] auf diese Karte, um anzuzeigen, dass das nächste \"Ausholen\"-Ergebnis dieses Yetis stattdessen als der oben genannte [NAHKAMPF]-Angriff gilt. Entferne danach die [VERDERBEN]."
+    },
+    {
+      "range": "9-14",
+      "title": "Stößisch",
+      "text": "Der Yeti heilt sich 3W6 [LEBEN]."
+    },
+    {
+      "range": "15-20",
+      "title": "Flucht",
+      "text": "Liegen die aktuellen [LEBEN] des Yeti unter 20, so entferne ihn aus dem Kampf."
+    }
+  ],
+  "illustration": "Verena Biskup",
   "source": "card_image"
 }
 
