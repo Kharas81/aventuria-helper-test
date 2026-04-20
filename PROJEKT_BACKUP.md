@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 9:09:50 PM
+# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 9:12:18 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -13784,29 +13784,42 @@ export const ArchiveFilter = {
         const category = Utils.normalizeString(card?.card_category).toLowerCase();
         const tags = normalizeArrayValues(card?.tags);
 
-        if (
-            type === 'minion'
-            || category === 'schergenkarte'
-            || tags.includes('scherge')
-            || tags.includes('schergen')
-        ) {
+        const hasExplicitType = Boolean(type);
+        const hasExplicitCategory = Boolean(category);
+
+        // 1) Harte, explizite Kartendaten haben Vorrang
+        if (type === 'minion' || category === 'schergenkarte') {
             return 'schergen';
         }
 
-        if (
-            type === 'leader'
-            || tags.includes('anfuehrer')
-            || tags.includes('anführer')
-        ) {
+        if (type === 'leader' || category === 'anfuehrerkarte' || category === 'anführerkarte') {
             return 'anfuehrer';
         }
 
         if (
             ['special', 'event', 'story'].includes(type)
-            || tags.includes('spezial')
-            || tags.includes('ereigniskarte')
+            || category === 'spezialkarte'
         ) {
             return 'spezial';
+        }
+
+        if (category === 'abenteuerkarte') {
+            return 'abenteuerkarten';
+        }
+
+        // 2) Nur wenn Typ/Kategorie fehlen, auf Tags zurückfallen
+        if (!hasExplicitType && !hasExplicitCategory) {
+            if (tags.includes('scherge') || tags.includes('schergen')) {
+                return 'schergen';
+            }
+
+            if (tags.includes('anfuehrer') || tags.includes('anführer')) {
+                return 'anfuehrer';
+            }
+
+            if (tags.includes('spezial') || tags.includes('ereigniskarte')) {
+                return 'spezial';
+            }
         }
 
         return 'abenteuerkarten';
