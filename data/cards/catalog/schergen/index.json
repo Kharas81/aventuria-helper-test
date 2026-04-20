@@ -1,5 +1,11 @@
 {
   "cards": [
-  "sc_hofnaerrin.json"  
+  "sc_hofnaerrin.json",
+  "sc_basil_der_rote.json",
+  "sc_bukanische_strandraeuberin.json",
+  "sc_gemeiner_wegelagerer.json",
+  "sc_jongleurin.json",
+  "sc_raeuberische_diebin.json",
+  "sc_verrueckter_scharlatan.json"  
   ]
 }
