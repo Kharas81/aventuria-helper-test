@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 12:19:21 PM
+# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 12:39:45 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5407,6 +5407,61 @@ select {
     }
   ],
   "illustration": "Anja DiPaolo",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_eifriger_gruenschnabel.json
+```json
+{
+  "cardName": "Eifriger Grünschnabel",
+  "cardType": "Schergenkarte",
+  "set": "Wirtshaus zum Schwarzen Keiler",
+  "setId": "wirtshaus_zum_schwarzen_keiler",
+  "setShortName": "Wirtshaus zum Schwarzen Keiler",
+  "setSymbol": "Keilerkopf",
+  "layout": "landscape",
+  "image": "sc_eifriger_gruenschnabel.webp",
+  "tags": [
+    "mensch",
+    "soeldner"
+  ],
+  "keywords": [
+    "Mensch",
+    "Söldner"
+  ],
+  "searchAliases": [],
+  "specialRules": [
+    "Steht links und rechts von ihm ein weiterer Gegner, so bekommt er [AKTIONEN]+1 und flieht nicht."
+  ],
+  "stats": {
+    "gefahrenpunkte": 3,
+    "lebenspunkte": 10,
+    "ausweichen": 2,
+    "ruestung": "-",
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+3 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "3-12",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-20",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+    }
+  ],
+  "illustration": "Annika Maar",
   "source": "card_image"
 }
 
