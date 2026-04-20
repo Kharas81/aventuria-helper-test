@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 3:06:03 PM
+# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 3:06:16 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5476,6 +5476,61 @@ select {
     }
   ],
   "illustration": "Florian Stitz",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_buckliger.json
+```json
+{
+  "cardName": "Buckliger",
+  "cardType": "Schergenkarte",
+  "set": "Aventuria Grundbox",
+  "setId": "aventuria_grundbox",
+  "setShortName": "Grundbox",
+  "setSymbol": "A",
+  "layout": "landscape",
+  "image": "sc_buckliger.webp",
+  "tags": [
+    "mensch",
+    "diener"
+  ],
+  "keywords": [
+    "Mensch",
+    "Diener"
+  ],
+  "searchAliases": [],
+  "specialRules": [
+    "Solange er im Spiel ist haben alle Anführer +1 [AUSWEICHEN]. Sobald alle Anführer besiegt wurden, entfernt den Buckligen ebenfalls."
+  ],
+  "stats": {
+    "gefahrenpunkte": 6,
+    "lebenspunkte": 20,
+    "ausweichen": 2,
+    "ruestung": "-",
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-8",
+      "title": "Verbinden",
+      "text": "Heilt sich und allen Anführern jeweils 5 [LEBEN]."
+    },
+    {
+      "range": "9-15",
+      "title": "Verfluchen",
+      "text": "Alle Helden verlieren für jeden ihrer [SCHICKSALSPUNKT] 1W6 [LEBEN]."
+    },
+    {
+      "range": "16-20",
+      "title": "Nichts",
+      "text": "Er stammelt unzusammenhängende Worte."
+    }
+  ],
+  "illustration": "Anja DiPaolo",
   "source": "card_image"
 }
 
