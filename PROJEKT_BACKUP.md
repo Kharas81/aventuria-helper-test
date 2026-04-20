@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 11:52:10 AM
+# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 11:58:08 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -4914,6 +4914,66 @@ select {
     }
   ],
   "illustration": "Karin Wittig",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_borbaradianische_laienmagierin_brenne_toter_stoff.json
+```json
+{
+  "cardName": "Borbaradianische Laienmagierin",
+  "cardType": "Schergenkarte",
+  "set": "Rückkehr zum Schwarzen Keiler",
+  "setId": "rueckkehr_zum_schwarzen_keiler",
+  "setShortName": "Rückkehr zum Schwarzen Keiler",
+  "setSymbol": "R",
+  "layout": "landscape",
+  "image": "sc_borbaradianische_laienmagierin_brenne_toter_stoff.webp",
+  "tags": [
+    "mensch",
+    "borbaradianer",
+    "zauberer"
+  ],
+  "keywords": [
+    "Mensch",
+    "Borbaradianer",
+    "Zauberer"
+  ],
+  "searchAliases": [],
+  "specialRules": [],
+  "stats": {
+    "gefahrenpunkte": 3,
+    "lebenspunkte": 13,
+    "ausweichen": 2,
+    "ruestung": "-",
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-5",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein Held nach Wahl der Helden erhält 1W6+1 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "6-12",
+      "title": "Brenne, toter Stoff",
+      "text": "Der Held mit den meisten [SCHICKSALSPUNKT] verliert für jede von ihm liegende dauerhafte Karte 1 [LEBEN]. Die Laienmagierin verliert 1W6 [LEBEN]."
+    },
+    {
+      "range": "13-17",
+      "title": "Ausruhen",
+      "text": "Heilt bei sich 2 [LEBEN]."
+    },
+    {
+      "range": "18-20",
+      "title": "Nichts",
+      "text": "Starrt düster vor sich hin."
+    }
+  ],
+  "illustration": "Luisa Preißler",
   "source": "card_image"
 }
 
