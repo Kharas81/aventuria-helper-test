@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 11:15:55 AM
+# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 11:21:04 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5089,6 +5089,70 @@ select {
     }
   ],
   "illustration": "Anja Di Paolo",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_raeuberische_diebin.json
+```json
+{
+  "cardName": "Räuberische Diebin",
+  "cardType": "Schergenkarte",
+  "set": "Aventuria Grundbox",
+  "setId": "aventuria_grundbox",
+  "setShortName": "Grundbox",
+  "setSymbol": "A",
+  "layout": "landscape",
+  "image": "sc_raeuberische_diebin.webp",
+  "copies": 2,
+  "usedDuplicateForVerification": true,
+  "tags": [
+    "mensch",
+    "raeuber",
+    "dieb"
+  ],
+  "keywords": [
+    "Mensch",
+    "Räuber",
+    "Dieb"
+  ],
+  "searchAliases": [],
+  "specialRules": [
+    "3 [ZEIT]: Legt alle Karten unter dieser ab."
+  ],
+  "stats": {
+    "gefahrenpunkte": 4,
+    "lebenspunkte": 14,
+    "ausweichen": 1,
+    "ruestung": "-",
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-5",
+      "title": "Diebstahl",
+      "text": "Ein zufälliger Held legt eine seiner ausgespielten dauerhaften Karten seiner Wahl unter den Schergen. Stirbt der Scherge, so bekommt der Held die Karte zurück auf die Hand."
+    },
+    {
+      "range": "6-10",
+      "title": "[FERNKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "11-15",
+      "title": "[FERNKAMPF]-Angriff",
+      "text": "Der Held mit den meisten [LEBEN] erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "16-20",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+    }
+  ],
+  "illustration": "Ben Maier",
   "source": "card_image"
 }
 
