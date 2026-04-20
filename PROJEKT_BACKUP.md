@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 11:15:10 AM
+# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 11:15:30 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -4851,6 +4851,64 @@ select {
   "cards": [
   "sc_hofnaerrin.json"  
   ]
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_basil_der_rote.json
+```json
+{
+  "cardName": "Basil der Rote",
+  "cardType": "Schergenkarte",
+  "set": "Aventuria Grundbox",
+  "setId": "aventuria_grundbox",
+  "setShortName": "Grundbox",
+  "setSymbol": "A",
+  "layout": "landscape",
+  "image": "sc_basil_der_rote.webp",
+  "tags": [
+    "mensch",
+    "pirat"
+  ],
+  "keywords": [
+    "Mensch",
+    "Pirat"
+  ],
+  "searchAliases": [],
+  "specialRules": [],
+  "stats": {
+    "gefahrenpunkte": 6,
+    "lebenspunkte": 18,
+    "ausweichen": 1,
+    "ruestung": "-",
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-4",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+5 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "5-12",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6+3 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-18",
+      "title": "Nichts",
+      "text": "Brüllt einen Piratenfluch."
+    },
+    {
+      "range": "19-20",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+    }
+  ],
+  "illustration": "Karin Wittig",
+  "source": "card_image"
 }
 
 ```
