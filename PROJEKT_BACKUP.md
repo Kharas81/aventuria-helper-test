@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 12:18:44 PM
+# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 12:18:55 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5819,6 +5819,64 @@ select {
     }
   ],
   "illustration": "Ben Maier",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_soeldner_langbogenschuetze.json
+```json
+{
+  "cardName": "Söldner-Langbogenschütze",
+  "cardType": "Schergenkarte",
+  "set": "Wirtshaus zum Schwarzen Keiler",
+  "setId": "wirtshaus_zum_schwarzen_keiler",
+  "setShortName": "Wirtshaus zum Schwarzen Keiler",
+  "setSymbol": "Keilerkopf",
+  "layout": "landscape",
+  "image": "sc_soeldner_langbogenschuetze.webp",
+  "tags": [
+    "mensch",
+    "soeldner"
+  ],
+  "keywords": [
+    "Mensch",
+    "Söldner"
+  ],
+  "searchAliases": [],
+  "specialRules": [],
+  "stats": {
+    "gefahrenpunkte": 6,
+    "lebenspunkte": 15,
+    "ausweichen": "-",
+    "ruestung": 2,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-4",
+      "title": "[FERNKAMPF]-Angriff",
+      "text": "Der Held mit den meisten [LEBEN] erhält 1W6+6 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "5-12",
+      "title": "[FERNKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+4 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-16",
+      "title": "Nichts",
+      "text": "Sucht sich ein neues Ziel."
+    },
+    {
+      "range": "17-20",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+    }
+  ],
+  "illustration": "Annalena Weber",
   "source": "card_image"
 }
 
