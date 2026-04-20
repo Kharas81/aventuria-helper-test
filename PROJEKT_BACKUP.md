@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 12:40:45 PM
+# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 1:04:06 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5587,6 +5587,61 @@ select {
     }
   ],
   "illustration": "Annika Maar",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_folterknecht.json
+```json
+{
+  "cardName": "Folterknecht",
+  "cardType": "Schergenkarte",
+  "set": "Wald ohne Wiederkehr",
+  "setId": "wald_ohne_wiederkehr",
+  "setShortName": "Wald ohne Wiederkehr",
+  "setSymbol": "Baum",
+  "layout": "landscape",
+  "image": "sc_folterknecht.webp",
+  "tags": [
+    "diener",
+    "mensch"
+  ],
+  "keywords": [
+    "Diener",
+    "Mensch"
+  ],
+  "searchAliases": [],
+  "specialRules": [
+    "Schergen rechts und links von dieser Karte haben jeweils [AKTIONEN]+1, verlieren jedoch vor jedem Aktionswurf 1 [LEBEN]."
+  ],
+  "stats": {
+    "gefahrenpunkte": 6,
+    "lebenspunkte": 20,
+    "ausweichen": 2,
+    "ruestung": "-",
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-8",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Held mit den meisten [LEBEN] erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "9-12",
+      "title": "Verbinden",
+      "text": "Heilt sich und allen Anführern jeweils 5 [LEBEN]."
+    },
+    {
+      "range": "13-20",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+    }
+  ],
+  "illustration": "Elf Siebenpfeiffer",
   "source": "card_image"
 }
 
