@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 9:01:24 PM
+# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 9:01:37 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -4952,6 +4952,58 @@ select {
     }
   ],
   "illustration": "Colin Michael Ascroft",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_aggressiver_yeti.json
+```json
+{
+  "cardName": "Aggressiver Yeti",
+  "cardType": "Schergenkarte",
+  "set": "Mythische Geschichten",
+  "setId": "mythische_geschichten",
+  "setShortName": "Mythische Geschichten",
+  "setSymbol": "mythische_geschichten_symbol",
+  "layout": "landscape",
+  "image": "sc_aggressiver_yeti.webp",
+  "sourceImages": ["Karte0012.webp"],
+  "tags": ["yeti", "raeuber"],
+  "keywords": ["Yeti", "Räuber"],
+  "specialRules": [],
+  "stats": {
+    "gefahrenpunkte": 5,
+    "lebenspunkte": 40,
+    "ausweichen": "-",
+    "ruestung": 1,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 2W6 [TREFFERPUNKTE] und muss 1 zufällige Ausdauerkarte auf die Hand nehmen."
+    },
+    {
+      "range": "3-8",
+      "title": "Ausholen",
+      "text": "Lege 1 [VERDERBEN] auf diese Karte, um anzuzeigen, dass das nächste \"Ausholen\"-Ergebnis dieses Yetis stattdessen als der oben genannte [NAHKAMPF]-Angriff gilt. Entferne danach die [VERDERBEN]."
+    },
+    {
+      "range": "9-14",
+      "title": "Aggressiv",
+      "text": "Der Yeti verliert 2W6 [LEBEN] und führt sofort eine weitere [AKTIONEN] durch."
+    },
+    {
+      "range": "15-20",
+      "title": "Flucht",
+      "text": "Liegen die aktuellen [LEBEN] des Yeti unter 20, so entferne ihn aus dem Kampf."
+    }
+  ],
+  "illustration": "Verena Biskup",
   "source": "card_image"
 }
 
