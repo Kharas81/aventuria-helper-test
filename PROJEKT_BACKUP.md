@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 8:58:10 PM
+# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 8:58:26 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5821,6 +5821,58 @@ select {
     }
   ],
   "illustration": "Elif Siebenpfeiffer",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_gemeiner_yeti.json
+```json
+{
+  "cardName": "Gemeiner Yeti",
+  "cardType": "Schergenkarte",
+  "set": "Mythische Geschichten",
+  "setId": "mythische_geschichten",
+  "setShortName": "Mythische Geschichten",
+  "setSymbol": "mythische_geschichten_symbol",
+  "layout": "landscape",
+  "image": "sc_gemeiner_yeti.webp",
+  "sourceImages": ["Karte0002.webp"],
+  "tags": ["yeti", "raeuber"],
+  "keywords": ["Yeti", "Räuber"],
+  "specialRules": [],
+  "stats": {
+    "gefahrenpunkte": 5,
+    "lebenspunkte": 40,
+    "ausweichen": "-",
+    "ruestung": 1,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Held mit den wenigsten [LEBEN] erhält 2W6 [TREFFERPUNKTE] und muss 1 zufällige Ausdauerkarte auf die Hand nehmen."
+    },
+    {
+      "range": "3-8",
+      "title": "Ausholen",
+      "text": "Lege 1 [VERDERBEN] auf diese Karte, um anzuzeigen, dass das nächste \"Ausholen\"-Ergebnis dieses Yetis stattdessen als der oben genannte [NAHKAMPF]-Angriff gilt. Entferne danach die [VERDERBEN]."
+    },
+    {
+      "range": "9-14",
+      "title": "Gemein",
+      "text": "Der Held mit den wenigsten [LEBEN] verliert 2 [LEBEN]."
+    },
+    {
+      "range": "15-20",
+      "title": "Flucht",
+      "text": "Liegen die aktuellen [LEBEN] des Yeti unter 20, so entferne ihn aus dem Kampf."
+    }
+  ],
+  "illustration": "Verena Biskup",
   "source": "card_image"
 }
 
