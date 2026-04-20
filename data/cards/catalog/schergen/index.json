@@ -27,6 +27,16 @@
   "sc_treuer_leibwaechter.json",
   "sc_boese_magd.json",
   "sc_buckliger.json",
-  "sc_haken_joe.json" 
+  "sc_haken_joe.json",
+  "sc_kraeftiger_yeti.json",
+  "sc_gemeiner_yeti.json",
+  "sc_veraergerter_yeti.json",
+  "sc_flinker_yeti.json",
+  "sc_klammernder_yeti.json",
+  "sc_fluchender_yeti.json",
+  "sc_nachtragender_yeti.json",
+  "sc_freundlicher_yeti.json",
+  "sc_herrischer_yeti.json",
+  "sc_wurfgewandter_yeti.json"    
   ]
 }
