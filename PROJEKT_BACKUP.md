@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 3:06:28 PM
+# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 3:07:30 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -4873,7 +4873,10 @@ select {
   "sc_eifriger_gruenschnabel.json",
   "sc_folterknecht.json",
   "sc_soeldner_feldwebelin.json",
-  "sc_treuer_leibwaechter.json"
+  "sc_treuer_leibwaechter.json",
+  "sc_boese_magd.json",
+  "sc_buckliger.json",
+  "sc_haken_joe.json" 
   ]
 }
 
