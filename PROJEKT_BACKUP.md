@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 10:26:48 AM
+# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 11:15:10 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -4913,6 +4913,65 @@ select {
   "uncertainNotes": [
     "Im Text steht ein rotes ovales Symbol, das auf dem Bild sichtbar ist, aber hier nicht sicher offiziell zugeordnet werden konnte. Deshalb vorläufig als [UNSICHERES_SYMBOL_ROT_OVAL] markiert."
   ]
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_jongleurin.json
+```json
+{
+  "cardName": "Jongleurin",
+  "cardType": "Schergenkarte",
+  "set": "Rückkehr zum Schwarzen Keiler",
+  "setId": "rueckkehr_zum_schwarzen_keiler",
+  "setShortName": "Rückkehr zum Schwarzen Keiler",
+  "setSymbol": "R",
+  "layout": "landscape",
+  "image": "sc_jongleurin.webp",
+  "copies": 2,
+  "usedDuplicateForVerification": true,
+  "tags": [
+    "mensch",
+    "gaukler",
+    "diener"
+  ],
+  "keywords": [
+    "Mensch",
+    "Gaukler",
+    "Diener"
+  ],
+  "searchAliases": [],
+  "specialRules": [
+    "Die Jongleurin kann nicht als Ziel für Angriffe gewählt werden, die mehr als 1W6 [TREFFERPUNKTE] verursachen."
+  ],
+  "stats": {
+    "gefahrenpunkte": 3,
+    "lebenspunkte": 10,
+    "ausweichen": 0,
+    "ruestung": 5,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-8",
+      "title": "[FERNKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "9-15",
+      "title": "Nichts",
+      "text": "Macht lustige Späße."
+    },
+    {
+      "range": "16-20",
+      "title": "Flucht/Schutzschild",
+      "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Ist noch mindestens 1 Anführer anwesend, und dieser hat noch keinen Schergen auf sich liegen, so lege die Jongleurin auf ihn. Solange sie dort liegt, führt sie keine Aktionen durch und der Anführer kann nicht zum Ziel von Angriffen werden."
+    }
+  ],
+  "illustration": "Anja Di Paolo",
+  "source": "card_image"
 }
 
 ```
