@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 11:21:39 AM
+# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 11:41:36 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -4849,7 +4849,13 @@ select {
 ```json
 {
   "cards": [
-  "sc_hofnaerrin.json"  
+  "sc_hofnaerrin.json",
+  "sc_basil_der_rote.json",
+  "sc_bukanische_strandraeuberin.json",
+  "sc_gemeiner_wegelagerer.json",
+  "sc_jongleurin.json",
+  "sc_raeuberische_diebin.json",
+  "sc_verrueckter_scharlatan.json"  
   ]
 }
 
