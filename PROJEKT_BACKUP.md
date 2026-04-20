@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 12:00:19 PM
+# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 12:17:01 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5037,6 +5037,66 @@ select {
     }
   ],
   "illustration": "Luisa Preißler",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_borbaradianische_laienmagierin_weiches_erstarre_fliessendes_verharre.json
+```json
+{
+  "cardName": "Borbaradianische Laienmagierin",
+  "cardType": "Schergenkarte",
+  "set": "Rückkehr zum Schwarzen Keiler",
+  "setId": "rueckkehr_zum_schwarzen_keiler",
+  "setShortName": "Rückkehr zum Schwarzen Keiler",
+  "setSymbol": "R",
+  "layout": "landscape",
+  "image": "sc_borbaradianische_laienmagierin_weiches_erstarre_fliessendes_verharre.webp",
+  "tags": [
+    "mensch",
+    "borbaradianer",
+    "zauberer"
+  ],
+  "keywords": [
+    "Mensch",
+    "Borbaradianer",
+    "Zauberer"
+  ],
+  "searchAliases": [],
+  "specialRules": [],
+  "stats": {
+    "gefahrenpunkte": 3,
+    "lebenspunkte": 13,
+    "ausweichen": "-",
+    "ruestung": 2,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-5",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein Held nach Wahl der Helden erhält 1W6+1 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "6-12",
+      "title": "Weiches erstarre, Fließendes verharre",
+      "text": "Der Held mit den meisten [SCHICKSALSPUNKT] muss 1 Ausdauerkarte seiner Wahl abwerfen. Die Laienmagierin verliert 1W6 [LEBEN]."
+    },
+    {
+      "range": "13-17",
+      "title": "Ausruhen",
+      "text": "Heilt bei sich 2 [LEBEN]."
+    },
+    {
+      "range": "18-20",
+      "title": "Nichts",
+      "text": "Starrt düster vor sich hin."
+    }
+  ],
+  "illustration": "Nele Klumpe",
   "source": "card_image"
 }
 
