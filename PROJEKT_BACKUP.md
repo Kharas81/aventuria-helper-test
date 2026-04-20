@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 12:18:14 PM
+# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 12:18:29 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5636,6 +5636,65 @@ select {
     }
   ],
   "illustration": "Anja Di Paolo",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_rachsuechtige_leibwaechterin.json
+```json
+{
+  "cardName": "Rachsüchtige Leibwächterin",
+  "cardType": "Schergenkarte",
+  "set": "Wirtshaus zum Schwarzen Keiler",
+  "setId": "wirtshaus_zum_schwarzen_keiler",
+  "setShortName": "Wirtshaus zum Schwarzen Keiler",
+  "setSymbol": "Keilerkopf",
+  "layout": "landscape",
+  "image": "sc_rachsuechtige_leibwaechterin.webp",
+  "copies": 2,
+  "usedDuplicateForVerification": true,
+  "tags": [
+    "mensch",
+    "soeldner",
+    "waechter"
+  ],
+  "keywords": [
+    "Mensch",
+    "Söldner",
+    "Wächter"
+  ],
+  "searchAliases": [],
+  "specialRules": [
+    "Wenn die Leibwächterin oder ein links oder rechts an sie angrenzender Gegner durch den Angriff eines Helden [LEBEN] verliert, führt die Leibwächterin sofort eine [AKTIONEN] durch."
+  ],
+  "stats": {
+    "gefahrenpunkte": 5,
+    "lebenspunkte": 14,
+    "ausweichen": "-",
+    "ruestung": 2,
+    "aktionen": 0
+  },
+  "actionTable": [
+    {
+      "range": "1-4",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Held, der den Angriff durchgeführt hat*, erhält 1W6+3 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "5-12",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Held, der den Angriff durchgeführt hat*, erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-20",
+      "title": "Nichts",
+      "text": "Reagiert nicht rechtzeitig."
+    }
+  ],
+  "illustration": "Nathaniel Park",
   "source": "card_image"
 }
 
