@@ -1,0 +1,58 @@
+{
+  "cardName": "Hofnärrin",
+  "cardType": "Schergenkarte",
+  "set": "Rückkehr zum Schwarzen Keiler",
+  "setId": "rueckkehr_zum_schwarzen_keiler",
+  "setShortName": "Rückkehr zum Schwarzen Keiler",
+  "setSymbol": "R",
+  "layout": "landscape",
+  "image": "sc_hofnaerrin.webp",
+  "sourceImages": [
+    "bild.webp"
+  ],
+  "tags": [
+    "mensch",
+    "gaukler",
+    "diener"
+  ],
+  "keywords": [
+    "Mensch",
+    "Gaukler",
+    "Diener"
+  ],
+  "searchAliases": [],
+  "specialRules": [],
+  "stats": {
+    "gefahrenpunkte": 2,
+    "lebenspunkte": 15,
+    "ausweichen": 0,
+    "ruestung": 5,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-7",
+      "title": "Schelmenstreich",
+      "text": "Nimm alle [UNSICHERES_SYMBOL_ROT_OVAL] aus der Tischmitte, falls vorhanden, und lege sie auf die Hofnärrin. Wird die Närrin ausgeschaltet oder flieht, so lege die [UNSICHERES_SYMBOL_ROT_OVAL] wieder zurück in die Tischmitte."
+    },
+    {
+      "range": "8-15",
+      "title": "Nichts",
+      "text": "Macht lustige Späße."
+    },
+    {
+      "range": "16-20",
+      "title": "Flucht/Schutzschild",
+      "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Ist noch mindestens 1 Anführer anwesend, und dieser hat noch keinen Schergen auf sich liegen, so lege die Hofnärrin auf ihn. Solange sie dort liegt, führt sie keine Aktionen durch und der Anführer kann nicht zum Ziel von Angriffen werden."
+    }
+  ],
+  "illustration": "Ben Maier",
+  "source": "card_image",
+  "uncertain": true,
+  "uncertainFields": [
+    "actionTable[0].text"
+  ],
+  "uncertainNotes": [
+    "Im Text steht ein rotes ovales Symbol, das auf dem Bild sichtbar ist, aber hier nicht sicher offiziell zugeordnet werden konnte. Deshalb vorläufig als [UNSICHERES_SYMBOL_ROT_OVAL] markiert."
+  ]
+}
