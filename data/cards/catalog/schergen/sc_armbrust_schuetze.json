@@ -1,0 +1,53 @@
+{
+  "cardName": "Armbrust-Schütze",
+  "cardType": "Schergenkarte",
+  "set": "Aventuria Grundbox",
+  "setId": "aventuria_grundbox",
+  "setShortName": "Grundbox",
+  "setSymbol": "A",
+  "layout": "landscape",
+  "image": "sc_armbrust_schuetze.webp",
+  "copies": 2,
+  "usedDuplicateForVerification": true,
+  "tags": [
+    "mensch",
+    "waechter"
+  ],
+  "keywords": [
+    "Mensch",
+    "Wächter"
+  ],
+  "searchAliases": [],
+  "specialRules": [],
+  "stats": {
+    "gefahrenpunkte": 4,
+    "lebenspunkte": 12,
+    "ausweichen": 2,
+    "ruestung": "-",
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-4",
+      "title": "[FERNKAMPF]-Angriff",
+      "text": "Der Held mit den meisten [LEBEN] erhält 1W6+5 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "5-12",
+      "title": "[FERNKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-16",
+      "title": "Nichts",
+      "text": "Sucht sich ein neues Ziel."
+    },
+    {
+      "range": "17-20",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+    }
+  ],
+  "illustration": "Nathaniel Park",
+  "source": "card_image"
+}
