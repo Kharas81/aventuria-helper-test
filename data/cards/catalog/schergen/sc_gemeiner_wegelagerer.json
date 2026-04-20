@@ -7,6 +7,8 @@
   "setSymbol": "A",
   "layout": "landscape",
   "image": "sc_gemeiner_wegelagerer.webp",
+  "copies": 2,
+  "usedDuplicateForVerification": true,
   "tags": [
     "mensch",
     "raeuber"
