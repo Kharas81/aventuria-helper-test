@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 11:15:30 AM
+# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 11:15:55 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -4915,6 +4915,66 @@ select {
 
 ---
 
+## 📄 Datei: data/cards/catalog/schergen/sc_bukanische_strandraeuberin.json
+```json
+{
+  "cardName": "Bukanische Strandräuberin",
+  "cardType": "Schergenkarte",
+  "set": "Aventuria Grundbox",
+  "setId": "aventuria_grundbox",
+  "setShortName": "Grundbox",
+  "setSymbol": "A",
+  "layout": "landscape",
+  "image": "sc_bukanische_strandraeuberin.webp",
+  "tags": [
+    "mensch",
+    "pirat",
+    "raeuber"
+  ],
+  "keywords": [
+    "Mensch",
+    "Pirat",
+    "Räuber"
+  ],
+  "searchAliases": [],
+  "specialRules": [],
+  "stats": {
+    "gefahrenpunkte": 4,
+    "lebenspunkte": 15,
+    "ausweichen": 1,
+    "ruestung": "-",
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-4",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6+3 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "5-10",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein Held nach Wahl der Spieler erhält 1W6+3 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "11-16",
+      "title": "Nichts",
+      "text": "Brüllt einen Piratenfluch."
+    },
+    {
+      "range": "17-20",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+    }
+  ],
+  "illustration": "Anja DiPaolo",
+  "source": "card_image"
+}
+
+```
+
+---
+
 ## 📄 Datei: data/cards/catalog/schergen/sc_hofnaerrin.json
 ```json
 {
@@ -5029,6 +5089,63 @@ select {
     }
   ],
   "illustration": "Anja Di Paolo",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_verrueckter_scharlatan.json
+```json
+{
+  "cardName": "Verrückter Scharlatan",
+  "cardType": "Schergenkarte",
+  "set": "Aventuria Grundbox",
+  "setId": "aventuria_grundbox",
+  "setShortName": "Grundbox",
+  "setSymbol": "A",
+  "layout": "landscape",
+  "image": "sc_verrueckter_scharlatan.webp",
+  "tags": [
+    "mensch",
+    "raeuber",
+    "zauberer"
+  ],
+  "keywords": [
+    "Mensch",
+    "Räuber",
+    "Zauberer"
+  ],
+  "searchAliases": [],
+  "specialRules": [
+    "4 [ZEIT]: Heilt allen seinen Mitstreitern 4 [LEBEN]."
+  ],
+  "stats": {
+    "gefahrenpunkte": 4,
+    "lebenspunkte": 15,
+    "ausweichen": 1,
+    "ruestung": "-",
+    "aktionen": 2
+  },
+  "actionTable": [
+    {
+      "range": "1-7",
+      "title": "[MAGIE]-Angriff",
+      "text": "Der Held mit den meisten [SCHICKSALSPUNKT] erhält 1W6+1 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "8-11",
+      "title": "Zauber",
+      "text": "Heilt seinen Mitstreiter der die meisten [LEBEN] verloren hat 5 [LEBEN]."
+    },
+    {
+      "range": "12-20",
+      "title": "Nichts",
+      "text": "Lacht irre."
+    }
+  ],
+  "illustration": "Anna Steinbauer",
   "source": "card_image"
 }
 
