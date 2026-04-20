@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 11:58:45 AM
+# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 11:59:39 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5171,6 +5171,8 @@ select {
   "setSymbol": "A",
   "layout": "landscape",
   "image": "sc_gemeiner_wegelagerer.webp",
+  "copies": 2,
+  "usedDuplicateForVerification": true,
   "tags": [
     "mensch",
     "raeuber"
