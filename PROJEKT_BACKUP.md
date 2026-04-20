@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 1:04:34 PM
+# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 3:06:03 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5763,6 +5763,69 @@ select {
     }
   ],
   "illustration": "Luisa Preißler",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_haken_joe.json
+```json
+{
+  "cardName": "Haken-Joe",
+  "cardType": "Schergenkarte",
+  "set": "Aventuria Grundbox",
+  "setId": "aventuria_grundbox",
+  "setShortName": "Grundbox",
+  "setSymbol": "A",
+  "layout": "landscape",
+  "image": "sc_haken_joe.webp",
+  "tags": [
+    "mensch",
+    "pirat"
+  ],
+  "keywords": [
+    "Mensch",
+    "Pirat"
+  ],
+  "searchAliases": [],
+  "specialRules": [],
+  "stats": {
+    "gefahrenpunkte": 5,
+    "lebenspunkte": 15,
+    "ausweichen": 2,
+    "ruestung": "-",
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "Haken-Schwung",
+      "text": "Ein zufälliger Held muss eine seiner ausgespielten Waffen seiner Wahl zurück auf die Hand nehmen. Hat er keine, passiert nichts."
+    },
+    {
+      "range": "3-7",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6+3 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "8-12",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein Held nach Wahl der Spieler erhält 1W6+3 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-17",
+      "title": "Nichts",
+      "text": "Brüllt einen Piratenfluch."
+    },
+    {
+      "range": "18-20",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+    }
+  ],
+  "illustration": "Anja DiPaolo",
   "source": "card_image"
 }
 
