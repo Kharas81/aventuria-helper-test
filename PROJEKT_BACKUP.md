@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 12:39:58 PM
+# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 12:40:09 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -6000,6 +6000,66 @@ select {
     }
   ],
   "illustration": "Annalena Weber",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_treuer_leibwaechter.json
+```json
+{
+  "cardName": "Treuer Leibwächter",
+  "cardType": "Schergenkarte",
+  "set": "Aventuria Grundbox",
+  "setId": "aventuria_grundbox",
+  "setShortName": "Grundbox",
+  "setSymbol": "A",
+  "layout": "landscape",
+  "image": "sc_treuer_leibwaechter.webp",
+  "tags": [
+    "mensch",
+    "waechter"
+  ],
+  "keywords": [
+    "Mensch",
+    "Wächter"
+  ],
+  "searchAliases": [],
+  "specialRules": [
+    "Der Gegner rechts und links von dieser Karte erhält jeweils [AUSWEICHEN]+1."
+  ],
+  "stats": {
+    "gefahrenpunkte": 5,
+    "lebenspunkte": 15,
+    "ausweichen": 2,
+    "ruestung": "-",
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-4",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Held, der zuletzt den Anführer angreift, erhält 1W6+3 [TREFFERPUNKTE]. Falls in der laufenden Runde kein Held den Anführer angreift, wird ein zufälliger Held getroffen."
+    },
+    {
+      "range": "5-12",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Held mit den meisten [LEBEN] erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-17",
+      "title": "Nichts",
+      "text": "Schaut sich um und zögert."
+    },
+    {
+      "range": "18-20",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+    }
+  ],
+  "illustration": "Luisa Preißler",
   "source": "card_image"
 }
 
