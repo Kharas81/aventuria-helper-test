@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 9:01:37 PM
+# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 9:02:16 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -4886,7 +4886,9 @@ select {
   "sc_nachtragender_yeti.json",
   "sc_freundlicher_yeti.json",
   "sc_herrischer_yeti.json",
-  "sc_wurfgewandter_yeti.json"    
+  "sc_wurfgewandter_yeti.json",
+  "sc_stoessischer_yeti.json",
+  "sc_aggressiver_yeti.json"  
   ]
 }
 
