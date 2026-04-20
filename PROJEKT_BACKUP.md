@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 12:40:09 PM
+# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 12:40:19 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -4869,6 +4869,71 @@ select {
   "sc_rachsuechtige_leibwaechterin.json",
   "sc_soeldner_langbogenschuetze.json"
   ]
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_aengstlicher_waechter.json
+```json
+{
+  "cardName": "Ängstlicher Wächter",
+  "cardType": "Schergenkarte",
+  "set": "Aventuria Grundbox",
+  "setId": "aventuria_grundbox",
+  "setShortName": "Grundbox",
+  "setSymbol": "A",
+  "layout": "landscape",
+  "image": "sc_aengstlicher_waechter.webp",
+  "tags": [
+    "mensch",
+    "waechter"
+  ],
+  "keywords": [
+    "Mensch",
+    "Wächter"
+  ],
+  "searchAliases": [],
+  "specialRules": [
+    "1 [ZEIT]: Entfernt die Karte aus dem Spiel. Sie wird nicht in den Schergenstapel zurückgemischt."
+  ],
+  "stats": {
+    "gefahrenpunkte": 3,
+    "lebenspunkte": 10,
+    "ausweichen": 2,
+    "ruestung": "-",
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 2W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "3-10",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6+1 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "11-16",
+      "title": "Nichts",
+      "text": "Zögert ängstlich."
+    },
+    {
+      "range": "17-19",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+    },
+    {
+      "range": "20",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Spiel. Sie wird nicht in den Schergenstapel zurückgemischt."
+    }
+  ],
+  "illustration": "Colin Michael Ascroft",
+  "source": "card_image"
 }
 
 ```
