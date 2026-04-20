@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 3:06:16 PM
+# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 3:06:28 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5116,6 +5116,66 @@ select {
     }
   ],
   "illustration": "Karin Wittig",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_boese_magd.json
+```json
+{
+  "cardName": "Böse Magd",
+  "cardType": "Schergenkarte",
+  "set": "Aventuria Grundbox",
+  "setId": "aventuria_grundbox",
+  "setShortName": "Grundbox",
+  "setSymbol": "A",
+  "layout": "landscape",
+  "image": "sc_boese_magd.webp",
+  "tags": [
+    "mensch",
+    "diener"
+  ],
+  "keywords": [
+    "Mensch",
+    "Diener"
+  ],
+  "searchAliases": [],
+  "specialRules": [
+    "Kann nicht angegriffen werden, solange rechts neben ihr ein weiterer Gegner steht."
+  ],
+  "stats": {
+    "gefahrenpunkte": 2,
+    "lebenspunkte": 10,
+    "ausweichen": 1,
+    "ruestung": "-",
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-4",
+      "title": "Pech an den Hals wünschen",
+      "text": "Der Held mit den meisten [SCHICKSALSPUNKT] muss alle [SCHICKSALSPUNKT] ablegen."
+    },
+    {
+      "range": "5-8",
+      "title": "Verbinden",
+      "text": "Heilt den Gegner rechts neben sich und allen Anführern jeweils 5 [LEBEN]."
+    },
+    {
+      "range": "9-15",
+      "title": "Nichts",
+      "text": "Guckt unschuldig."
+    },
+    {
+      "range": "16-20",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+    }
+  ],
+  "illustration": "Anna Steinbauer",
   "source": "card_image"
 }
 
