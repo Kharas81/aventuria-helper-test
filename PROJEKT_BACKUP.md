@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 9:34:53 AM
+# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 9:53:39 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -4849,7 +4849,7 @@ select {
 ```json
 {
   "cards": [
-    
+  "sc_hofnaerrin.json"  
   ]
 }
 
