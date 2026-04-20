@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 11:59:39 AM
+# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 11:59:52 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5111,6 +5111,8 @@ select {
   "setSymbol": "A",
   "layout": "landscape",
   "image": "sc_bukanische_strandraeuberin.webp",
+  "copies": 2,
+  "usedDuplicateForVerification": true,
   "tags": [
     "mensch",
     "pirat",
