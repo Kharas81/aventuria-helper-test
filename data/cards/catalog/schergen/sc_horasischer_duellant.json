@@ -1,0 +1,59 @@
+{
+  "cardName": "Horasischer Duellant",
+  "cardType": "Schergenkarte",
+  "set": "Wirtshaus zum Schwarzen Keiler",
+  "setId": "wirtshaus_zum_schwarzen_keiler",
+  "setShortName": "Wirtshaus zum Schwarzen Keiler",
+  "setSymbol": "Keilerkopf",
+  "layout": "landscape",
+  "image": "sc_horasischer_duellant.webp",
+  "copies": 2,
+  "usedDuplicateForVerification": true,
+  "tags": [
+    "mensch",
+    "soeldner"
+  ],
+  "keywords": [
+    "Mensch",
+    "Söldner"
+  ],
+  "searchAliases": [],
+  "specialRules": [
+    "Zu Beginn seines Zuges entfernt 1 [UNSICHERES_SYMBOL_BLAUE_RUNDE_MARKE] von dieser Karte."
+  ],
+  "stats": {
+    "gefahrenpunkte": 4,
+    "lebenspunkte": 13,
+    "ausweichen": "[UNSICHERES_SYMBOL_BLAUE_RUNDE_MARKE] x5",
+    "ruestung": 1,
+    "aktionen": 2
+  },
+  "actionTable": [
+    {
+      "range": "1-8",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "9-18",
+      "title": "Verteidigungsstellung",
+      "text": "Legt 1 [UNSICHERES_SYMBOL_BLAUE_RUNDE_MARKE] auf diese Karte."
+    },
+    {
+      "range": "19-20",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+    }
+  ],
+  "illustration": "Annika Maar",
+  "source": "card_image",
+  "uncertain": true,
+  "uncertainFields": [
+    "specialRules[0]",
+    "stats.ausweichen",
+    "actionTable[1].text"
+  ],
+  "uncertainNotes": [
+    "Auf der Karte ist ein blaues rundes Markersymbol zu sehen, das hier nicht sicher offiziell zugeordnet werden konnte. Deshalb vorläufig als [UNSICHERES_SYMBOL_BLAUE_RUNDE_MARKE] markiert."
+  ]
+}
