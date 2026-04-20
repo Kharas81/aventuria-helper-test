@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 9:53:39 AM
+# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 10:26:48 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -4868,9 +4868,6 @@ select {
   "setSymbol": "R",
   "layout": "landscape",
   "image": "sc_hofnaerrin.webp",
-  "sourceImages": [
-    "bild.webp"
-  ],
   "tags": [
     "mensch",
     "gaukler",
