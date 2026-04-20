@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 12:39:45 PM
+# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 12:39:58 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5882,6 +5882,66 @@ select {
     }
   ],
   "illustration": "Ben Maier",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_soeldner_feldwebelin.json
+```json
+{
+  "cardName": "Söldner-Feldwebelin",
+  "cardType": "Schergenkarte",
+  "set": "Wirtshaus zum Schwarzen Keiler",
+  "setId": "wirtshaus_zum_schwarzen_keiler",
+  "setShortName": "Wirtshaus zum Schwarzen Keiler",
+  "setSymbol": "Keilerkopf",
+  "layout": "landscape",
+  "image": "sc_soeldner_feldwebelin.webp",
+  "tags": [
+    "mensch",
+    "soeldner"
+  ],
+  "keywords": [
+    "Mensch",
+    "Söldner"
+  ],
+  "searchAliases": [],
+  "specialRules": [
+    "Wenn kein anderer Anführer anwesend ist, zählt die Feldwebelin als Anführer."
+  ],
+  "stats": {
+    "gefahrenpunkte": 6,
+    "lebenspunkte": 14,
+    "ausweichen": 2,
+    "ruestung": "-",
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-5",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+4 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "6-12",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein Held nach Wahl der Spieler erhält 1W6+4 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-16",
+      "title": "Heiltrank",
+      "text": "Die Söldner-Feldwebelin heilt sich 2W6 [LEBEN]."
+    },
+    {
+      "range": "17-20",
+      "title": "Nichts",
+      "text": "Brüllt Befehle."
+    }
+  ],
+  "illustration": "Annika Maar",
   "source": "card_image"
 }
 
