@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 11:58:17 AM
+# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 11:58:34 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -4857,6 +4857,65 @@ select {
   "sc_raeuberische_diebin.json",
   "sc_verrueckter_scharlatan.json"  
   ]
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_bardin.json
+```json
+{
+  "cardName": "Bardin",
+  "cardType": "Schergenkarte",
+  "set": "Rückkehr zum Schwarzen Keiler",
+  "setId": "rueckkehr_zum_schwarzen_keiler",
+  "setShortName": "Rückkehr zum Schwarzen Keiler",
+  "setSymbol": "R",
+  "layout": "landscape",
+  "image": "sc_bardin.webp",
+  "copies": 2,
+  "usedDuplicateForVerification": true,
+  "tags": [
+    "mensch",
+    "gaukler",
+    "diener"
+  ],
+  "keywords": [
+    "Mensch",
+    "Gaukler",
+    "Diener"
+  ],
+  "searchAliases": [],
+  "specialRules": [
+    "Liegt sie auf einem Anführer, so darf dieser das Würfergebnis seiner [AKTIONEN]-Würfe um 1 reduzieren."
+  ],
+  "stats": {
+    "gefahrenpunkte": 4,
+    "lebenspunkte": 12,
+    "ausweichen": 0,
+    "ruestung": 5,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-10",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "11-15",
+      "title": "Zuspruch",
+      "text": "Heilt jedem Anführer 2 [LEBEN]."
+    },
+    {
+      "range": "16-20",
+      "title": "Flucht/Schutzschild",
+      "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Ist noch mindestens 1 Anführer anwesend und dieser hat noch keinen Schergen auf sich liegen, so lege die Bardin auf ihn. Solange sie dort liegt, führt sie keine Aktionen durch und der Anführer kann nicht zum Ziel von Angriffen werden."
+    }
+  ],
+  "illustration": "Anja Di Paolo",
+  "source": "card_image"
 }
 
 ```
