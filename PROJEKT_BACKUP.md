@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 9:02:16 PM
+# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 9:09:50 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -16955,6 +16955,7 @@ export const CardDetailFormatters = {
         '[TREFFERPUNKTE]': 'Trefferpunkte',
         '[LEBEN]': 'Leben',
         '[AKTIONEN]': 'Aktionen',
+        '[SCHICKSALSPUNKT]': 'Schicksalspunkt',
         '[UNSICHERES_SYMBOL_ROT_OVAL]': 'rotes Oval-Symbol'
     },
 
