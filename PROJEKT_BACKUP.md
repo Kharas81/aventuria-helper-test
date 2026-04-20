@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 11:59:52 AM
+# 🛡️ Aventuria Projekt-Backup - 4/20/2026, 12:00:19 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -4855,7 +4855,11 @@ select {
   "sc_gemeiner_wegelagerer.json",
   "sc_jongleurin.json",
   "sc_raeuberische_diebin.json",
-  "sc_verrueckter_scharlatan.json"  
+  "sc_verrueckter_scharlatan.json",
+  "sc_bardin.json",
+  "sc_borbaradianische_laienmagierin_brenne_toter_stoff.json",
+  "sc_borbaradianischer_laienmagier_starres_fliesse_hartes_schmelze.json",
+  "sc_zaeher_waechter.json"
   ]
 }
 
