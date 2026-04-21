@@ -14,6 +14,33 @@ export const ArchiveListCardTemplate = {
         `;
     },
 
+    renderTags(tags = []) {
+        if (!tags.length) {
+            return '';
+        }
+
+        return `
+            <div class="archive-card__tags">
+                ${tags.map(tag => `<span class="archive-tag">${Utils.escapeHtml(tag)}</span>`).join('')}
+            </div>
+        `;
+    },
+
+    renderActions(actionTitles = []) {
+        if (!actionTitles.length) {
+            return '';
+        }
+
+        return `
+            <div class="archive-card__actions-preview">
+                <div class="archive-card__actions-title">Aktionen:</div>
+                <ul class="archive-card__actions-list">
+                    ${actionTitles.map(title => `<li class="archive-card__action-item">${Utils.escapeHtml(title)}</li>`).join('')}
+                </ul>
+            </div>
+        `;
+    },
+
     renderCard(card = {}) {
         const cardId = Utils.escapeHtml(ArchiveCardMeta.getCardId(card));
         const name = Utils.escapeHtml(ArchiveCardMeta.getDisplayName(card));
@@ -31,25 +58,10 @@ export const ArchiveListCardTemplate = {
             this.renderStat('Aktionen', stats.aktionen)
         ].join('');
 
-        const tagsHtml = tags.length
-            ? tags
-                .map(tag => `<span class="archive-tag">${Utils.escapeHtml(tag)}</span>`)
-                .join('')
-            : '<span class="archive-tag archive-tag--muted">keine Tags</span>';
-
-        const actionsHtml = actionTitles.length
-            ? actionTitles
-                .map(title => `<li class="archive-card__action-item">${Utils.escapeHtml(title)}</li>`)
-                .join('')
-            : '<li class="archive-card__action-item archive-card__action-item--muted">Keine Aktionen</li>';
-
         return `
             <article class="archive-card" data-card-id="${cardId}">
                 <div class="archive-card__header">
-                    <div class="archive-card__title-wrap">
-                        <h3 class="archive-card__title">${name}</h3>
-                        <p class="archive-card__subtitle">${typeLabel}</p>
-                    </div>
+                    <h3 class="archive-card__title" title="${name}">${name}</h3>
 
                     <div class="archive-card__badges">
                         <span class="archive-badge archive-badge--type">${typeLabel}</span>
@@ -57,21 +69,15 @@ export const ArchiveListCardTemplate = {
                     </div>
                 </div>
 
+                <div class="archive-card__subtitle">${typeLabel}</div>
+
                 <div class="archive-card__body">
                     <div class="archive-card__stats">
                         ${statsHtml}
                     </div>
 
-                    <div class="archive-card__tags">
-                        ${tagsHtml}
-                    </div>
-
-                    <div class="archive-card__actions-preview">
-                        <div class="archive-card__actions-title">Aktionen:</div>
-                        <ul class="archive-card__actions-list">
-                            ${actionsHtml}
-                        </ul>
-                    </div>
+                    ${this.renderTags(tags)}
+                    ${this.renderActions(actionTitles)}
                 </div>
 
                 <div class="archive-card__footer">
