@@ -29,8 +29,8 @@ function toDisplayValue(value, fallback = '-') {
         return fallback;
     }
 
-    const normalized = Utils.normalizeString(value);
-    return normalized || fallback;
+    const asString = String(value).trim();
+    return asString || fallback;
 }
 
 function uniqueStrings(values = []) {
@@ -71,7 +71,12 @@ export const ArchiveCardMeta = {
     },
 
     getSourceLabel(card = {}) {
-        return Utils.normalizeString(ArchiveFilter.getCardSourceName(card) || 'Unbekanntes Set');
+        return Utils.normalizeString(
+            card?.set?.shortName
+            || card?.set?.name
+            || ArchiveFilter.getCardSourceName(card)
+            || 'Unbekanntes Set'
+        );
     },
 
     getTypeLabel(card = {}) {
@@ -93,11 +98,11 @@ export const ArchiveCardMeta = {
         const stats = card?.stats || {};
 
         return {
-            gp: toDisplayValue(stats?.gefahrenpunkte),
-            leben: toDisplayValue(stats?.lebenspunkte),
-            ausweichen: toDisplayValue(stats?.ausweichen),
-            ruestung: toDisplayValue(stats?.ruestung),
-            aktionen: toDisplayValue(stats?.aktionen)
+            gp: toDisplayValue(stats?.gp ?? stats?.gefahrenpunkte),
+            leben: toDisplayValue(stats?.lp ?? stats?.lebenspunkte),
+            ausweichen: toDisplayValue(stats?.evasion ?? stats?.ausweichen),
+            ruestung: toDisplayValue(stats?.armor ?? stats?.ruestung),
+            aktionen: toDisplayValue(stats?.actions ?? stats?.aktionen)
         };
     },
 
@@ -110,7 +115,8 @@ export const ArchiveCardMeta = {
 
     getActionRows(card = {}) {
         const sourceRows = Utils.normalizeArray(
-            card?.actionTable
+            card?.rules?.action_table
+            || card?.actionTable
             || card?.action_table
             || card?.actions
         );
@@ -130,9 +136,12 @@ export const ArchiveCardMeta = {
                     };
                 }
 
-                const title = Utils.normalizeString(row?.title || row?.name || 'Ohne Titel');
-                const range = Utils.normalizeString(row?.range);
-                const text = Utils.normalizeString(row?.text || row?.description);
+                const title = Utils.normalizeString(row?.title || row?.name);
+                const range = Utils.normalizeString(row?.roll || row?.range);
+                const text = Utils.normalizeString(
+                    row?.description
+                    || row?.text
+                );
 
                 if (!title && !text) {
                     return null;
