@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/21/2026, 7:49:26 AM
+# 🛡️ Aventuria Projekt-Backup - 4/21/2026, 10:16:08 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -4845,6 +4845,71 @@ select {
 
 ---
 
+## 📄 Datei: data/cards/catalog/sc_schwarzer_keiler.json
+```json
+{
+  "cardName": "Schwarzer Keiler",
+  "cardType": "Schergenkarte",
+  "set": "Wirtshaus zum Schwarzen Keiler",
+  "setId": "wirtshaus_zum_schwarzen_keiler",
+  "setShortName": "Wirtshaus zum Schwarzen Keiler",
+  "setSymbol": "Keiler",
+  "layout": "landscape",
+  "image": "sc_schwarzer_keiler.webp",
+  "sourceImages": [
+    "Karte0003.webp"
+  ],
+  "tags": [
+    "tier",
+    "wald",
+    "jagdwild",
+    "keiler"
+  ],
+  "keywords": [
+    "Tier",
+    "Wald",
+    "Jagdwild"
+  ],
+  "searchAliases": [],
+  "specialRules": [
+    "Beute. Der Held, der den Schwarzen Keiler ausschaltet, darf einem Helden seiner Wahl 1W6+1 [LEBEN] heilen. Dies kann nicht genutzt werden, um einen ausgeschalteten Helden wiederzubeleben."
+  ],
+  "stats": {
+    "gefahrenpunkte": 6,
+    "lebenspunkte": 20,
+    "ausweichen": "-",
+    "ruestung": 1,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-4",
+      "title": "Umrennen",
+      "text": "Einem zufälligen Helden muss eine [AUSWEICHEN]-Probe gelingen, oder er verliert 5 [LEBEN]. Dies zählt nicht als Angriff."
+    },
+    {
+      "range": "5-12",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+3 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-16",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein Held nach Wahl der Spieler erhält 1W6+1 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "17-20",
+      "title": "Nichts",
+      "text": "Schnüffelt nach Nahrung."
+    }
+  ],
+  "illustration": "Sandra Braun",
+  "source": "card_image"
+}
+```
+
+---
+
 ## 📄 Datei: data/cards/catalog/schergen/index.json
 ```json
 {
@@ -4888,7 +4953,22 @@ select {
   "sc_herrischer_yeti.json",
   "sc_wurfgewandter_yeti.json",
   "sc_stoessischer_yeti.json",
-  "sc_aggressiver_yeti.json"  
+  "sc_aggressiver_yeti.json",
+  "sc_grosse_hoehlenspinne.json",
+  "sc_schwarzer_keiler.json",
+  "sc_alter_riesenhirschkaefer.json",
+  "sc_ausgewachsener_hoehlenbaer.json",
+  "sc_aggressiver_baer.json",
+  "sc_schattenloewe.json",
+  "sc_kriechende_riesenamoebe.json",
+  "sc_krabbelnde_gruftassel.json",
+  "sc_gemeiner_wolf.json",
+  "sc_tollwuetiger_waldwolf.json",
+  "sc_diebische_riesenfledermaus.json",
+  "sc_junge_seeschlange.json",
+  "sc_kleiner_krakenmolch.json",
+  "sc_gieriger_tigerhai.json",
+  "sc_hungriger_morfu.json"
   ]
 }
 
@@ -4961,6 +5041,69 @@ select {
 
 ---
 
+## 📄 Datei: data/cards/catalog/schergen/sc_aggressiver_baer.json
+```json
+{
+  "cardName": "Aggressiver Bär",
+  "cardType": "Schergenkarte",
+  "set": "Wald ohne Wiederkehr",
+  "setId": "wald_ohne_wiederkehr",
+  "setShortName": "Wald ohne Wiederkehr",
+  "setSymbol": "Baum",
+  "layout": "landscape",
+  "image": "sc_aggressiver_baer.webp",
+  "sourceImages": [
+    "Karte0007.webp"
+  ],
+  "tags": [
+    "tier",
+    "wald",
+    "baer"
+  ],
+  "keywords": [
+    "Tier",
+    "Wald"
+  ],
+  "searchAliases": [],
+  "specialRules": [
+    "Sobald der Bär 6 [LEBEN] oder mehr verloren hat, erhält er +1 [AKTIONEN]. Sobald er 12 [LEBEN] oder mehr verloren hat, erhält er zusätzlich nochmals +1 [AKTIONEN]."
+  ],
+  "stats": {
+    "gefahrenpunkte": 7,
+    "lebenspunkte": 18,
+    "ausweichen": "-",
+    "ruestung": 1,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "Umarmung",
+      "text": "Der Startspieler muss eine seiner ausliegenden dauerhaften Karten seiner Wahl zurück auf die Hand nehmen."
+    },
+    {
+      "range": "3-8",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Held mit den meisten [LEBEN] erhält 2W6 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "9-12",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-20",
+      "title": "Nichts",
+      "text": "Knurrt bedrohlich."
+    }
+  ],
+  "illustration": "Tristan Denecke",
+  "source": "card_image"
+}
+```
+
+---
+
 ## 📄 Datei: data/cards/catalog/schergen/sc_aggressiver_yeti.json
 ```json
 {
@@ -5009,6 +5152,71 @@ select {
   "source": "card_image"
 }
 
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_alter_riesenhirschkaefer.json
+```json
+{
+  "cardName": "Alter Riesenhirschkäfer",
+  "cardType": "Schergenkarte",
+  "set": "Wirtshaus zum Schwarzen Keiler",
+  "setId": "wirtshaus_zum_schwarzen_keiler",
+  "setShortName": "Wirtshaus zum Schwarzen Keiler",
+  "setSymbol": "Keiler",
+  "layout": "landscape",
+  "image": "sc_alter_riesenhirschkaefer.webp",
+  "sourceImages": [
+    "Karte0005.webp"
+  ],
+  "tags": [
+    "tier",
+    "unterirdisch",
+    "wald",
+    "kaefer"
+  ],
+  "keywords": [
+    "Tier",
+    "Unterirdisch",
+    "Wald"
+  ],
+  "searchAliases": [],
+  "specialRules": [
+    "Der Rüstungsschutz von Rüstungen kann bei Angriffen dieses Schergen nicht genutzt werden."
+  ],
+  "stats": {
+    "gefahrenpunkte": 4,
+    "lebenspunkte": 14,
+    "ausweichen": "-",
+    "ruestung": 3,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-3",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6+4 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "4-8",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "9-17",
+      "title": "Nichts",
+      "text": "Krabbelt ziellos."
+    },
+    {
+      "range": "18-20",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Kampf, falls die [LEBEN] des Schergen bei 8 oder darunter liegen. Andernfalls geschieht nichts."
+    }
+  ],
+  "illustration": "Julia Metzger",
+  "source": "card_image"
+}
 ```
 
 ---
@@ -5069,6 +5277,67 @@ select {
   "source": "card_image"
 }
 
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_ausgewachsener_hoehlenbaer.json
+```json
+{
+  "cardName": "Ausgewachsener Höhlenbär",
+  "cardType": "Schergenkarte",
+  "set": "Wirtshaus zum Schwarzen Keiler",
+  "setId": "wirtshaus_zum_schwarzen_keiler",
+  "setShortName": "Wirtshaus zum Schwarzen Keiler",
+  "setSymbol": "Keiler",
+  "layout": "landscape",
+  "image": "sc_ausgewachsener_hoehlenbaer.webp",
+  "sourceImages": [
+    "Karte0006.webp"
+  ],
+  "tags": [
+    "tier",
+    "unterirdisch",
+    "baer"
+  ],
+  "keywords": [
+    "Tier",
+    "Unterirdisch"
+  ],
+  "searchAliases": [],
+  "specialRules": [],
+  "stats": {
+    "gefahrenpunkte": 5,
+    "lebenspunkte": 20,
+    "ausweichen": "-",
+    "ruestung": 1,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "Brüllen",
+      "text": "Alle Helden müssen eine Willenskraft-Probe bestehen, oder 1 zufällige ihrer Ausdauerkarten ablegen."
+    },
+    {
+      "range": "3-4",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 2W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "5-12",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-20",
+      "title": "Nichts",
+      "text": "Knurrt bedrohlich."
+    }
+  ],
+  "illustration": "Nadine Schäkel",
+  "source": "card_image"
+}
 ```
 
 ---
@@ -5727,6 +5996,87 @@ select {
 
 ---
 
+## 📄 Datei: data/cards/catalog/schergen/sc_diebische_riesenfledermaus.json
+```json
+{
+  "cardName": "Diebische Riesenfledermaus",
+  "cardType": "Schergenkarte",
+  "set": "Wald ohne Wiederkehr",
+  "setId": "wald_ohne_wiederkehr",
+  "setShortName": "Wald ohne Wiederkehr",
+  "setSymbol": "Baum",
+  "layout": "landscape",
+  "image": "sc_diebische_riesenfledermaus.webp",
+  "copies": 2,
+  "sourceImages": [
+    "Karte0017.webp",
+    "Karte0018.webp"
+  ],
+  "referenceImages": [
+    "Karte0017.webp",
+    "Karte0018.webp"
+  ],
+  "usedDuplicateForVerification": true,
+  "tags": [
+    "tier",
+    "unterirdisch",
+    "wald",
+    "fledermaus"
+  ],
+  "keywords": [
+    "Tier",
+    "Unterirdisch",
+    "Wald"
+  ],
+  "searchAliases": [],
+  "specialRules": [],
+  "stats": {
+    "gefahrenpunkte": 3,
+    "lebenspunkte": 8,
+    "ausweichen": 10,
+    "ruestung": 0,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "Diebstahl",
+      "text": "Ein zufälliger Held legt eine seiner ausgespielten dauerhaften Karten seiner Wahl unter den Schergen. Stirbt oder flieht der Scherge, so bekommt der Held die Karte zurück auf die Hand."
+    },
+    {
+      "range": "3-7",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+1 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "8-12",
+      "title": "Saugt Blut",
+      "text": "Der Startspieler verliert 1 [LEBEN], die Diebische Riesenfledermaus heilt 1 [LEBEN]."
+    },
+    {
+      "range": "13-17",
+      "title": "Nichts",
+      "text": "Flattert wild umher."
+    },
+    {
+      "range": "18-20",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Kampf, falls die Lebenspunkte des Schergen bei 3 oder darunter liegen. Andernfalls passiert nichts."
+    }
+  ],
+  "timeEffects": [
+    {
+      "trigger": "3 [ZEIT]",
+      "text": "Legt alle Karten unter dieser ab."
+    }
+  ],
+  "illustration": "Annika Maar",
+  "source": "card_image"
+}
+```
+
+---
+
 ## 📄 Datei: data/cards/catalog/schergen/sc_eifriger_gruenschnabel.json
 ```json
 {
@@ -6048,6 +6398,74 @@ select {
 
 ---
 
+## 📄 Datei: data/cards/catalog/schergen/sc_gemeiner_wolf.json
+```json
+{
+  "cardName": "Gemeiner Wolf",
+  "cardType": "Schergenkarte",
+  "set": "Wald ohne Wiederkehr",
+  "setId": "wald_ohne_wiederkehr",
+  "setShortName": "Wald ohne Wiederkehr",
+  "setSymbol": "Baum",
+  "layout": "landscape",
+  "image": "sc_gemeiner_wolf.webp",
+  "copies": 2,
+  "sourceImages": [
+    "Karte0013.webp",
+    "Karte0014.webp"
+  ],
+  "referenceImages": [
+    "Karte0013.webp",
+    "Karte0014.webp"
+  ],
+  "usedDuplicateForVerification": true,
+  "tags": [
+    "tier",
+    "wald",
+    "wolf"
+  ],
+  "keywords": [
+    "Tier",
+    "Wald"
+  ],
+  "searchAliases": [],
+  "specialRules": [],
+  "stats": {
+    "gefahrenpunkte": 3,
+    "lebenspunkte": 10,
+    "ausweichen": "-",
+    "ruestung": 0,
+    "aktionen": 2
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 2W6 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "3-12",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-18",
+      "title": "Nichts",
+      "text": "Knurrt bedrohlich."
+    },
+    {
+      "range": "19-20",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Kampf, falls die Lebenspunkte des Schergen bei 3 oder darunter liegen. Andernfalls passiert nichts."
+    }
+  ],
+  "illustration": "Sebastian Watzlawek",
+  "source": "card_image"
+}
+```
+
+---
+
 ## 📄 Datei: data/cards/catalog/schergen/sc_gemeiner_yeti.json
 ```json
 {
@@ -6156,6 +6574,139 @@ select {
   "source": "card_image"
 }
 
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_gieriger_tigerhai.json
+```json
+{
+  "cardName": "Gieriger Tigerhai",
+  "cardType": "Schergenkarte",
+  "set": "Schiff der verlorenen Seelen",
+  "setId": "schiff_der_verlorenen_seelen",
+  "setShortName": "Schiff der verlorenen Seelen",
+  "setSymbol": "Schiff",
+  "layout": "landscape",
+  "image": "sc_gieriger_tigerhai.webp",
+  "copies": 2,
+  "sourceImages": [
+    "Karte0021.webp",
+    "Karte0023.webp"
+  ],
+  "referenceImages": [
+    "Karte0021.webp",
+    "Karte0023.webp"
+  ],
+  "usedDuplicateForVerification": true,
+  "tags": [
+    "tier",
+    "meer",
+    "hai"
+  ],
+  "keywords": [
+    "Tier",
+    "Meer"
+  ],
+  "searchAliases": [],
+  "specialRules": [],
+  "stats": {
+    "gefahrenpunkte": 7,
+    "lebenspunkte": 15,
+    "ausweichen": 5,
+    "ruestung": 1,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Held mit den wenigsten [LEBEN] erhält 1W6+5 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "3-14",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "15-20",
+      "title": "Nichts",
+      "text": "Der Hai schwimmt gierig umher."
+    }
+  ],
+  "illustration": "Nadine Schäkel",
+  "source": "card_image"
+}
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_grosse_hoehlenspinne.json
+```json
+{
+  "cardName": "Große Höhlenspinne",
+  "cardType": "Schergenkarte",
+  "set": "Wirtshaus zum Schwarzen Keiler",
+  "setId": "wirtshaus_zum_schwarzen_keiler",
+  "setShortName": "Wirtshaus zum Schwarzen Keiler",
+  "setSymbol": "Keiler",
+  "layout": "landscape",
+  "image": "sc_grosse_hoehlenspinne.webp",
+  "copies": 3,
+  "sourceImages": [
+    "Karte0001.webp",
+    "Karte0002.webp",
+    "Karte0004.webp"
+  ],
+  "referenceImages": [
+    "Karte0001.webp",
+    "Karte0002.webp",
+    "Karte0004.webp"
+  ],
+  "usedDuplicateForVerification": true,
+  "tags": [
+    "tier",
+    "unterirdisch",
+    "spinne"
+  ],
+  "keywords": [
+    "Tier",
+    "Unterirdisch"
+  ],
+  "searchAliases": [],
+  "specialRules": [],
+  "stats": {
+    "gefahrenpunkte": 2,
+    "lebenspunkte": 9,
+    "ausweichen": "-",
+    "ruestung": 1,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-4",
+      "title": "Netz",
+      "text": "Ein zufälliger Held, der aktuell nicht Opfer eines Netzes ist, muss eine [AUSWEICHEN]-Probe durchführen. Misslingt sie, so sinkt sein [AUSWEICHEN]-Wert bis zum Ende der laufenden Runde auf 0. Zeigt dies durch 1 Netz-Marke (●) auf dem [AUSWEICHEN]-Wert des Helden an."
+    },
+    {
+      "range": "5-12",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6+1 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-19",
+      "title": "Nichts",
+      "text": "Wartet ab."
+    },
+    {
+      "range": "20",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Kampf, falls die [LEBEN] des Schergen bei 3 oder darunter liegen. Andernfalls geschieht nichts."
+    }
+  ],
+  "illustration": "Sandra Braun",
+  "source": "card_image"
+}
 ```
 
 ---
@@ -6398,6 +6949,59 @@ select {
 
 ---
 
+## 📄 Datei: data/cards/catalog/schergen/sc_hungriger_morfu.json
+```json
+{
+  "cardName": "Hungriger Morfu",
+  "cardType": "Schergenkarte",
+  "set": "Schiff der verlorenen Seelen",
+  "setId": "schiff_der_verlorenen_seelen",
+  "setShortName": "Schiff der verlorenen Seelen",
+  "setSymbol": "Schiff",
+  "layout": "landscape",
+  "image": "sc_hungriger_morfu.webp",
+  "sourceImages": [
+    "Karte0022.webp"
+  ],
+  "tags": [
+    "tier",
+    "meer",
+    "unterirdisch",
+    "morfu"
+  ],
+  "keywords": [
+    "Tier",
+    "Meer",
+    "Unterirdisch"
+  ],
+  "searchAliases": [],
+  "specialRules": [],
+  "stats": {
+    "gefahrenpunkte": 8,
+    "lebenspunkte": 24,
+    "ausweichen": "-",
+    "ruestung": 0,
+    "aktionen": "1W6"
+  },
+  "actionTable": [
+    {
+      "range": "1-5",
+      "title": "[FERNKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6 [TREFFERPUNKTE]. Verliert er dadurch mindestens 1 [LEBEN], so verliert er weitere 1W6 [LEBEN]."
+    },
+    {
+      "range": "6-20",
+      "title": "Nichts",
+      "text": "Das Morfu kriecht hungrig umher."
+    }
+  ],
+  "illustration": "Fabrice Weiss",
+  "source": "card_image"
+}
+```
+
+---
+
 ## 📄 Datei: data/cards/catalog/schergen/sc_jongleurin.json
 ```json
 {
@@ -6457,6 +7061,62 @@ select {
 
 ---
 
+## 📄 Datei: data/cards/catalog/schergen/sc_junge_seeschlange.json
+```json
+{
+  "cardName": "Junge Seeschlange",
+  "cardType": "Schergenkarte",
+  "set": "Schiff der verlorenen Seelen",
+  "setId": "schiff_der_verlorenen_seelen",
+  "setShortName": "Schiff der verlorenen Seelen",
+  "setSymbol": "Schiff",
+  "layout": "landscape",
+  "image": "sc_junge_seeschlange.webp",
+  "sourceImages": [
+    "Karte0019.webp"
+  ],
+  "tags": [
+    "tier",
+    "meer",
+    "seeschlange"
+  ],
+  "keywords": [
+    "Tier",
+    "Meer"
+  ],
+  "searchAliases": [],
+  "specialRules": [],
+  "stats": {
+    "gefahrenpunkte": 8,
+    "lebenspunkte": 25,
+    "ausweichen": "-",
+    "ruestung": 2,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "Schnappen",
+      "text": "Ein zufälliger Held muss eine seiner ausliegenden Aktionskarten seiner Wahl ablegen."
+    },
+    {
+      "range": "3-10",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 2W6+3 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "11-20",
+      "title": "Nichts",
+      "text": "Die Seeschlange stößt ein zorniges Zischen aus."
+    }
+  ],
+  "illustration": "Nadine Schäkel",
+  "source": "card_image"
+}
+```
+
+---
+
 ## 📄 Datei: data/cards/catalog/schergen/sc_klammernder_yeti.json
 ```json
 {
@@ -6509,6 +7169,145 @@ select {
 
 ---
 
+## 📄 Datei: data/cards/catalog/schergen/sc_kleiner_krakenmolch.json
+```json
+{
+  "cardName": "Kleiner Krakenmolch",
+  "cardType": "Schergenkarte",
+  "set": "Wald ohne Wiederkehr",
+  "setId": "wald_ohne_wiederkehr",
+  "setShortName": "Wald ohne Wiederkehr",
+  "setSymbol": "Baum",
+  "layout": "landscape",
+  "image": "sc_kleiner_krakenmolch.webp",
+  "sourceImages": [
+    "Karte0020.webp"
+  ],
+  "tags": [
+    "tier",
+    "meer",
+    "unterirdisch",
+    "krakenmolch"
+  ],
+  "keywords": [
+    "Tier",
+    "Meer",
+    "Unterirdisch"
+  ],
+  "searchAliases": [],
+  "specialRules": [],
+  "stats": {
+    "gefahrenpunkte": 9,
+    "lebenspunkte": 20,
+    "ausweichen": "-",
+    "ruestung": 1,
+    "aktionen": 2
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "Gepackt",
+      "text": "Ein zufälliger Held erhält eine Gepackt-Marke. Zu Beginn jeder seiner Kampfrunden muss er für jede Gepackt-Marke eine Körperbeherrschung-Probe bestehen, oder erhält 1W6+1 [TREFFERPUNKTE], ohne die Möglichkeit auszuweichen. Lege alle Gepackt-Marken ab, sobald der Kleine Krakenmolch aus dem Kampf entfernt wird."
+    },
+    {
+      "range": "3-10",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6+3 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "11-20",
+      "title": "Nichts",
+      "text": "Der Tentakel tastet gierig umher."
+    }
+  ],
+  "illustration": "Tristan Denecke",
+  "source": "card_image"
+}
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_krabbelnde_gruftassel.json
+```json
+{
+  "cardName": "Krabbelnde Gruftassel",
+  "cardType": "Schergenkarte",
+  "set": "Wald ohne Wiederkehr",
+  "setId": "wald_ohne_wiederkehr",
+  "setShortName": "Wald ohne Wiederkehr",
+  "setSymbol": "Baum",
+  "layout": "landscape",
+  "image": "sc_krabbelnde_gruftassel.webp",
+  "copies": 2,
+  "sourceImages": [
+    "Karte0011.webp",
+    "Karte0012.webp"
+  ],
+  "referenceImages": [
+    "Karte0011.webp",
+    "Karte0012.webp"
+  ],
+  "usedDuplicateForVerification": true,
+  "tags": [
+    "tier",
+    "unterirdisch",
+    "gruftassel"
+  ],
+  "keywords": [
+    "Tier",
+    "Unterirdisch"
+  ],
+  "searchAliases": [],
+  "specialRules": [],
+  "stats": {
+    "gefahrenpunkte": 6,
+    "lebenspunkte": 20,
+    "ausweichen": "-",
+    "ruestung": 3,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-5",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6+3 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "6-10",
+      "title": "Unaufhaltsames Krabbeln",
+      "text": "Der Startspieler erhält 1W6+(2 je [UNSICHERES_SYMBOL_SCHWARZER_SCHAEDELKREIS]) [TREFFERPUNKTE]."
+    },
+    {
+      "range": "10-15",
+      "title": "Aufgeregtes Krabbeln",
+      "text": "Legt 1 [UNSICHERES_SYMBOL_SCHWARZER_SCHAEDELKREIS] auf diese Karte."
+    },
+    {
+      "range": "16-19",
+      "title": "Ergebnisloses Krabbeln",
+      "text": "keine Auswirkung"
+    },
+    {
+      "range": "20",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Kampf, falls die Lebenspunkte des Schergen bei 4 oder darunter liegen. Andernfalls passiert nichts."
+    }
+  ],
+  "illustration": "Tristan Denecke",
+  "source": "card_image",
+  "uncertain": true,
+  "uncertainFields": [
+    "actionTable[1].text",
+    "actionTable[2].text"
+  ],
+  "uncertainNotes": [
+    "Das schwarze Schädel-Kreis-Symbol ist sichtbar, aber nicht sicher offiziell zugeordnet. Deshalb als [UNSICHERES_SYMBOL_SCHWARZER_SCHAEDELKREIS] markiert."
+  ]
+}
+```
+
+---
+
 ## 📄 Datei: data/cards/catalog/schergen/sc_kraeftiger_yeti.json
 ```json
 {
@@ -6557,6 +7356,89 @@ select {
   "source": "card_image"
 }
 
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_kriechende_riesenamoebe.json
+```json
+{
+  "cardName": "Kriechende Riesenamöbe",
+  "cardType": "Schergenkarte",
+  "set": "Wald ohne Wiederkehr",
+  "setId": "wald_ohne_wiederkehr",
+  "setShortName": "Wald ohne Wiederkehr",
+  "setSymbol": "Baum",
+  "layout": "landscape",
+  "image": "sc_kriechende_riesenamoebe.webp",
+  "copies": 2,
+  "sourceImages": [
+    "Karte0009.webp",
+    "Karte0010.webp"
+  ],
+  "referenceImages": [
+    "Karte0009.webp",
+    "Karte0010.webp"
+  ],
+  "usedDuplicateForVerification": true,
+  "tags": [
+    "tier",
+    "unterirdisch",
+    "amoebe"
+  ],
+  "keywords": [
+    "Tier",
+    "Unterirdisch"
+  ],
+  "searchAliases": [],
+  "specialRules": [],
+  "stats": {
+    "gefahrenpunkte": 4,
+    "lebenspunkte": 20,
+    "ausweichen": "-",
+    "ruestung": 0,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "Gefräßige Säure",
+      "text": "Ein zufälliger Held muss eine seiner ausgespielten dauerhaften Karten seiner Wahl aus dem Spiel entfernen."
+    },
+    {
+      "range": "3-5",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "6-10",
+      "title": "Unaufhaltsames Kriechen",
+      "text": "Der Startspieler erhält 1W6+(2 je [UNSICHERES_SYMBOL_SCHWARZER_SCHAEDELKREIS]) [TREFFERPUNKTE]."
+    },
+    {
+      "range": "6-12",
+      "title": "Aufgeregtes Kriechen",
+      "text": "Legt 1 [UNSICHERES_SYMBOL_SCHWARZER_SCHAEDELKREIS] auf diese Karte."
+    },
+    {
+      "range": "13-20",
+      "title": "Ergebnisloses Kriechen",
+      "text": "keine Auswirkung"
+    }
+  ],
+  "illustration": "Patrice Weiss",
+  "source": "card_image",
+  "uncertain": true,
+  "uncertainFields": [
+    "actionTable[2].text",
+    "actionTable[3].range",
+    "actionTable[3].text"
+  ],
+  "uncertainNotes": [
+    "Das schwarze Schädel-Kreis-Symbol ist auf beiden Bildern klar sichtbar, aber ohne sichere offizielle Token-Zuordnung. Deshalb als [UNSICHERES_SYMBOL_SCHWARZER_SCHAEDELKREIS] markiert.",
+    "Die Range '6-12' ist auf beiden Exemplaren so lesbar, obwohl sie sich mit '6-10' überschneidet. Ich habe sie deshalb nicht still korrigiert, sondern als unsicher markiert."
+  ]
+}
 ```
 
 ---
@@ -6738,6 +7620,67 @@ select {
 
 ---
 
+## 📄 Datei: data/cards/catalog/schergen/sc_schattenloewe.json
+```json
+{
+  "cardName": "Schattenlöwe",
+  "cardType": "Schergenkarte",
+  "set": "Mythische Geschichten",
+  "setId": "mythische_geschichten",
+  "setShortName": "Mythische Geschichten",
+  "setSymbol": "Schneeflocke",
+  "layout": "landscape",
+  "image": "sc_schattenloewe.webp",
+  "sourceImages": [
+    "Karte0008.webp"
+  ],
+  "tags": [
+    "tier",
+    "wald",
+    "loewe"
+  ],
+  "keywords": [
+    "Tier",
+    "Wald"
+  ],
+  "searchAliases": [],
+  "specialRules": [],
+  "stats": {
+    "gefahrenpunkte": 5,
+    "lebenspunkte": 24,
+    "ausweichen": "-",
+    "ruestung": 1,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-4",
+      "title": "Anspringen",
+      "text": "Der Startspieler muss eine Sinnesschärfe-Probe ablegen. Misslingt sie, so darf er in der darauffolgenden Runde nur die Hälfte (abgerundet) seiner erschöpften Ausdauerkarten bereit machen."
+    },
+    {
+      "range": "5-10",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 2W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "11-17",
+      "title": "Nichts",
+      "text": "Er starrt euch reglos an."
+    },
+    {
+      "range": "18-20",
+      "title": "Flucht",
+      "text": "Liegen die aktuellen [LEBEN] des Schattenlöwen unter 9, so entferne ihn aus dem Kampf."
+    }
+  ],
+  "illustration": "Sandra Braun",
+  "source": "card_image"
+}
+```
+
+---
+
 ## 📄 Datei: data/cards/catalog/schergen/sc_soeldner_feldwebelin.json
 ```json
 {
@@ -6904,6 +7847,72 @@ select {
   "source": "card_image"
 }
 
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_tollwuetiger_waldwolf.json
+```json
+{
+  "cardName": "Tollwütiger Waldwolf",
+  "cardType": "Schergenkarte",
+  "set": "Wald ohne Wiederkehr",
+  "setId": "wald_ohne_wiederkehr",
+  "setShortName": "Wald ohne Wiederkehr",
+  "setSymbol": "Baum",
+  "layout": "landscape",
+  "image": "sc_tollwuetiger_waldwolf.webp",
+  "copies": 2,
+  "sourceImages": [
+    "Karte0015.webp",
+    "Karte0016.webp"
+  ],
+  "referenceImages": [
+    "Karte0015.webp",
+    "Karte0016.webp"
+  ],
+  "usedDuplicateForVerification": true,
+  "tags": [
+    "tier",
+    "wald",
+    "wolf",
+    "tollwuetig"
+  ],
+  "keywords": [
+    "Tier",
+    "Wald"
+  ],
+  "searchAliases": [],
+  "specialRules": [
+    "Nachdem dieser Scherge platziert wurde, lege die Karte „Infizierte Wunde“ unter den Wolf. Der erste Held, der durch den Wolf [LEBEN] verliert, mischt sie in sein Deck."
+  ],
+  "stats": {
+    "gefahrenpunkte": 5,
+    "lebenspunkte": 15,
+    "ausweichen": "-",
+    "ruestung": 0,
+    "aktionen": 2
+  },
+  "actionTable": [
+    {
+      "range": "1-3",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 2W6 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "4-12",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-20",
+      "title": "Nichts",
+      "text": "Knurrt bedrohlich."
+    }
+  ],
+  "illustration": "Sebastian Watzlawek",
+  "source": "card_image"
+}
 ```
 
 ---
