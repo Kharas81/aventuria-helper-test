@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/21/2026, 8:05:07 PM
+# 🛡️ Aventuria Projekt-Backup - 4/21/2026, 8:05:32 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -15144,6 +15144,14 @@ export const Archive = {
         ArchiveState.isLoading = Boolean(value);
     },
 
+    get isHomeView() {
+        return ArchiveState.isHomeView;
+    },
+
+    set isHomeView(value) {
+        ArchiveState.isHomeView = Boolean(value);
+    },
+
     getModal() {
         return ArchiveController.getModal();
     },
@@ -15176,6 +15184,10 @@ export const Archive = {
         return ArchiveController.close();
     },
 
+    async openCategory(categoryFilter = '', options = {}) {
+        return ArchiveController.openCategory(categoryFilter, options);
+    },
+
     async loadSet(setKey = '', options = {}) {
         return ArchiveController.loadSet(setKey, options);
     },
@@ -15206,17 +15218,7 @@ export const Archive = {
 
     init() {
         ArchiveBindings.init();
-
-        ArchiveRenderer.renderToolbar({
-            activeSetKey: ArchiveState.currentSet,
-            activeSourceFilter: ArchiveState.currentSourceFilter,
-            activeCategoryFilter: ArchiveState.currentCategoryFilter,
-            availableSources: [],
-            availableCategories: [],
-            currentQuery: '',
-            filteredCount: 0,
-            totalCount: 0
-        });
+        ArchiveController.renderHome();
     }
 };
 
