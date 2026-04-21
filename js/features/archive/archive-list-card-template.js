@@ -26,8 +26,8 @@ export const ArchiveListCardTemplate = {
         `;
     },
 
-    renderActions(actionTitles = []) {
-        if (!actionTitles.length) {
+    renderActions(actionRows = []) {
+        if (!actionRows.length) {
             return '';
         }
 
@@ -35,7 +35,12 @@ export const ArchiveListCardTemplate = {
             <div class="archive-card__actions-preview">
                 <div class="archive-card__actions-title">Aktionen:</div>
                 <ul class="archive-card__actions-list">
-                    ${actionTitles.map(title => `<li class="archive-card__action-item">${Utils.escapeHtml(title)}</li>`).join('')}
+                    ${actionRows.map(row => `
+                        <li class="archive-card__action-item">
+                            ${row.range ? `<span class="archive-card__action-range">${Utils.escapeHtml(row.range)}</span>` : ''}
+                            <span class="archive-card__action-name">${Utils.escapeHtml(row.title)}</span>
+                        </li>
+                    `).join('')}
                 </ul>
             </div>
         `;
@@ -49,7 +54,7 @@ export const ArchiveListCardTemplate = {
 
         const stats = ArchiveCardMeta.getStats(card);
         const tags = ArchiveCardMeta.getTags(card);
-        const actionTitles = ArchiveCardMeta.getActionTitles(card, 4);
+        const actionRows = ArchiveCardMeta.getActionPreviewRows(card, 4);
 
         const statsHtml = [
             this.renderStat('GP', stats.gp),
@@ -77,7 +82,7 @@ export const ArchiveListCardTemplate = {
                     </div>
 
                     ${this.renderTags(tags)}
-                    ${this.renderActions(actionTitles)}
+                    ${this.renderActions(actionRows)}
                 </div>
 
                 <div class="archive-card__footer">
