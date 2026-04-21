@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/21/2026, 8:05:32 PM
+# 🛡️ Aventuria Projekt-Backup - 4/21/2026, 8:05:49 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -20304,6 +20304,15 @@ export function getArchiveActions() {
                 sourceFilter: '__all__',
                 categoryFilter: '__all__'
             });
+        },
+
+        'archive-open-category': trigger => {
+            CoreRuntime.getArchive()?.openCategory?.(
+                trigger?.dataset?.categoryFilter || '',
+                {
+                    setKey: trigger?.dataset?.set || ''
+                }
+            );
         },
 
         'archive-filter-source': trigger => {
