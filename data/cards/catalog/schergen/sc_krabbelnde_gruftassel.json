@@ -1,0 +1,75 @@
+{
+  "cardName": "Krabbelnde Gruftassel",
+  "cardType": "Schergenkarte",
+  "set": "Wald ohne Wiederkehr",
+  "setId": "wald_ohne_wiederkehr",
+  "setShortName": "Wald ohne Wiederkehr",
+  "setSymbol": "Baum",
+  "layout": "landscape",
+  "image": "sc_krabbelnde_gruftassel.webp",
+  "copies": 2,
+  "sourceImages": [
+    "Karte0011.webp",
+    "Karte0012.webp"
+  ],
+  "referenceImages": [
+    "Karte0011.webp",
+    "Karte0012.webp"
+  ],
+  "usedDuplicateForVerification": true,
+  "tags": [
+    "tier",
+    "unterirdisch",
+    "gruftassel"
+  ],
+  "keywords": [
+    "Tier",
+    "Unterirdisch"
+  ],
+  "searchAliases": [],
+  "specialRules": [],
+  "stats": {
+    "gefahrenpunkte": 6,
+    "lebenspunkte": 20,
+    "ausweichen": "-",
+    "ruestung": 3,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-5",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6+3 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "6-10",
+      "title": "Unaufhaltsames Krabbeln",
+      "text": "Der Startspieler erhält 1W6+(2 je [UNSICHERES_SYMBOL_SCHWARZER_SCHAEDELKREIS]) [TREFFERPUNKTE]."
+    },
+    {
+      "range": "10-15",
+      "title": "Aufgeregtes Krabbeln",
+      "text": "Legt 1 [UNSICHERES_SYMBOL_SCHWARZER_SCHAEDELKREIS] auf diese Karte."
+    },
+    {
+      "range": "16-19",
+      "title": "Ergebnisloses Krabbeln",
+      "text": "keine Auswirkung"
+    },
+    {
+      "range": "20",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Kampf, falls die Lebenspunkte des Schergen bei 4 oder darunter liegen. Andernfalls passiert nichts."
+    }
+  ],
+  "illustration": "Tristan Denecke",
+  "source": "card_image",
+  "uncertain": true,
+  "uncertainFields": [
+    "actionTable[1].text",
+    "actionTable[2].text"
+  ],
+  "uncertainNotes": [
+    "Das schwarze Schädel-Kreis-Symbol ist sichtbar, aber nicht sicher offiziell zugeordnet. Deshalb als [UNSICHERES_SYMBOL_SCHWARZER_SCHAEDELKREIS] markiert."
+  ]
+}

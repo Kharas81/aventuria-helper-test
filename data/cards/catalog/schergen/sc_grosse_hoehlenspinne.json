@@ -1,0 +1,64 @@
+{
+  "cardName": "Große Höhlenspinne",
+  "cardType": "Schergenkarte",
+  "set": "Wirtshaus zum Schwarzen Keiler",
+  "setId": "wirtshaus_zum_schwarzen_keiler",
+  "setShortName": "Wirtshaus zum Schwarzen Keiler",
+  "setSymbol": "Keiler",
+  "layout": "landscape",
+  "image": "sc_grosse_hoehlenspinne.webp",
+  "copies": 3,
+  "sourceImages": [
+    "Karte0001.webp",
+    "Karte0002.webp",
+    "Karte0004.webp"
+  ],
+  "referenceImages": [
+    "Karte0001.webp",
+    "Karte0002.webp",
+    "Karte0004.webp"
+  ],
+  "usedDuplicateForVerification": true,
+  "tags": [
+    "tier",
+    "unterirdisch",
+    "spinne"
+  ],
+  "keywords": [
+    "Tier",
+    "Unterirdisch"
+  ],
+  "searchAliases": [],
+  "specialRules": [],
+  "stats": {
+    "gefahrenpunkte": 2,
+    "lebenspunkte": 9,
+    "ausweichen": "-",
+    "ruestung": 1,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-4",
+      "title": "Netz",
+      "text": "Ein zufälliger Held, der aktuell nicht Opfer eines Netzes ist, muss eine [AUSWEICHEN]-Probe durchführen. Misslingt sie, so sinkt sein [AUSWEICHEN]-Wert bis zum Ende der laufenden Runde auf 0. Zeigt dies durch 1 Netz-Marke (●) auf dem [AUSWEICHEN]-Wert des Helden an."
+    },
+    {
+      "range": "5-12",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6+1 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-19",
+      "title": "Nichts",
+      "text": "Wartet ab."
+    },
+    {
+      "range": "20",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Kampf, falls die [LEBEN] des Schergen bei 3 oder darunter liegen. Andernfalls geschieht nichts."
+    }
+  ],
+  "illustration": "Sandra Braun",
+  "source": "card_image"
+}

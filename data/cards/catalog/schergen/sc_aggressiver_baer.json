@@ -1,0 +1,57 @@
+{
+  "cardName": "Aggressiver Bär",
+  "cardType": "Schergenkarte",
+  "set": "Wald ohne Wiederkehr",
+  "setId": "wald_ohne_wiederkehr",
+  "setShortName": "Wald ohne Wiederkehr",
+  "setSymbol": "Baum",
+  "layout": "landscape",
+  "image": "sc_aggressiver_baer.webp",
+  "sourceImages": [
+    "Karte0007.webp"
+  ],
+  "tags": [
+    "tier",
+    "wald",
+    "baer"
+  ],
+  "keywords": [
+    "Tier",
+    "Wald"
+  ],
+  "searchAliases": [],
+  "specialRules": [
+    "Sobald der Bär 6 [LEBEN] oder mehr verloren hat, erhält er +1 [AKTIONEN]. Sobald er 12 [LEBEN] oder mehr verloren hat, erhält er zusätzlich nochmals +1 [AKTIONEN]."
+  ],
+  "stats": {
+    "gefahrenpunkte": 7,
+    "lebenspunkte": 18,
+    "ausweichen": "-",
+    "ruestung": 1,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "Umarmung",
+      "text": "Der Startspieler muss eine seiner ausliegenden dauerhaften Karten seiner Wahl zurück auf die Hand nehmen."
+    },
+    {
+      "range": "3-8",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Held mit den meisten [LEBEN] erhält 2W6 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "9-12",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-20",
+      "title": "Nichts",
+      "text": "Knurrt bedrohlich."
+    }
+  ],
+  "illustration": "Tristan Denecke",
+  "source": "card_image"
+}

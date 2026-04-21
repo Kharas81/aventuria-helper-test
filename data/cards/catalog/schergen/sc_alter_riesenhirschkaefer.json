@@ -1,0 +1,59 @@
+{
+  "cardName": "Alter Riesenhirschkäfer",
+  "cardType": "Schergenkarte",
+  "set": "Wirtshaus zum Schwarzen Keiler",
+  "setId": "wirtshaus_zum_schwarzen_keiler",
+  "setShortName": "Wirtshaus zum Schwarzen Keiler",
+  "setSymbol": "Keiler",
+  "layout": "landscape",
+  "image": "sc_alter_riesenhirschkaefer.webp",
+  "sourceImages": [
+    "Karte0005.webp"
+  ],
+  "tags": [
+    "tier",
+    "unterirdisch",
+    "wald",
+    "kaefer"
+  ],
+  "keywords": [
+    "Tier",
+    "Unterirdisch",
+    "Wald"
+  ],
+  "searchAliases": [],
+  "specialRules": [
+    "Der Rüstungsschutz von Rüstungen kann bei Angriffen dieses Schergen nicht genutzt werden."
+  ],
+  "stats": {
+    "gefahrenpunkte": 4,
+    "lebenspunkte": 14,
+    "ausweichen": "-",
+    "ruestung": 3,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-3",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6+4 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "4-8",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "9-17",
+      "title": "Nichts",
+      "text": "Krabbelt ziellos."
+    },
+    {
+      "range": "18-20",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Kampf, falls die [LEBEN] des Schergen bei 8 oder darunter liegen. Andernfalls geschieht nichts."
+    }
+  ],
+  "illustration": "Julia Metzger",
+  "source": "card_image"
+}

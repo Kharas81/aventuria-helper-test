@@ -1,0 +1,59 @@
+{
+  "cardName": "Schwarzer Keiler",
+  "cardType": "Schergenkarte",
+  "set": "Wirtshaus zum Schwarzen Keiler",
+  "setId": "wirtshaus_zum_schwarzen_keiler",
+  "setShortName": "Wirtshaus zum Schwarzen Keiler",
+  "setSymbol": "Keiler",
+  "layout": "landscape",
+  "image": "sc_schwarzer_keiler.webp",
+  "sourceImages": [
+    "Karte0003.webp"
+  ],
+  "tags": [
+    "tier",
+    "wald",
+    "jagdwild",
+    "keiler"
+  ],
+  "keywords": [
+    "Tier",
+    "Wald",
+    "Jagdwild"
+  ],
+  "searchAliases": [],
+  "specialRules": [
+    "Beute. Der Held, der den Schwarzen Keiler ausschaltet, darf einem Helden seiner Wahl 1W6+1 [LEBEN] heilen. Dies kann nicht genutzt werden, um einen ausgeschalteten Helden wiederzubeleben."
+  ],
+  "stats": {
+    "gefahrenpunkte": 6,
+    "lebenspunkte": 20,
+    "ausweichen": "-",
+    "ruestung": 1,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-4",
+      "title": "Umrennen",
+      "text": "Einem zufälligen Helden muss eine [AUSWEICHEN]-Probe gelingen, oder er verliert 5 [LEBEN]. Dies zählt nicht als Angriff."
+    },
+    {
+      "range": "5-12",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+3 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-16",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein Held nach Wahl der Spieler erhält 1W6+1 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "17-20",
+      "title": "Nichts",
+      "text": "Schnüffelt nach Nahrung."
+    }
+  ],
+  "illustration": "Sandra Braun",
+  "source": "card_image"
+}

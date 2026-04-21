@@ -1,0 +1,60 @@
+{
+  "cardName": "Tollwütiger Waldwolf",
+  "cardType": "Schergenkarte",
+  "set": "Wald ohne Wiederkehr",
+  "setId": "wald_ohne_wiederkehr",
+  "setShortName": "Wald ohne Wiederkehr",
+  "setSymbol": "Baum",
+  "layout": "landscape",
+  "image": "sc_tollwuetiger_waldwolf.webp",
+  "copies": 2,
+  "sourceImages": [
+    "Karte0015.webp",
+    "Karte0016.webp"
+  ],
+  "referenceImages": [
+    "Karte0015.webp",
+    "Karte0016.webp"
+  ],
+  "usedDuplicateForVerification": true,
+  "tags": [
+    "tier",
+    "wald",
+    "wolf",
+    "tollwuetig"
+  ],
+  "keywords": [
+    "Tier",
+    "Wald"
+  ],
+  "searchAliases": [],
+  "specialRules": [
+    "Nachdem dieser Scherge platziert wurde, lege die Karte „Infizierte Wunde“ unter den Wolf. Der erste Held, der durch den Wolf [LEBEN] verliert, mischt sie in sein Deck."
+  ],
+  "stats": {
+    "gefahrenpunkte": 5,
+    "lebenspunkte": 15,
+    "ausweichen": "-",
+    "ruestung": 0,
+    "aktionen": 2
+  },
+  "actionTable": [
+    {
+      "range": "1-3",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 2W6 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "4-12",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-20",
+      "title": "Nichts",
+      "text": "Knurrt bedrohlich."
+    }
+  ],
+  "illustration": "Sebastian Watzlawek",
+  "source": "card_image"
+}

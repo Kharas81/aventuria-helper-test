@@ -1,0 +1,55 @@
+{
+  "cardName": "Ausgewachsener Höhlenbär",
+  "cardType": "Schergenkarte",
+  "set": "Wirtshaus zum Schwarzen Keiler",
+  "setId": "wirtshaus_zum_schwarzen_keiler",
+  "setShortName": "Wirtshaus zum Schwarzen Keiler",
+  "setSymbol": "Keiler",
+  "layout": "landscape",
+  "image": "sc_ausgewachsener_hoehlenbaer.webp",
+  "sourceImages": [
+    "Karte0006.webp"
+  ],
+  "tags": [
+    "tier",
+    "unterirdisch",
+    "baer"
+  ],
+  "keywords": [
+    "Tier",
+    "Unterirdisch"
+  ],
+  "searchAliases": [],
+  "specialRules": [],
+  "stats": {
+    "gefahrenpunkte": 5,
+    "lebenspunkte": 20,
+    "ausweichen": "-",
+    "ruestung": 1,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "Brüllen",
+      "text": "Alle Helden müssen eine Willenskraft-Probe bestehen, oder 1 zufällige ihrer Ausdauerkarten ablegen."
+    },
+    {
+      "range": "3-4",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 2W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "5-12",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-20",
+      "title": "Nichts",
+      "text": "Knurrt bedrohlich."
+    }
+  ],
+  "illustration": "Nadine Schäkel",
+  "source": "card_image"
+}

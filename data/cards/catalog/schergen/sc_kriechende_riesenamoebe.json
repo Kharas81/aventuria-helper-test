@@ -1,0 +1,77 @@
+{
+  "cardName": "Kriechende Riesenamöbe",
+  "cardType": "Schergenkarte",
+  "set": "Wald ohne Wiederkehr",
+  "setId": "wald_ohne_wiederkehr",
+  "setShortName": "Wald ohne Wiederkehr",
+  "setSymbol": "Baum",
+  "layout": "landscape",
+  "image": "sc_kriechende_riesenamoebe.webp",
+  "copies": 2,
+  "sourceImages": [
+    "Karte0009.webp",
+    "Karte0010.webp"
+  ],
+  "referenceImages": [
+    "Karte0009.webp",
+    "Karte0010.webp"
+  ],
+  "usedDuplicateForVerification": true,
+  "tags": [
+    "tier",
+    "unterirdisch",
+    "amoebe"
+  ],
+  "keywords": [
+    "Tier",
+    "Unterirdisch"
+  ],
+  "searchAliases": [],
+  "specialRules": [],
+  "stats": {
+    "gefahrenpunkte": 4,
+    "lebenspunkte": 20,
+    "ausweichen": "-",
+    "ruestung": 0,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "Gefräßige Säure",
+      "text": "Ein zufälliger Held muss eine seiner ausgespielten dauerhaften Karten seiner Wahl aus dem Spiel entfernen."
+    },
+    {
+      "range": "3-5",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "6-10",
+      "title": "Unaufhaltsames Kriechen",
+      "text": "Der Startspieler erhält 1W6+(2 je [UNSICHERES_SYMBOL_SCHWARZER_SCHAEDELKREIS]) [TREFFERPUNKTE]."
+    },
+    {
+      "range": "6-12",
+      "title": "Aufgeregtes Kriechen",
+      "text": "Legt 1 [UNSICHERES_SYMBOL_SCHWARZER_SCHAEDELKREIS] auf diese Karte."
+    },
+    {
+      "range": "13-20",
+      "title": "Ergebnisloses Kriechen",
+      "text": "keine Auswirkung"
+    }
+  ],
+  "illustration": "Patrice Weiss",
+  "source": "card_image",
+  "uncertain": true,
+  "uncertainFields": [
+    "actionTable[2].text",
+    "actionTable[3].range",
+    "actionTable[3].text"
+  ],
+  "uncertainNotes": [
+    "Das schwarze Schädel-Kreis-Symbol ist auf beiden Bildern klar sichtbar, aber ohne sichere offizielle Token-Zuordnung. Deshalb als [UNSICHERES_SYMBOL_SCHWARZER_SCHAEDELKREIS] markiert.",
+    "Die Range '6-12' ist auf beiden Exemplaren so lesbar, obwohl sie sich mit '6-10' überschneidet. Ich habe sie deshalb nicht still korrigiert, sondern als unsicher markiert."
+  ]
+}

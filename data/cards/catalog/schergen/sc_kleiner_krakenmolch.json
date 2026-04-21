@@ -1,0 +1,52 @@
+{
+  "cardName": "Kleiner Krakenmolch",
+  "cardType": "Schergenkarte",
+  "set": "Wald ohne Wiederkehr",
+  "setId": "wald_ohne_wiederkehr",
+  "setShortName": "Wald ohne Wiederkehr",
+  "setSymbol": "Baum",
+  "layout": "landscape",
+  "image": "sc_kleiner_krakenmolch.webp",
+  "sourceImages": [
+    "Karte0020.webp"
+  ],
+  "tags": [
+    "tier",
+    "meer",
+    "unterirdisch",
+    "krakenmolch"
+  ],
+  "keywords": [
+    "Tier",
+    "Meer",
+    "Unterirdisch"
+  ],
+  "searchAliases": [],
+  "specialRules": [],
+  "stats": {
+    "gefahrenpunkte": 9,
+    "lebenspunkte": 20,
+    "ausweichen": "-",
+    "ruestung": 1,
+    "aktionen": 2
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "Gepackt",
+      "text": "Ein zufälliger Held erhält eine Gepackt-Marke. Zu Beginn jeder seiner Kampfrunden muss er für jede Gepackt-Marke eine Körperbeherrschung-Probe bestehen, oder erhält 1W6+1 [TREFFERPUNKTE], ohne die Möglichkeit auszuweichen. Lege alle Gepackt-Marken ab, sobald der Kleine Krakenmolch aus dem Kampf entfernt wird."
+    },
+    {
+      "range": "3-10",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6+3 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "11-20",
+      "title": "Nichts",
+      "text": "Der Tentakel tastet gierig umher."
+    }
+  ],
+  "illustration": "Tristan Denecke",
+  "source": "card_image"
+}

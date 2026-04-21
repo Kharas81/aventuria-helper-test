@@ -39,6 +39,21 @@
   "sc_herrischer_yeti.json",
   "sc_wurfgewandter_yeti.json",
   "sc_stoessischer_yeti.json",
-  "sc_aggressiver_yeti.json"  
+  "sc_aggressiver_yeti.json",
+  "sc_grosse_hoehlenspinne.json",
+  "sc_schwarzer_keiler.json",
+  "sc_alter_riesenhirschkaefer.json",
+  "sc_ausgewachsener_hoehlenbaer.json",
+  "sc_aggressiver_baer.json",
+  "sc_schattenloewe.json",
+  "sc_kriechende_riesenamoebe.json",
+  "sc_krabbelnde_gruftassel.json",
+  "sc_gemeiner_wolf.json",
+  "sc_tollwuetiger_waldwolf.json",
+  "sc_diebische_riesenfledermaus.json",
+  "sc_junge_seeschlange.json",
+  "sc_kleiner_krakenmolch.json",
+  "sc_gieriger_tigerhai.json",
+  "sc_hungriger_morfu.json"
   ]
 }

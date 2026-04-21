@@ -1,0 +1,55 @@
+{
+  "cardName": "Schattenlöwe",
+  "cardType": "Schergenkarte",
+  "set": "Mythische Geschichten",
+  "setId": "mythische_geschichten",
+  "setShortName": "Mythische Geschichten",
+  "setSymbol": "Schneeflocke",
+  "layout": "landscape",
+  "image": "sc_schattenloewe.webp",
+  "sourceImages": [
+    "Karte0008.webp"
+  ],
+  "tags": [
+    "tier",
+    "wald",
+    "loewe"
+  ],
+  "keywords": [
+    "Tier",
+    "Wald"
+  ],
+  "searchAliases": [],
+  "specialRules": [],
+  "stats": {
+    "gefahrenpunkte": 5,
+    "lebenspunkte": 24,
+    "ausweichen": "-",
+    "ruestung": 1,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-4",
+      "title": "Anspringen",
+      "text": "Der Startspieler muss eine Sinnesschärfe-Probe ablegen. Misslingt sie, so darf er in der darauffolgenden Runde nur die Hälfte (abgerundet) seiner erschöpften Ausdauerkarten bereit machen."
+    },
+    {
+      "range": "5-10",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 2W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "11-17",
+      "title": "Nichts",
+      "text": "Er starrt euch reglos an."
+    },
+    {
+      "range": "18-20",
+      "title": "Flucht",
+      "text": "Liegen die aktuellen [LEBEN] des Schattenlöwen unter 9, so entferne ihn aus dem Kampf."
+    }
+  ],
+  "illustration": "Sandra Braun",
+  "source": "card_image"
+}

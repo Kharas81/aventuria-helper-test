@@ -1,0 +1,50 @@
+{
+  "cardName": "Junge Seeschlange",
+  "cardType": "Schergenkarte",
+  "set": "Schiff der verlorenen Seelen",
+  "setId": "schiff_der_verlorenen_seelen",
+  "setShortName": "Schiff der verlorenen Seelen",
+  "setSymbol": "Schiff",
+  "layout": "landscape",
+  "image": "sc_junge_seeschlange.webp",
+  "sourceImages": [
+    "Karte0019.webp"
+  ],
+  "tags": [
+    "tier",
+    "meer",
+    "seeschlange"
+  ],
+  "keywords": [
+    "Tier",
+    "Meer"
+  ],
+  "searchAliases": [],
+  "specialRules": [],
+  "stats": {
+    "gefahrenpunkte": 8,
+    "lebenspunkte": 25,
+    "ausweichen": "-",
+    "ruestung": 2,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "Schnappen",
+      "text": "Ein zufälliger Held muss eine seiner ausliegenden Aktionskarten seiner Wahl ablegen."
+    },
+    {
+      "range": "3-10",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 2W6+3 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "11-20",
+      "title": "Nichts",
+      "text": "Die Seeschlange stößt ein zorniges Zischen aus."
+    }
+  ],
+  "illustration": "Nadine Schäkel",
+  "source": "card_image"
+}
