@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/21/2026, 8:02:00 PM
+# 🛡️ Aventuria Projekt-Backup - 4/21/2026, 8:02:24 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -14273,6 +14273,26 @@ export const ArchiveGridRenderer = {
 };
 
 export default ArchiveGridRenderer;
+
+```
+
+---
+
+## 📄 Datei: js/features/archive/archive-home-renderer.js
+```js
+import ArchiveHomeTemplate from './archive-home-template.js';
+
+export const ArchiveHomeRenderer = {
+    renderHome(container, options = {}) {
+        if (!container) {
+            return;
+        }
+
+        container.innerHTML = ArchiveHomeTemplate.render(options);
+    }
+};
+
+export default ArchiveHomeRenderer;
 
 ```
 
