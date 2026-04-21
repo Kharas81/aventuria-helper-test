@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/21/2026, 3:28:30 PM
+# 🛡️ Aventuria Projekt-Backup - 4/21/2026, 3:28:47 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -13241,6 +13241,11 @@ export const ArchiveBindings = {
         return ArchiveModal.ensure();
     },
 
+    getCloseButton() {
+        const modal = this.getModal();
+        return modal?.querySelector('[data-action="close-archive"]') || null;
+    },
+
     bindSearch() {
         const searchInput = ArchiveRenderer.getSearchInput();
         if (!searchInput || searchInput.dataset.bound === 'true') {
@@ -13254,9 +13259,9 @@ export const ArchiveBindings = {
         searchInput.dataset.bound = 'true';
     },
 
-    bindModalClose() {
+    bindBackdropClose() {
         const modal = this.getModal();
-        if (!modal || modal.dataset.bound === 'true') {
+        if (!modal || modal.dataset.backdropBound === 'true') {
             return;
         }
 
@@ -13266,12 +13271,28 @@ export const ArchiveBindings = {
             }
         });
 
-        modal.dataset.bound = 'true';
+        modal.dataset.backdropBound = 'true';
+    },
+
+    bindCloseButton() {
+        const closeButton = this.getCloseButton();
+        if (!closeButton || closeButton.dataset.bound === 'true') {
+            return;
+        }
+
+        closeButton.addEventListener('click', event => {
+            event.preventDefault();
+            event.stopPropagation();
+            ArchiveController.close();
+        });
+
+        closeButton.dataset.bound = 'true';
     },
 
     init() {
         this.bindSearch();
-        this.bindModalClose();
+        this.bindBackdropClose();
+        this.bindCloseButton();
     }
 };
 
