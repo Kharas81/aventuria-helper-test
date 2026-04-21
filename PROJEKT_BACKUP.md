@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/21/2026, 8:04:00 PM
+# 🛡️ Aventuria Projekt-Backup - 4/21/2026, 8:05:07 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -14001,6 +14001,16 @@ export const ArchiveController = {
         return ArchiveModal.ensure();
     },
 
+    renderHome() {
+        ArchiveState.isHomeView = true;
+        ArchiveRenderer.renderHome({
+            activeSetKey: ArchiveState.currentSet,
+            activeSetName: CONFIG.getSetDisplayName?.(ArchiveState.currentSet),
+            enabledSets: CONFIG.getEnabledSets?.() || [],
+            totalLoadedCards: ArchiveState.allCards.length
+        });
+    },
+
     applyFilters() {
         ArchiveState.filteredCards = ArchiveFilter.filterCards(ArchiveState.allCards, {
             searchTerm: ArchiveState.currentSearchTerm,
@@ -14013,7 +14023,9 @@ export const ArchiveController = {
 
     async open(options = {}) {
         const modal = ArchiveModal.open();
-        if (!modal) return;
+        if (!modal) {
+            return;
+        }
 
         const desiredSet = Utils.normalizeString(
             options?.setKey
@@ -14024,10 +14036,13 @@ export const ArchiveController = {
         const hasExplicitQuery = Object.prototype.hasOwnProperty.call(options, 'query');
         const hasExplicitSource = Object.prototype.hasOwnProperty.call(options, 'sourceFilter');
         const hasExplicitCategory = Object.prototype.hasOwnProperty.call(options, 'categoryFilter');
+        const hasExplicitSet = Object.prototype.hasOwnProperty.call(options, 'setKey');
 
-        if (desiredSet !== ArchiveState.currentSet || !ArchiveState.allCards.length) {
-            await this.loadSet(desiredSet, {
-                query: hasExplicitQuery ? Utils.normalizeString(options.query) : ArchiveState.currentSearchTerm,
+        ArchiveState.currentSet = desiredSet || ArchiveState.currentSet;
+
+        if (hasExplicitQuery || hasExplicitSource || hasExplicitCategory || hasExplicitSet) {
+            await this.loadSet(ArchiveState.currentSet, {
+                query: hasExplicitQuery ? Utils.normalizeString(options.query) : '',
                 sourceFilter: hasExplicitSource
                     ? ArchiveState.normalizeSourceFilter(options.sourceFilter)
                     : ArchiveFilter.ALL_SOURCE_FILTER,
@@ -14038,24 +14053,27 @@ export const ArchiveController = {
             return;
         }
 
-        if (hasExplicitQuery) {
-            ArchiveState.currentSearchTerm = Utils.normalizeString(options.query);
-        }
-
-        if (hasExplicitSource) {
-            ArchiveState.currentSourceFilter = ArchiveState.normalizeSourceFilter(options.sourceFilter);
-        }
-
-        if (hasExplicitCategory) {
-            ArchiveState.currentCategoryFilter = ArchiveState.normalizeCategoryFilter(options.categoryFilter);
-        }
-
-        ArchiveRenderer.setSearchValue(ArchiveState.currentSearchTerm);
-        this.applyFilters();
+        this.renderHome();
     },
 
     close() {
         ArchiveModal.close();
+    },
+
+    async openCategory(categoryFilter = '', options = {}) {
+        const resolvedCategory = ArchiveState.normalizeCategoryFilter(categoryFilter);
+        const resolvedSet = Utils.normalizeString(
+            options?.setKey
+            || ArchiveState.currentSet
+            || CONFIG.defaultSet
+            || 'base_game'
+        );
+
+        await this.loadSet(resolvedSet, {
+            query: '',
+            sourceFilter: ArchiveFilter.ALL_SOURCE_FILTER,
+            categoryFilter: resolvedCategory
+        });
     },
 
     async loadSet(setKey = '', options = {}) {
@@ -14074,6 +14092,7 @@ export const ArchiveController = {
 
         ArchiveState.currentSet = resolvedSetKey;
         ArchiveState.isLoading = true;
+        ArchiveState.isHomeView = false;
 
         ArchiveRenderer.renderToolbar({
             activeSetKey: ArchiveState.currentSet,
@@ -14096,6 +14115,8 @@ export const ArchiveController = {
 
             if (hasExplicitQuery) {
                 ArchiveState.currentSearchTerm = Utils.normalizeString(options.query);
+            } else {
+                ArchiveState.currentSearchTerm = '';
             }
 
             if (hasExplicitSource) {
@@ -14138,21 +14159,38 @@ export const ArchiveController = {
     },
 
     handleSearch(searchTerm = '') {
+        if (ArchiveState.isHomeView) {
+            return;
+        }
+
         ArchiveState.currentSearchTerm = Utils.normalizeString(searchTerm);
         this.applyFilters();
     },
 
     setSourceFilter(sourceFilter = '') {
+        if (ArchiveState.isHomeView) {
+            return;
+        }
+
         ArchiveState.currentSourceFilter = ArchiveState.normalizeSourceFilter(sourceFilter);
         this.applyFilters();
     },
 
     setCategoryFilter(categoryFilter = '') {
+        if (ArchiveState.isHomeView) {
+            return;
+        }
+
         ArchiveState.currentCategoryFilter = ArchiveState.normalizeCategoryFilter(categoryFilter);
         this.applyFilters();
     },
 
     render() {
+        if (ArchiveState.isHomeView) {
+            this.renderHome();
+            return;
+        }
+
         ArchiveRenderer.renderToolbar({
             activeSetKey: ArchiveState.currentSet,
             activeSourceFilter: ArchiveState.currentSourceFilter,
