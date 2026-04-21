@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/21/2026, 5:47:36 PM
+# 🛡️ Aventuria Projekt-Backup - 4/21/2026, 5:47:52 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -329,7 +329,7 @@ hr {
 .archive-card__actions-list {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -338,9 +338,8 @@ hr {
 
 .archive-card__action-item {
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     line-height: 1.3;
 }
 
@@ -358,11 +357,38 @@ hr {
     font-weight: bold;
     line-height: 1;
     white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.archive-card__action-main {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+}
+
+.archive-card__action-type {
+    display: inline-flex;
+    align-items: center;
+    min-height: 26px;
+    padding: 0 10px;
+    border-radius: 999px;
+    background: rgba(139, 69, 19, 0.08);
+    border: 1px solid var(--color-border-soft-card);
+    color: var(--color-secondary);
+    font-size: 0.8rem;
+    font-weight: bold;
+    line-height: 1;
+    white-space: nowrap;
 }
 
 .archive-card__action-name {
     color: var(--color-text);
-    font-weight: 600;
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1.25;
+    word-break: break-word;
 }
 
 .archive-card__footer {
@@ -413,6 +439,12 @@ hr {
 
     .archive-card__action-item {
         align-items: flex-start;
+    }
+
+    .archive-card__action-main {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
     }
 }
 
