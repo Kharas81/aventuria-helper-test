@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/21/2026, 5:24:43 PM
+# 🛡️ Aventuria Projekt-Backup - 4/21/2026, 5:32:38 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -327,18 +327,42 @@ hr {
 }
 
 .archive-card__actions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
     margin: 0;
-    padding-left: 1.2rem;
+    padding: 0;
+    list-style: none;
     color: var(--color-text);
 }
 
 .archive-card__action-item {
-    margin-bottom: 6px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
     line-height: 1.3;
 }
 
-.archive-card__action-item:last-child {
-    margin-bottom: 0;
+.archive-card__action-range {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 54px;
+    min-height: 28px;
+    padding: 0 10px;
+    border-radius: 999px;
+    background: var(--color-primary);
+    color: var(--color-white);
+    font-size: 0.82rem;
+    font-weight: bold;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.archive-card__action-name {
+    color: var(--color-text);
+    font-weight: 600;
 }
 
 .archive-card__footer {
@@ -385,6 +409,10 @@ hr {
 @media (max-width: 480px) {
     .archive-card__title {
         font-size: 1.25rem;
+    }
+
+    .archive-card__action-item {
+        align-items: flex-start;
     }
 }
 
