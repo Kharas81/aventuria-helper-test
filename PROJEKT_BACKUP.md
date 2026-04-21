@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/21/2026, 8:03:22 PM
+# 🛡️ Aventuria Projekt-Backup - 4/21/2026, 8:03:40 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -14856,6 +14856,7 @@ export const ArchiveState = {
     allCards: [],
     filteredCards: [],
     isLoading: false,
+    isHomeView: true,
 
     getResolvedCurrentSet() {
         return Utils.normalizeString(
