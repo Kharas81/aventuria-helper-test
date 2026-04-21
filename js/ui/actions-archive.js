@@ -51,6 +51,15 @@ export function getArchiveActions() {
             });
         },
 
+        'archive-open-category': trigger => {
+            CoreRuntime.getArchive()?.openCategory?.(
+                trigger?.dataset?.categoryFilter || '',
+                {
+                    setKey: trigger?.dataset?.set || ''
+                }
+            );
+        },
+
         'archive-filter-source': trigger => {
             CoreRuntime.getArchive()?.setSourceFilter?.(
                 trigger?.dataset?.sourceFilter || ''
