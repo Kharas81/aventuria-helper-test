@@ -10,6 +10,7 @@ export const ArchiveState = {
     allCards: [],
     filteredCards: [],
     isLoading: false,
+    isHomeView: true,
 
     getResolvedCurrentSet() {
         return Utils.normalizeString(
