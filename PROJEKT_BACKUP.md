@@ -1,4 +1,231 @@
-# 🛡️ Aventuria Projekt-Backup - 4/21/2026, 10:16:08 AM
+# 🛡️ Aventuria Projekt-Backup - 4/21/2026, 2:36:55 PM
+
+## 📄 Datei: archive-demo.html
+```html
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aventuria Kartenarchiv Demo</title>
+  <link rel="stylesheet" href="css/archive-card-view.css" />
+</head>
+<body>
+  <main class="archive-page">
+    <header class="archive-header">
+      <div class="archive-header__text">
+        <h1>Kartenarchiv</h1>
+        <p>Alle Karten durchsuchen, filtern und im Detail ansehen.</p>
+      </div>
+    </header>
+
+    <section class="archive-toolbar" aria-label="Archiv Filter">
+      <div class="archive-toolbar__search">
+        <label for="archive-search" class="sr-only">Suche</label>
+        <input
+          id="archive-search"
+          type="search"
+          placeholder="Nach Name, Tag oder Set suchen..."
+        />
+      </div>
+
+      <div class="archive-toolbar__filters">
+        <label>
+          <span>Typ</span>
+          <select id="archive-filter-type">
+            <option value="">Alle</option>
+          </select>
+        </label>
+
+        <label>
+          <span>Set</span>
+          <select id="archive-filter-set">
+            <option value="">Alle</option>
+          </select>
+        </label>
+
+        <label>
+          <span>Sortierung</span>
+          <select id="archive-sort">
+            <option value="name-asc">Name A–Z</option>
+            <option value="name-desc">Name Z–A</option>
+            <option value="set-asc">Set A–Z</option>
+            <option value="gp-desc">Gefahrenpunkte absteigend</option>
+            <option value="leben-desc">Leben absteigend</option>
+          </select>
+        </label>
+      </div>
+    </section>
+
+    <section class="archive-results">
+      <div class="archive-results__meta" id="archive-results-meta">
+        <p><strong>0</strong> Karten gefunden</p>
+      </div>
+
+      <div class="archive-card-list" id="archive-card-list"></div>
+    </section>
+  </main>
+
+  <div class="archive-detail-overlay" id="archive-detail-overlay" hidden>
+    <div
+      class="archive-detail-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="archive-detail-title"
+    >
+      <div class="archive-detail-modal__header">
+        <div>
+          <h2 id="archive-detail-title">Kartendetails</h2>
+          <p id="archive-detail-subtitle"></p>
+        </div>
+
+        <button
+          type="button"
+          class="archive-detail-modal__close"
+          id="archive-detail-close"
+        >
+          Schließen
+        </button>
+      </div>
+
+      <div class="archive-detail-modal__content" id="archive-detail-content"></div>
+    </div>
+  </div>
+
+  <script src="js/archive-card-view.js"></script>
+  <script>
+    const demoCards = [
+      {
+        id: 'sc_aggressiver_yeti',
+        cardName: 'Aggressiver Yeti',
+        cardType: 'Schergenkarte',
+        set: 'Mythische Geschichten',
+        setId: 'mythische_geschichten',
+        setShortName: 'Mythische Geschichten',
+        setSymbol: 'mythische_geschichten_symbol',
+        tags: ['yeti', 'raeuber'],
+        keywords: ['Yeti', 'Räuber'],
+        specialRules: [],
+        stats: {
+          gefahrenpunkte: 5,
+          lebenspunkte: 40,
+          ausweichen: '-',
+          ruestung: 1,
+          aktionen: 1
+        },
+        actionTable: [
+          {
+            range: '1-2',
+            title: '[NAHKAMPF]-Angriff',
+            text: 'Ein zufälliger Held erhält 2W6 [TREFFERPUNKTE] und muss 1 zufällige Ausdauerkarte auf die Hand nehmen.'
+          },
+          {
+            range: '3-8',
+            title: 'Ausholen',
+            text: 'Lege 1 [VERDERBEN] auf diese Karte, um anzuzeigen, dass das nächste "Ausholen"-Ergebnis dieses Yetis stattdessen als der oben genannte [NAHKAMPF]-Angriff gilt.'
+          },
+          {
+            range: '9-14',
+            title: 'Aggressiv',
+            text: 'Der Yeti verliert 2W6 [LEBEN] und führt sofort eine weitere [AKTIONEN] durch.'
+          },
+          {
+            range: '15-20',
+            title: 'Flucht',
+            text: 'Liegen die aktuellen [LEBEN] des Yeti unter 20, so entferne ihn aus dem Kampf.'
+          }
+        ],
+        illustration: 'Verena Biskup'
+      },
+      {
+        id: 'sc_hofnaerrin',
+        cardName: 'Hofnärrin',
+        cardType: 'Schergenkarte',
+        set: 'Rückkehr zum Schwarzen Keiler',
+        setId: 'rueckkehr_zum_schwarzen_keiler',
+        setShortName: 'Rückkehr zum Schwarzen Keiler',
+        setSymbol: 'R',
+        tags: ['mensch', 'gaukler', 'diener'],
+        keywords: ['Mensch', 'Gaukler', 'Diener'],
+        specialRules: [],
+        stats: {
+          gefahrenpunkte: 2,
+          lebenspunkte: 15,
+          ausweichen: 0,
+          ruestung: 5,
+          aktionen: 1
+        },
+        actionTable: [
+          {
+            range: '1-7',
+            title: 'Schelmenstreich',
+            text: 'Nimm alle [SCHICKSALSPUNKT] aus der Tischmitte, falls vorhanden, und lege sie auf die Hofnärrin.'
+          },
+          {
+            range: '8-15',
+            title: 'Nichts',
+            text: 'Macht lustige Späße.'
+          },
+          {
+            range: '16-20',
+            title: 'Flucht/Schutzschild',
+            text: 'Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden.'
+          }
+        ],
+        illustration: 'Ben Maier'
+      },
+      {
+        id: 'sc_gemeiner_wolf',
+        cardName: 'Gemeiner Wolf',
+        cardType: 'Schergenkarte',
+        set: 'Wald ohne Wiederkehr',
+        setId: 'wald_ohne_wiederkehr',
+        setShortName: 'Wald ohne Wiederkehr',
+        setSymbol: 'Baum',
+        tags: ['tier', 'wald', 'wolf'],
+        keywords: ['Tier', 'Wald'],
+        specialRules: [],
+        stats: {
+          gefahrenpunkte: 3,
+          lebenspunkte: 10,
+          ausweichen: '-',
+          ruestung: 0,
+          aktionen: 2
+        },
+        actionTable: [
+          {
+            range: '1-2',
+            title: '[NAHKAMPF]-Angriff',
+            text: 'Ein zufälliger Held erhält 2W6 [TREFFERPUNKTE].'
+          },
+          {
+            range: '3-12',
+            title: '[NAHKAMPF]-Angriff',
+            text: 'Ein zufälliger Held erhält 1W6 [TREFFERPUNKTE].'
+          },
+          {
+            range: '13-18',
+            title: 'Nichts',
+            text: 'Knurrt bedrohlich.'
+          },
+          {
+            range: '19-20',
+            title: 'Flucht',
+            text: 'Entfernt die Karte aus dem Kampf, falls die Lebenspunkte des Schergen bei 3 oder darunter liegen.'
+          }
+        ],
+        illustration: 'Sebastian Watzlawek'
+      }
+    ];
+
+    window.ArchiveCardView.init(demoCards);
+  </script>
+</body>
+</html>
+
+```
+
+---
 
 ## 📄 Datei: css/app-layout.css
 ```css
