@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/21/2026, 8:06:26 PM
+# 🛡️ Aventuria Projekt-Backup - 4/21/2026, 8:06:43 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -10125,6 +10125,7 @@ select {
     <link rel="stylesheet" href="css/preview-tooltip.css">
     <link rel="stylesheet" href="css/archive-layout.css">
     <link rel="stylesheet" href="css/archive-cards.css">
+    <link rel="stylesheet" href="css/archive-home.css">
     <link rel="stylesheet" href="css/rulebook-layout.css">
     <link rel="stylesheet" href="css/rulebook-blocks.css">
     <link rel="stylesheet" href="css/combat-tools.css">
@@ -10138,17 +10139,11 @@ select {
 </head>
 <body>
     <div class="app-container">
-        <!-- =========================================================
-             APP-HEADER
-        ========================================================== -->
         <header>
             <h1>Aventuria Abenteuer-Helfer</h1>
             <p id="loading-status" aria-live="polite">Bereit.</p>
         </header>
 
-        <!-- =========================================================
-             HAUPTSTEUERUNG
-        ========================================================== -->
         <section aria-label="Hauptsteuerung">
             <div class="top-bar">
                 <div class="button-group">
@@ -10197,13 +10192,7 @@ select {
             </div>
         </section>
 
-        <!-- =========================================================
-             HAUPTINHALT
-        ========================================================== -->
         <main id="app-main">
-            <!-- -----------------------------------------------------
-                 ABENTEUER-SETUP / KARTENÜBERSICHT
-            ------------------------------------------------------ -->
             <section id="setup-display" class="hidden" aria-label="Abenteuer-Setup">
                 <h2 id="title">Abenteuer</h2>
                 <p id="danger-value"></p>
@@ -10226,14 +10215,8 @@ select {
                 </div>
             </section>
 
-            <!-- -----------------------------------------------------
-                 STORY / NARRATIVE
-            ------------------------------------------------------ -->
             <section id="story-area" aria-label="Abenteuertext"></section>
 
-            <!-- -----------------------------------------------------
-                 TOGGLE-BEREICH FÜR ZUSATZPANELS
-            ------------------------------------------------------ -->
             <section aria-label="Zusatzbereiche">
                 <div class="toggle-section">
                     <button
@@ -10256,9 +10239,6 @@ select {
                 </div>
             </section>
 
-            <!-- -----------------------------------------------------
-                 KAMPF-TOOLS
-            ------------------------------------------------------ -->
             <section
                 id="combat-tools-section"
                 class="hidden-section show"
@@ -10310,9 +10290,6 @@ select {
                 </div>
             </section>
 
-            <!-- -----------------------------------------------------
-                 ATEMPAUSE / ZWISCHENPHASE
-            ------------------------------------------------------ -->
             <section
                 id="intermission-section"
                 class="hidden-section show"
@@ -10335,9 +10312,6 @@ select {
                 </div>
             </section>
 
-            <!-- -----------------------------------------------------
-                 DIAGNOSTICS
-            ------------------------------------------------------ -->
             <section
                 id="diagnostics-section"
                 class="hidden section-spacer-top"
@@ -10349,18 +10323,12 @@ select {
         </main>
     </div>
 
-    <!-- =============================================================
-         TOOLTIP / PREVIEW
-    ============================================================== -->
     <div class="card-tooltip" id="card-tooltip" aria-hidden="true">
         <div class="tooltip-inner">
             <img id="tooltip-image" alt="Kartenvorschau">
         </div>
     </div>
 
-    <!-- =============================================================
-         ARCHIV-MODAL-TEMPLATE
-    ============================================================== -->
     <template id="archive-modal-template">
         <div
             class="modal-backdrop"
@@ -10391,9 +10359,6 @@ select {
         </div>
     </template>
 
-    <!-- =============================================================
-         REGELBUCH-MODAL-TEMPLATE
-    ============================================================== -->
     <template id="rulebook-modal-template">
         <div
             class="modal-backdrop"
@@ -10407,13 +10372,11 @@ select {
                 <span class="close-modal" data-action="close-rulebook" aria-label="Regelbuch schließen">&times;</span>
 
                 <div class="modal-layout">
-                    <!-- Seitenliste -->
                     <aside class="modal-sidebar" aria-label="Regelbuch-Seiten">
                         <h4 id="manual-set-label">Regelbuch</h4>
                         <ul id="manual-page-list"></ul>
                     </aside>
 
-                    <!-- Reader / Kodex -->
                     <div class="modal-main">
                         <div class="modal-nav">
                             <h2 id="manual-title">Regelbuch</h2>
@@ -10462,9 +10425,6 @@ select {
         </div>
     </template>
 
-    <!-- =============================================================
-         CARD-DETAIL-TEMPLATE
-    ============================================================== -->
     <template id="card-detail-modal-template">
         <div
             class="modal-backdrop"
