@@ -156,11 +156,14 @@ export const ArchiveCardMeta = {
             .filter(Boolean);
     },
 
-    getActionTitles(card = {}, limit = 4) {
+    getActionPreviewRows(card = {}, limit = 4) {
         return this.getActionRows(card)
-            .map(row => Utils.normalizeString(row?.title))
-            .filter(Boolean)
-            .slice(0, limit);
+            .slice(0, limit)
+            .map(row => ({
+                range: Utils.normalizeString(row?.range),
+                title: Utils.normalizeString(row?.title || 'Ohne Titel')
+            }))
+            .filter(row => row.range || row.title);
     }
 };
 
