@@ -1,6 +1,27 @@
 import Utils from '../../core/utils.js';
 import ArchiveCardMeta from './archive-card-meta.js';
 
+function formatActionTypeLabel(rawType = '') {
+    const normalized = Utils.normalizeString(rawType).toUpperCase();
+
+    const knownLabels = {
+        NAHKAMPF: 'Nahkampf',
+        FERNKAMPF: 'Fernkampf',
+        ZEIT: 'Zeit',
+        PASSIV: 'Passiv'
+    };
+
+    if (knownLabels[normalized]) {
+        return knownLabels[normalized];
+    }
+
+    if (!normalized) {
+        return '';
+    }
+
+    return normalized.charAt(0) + normalized.slice(1).toLowerCase();
+}
+
 export const ArchiveListCardTemplate = {
     renderStat(label = '', value = '') {
         const safeLabel = Utils.escapeHtml(label);
@@ -26,6 +47,34 @@ export const ArchiveListCardTemplate = {
         `;
     },
 
+    parseActionTitle(rawTitle = '') {
+        const normalizedTitle = Utils.normalizeString(rawTitle);
+
+        if (!normalizedTitle) {
+            return {
+                typeLabel: '',
+                titleLabel: ''
+            };
+        }
+
+        const match = normalizedTitle.match(/^\[([^\]]+)\]\s*-?\s*(.*)$/);
+
+        if (!match) {
+            return {
+                typeLabel: '',
+                titleLabel: normalizedTitle
+            };
+        }
+
+        const typeLabel = formatActionTypeLabel(match[1]);
+        const titleLabel = Utils.normalizeString(match[2]) || 'Aktion';
+
+        return {
+            typeLabel,
+            titleLabel
+        };
+    },
+
     renderActions(actionRows = []) {
         if (!actionRows.length) {
             return '';
@@ -35,12 +84,20 @@ export const ArchiveListCardTemplate = {
             <div class="archive-card__actions-preview">
                 <div class="archive-card__actions-title">Aktionen:</div>
                 <ul class="archive-card__actions-list">
-                    ${actionRows.map(row => `
-                        <li class="archive-card__action-item">
-                            ${row.range ? `<span class="archive-card__action-range">${Utils.escapeHtml(row.range)}</span>` : ''}
-                            <span class="archive-card__action-name">${Utils.escapeHtml(row.title)}</span>
-                        </li>
-                    `).join('')}
+                    ${actionRows.map(row => {
+                        const parsed = this.parseActionTitle(row.title);
+
+                        return `
+                            <li class="archive-card__action-item">
+                                ${row.range ? `<span class="archive-card__action-range">${Utils.escapeHtml(row.range)}</span>` : ''}
+
+                                <div class="archive-card__action-main">
+                                    ${parsed.typeLabel ? `<span class="archive-card__action-type">${Utils.escapeHtml(parsed.typeLabel)}</span>` : ''}
+                                    <span class="archive-card__action-name">${Utils.escapeHtml(parsed.titleLabel || row.title)}</span>
+                                </div>
+                            </li>
+                        `;
+                    }).join('')}
                 </ul>
             </div>
         `;
