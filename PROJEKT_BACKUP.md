@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/21/2026, 5:07:56 PM
+# 🛡️ Aventuria Projekt-Backup - 4/21/2026, 5:08:07 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -9960,7 +9960,8 @@ select {
 
     <!-- Spezifische Bereiche -->
     <link rel="stylesheet" href="css/preview-tooltip.css">
-    <link rel="stylesheet" href="css/archive.css">
+    <link rel="stylesheet" href="css/archive-layout.css">
+    <link rel="stylesheet" href="css/archive-cards.css">
     <link rel="stylesheet" href="css/rulebook-layout.css">
     <link rel="stylesheet" href="css/rulebook-blocks.css">
     <link rel="stylesheet" href="css/combat-tools.css">
