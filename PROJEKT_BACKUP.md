@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/21/2026, 3:30:11 PM
+# 🛡️ Aventuria Projekt-Backup - 4/21/2026, 4:47:59 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -13482,8 +13482,8 @@ function toDisplayValue(value, fallback = '-') {
         return fallback;
     }
 
-    const normalized = Utils.normalizeString(value);
-    return normalized || fallback;
+    const asString = String(value).trim();
+    return asString || fallback;
 }
 
 function uniqueStrings(values = []) {
@@ -13524,7 +13524,12 @@ export const ArchiveCardMeta = {
     },
 
     getSourceLabel(card = {}) {
-        return Utils.normalizeString(ArchiveFilter.getCardSourceName(card) || 'Unbekanntes Set');
+        return Utils.normalizeString(
+            card?.set?.shortName
+            || card?.set?.name
+            || ArchiveFilter.getCardSourceName(card)
+            || 'Unbekanntes Set'
+        );
     },
 
     getTypeLabel(card = {}) {
@@ -13546,11 +13551,11 @@ export const ArchiveCardMeta = {
         const stats = card?.stats || {};
 
         return {
-            gp: toDisplayValue(stats?.gefahrenpunkte),
-            leben: toDisplayValue(stats?.lebenspunkte),
-            ausweichen: toDisplayValue(stats?.ausweichen),
-            ruestung: toDisplayValue(stats?.ruestung),
-            aktionen: toDisplayValue(stats?.aktionen)
+            gp: toDisplayValue(stats?.gp ?? stats?.gefahrenpunkte),
+            leben: toDisplayValue(stats?.lp ?? stats?.lebenspunkte),
+            ausweichen: toDisplayValue(stats?.evasion ?? stats?.ausweichen),
+            ruestung: toDisplayValue(stats?.armor ?? stats?.ruestung),
+            aktionen: toDisplayValue(stats?.actions ?? stats?.aktionen)
         };
     },
 
@@ -13563,7 +13568,8 @@ export const ArchiveCardMeta = {
 
     getActionRows(card = {}) {
         const sourceRows = Utils.normalizeArray(
-            card?.actionTable
+            card?.rules?.action_table
+            || card?.actionTable
             || card?.action_table
             || card?.actions
         );
@@ -13583,9 +13589,12 @@ export const ArchiveCardMeta = {
                     };
                 }
 
-                const title = Utils.normalizeString(row?.title || row?.name || 'Ohne Titel');
-                const range = Utils.normalizeString(row?.range);
-                const text = Utils.normalizeString(row?.text || row?.description);
+                const title = Utils.normalizeString(row?.title || row?.name);
+                const range = Utils.normalizeString(row?.roll || row?.range);
+                const text = Utils.normalizeString(
+                    row?.description
+                    || row?.text
+                );
 
                 if (!title && !text) {
                     return null;
@@ -14001,6 +14010,33 @@ export const ArchiveListCardTemplate = {
         `;
     },
 
+    renderTags(tags = []) {
+        if (!tags.length) {
+            return '';
+        }
+
+        return `
+            <div class="archive-card__tags">
+                ${tags.map(tag => `<span class="archive-tag">${Utils.escapeHtml(tag)}</span>`).join('')}
+            </div>
+        `;
+    },
+
+    renderActions(actionTitles = []) {
+        if (!actionTitles.length) {
+            return '';
+        }
+
+        return `
+            <div class="archive-card__actions-preview">
+                <div class="archive-card__actions-title">Aktionen:</div>
+                <ul class="archive-card__actions-list">
+                    ${actionTitles.map(title => `<li class="archive-card__action-item">${Utils.escapeHtml(title)}</li>`).join('')}
+                </ul>
+            </div>
+        `;
+    },
+
     renderCard(card = {}) {
         const cardId = Utils.escapeHtml(ArchiveCardMeta.getCardId(card));
         const name = Utils.escapeHtml(ArchiveCardMeta.getDisplayName(card));
@@ -14018,25 +14054,10 @@ export const ArchiveListCardTemplate = {
             this.renderStat('Aktionen', stats.aktionen)
         ].join('');
 
-        const tagsHtml = tags.length
-            ? tags
-                .map(tag => `<span class="archive-tag">${Utils.escapeHtml(tag)}</span>`)
-                .join('')
-            : '<span class="archive-tag archive-tag--muted">keine Tags</span>';
-
-        const actionsHtml = actionTitles.length
-            ? actionTitles
-                .map(title => `<li class="archive-card__action-item">${Utils.escapeHtml(title)}</li>`)
-                .join('')
-            : '<li class="archive-card__action-item archive-card__action-item--muted">Keine Aktionen</li>';
-
         return `
             <article class="archive-card" data-card-id="${cardId}">
                 <div class="archive-card__header">
-                    <div class="archive-card__title-wrap">
-                        <h3 class="archive-card__title">${name}</h3>
-                        <p class="archive-card__subtitle">${typeLabel}</p>
-                    </div>
+                    <h3 class="archive-card__title" title="${name}">${name}</h3>
 
                     <div class="archive-card__badges">
                         <span class="archive-badge archive-badge--type">${typeLabel}</span>
@@ -14044,21 +14065,15 @@ export const ArchiveListCardTemplate = {
                     </div>
                 </div>
 
+                <div class="archive-card__subtitle">${typeLabel}</div>
+
                 <div class="archive-card__body">
                     <div class="archive-card__stats">
                         ${statsHtml}
                     </div>
 
-                    <div class="archive-card__tags">
-                        ${tagsHtml}
-                    </div>
-
-                    <div class="archive-card__actions-preview">
-                        <div class="archive-card__actions-title">Aktionen:</div>
-                        <ul class="archive-card__actions-list">
-                            ${actionsHtml}
-                        </ul>
-                    </div>
+                    ${this.renderTags(tags)}
+                    ${this.renderActions(actionTitles)}
                 </div>
 
                 <div class="archive-card__footer">
