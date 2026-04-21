@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/21/2026, 7:27:35 PM
+# 🛡️ Aventuria Projekt-Backup - 4/21/2026, 7:30:57 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -2799,7 +2799,17 @@ select {
       { "id": "story_erbe" }
     ],
     "minion_cards": [
-      { "id": "minion_raeuber", "label": "Räuber" }
+      {
+        "id": "minion_raeuber",
+        "label": "Räuber",
+        "search": {
+          "mode": "archive",
+          "preferArchiveSearch": true,
+          "query": "Räuber",
+          "sourceFilter": "Aventuria Grundbox",
+          "setKey": "base_game"
+        }
+      }
     ],
     "special_cards": [
       { "id": "special_ereignisse_allgemein", "label": "Ereignisse: Allgemein" },
