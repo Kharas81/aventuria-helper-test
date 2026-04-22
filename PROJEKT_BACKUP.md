@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 7:17:29 PM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 7:18:06 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5651,6 +5651,11 @@ select {
   "sc_goblin_krieger.json",
   "sc_goblin_speerwerfer.json",
   "sc_feiger_goblin.json",
+  "sc_irrhalk.json",
+  "sc_fuenfgehoernte_echse.json",
+  "sc_geisterbaer.json",
+  "sc_heshthot.json",
+  "sc_azzitai.json"  
   ]
 }
 
@@ -6164,6 +6169,63 @@ select {
   "illustration": "Nadine Schäkel",
   "source": "card_image"
 }
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_azzitai.json
+```json
+{
+  "cardName": "Azzitai",
+  "cardType": "Schergenkarte",
+  "set": "Mythische Geschichten",
+  "setId": "mythische_geschichten",
+  "setShortName": "Mythische Geschichten",
+  "setSymbol": "schneeflocken_symbol",
+  "layout": "landscape",
+  "image": "sc_azzitai.webp",
+  "sourceImages": ["Karte0005.webp"],
+  "tags": ["daemon", "gehoernt", "feuer"],
+  "keywords": ["Dämon", "Gehörnt", "Feuer"],
+  "searchAliases": [],
+  "specialRules": [
+    "Nach jedem erfolgreichen Angriff gegen den Azzitai verliert der Angreifer [LEBEN] in Höhe der Anzahl [ABENTEUERMARKE] auf dieser Karte."
+  ],
+  "stats": {
+    "gefahrenpunkte": "-",
+    "lebenspunkte": "[ANZAHL_HELDEN] x 6",
+    "ausweichen": 0,
+    "ruestung": 2,
+    "aktionen": "[ANZAHL_HELDEN]"
+  },
+  "actionTable": [
+    {
+      "range": "1-6",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Jeder Held muss eine Probe auf [UNSICHERES_SYMBOL_ORANGE_STIEFEL] ablegen, bei deren Misslingen er 2W6 [LEBEN] verliert."
+    },
+    {
+      "range": "7-12",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6+4 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-20",
+      "title": "Flammensäule",
+      "text": "Lege 1 [ABENTEUERMARKE] auf diese Karte, bis zu einem Maximum von 5 [ABENTEUERMARKE]."
+    }
+  ],
+  "illustration": "Helge C. Balzer",
+  "source": "card_image",
+  "uncertain": true,
+  "uncertainFields": [
+    "actionTable[0].text"
+  ],
+  "uncertainNotes": [
+    "Das orangefarbene Proben-Symbol in der ersten Aktion ist auf dem Kartenbild nicht sicher genug lesbar und wurde daher bewusst als [UNSICHERES_SYMBOL_ORANGE_STIEFEL] markiert."
+  ]
+}
+
 ```
 
 ---
