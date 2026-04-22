@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 6:35:18 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 6:35:40 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -14187,7 +14187,7 @@ export const ArchiveController = {
         ArchiveRenderer.renderHome({
             activeSetKey: ArchiveState.currentSet,
             activeSetName: CONFIG.getSetDisplayName?.(ArchiveState.currentSet),
-            enabledSets: CONFIG.getEnabledSets?.() || [],
+            enabledSets: CONFIG.getArchiveSets?.() || CONFIG.getEnabledSets?.() || [],
             totalLoadedCards: ArchiveState.allCards.length
         });
     },
