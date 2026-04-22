@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 12:15:09 PM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 12:57:43 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -8245,6 +8245,79 @@ select {
   "illustration": "Nadine Schäkel",
   "source": "card_image"
 }
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_goblin_feldscher.json
+```json
+{
+  "cardName": "Goblin-Feldscher",
+  "cardType": "Schergenkarte",
+  "set": "Wirtshaus zum Schwarzen Keiler",
+  "setId": "wirtshaus_zum_schwarzen_keiler",
+  "setShortName": "Schwarzer Keiler",
+  "setSymbol": "Keiler",
+  "layout": "landscape",
+  "image": "sc_goblin_feldscher.webp",
+  "copies": 3,
+  "sourceImages": [
+    "Karte0001.webp",
+    "Karte0006.webp",
+    "Karte0008.webp"
+  ],
+  "referenceImages": [
+    "Karte0001.webp",
+    "Karte0006.webp",
+    "Karte0008.webp"
+  ],
+  "usedDuplicateForVerification": true,
+  "tags": [
+    "goblin"
+  ],
+  "keywords": [
+    "Goblin"
+  ],
+  "searchAliases": [],
+  "specialRules": [],
+  "stats": {
+    "gefahrenpunkte": 3,
+    "lebenspunkte": 13,
+    "ausweichen": "-",
+    "ruestung": 2,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-8",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "9-14",
+      "title": "Wunden versorgen",
+      "text": "Heile dem „Goblin“-Gegner mit dem meisten Schaden 1W6 [LEBEN]."
+    },
+    {
+      "range": "15-16",
+      "title": "Nichts",
+      "text": "Schaut sich ängstlich nach einem Fluchtweg um."
+    },
+    {
+      "range": "17-18",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+    },
+    {
+      "range": "19-20",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Kampf. Sie wird nicht in den Schergenstapel zurückgemischt."
+    }
+  ],
+  "illustration": "Julia Metzger",
+  "source": "card_image"
+}
+
 ```
 
 ---
