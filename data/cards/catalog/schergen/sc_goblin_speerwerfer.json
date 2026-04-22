@@ -7,14 +7,18 @@
   "setSymbol": "Keiler",
   "layout": "landscape",
   "image": "sc_goblin_speerwerfer.webp",
-  "copies": 2,
+  "copies": 4,
   "sourceImages": [
     "Karte0003.webp",
-    "Karte0005.webp"
+    "Karte0005.webp",
+    "Karte0011.webp",
+    "Karte0013.webp"
   ],
   "referenceImages": [
     "Karte0003.webp",
-    "Karte0005.webp"
+    "Karte0005.webp",
+    "Karte0011.webp",
+    "Karte0013.webp"
   ],
   "usedDuplicateForVerification": true,
   "tags": [
