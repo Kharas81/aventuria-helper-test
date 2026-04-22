@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 11:40:27 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 11:40:44 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -9764,6 +9764,67 @@ select {
   "uncertainNotes": [
     "Das orange Handsymbol ist sichtbar, aber hier noch nicht sicher offiziell zugeordnet. Vorläufiger Platzhalter: [UNSICHERES_SYMBOL_ORANGE_HAND]."
   ]
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_orkischer_raeuber.json
+```json
+{
+  "cardName": "Orkischer Räuber",
+  "cardType": "Schergenkarte",
+  "set": "Wirtshaus zum Schwarzen Keiler",
+  "setId": "wirtshaus_zum_schwarzen_keiler",
+  "setShortName": "Schwarzer Keiler",
+  "setSymbol": "Keiler-Symbol",
+  "layout": "landscape",
+  "image": "sc_orkischer_raeuber.webp",
+  "sourceImages": [
+    "Karte0005.webp"
+  ],
+  "tags": [
+    "ork",
+    "raeuber",
+    "schlaeger"
+  ],
+  "keywords": [
+    "Ork",
+    "Räuber",
+    "Schläger"
+  ],
+  "stats": {
+    "gefahrenpunkte": 4,
+    "lebenspunkte": 14,
+    "ausweichen": "-",
+    "ruestung": 2,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-4",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+3 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "5-12",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein Held nach Wahl der Spieler erhält 1W6+1 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-18",
+      "title": "Nichts",
+      "text": "Brüllt einen Orkfluch."
+    },
+    {
+      "range": "19-20",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+    }
+  ],
+  "illustration": "Nadine Schäkel",
+  "source": "card_image"
 }
 
 ```
