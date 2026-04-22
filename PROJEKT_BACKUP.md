@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 11:35:52 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 11:36:27 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -7679,9 +7679,16 @@ select {
   "setSymbol": "schiff_der_verlorenen_seelen_symbol",
   "layout": "landscape",
   "image": "sc_gefraessige_salzwasser_piranhas.webp",
+  "copies": 2,
   "sourceImages": [
-    "Karte0010.webp"
+    "Karte0010.webp",
+    "Karte0011.webp"
   ],
+  "referenceImages": [
+    "Karte0010.webp",
+    "Karte0011.webp"
+  ],
+  "usedDuplicateForVerification": true,
   "tags": [
     "schwarm",
     "tier",
