@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 9:32:22 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 9:33:09 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -8405,6 +8405,57 @@ select {
     "Die Range '6-12' ist auf beiden Exemplaren so lesbar, obwohl sie sich mit '6-10' überschneidet. Ich habe sie deshalb nicht still korrigiert, sondern als unsicher markiert."
   ]
 }
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_leiser_hugo.json
+```json
+{
+  "cardName": "Leiser Hugo",
+  "cardType": "Schergenkarte",
+  "set": "Schiff der verlorenen Seelen",
+  "setId": "schiff_der_verlorenen_seelen",
+  "setShortName": "Schiff der verlorenen Seelen",
+  "setSymbol": "Schiff der verlorenen Seelen Symbol",
+  "layout": "landscape",
+  "image": "sc_leiser_hugo.webp",
+  "sourceImages": ["Karte0011.webp"],
+  "tags": ["untoter", "zombie", "pirat"],
+  "keywords": ["Untoter", "Zombie", "Pirat"],
+  "stats": {
+    "gefahrenpunkte": 8,
+    "lebenspunkte": 30,
+    "ausweichen": "-",
+    "ruestung": 3,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+3 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "3-12",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13",
+      "title": "Nichts",
+      "text": "Flüstert einen Piratenfluch."
+    },
+    {
+      "range": "14-20",
+      "title": "Verfault",
+      "text": "Der Scherge verliert 5 [LEBEN]."
+    }
+  ],
+  "illustration": "Helge Balzer",
+  "source": "card_image"
+}
+
 ```
 
 ---
