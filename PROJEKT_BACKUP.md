@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 10:18:24 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 10:19:27 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -8184,6 +8184,70 @@ select {
   ],
   "uncertainNotes": [
     "Auf der Karte ist ein blaues rundes Markersymbol zu sehen, das hier nicht sicher offiziell zugeordnet werden konnte. Deshalb vorläufig als [UNSICHERES_SYMBOL_BLAUE_RUNDE_MARKE] markiert."
+  ]
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_hundeblume.json
+```json
+{
+  "cardName": "Hundeblume",
+  "cardType": "Schergenkarte",
+  "set": "Mythische Geschichten",
+  "setId": "mythische_geschichten",
+  "setShortName": "Mythische Geschichten",
+  "setSymbol": "[SET_SYMBOL_MYTHISCHE_GESCHICHTEN]",
+  "layout": "landscape",
+  "image": "sc_hundeblume.webp",
+  "sourceImages": [
+    "Karte0012.webp"
+  ],
+  "tags": [
+    "uebernatuerlich",
+    "chimaere",
+    "schwarm"
+  ],
+  "keywords": [
+    "Übernatürlich",
+    "Chimäre",
+    "Schwarm"
+  ],
+  "searchAliases": [],
+  "specialRules": [
+    "Lege 4 [UNSICHERES_SYMBOL_BLAUER_MARKER] auf diese Karte. Immer wenn die [LEBEN] auf 0 oder darunter sinken, entferne nach dem Angriff 1 [UNSICHERES_SYMBOL_BLAUER_MARKER], und setze die [LEBEN] auf 3. Wird der letzte [UNSICHERES_SYMBOL_BLAUER_MARKER] entfernt, so wird der Schwarm aus dem Spiel entfernt und nicht in den Schergenstapel zurückgemischt."
+  ],
+  "stats": {
+    "gefahrenpunkte": 6,
+    "lebenspunkte": 3,
+    "ausweichen": "-",
+    "ruestung": "-",
+    "aktionen": "[UNSICHERES_SYMBOL_BLAUER_MARKER]"
+  },
+  "actionTable": [
+    {
+      "range": "1-15",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "16-20",
+      "title": "Regeneration",
+      "text": "Falls die Hundeblume aktuell [UNSICHERES_SYMBOL_BLAUER_MARKER] eingebüßt hat, lege 1 [UNSICHERES_SYMBOL_BLAUER_MARKER] auf sie."
+    }
+  ],
+  "illustration": "Matthias Kinigkeit",
+  "source": "card_image",
+  "uncertain": true,
+  "uncertainFields": [
+    "specialRules[0]",
+    "stats.aktionen",
+    "actionTable[1].text"
+  ],
+  "uncertainNotes": [
+    "Auf der Karte steht ein blaues Marker-Symbol, dessen offizieller Token hier noch nicht sicher zugeordnet ist. Vorläufiger Platzhalter: [UNSICHERES_SYMBOL_BLAUER_MARKER]."
   ]
 }
 
