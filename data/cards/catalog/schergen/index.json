@@ -94,6 +94,9 @@
   "sc_orkischer_fallensteller.json",
   "sc_orkischer_raeuber.json",
   "sc_orkischer_menschenfaenger.json",
-  "sc_ork_trommler.json"
+  "sc_ork_trommler.json",
+  "sc_ork_krieger.json",
+  "sc_tairachschamane.json",
+  "sc_orkischer_bogenschuetze.json"
   ]
 }
