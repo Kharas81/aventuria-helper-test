@@ -1,0 +1,62 @@
+{
+  "cardName": "Orkfamilie",
+  "cardType": "Schergenkarte",
+  "set": "Aventuria Grundbox",
+  "setId": "aventuria_grundbox",
+  "setShortName": "Grundbox",
+  "setSymbol": "A",
+  "layout": "landscape",
+  "image": "sc_orkfamilie.webp",
+  "sourceImages": [
+    "Karte0025.webp"
+  ],
+  "tags": [
+    "ork",
+    "schwarm"
+  ],
+  "keywords": [
+    "Ork",
+    "Schwarm"
+  ],
+  "specialRules": [
+    "Lege 4 [UNSICHERES_SYMBOL_BLAUE_MARKE] auf diese Karte. Immer wenn [LEBEN] auf 0 oder darunter sinken, entfernt nach dem Angriff 1 [UNSICHERES_SYMBOL_BLAUE_MARKE] und setzt [LEBEN] auf 5. Sobald der letzte [UNSICHERES_SYMBOL_BLAUE_MARKE] entfernt wird, entfernt die Orkfamilie aus dem Spiel und mischt sie nicht wieder in den Schergenstapel zurück.",
+    "Alle Helden verlieren alle [UNSICHERES_SYMBOL_ROT_OVAL]."
+  ],
+  "stats": {
+    "gefahrenpunkte": 5,
+    "lebenspunkte": 5,
+    "ausweichen": 0,
+    "ruestung": 0,
+    "aktionen": "[UNSICHERES_SYMBOL_BLAUE_MARKE]"
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 2W6 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "3-8",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "9-20",
+      "title": "Nichts",
+      "text": "Der Ork sagt etwas auf Orkisch."
+    }
+  ],
+  "illustration": "Bryan Talbot Promo",
+  "source": "card_image",
+  "uncertain": true,
+  "uncertainFields": [
+    "specialRules[0]",
+    "specialRules[1]",
+    "stats.aktionen"
+  ],
+  "uncertainNotes": [
+    "Das blaue Marken-Symbol ist auf der Karte sichtbar, aber hier noch nicht sicher offiziell zugeordnet. Vorläufiger Platzhalter: [UNSICHERES_SYMBOL_BLAUE_MARKE].",
+    "Das rote ovale Symbol ist auf der Karte sichtbar, aber hier noch nicht sicher offiziell zugeordnet. Vorläufiger Platzhalter: [UNSICHERES_SYMBOL_ROT_OVAL].",
+    "Im Aktionsfeld steht bei dieser Karte kein numerischer Wert, sondern das blaue Symbol. Deshalb wurde es kartengetreu als Platzhalter in 'stats.aktionen' übernommen."
+  ]
+}
