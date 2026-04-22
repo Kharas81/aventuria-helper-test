@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 11:35:01 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 11:35:25 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -7273,6 +7273,61 @@ select {
 
 ---
 
+## 📄 Datei: data/cards/catalog/schergen/sc_fledermausschwarm.json
+```json
+{
+  "cardName": "Fledermausschwarm",
+  "cardType": "Schergenkarte",
+  "set": "Wald ohne Wiederkehr",
+  "setId": "wald_ohne_wiederkehr",
+  "setShortName": "Wald ohne Wiederkehr",
+  "setSymbol": "wald_ohne_wiederkehr_symbol",
+  "layout": "landscape",
+  "image": "sc_fledermausschwarm.webp",
+  "sourceImages": [
+    "Karte0009.webp"
+  ],
+  "tags": [
+    "schwarm",
+    "tier",
+    "unterirdisch",
+    "wald",
+    "fledermaus"
+  ],
+  "keywords": [
+    "Schwarm",
+    "Tier (Unterirdisch, Wald)"
+  ],
+  "specialRules": [
+    "Legt 3 [VERDERBEN] auf diese Karte. Immer wenn die [LEBEN] auf 0 oder darunter sinken, entfernt nach dem Angriff 1 [VERDERBEN] und setzt die [LEBEN] auf 3. Wird der letzte [VERDERBEN] entfernt, so wird der Schwarm aus dem Spiel entfernt und nicht in den Schergenstapel zurückgemischt."
+  ],
+  "stats": {
+    "gefahrenpunkte": 4,
+    "lebenspunkte": 3,
+    "ausweichen": "-",
+    "ruestung": 0,
+    "aktionen": "[VERDERBEN]"
+  },
+  "actionTable": [
+    {
+      "range": "1-10",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+1 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "11-20",
+      "title": "Nichts",
+      "text": "Die Fledermäuse stoßen ein lautes Kreischen aus."
+    }
+  ],
+  "illustration": "Sebastian Watzlawek",
+  "source": "card_image"
+}
+
+```
+
+---
+
 ## 📄 Datei: data/cards/catalog/schergen/sc_flinker_yeti.json
 ```json
 {
@@ -7597,6 +7652,65 @@ select {
       "range": "16-20",
       "title": "Ermüdung",
       "text": "Der Gargyl verliert 1W6 [LEBEN]."
+    }
+  ],
+  "illustration": "Fabrice Weiss",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_gefraessige_salzwasser_piranhas.json
+```json
+{
+  "cardName": "Gefräßige Salzwasser-Piranhas",
+  "cardType": "Schergenkarte",
+  "set": "Schiff der verlorenen Seelen",
+  "setId": "schiff_der_verlorenen_seelen",
+  "setShortName": "Schiff der verlorenen Seelen",
+  "setSymbol": "schiff_der_verlorenen_seelen_symbol",
+  "layout": "landscape",
+  "image": "sc_gefraessige_salzwasser_piranhas.webp",
+  "sourceImages": [
+    "Karte0010.webp"
+  ],
+  "tags": [
+    "schwarm",
+    "tier",
+    "meer",
+    "piranha"
+  ],
+  "keywords": [
+    "Schwarm",
+    "Tier (Meer)"
+  ],
+  "specialRules": [
+    "Lege 2 [VERDERBEN] auf diese Karte. Immer wenn die [LEBEN] auf 0 oder darunter sinken, entferne nach dem Angriff 1 [VERDERBEN] und setze die [LEBEN] auf 3. Wird der letzte [VERDERBEN] entfernt, so werden stattdessen die Salzwasser-Piranhas aus dem Spiel entfernt."
+  ],
+  "stats": {
+    "gefahrenpunkte": 4,
+    "lebenspunkte": 3,
+    "ausweichen": 8,
+    "ruestung": 0,
+    "aktionen": "[VERDERBEN]"
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Held mit den wenigsten [LEBEN] erhält 1W6+1 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "3-12",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein Held nach Wahl der Spieler erhält 1W6 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-20",
+      "title": "Nichts",
+      "text": "Schnappen wild um sich."
     }
   ],
   "illustration": "Fabrice Weiss",
