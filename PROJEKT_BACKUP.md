@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 7:18:06 PM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 7:19:48 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -7320,6 +7320,79 @@ select {
   "illustration": "Annika Maar",
   "source": "card_image"
 }
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_diebischer_echsenmensch.json
+```json
+{
+  "cardName": "Diebischer Echsenmensch",
+  "cardType": "Schergenkarte",
+  "set": "Wirtshaus zum Schwarzen Keiler",
+  "setId": "wirtshaus_zum_schwarzen_keiler",
+  "setShortName": "Wirtshaus zum Schwarzen Keiler",
+  "setSymbol": "Schwarzer Keiler",
+  "layout": "landscape",
+  "image": "sc_diebischer_echsenmensch.webp",
+  "copies": 3,
+  "sourceImages": [
+    "Karte0001.webp",
+    "Karte0004.webp",
+    "Karte0008.webp"
+  ],
+  "referenceImages": [
+    "Karte0001.webp",
+    "Karte0004.webp",
+    "Karte0008.webp"
+  ],
+  "usedDuplicateForVerification": true,
+  "tags": [
+    "achaz",
+    "dieb"
+  ],
+  "keywords": [
+    "Achaz",
+    "Dieb"
+  ],
+  "searchAliases": [],
+  "specialRules": [],
+  "stats": {
+    "gefahrenpunkte": 2,
+    "lebenspunkte": 6,
+    "ausweichen": 3,
+    "ruestung": 2,
+    "aktionen": 2
+  },
+  "actionTable": [
+    {
+      "range": "1-6",
+      "title": "Diebstahl",
+      "text": "Ein zufälliger Held muss eine seiner ausgespielten dauerhaften Karten seiner Wahl unter diesen Schergen legen. Stirbt der Scherge, so bekommen die Besitzer ihre Karten zurück auf die Hand."
+    },
+    {
+      "range": "7-15",
+      "title": "Schleichen im Dunkeln",
+      "text": "Legt 1 [UNSICHERES_SYMBOL_LILA_ORB] auf diese Karte."
+    },
+    {
+      "range": "16-20",
+      "title": "Flucht",
+      "text": "Wenn mindestens eine gestohlene Karte unter diesem Schergen und mindestens 1 [UNSICHERES_SYMBOL_LILA_ORB] auf dieser Karte liegen, entfernt diese Karte und alle Karten unter ihr aus dem Kampf. Andernfalls geschieht nichts."
+    }
+  ],
+  "illustration": "Petra Rudolf",
+  "source": "card_image",
+  "uncertain": true,
+  "uncertainFields": [
+    "actionTable[1].text",
+    "actionTable[2].text"
+  ],
+  "uncertainNotes": [
+    "Das lila Inline-Symbol ist auf den Karten klar sichtbar, aber nicht sicher offiziell zugeordnet. Vorläufiger Platzhalter: [UNSICHERES_SYMBOL_LILA_ORB]."
+  ]
+}
+
 ```
 
 ---
