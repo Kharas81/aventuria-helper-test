@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 7:23:25 PM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 7:23:53 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5659,8 +5659,9 @@ select {
    "sc_diebischer_echsenmensch.json",
    "sc_junger_kristallomant.json",
    "sc_echsenmenschen_kultist.json",
-   "sc_standhafter_echsenmensch.json"
-  ]  
+   "sc_standhafter_echsenmensch.json",
+   "sc_stumpfsinniger_krakonier.json",
+   "sc_heimtueckischer_zilit.json"   
   ]
 }
 
