@@ -7,9 +7,16 @@
   "setSymbol": "Keiler-Symbol",
   "layout": "landscape",
   "image": "sc_ork_trommler.webp",
+  "copies": 2,
   "sourceImages": [
-    "Karte0008.webp"
+    "Karte0008.webp",
+    "Karte0014.webp"
   ],
+  "referenceImages": [
+    "Karte0008.webp",
+    "Karte0014.webp"
+  ],
+  "usedDuplicateForVerification": true,
   "tags": [
     "ork",
     "zauberer"
