@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 10:17:03 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 10:17:26 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -6209,6 +6209,71 @@ select {
     }
   ],
   "illustration": "Malte Zierbel",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_blutschakal.json
+```json
+{
+  "cardName": "Blutschakal",
+  "cardType": "Schergenkarte",
+  "set": "Mythische Geschichten",
+  "setId": "mythische_geschichten",
+  "setShortName": "Mythische Geschichten",
+  "setSymbol": "[SET_SYMBOL_MYTHISCHE_GESCHICHTEN]",
+  "layout": "landscape",
+  "image": "sc_blutschakal.webp",
+  "copies": 2,
+  "sourceImages": [
+    "Karte0008.webp",
+    "Karte0009.webp"
+  ],
+  "referenceImages": [
+    "Karte0008.webp",
+    "Karte0009.webp"
+  ],
+  "usedDuplicateForVerification": true,
+  "tags": [
+    "uebernatuerlich",
+    "chimaere"
+  ],
+  "keywords": [
+    "Übernatürlich",
+    "Chimäre"
+  ],
+  "searchAliases": [],
+  "specialRules": [
+    "Nachdem diese Karte platziert wurde, lege eine Karte \"Blutschakalgift\" darunter. Der erste Held, der durch den Blutschakal [LEBEN] verliert, mischt sie in sein Deck."
+  ],
+  "stats": {
+    "gefahrenpunkte": 6,
+    "lebenspunkte": 14,
+    "ausweichen": 2,
+    "ruestung": 7,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-10",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 2W6 [TREFFERPUNKTE] und muss eine zufällige Handkarte ablegen."
+    },
+    {
+      "range": "11-16",
+      "title": "Nichts",
+      "text": "Er zischt kampflustig."
+    },
+    {
+      "range": "17-20",
+      "title": "Flucht",
+      "text": "Entfernt diese Karte aus dem Spiel, falls der Scherge 5 oder weniger [LEBEN] hat."
+    }
+  ],
+  "illustration": "Sandra Braun",
   "source": "card_image"
 }
 
