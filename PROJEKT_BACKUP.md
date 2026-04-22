@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 9:33:34 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 9:34:00 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -6735,6 +6735,57 @@ select {
 
 ---
 
+## 📄 Datei: data/cards/catalog/schergen/sc_der_blutige_martin.json
+```json
+{
+  "cardName": "Der blutige Martin",
+  "cardType": "Schergenkarte",
+  "set": "Schiff der verlorenen Seelen",
+  "setId": "schiff_der_verlorenen_seelen",
+  "setShortName": "Schiff der verlorenen Seelen",
+  "setSymbol": "Schiff der verlorenen Seelen Symbol",
+  "layout": "landscape",
+  "image": "sc_der_blutige_martin.webp",
+  "sourceImages": ["Karte0015.webp"],
+  "tags": ["untoter", "zombie", "pirat"],
+  "keywords": ["Untoter", "Zombie", "Pirat"],
+  "stats": {
+    "gefahrenpunkte": 6,
+    "lebenspunkte": 20,
+    "ausweichen": "-",
+    "ruestung": 1,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+4 [TREFFERPUNKTE]. Der blutige Martin heilt bei sich diese Menge an [LEBEN]."
+    },
+    {
+      "range": "3-12",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6+3 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-18",
+      "title": "Nichts",
+      "text": "Brüllt einen Piratenfluch."
+    },
+    {
+      "range": "19-20",
+      "title": "Verfault",
+      "text": "Der Scherge verliert 5 [LEBEN]."
+    }
+  ],
+  "illustration": "Helge Balzer",
+  "source": "card_image"
+}
+
+```
+
+---
+
 ## 📄 Datei: data/cards/catalog/schergen/sc_diebische_riesenfledermaus.json
 ```json
 {
@@ -8321,6 +8372,71 @@ select {
     "Das schwarze Schädel-Kreis-Symbol ist sichtbar, aber nicht sicher offiziell zugeordnet. Deshalb als [UNSICHERES_SYMBOL_SCHWARZER_SCHAEDELKREIS] markiert."
   ]
 }
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_kraeftige_mumie.json
+```json
+{
+  "cardName": "Kräftige Mumie",
+  "cardType": "Schergenkarte",
+  "set": "Wald ohne Wiederkehr",
+  "setId": "wald_ohne_wiederkehr",
+  "setShortName": "Wald ohne Wiederkehr",
+  "setSymbol": "Wald ohne Wiederkehr Symbol",
+  "layout": "landscape",
+  "image": "sc_kraeftige_mumie.webp",
+  "copies": 2,
+  "sourceImages": [
+    "Karte0014.webp",
+    "Karte0016.webp"
+  ],
+  "referenceImages": [
+    "Karte0014.webp",
+    "Karte0016.webp"
+  ],
+  "usedDuplicateForVerification": true,
+  "tags": ["untoter", "mumie"],
+  "keywords": ["Untoter", "Mumie"],
+  "stats": {
+    "gefahrenpunkte": 7,
+    "lebenspunkte": 22,
+    "ausweichen": "-",
+    "ruestung": 2,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Held mit den meisten [UNSICHERES_SYMBOL_ROT_LIPPEN] erhält 1W6+6 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "3-14",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein Held nach Wahl der Spieler erhält 1W6+4 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "15-19",
+      "title": "Nichts",
+      "text": "Die Mumie wankt ziellos umher."
+    },
+    {
+      "range": "20",
+      "title": "Zerfällt",
+      "text": "Mische die Karte zurück in den Schergenstapel."
+    }
+  ],
+  "illustration": "Malte Zierbel",
+  "source": "card_image",
+  "uncertain": true,
+  "uncertainFields": ["actionTable[0].text"],
+  "uncertainNotes": [
+    "Auf der Karte steht ein rotes Lippen-/Mund-Symbol. Die sichtbare Form ist klar, die offizielle Bedeutung aber hier nicht sicher genug belegt. Daher vorläufig als [UNSICHERES_SYMBOL_ROT_LIPPEN] markiert."
+  ]
+}
+
 ```
 
 ---
