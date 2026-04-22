@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 5:10:42 PM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 7:16:49 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -9353,6 +9353,57 @@ select {
   "uncertainNotes": [
     "Auf der Karte steht vor \"-Angriff\" ein grünes, noch nicht sicher offiziell zugeordnetes Symbol. Vorläufiger Platzhalter: [UNSICHERES_SYMBOL_GRUEN]."
   ]
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_irrhalk.json
+```json
+{
+  "cardName": "Irrhalk",
+  "cardType": "Schergenkarte",
+  "set": "Aventuria Grundbox",
+  "setId": "aventuria_grundbox",
+  "setShortName": "Grundbox",
+  "setSymbol": "A",
+  "layout": "landscape",
+  "image": "sc_irrhalk.webp",
+  "sourceImages": ["Karte0001.webp"],
+  "tags": ["daemon", "gehoernt", "fliegend", "feuer"],
+  "keywords": ["Dämon", "Gehörnt", "Fliegend", "Feuer"],
+  "searchAliases": [],
+  "specialRules": [
+    "Gegen [NAHKAMPF]- und [FERNKAMPF]-Angriffe hat der Irrhalk [AUSWEICHEN] 6. Solange der Irrhalk im Spiel ist, können Anführer nicht angegriffen werden.",
+    "Todesexplosion: Sobald der Irrhalk ausgeschaltet wird, wird jeder Held und jeder Gegner zum Ziel eines [FERNKAMPF]-Angriffs, der 1W6+4 [TREFFERPUNKTE] verursacht."
+  ],
+  "stats": {
+    "gefahrenpunkte": "-",
+    "lebenspunkte": "[ANZAHL_HELDEN] x 6",
+    "ausweichen": 4,
+    "ruestung": 0,
+    "aktionen": "[ANZAHL_HELDEN]"
+  },
+  "actionTable": [
+    {
+      "range": "1-5",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+6 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "6-10",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6+4 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "11-20",
+      "title": "Feuereifer",
+      "text": "Heilt sich 2 [LEBEN]."
+    }
+  ],
+  "illustration": "Nadine Schäkel",
+  "source": "card_image"
 }
 
 ```
