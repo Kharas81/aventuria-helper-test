@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 10:16:41 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 10:17:03 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -9006,6 +9006,71 @@ select {
     }
   ],
   "illustration": "Ben Maier",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_raubschwinge.json
+```json
+{
+  "cardName": "Raubschwinge",
+  "cardType": "Schergenkarte",
+  "set": "Mythische Geschichten",
+  "setId": "mythische_geschichten",
+  "setShortName": "Mythische Geschichten",
+  "setSymbol": "[SET_SYMBOL_MYTHISCHE_GESCHICHTEN]",
+  "layout": "landscape",
+  "image": "sc_raubschwinge.webp",
+  "copies": 2,
+  "sourceImages": [
+    "Karte0006.webp",
+    "Karte0007.webp"
+  ],
+  "referenceImages": [
+    "Karte0006.webp",
+    "Karte0007.webp"
+  ],
+  "usedDuplicateForVerification": true,
+  "tags": [
+    "uebernatuerlich",
+    "chimaere"
+  ],
+  "keywords": [
+    "Übernatürlich",
+    "Chimäre"
+  ],
+  "searchAliases": [],
+  "specialRules": [
+    "Nachdem diese Karte platziert wurde, lege eine Karte \"Raubschwingengift\" darunter. Der erste Held, der durch die Raubschwinge [LEBEN] verliert, mischt sie in sein Deck."
+  ],
+  "stats": {
+    "gefahrenpunkte": 5,
+    "lebenspunkte": 10,
+    "ausweichen": 1,
+    "ruestung": 6,
+    "aktionen": 2
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 2W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "3-14",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein Held nach Wahl der Spieler erhält 1W6 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "15-20",
+      "title": "Flucht",
+      "text": "Entfernt diese Karte aus dem Spiel, falls weniger Schergen als Helden am Kampf teilnehmen."
+    }
+  ],
+  "illustration": "Sandra Braun",
   "source": "card_image"
 }
 
