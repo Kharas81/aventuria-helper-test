@@ -1,0 +1,61 @@
+{
+  "cardName": "Orkischer Menschenfänger",
+  "cardType": "Schergenkarte",
+  "set": "Wirtshaus zum Schwarzen Keiler",
+  "setId": "wirtshaus_zum_schwarzen_keiler",
+  "setShortName": "Schwarzer Keiler",
+  "setSymbol": "Keiler-Symbol",
+  "layout": "landscape",
+  "image": "sc_orkischer_menschenfaenger.webp",
+  "sourceImages": [
+    "Karte0007.webp"
+  ],
+  "tags": [
+    "ork",
+    "raeuber",
+    "krieger"
+  ],
+  "keywords": [
+    "Ork",
+    "Räuber",
+    "Krieger"
+  ],
+  "specialRules": [
+    "Netz. Ein zufälliger Held, der aktuell nicht Opfer eines Netzes ist, muss eine [UNSICHERES_SYMBOL_ORANGE_HAND]-Probe durchführen. Misslingt sie, so sinkt sein [UNSICHERES_SYMBOL_ORANGE_HAND]-Wert bis zum Ende der laufenden Runde auf 0. Zeigt dies durch eine Netz-Marke ([UNSICHERES_SYMBOL_SCHWARZE_NETZMARKE]) auf dem [UNSICHERES_SYMBOL_ORANGE_HAND]-Wert des Helden an."
+  ],
+  "stats": {
+    "gefahrenpunkte": 4,
+    "lebenspunkte": 14,
+    "ausweichen": "-",
+    "ruestung": 1,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "5-12",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Held mit dem niedrigsten [UNSICHERES_SYMBOL_ORANGE_HAND]-Wert erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-17",
+      "title": "Nichts",
+      "text": "Brüllt einen Orkfluch."
+    },
+    {
+      "range": "18-20",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+    }
+  ],
+  "illustration": "Tristan Denecke",
+  "source": "card_image",
+  "uncertain": true,
+  "uncertainFields": [
+    "specialRules[0]",
+    "actionTable[0].text"
+  ],
+  "uncertainNotes": [
+    "Das orange Handsymbol ist sichtbar, aber hier noch nicht sicher offiziell zugeordnet. Vorläufiger Platzhalter: [UNSICHERES_SYMBOL_ORANGE_HAND].",
+    "Die schwarze Netz-Marke in Klammern ist sichtbar, aber hier noch nicht sicher offiziell zugeordnet. Vorläufiger Platzhalter: [UNSICHERES_SYMBOL_SCHWARZE_NETZMARKE]."
+  ]
+}
