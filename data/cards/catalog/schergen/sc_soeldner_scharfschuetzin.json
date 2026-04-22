@@ -1,0 +1,69 @@
+{
+  "cardName": "Söldner-Scharfschützin",
+  "cardType": "Schergenkarte",
+  "set": "Wirtshaus zum Schwarzen Keiler",
+  "setId": "wirtshaus_zum_schwarzen_keiler",
+  "setShortName": "Wirtshaus zum Schwarzen Keiler",
+  "setSymbol": "Keiler-Symbol",
+  "layout": "landscape",
+  "image": "sc_soeldner_scharfschuetzin.webp",
+  "copies": 2,
+  "sourceImages": [
+    "Karte0001.webp",
+    "Karte0002.webp"
+  ],
+  "referenceImages": [
+    "Karte0001.webp",
+    "Karte0002.webp"
+  ],
+  "usedDuplicateForVerification": true,
+  "tags": [
+    "halbelf",
+    "soeldner"
+  ],
+  "keywords": [
+    "Halbelf",
+    "Söldner"
+  ],
+  "searchAliases": [
+    "Soeldner-Scharfschuetzin"
+  ],
+  "stats": {
+    "gefahrenpunkte": 5,
+    "lebenspunkte": 14,
+    "ausweichen": 5,
+    "ruestung": 1,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-3",
+      "title": "[FERNKAMPF]-Angriff",
+      "text": "Der Held mit den meisten [AUSDAUER] erhält 1W6+7 [TREFFERPUNKTE] und muss 1 [AUSDAUER] ablegen."
+    },
+    {
+      "range": "4-10",
+      "title": "Zielt sorgfältig",
+      "text": "Legt 1 [UNSICHERES_SYMBOL_BLAU_VIOLETT_ZIELMARKE] auf diese Karte. Bei der nächsten [AKTIONEN] der Schergin entfernt [UNSICHERES_SYMBOL_BLAU_VIOLETT_ZIELMARKE] und werte ihr Würfergebnis automatisch als „2“."
+    },
+    {
+      "range": "11-16",
+      "title": "Nichts",
+      "text": "Sucht sich ein neues Ziel."
+    },
+    {
+      "range": "17-20",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+    }
+  ],
+  "illustration": "Annika Maar",
+  "source": "card_image",
+  "uncertain": true,
+  "uncertainFields": [
+    "actionTable[1].text"
+  ],
+  "uncertainNotes": [
+    "Das blau-violette Markersymbol in „Zielt sorgfältig“ ist sichtbar, aber die offizielle Token-Zuordnung ist hier noch nicht sicher bestimmt."
+  ]
+}
