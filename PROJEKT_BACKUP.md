@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 10:21:19 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 11:34:23 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5930,6 +5930,78 @@ select {
   ],
   "illustration": "Nathaniel Park",
   "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_aufgeschreckte_fledermaeuse.json
+```json
+{
+  "cardName": "Aufgeschreckte Fledermäuse",
+  "cardType": "Schergenkarte",
+  "set": "Wirtshaus zum Schwarzen Keiler",
+  "setId": "wirtshaus_zum_schwarzen_keiler",
+  "setShortName": "Wirtshaus zum Schwarzen Keiler",
+  "setSymbol": "wirtshaus_zum_schwarzen_keiler_symbol",
+  "layout": "landscape",
+  "image": "sc_aufgeschreckte_fledermaeuse.webp",
+  "copies": 3,
+  "sourceImages": [
+    "Karte0001.webp",
+    "Karte0005.webp",
+    "Karte0006.webp"
+  ],
+  "referenceImages": [
+    "Karte0001.webp",
+    "Karte0005.webp",
+    "Karte0006.webp"
+  ],
+  "usedDuplicateForVerification": true,
+  "tags": [
+    "schwarm",
+    "tier",
+    "unterirdisch",
+    "wald",
+    "fledermaus"
+  ],
+  "keywords": [
+    "Schwarm",
+    "Tier (Unterirdisch, Wald)"
+  ],
+  "specialRules": [
+    "Legt 2 [UNSICHERES_SYMBOL_LILA_SCHWARM] auf diese Karte. Immer wenn die [LEBEN] auf 0 oder darunter sinken, entfernt nach dem Angriff 1 [UNSICHERES_SYMBOL_LILA_SCHWARM] und setzt die [LEBEN] auf 3. Wird der letzte [UNSICHERES_SYMBOL_LILA_SCHWARM] entfernt, so wird der Schwarm aus dem Spiel entfernt und nicht in den Schergenstapel zurückgemischt."
+  ],
+  "stats": {
+    "gefahrenpunkte": 3,
+    "lebenspunkte": 3,
+    "ausweichen": 8,
+    "ruestung": 0,
+    "aktionen": "[UNSICHERES_SYMBOL_LILA_SCHWARM]"
+  },
+  "actionTable": [
+    {
+      "range": "1-10",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held verliert 2 [LEBEN]."
+    },
+    {
+      "range": "11-20",
+      "title": "Nichts",
+      "text": "Die Fledermäuse stoßen ein lautes Kreischen aus."
+    }
+  ],
+  "illustration": "Sandra Braun",
+  "source": "card_image",
+  "uncertain": true,
+  "uncertainFields": [
+    "stats.aktionen",
+    "specialRules[0]"
+  ],
+  "uncertainNotes": [
+    "Das lila Schwarm-/Aktionssymbol auf dieser Karte ist sichtbar, aber aktuell keinem sicheren festen Token zugeordnet. Vorläufiger Platzhalter: [UNSICHERES_SYMBOL_LILA_SCHWARM]."
+  ]
 }
 
 ```
