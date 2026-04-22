@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 10:13:37 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 10:15:32 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -8772,6 +8772,48 @@ select {
     }
   ],
   "illustration": "Verena Biskup",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_quaelgeister.json
+```json
+{
+  "cardName": "Quälgeister",
+  "cardType": "Schergenkarte",
+  "set": "Schiff der verlorenen Seelen",
+  "setId": "schiff_der_verlorenen_seelen",
+  "setShortName": "Schiff der verlorenen Seelen",
+  "setSymbol": "[SET_SYMBOL_SCHIFF_DER_VERLORENEN_SEELEN]",
+  "layout": "landscape",
+  "image": "sc_quaelgeister.webp",
+  "sourceImages": [
+    "Karte0001.webp"
+  ],
+  "tags": [
+    "uebernatuerlich"
+  ],
+  "keywords": [
+    "Übernatürlich"
+  ],
+  "searchAliases": [],
+  "specialRules": [
+    "Platziere die Quälgeister unterhalb des zuvor ausgelegten Schergen. Der Scherge erhält +1 [AKTIONEN]. Wurde noch kein Scherge ausgespielt, fügt sie dem nächsten Schergen hinzu.",
+    "Werden zwei Quälgeister direkt nacheinander gezogen, lege die zweiten Quälgeister beiseite und ziehe einen neuen Schergen vom Schergenstapel. Mische danach die zweiten Quälgeister zurück in den Schergenstapel.",
+    "Die Quälgeister werden aus dem Kampf entfernt, sobald der Scherge, an dem sie anliegen, besiegt wird."
+  ],
+  "stats": {
+    "gefahrenpunkte": 2,
+    "lebenspunkte": "-",
+    "ausweichen": "-",
+    "ruestung": "-",
+    "aktionen": "+1"
+  },
+  "actionTable": [],
+  "illustration": "Helge Balzer",
   "source": "card_image"
 }
 
