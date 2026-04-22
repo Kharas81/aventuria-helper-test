@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 12:58:46 PM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 5:09:08 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -8480,14 +8480,18 @@ select {
   "setSymbol": "Keiler",
   "layout": "landscape",
   "image": "sc_goblin_speerwerfer.webp",
-  "copies": 2,
+  "copies": 4,
   "sourceImages": [
     "Karte0003.webp",
-    "Karte0005.webp"
+    "Karte0005.webp",
+    "Karte0011.webp",
+    "Karte0013.webp"
   ],
   "referenceImages": [
     "Karte0003.webp",
-    "Karte0005.webp"
+    "Karte0005.webp",
+    "Karte0011.webp",
+    "Karte0013.webp"
   ],
   "usedDuplicateForVerification": true,
   "tags": [
