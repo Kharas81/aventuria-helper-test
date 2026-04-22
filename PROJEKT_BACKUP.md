@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 12:57:56 PM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 12:58:11 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -8385,6 +8385,79 @@ select {
     },
     {
       "range": "20",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Kampf. Sie wird nicht in den Schergenstapel zurückgemischt."
+    }
+  ],
+  "illustration": "Julia Metzger",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_goblin_speerwerfer.json
+```json
+{
+  "cardName": "Goblin-Speerwerfer",
+  "cardType": "Schergenkarte",
+  "set": "Wirtshaus zum Schwarzen Keiler",
+  "setId": "wirtshaus_zum_schwarzen_keiler",
+  "setShortName": "Schwarzer Keiler",
+  "setSymbol": "Keiler",
+  "layout": "landscape",
+  "image": "sc_goblin_speerwerfer.webp",
+  "copies": 2,
+  "sourceImages": [
+    "Karte0003.webp",
+    "Karte0005.webp"
+  ],
+  "referenceImages": [
+    "Karte0003.webp",
+    "Karte0005.webp"
+  ],
+  "usedDuplicateForVerification": true,
+  "tags": [
+    "goblin",
+    "raeuber"
+  ],
+  "keywords": [
+    "Goblin",
+    "Räuber"
+  ],
+  "searchAliases": [],
+  "specialRules": [],
+  "stats": {
+    "gefahrenpunkte": 3,
+    "lebenspunkte": 8,
+    "ausweichen": "-",
+    "ruestung": 1,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-3",
+      "title": "[FERNKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+4 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "4-12",
+      "title": "[FERNKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-14",
+      "title": "Nichts",
+      "text": "Schaut sich ängstlich nach einem Fluchtweg um."
+    },
+    {
+      "range": "15-18",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+    },
+    {
+      "range": "19-20",
       "title": "Flucht",
       "text": "Entfernt die Karte aus dem Kampf. Sie wird nicht in den Schergenstapel zurückgemischt."
     }
