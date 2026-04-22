@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 7:10:24 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 7:16:57 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -474,8 +474,20 @@ hr {
     background: var(--color-bg-soft);
 }
 
+.archive-home__hero {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.archive-home__hero-text {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
 .archive-home__title {
-    margin: 0 0 8px;
+    margin: 0;
     color: var(--color-primary);
     font-size: 1.5rem;
 }
@@ -492,7 +504,6 @@ hr {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: var(--space-md);
-    margin-top: var(--space-lg);
 }
 
 .archive-home__meta-box {
@@ -528,16 +539,76 @@ hr {
     font-size: 1.2rem;
 }
 
-.archive-home__actions {
+.archive-home__card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-md);
+}
+
+.archive-home-card {
+    appearance: none;
     display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-sm);
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    min-height: 140px;
+    padding: var(--space-md);
+    border: var(--border-thin) solid var(--color-border-soft-card);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-soft);
+    color: var(--color-text);
+    text-align: left;
+    cursor: pointer;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.archive-home-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card);
+}
+
+.archive-home-card--active {
+    border-color: var(--color-primary);
+    background: rgba(92, 30, 30, 0.06);
+}
+
+.archive-home-card__eyebrow {
+    color: var(--color-secondary);
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.archive-home-card__title {
+    color: var(--color-primary);
+    font-size: 1.05rem;
+    font-weight: bold;
+    line-height: 1.25;
+}
+
+.archive-home-card__text {
+    color: var(--color-text);
+    font-size: 0.92rem;
+    line-height: 1.45;
+}
+
+.archive-home__empty {
+    padding: var(--space-md);
+    border: var(--border-thin) dashed var(--color-border-soft-card);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-soft);
+    color: var(--color-text);
 }
 
 @media (max-width: 700px) {
     .archive-home__hero,
     .archive-home__section {
         padding: var(--space-md);
+    }
+
+    .archive-home__card-grid {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -10139,6 +10210,3203 @@ select {
     }
   ]
 }
+```
+
+---
+
+## 📄 Datei: data/runtime/catalogs/schergen.cards.json
+```json
+{
+  "catalog_key": "schergen",
+  "generated_at": "2026-04-22T07:16:07.982Z",
+  "card_count": 55,
+  "cards": [
+    {
+      "fileName": "sc_hofnaerrin.json",
+      "rawCard": {
+        "cardName": "Hofnärrin",
+        "cardType": "Schergenkarte",
+        "set": "Rückkehr zum Schwarzen Keiler",
+        "setId": "rueckkehr_zum_schwarzen_keiler",
+        "setShortName": "Rückkehr zum Schwarzen Keiler",
+        "setSymbol": "R",
+        "layout": "landscape",
+        "image": "sc_hofnaerrin.webp",
+        "copies": 2,
+        "usedDuplicateForVerification": true,
+        "tags": [
+          "mensch",
+          "gaukler",
+          "diener"
+        ],
+        "keywords": [
+          "Mensch",
+          "Gaukler",
+          "Diener"
+        ],
+        "searchAliases": [],
+        "specialRules": [],
+        "stats": {
+          "gefahrenpunkte": 2,
+          "lebenspunkte": 15,
+          "ausweichen": 0,
+          "ruestung": 5,
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-7",
+            "title": "Schelmenstreich",
+            "text": "Nimm alle [SCHICKSALSPUNKT] aus der Tischmitte, falls vorhanden, und lege sie auf die Hofnärrin. Wird die Närrin ausgeschaltet oder flieht, so lege die [SCHICKSALSPUNKT] wieder zurück in die Tischmitte."
+          },
+          {
+            "range": "8-15",
+            "title": "Nichts",
+            "text": "Macht lustige Späße."
+          },
+          {
+            "range": "16-20",
+            "title": "Flucht/Schutzschild",
+            "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Ist noch mindestens 1 Anführer anwesend, und dieser hat noch keinen Schergen auf sich liegen, so lege die Hofnärrin auf ihn. Solange sie dort liegt, führt sie keine Aktionen durch und der Anführer kann nicht zum Ziel von Angriffen werden."
+          }
+        ],
+        "illustration": "Ben Maier",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_basil_der_rote.json",
+      "rawCard": {
+        "cardName": "Basil der Rote",
+        "cardType": "Schergenkarte",
+        "set": "Aventuria Grundbox",
+        "setId": "aventuria_grundbox",
+        "setShortName": "Grundbox",
+        "setSymbol": "A",
+        "layout": "landscape",
+        "image": "sc_basil_der_rote.webp",
+        "tags": [
+          "mensch",
+          "pirat"
+        ],
+        "keywords": [
+          "Mensch",
+          "Pirat"
+        ],
+        "searchAliases": [],
+        "specialRules": [],
+        "stats": {
+          "gefahrenpunkte": 6,
+          "lebenspunkte": 18,
+          "ausweichen": 1,
+          "ruestung": "-",
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-4",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Der Startspieler erhält 1W6+5 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "5-12",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein zufälliger Held erhält 1W6+3 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "13-18",
+            "title": "Nichts",
+            "text": "Brüllt einen Piratenfluch."
+          },
+          {
+            "range": "19-20",
+            "title": "Flucht",
+            "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+          }
+        ],
+        "illustration": "Karin Wittig",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_bukanische_strandraeuberin.json",
+      "rawCard": {
+        "cardName": "Bukanische Strandräuberin",
+        "cardType": "Schergenkarte",
+        "set": "Aventuria Grundbox",
+        "setId": "aventuria_grundbox",
+        "setShortName": "Grundbox",
+        "setSymbol": "A",
+        "layout": "landscape",
+        "image": "sc_bukanische_strandraeuberin.webp",
+        "copies": 2,
+        "usedDuplicateForVerification": true,
+        "tags": [
+          "mensch",
+          "pirat",
+          "raeuber"
+        ],
+        "keywords": [
+          "Mensch",
+          "Pirat",
+          "Räuber"
+        ],
+        "searchAliases": [],
+        "specialRules": [],
+        "stats": {
+          "gefahrenpunkte": 4,
+          "lebenspunkte": 15,
+          "ausweichen": 1,
+          "ruestung": "-",
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-4",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein zufälliger Held erhält 1W6+3 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "5-10",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein Held nach Wahl der Spieler erhält 1W6+3 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "11-16",
+            "title": "Nichts",
+            "text": "Brüllt einen Piratenfluch."
+          },
+          {
+            "range": "17-20",
+            "title": "Flucht",
+            "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+          }
+        ],
+        "illustration": "Anja DiPaolo",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_gemeiner_wegelagerer.json",
+      "rawCard": {
+        "cardName": "Gemeiner Wegelagerer",
+        "cardType": "Schergenkarte",
+        "set": "Aventuria Grundbox",
+        "setId": "aventuria_grundbox",
+        "setShortName": "Grundbox",
+        "setSymbol": "A",
+        "layout": "landscape",
+        "image": "sc_gemeiner_wegelagerer.webp",
+        "copies": 2,
+        "usedDuplicateForVerification": true,
+        "tags": [
+          "mensch",
+          "raeuber"
+        ],
+        "keywords": [
+          "Mensch",
+          "Räuber"
+        ],
+        "searchAliases": [],
+        "specialRules": [],
+        "stats": {
+          "gefahrenpunkte": 5,
+          "lebenspunkte": 12,
+          "ausweichen": 3,
+          "ruestung": "-",
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-14",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein Held nach Wahl der Spieler erhält 1W6+3 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "15-17",
+            "title": "Nichts",
+            "text": "Schaut sich um und zögert."
+          },
+          {
+            "range": "18-20",
+            "title": "Flucht",
+            "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls passiert nichts."
+          }
+        ],
+        "illustration": "Elif Siebenpfeiffer",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_jongleurin.json",
+      "rawCard": {
+        "cardName": "Jongleurin",
+        "cardType": "Schergenkarte",
+        "set": "Rückkehr zum Schwarzen Keiler",
+        "setId": "rueckkehr_zum_schwarzen_keiler",
+        "setShortName": "Rückkehr zum Schwarzen Keiler",
+        "setSymbol": "R",
+        "layout": "landscape",
+        "image": "sc_jongleurin.webp",
+        "copies": 2,
+        "usedDuplicateForVerification": true,
+        "tags": [
+          "mensch",
+          "gaukler",
+          "diener"
+        ],
+        "keywords": [
+          "Mensch",
+          "Gaukler",
+          "Diener"
+        ],
+        "searchAliases": [],
+        "specialRules": [
+          "Die Jongleurin kann nicht als Ziel für Angriffe gewählt werden, die mehr als 1W6 [TREFFERPUNKTE] verursachen."
+        ],
+        "stats": {
+          "gefahrenpunkte": 3,
+          "lebenspunkte": 10,
+          "ausweichen": 0,
+          "ruestung": 5,
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-8",
+            "title": "[FERNKAMPF]-Angriff",
+            "text": "Der Startspieler erhält 1W6+2 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "9-15",
+            "title": "Nichts",
+            "text": "Macht lustige Späße."
+          },
+          {
+            "range": "16-20",
+            "title": "Flucht/Schutzschild",
+            "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Ist noch mindestens 1 Anführer anwesend, und dieser hat noch keinen Schergen auf sich liegen, so lege die Jongleurin auf ihn. Solange sie dort liegt, führt sie keine Aktionen durch und der Anführer kann nicht zum Ziel von Angriffen werden."
+          }
+        ],
+        "illustration": "Anja Di Paolo",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_raeuberische_diebin.json",
+      "rawCard": {
+        "cardName": "Räuberische Diebin",
+        "cardType": "Schergenkarte",
+        "set": "Aventuria Grundbox",
+        "setId": "aventuria_grundbox",
+        "setShortName": "Grundbox",
+        "setSymbol": "A",
+        "layout": "landscape",
+        "image": "sc_raeuberische_diebin.webp",
+        "copies": 2,
+        "usedDuplicateForVerification": true,
+        "tags": [
+          "mensch",
+          "raeuber",
+          "dieb"
+        ],
+        "keywords": [
+          "Mensch",
+          "Räuber",
+          "Dieb"
+        ],
+        "searchAliases": [],
+        "specialRules": [
+          "3 [ZEIT]: Legt alle Karten unter dieser ab."
+        ],
+        "stats": {
+          "gefahrenpunkte": 4,
+          "lebenspunkte": 14,
+          "ausweichen": 1,
+          "ruestung": "-",
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-5",
+            "title": "Diebstahl",
+            "text": "Ein zufälliger Held legt eine seiner ausgespielten dauerhaften Karten seiner Wahl unter den Schergen. Stirbt der Scherge, so bekommt der Held die Karte zurück auf die Hand."
+          },
+          {
+            "range": "6-10",
+            "title": "[FERNKAMPF]-Angriff",
+            "text": "Der Startspieler erhält 1W6+2 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "11-15",
+            "title": "[FERNKAMPF]-Angriff",
+            "text": "Der Held mit den meisten [LEBEN] erhält 1W6+2 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "16-20",
+            "title": "Flucht",
+            "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+          }
+        ],
+        "illustration": "Ben Maier",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_verrueckter_scharlatan.json",
+      "rawCard": {
+        "cardName": "Verrückter Scharlatan",
+        "cardType": "Schergenkarte",
+        "set": "Aventuria Grundbox",
+        "setId": "aventuria_grundbox",
+        "setShortName": "Grundbox",
+        "setSymbol": "A",
+        "layout": "landscape",
+        "image": "sc_verrueckter_scharlatan.webp",
+        "tags": [
+          "mensch",
+          "raeuber",
+          "zauberer"
+        ],
+        "keywords": [
+          "Mensch",
+          "Räuber",
+          "Zauberer"
+        ],
+        "searchAliases": [],
+        "specialRules": [
+          "4 [ZEIT]: Heilt allen seinen Mitstreitern 4 [LEBEN]."
+        ],
+        "stats": {
+          "gefahrenpunkte": 4,
+          "lebenspunkte": 15,
+          "ausweichen": 1,
+          "ruestung": "-",
+          "aktionen": 2
+        },
+        "actionTable": [
+          {
+            "range": "1-7",
+            "title": "[MAGIE]-Angriff",
+            "text": "Der Held mit den meisten [SCHICKSALSPUNKT] erhält 1W6+1 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "8-11",
+            "title": "Zauber",
+            "text": "Heilt seinen Mitstreiter der die meisten [LEBEN] verloren hat 5 [LEBEN]."
+          },
+          {
+            "range": "12-20",
+            "title": "Nichts",
+            "text": "Lacht irre."
+          }
+        ],
+        "illustration": "Anna Steinbauer",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_bardin.json",
+      "rawCard": {
+        "cardName": "Bardin",
+        "cardType": "Schergenkarte",
+        "set": "Rückkehr zum Schwarzen Keiler",
+        "setId": "rueckkehr_zum_schwarzen_keiler",
+        "setShortName": "Rückkehr zum Schwarzen Keiler",
+        "setSymbol": "R",
+        "layout": "landscape",
+        "image": "sc_bardin.webp",
+        "copies": 2,
+        "usedDuplicateForVerification": true,
+        "tags": [
+          "mensch",
+          "gaukler",
+          "diener"
+        ],
+        "keywords": [
+          "Mensch",
+          "Gaukler",
+          "Diener"
+        ],
+        "searchAliases": [],
+        "specialRules": [
+          "Liegt sie auf einem Anführer, so darf dieser das Würfergebnis seiner [AKTIONEN]-Würfe um 1 reduzieren."
+        ],
+        "stats": {
+          "gefahrenpunkte": 4,
+          "lebenspunkte": 12,
+          "ausweichen": 0,
+          "ruestung": 5,
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-10",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Der Startspieler erhält 1W6+2 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "11-15",
+            "title": "Zuspruch",
+            "text": "Heilt jedem Anführer 2 [LEBEN]."
+          },
+          {
+            "range": "16-20",
+            "title": "Flucht/Schutzschild",
+            "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Ist noch mindestens 1 Anführer anwesend und dieser hat noch keinen Schergen auf sich liegen, so lege die Bardin auf ihn. Solange sie dort liegt, führt sie keine Aktionen durch und der Anführer kann nicht zum Ziel von Angriffen werden."
+          }
+        ],
+        "illustration": "Anja Di Paolo",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_borbaradianische_laienmagierin_brenne_toter_stoff.json",
+      "rawCard": {
+        "cardName": "Borbaradianische Laienmagierin",
+        "cardType": "Schergenkarte",
+        "set": "Rückkehr zum Schwarzen Keiler",
+        "setId": "rueckkehr_zum_schwarzen_keiler",
+        "setShortName": "Rückkehr zum Schwarzen Keiler",
+        "setSymbol": "R",
+        "layout": "landscape",
+        "image": "sc_borbaradianische_laienmagierin_brenne_toter_stoff.webp",
+        "tags": [
+          "mensch",
+          "borbaradianer",
+          "zauberer"
+        ],
+        "keywords": [
+          "Mensch",
+          "Borbaradianer",
+          "Zauberer"
+        ],
+        "searchAliases": [],
+        "specialRules": [],
+        "stats": {
+          "gefahrenpunkte": 3,
+          "lebenspunkte": 13,
+          "ausweichen": 2,
+          "ruestung": "-",
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-5",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein Held nach Wahl der Helden erhält 1W6+1 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "6-12",
+            "title": "Brenne, toter Stoff",
+            "text": "Der Held mit den meisten [SCHICKSALSPUNKT] verliert für jede von ihm liegende dauerhafte Karte 1 [LEBEN]. Die Laienmagierin verliert 1W6 [LEBEN]."
+          },
+          {
+            "range": "13-17",
+            "title": "Ausruhen",
+            "text": "Heilt bei sich 2 [LEBEN]."
+          },
+          {
+            "range": "18-20",
+            "title": "Nichts",
+            "text": "Starrt düster vor sich hin."
+          }
+        ],
+        "illustration": "Luisa Preißler",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_borbaradianischer_laienmagier_starres_fliesse_hartes_schmelze.json",
+      "rawCard": {
+        "cardName": "Borbaradianischer Laienmagier",
+        "cardType": "Schergenkarte",
+        "set": "Rückkehr zum Schwarzen Keiler",
+        "setId": "rueckkehr_zum_schwarzen_keiler",
+        "setShortName": "Rückkehr zum Schwarzen Keiler",
+        "setSymbol": "R",
+        "layout": "landscape",
+        "image": "sc_borbaradianischer_laienmagier_starres_fliesse_hartes_schmelze.webp",
+        "tags": [
+          "mensch",
+          "borbaradianer",
+          "zauberer"
+        ],
+        "keywords": [
+          "Mensch",
+          "Borbaradianer",
+          "Zauberer"
+        ],
+        "searchAliases": [],
+        "specialRules": [],
+        "stats": {
+          "gefahrenpunkte": 3,
+          "lebenspunkte": 13,
+          "ausweichen": 2,
+          "ruestung": "-",
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-5",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein Held nach Wahl der Helden erhält 1W6+1 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "6-12",
+            "title": "Starres fließe, Hartes schmelze",
+            "text": "Der Held mit den meisten [SCHICKSALSPUNKT] muss eine vor ihm liegende dauerhafte Karte seiner Wahl abwerfen. Der Laienmagier verliert 1W6 [LEBEN]."
+          },
+          {
+            "range": "13-17",
+            "title": "Ausruhen",
+            "text": "Heilt bei sich 2 [LEBEN]."
+          },
+          {
+            "range": "18-20",
+            "title": "Nichts",
+            "text": "Starrt düster vor sich hin."
+          }
+        ],
+        "illustration": "Florian Stitz",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_zaeher_waechter.json",
+      "rawCard": {
+        "cardName": "Zäher Wächter",
+        "cardType": "Schergenkarte",
+        "set": "Aventuria Grundbox",
+        "setId": "aventuria_grundbox",
+        "setShortName": "Grundbox",
+        "setSymbol": "A",
+        "layout": "landscape",
+        "image": "sc_zaeher_waechter.webp",
+        "tags": [
+          "mensch",
+          "waechter"
+        ],
+        "keywords": [
+          "Mensch",
+          "Wächter"
+        ],
+        "searchAliases": [],
+        "specialRules": [
+          "4 [ZEIT]: Heilt sich 5 [LEBEN]."
+        ],
+        "stats": {
+          "gefahrenpunkte": 7,
+          "lebenspunkte": 20,
+          "ausweichen": 3,
+          "ruestung": "-",
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-5",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Der Startspieler erhält 1W6+5 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "6-10",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Der Held mit den meisten [LEBEN] erhält 1W6+4 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "11-14",
+            "title": "Standhaft",
+            "text": "Heilt sich 2 [LEBEN]."
+          },
+          {
+            "range": "15-17",
+            "title": "Nichts",
+            "text": "Schaut sich um und zögert."
+          },
+          {
+            "range": "18-20",
+            "title": "Flucht",
+            "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+          }
+        ],
+        "illustration": "Anna Steinbauer",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_borbaradianische_laienmagierin_goldgier_uebermanne_dich.json",
+      "rawCard": {
+        "cardName": "Borbaradianische Laienmagierin",
+        "cardType": "Schergenkarte",
+        "set": "Rückkehr zum Schwarzen Keiler",
+        "setId": "rueckkehr_zum_schwarzen_keiler",
+        "setShortName": "Rückkehr zum Schwarzen Keiler",
+        "setSymbol": "R",
+        "layout": "landscape",
+        "image": "sc_borbaradianische_laienmagierin_goldgier_uebermanne_dich.webp",
+        "tags": [
+          "mensch",
+          "borbaradianer",
+          "zauberer"
+        ],
+        "keywords": [
+          "Mensch",
+          "Borbaradianer",
+          "Zauberer"
+        ],
+        "searchAliases": [],
+        "specialRules": [],
+        "stats": {
+          "gefahrenpunkte": 3,
+          "lebenspunkte": 13,
+          "ausweichen": "-",
+          "ruestung": 2,
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-5",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein Held nach Wahl der Helden erhält 1W6+1 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "6-12",
+            "title": "Goldgier übermanne dich",
+            "text": "Der Held mit den meisten [SCHICKSALSPUNKT] muss 2 Handkarten seiner Wahl abwerfen. Die Laienmagierin verliert 1W6 [LEBEN]."
+          },
+          {
+            "range": "13-17",
+            "title": "Ausruhen",
+            "text": "Heilt bei sich 2 [LEBEN]."
+          },
+          {
+            "range": "18-20",
+            "title": "Nichts",
+            "text": "Starrt düster vor sich hin."
+          }
+        ],
+        "illustration": "Luisa Preißler",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_borbaradianische_laienmagierin_weiches_erstarre_fliessendes_verharre.json",
+      "rawCard": {
+        "cardName": "Borbaradianische Laienmagierin",
+        "cardType": "Schergenkarte",
+        "set": "Rückkehr zum Schwarzen Keiler",
+        "setId": "rueckkehr_zum_schwarzen_keiler",
+        "setShortName": "Rückkehr zum Schwarzen Keiler",
+        "setSymbol": "R",
+        "layout": "landscape",
+        "image": "sc_borbaradianische_laienmagierin_weiches_erstarre_fliessendes_verharre.webp",
+        "tags": [
+          "mensch",
+          "borbaradianer",
+          "zauberer"
+        ],
+        "keywords": [
+          "Mensch",
+          "Borbaradianer",
+          "Zauberer"
+        ],
+        "searchAliases": [],
+        "specialRules": [],
+        "stats": {
+          "gefahrenpunkte": 3,
+          "lebenspunkte": 13,
+          "ausweichen": "-",
+          "ruestung": 2,
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-5",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein Held nach Wahl der Helden erhält 1W6+1 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "6-12",
+            "title": "Weiches erstarre, Fließendes verharre",
+            "text": "Der Held mit den meisten [SCHICKSALSPUNKT] muss 1 Ausdauerkarte seiner Wahl abwerfen. Die Laienmagierin verliert 1W6 [LEBEN]."
+          },
+          {
+            "range": "13-17",
+            "title": "Ausruhen",
+            "text": "Heilt bei sich 2 [LEBEN]."
+          },
+          {
+            "range": "18-20",
+            "title": "Nichts",
+            "text": "Starrt düster vor sich hin."
+          }
+        ],
+        "illustration": "Nele Klumpe",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_borbaradianischer_laienmagier_erinnerung_verlasse_dich.json",
+      "rawCard": {
+        "cardName": "Borbaradianischer Laienmagier",
+        "cardType": "Schergenkarte",
+        "set": "Rückkehr zum Schwarzen Keiler",
+        "setId": "rueckkehr_zum_schwarzen_keiler",
+        "setShortName": "Rückkehr zum Schwarzen Keiler",
+        "setSymbol": "R",
+        "layout": "landscape",
+        "image": "sc_borbaradianischer_laienmagier_erinnerung_verlasse_dich.webp",
+        "tags": [
+          "mensch",
+          "borbaradianer",
+          "zauberer"
+        ],
+        "keywords": [
+          "Mensch",
+          "Borbaradianer",
+          "Zauberer"
+        ],
+        "searchAliases": [],
+        "specialRules": [],
+        "stats": {
+          "gefahrenpunkte": 3,
+          "lebenspunkte": 13,
+          "ausweichen": "-",
+          "ruestung": 2,
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-5",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein Held nach Wahl der Helden erhält 1W6+1 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "6-12",
+            "title": "Erinnerung verlasse dich",
+            "text": "Der Held mit den meisten [SCHICKSALSPUNKT] muss die obersten 3 Karten seines Heldendecks abwerfen. Der Laienmagier verliert 1W6 [LEBEN]."
+          },
+          {
+            "range": "13-17",
+            "title": "Ausruhen",
+            "text": "Heilt bei sich 2 [LEBEN]."
+          },
+          {
+            "range": "18-20",
+            "title": "Nichts",
+            "text": "Starrt düster vor sich hin."
+          }
+        ],
+        "illustration": "Verena Biskup",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_borbaradianischer_laienmagier_hoellenpein_zerreisse_dich.json",
+      "rawCard": {
+        "cardName": "Borbaradianischer Laienmagier",
+        "cardType": "Schergenkarte",
+        "set": "Rückkehr zum Schwarzen Keiler",
+        "setId": "rueckkehr_zum_schwarzen_keiler",
+        "setShortName": "Rückkehr zum Schwarzen Keiler",
+        "setSymbol": "R",
+        "layout": "landscape",
+        "image": "sc_borbaradianischer_laienmagier_hoellenpein_zerreisse_dich.webp",
+        "tags": [
+          "mensch",
+          "borbaradianer",
+          "zauberer"
+        ],
+        "keywords": [
+          "Mensch",
+          "Borbaradianer",
+          "Zauberer"
+        ],
+        "searchAliases": [],
+        "specialRules": [],
+        "stats": {
+          "gefahrenpunkte": 3,
+          "lebenspunkte": 13,
+          "ausweichen": "-",
+          "ruestung": 2,
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-5",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein Held nach Wahl der Helden erhält 1W6+1 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "6-12",
+            "title": "Höllenpein zerreiße dich",
+            "text": "Der Held mit den meisten [SCHICKSALSPUNKT] verliert 2W6 [LEBEN]. Der Laienmagier verliert 1W6 [LEBEN]."
+          },
+          {
+            "range": "13-17",
+            "title": "Ausruhen",
+            "text": "Heilt bei sich 2 [LEBEN]."
+          },
+          {
+            "range": "18-20",
+            "title": "Nichts",
+            "text": "Starrt düster vor sich hin."
+          }
+        ],
+        "illustration": "Verena Biskup",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_gewiefter_soeldner.json",
+      "rawCard": {
+        "cardName": "Gewiefter Söldner",
+        "cardType": "Schergenkarte",
+        "set": "Wirtshaus zum Schwarzen Keiler",
+        "setId": "wirtshaus_zum_schwarzen_keiler",
+        "setShortName": "Wirtshaus zum Schwarzen Keiler",
+        "setSymbol": "Keilerkopf",
+        "layout": "landscape",
+        "image": "sc_gewiefter_soeldner.webp",
+        "tags": [
+          "mensch",
+          "soeldner"
+        ],
+        "keywords": [
+          "Mensch",
+          "Söldner"
+        ],
+        "searchAliases": [],
+        "specialRules": [
+          "Wurde er zum Ziel einer Anführeraktion, so bekommt er in der laufenden Runde +1 [AKTIONEN]."
+        ],
+        "stats": {
+          "gefahrenpunkte": 6,
+          "lebenspunkte": 16,
+          "ausweichen": "-",
+          "ruestung": 2,
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-2",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Der Startspieler erhält 1W6+4 [TREFFERPUNKTE] und muss 1 [SCHICKSALSPUNKT] ablegen."
+          },
+          {
+            "range": "3-10",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein zufälliger Held erhält 1W6+2 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "11-16",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein Held nach Wahl der Spieler erhält 1W6+1 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "17-20",
+            "title": "Flucht",
+            "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+          }
+        ],
+        "illustration": "Luisa Preißler",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_horasischer_duellant.json",
+      "rawCard": {
+        "cardName": "Horasischer Duellant",
+        "cardType": "Schergenkarte",
+        "set": "Wirtshaus zum Schwarzen Keiler",
+        "setId": "wirtshaus_zum_schwarzen_keiler",
+        "setShortName": "Wirtshaus zum Schwarzen Keiler",
+        "setSymbol": "Keilerkopf",
+        "layout": "landscape",
+        "image": "sc_horasischer_duellant.webp",
+        "copies": 2,
+        "usedDuplicateForVerification": true,
+        "tags": [
+          "mensch",
+          "soeldner"
+        ],
+        "keywords": [
+          "Mensch",
+          "Söldner"
+        ],
+        "searchAliases": [],
+        "specialRules": [
+          "Zu Beginn seines Zuges entfernt 1 [UNSICHERES_SYMBOL_BLAUE_RUNDE_MARKE] von dieser Karte."
+        ],
+        "stats": {
+          "gefahrenpunkte": 4,
+          "lebenspunkte": 13,
+          "ausweichen": "[UNSICHERES_SYMBOL_BLAUE_RUNDE_MARKE] x5",
+          "ruestung": 1,
+          "aktionen": 2
+        },
+        "actionTable": [
+          {
+            "range": "1-8",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Der Startspieler erhält 1W6+2 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "9-18",
+            "title": "Verteidigungsstellung",
+            "text": "Legt 1 [UNSICHERES_SYMBOL_BLAUE_RUNDE_MARKE] auf diese Karte."
+          },
+          {
+            "range": "19-20",
+            "title": "Flucht",
+            "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+          }
+        ],
+        "illustration": "Annika Maar",
+        "source": "card_image",
+        "uncertain": true,
+        "uncertainFields": [
+          "specialRules[0]",
+          "stats.ausweichen",
+          "actionTable[1].text"
+        ],
+        "uncertainNotes": [
+          "Auf der Karte ist ein blaues rundes Markersymbol zu sehen, das hier nicht sicher offiziell zugeordnet werden konnte. Deshalb vorläufig als [UNSICHERES_SYMBOL_BLAUE_RUNDE_MARKE] markiert."
+        ]
+      }
+    },
+    {
+      "fileName": "sc_rachsuechtige_leibwaechterin.json",
+      "rawCard": {
+        "cardName": "Rachsüchtige Leibwächterin",
+        "cardType": "Schergenkarte",
+        "set": "Wirtshaus zum Schwarzen Keiler",
+        "setId": "wirtshaus_zum_schwarzen_keiler",
+        "setShortName": "Wirtshaus zum Schwarzen Keiler",
+        "setSymbol": "Keilerkopf",
+        "layout": "landscape",
+        "image": "sc_rachsuechtige_leibwaechterin.webp",
+        "copies": 2,
+        "usedDuplicateForVerification": true,
+        "tags": [
+          "mensch",
+          "soeldner",
+          "waechter"
+        ],
+        "keywords": [
+          "Mensch",
+          "Söldner",
+          "Wächter"
+        ],
+        "searchAliases": [],
+        "specialRules": [
+          "Wenn die Leibwächterin oder ein links oder rechts an sie angrenzender Gegner durch den Angriff eines Helden [LEBEN] verliert, führt die Leibwächterin sofort eine [AKTIONEN] durch."
+        ],
+        "stats": {
+          "gefahrenpunkte": 5,
+          "lebenspunkte": 14,
+          "ausweichen": "-",
+          "ruestung": 2,
+          "aktionen": 0
+        },
+        "actionTable": [
+          {
+            "range": "1-4",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Der Held, der den Angriff durchgeführt hat*, erhält 1W6+3 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "5-12",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Der Held, der den Angriff durchgeführt hat*, erhält 1W6+2 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "13-20",
+            "title": "Nichts",
+            "text": "Reagiert nicht rechtzeitig."
+          }
+        ],
+        "illustration": "Nathaniel Park",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_soeldner_langbogenschuetze.json",
+      "rawCard": {
+        "cardName": "Söldner-Langbogenschütze",
+        "cardType": "Schergenkarte",
+        "set": "Wirtshaus zum Schwarzen Keiler",
+        "setId": "wirtshaus_zum_schwarzen_keiler",
+        "setShortName": "Wirtshaus zum Schwarzen Keiler",
+        "setSymbol": "Keilerkopf",
+        "layout": "landscape",
+        "image": "sc_soeldner_langbogenschuetze.webp",
+        "tags": [
+          "mensch",
+          "soeldner"
+        ],
+        "keywords": [
+          "Mensch",
+          "Söldner"
+        ],
+        "searchAliases": [],
+        "specialRules": [],
+        "stats": {
+          "gefahrenpunkte": 6,
+          "lebenspunkte": 15,
+          "ausweichen": "-",
+          "ruestung": 2,
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-4",
+            "title": "[FERNKAMPF]-Angriff",
+            "text": "Der Held mit den meisten [LEBEN] erhält 1W6+6 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "5-12",
+            "title": "[FERNKAMPF]-Angriff",
+            "text": "Der Startspieler erhält 1W6+4 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "13-16",
+            "title": "Nichts",
+            "text": "Sucht sich ein neues Ziel."
+          },
+          {
+            "range": "17-20",
+            "title": "Flucht",
+            "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+          }
+        ],
+        "illustration": "Annalena Weber",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_aengstlicher_waechter.json",
+      "rawCard": {
+        "cardName": "Ängstlicher Wächter",
+        "cardType": "Schergenkarte",
+        "set": "Aventuria Grundbox",
+        "setId": "aventuria_grundbox",
+        "setShortName": "Grundbox",
+        "setSymbol": "A",
+        "layout": "landscape",
+        "image": "sc_aengstlicher_waechter.webp",
+        "tags": [
+          "mensch",
+          "waechter"
+        ],
+        "keywords": [
+          "Mensch",
+          "Wächter"
+        ],
+        "searchAliases": [],
+        "specialRules": [
+          "1 [ZEIT]: Entfernt die Karte aus dem Spiel. Sie wird nicht in den Schergenstapel zurückgemischt."
+        ],
+        "stats": {
+          "gefahrenpunkte": 3,
+          "lebenspunkte": 10,
+          "ausweichen": 2,
+          "ruestung": "-",
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-2",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Der Startspieler erhält 2W6+2 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "3-10",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein zufälliger Held erhält 1W6+1 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "11-16",
+            "title": "Nichts",
+            "text": "Zögert ängstlich."
+          },
+          {
+            "range": "17-19",
+            "title": "Flucht",
+            "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+          },
+          {
+            "range": "20",
+            "title": "Flucht",
+            "text": "Entfernt die Karte aus dem Spiel. Sie wird nicht in den Schergenstapel zurückgemischt."
+          }
+        ],
+        "illustration": "Colin Michael Ascroft",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_armbrust_schuetze.json",
+      "rawCard": {
+        "cardName": "Armbrust-Schütze",
+        "cardType": "Schergenkarte",
+        "set": "Aventuria Grundbox",
+        "setId": "aventuria_grundbox",
+        "setShortName": "Grundbox",
+        "setSymbol": "A",
+        "layout": "landscape",
+        "image": "sc_armbrust_schuetze.webp",
+        "copies": 2,
+        "usedDuplicateForVerification": true,
+        "tags": [
+          "mensch",
+          "waechter"
+        ],
+        "keywords": [
+          "Mensch",
+          "Wächter"
+        ],
+        "searchAliases": [],
+        "specialRules": [],
+        "stats": {
+          "gefahrenpunkte": 4,
+          "lebenspunkte": 12,
+          "ausweichen": 2,
+          "ruestung": "-",
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-4",
+            "title": "[FERNKAMPF]-Angriff",
+            "text": "Der Held mit den meisten [LEBEN] erhält 1W6+5 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "5-12",
+            "title": "[FERNKAMPF]-Angriff",
+            "text": "Der Startspieler erhält 1W6+2 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "13-16",
+            "title": "Nichts",
+            "text": "Sucht sich ein neues Ziel."
+          },
+          {
+            "range": "17-20",
+            "title": "Flucht",
+            "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+          }
+        ],
+        "illustration": "Nathaniel Park",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_eifriger_gruenschnabel.json",
+      "rawCard": {
+        "cardName": "Eifriger Grünschnabel",
+        "cardType": "Schergenkarte",
+        "set": "Wirtshaus zum Schwarzen Keiler",
+        "setId": "wirtshaus_zum_schwarzen_keiler",
+        "setShortName": "Wirtshaus zum Schwarzen Keiler",
+        "setSymbol": "Keilerkopf",
+        "layout": "landscape",
+        "image": "sc_eifriger_gruenschnabel.webp",
+        "tags": [
+          "mensch",
+          "soeldner"
+        ],
+        "keywords": [
+          "Mensch",
+          "Söldner"
+        ],
+        "searchAliases": [],
+        "specialRules": [
+          "Steht links und rechts von ihm ein weiterer Gegner, so bekommt er [AKTIONEN]+1 und flieht nicht."
+        ],
+        "stats": {
+          "gefahrenpunkte": 3,
+          "lebenspunkte": 10,
+          "ausweichen": 2,
+          "ruestung": "-",
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-2",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Der Startspieler erhält 1W6+3 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "3-12",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein zufälliger Held erhält 1W6 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "13-20",
+            "title": "Flucht",
+            "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+          }
+        ],
+        "illustration": "Annika Maar",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_folterknecht.json",
+      "rawCard": {
+        "cardName": "Folterknecht",
+        "cardType": "Schergenkarte",
+        "set": "Wald ohne Wiederkehr",
+        "setId": "wald_ohne_wiederkehr",
+        "setShortName": "Wald ohne Wiederkehr",
+        "setSymbol": "Baum",
+        "layout": "landscape",
+        "image": "sc_folterknecht.webp",
+        "tags": [
+          "diener",
+          "mensch"
+        ],
+        "keywords": [
+          "Diener",
+          "Mensch"
+        ],
+        "searchAliases": [],
+        "specialRules": [
+          "Schergen rechts und links von dieser Karte haben jeweils [AKTIONEN]+1, verlieren jedoch vor jedem Aktionswurf 1 [LEBEN]."
+        ],
+        "stats": {
+          "gefahrenpunkte": 6,
+          "lebenspunkte": 20,
+          "ausweichen": 2,
+          "ruestung": "-",
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-8",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Der Held mit den meisten [LEBEN] erhält 1W6+2 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "9-12",
+            "title": "Verbinden",
+            "text": "Heilt sich und allen Anführern jeweils 5 [LEBEN]."
+          },
+          {
+            "range": "13-20",
+            "title": "Flucht",
+            "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+          }
+        ],
+        "illustration": "Elf Siebenpfeiffer",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_soeldner_feldwebelin.json",
+      "rawCard": {
+        "cardName": "Söldner-Feldwebelin",
+        "cardType": "Schergenkarte",
+        "set": "Wirtshaus zum Schwarzen Keiler",
+        "setId": "wirtshaus_zum_schwarzen_keiler",
+        "setShortName": "Wirtshaus zum Schwarzen Keiler",
+        "setSymbol": "Keilerkopf",
+        "layout": "landscape",
+        "image": "sc_soeldner_feldwebelin.webp",
+        "tags": [
+          "mensch",
+          "soeldner"
+        ],
+        "keywords": [
+          "Mensch",
+          "Söldner"
+        ],
+        "searchAliases": [],
+        "specialRules": [
+          "Wenn kein anderer Anführer anwesend ist, zählt die Feldwebelin als Anführer."
+        ],
+        "stats": {
+          "gefahrenpunkte": 6,
+          "lebenspunkte": 14,
+          "ausweichen": 2,
+          "ruestung": "-",
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-5",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Der Startspieler erhält 1W6+4 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "6-12",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein Held nach Wahl der Spieler erhält 1W6+4 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "13-16",
+            "title": "Heiltrank",
+            "text": "Die Söldner-Feldwebelin heilt sich 2W6 [LEBEN]."
+          },
+          {
+            "range": "17-20",
+            "title": "Nichts",
+            "text": "Brüllt Befehle."
+          }
+        ],
+        "illustration": "Annika Maar",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_treuer_leibwaechter.json",
+      "rawCard": {
+        "cardName": "Treuer Leibwächter",
+        "cardType": "Schergenkarte",
+        "set": "Aventuria Grundbox",
+        "setId": "aventuria_grundbox",
+        "setShortName": "Grundbox",
+        "setSymbol": "A",
+        "layout": "landscape",
+        "image": "sc_treuer_leibwaechter.webp",
+        "tags": [
+          "mensch",
+          "waechter"
+        ],
+        "keywords": [
+          "Mensch",
+          "Wächter"
+        ],
+        "searchAliases": [],
+        "specialRules": [
+          "Der Gegner rechts und links von dieser Karte erhält jeweils [AUSWEICHEN]+1."
+        ],
+        "stats": {
+          "gefahrenpunkte": 5,
+          "lebenspunkte": 15,
+          "ausweichen": 2,
+          "ruestung": "-",
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-4",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Der Held, der zuletzt den Anführer angreift, erhält 1W6+3 [TREFFERPUNKTE]. Falls in der laufenden Runde kein Held den Anführer angreift, wird ein zufälliger Held getroffen."
+          },
+          {
+            "range": "5-12",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Der Held mit den meisten [LEBEN] erhält 1W6+2 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "13-17",
+            "title": "Nichts",
+            "text": "Schaut sich um und zögert."
+          },
+          {
+            "range": "18-20",
+            "title": "Flucht",
+            "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+          }
+        ],
+        "illustration": "Luisa Preißler",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_boese_magd.json",
+      "rawCard": {
+        "cardName": "Böse Magd",
+        "cardType": "Schergenkarte",
+        "set": "Aventuria Grundbox",
+        "setId": "aventuria_grundbox",
+        "setShortName": "Grundbox",
+        "setSymbol": "A",
+        "layout": "landscape",
+        "image": "sc_boese_magd.webp",
+        "tags": [
+          "mensch",
+          "diener"
+        ],
+        "keywords": [
+          "Mensch",
+          "Diener"
+        ],
+        "searchAliases": [],
+        "specialRules": [
+          "Kann nicht angegriffen werden, solange rechts neben ihr ein weiterer Gegner steht."
+        ],
+        "stats": {
+          "gefahrenpunkte": 2,
+          "lebenspunkte": 10,
+          "ausweichen": 1,
+          "ruestung": "-",
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-4",
+            "title": "Pech an den Hals wünschen",
+            "text": "Der Held mit den meisten [SCHICKSALSPUNKT] muss alle [SCHICKSALSPUNKT] ablegen."
+          },
+          {
+            "range": "5-8",
+            "title": "Verbinden",
+            "text": "Heilt den Gegner rechts neben sich und allen Anführern jeweils 5 [LEBEN]."
+          },
+          {
+            "range": "9-15",
+            "title": "Nichts",
+            "text": "Guckt unschuldig."
+          },
+          {
+            "range": "16-20",
+            "title": "Flucht",
+            "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+          }
+        ],
+        "illustration": "Anna Steinbauer",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_buckliger.json",
+      "rawCard": {
+        "cardName": "Buckliger",
+        "cardType": "Schergenkarte",
+        "set": "Aventuria Grundbox",
+        "setId": "aventuria_grundbox",
+        "setShortName": "Grundbox",
+        "setSymbol": "A",
+        "layout": "landscape",
+        "image": "sc_buckliger.webp",
+        "tags": [
+          "mensch",
+          "diener"
+        ],
+        "keywords": [
+          "Mensch",
+          "Diener"
+        ],
+        "searchAliases": [],
+        "specialRules": [
+          "Solange er im Spiel ist haben alle Anführer +1 [AUSWEICHEN]. Sobald alle Anführer besiegt wurden, entfernt den Buckligen ebenfalls."
+        ],
+        "stats": {
+          "gefahrenpunkte": 6,
+          "lebenspunkte": 20,
+          "ausweichen": 2,
+          "ruestung": "-",
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-8",
+            "title": "Verbinden",
+            "text": "Heilt sich und allen Anführern jeweils 5 [LEBEN]."
+          },
+          {
+            "range": "9-15",
+            "title": "Verfluchen",
+            "text": "Alle Helden verlieren für jeden ihrer [SCHICKSALSPUNKT] 1W6 [LEBEN]."
+          },
+          {
+            "range": "16-20",
+            "title": "Nichts",
+            "text": "Er stammelt unzusammenhängende Worte."
+          }
+        ],
+        "illustration": "Anja DiPaolo",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_haken_joe.json",
+      "rawCard": {
+        "cardName": "Haken-Joe",
+        "cardType": "Schergenkarte",
+        "set": "Aventuria Grundbox",
+        "setId": "aventuria_grundbox",
+        "setShortName": "Grundbox",
+        "setSymbol": "A",
+        "layout": "landscape",
+        "image": "sc_haken_joe.webp",
+        "tags": [
+          "mensch",
+          "pirat"
+        ],
+        "keywords": [
+          "Mensch",
+          "Pirat"
+        ],
+        "searchAliases": [],
+        "specialRules": [],
+        "stats": {
+          "gefahrenpunkte": 5,
+          "lebenspunkte": 15,
+          "ausweichen": 2,
+          "ruestung": "-",
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-2",
+            "title": "Haken-Schwung",
+            "text": "Ein zufälliger Held muss eine seiner ausgespielten Waffen seiner Wahl zurück auf die Hand nehmen. Hat er keine, passiert nichts."
+          },
+          {
+            "range": "3-7",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein zufälliger Held erhält 1W6+3 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "8-12",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein Held nach Wahl der Spieler erhält 1W6+3 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "13-17",
+            "title": "Nichts",
+            "text": "Brüllt einen Piratenfluch."
+          },
+          {
+            "range": "18-20",
+            "title": "Flucht",
+            "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+          }
+        ],
+        "illustration": "Anja DiPaolo",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_kraeftiger_yeti.json",
+      "rawCard": {
+        "cardName": "Kräftiger Yeti",
+        "cardType": "Schergenkarte",
+        "set": "Mythische Geschichten",
+        "setId": "mythische_geschichten",
+        "setShortName": "Mythische Geschichten",
+        "setSymbol": "mythische_geschichten_symbol",
+        "layout": "landscape",
+        "image": "sc_kraeftiger_yeti.webp",
+        "sourceImages": [
+          "Karte0001.webp"
+        ],
+        "tags": [
+          "yeti",
+          "raeuber"
+        ],
+        "keywords": [
+          "Yeti",
+          "Räuber"
+        ],
+        "specialRules": [],
+        "stats": {
+          "gefahrenpunkte": 5,
+          "lebenspunkte": 40,
+          "ausweichen": "-",
+          "ruestung": 1,
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-2",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein zufälliger Held erhält 3W6 [TREFFERPUNKTE] und muss 1 zufällige Ausdauerkarte auf die Hand nehmen."
+          },
+          {
+            "range": "3-8",
+            "title": "Ausholen",
+            "text": "Lege 1 [VERDERBEN] auf diese Karte, um anzuzeigen, dass das nächste \"Ausholen\"-Ergebnis dieses Yetis stattdessen als der oben genannte [NAHKAMPF]-Angriff gilt. Entferne danach die [VERDERBEN]."
+          },
+          {
+            "range": "9-14",
+            "title": "Nichts",
+            "text": "Er brüstet sich mit seiner Kraft."
+          },
+          {
+            "range": "15-20",
+            "title": "Flucht",
+            "text": "Liegen die aktuellen [LEBEN] des Yeti unter 20, so entferne ihn aus dem Kampf."
+          }
+        ],
+        "illustration": "Verena Biskup",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_gemeiner_yeti.json",
+      "rawCard": {
+        "cardName": "Gemeiner Yeti",
+        "cardType": "Schergenkarte",
+        "set": "Mythische Geschichten",
+        "setId": "mythische_geschichten",
+        "setShortName": "Mythische Geschichten",
+        "setSymbol": "mythische_geschichten_symbol",
+        "layout": "landscape",
+        "image": "sc_gemeiner_yeti.webp",
+        "sourceImages": [
+          "Karte0002.webp"
+        ],
+        "tags": [
+          "yeti",
+          "raeuber"
+        ],
+        "keywords": [
+          "Yeti",
+          "Räuber"
+        ],
+        "specialRules": [],
+        "stats": {
+          "gefahrenpunkte": 5,
+          "lebenspunkte": 40,
+          "ausweichen": "-",
+          "ruestung": 1,
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-2",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Der Held mit den wenigsten [LEBEN] erhält 2W6 [TREFFERPUNKTE] und muss 1 zufällige Ausdauerkarte auf die Hand nehmen."
+          },
+          {
+            "range": "3-8",
+            "title": "Ausholen",
+            "text": "Lege 1 [VERDERBEN] auf diese Karte, um anzuzeigen, dass das nächste \"Ausholen\"-Ergebnis dieses Yetis stattdessen als der oben genannte [NAHKAMPF]-Angriff gilt. Entferne danach die [VERDERBEN]."
+          },
+          {
+            "range": "9-14",
+            "title": "Gemein",
+            "text": "Der Held mit den wenigsten [LEBEN] verliert 2 [LEBEN]."
+          },
+          {
+            "range": "15-20",
+            "title": "Flucht",
+            "text": "Liegen die aktuellen [LEBEN] des Yeti unter 20, so entferne ihn aus dem Kampf."
+          }
+        ],
+        "illustration": "Verena Biskup",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_veraergerter_yeti.json",
+      "rawCard": {
+        "cardName": "Verärgerter Yeti",
+        "cardType": "Schergenkarte",
+        "set": "Mythische Geschichten",
+        "setId": "mythische_geschichten",
+        "setShortName": "Mythische Geschichten",
+        "setSymbol": "mythische_geschichten_symbol",
+        "layout": "landscape",
+        "image": "sc_veraergerter_yeti.webp",
+        "sourceImages": [
+          "Karte0003.webp"
+        ],
+        "tags": [
+          "yeti",
+          "raeuber"
+        ],
+        "keywords": [
+          "Yeti",
+          "Räuber"
+        ],
+        "specialRules": [],
+        "stats": {
+          "gefahrenpunkte": 5,
+          "lebenspunkte": 40,
+          "ausweichen": "-",
+          "ruestung": 1,
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-2",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein zufälliger Held erhält 2W6 [TREFFERPUNKTE] und muss 1 zufällige Ausdauerkarte auf die Hand nehmen."
+          },
+          {
+            "range": "3-8",
+            "title": "Ausholen",
+            "text": "Lege 1 [VERDERBEN] auf diese Karte, um anzuzeigen, dass das nächste \"Ausholen\"-Ergebnis dieses Yetis stattdessen als der oben genannte [NAHKAMPF]-Angriff gilt. Entferne danach 1 [VERDERBEN] von dieser Karte."
+          },
+          {
+            "range": "9-14",
+            "title": "Verärgert",
+            "text": "Der Yeti verliert 1W6 [LEBEN]. Lege 1 [VERDERBEN] auf diese Karte (siehe oben)."
+          },
+          {
+            "range": "15-20",
+            "title": "Flucht",
+            "text": "Liegen die aktuellen [LEBEN] des Yeti unter 20, so entferne ihn aus dem Kampf."
+          }
+        ],
+        "illustration": "Verena Biskup",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_flinker_yeti.json",
+      "rawCard": {
+        "cardName": "Flinker Yeti",
+        "cardType": "Schergenkarte",
+        "set": "Mythische Geschichten",
+        "setId": "mythische_geschichten",
+        "setShortName": "Mythische Geschichten",
+        "setSymbol": "mythische_geschichten_symbol",
+        "layout": "landscape",
+        "image": "sc_flinker_yeti.webp",
+        "sourceImages": [
+          "Karte0004.webp"
+        ],
+        "tags": [
+          "yeti",
+          "raeuber"
+        ],
+        "keywords": [
+          "Yeti",
+          "Räuber"
+        ],
+        "specialRules": [],
+        "stats": {
+          "gefahrenpunkte": 5,
+          "lebenspunkte": 40,
+          "ausweichen": 8,
+          "ruestung": 1,
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-2",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein zufälliger Held erhält 2W6 [TREFFERPUNKTE] und muss 1 zufällige Ausdauerkarte auf die Hand nehmen."
+          },
+          {
+            "range": "3-8",
+            "title": "Ausholen",
+            "text": "Lege 1 [VERDERBEN] auf diese Karte, um anzuzeigen, dass das nächste \"Ausholen\"-Ergebnis dieses Yetis stattdessen als der oben genannte [NAHKAMPF]-Angriff gilt. Entferne danach die [VERDERBEN]."
+          },
+          {
+            "range": "9-14",
+            "title": "Flink",
+            "text": "Der Yeti ist bis zum Beginn des nächsten Gegnerzuges immun gegen Nahkampfangriffe."
+          },
+          {
+            "range": "15-20",
+            "title": "Flucht",
+            "text": "Liegen die aktuellen [LEBEN] des Yeti unter 20, so entferne ihn aus dem Kampf."
+          }
+        ],
+        "illustration": "Verena Biskup",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_klammernder_yeti.json",
+      "rawCard": {
+        "cardName": "Klammernder Yeti",
+        "cardType": "Schergenkarte",
+        "set": "Mythische Geschichten",
+        "setId": "mythische_geschichten",
+        "setShortName": "Mythische Geschichten",
+        "setSymbol": "mythische_geschichten_symbol",
+        "layout": "landscape",
+        "image": "sc_klammernder_yeti.webp",
+        "sourceImages": [
+          "Karte0005.webp"
+        ],
+        "tags": [
+          "yeti",
+          "raeuber"
+        ],
+        "keywords": [
+          "Yeti",
+          "Räuber"
+        ],
+        "specialRules": [],
+        "stats": {
+          "gefahrenpunkte": 5,
+          "lebenspunkte": 40,
+          "ausweichen": "-",
+          "ruestung": 1,
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-2",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein zufälliger Held erhält 2W6 [TREFFERPUNKTE] und muss 1 zufällige Ausdauerkarte auf die Hand nehmen."
+          },
+          {
+            "range": "3-8",
+            "title": "Ausholen",
+            "text": "Lege 1 [VERDERBEN] auf diese Karte, um anzuzeigen, dass das nächste \"Ausholen\"-Ergebnis dieses Yetis stattdessen als der oben genannte [NAHKAMPF]-Angriff gilt. Entferne danach die [VERDERBEN]."
+          },
+          {
+            "range": "9-14",
+            "title": "Klammern",
+            "text": "Ein zufälliger Held muss 1 zufällige Ausdauerkarte ablegen."
+          },
+          {
+            "range": "15-20",
+            "title": "Flucht",
+            "text": "Liegen die aktuellen [LEBEN] des Yeti unter 20, so entferne ihn aus dem Kampf."
+          }
+        ],
+        "illustration": "Verena Biskup",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_fluchender_yeti.json",
+      "rawCard": {
+        "cardName": "Fluchender Yeti",
+        "cardType": "Schergenkarte",
+        "set": "Mythische Geschichten",
+        "setId": "mythische_geschichten",
+        "setShortName": "Mythische Geschichten",
+        "setSymbol": "mythische_geschichten_symbol",
+        "layout": "landscape",
+        "image": "sc_fluchender_yeti.webp",
+        "sourceImages": [
+          "Karte0006.webp"
+        ],
+        "tags": [
+          "yeti",
+          "raeuber"
+        ],
+        "keywords": [
+          "Yeti",
+          "Räuber"
+        ],
+        "specialRules": [],
+        "stats": {
+          "gefahrenpunkte": 5,
+          "lebenspunkte": 40,
+          "ausweichen": "-",
+          "ruestung": 1,
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-2",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein zufälliger Held erhält 2W6 [TREFFERPUNKTE] und muss 1 zufällige Ausdauerkarte auf die Hand nehmen."
+          },
+          {
+            "range": "3-8",
+            "title": "Ausholen",
+            "text": "Lege 1 [VERDERBEN] auf diese Karte, um anzuzeigen, dass das nächste \"Ausholen\"-Ergebnis dieses Yetis stattdessen als der oben genannte [NAHKAMPF]-Angriff gilt. Entferne danach die [VERDERBEN]."
+          },
+          {
+            "range": "9-14",
+            "title": "Fluch",
+            "text": "Der Held mit den meisten [SCHICKSALSPUNKT] muss 1 [SCHICKSALSPUNKT] ablegen."
+          },
+          {
+            "range": "15-20",
+            "title": "Flucht",
+            "text": "Liegen die aktuellen [LEBEN] des Yeti unter 20, so entferne ihn aus dem Kampf."
+          }
+        ],
+        "illustration": "Verena Biskup",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_nachtragender_yeti.json",
+      "rawCard": {
+        "cardName": "Nachtragender Yeti",
+        "cardType": "Schergenkarte",
+        "set": "Mythische Geschichten",
+        "setId": "mythische_geschichten",
+        "setShortName": "Mythische Geschichten",
+        "setSymbol": "mythische_geschichten_symbol",
+        "layout": "landscape",
+        "image": "sc_nachtragender_yeti.webp",
+        "sourceImages": [
+          "Karte0007.webp"
+        ],
+        "tags": [
+          "yeti",
+          "raeuber"
+        ],
+        "keywords": [
+          "Yeti",
+          "Räuber"
+        ],
+        "specialRules": [
+          "Bis zu einmal pro Runde, wenn der Yeti durch einen Helden Schaden erhält, erhält dieser Held direkt im Anschluss daran 2W6 [TREFFERPUNKTE]."
+        ],
+        "stats": {
+          "gefahrenpunkte": 5,
+          "lebenspunkte": 40,
+          "ausweichen": "-",
+          "ruestung": 1,
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-2",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein zufälliger Held erhält 2W6 [TREFFERPUNKTE] und muss 1 zufällige Ausdauerkarte auf die Hand nehmen."
+          },
+          {
+            "range": "3-8",
+            "title": "Ausholen",
+            "text": "Lege 1 [VERDERBEN] auf diese Karte, um anzuzeigen, dass das nächste \"Ausholen\"-Ergebnis dieses Yetis stattdessen als der oben genannte [NAHKAMPF]-Angriff gilt. Entferne danach die [VERDERBEN]."
+          },
+          {
+            "range": "9-14",
+            "title": "Nichts",
+            "text": "Er knurrt argwöhnisch."
+          },
+          {
+            "range": "15-20",
+            "title": "Flucht",
+            "text": "Liegen die aktuellen [LEBEN] des Yeti unter 20, so entferne ihn aus dem Kampf."
+          }
+        ],
+        "illustration": "Verena Biskup",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_freundlicher_yeti.json",
+      "rawCard": {
+        "cardName": "Freundlicher Yeti",
+        "cardType": "Schergenkarte",
+        "set": "Mythische Geschichten",
+        "setId": "mythische_geschichten",
+        "setShortName": "Mythische Geschichten",
+        "setSymbol": "mythische_geschichten_symbol",
+        "layout": "landscape",
+        "image": "sc_freundlicher_yeti.webp",
+        "sourceImages": [
+          "Karte0008.webp"
+        ],
+        "tags": [
+          "yeti",
+          "raeuber"
+        ],
+        "keywords": [
+          "Yeti",
+          "Räuber"
+        ],
+        "specialRules": [],
+        "stats": {
+          "gefahrenpunkte": 5,
+          "lebenspunkte": 40,
+          "ausweichen": "-",
+          "ruestung": 1,
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-2",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein zufälliger Held erhält 2W6 [TREFFERPUNKTE] und muss 1 zufällige Ausdauerkarte auf die Hand nehmen."
+          },
+          {
+            "range": "3-8",
+            "title": "Ausholen",
+            "text": "Lege 1 [VERDERBEN] auf diese Karte, um anzuzeigen, dass das nächste \"Ausholen\"-Ergebnis dieses Yetis stattdessen als der oben genannte [NAHKAMPF]-Angriff gilt. Entferne danach die [VERDERBEN]."
+          },
+          {
+            "range": "9-14",
+            "title": "Freundlich",
+            "text": "Jedem Yeti außer diesem werden sofort 2 [LEBEN] geheilt."
+          },
+          {
+            "range": "15-20",
+            "title": "Flucht",
+            "text": "Liegen die aktuellen [LEBEN] des Yeti unter 20, so entferne ihn aus dem Kampf."
+          }
+        ],
+        "illustration": "Verena Biskup",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_herrischer_yeti.json",
+      "rawCard": {
+        "cardName": "Herrischer Yeti",
+        "cardType": "Schergenkarte",
+        "set": "Mythische Geschichten",
+        "setId": "mythische_geschichten",
+        "setShortName": "Mythische Geschichten",
+        "setSymbol": "mythische_geschichten_symbol",
+        "layout": "landscape",
+        "image": "sc_herrischer_yeti.webp",
+        "sourceImages": [
+          "Karte0009.webp"
+        ],
+        "tags": [
+          "yeti",
+          "raeuber"
+        ],
+        "keywords": [
+          "Yeti",
+          "Räuber"
+        ],
+        "specialRules": [],
+        "stats": {
+          "gefahrenpunkte": 5,
+          "lebenspunkte": 40,
+          "ausweichen": "-",
+          "ruestung": 1,
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-2",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein zufälliger Held erhält 2W6 [TREFFERPUNKTE] und muss 1 zufällige Ausdauerkarte auf die Hand nehmen."
+          },
+          {
+            "range": "3-8",
+            "title": "Ausholen",
+            "text": "Lege 1 [VERDERBEN] auf diese Karte, um anzuzeigen, dass das nächste \"Ausholen\"-Ergebnis dieses Yetis stattdessen als der oben genannte [NAHKAMPF]-Angriff gilt. Entferne danach die [VERDERBEN]."
+          },
+          {
+            "range": "9-14",
+            "title": "Herrisch",
+            "text": "Die [AKTIONEN]-Wurfergebnisse aller Yetis werden bis zum Ende der Runde um 1 reduziert."
+          },
+          {
+            "range": "15-20",
+            "title": "Flucht",
+            "text": "Liegen die aktuellen [LEBEN] des Yeti unter 20, so entferne ihn aus dem Kampf."
+          }
+        ],
+        "illustration": "Verena Biskup",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_wurfgewandter_yeti.json",
+      "rawCard": {
+        "cardName": "Wurfgewandter Yeti",
+        "cardType": "Schergenkarte",
+        "set": "Mythische Geschichten",
+        "setId": "mythische_geschichten",
+        "setShortName": "Mythische Geschichten",
+        "setSymbol": "mythische_geschichten_symbol",
+        "layout": "landscape",
+        "image": "sc_wurfgewandter_yeti.webp",
+        "sourceImages": [
+          "Karte0010.webp"
+        ],
+        "tags": [
+          "yeti",
+          "raeuber"
+        ],
+        "keywords": [
+          "Yeti",
+          "Räuber"
+        ],
+        "specialRules": [],
+        "stats": {
+          "gefahrenpunkte": 5,
+          "lebenspunkte": 40,
+          "ausweichen": "-",
+          "ruestung": 1,
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-2",
+            "title": "[FERNKAMPF]-Angriff",
+            "text": "Ein zufälliger Held erhält 2W6 [TREFFERPUNKTE] und muss 1 zufällige Ausdauerkarte auf die Hand nehmen."
+          },
+          {
+            "range": "3-8",
+            "title": "Ausholen",
+            "text": "Lege 1 [VERDERBEN] auf diese Karte, um anzuzeigen, dass das nächste \"Ausholen\"-Ergebnis dieses Yetis stattdessen als der oben genannte [NAHKAMPF]-Angriff gilt. Entferne danach die [VERDERBEN]."
+          },
+          {
+            "range": "9-14",
+            "title": "[FERNKAMPF]-Angriff",
+            "text": "Der Startspieler erhält 1W6 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "15-20",
+            "title": "Flucht",
+            "text": "Liegen die aktuellen [LEBEN] des Yeti unter 20, so entferne ihn aus dem Kampf."
+          }
+        ],
+        "illustration": "Verena Biskup",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_stoessischer_yeti.json",
+      "rawCard": {
+        "cardName": "Stößischer Yeti",
+        "cardType": "Schergenkarte",
+        "set": "Mythische Geschichten",
+        "setId": "mythische_geschichten",
+        "setShortName": "Mythische Geschichten",
+        "setSymbol": "mythische_geschichten_symbol",
+        "layout": "landscape",
+        "image": "sc_stoessischer_yeti.webp",
+        "sourceImages": [
+          "Karte0011.webp"
+        ],
+        "tags": [
+          "yeti",
+          "raeuber"
+        ],
+        "keywords": [
+          "Yeti",
+          "Räuber"
+        ],
+        "specialRules": [],
+        "stats": {
+          "gefahrenpunkte": 5,
+          "lebenspunkte": 40,
+          "ausweichen": "-",
+          "ruestung": 1,
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-2",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein zufälliger Held erhält 2W6 [TREFFERPUNKTE] und muss 1 zufällige Ausdauerkarte auf die Hand nehmen."
+          },
+          {
+            "range": "3-8",
+            "title": "Ausholen",
+            "text": "Lege 1 [VERDERBEN] auf diese Karte, um anzuzeigen, dass das nächste \"Ausholen\"-Ergebnis dieses Yetis stattdessen als der oben genannte [NAHKAMPF]-Angriff gilt. Entferne danach die [VERDERBEN]."
+          },
+          {
+            "range": "9-14",
+            "title": "Stößisch",
+            "text": "Der Yeti heilt sich 3W6 [LEBEN]."
+          },
+          {
+            "range": "15-20",
+            "title": "Flucht",
+            "text": "Liegen die aktuellen [LEBEN] des Yeti unter 20, so entferne ihn aus dem Kampf."
+          }
+        ],
+        "illustration": "Verena Biskup",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_aggressiver_yeti.json",
+      "rawCard": {
+        "cardName": "Aggressiver Yeti",
+        "cardType": "Schergenkarte",
+        "set": "Mythische Geschichten",
+        "setId": "mythische_geschichten",
+        "setShortName": "Mythische Geschichten",
+        "setSymbol": "mythische_geschichten_symbol",
+        "layout": "landscape",
+        "image": "sc_aggressiver_yeti.webp",
+        "sourceImages": [
+          "Karte0012.webp"
+        ],
+        "tags": [
+          "yeti",
+          "raeuber"
+        ],
+        "keywords": [
+          "Yeti",
+          "Räuber"
+        ],
+        "specialRules": [],
+        "stats": {
+          "gefahrenpunkte": 5,
+          "lebenspunkte": 40,
+          "ausweichen": "-",
+          "ruestung": 1,
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-2",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein zufälliger Held erhält 2W6 [TREFFERPUNKTE] und muss 1 zufällige Ausdauerkarte auf die Hand nehmen."
+          },
+          {
+            "range": "3-8",
+            "title": "Ausholen",
+            "text": "Lege 1 [VERDERBEN] auf diese Karte, um anzuzeigen, dass das nächste \"Ausholen\"-Ergebnis dieses Yetis stattdessen als der oben genannte [NAHKAMPF]-Angriff gilt. Entferne danach die [VERDERBEN]."
+          },
+          {
+            "range": "9-14",
+            "title": "Aggressiv",
+            "text": "Der Yeti verliert 2W6 [LEBEN] und führt sofort eine weitere [AKTIONEN] durch."
+          },
+          {
+            "range": "15-20",
+            "title": "Flucht",
+            "text": "Liegen die aktuellen [LEBEN] des Yeti unter 20, so entferne ihn aus dem Kampf."
+          }
+        ],
+        "illustration": "Verena Biskup",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_grosse_hoehlenspinne.json",
+      "rawCard": {
+        "cardName": "Große Höhlenspinne",
+        "cardType": "Schergenkarte",
+        "set": "Wirtshaus zum Schwarzen Keiler",
+        "setId": "wirtshaus_zum_schwarzen_keiler",
+        "setShortName": "Wirtshaus zum Schwarzen Keiler",
+        "setSymbol": "Keiler",
+        "layout": "landscape",
+        "image": "sc_grosse_hoehlenspinne.webp",
+        "copies": 3,
+        "sourceImages": [
+          "Karte0001.webp",
+          "Karte0002.webp",
+          "Karte0004.webp"
+        ],
+        "referenceImages": [
+          "Karte0001.webp",
+          "Karte0002.webp",
+          "Karte0004.webp"
+        ],
+        "usedDuplicateForVerification": true,
+        "tags": [
+          "tier",
+          "unterirdisch",
+          "spinne"
+        ],
+        "keywords": [
+          "Tier",
+          "Unterirdisch"
+        ],
+        "searchAliases": [],
+        "specialRules": [],
+        "stats": {
+          "gefahrenpunkte": 2,
+          "lebenspunkte": 9,
+          "ausweichen": "-",
+          "ruestung": 1,
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-4",
+            "title": "Netz",
+            "text": "Ein zufälliger Held, der aktuell nicht Opfer eines Netzes ist, muss eine [AUSWEICHEN]-Probe durchführen. Misslingt sie, so sinkt sein [AUSWEICHEN]-Wert bis zum Ende der laufenden Runde auf 0. Zeigt dies durch 1 Netz-Marke (●) auf dem [AUSWEICHEN]-Wert des Helden an."
+          },
+          {
+            "range": "5-12",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein zufälliger Held erhält 1W6+1 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "13-19",
+            "title": "Nichts",
+            "text": "Wartet ab."
+          },
+          {
+            "range": "20",
+            "title": "Flucht",
+            "text": "Entfernt die Karte aus dem Kampf, falls die [LEBEN] des Schergen bei 3 oder darunter liegen. Andernfalls geschieht nichts."
+          }
+        ],
+        "illustration": "Sandra Braun",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_schwarzer_keiler.json",
+      "rawCard": {
+        "cardName": "Schwarzer Keiler",
+        "cardType": "Schergenkarte",
+        "set": "Wirtshaus zum Schwarzen Keiler",
+        "setId": "wirtshaus_zum_schwarzen_keiler",
+        "setShortName": "Wirtshaus zum Schwarzen Keiler",
+        "setSymbol": "Keiler",
+        "layout": "landscape",
+        "image": "sc_schwarzer_keiler.webp",
+        "sourceImages": [
+          "Karte0003.webp"
+        ],
+        "tags": [
+          "tier",
+          "wald",
+          "jagdwild",
+          "keiler"
+        ],
+        "keywords": [
+          "Tier",
+          "Wald",
+          "Jagdwild"
+        ],
+        "searchAliases": [],
+        "specialRules": [
+          "Beute. Der Held, der den Schwarzen Keiler ausschaltet, darf einem Helden seiner Wahl 1W6+1 [LEBEN] heilen. Dies kann nicht genutzt werden, um einen ausgeschalteten Helden wiederzubeleben."
+        ],
+        "stats": {
+          "gefahrenpunkte": 6,
+          "lebenspunkte": 20,
+          "ausweichen": "-",
+          "ruestung": 1,
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-4",
+            "title": "Umrennen",
+            "text": "Einem zufälligen Helden muss eine [AUSWEICHEN]-Probe gelingen, oder er verliert 5 [LEBEN]. Dies zählt nicht als Angriff."
+          },
+          {
+            "range": "5-12",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Der Startspieler erhält 1W6+3 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "13-16",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein Held nach Wahl der Spieler erhält 1W6+1 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "17-20",
+            "title": "Nichts",
+            "text": "Schnüffelt nach Nahrung."
+          }
+        ],
+        "illustration": "Sandra Braun",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_alter_riesenhirschkaefer.json",
+      "rawCard": {
+        "cardName": "Alter Riesenhirschkäfer",
+        "cardType": "Schergenkarte",
+        "set": "Wirtshaus zum Schwarzen Keiler",
+        "setId": "wirtshaus_zum_schwarzen_keiler",
+        "setShortName": "Wirtshaus zum Schwarzen Keiler",
+        "setSymbol": "Keiler",
+        "layout": "landscape",
+        "image": "sc_alter_riesenhirschkaefer.webp",
+        "sourceImages": [
+          "Karte0005.webp"
+        ],
+        "tags": [
+          "tier",
+          "unterirdisch",
+          "wald",
+          "kaefer"
+        ],
+        "keywords": [
+          "Tier",
+          "Unterirdisch",
+          "Wald"
+        ],
+        "searchAliases": [],
+        "specialRules": [
+          "Der Rüstungsschutz von Rüstungen kann bei Angriffen dieses Schergen nicht genutzt werden."
+        ],
+        "stats": {
+          "gefahrenpunkte": 4,
+          "lebenspunkte": 14,
+          "ausweichen": "-",
+          "ruestung": 3,
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-3",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein zufälliger Held erhält 1W6+4 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "4-8",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein zufälliger Held erhält 1W6+2 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "9-17",
+            "title": "Nichts",
+            "text": "Krabbelt ziellos."
+          },
+          {
+            "range": "18-20",
+            "title": "Flucht",
+            "text": "Entfernt die Karte aus dem Kampf, falls die [LEBEN] des Schergen bei 8 oder darunter liegen. Andernfalls geschieht nichts."
+          }
+        ],
+        "illustration": "Julia Metzger",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_ausgewachsener_hoehlenbaer.json",
+      "rawCard": {
+        "cardName": "Ausgewachsener Höhlenbär",
+        "cardType": "Schergenkarte",
+        "set": "Wirtshaus zum Schwarzen Keiler",
+        "setId": "wirtshaus_zum_schwarzen_keiler",
+        "setShortName": "Wirtshaus zum Schwarzen Keiler",
+        "setSymbol": "Keiler",
+        "layout": "landscape",
+        "image": "sc_ausgewachsener_hoehlenbaer.webp",
+        "sourceImages": [
+          "Karte0006.webp"
+        ],
+        "tags": [
+          "tier",
+          "unterirdisch",
+          "baer"
+        ],
+        "keywords": [
+          "Tier",
+          "Unterirdisch"
+        ],
+        "searchAliases": [],
+        "specialRules": [],
+        "stats": {
+          "gefahrenpunkte": 5,
+          "lebenspunkte": 20,
+          "ausweichen": "-",
+          "ruestung": 1,
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-2",
+            "title": "Brüllen",
+            "text": "Alle Helden müssen eine Willenskraft-Probe bestehen, oder 1 zufällige ihrer Ausdauerkarten ablegen."
+          },
+          {
+            "range": "3-4",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Der Startspieler erhält 2W6+2 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "5-12",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein zufälliger Held erhält 1W6+2 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "13-20",
+            "title": "Nichts",
+            "text": "Knurrt bedrohlich."
+          }
+        ],
+        "illustration": "Nadine Schäkel",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_aggressiver_baer.json",
+      "rawCard": {
+        "cardName": "Aggressiver Bär",
+        "cardType": "Schergenkarte",
+        "set": "Wald ohne Wiederkehr",
+        "setId": "wald_ohne_wiederkehr",
+        "setShortName": "Wald ohne Wiederkehr",
+        "setSymbol": "Baum",
+        "layout": "landscape",
+        "image": "sc_aggressiver_baer.webp",
+        "sourceImages": [
+          "Karte0007.webp"
+        ],
+        "tags": [
+          "tier",
+          "wald",
+          "baer"
+        ],
+        "keywords": [
+          "Tier",
+          "Wald"
+        ],
+        "searchAliases": [],
+        "specialRules": [
+          "Sobald der Bär 6 [LEBEN] oder mehr verloren hat, erhält er +1 [AKTIONEN]. Sobald er 12 [LEBEN] oder mehr verloren hat, erhält er zusätzlich nochmals +1 [AKTIONEN]."
+        ],
+        "stats": {
+          "gefahrenpunkte": 7,
+          "lebenspunkte": 18,
+          "ausweichen": "-",
+          "ruestung": 1,
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-2",
+            "title": "Umarmung",
+            "text": "Der Startspieler muss eine seiner ausliegenden dauerhaften Karten seiner Wahl zurück auf die Hand nehmen."
+          },
+          {
+            "range": "3-8",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Der Held mit den meisten [LEBEN] erhält 2W6 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "9-12",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Der Startspieler erhält 1W6 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "13-20",
+            "title": "Nichts",
+            "text": "Knurrt bedrohlich."
+          }
+        ],
+        "illustration": "Tristan Denecke",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_schattenloewe.json",
+      "rawCard": {
+        "cardName": "Schattenlöwe",
+        "cardType": "Schergenkarte",
+        "set": "Mythische Geschichten",
+        "setId": "mythische_geschichten",
+        "setShortName": "Mythische Geschichten",
+        "setSymbol": "Schneeflocke",
+        "layout": "landscape",
+        "image": "sc_schattenloewe.webp",
+        "sourceImages": [
+          "Karte0008.webp"
+        ],
+        "tags": [
+          "tier",
+          "wald",
+          "loewe"
+        ],
+        "keywords": [
+          "Tier",
+          "Wald"
+        ],
+        "searchAliases": [],
+        "specialRules": [],
+        "stats": {
+          "gefahrenpunkte": 5,
+          "lebenspunkte": 24,
+          "ausweichen": "-",
+          "ruestung": 1,
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-4",
+            "title": "Anspringen",
+            "text": "Der Startspieler muss eine Sinnesschärfe-Probe ablegen. Misslingt sie, so darf er in der darauffolgenden Runde nur die Hälfte (abgerundet) seiner erschöpften Ausdauerkarten bereit machen."
+          },
+          {
+            "range": "5-10",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Der Startspieler erhält 2W6+2 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "11-17",
+            "title": "Nichts",
+            "text": "Er starrt euch reglos an."
+          },
+          {
+            "range": "18-20",
+            "title": "Flucht",
+            "text": "Liegen die aktuellen [LEBEN] des Schattenlöwen unter 9, so entferne ihn aus dem Kampf."
+          }
+        ],
+        "illustration": "Sandra Braun",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_kriechende_riesenamoebe.json",
+      "rawCard": {
+        "cardName": "Kriechende Riesenamöbe",
+        "cardType": "Schergenkarte",
+        "set": "Wald ohne Wiederkehr",
+        "setId": "wald_ohne_wiederkehr",
+        "setShortName": "Wald ohne Wiederkehr",
+        "setSymbol": "Baum",
+        "layout": "landscape",
+        "image": "sc_kriechende_riesenamoebe.webp",
+        "copies": 2,
+        "sourceImages": [
+          "Karte0009.webp",
+          "Karte0010.webp"
+        ],
+        "referenceImages": [
+          "Karte0009.webp",
+          "Karte0010.webp"
+        ],
+        "usedDuplicateForVerification": true,
+        "tags": [
+          "tier",
+          "unterirdisch",
+          "amoebe"
+        ],
+        "keywords": [
+          "Tier",
+          "Unterirdisch"
+        ],
+        "searchAliases": [],
+        "specialRules": [],
+        "stats": {
+          "gefahrenpunkte": 4,
+          "lebenspunkte": 20,
+          "ausweichen": "-",
+          "ruestung": 0,
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-2",
+            "title": "Gefräßige Säure",
+            "text": "Ein zufälliger Held muss eine seiner ausgespielten dauerhaften Karten seiner Wahl aus dem Spiel entfernen."
+          },
+          {
+            "range": "3-5",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein zufälliger Held erhält 1W6+2 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "6-10",
+            "title": "Unaufhaltsames Kriechen",
+            "text": "Der Startspieler erhält 1W6+(2 je [UNSICHERES_SYMBOL_SCHWARZER_SCHAEDELKREIS]) [TREFFERPUNKTE]."
+          },
+          {
+            "range": "6-12",
+            "title": "Aufgeregtes Kriechen",
+            "text": "Legt 1 [UNSICHERES_SYMBOL_SCHWARZER_SCHAEDELKREIS] auf diese Karte."
+          },
+          {
+            "range": "13-20",
+            "title": "Ergebnisloses Kriechen",
+            "text": "keine Auswirkung"
+          }
+        ],
+        "illustration": "Patrice Weiss",
+        "source": "card_image",
+        "uncertain": true,
+        "uncertainFields": [
+          "actionTable[2].text",
+          "actionTable[3].range",
+          "actionTable[3].text"
+        ],
+        "uncertainNotes": [
+          "Das schwarze Schädel-Kreis-Symbol ist auf beiden Bildern klar sichtbar, aber ohne sichere offizielle Token-Zuordnung. Deshalb als [UNSICHERES_SYMBOL_SCHWARZER_SCHAEDELKREIS] markiert.",
+          "Die Range '6-12' ist auf beiden Exemplaren so lesbar, obwohl sie sich mit '6-10' überschneidet. Ich habe sie deshalb nicht still korrigiert, sondern als unsicher markiert."
+        ]
+      }
+    },
+    {
+      "fileName": "sc_krabbelnde_gruftassel.json",
+      "rawCard": {
+        "cardName": "Krabbelnde Gruftassel",
+        "cardType": "Schergenkarte",
+        "set": "Wald ohne Wiederkehr",
+        "setId": "wald_ohne_wiederkehr",
+        "setShortName": "Wald ohne Wiederkehr",
+        "setSymbol": "Baum",
+        "layout": "landscape",
+        "image": "sc_krabbelnde_gruftassel.webp",
+        "copies": 2,
+        "sourceImages": [
+          "Karte0011.webp",
+          "Karte0012.webp"
+        ],
+        "referenceImages": [
+          "Karte0011.webp",
+          "Karte0012.webp"
+        ],
+        "usedDuplicateForVerification": true,
+        "tags": [
+          "tier",
+          "unterirdisch",
+          "gruftassel"
+        ],
+        "keywords": [
+          "Tier",
+          "Unterirdisch"
+        ],
+        "searchAliases": [],
+        "specialRules": [],
+        "stats": {
+          "gefahrenpunkte": 6,
+          "lebenspunkte": 20,
+          "ausweichen": "-",
+          "ruestung": 3,
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-5",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein zufälliger Held erhält 1W6+3 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "6-10",
+            "title": "Unaufhaltsames Krabbeln",
+            "text": "Der Startspieler erhält 1W6+(2 je [UNSICHERES_SYMBOL_SCHWARZER_SCHAEDELKREIS]) [TREFFERPUNKTE]."
+          },
+          {
+            "range": "10-15",
+            "title": "Aufgeregtes Krabbeln",
+            "text": "Legt 1 [UNSICHERES_SYMBOL_SCHWARZER_SCHAEDELKREIS] auf diese Karte."
+          },
+          {
+            "range": "16-19",
+            "title": "Ergebnisloses Krabbeln",
+            "text": "keine Auswirkung"
+          },
+          {
+            "range": "20",
+            "title": "Flucht",
+            "text": "Entfernt die Karte aus dem Kampf, falls die Lebenspunkte des Schergen bei 4 oder darunter liegen. Andernfalls passiert nichts."
+          }
+        ],
+        "illustration": "Tristan Denecke",
+        "source": "card_image",
+        "uncertain": true,
+        "uncertainFields": [
+          "actionTable[1].text",
+          "actionTable[2].text"
+        ],
+        "uncertainNotes": [
+          "Das schwarze Schädel-Kreis-Symbol ist sichtbar, aber nicht sicher offiziell zugeordnet. Deshalb als [UNSICHERES_SYMBOL_SCHWARZER_SCHAEDELKREIS] markiert."
+        ]
+      }
+    },
+    {
+      "fileName": "sc_gemeiner_wolf.json",
+      "rawCard": {
+        "cardName": "Gemeiner Wolf",
+        "cardType": "Schergenkarte",
+        "set": "Wald ohne Wiederkehr",
+        "setId": "wald_ohne_wiederkehr",
+        "setShortName": "Wald ohne Wiederkehr",
+        "setSymbol": "Baum",
+        "layout": "landscape",
+        "image": "sc_gemeiner_wolf.webp",
+        "copies": 2,
+        "sourceImages": [
+          "Karte0013.webp",
+          "Karte0014.webp"
+        ],
+        "referenceImages": [
+          "Karte0013.webp",
+          "Karte0014.webp"
+        ],
+        "usedDuplicateForVerification": true,
+        "tags": [
+          "tier",
+          "wald",
+          "wolf"
+        ],
+        "keywords": [
+          "Tier",
+          "Wald"
+        ],
+        "searchAliases": [],
+        "specialRules": [],
+        "stats": {
+          "gefahrenpunkte": 3,
+          "lebenspunkte": 10,
+          "ausweichen": "-",
+          "ruestung": 0,
+          "aktionen": 2
+        },
+        "actionTable": [
+          {
+            "range": "1-2",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein zufälliger Held erhält 2W6 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "3-12",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein zufälliger Held erhält 1W6 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "13-18",
+            "title": "Nichts",
+            "text": "Knurrt bedrohlich."
+          },
+          {
+            "range": "19-20",
+            "title": "Flucht",
+            "text": "Entfernt die Karte aus dem Kampf, falls die Lebenspunkte des Schergen bei 3 oder darunter liegen. Andernfalls passiert nichts."
+          }
+        ],
+        "illustration": "Sebastian Watzlawek",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_tollwuetiger_waldwolf.json",
+      "rawCard": {
+        "cardName": "Tollwütiger Waldwolf",
+        "cardType": "Schergenkarte",
+        "set": "Wald ohne Wiederkehr",
+        "setId": "wald_ohne_wiederkehr",
+        "setShortName": "Wald ohne Wiederkehr",
+        "setSymbol": "Baum",
+        "layout": "landscape",
+        "image": "sc_tollwuetiger_waldwolf.webp",
+        "copies": 2,
+        "sourceImages": [
+          "Karte0015.webp",
+          "Karte0016.webp"
+        ],
+        "referenceImages": [
+          "Karte0015.webp",
+          "Karte0016.webp"
+        ],
+        "usedDuplicateForVerification": true,
+        "tags": [
+          "tier",
+          "wald",
+          "wolf",
+          "tollwuetig"
+        ],
+        "keywords": [
+          "Tier",
+          "Wald"
+        ],
+        "searchAliases": [],
+        "specialRules": [
+          "Nachdem dieser Scherge platziert wurde, lege die Karte „Infizierte Wunde“ unter den Wolf. Der erste Held, der durch den Wolf [LEBEN] verliert, mischt sie in sein Deck."
+        ],
+        "stats": {
+          "gefahrenpunkte": 5,
+          "lebenspunkte": 15,
+          "ausweichen": "-",
+          "ruestung": 0,
+          "aktionen": 2
+        },
+        "actionTable": [
+          {
+            "range": "1-3",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein zufälliger Held erhält 2W6 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "4-12",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein zufälliger Held erhält 1W6 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "13-20",
+            "title": "Nichts",
+            "text": "Knurrt bedrohlich."
+          }
+        ],
+        "illustration": "Sebastian Watzlawek",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_diebische_riesenfledermaus.json",
+      "rawCard": {
+        "cardName": "Diebische Riesenfledermaus",
+        "cardType": "Schergenkarte",
+        "set": "Wald ohne Wiederkehr",
+        "setId": "wald_ohne_wiederkehr",
+        "setShortName": "Wald ohne Wiederkehr",
+        "setSymbol": "Baum",
+        "layout": "landscape",
+        "image": "sc_diebische_riesenfledermaus.webp",
+        "copies": 2,
+        "sourceImages": [
+          "Karte0017.webp",
+          "Karte0018.webp"
+        ],
+        "referenceImages": [
+          "Karte0017.webp",
+          "Karte0018.webp"
+        ],
+        "usedDuplicateForVerification": true,
+        "tags": [
+          "tier",
+          "unterirdisch",
+          "wald",
+          "fledermaus"
+        ],
+        "keywords": [
+          "Tier",
+          "Unterirdisch",
+          "Wald"
+        ],
+        "searchAliases": [],
+        "specialRules": [],
+        "stats": {
+          "gefahrenpunkte": 3,
+          "lebenspunkte": 8,
+          "ausweichen": 10,
+          "ruestung": 0,
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-2",
+            "title": "Diebstahl",
+            "text": "Ein zufälliger Held legt eine seiner ausgespielten dauerhaften Karten seiner Wahl unter den Schergen. Stirbt oder flieht der Scherge, so bekommt der Held die Karte zurück auf die Hand."
+          },
+          {
+            "range": "3-7",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Der Startspieler erhält 1W6+1 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "8-12",
+            "title": "Saugt Blut",
+            "text": "Der Startspieler verliert 1 [LEBEN], die Diebische Riesenfledermaus heilt 1 [LEBEN]."
+          },
+          {
+            "range": "13-17",
+            "title": "Nichts",
+            "text": "Flattert wild umher."
+          },
+          {
+            "range": "18-20",
+            "title": "Flucht",
+            "text": "Entfernt die Karte aus dem Kampf, falls die Lebenspunkte des Schergen bei 3 oder darunter liegen. Andernfalls passiert nichts."
+          }
+        ],
+        "timeEffects": [
+          {
+            "trigger": "3 [ZEIT]",
+            "text": "Legt alle Karten unter dieser ab."
+          }
+        ],
+        "illustration": "Annika Maar",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_junge_seeschlange.json",
+      "rawCard": {
+        "cardName": "Junge Seeschlange",
+        "cardType": "Schergenkarte",
+        "set": "Schiff der verlorenen Seelen",
+        "setId": "schiff_der_verlorenen_seelen",
+        "setShortName": "Schiff der verlorenen Seelen",
+        "setSymbol": "Schiff",
+        "layout": "landscape",
+        "image": "sc_junge_seeschlange.webp",
+        "sourceImages": [
+          "Karte0019.webp"
+        ],
+        "tags": [
+          "tier",
+          "meer",
+          "seeschlange"
+        ],
+        "keywords": [
+          "Tier",
+          "Meer"
+        ],
+        "searchAliases": [],
+        "specialRules": [],
+        "stats": {
+          "gefahrenpunkte": 8,
+          "lebenspunkte": 25,
+          "ausweichen": "-",
+          "ruestung": 2,
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-2",
+            "title": "Schnappen",
+            "text": "Ein zufälliger Held muss eine seiner ausliegenden Aktionskarten seiner Wahl ablegen."
+          },
+          {
+            "range": "3-10",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Der Startspieler erhält 2W6+3 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "11-20",
+            "title": "Nichts",
+            "text": "Die Seeschlange stößt ein zorniges Zischen aus."
+          }
+        ],
+        "illustration": "Nadine Schäkel",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_kleiner_krakenmolch.json",
+      "rawCard": {
+        "cardName": "Kleiner Krakenmolch",
+        "cardType": "Schergenkarte",
+        "set": "Wald ohne Wiederkehr",
+        "setId": "wald_ohne_wiederkehr",
+        "setShortName": "Wald ohne Wiederkehr",
+        "setSymbol": "Baum",
+        "layout": "landscape",
+        "image": "sc_kleiner_krakenmolch.webp",
+        "sourceImages": [
+          "Karte0020.webp"
+        ],
+        "tags": [
+          "tier",
+          "meer",
+          "unterirdisch",
+          "krakenmolch"
+        ],
+        "keywords": [
+          "Tier",
+          "Meer",
+          "Unterirdisch"
+        ],
+        "searchAliases": [],
+        "specialRules": [],
+        "stats": {
+          "gefahrenpunkte": 9,
+          "lebenspunkte": 20,
+          "ausweichen": "-",
+          "ruestung": 1,
+          "aktionen": 2
+        },
+        "actionTable": [
+          {
+            "range": "1-2",
+            "title": "Gepackt",
+            "text": "Ein zufälliger Held erhält eine Gepackt-Marke. Zu Beginn jeder seiner Kampfrunden muss er für jede Gepackt-Marke eine Körperbeherrschung-Probe bestehen, oder erhält 1W6+1 [TREFFERPUNKTE], ohne die Möglichkeit auszuweichen. Lege alle Gepackt-Marken ab, sobald der Kleine Krakenmolch aus dem Kampf entfernt wird."
+          },
+          {
+            "range": "3-10",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein zufälliger Held erhält 1W6+3 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "11-20",
+            "title": "Nichts",
+            "text": "Der Tentakel tastet gierig umher."
+          }
+        ],
+        "illustration": "Tristan Denecke",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_gieriger_tigerhai.json",
+      "rawCard": {
+        "cardName": "Gieriger Tigerhai",
+        "cardType": "Schergenkarte",
+        "set": "Schiff der verlorenen Seelen",
+        "setId": "schiff_der_verlorenen_seelen",
+        "setShortName": "Schiff der verlorenen Seelen",
+        "setSymbol": "Schiff",
+        "layout": "landscape",
+        "image": "sc_gieriger_tigerhai.webp",
+        "copies": 2,
+        "sourceImages": [
+          "Karte0021.webp",
+          "Karte0023.webp"
+        ],
+        "referenceImages": [
+          "Karte0021.webp",
+          "Karte0023.webp"
+        ],
+        "usedDuplicateForVerification": true,
+        "tags": [
+          "tier",
+          "meer",
+          "hai"
+        ],
+        "keywords": [
+          "Tier",
+          "Meer"
+        ],
+        "searchAliases": [],
+        "specialRules": [],
+        "stats": {
+          "gefahrenpunkte": 7,
+          "lebenspunkte": 15,
+          "ausweichen": 5,
+          "ruestung": 1,
+          "aktionen": 1
+        },
+        "actionTable": [
+          {
+            "range": "1-2",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Der Held mit den wenigsten [LEBEN] erhält 1W6+5 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "3-14",
+            "title": "[NAHKAMPF]-Angriff",
+            "text": "Ein zufälliger Held erhält 1W6+2 [TREFFERPUNKTE]."
+          },
+          {
+            "range": "15-20",
+            "title": "Nichts",
+            "text": "Der Hai schwimmt gierig umher."
+          }
+        ],
+        "illustration": "Nadine Schäkel",
+        "source": "card_image"
+      }
+    },
+    {
+      "fileName": "sc_hungriger_morfu.json",
+      "rawCard": {
+        "cardName": "Hungriger Morfu",
+        "cardType": "Schergenkarte",
+        "set": "Schiff der verlorenen Seelen",
+        "setId": "schiff_der_verlorenen_seelen",
+        "setShortName": "Schiff der verlorenen Seelen",
+        "setSymbol": "Schiff",
+        "layout": "landscape",
+        "image": "sc_hungriger_morfu.webp",
+        "sourceImages": [
+          "Karte0022.webp"
+        ],
+        "tags": [
+          "tier",
+          "meer",
+          "unterirdisch",
+          "morfu"
+        ],
+        "keywords": [
+          "Tier",
+          "Meer",
+          "Unterirdisch"
+        ],
+        "searchAliases": [],
+        "specialRules": [],
+        "stats": {
+          "gefahrenpunkte": 8,
+          "lebenspunkte": 24,
+          "ausweichen": "-",
+          "ruestung": 0,
+          "aktionen": "1W6"
+        },
+        "actionTable": [
+          {
+            "range": "1-5",
+            "title": "[FERNKAMPF]-Angriff",
+            "text": "Ein zufälliger Held erhält 1W6 [TREFFERPUNKTE]. Verliert er dadurch mindestens 1 [LEBEN], so verliert er weitere 1W6 [LEBEN]."
+          },
+          {
+            "range": "6-20",
+            "title": "Nichts",
+            "text": "Das Morfu kriecht hungrig umher."
+          }
+        ],
+        "illustration": "Fabrice Weiss",
+        "source": "card_image"
+      }
+    }
+  ]
+}
+
 ```
 
 ---
