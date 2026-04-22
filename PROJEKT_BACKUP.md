@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 9:27:19 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 9:27:36 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -6136,6 +6136,50 @@ select {
       "range": "17-20",
       "title": "Zerfällt",
       "text": "Mischt die Karte zurück in den Schergenstapel!"
+    }
+  ],
+  "illustration": "Malte Zierbel",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_bilgenschwein.json
+```json
+{
+  "cardName": "Bilgenschwein",
+  "cardType": "Schergenkarte",
+  "set": "Mythische Geschichten",
+  "setId": "mythische_geschichten",
+  "setShortName": "Mythische Geschichten",
+  "setSymbol": "Mythische Geschichten Symbol",
+  "layout": "landscape",
+  "image": "sc_bilgenschwein.webp",
+  "sourceImages": ["Karte0004.webp"],
+  "tags": ["untot", "zombie", "pirat"],
+  "keywords": ["Untot", "Zombie", "Pirat"],
+  "specialRules": [
+    "Solange mindestens 1 Bilgenschwein am Kampf teilnimmt, sind die Talentproben aller Helden um 2 Punkte erschwert."
+  ],
+  "stats": {
+    "gefahrenpunkte": 5,
+    "lebenspunkte": 17,
+    "ausweichen": "-",
+    "ruestung": 0,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-13",
+      "title": "Übler Geruch",
+      "text": "Misslingt dem Startspieler eine Probe auf Willenskraft, so verliert er 1W6+3 [LEBEN]."
+    },
+    {
+      "range": "14-20",
+      "title": "Nichts",
+      "text": "Es macht schmatzende Geräusche."
     }
   ],
   "illustration": "Malte Zierbel",
