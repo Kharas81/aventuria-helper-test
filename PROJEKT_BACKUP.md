@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 7:23:00 PM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 7:23:25 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -9131,6 +9131,68 @@ select {
     }
   ],
   "illustration": "Anja DiPaolo",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_heimtueckischer_zilit.json
+```json
+{
+  "cardName": "Heimtückischer Zilit",
+  "cardType": "Schergenkarte",
+  "set": "Aventuria - Kelche der Macht",
+  "setId": "kelche_der_macht",
+  "setShortName": "Kelche der Macht",
+  "setSymbol": "K",
+  "layout": "landscape",
+  "image": "sc_heimtueckischer_zilit.webp",
+  "copies": 2,
+  "sourceImages": [
+    "Karte0004.webp",
+    "Karte0005.webp"
+  ],
+  "referenceImages": [
+    "Karte0004.webp",
+    "Karte0005.webp"
+  ],
+  "usedDuplicateForVerification": true,
+  "tags": ["amphibie", "zilit"],
+  "keywords": ["Amphibie", "Zilit"],
+  "searchAliases": [],
+  "specialRules": [],
+  "stats": {
+    "gefahrenpunkte": 5,
+    "lebenspunkte": 12,
+    "ausweichen": "-",
+    "ruestung": 3,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-4",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Held mit den wenigsten [LEBEN] erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "5-12",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Held mit den meisten [MUND_SYMBOL] erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-16",
+      "title": "Nichts",
+      "text": "Zischt heimtückisch."
+    },
+    {
+      "range": "17-20",
+      "title": "Flucht",
+      "text": "Entferne die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+    }
+  ],
+  "illustration": "Nadine Schäkel",
   "source": "card_image"
 }
 
