@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 7:20:17 PM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 7:21:24 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -12156,6 +12156,79 @@ select {
   ],
   "uncertainNotes": [
     "Das blau-violette Markersymbol in „Zielt sorgfältig“ ist sichtbar, aber die offizielle Token-Zuordnung ist hier noch nicht sicher bestimmt."
+  ]
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_standhafter_echsenmensch.json
+```json
+{
+  "cardName": "Standhafter Echsenmensch",
+  "cardType": "Schergenkarte",
+  "set": "Wirtshaus zum Schwarzen Keiler",
+  "setId": "wirtshaus_zum_schwarzen_keiler",
+  "setShortName": "Wirtshaus zum Schwarzen Keiler",
+  "setSymbol": "Schwarzer Keiler",
+  "layout": "landscape",
+  "image": "sc_standhafter_echsenmensch.webp",
+  "sourceImages": [
+    "Karte0007.webp"
+  ],
+  "tags": [
+    "achaz",
+    "waechter"
+  ],
+  "keywords": [
+    "Achaz",
+    "Wächter"
+  ],
+  "searchAliases": [],
+  "specialRules": [
+    "Sobald diese Karte ins Spiel kommt, legt 3 [UNSICHERES_SYMBOL_LILA_ORB] auf diese Karte."
+  ],
+  "stats": {
+    "gefahrenpunkte": 4,
+    "lebenspunkte": 11,
+    "ausweichen": "-",
+    "ruestung": 3,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-4",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+([UNSICHERES_SYMBOL_LILA_ORB] x2) [TREFFERPUNKTE]. Entfernt 1 [UNSICHERES_SYMBOL_LILA_ORB] von dieser Karte."
+    },
+    {
+      "range": "5-11",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+[UNSICHERES_SYMBOL_LILA_ORB] [TREFFERPUNKTE]."
+    },
+    {
+      "range": "12-15",
+      "title": "Nichts",
+      "text": "Zischt."
+    },
+    {
+      "range": "16-20",
+      "title": "Flucht",
+      "text": "Wenn keine [UNSICHERES_SYMBOL_LILA_ORB] mehr auf dieser Karte liegen, entfernt diese Karte aus dem Kampf. Andernfalls entfernt 1 [UNSICHERES_SYMBOL_LILA_ORB] von dieser Karte."
+    }
+  ],
+  "illustration": "Petra Rudolf",
+  "source": "card_image",
+  "uncertain": true,
+  "uncertainFields": [
+    "specialRules[0]",
+    "actionTable[0].text",
+    "actionTable[1].text",
+    "actionTable[3].text"
+  ],
+  "uncertainNotes": [
+    "Das lila Inline-Symbol ist sichtbar, aber nicht sicher offiziell zugeordnet. Vorläufiger Platzhalter: [UNSICHERES_SYMBOL_LILA_ORB]."
   ]
 }
 
