@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 9:34:00 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 9:34:24 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -7781,6 +7781,66 @@ select {
 
 ---
 
+## 📄 Datei: data/cards/catalog/schergen/sc_hirnloser_zombie.json
+```json
+{
+  "cardName": "Hirnloser Zombie",
+  "cardType": "Schergenkarte",
+  "set": "Wald ohne Wiederkehr",
+  "setId": "wald_ohne_wiederkehr",
+  "setShortName": "Wald ohne Wiederkehr",
+  "setSymbol": "Wald ohne Wiederkehr Symbol",
+  "layout": "landscape",
+  "image": "sc_hirnloser_zombie.webp",
+  "copies": 2,
+  "sourceImages": [
+    "Karte0017.webp",
+    "Karte0019.webp"
+  ],
+  "referenceImages": [
+    "Karte0017.webp",
+    "Karte0019.webp"
+  ],
+  "usedDuplicateForVerification": true,
+  "tags": ["untoter", "zombie"],
+  "keywords": ["Untoter", "Zombie"],
+  "stats": {
+    "gefahrenpunkte": 2,
+    "lebenspunkte": 10,
+    "ausweichen": "-",
+    "ruestung": 0,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6+6 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "3-12",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein Held nach Wahl der Spieler erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-15",
+      "title": "Nichts",
+      "text": "Der Zombie wankt ziellos umher."
+    },
+    {
+      "range": "16-20",
+      "title": "Zerfällt",
+      "text": "Mische die Karte zurück in den Schergenstapel."
+    }
+  ],
+  "illustration": "Malte Zierbel",
+  "source": "card_image"
+}
+
+```
+
+---
+
 ## 📄 Datei: data/cards/catalog/schergen/sc_hirnloser_zombie_pirat.json
 ```json
 {
@@ -8977,6 +9037,60 @@ select {
   "illustration": "Sandra Braun",
   "source": "card_image"
 }
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_skelett_bogenschuetze.json
+```json
+{
+  "cardName": "Skelett-Bogenschütze",
+  "cardType": "Schergenkarte",
+  "set": "Aventuria Grundbox",
+  "setId": "aventuria_grundbox",
+  "setShortName": "Grundbox",
+  "setSymbol": "A",
+  "layout": "landscape",
+  "image": "sc_skelett_bogenschuetze.webp",
+  "sourceImages": ["Karte0020.webp"],
+  "tags": ["untot", "skelett"],
+  "keywords": ["Untot", "Skelett"],
+  "specialRules": [
+    "Bei [FERNKAMPF]-Angriffen gegen das Skelett wird das Ergebnis, das die Würfel beim Schadenswurf zeigen, halbiert (aufrunden)."
+  ],
+  "stats": {
+    "gefahrenpunkte": 3,
+    "lebenspunkte": 12,
+    "ausweichen": "-",
+    "ruestung": 1,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "[FERNKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+4 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "3-10",
+      "title": "[FERNKAMPF]-Angriff",
+      "text": "Der Held mit den meisten [LEBEN] erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "11-13",
+      "title": "Schattenpakt",
+      "text": "Alle Anführer werden um 2 [LEBEN] geheilt."
+    },
+    {
+      "range": "14-20",
+      "title": "Nichts",
+      "text": "Das Skelett verharrt bewegungslos."
+    }
+  ],
+  "illustration": "Elif Siebenpfeiffer",
+  "source": "card_image"
+}
+
 ```
 
 ---
