@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 9:26:59 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 9:27:19 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -7383,6 +7383,61 @@ select {
   "illustration": "Nadine Schäkel",
   "source": "card_image"
 }
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_graeberskelett.json
+```json
+{
+  "cardName": "Gräberskelett",
+  "cardType": "Schergenkarte",
+  "set": "Aventuria Grundbox",
+  "setId": "aventuria_grundbox",
+  "setShortName": "Grundbox",
+  "setSymbol": "A",
+  "layout": "landscape",
+  "image": "sc_graeberskelett.webp",
+  "sourceImages": ["Karte0003.webp"],
+  "tags": ["untot", "skelett"],
+  "keywords": ["Untot", "Skelett"],
+  "specialRules": [
+    "[Nur mit Gräber-Karten einsetzbar.]",
+    "Bei [FERNKAMPF]-Angriffen gegen das Skelett wird das Ergebnis, das die Würfel beim Schadenswurf zeigen, halbiert (aufrunden)."
+  ],
+  "stats": {
+    "gefahrenpunkte": 3,
+    "lebenspunkte": 12,
+    "ausweichen": "-",
+    "ruestung": 1,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6+4 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "3-10",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein Held nach Wahl der Spieler erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "11-16",
+      "title": "Grabflüstern",
+      "text": "Ein „Flüsterndes Grab“ wird zu einem „Bebenden Grab“ umgedreht."
+    },
+    {
+      "range": "17-20",
+      "title": "Nichts",
+      "text": "Das Skelett verharrt bewegungslos."
+    }
+  ],
+  "illustration": "Nadine Schäkel",
+  "source": "card_image"
+}
+
 ```
 
 ---
