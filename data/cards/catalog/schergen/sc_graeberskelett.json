@@ -7,7 +7,16 @@
   "setSymbol": "A",
   "layout": "landscape",
   "image": "sc_graeberskelett.webp",
-  "sourceImages": ["Karte0003.webp"],
+  "copies": 2,
+  "sourceImages": [
+    "Karte0003.webp",
+    "Karte0021.webp"
+  ],
+  "referenceImages": [
+    "Karte0003.webp",
+    "Karte0021.webp"
+  ],
+  "usedDuplicateForVerification": true,
   "tags": ["untot", "skelett"],
   "keywords": ["Untot", "Skelett"],
   "specialRules": [
@@ -30,7 +39,7 @@
     {
       "range": "3-10",
       "title": "[NAHKAMPF]-Angriff",
-      "text": "Ein Held nach Wahl der Spieler erhält 1W6+2 [TREFFERPUNKTE]."
+      "text": "Ein Held nach Wahl der Helden erhält 1W6+2 [TREFFERPUNKTE]."
     },
     {
       "range": "11-16",
