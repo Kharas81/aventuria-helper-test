@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 11:54:51 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 11:55:01 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -9647,9 +9647,16 @@ select {
   "setSymbol": "Keiler-Symbol",
   "layout": "landscape",
   "image": "sc_ork_trommler.webp",
+  "copies": 2,
   "sourceImages": [
-    "Karte0008.webp"
+    "Karte0008.webp",
+    "Karte0014.webp"
   ],
+  "referenceImages": [
+    "Karte0008.webp",
+    "Karte0014.webp"
+  ],
+  "usedDuplicateForVerification": true,
   "tags": [
     "ork",
     "zauberer"
