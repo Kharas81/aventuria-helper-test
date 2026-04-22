@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 7:20:06 PM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 7:20:17 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -7390,6 +7390,84 @@ select {
   ],
   "uncertainNotes": [
     "Das lila Inline-Symbol ist auf den Karten klar sichtbar, aber nicht sicher offiziell zugeordnet. Vorläufiger Platzhalter: [UNSICHERES_SYMBOL_LILA_ORB]."
+  ]
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_echsenmenschen_kultist.json
+```json
+{
+  "cardName": "Echsenmenschen-Kultist",
+  "cardType": "Schergenkarte",
+  "set": "Wirtshaus zum Schwarzen Keiler",
+  "setId": "wirtshaus_zum_schwarzen_keiler",
+  "setShortName": "Wirtshaus zum Schwarzen Keiler",
+  "setSymbol": "Schwarzer Keiler",
+  "layout": "landscape",
+  "image": "sc_echsenmenschen_kultist.webp",
+  "copies": 2,
+  "sourceImages": [
+    "Karte0005.webp",
+    "Karte0009.webp"
+  ],
+  "referenceImages": [
+    "Karte0005.webp",
+    "Karte0009.webp"
+  ],
+  "usedDuplicateForVerification": true,
+  "tags": [
+    "achaz",
+    "kultist"
+  ],
+  "keywords": [
+    "Achaz",
+    "Kultist"
+  ],
+  "searchAliases": [],
+  "specialRules": [
+    "Sobald diese Karte ins Spiel kommt, legt 1 [UNSICHERES_SYMBOL_LILA_ORB] auf diese Karte."
+  ],
+  "stats": {
+    "gefahrenpunkte": 3,
+    "lebenspunkte": 8,
+    "ausweichen": "-",
+    "ruestung": 2,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-4",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "5-12",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+1 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-15",
+      "title": "Nichts",
+      "text": "Zischt."
+    },
+    {
+      "range": "16-20",
+      "title": "Flucht",
+      "text": "Wenn keine [UNSICHERES_SYMBOL_LILA_ORB] mehr auf dieser Karte liegen, entfernt diese Karte aus dem Kampf. Andernfalls entfernt 1 [UNSICHERES_SYMBOL_LILA_ORB] von dieser Karte."
+    }
+  ],
+  "illustration": "Petra Rudolf",
+  "source": "card_image",
+  "uncertain": true,
+  "uncertainFields": [
+    "specialRules[0]",
+    "actionTable[3].text"
+  ],
+  "uncertainNotes": [
+    "Das lila Inline-Symbol ist sichtbar, aber nicht sicher offiziell zugeordnet. Vorläufiger Platzhalter: [UNSICHERES_SYMBOL_LILA_ORB]."
   ]
 }
 
