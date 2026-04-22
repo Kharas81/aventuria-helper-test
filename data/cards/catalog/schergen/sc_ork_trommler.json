@@ -1,0 +1,64 @@
+{
+  "cardName": "Ork-Trommler",
+  "cardType": "Schergenkarte",
+  "set": "Wirtshaus zum Schwarzen Keiler",
+  "setId": "wirtshaus_zum_schwarzen_keiler",
+  "setShortName": "Schwarzer Keiler",
+  "setSymbol": "Keiler-Symbol",
+  "layout": "landscape",
+  "image": "sc_ork_trommler.webp",
+  "sourceImages": [
+    "Karte0008.webp"
+  ],
+  "tags": [
+    "ork",
+    "zauberer"
+  ],
+  "keywords": [
+    "Ork",
+    "Zauberer"
+  ],
+  "specialRules": [
+    "Alle Gegner mit dem Schlagwort „Ork“ senken ihre [UNSICHERES_SYMBOL_SCHWARZER_WURF]-Würfe um 1 (bis zu einem Minimum von 1)."
+  ],
+  "stats": {
+    "gefahrenpunkte": 3,
+    "lebenspunkte": 15,
+    "ausweichen": "-",
+    "ruestung": 1,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-8",
+      "title": "[MAGIE]-Angriff",
+      "text": "Der Held mit den meisten [UNSICHERES_SYMBOL_ROT_OVAL] erhält 1W6+1 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "9-14",
+      "title": "Motivation",
+      "text": "Jedem verletzten Schergen mit dem Schlagwort „Ork“ wird 1 [LEBEN] geheilt."
+    },
+    {
+      "range": "15-17",
+      "title": "Nichts",
+      "text": "Feuert seine Kameraden an."
+    },
+    {
+      "range": "18-20",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+    }
+  ],
+  "illustration": "Tristan Denecke",
+  "source": "card_image",
+  "uncertain": true,
+  "uncertainFields": [
+    "specialRules[0]",
+    "actionTable[0].text"
+  ],
+  "uncertainNotes": [
+    "Das Symbol vor „-Würfe“ in der Sonderregel ist sichtbar, aber hier noch nicht sicher offiziell zugeordnet. Vorläufiger Platzhalter: [UNSICHERES_SYMBOL_SCHWARZER_WURF].",
+    "Das rote ovale Symbol ist auf der Karte gut sichtbar, aber hier noch nicht sicher offiziell zugeordnet. Vorläufiger Platzhalter: [UNSICHERES_SYMBOL_ROT_OVAL]."
+  ]
+}
