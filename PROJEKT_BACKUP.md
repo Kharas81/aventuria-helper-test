@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 10:19:27 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 10:19:59 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -7267,6 +7267,73 @@ select {
   ],
   "illustration": "Verena Biskup",
   "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_frostriese.json
+```json
+{
+  "cardName": "Frostriese",
+  "cardType": "Schergenkarte",
+  "set": "Mythische Geschichten",
+  "setId": "mythische_geschichten",
+  "setShortName": "Mythische Geschichten",
+  "setSymbol": "[SET_SYMBOL_MYTHISCHE_GESCHICHTEN]",
+  "layout": "landscape",
+  "image": "sc_frostriese.webp",
+  "sourceImages": [
+    "Karte0013.webp"
+  ],
+  "tags": [
+    "uebernatuerlich",
+    "riese",
+    "raeuber"
+  ],
+  "keywords": [
+    "Übernatürlich",
+    "Riese",
+    "Räuber"
+  ],
+  "searchAliases": [],
+  "specialRules": [
+    "Solange der Frostriese am Kampf teilnimmt, gelingen die [UNSICHERES_SYMBOL_ORANGE_PROBE]-Würfe von Anführern automatisch."
+  ],
+  "stats": {
+    "gefahrenpunkte": 8,
+    "lebenspunkte": 40,
+    "ausweichen": 2,
+    "ruestung": "-",
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-6",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Held mit den meisten [LEBEN] erhält 2W6+4 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "7-17",
+      "title": "Nichts",
+      "text": "Er blickt sich geistesabwesend um."
+    },
+    {
+      "range": "18-20",
+      "title": "Flucht",
+      "text": "Liegen die aktuellen [LEBEN] des Frostriesen unter 20, so entferne ihn aus dem Kampf."
+    }
+  ],
+  "illustration": "Lukas Banas",
+  "source": "card_image",
+  "uncertain": true,
+  "uncertainFields": [
+    "specialRules[0]"
+  ],
+  "uncertainNotes": [
+    "Im grauen Regelkasten steht ein oranges Symbol vor \"-Würfe\", dessen offizieller Token hier noch nicht sicher zugeordnet ist. Vorläufiger Platzhalter: [UNSICHERES_SYMBOL_ORANGE_PROBE]."
+  ]
 }
 
 ```
