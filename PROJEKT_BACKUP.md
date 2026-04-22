@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 10:17:26 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 10:17:44 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -8178,6 +8178,66 @@ select {
   "illustration": "Fabrice Weiss",
   "source": "card_image"
 }
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_ikanaria_morfu.json
+```json
+{
+  "cardName": "Ikanaria-Morfu",
+  "cardType": "Schergenkarte",
+  "set": "Mythische Geschichten",
+  "setId": "mythische_geschichten",
+  "setShortName": "Mythische Geschichten",
+  "setSymbol": "[SET_SYMBOL_MYTHISCHE_GESCHICHTEN]",
+  "layout": "landscape",
+  "image": "sc_ikanaria_morfu.webp",
+  "sourceImages": [
+    "Karte0010.webp"
+  ],
+  "tags": [
+    "uebernatuerlich",
+    "chimaere"
+  ],
+  "keywords": [
+    "Übernatürlich",
+    "Chimäre"
+  ],
+  "searchAliases": [],
+  "specialRules": [
+    "Ein Held, der einen Angriff oder Spieleffekt gegen das Ikanaria-Morfu richtet, muss zunächst eine Willenskraft-Probe ablegen. Misslingt diese, so verfällt der Angriff oder Spieleffekt ungenutzt."
+  ],
+  "stats": {
+    "gefahrenpunkte": 5,
+    "lebenspunkte": 18,
+    "ausweichen": 0,
+    "ruestung": "-",
+    "aktionen": "1W6"
+  },
+  "actionTable": [
+    {
+      "range": "1-5",
+      "title": "[UNSICHERES_SYMBOL_GRUEN]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6 [TREFFERPUNKTE]. Verliert er dadurch mindestens 1 [LEBEN] so verliert er weitere 2 [LEBEN]."
+    },
+    {
+      "range": "6-20",
+      "title": "Nichts",
+      "text": "Das Morfu kriecht hungrig umher."
+    }
+  ],
+  "illustration": "Sandra Braun",
+  "source": "card_image",
+  "uncertain": true,
+  "uncertainFields": [
+    "actionTable[0].title"
+  ],
+  "uncertainNotes": [
+    "Auf der Karte steht vor \"-Angriff\" ein grünes, noch nicht sicher offiziell zugeordnetes Symbol. Vorläufiger Platzhalter: [UNSICHERES_SYMBOL_GRUEN]."
+  ]
+}
+
 ```
 
 ---
