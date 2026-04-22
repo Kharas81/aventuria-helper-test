@@ -7,9 +7,18 @@
   "setSymbol": "A",
   "layout": "landscape",
   "image": "sc_orkischer_bogenschuetze.webp",
+  "copies": 3,
   "sourceImages": [
-    "Karte0019.webp"
+    "Karte0019.webp",
+    "Karte0022.webp",
+    "Karte0026.webp"
   ],
+  "referenceImages": [
+    "Karte0019.webp",
+    "Karte0022.webp",
+    "Karte0026.webp"
+  ],
+  "usedDuplicateForVerification": true,
   "tags": [
     "ork",
     "raeuber"
