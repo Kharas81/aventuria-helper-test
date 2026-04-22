@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 12:58:11 PM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 12:58:23 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -8245,6 +8245,74 @@ select {
   "illustration": "Nadine Schäkel",
   "source": "card_image"
 }
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_goblin_antreiber.json
+```json
+{
+  "cardName": "Goblin-Antreiber",
+  "cardType": "Schergenkarte",
+  "set": "Wirtshaus zum Schwarzen Keiler",
+  "setId": "wirtshaus_zum_schwarzen_keiler",
+  "setShortName": "Schwarzer Keiler",
+  "setSymbol": "Keiler",
+  "layout": "landscape",
+  "image": "sc_goblin_antreiber.webp",
+  "copies": 2,
+  "sourceImages": [
+    "Karte0004.webp",
+    "Karte0007.webp"
+  ],
+  "referenceImages": [
+    "Karte0004.webp",
+    "Karte0007.webp"
+  ],
+  "usedDuplicateForVerification": true,
+  "tags": [
+    "goblin"
+  ],
+  "keywords": [
+    "Goblin"
+  ],
+  "searchAliases": [],
+  "specialRules": [
+    "Alle Gegner mit dem Schlagwort „Goblin“, die an diese Karte angrenzen, verursachen +1 [TREFFERPUNKTE] und fliehen nicht."
+  ],
+  "stats": {
+    "gefahrenpunkte": 4,
+    "lebenspunkte": 12,
+    "ausweichen": 6,
+    "ruestung": 0,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-4",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+3 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "5-14",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein Held nach Wahl der Spieler erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "15-18",
+      "title": "Nichts",
+      "text": "Ruft seine Kameraden zur Tapferkeit auf."
+    },
+    {
+      "range": "19-20",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Kampf und mische sie in den Schergenstapel zurück."
+    }
+  ],
+  "illustration": "Julia Metzger",
+  "source": "card_image"
+}
+
 ```
 
 ---
