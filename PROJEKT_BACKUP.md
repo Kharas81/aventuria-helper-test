@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 9:27:45 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 9:28:00 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -7664,6 +7664,68 @@ select {
     }
   ],
   "illustration": "Verena Biskup",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_hirnloser_zombie_pirat.json
+```json
+{
+  "cardName": "Hirnloser Zombie-Pirat",
+  "cardType": "Schergenkarte",
+  "set": "Schiff der verlorenen Seelen",
+  "setId": "schiff_der_verlorenen_seelen",
+  "setShortName": "Schiff der verlorenen Seelen",
+  "setSymbol": "Schiff der verlorenen Seelen Symbol",
+  "layout": "landscape",
+  "image": "sc_hirnloser_zombie_pirat.webp",
+  "copies": 3,
+  "sourceImages": [
+    "Karte0006.webp",
+    "Karte0007.webp",
+    "Karte0008.webp"
+  ],
+  "referenceImages": [
+    "Karte0006.webp",
+    "Karte0007.webp",
+    "Karte0008.webp"
+  ],
+  "usedDuplicateForVerification": true,
+  "tags": ["untoter", "zombie", "pirat"],
+  "keywords": ["Untoter", "Zombie", "Pirat"],
+  "stats": {
+    "gefahrenpunkte": 3,
+    "lebenspunkte": 12,
+    "ausweichen": "-",
+    "ruestung": 1,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6+6 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "3-12",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein Held nach Wahl der Spieler erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-17",
+      "title": "Nichts",
+      "text": "Der Pirat wankt ziellos umher."
+    },
+    {
+      "range": "18-20",
+      "title": "Verfault",
+      "text": "Der Scherge verliert 5 [LEBEN]."
+    }
+  ],
+  "illustration": "Helge Balzer",
   "source": "card_image"
 }
 
