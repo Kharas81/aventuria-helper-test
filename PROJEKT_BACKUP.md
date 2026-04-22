@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 6:36:13 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 6:36:33 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -538,6 +538,106 @@ hr {
     .archive-home__hero,
     .archive-home__section {
         padding: var(--space-md);
+    }
+}
+
+```
+
+---
+
+## 📄 Datei: css/archive-layout.css
+```css
+.archive-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-lg);
+    padding-right: var(--space-5xl);
+    margin-bottom: var(--space-lg);
+}
+
+.archive-header h2 {
+    margin: 0;
+    color: var(--color-primary);
+    flex-shrink: 0;
+}
+
+.archive-header .search-bar {
+    margin-bottom: 0;
+    max-width: 360px;
+}
+
+#archive-set-buttons {
+    margin-bottom: var(--space-lg) !important;
+}
+
+.archive-controls {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.archive-controls__block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.archive-controls__label {
+    color: var(--color-primary);
+    font-weight: bold;
+    font-size: 0.92rem;
+}
+
+.archive-controls__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+
+.archive-result-summary {
+    margin: 0;
+    color: var(--color-text);
+    font-size: 0.95rem;
+}
+
+.archive-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-lg);
+    padding: var(--space-lg) 0;
+    align-items: stretch;
+}
+
+@media (max-width: 900px) {
+    .archive-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: var(--space-md);
+        padding: var(--space-md) 0;
+    }
+
+    .archive-header {
+        flex-direction: column;
+        align-items: stretch;
+        padding-right: 0;
+    }
+
+    .archive-header .search-bar {
+        max-width: none;
+    }
+}
+
+@media (max-width: 700px) {
+    .archive-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+        padding: var(--space-sm) 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .archive-controls__row {
+        gap: 8px;
     }
 }
 
