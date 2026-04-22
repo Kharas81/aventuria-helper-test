@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 6:36:33 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 7:02:53 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -12220,6 +12220,22 @@ export const CardSetResolver = {
 };
 
 export default CardSetResolver;
+
+```
+
+---
+
+## 📄 Datei: js/core/config-paths.js
+```js
+const CONFIG_PATHS = {
+    dataRoot: 'data',
+    adventuresRoot: 'data/adventures',
+    cardsRoot: 'data/cards',
+    manualRoot: 'data/manual',
+    runtimeRoot: 'data/runtime'
+};
+
+export default CONFIG_PATHS;
 
 ```
 
