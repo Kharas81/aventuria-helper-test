@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 9:25:51 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 9:26:59 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -7198,6 +7198,65 @@ select {
     }
   ],
   "illustration": "Verena Biskup",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_geruestetes_skelett.json
+```json
+{
+  "cardName": "Gerüstetes Skelett",
+  "cardType": "Schergenkarte",
+  "set": "Aventuria Grundbox",
+  "setId": "aventuria_grundbox",
+  "setShortName": "Grundbox",
+  "setSymbol": "A",
+  "layout": "landscape",
+  "image": "sc_geruestetes_skelett.webp",
+  "sourceImages": ["Karte0002.webp"],
+  "tags": ["untot", "skelett"],
+  "keywords": ["Untot", "Skelett"],
+  "specialRules": [
+    "Bei [FERNKAMPF]-Angriffen gegen das Skelett wird das Ergebnis, das die Würfel beim Schadenswurf zeigen, halbiert (aufrunden)."
+  ],
+  "stats": {
+    "gefahrenpunkte": 2,
+    "lebenspunkte": 8,
+    "ausweichen": "-",
+    "ruestung": 1,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6+3 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "3-10",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein Held nach Wahl der Spieler erhält 1W6+1 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "11-13",
+      "title": "Schattenpakt",
+      "text": "Alle Anführer werden um 2 [LEBEN] geheilt."
+    },
+    {
+      "range": "14-16",
+      "title": "Nichts",
+      "text": "Das Skelett verharrt bewegungslos."
+    },
+    {
+      "range": "17-20",
+      "title": "Zerfällt",
+      "text": "Mischt die Karte zurück in den Schergenstapel!"
+    }
+  ],
+  "illustration": "Elif Siebenpfeiffer",
   "source": "card_image"
 }
 
