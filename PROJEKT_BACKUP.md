@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 12:13:35 PM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 12:13:54 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5643,7 +5643,8 @@ select {
   "sc_orkischer_wegelagerer.json",
   "sc_orkfamilie.json",
   "sc_neandertaler.json",
-  "sc_neandertalerin.json"  
+  "sc_neandertalerin.json",
+  "sc_herrischer_leviatan.json"  
   ]
 }
 
