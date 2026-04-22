@@ -7,9 +7,18 @@
   "setSymbol": "Schwarzer Keiler",
   "layout": "landscape",
   "image": "sc_standhafter_echsenmensch.webp",
+  "copies": 3,
   "sourceImages": [
-    "Karte0007.webp"
+    "Karte0007.webp",
+    "Karte0013.webp",
+    "Karte0014.webp"
   ],
+  "referenceImages": [
+    "Karte0007.webp",
+    "Karte0013.webp",
+    "Karte0014.webp"
+  ],
+  "usedDuplicateForVerification": true,
   "tags": [
     "achaz",
     "waechter"
