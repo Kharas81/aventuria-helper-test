@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 11:54:23 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 11:54:51 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -9860,9 +9860,16 @@ select {
   "setSymbol": "Keiler-Symbol",
   "layout": "landscape",
   "image": "sc_orkischer_pelzjaeger.webp",
+  "copies": 2,
   "sourceImages": [
-    "Karte0002.webp"
+    "Karte0002.webp",
+    "Karte0013.webp"
   ],
+  "referenceImages": [
+    "Karte0002.webp",
+    "Karte0013.webp"
+  ],
+  "usedDuplicateForVerification": true,
   "tags": [
     "ork",
     "krieger"
