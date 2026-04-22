@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 7:21:48 PM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 7:23:00 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -12286,6 +12286,72 @@ select {
     }
   ],
   "illustration": "Verena Biskup",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_stumpfsinniger_krakonier.json
+```json
+{
+  "cardName": "Stumpfsinniger Krakonier",
+  "cardType": "Schergenkarte",
+  "set": "Aventuria - Kelche der Macht",
+  "setId": "kelche_der_macht",
+  "setShortName": "Kelche der Macht",
+  "setSymbol": "K",
+  "layout": "landscape",
+  "image": "sc_stumpfsinniger_krakonier.webp",
+  "copies": 3,
+  "sourceImages": [
+    "Karte0001.webp",
+    "Karte0002.webp",
+    "Karte0003.webp"
+  ],
+  "referenceImages": [
+    "Karte0001.webp",
+    "Karte0002.webp",
+    "Karte0003.webp"
+  ],
+  "usedDuplicateForVerification": true,
+  "tags": ["amphibie", "krakonier"],
+  "keywords": ["Amphibie", "Krakonier"],
+  "searchAliases": [],
+  "specialRules": [
+    "Bei einem Kritischen Erfolg bei einem Angriff gegen den Krakonier erleidet dieser automatisch den maximalen Schaden des durchgeführten Angriffs."
+  ],
+  "stats": {
+    "gefahrenpunkte": 4,
+    "lebenspunkte": 12,
+    "ausweichen": "-",
+    "ruestung": 1,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-4",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+4 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "5-15",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein Held nach Wahl der Spieler erhält 1W6+3 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "16-18",
+      "title": "Nichts",
+      "text": "Starrt euch an."
+    },
+    {
+      "range": "19-20",
+      "title": "Flucht",
+      "text": "Entferne die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+    }
+  ],
+  "illustration": "Fabrice Weiss",
   "source": "card_image"
 }
 
