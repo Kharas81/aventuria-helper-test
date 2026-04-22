@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 9:36:22 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 9:36:33 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -6113,7 +6113,18 @@ select {
   "setSymbol": "A",
   "layout": "landscape",
   "image": "sc_belebtes_skelett.webp",
-  "sourceImages": ["Karte0001.webp"],
+  "copies": 3,
+  "sourceImages": [
+    "Karte0001.webp",
+    "Karte0022.webp",
+    "Karte0025.webp"
+  ],
+  "referenceImages": [
+    "Karte0001.webp",
+    "Karte0022.webp",
+    "Karte0025.webp"
+  ],
+  "usedDuplicateForVerification": true,
   "tags": ["untot", "skelett"],
   "keywords": ["Untot", "Skelett"],
   "specialRules": [
