@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 5:09:19 PM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 5:09:43 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -7360,6 +7360,75 @@ select {
     }
   ],
   "illustration": "Helge Balzer",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_feiger_goblin.json
+```json
+{
+  "cardName": "Feiger Goblin",
+  "cardType": "Schergenkarte",
+  "set": "Aventuria Grundbox",
+  "setId": "aventuria_grundbox",
+  "setShortName": "Grundbox",
+  "setSymbol": "A",
+  "layout": "landscape",
+  "image": "sc_feiger_goblin.webp",
+  "copies": 6,
+  "sourceImages": [
+    "Karte0014.webp",
+    "Karte0015.webp",
+    "Karte0016.webp",
+    "Karte0017.webp",
+    "Karte0018.webp",
+    "Karte0019.webp"
+  ],
+  "referenceImages": [
+    "Karte0014.webp",
+    "Karte0015.webp",
+    "Karte0016.webp",
+    "Karte0017.webp",
+    "Karte0018.webp",
+    "Karte0019.webp"
+  ],
+  "usedDuplicateForVerification": true,
+  "tags": [
+    "goblin"
+  ],
+  "keywords": [
+    "Goblin"
+  ],
+  "searchAliases": [],
+  "specialRules": [],
+  "stats": {
+    "gefahrenpunkte": 1,
+    "lebenspunkte": 5,
+    "ausweichen": "-",
+    "ruestung": 0,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-6",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+1 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "7-16",
+      "title": "Nichts",
+      "text": "Schaut sich ängstlich nach einem Fluchtweg um."
+    },
+    {
+      "range": "17-20",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Spiel. Sie wird nicht in den Schergenstapel zurückgemischt."
+    }
+  ],
+  "illustration": "Anja DiPaolo",
   "source": "card_image"
 }
 
