@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 9:33:09 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 9:33:34 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -6871,6 +6871,57 @@ select {
 
 ---
 
+## 📄 Datei: data/cards/catalog/schergen/sc_eisensterz.json
+```json
+{
+  "cardName": "Eisensterz",
+  "cardType": "Schergenkarte",
+  "set": "Schiff der verlorenen Seelen",
+  "setId": "schiff_der_verlorenen_seelen",
+  "setShortName": "Schiff der verlorenen Seelen",
+  "setSymbol": "Schiff der verlorenen Seelen Symbol",
+  "layout": "landscape",
+  "image": "sc_eisensterz.webp",
+  "sourceImages": ["Karte0012.webp"],
+  "tags": ["untoter", "zombie", "pirat"],
+  "keywords": ["Untoter", "Zombie", "Pirat"],
+  "stats": {
+    "gefahrenpunkte": 5,
+    "lebenspunkte": 18,
+    "ausweichen": "-",
+    "ruestung": 3,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+5 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "3-12",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6+1 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-18",
+      "title": "Nichts",
+      "text": "Brüllt einen Piratenfluch."
+    },
+    {
+      "range": "19-20",
+      "title": "Verfault",
+      "text": "Der Scherge verliert 5 [LEBEN]."
+    }
+  ],
+  "illustration": "Helge Balzer",
+  "source": "card_image"
+}
+
+```
+
+---
+
 ## 📄 Datei: data/cards/catalog/schergen/sc_flinker_yeti.json
 ```json
 {
@@ -9315,6 +9366,57 @@ select {
     }
   ],
   "illustration": "Verena Biskup",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_zackennase.json
+```json
+{
+  "cardName": "Zackennase",
+  "cardType": "Schergenkarte",
+  "set": "Schiff der verlorenen Seelen",
+  "setId": "schiff_der_verlorenen_seelen",
+  "setShortName": "Schiff der verlorenen Seelen",
+  "setSymbol": "Schiff der verlorenen Seelen Symbol",
+  "layout": "landscape",
+  "image": "sc_zackennase.webp",
+  "sourceImages": ["Karte0013.webp"],
+  "tags": ["untoter", "zombie", "pirat"],
+  "keywords": ["Untoter", "Zombie", "Pirat"],
+  "stats": {
+    "gefahrenpunkte": 5,
+    "lebenspunkte": 18,
+    "ausweichen": "-",
+    "ruestung": 1,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "Kopfnuss",
+      "text": "Der Startspieler erhält 1W6+3 [TREFFERPUNKTE] und darf zu Beginn seines nächsten Zuges nur die Hälfte (aufgerundet) seiner erschöpften Ausdauerkarten bereit machen."
+    },
+    {
+      "range": "3-12",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-18",
+      "title": "Nichts",
+      "text": "Brüllt einen Piratenfluch."
+    },
+    {
+      "range": "19-20",
+      "title": "Verfault",
+      "text": "Der Scherge verliert 5 [LEBEN]."
+    }
+  ],
+  "illustration": "Helge Balzer",
   "source": "card_image"
 }
 
