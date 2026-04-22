@@ -1,4 +1,5 @@
 import Utils from '../../core/utils.js';
+import CONFIG from '../../core/config.js';
 import CatalogIndexLoader from './catalog-index-loader.js';
 import CatalogCardNormalizer from './catalog-card-normalizer.js';
 import ApiFetch from '../../core/api-fetch.js';
@@ -72,6 +73,72 @@ export const CatalogRepository = {
         return loadedCards;
     },
 
+    buildRuntimeEntry(catalogKey = '', fileName = '') {
+        const catalogConfig = CONFIG.getCatalogConfig?.(catalogKey);
+        const safeFileName = Utils.normalizeString(fileName);
+
+        if (!catalogConfig || !safeFileName) {
+            return null;
+        }
+
+        return {
+            catalogKey: Utils.normalizeString(catalogConfig.key),
+            fileName: safeFileName,
+            fileStem: safeFileName.replace(/\.json$/i, ''),
+            filePath: `${Utils.normalizeString(catalogConfig.dataDir).replace(/\/+$/g, '')}/${safeFileName}`,
+            imageDir: Utils.normalizeString(catalogConfig.imageDir),
+            defaultType: Utils.normalizeString(catalogConfig.defaultType),
+            defaultCardCategory: Utils.normalizeString(catalogConfig.defaultCardCategory)
+        };
+    },
+
+    async loadRuntimeBundle(catalogKey = '') {
+        const resolvedCatalogKey = Utils.normalizeString(catalogKey);
+        const runtimePath = CONFIG.getRuntimeCatalogCardsPath?.(resolvedCatalogKey);
+
+        if (!runtimePath) {
+            return null;
+        }
+
+        const rawBundle = await ApiFetch.loadJSON(runtimePath);
+        if (!rawBundle) {
+            return null;
+        }
+
+        const cards = Utils.normalizeArray(rawBundle?.cards);
+        if (!cards.length) {
+            return [];
+        }
+
+        const loadedCards = [];
+
+        for (const item of cards) {
+            const fileName = Utils.normalizeString(item?.fileName);
+            const rawCard = item?.rawCard && typeof item.rawCard === 'object'
+                ? item.rawCard
+                : null;
+
+            if (!fileName || !rawCard) {
+                continue;
+            }
+
+            const entry = this.buildRuntimeEntry(resolvedCatalogKey, fileName);
+            if (!entry) {
+                continue;
+            }
+
+            const normalizedCard = CatalogCardNormalizer.normalize(rawCard, entry);
+            if (!normalizedCard) {
+                continue;
+            }
+
+            this.cacheCard(entry, normalizedCard);
+            loadedCards.push(normalizedCard);
+        }
+
+        return loadedCards;
+    },
+
     mergeById(cards = []) {
         const map = new Map();
 
@@ -94,6 +161,12 @@ export const CatalogRepository = {
         const cached = this.getCollectionCache(resolvedCatalogKey);
         if (cached) {
             return cached;
+        }
+
+        const runtimeCards = await this.loadRuntimeBundle(resolvedCatalogKey);
+        if (Array.isArray(runtimeCards)) {
+            const mergedRuntimeCards = this.mergeById(runtimeCards);
+            return this.cacheCollection(resolvedCatalogKey, mergedRuntimeCards);
         }
 
         const entries = await CatalogIndexLoader.getEntries(resolvedCatalogKey);
