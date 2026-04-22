@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 9:28:12 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 9:28:24 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -8918,6 +8918,57 @@ select {
     }
   ],
   "illustration": "Verena Biskup",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_tampen_bruno.json
+```json
+{
+  "cardName": "Tampen-Bruno",
+  "cardType": "Schergenkarte",
+  "set": "Schiff der verlorenen Seelen",
+  "setId": "schiff_der_verlorenen_seelen",
+  "setShortName": "Schiff der verlorenen Seelen",
+  "setSymbol": "Schiff der verlorenen Seelen Symbol",
+  "layout": "landscape",
+  "image": "sc_tampen_bruno.webp",
+  "sourceImages": ["Karte0010.webp"],
+  "tags": ["untoter", "zombie", "pirat"],
+  "keywords": ["Untoter", "Zombie", "Pirat"],
+  "stats": {
+    "gefahrenpunkte": 6,
+    "lebenspunkte": 20,
+    "ausweichen": "-",
+    "ruestung": 1,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+2 [TREFFERPUNKTE] und muss eine seiner Ausdauerkarten seiner Wahl ablegen."
+    },
+    {
+      "range": "3-12",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6+3 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-18",
+      "title": "Nichts",
+      "text": "Brüllt einen Piratenfluch."
+    },
+    {
+      "range": "19-20",
+      "title": "Verfault",
+      "text": "Der Scherge verliert 5 [LEBEN]."
+    }
+  ],
+  "illustration": "Helge Balzer",
   "source": "card_image"
 }
 
