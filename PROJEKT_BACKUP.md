@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 11:58:31 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 11:58:50 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5639,7 +5639,9 @@ select {
   "sc_ork_trommler.json",
   "sc_ork_krieger.json",
   "sc_tairachschamane.json",
-  "sc_orkischer_bogenschuetze.json"
+  "sc_orkischer_bogenschuetze.json",
+  "sc_orkischer_wegelagerer.json",
+  "sc_orkfamilie.json"
   ]
 }
 
