@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 11:55:01 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 11:55:24 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -9799,9 +9799,18 @@ select {
   "setSymbol": "Keiler-Symbol",
   "layout": "landscape",
   "image": "sc_orkischer_menschenfaenger.webp",
+  "copies": 3,
   "sourceImages": [
-    "Karte0007.webp"
+    "Karte0007.webp",
+    "Karte0015.webp",
+    "Karte0016.webp"
   ],
+  "referenceImages": [
+    "Karte0007.webp",
+    "Karte0015.webp",
+    "Karte0016.webp"
+  ],
+  "usedDuplicateForVerification": true,
   "tags": [
     "ork",
     "raeuber",
@@ -9813,7 +9822,7 @@ select {
     "Krieger"
   ],
   "specialRules": [
-    "Netz. Ein zufälliger Held, der aktuell nicht Opfer eines Netzes ist, muss eine [UNSICHERES_SYMBOL_ORANGE_HAND]-Probe durchführen. Misslingt sie, so sinkt sein [UNSICHERES_SYMBOL_ORANGE_HAND]-Wert bis zum Ende der laufenden Runde auf 0. Zeigt dies durch eine Netz-Marke ([UNSICHERES_SYMBOL_SCHWARZE_NETZMARKE]) auf dem [UNSICHERES_SYMBOL_ORANGE_HAND]-Wert des Helden an."
+    "Netz. Ein zufälliger Held, der aktuell nicht Opfer eines Netzes ist, muss eine [UNSICHERES_SYMBOL_ORANGE_HAND]-Probe durchführen. Misslingt sie, so sinkt sein [UNSICHERES_SYMBOL_ORANGE_HAND]-Wert bis zum Ende der laufenden Runde auf 0. Zeigt dies durch 1 Netz-Marke [UNSICHERES_SYMBOL_SCHWARZE_NETZMARKE] auf dem [UNSICHERES_SYMBOL_ORANGE_HAND]-Wert des Helden an."
   ],
   "stats": {
     "gefahrenpunkte": 4,
@@ -9848,7 +9857,7 @@ select {
   ],
   "uncertainNotes": [
     "Das orange Handsymbol ist sichtbar, aber hier noch nicht sicher offiziell zugeordnet. Vorläufiger Platzhalter: [UNSICHERES_SYMBOL_ORANGE_HAND].",
-    "Die schwarze Netz-Marke in Klammern ist sichtbar, aber hier noch nicht sicher offiziell zugeordnet. Vorläufiger Platzhalter: [UNSICHERES_SYMBOL_SCHWARZE_NETZMARKE]."
+    "Die schwarze Netz-Marke ist sichtbar, aber hier noch nicht sicher offiziell zugeordnet. Vorläufiger Platzhalter: [UNSICHERES_SYMBOL_SCHWARZE_NETZMARKE]."
   ]
 }
 
