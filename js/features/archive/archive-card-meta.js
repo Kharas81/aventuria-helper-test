@@ -33,9 +33,49 @@ function toDisplayValue(value, fallback = '-') {
     return asString || fallback;
 }
 
+function canonicalizeTag(value = '') {
+    return Utils.normalizeString(value)
+        .toLowerCase()
+        .replace(/ä/g, 'ae')
+        .replace(/ö/g, 'oe')
+        .replace(/ü/g, 'ue')
+        .replace(/ß/g, 'ss')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
+}
+
+function countSpecialGermanChars(value = '') {
+    const matches = Utils.normalizeString(value).match(/[äöüÄÖÜß]/g);
+    return matches ? matches.length : 0;
+}
+
+function isPreferredTag(candidate = '', current = '') {
+    const normalizedCandidate = Utils.normalizeString(candidate);
+    const normalizedCurrent = Utils.normalizeString(current);
+
+    const candidateSpecialCount = countSpecialGermanChars(normalizedCandidate);
+    const currentSpecialCount = countSpecialGermanChars(normalizedCurrent);
+
+    if (candidateSpecialCount !== currentSpecialCount) {
+        return candidateSpecialCount > currentSpecialCount;
+    }
+
+    const candidateHasUppercase = /[A-ZÄÖÜ]/.test(normalizedCandidate);
+    const currentHasUppercase = /[A-ZÄÖÜ]/.test(normalizedCurrent);
+
+    if (candidateHasUppercase !== currentHasUppercase) {
+        return candidateHasUppercase;
+    }
+
+    if (normalizedCandidate.length !== normalizedCurrent.length) {
+        return normalizedCandidate.length < normalizedCurrent.length;
+    }
+
+    return normalizedCandidate.localeCompare(normalizedCurrent, 'de') < 0;
+}
+
 function uniqueStrings(values = []) {
-    const seen = new Set();
-    const result = [];
+    const map = new Map();
 
     Utils.normalizeArray(values).forEach(value => {
         const normalized = Utils.normalizeString(value);
@@ -43,16 +83,15 @@ function uniqueStrings(values = []) {
             return;
         }
 
-        const key = normalized.toLowerCase();
-        if (seen.has(key)) {
-            return;
-        }
+        const key = canonicalizeTag(normalized);
+        const existing = map.get(key);
 
-        seen.add(key);
-        result.push(normalized);
+        if (!existing || isPreferredTag(normalized, existing)) {
+            map.set(key, normalized);
+        }
     });
 
-    return result;
+    return Array.from(map.values());
 }
 
 export const ArchiveCardMeta = {
