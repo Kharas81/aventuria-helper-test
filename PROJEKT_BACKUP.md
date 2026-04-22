@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 11:39:43 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 11:39:56 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -9560,6 +9560,73 @@ select {
   ],
   "illustration": "Verena Biskup",
   "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_orkischer_pelzjaeger.json
+```json
+{
+  "cardName": "Orkischer Pelzjäger",
+  "cardType": "Schergenkarte",
+  "set": "Wirtshaus zum Schwarzen Keiler",
+  "setId": "wirtshaus_zum_schwarzen_keiler",
+  "setShortName": "Schwarzer Keiler",
+  "setSymbol": "Keiler-Symbol",
+  "layout": "landscape",
+  "image": "sc_orkischer_pelzjaeger.webp",
+  "sourceImages": [
+    "Karte0002.webp"
+  ],
+  "tags": [
+    "ork",
+    "krieger"
+  ],
+  "keywords": [
+    "Ork",
+    "Krieger"
+  ],
+  "stats": {
+    "gefahrenpunkte": 3,
+    "lebenspunkte": 15,
+    "ausweichen": "-",
+    "ruestung": 1,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-4",
+      "title": "Jagdfalle",
+      "text": "Der Held mit dem niedrigsten [UNSICHERES_SYMBOL_ORANGE_HAND]-Wert muss eine Ausdauerkarte ablegen."
+    },
+    {
+      "range": "5-14",
+      "title": "[FERNKAMPF]-Angriff",
+      "text": "Der Held mit dem niedrigsten [UNSICHERES_SYMBOL_ORANGE_HAND]-Wert erhält 1W6 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "15-17",
+      "title": "Nichts",
+      "text": "Sucht ein neues Opfer."
+    },
+    {
+      "range": "18-20",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+    }
+  ],
+  "illustration": "Nadine Schäkel",
+  "source": "card_image",
+  "uncertain": true,
+  "uncertainFields": [
+    "actionTable[0].text",
+    "actionTable[1].text"
+  ],
+  "uncertainNotes": [
+    "Das orange Handsymbol ist sichtbar, aber hier noch nicht sicher offiziell zugeordnet. Vorläufiger Platzhalter: [UNSICHERES_SYMBOL_ORANGE_HAND]."
+  ]
 }
 
 ```
