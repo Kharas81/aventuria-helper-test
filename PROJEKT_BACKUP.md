@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 11:55:24 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 11:56:00 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -9629,6 +9629,72 @@ select {
     }
   ],
   "illustration": "Tristan Denecke",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_ork_krieger.json
+```json
+{
+  "cardName": "Ork-Krieger",
+  "cardType": "Schergenkarte",
+  "set": "Aventuria Grundbox",
+  "setId": "aventuria_grundbox",
+  "setShortName": "Grundbox",
+  "setSymbol": "A",
+  "layout": "landscape",
+  "image": "sc_ork_krieger.webp",
+  "copies": 2,
+  "sourceImages": [
+    "Karte0017.webp",
+    "Karte0020.webp"
+  ],
+  "referenceImages": [
+    "Karte0017.webp",
+    "Karte0020.webp"
+  ],
+  "usedDuplicateForVerification": true,
+  "tags": [
+    "ork",
+    "krieger"
+  ],
+  "keywords": [
+    "Ork",
+    "Krieger"
+  ],
+  "stats": {
+    "gefahrenpunkte": 5,
+    "lebenspunkte": 20,
+    "ausweichen": "-",
+    "ruestung": 3,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+6 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "3-9",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein Held nach Wahl der Spieler erhält 1W6+3 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "10-18",
+      "title": "Nichts",
+      "text": "Wirbelt seinen Zweihand-Hammer durch die Luft."
+    },
+    {
+      "range": "19-20",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+    }
+  ],
+  "illustration": "Nadine Schäkel",
   "source": "card_image"
 }
 
