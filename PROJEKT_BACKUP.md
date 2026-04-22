@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 9:34:24 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 9:34:46 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5604,7 +5604,14 @@ select {
   "sc_schlitz.json",
   "sc_hirnloser_zombie_pirat.json",
   "sc_kahler_dieter.json",
-  "sc_tampen_bruno.json"
+  "sc_tampen_bruno.json",
+  "sc_leiser_hugo.json",
+  "sc_eisensterz.json",
+  "sc_zackennase.json",
+  "sc_kraeftige_mumie.json",
+  "sc_der_blutige_martin.json",
+  "sc_hirnloser_zombie.json",
+  "sc_skelett_bogenschuetze.json"
   ]
 }
 
