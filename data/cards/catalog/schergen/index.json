@@ -107,6 +107,7 @@
   "sc_goblin_antreiber.json",
   "sc_goblin_feldscher.json",
   "sc_goblin_krieger.json",
-  "sc_goblin_speerwerfer.json"
+  "sc_goblin_speerwerfer.json",
+  "sc_feiger_goblin.json",
   ]
 }
