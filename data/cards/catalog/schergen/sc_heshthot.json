@@ -1,0 +1,55 @@
+{
+  "cardName": "Heshthot",
+  "cardType": "Schergenkarte",
+  "set": "Mythische Geschichten",
+  "setId": "mythische_geschichten",
+  "setShortName": "Mythische Geschichten",
+  "setSymbol": "schneeflocken_symbol",
+  "layout": "landscape",
+  "image": "sc_heshthot.webp",
+  "sourceImages": ["Karte0004.webp"],
+  "tags": ["daemon", "niederer", "magie", "humanoid"],
+  "keywords": ["Dämon", "Niederer", "Magie", "Humanoid"],
+  "searchAliases": ["Heshtot"],
+  "specialRules": [
+    "Wenn der Heshthot gezogen wird, greift er sofort an. Solange er im Spiel ist, können die Anführer nicht angegriffen werden."
+  ],
+  "stats": {
+    "gefahrenpunkte": 5,
+    "lebenspunkte": "[ANZAHL_HELDEN] x 5",
+    "ausweichen": 4,
+    "ruestung": 0,
+    "aktionen": "[ANZAHL_HELDEN]"
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Held mit den meisten [LEBEN] erhält 2W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "3-7",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+4 [TREFFERPUNKTE] und muss eine seiner dauerhaften Karten im Spiel zurück auf die Hand nehmen."
+    },
+    {
+      "range": "8-12",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6+4 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-20",
+      "title": "Schattenhaft",
+      "text": "Lege 1 [ABENTEUERMARKE] auf diese Karte. Immer wenn dem Heshthot eine [UNSICHERES_SYMBOL_ORANGE_STIEFEL]-Probe misslingt, dann wird 1 [ABENTEUERMARKE] von der Karte entfernt und die [UNSICHERES_SYMBOL_ORANGE_STIEFEL]-Probe gelingt."
+    }
+  ],
+  "illustration": "Malte Zirbel",
+  "source": "card_image",
+  "uncertain": true,
+  "uncertainFields": [
+    "actionTable[3].text"
+  ],
+  "uncertainNotes": [
+    "Das orangefarbene Proben-Symbol in der letzten Zeile ist auf dem Kartenbild nicht sicher genug lesbar und wurde daher bewusst als [UNSICHERES_SYMBOL_ORANGE_STIEFEL] markiert."
+  ]
+}
