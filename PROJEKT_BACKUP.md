@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 9:28:24 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 9:32:22 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5596,7 +5596,15 @@ select {
   "sc_junge_seeschlange.json",
   "sc_kleiner_krakenmolch.json",
   "sc_gieriger_tigerhai.json",
-  "sc_hungriger_morfu.json"
+  "sc_hungriger_morfu.json",
+  "sc_belebtes_skelett.json",
+  "sc_geruestetes_skelett.json",
+  "sc_graeberskelett.json",
+  "sc_bilgenschwein.json",
+  "sc_schlitz.json",
+  "sc_hirnloser_zombie_pirat.json",
+  "sc_kahler_dieter.json",
+  "sc_tampen_bruno.json"
   ]
 }
 
