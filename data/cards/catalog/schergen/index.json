@@ -97,6 +97,8 @@
   "sc_ork_trommler.json",
   "sc_ork_krieger.json",
   "sc_tairachschamane.json",
-  "sc_orkischer_bogenschuetze.json"
+  "sc_orkischer_bogenschuetze.json",
+  "sc_orkischer_wegelagerer.json",
+  "sc_orkfamilie.json"
   ]
 }
