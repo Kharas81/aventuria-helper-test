@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 10:20:36 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 10:20:54 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -6817,6 +6817,67 @@ select {
     }
   ],
   "illustration": "Anja DiPaolo",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_daemonische_eule.json
+```json
+{
+  "cardName": "Dämonische Eule",
+  "cardType": "Schergenkarte",
+  "set": "Wald ohne Wiederkehr",
+  "setId": "wald_ohne_wiederkehr",
+  "setShortName": "Wald ohne Wiederkehr",
+  "setSymbol": "[SET_SYMBOL_WALD_OHNE_WIEDERKEHR]",
+  "layout": "landscape",
+  "image": "sc_daemonische_eule.webp",
+  "sourceImages": [
+    "Karte0017.webp"
+  ],
+  "tags": [
+    "uebernatuerlich"
+  ],
+  "keywords": [
+    "Übernatürlich"
+  ],
+  "searchAliases": [],
+  "specialRules": [
+    "Am Ende jedes Spielerzuges heilt die Eule sich alle verlorenen [LEBEN]."
+  ],
+  "stats": {
+    "gefahrenpunkte": 3,
+    "lebenspunkte": 5,
+    "ausweichen": 0,
+    "ruestung": 12,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-7",
+      "title": "[MAGIE]-Angriff",
+      "text": "Der Startspieler erhält 1W6+3 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "8-12",
+      "title": "Hackt",
+      "text": "Der Startspieler verliert 1 [LEBEN]."
+    },
+    {
+      "range": "13-17",
+      "title": "Nichts",
+      "text": "Schaut mit großen Augen."
+    },
+    {
+      "range": "18-20",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Spiel, falls alle Anführer bereits besiegt wurden. Andernfalls passiert nichts."
+    }
+  ],
+  "illustration": "Sandra Braun",
   "source": "card_image"
 }
 
