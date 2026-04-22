@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 10:18:07 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 10:18:24 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -7266,6 +7266,62 @@ select {
     }
   ],
   "illustration": "Verena Biskup",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_gargyl.json
+```json
+{
+  "cardName": "Gargyl",
+  "cardType": "Schergenkarte",
+  "set": "Mythische Geschichten",
+  "setId": "mythische_geschichten",
+  "setShortName": "Mythische Geschichten",
+  "setSymbol": "[SET_SYMBOL_MYTHISCHE_GESCHICHTEN]",
+  "layout": "landscape",
+  "image": "sc_gargyl.webp",
+  "sourceImages": [
+    "Karte0011.webp"
+  ],
+  "tags": [
+    "uebernatuerlich"
+  ],
+  "keywords": [
+    "Übernatürlich"
+  ],
+  "searchAliases": [],
+  "specialRules": [
+    "Der Gargyl verliert durch Angriffe keine [LEBEN]."
+  ],
+  "stats": {
+    "gefahrenpunkte": 5,
+    "lebenspunkte": 15,
+    "ausweichen": "-",
+    "ruestung": "-",
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-5",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+5 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "6-15",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "16-20",
+      "title": "Ermüdung",
+      "text": "Der Gargyl verliert 1W6 [LEBEN]."
+    }
+  ],
+  "illustration": "Fabrice Weiss",
   "source": "card_image"
 }
 
