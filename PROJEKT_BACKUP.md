@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 11:56:00 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 11:56:27 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -9780,6 +9780,65 @@ select {
 
 ---
 
+## 📄 Datei: data/cards/catalog/schergen/sc_orkischer_bogenschuetze.json
+```json
+{
+  "cardName": "Orkischer Bogenschütze",
+  "cardType": "Schergenkarte",
+  "set": "Aventuria Grundbox",
+  "setId": "aventuria_grundbox",
+  "setShortName": "Grundbox",
+  "setSymbol": "A",
+  "layout": "landscape",
+  "image": "sc_orkischer_bogenschuetze.webp",
+  "sourceImages": [
+    "Karte0019.webp"
+  ],
+  "tags": [
+    "ork",
+    "raeuber"
+  ],
+  "keywords": [
+    "Ork",
+    "Räuber"
+  ],
+  "stats": {
+    "gefahrenpunkte": 4,
+    "lebenspunkte": 15,
+    "ausweichen": "-",
+    "ruestung": 1,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-4",
+      "title": "[FERNKAMPF]-Angriff",
+      "text": "Der Held mit den meisten [LEBEN] erhält 1W6+5 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "5-12",
+      "title": "[FERNKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-17",
+      "title": "Nichts",
+      "text": "Sucht sich ein neues Ziel."
+    },
+    {
+      "range": "18-20",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+    }
+  ],
+  "illustration": "Tristan Denecke",
+  "source": "card_image"
+}
+
+```
+
+---
+
 ## 📄 Datei: data/cards/catalog/schergen/sc_orkischer_fallensteller.json
 ```json
 {
@@ -10840,6 +10899,84 @@ select {
   ],
   "illustration": "Verena Biskup",
   "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_tairachschamane.json
+```json
+{
+  "cardName": "Tairachschamane",
+  "cardType": "Schergenkarte",
+  "set": "Aventuria Grundbox",
+  "setId": "aventuria_grundbox",
+  "setShortName": "Grundbox",
+  "setSymbol": "A",
+  "layout": "landscape",
+  "image": "sc_tairachschamane.webp",
+  "sourceImages": [
+    "Karte0018.webp"
+  ],
+  "tags": [
+    "ork",
+    "zauberer",
+    "schamane"
+  ],
+  "keywords": [
+    "Ork",
+    "Zauberer"
+  ],
+  "specialRules": [
+    "Liegen Gegner mit dem Schlagwort „Ork“ rechts und links von dieser Karte, werden die Ergebnisse von deren [UNSICHERES_SYMBOL_SCHWARZER_WURF]-Würfen um 2 gesenkt (bis zu einem Minimum von 1)."
+  ],
+  "stats": {
+    "gefahrenpunkte": 5,
+    "lebenspunkte": 15,
+    "ausweichen": "-",
+    "ruestung": 1,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "[MAGIE]-Angriff",
+      "text": "Der Startspieler erhält 1W6+6 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "3-10",
+      "title": "[MAGIE]-Angriff",
+      "text": "Der Held mit den meisten [UNSICHERES_SYMBOL_ROT_OVAL] erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "11-14",
+      "title": "Orkfluch",
+      "text": "Bis zum Ende des Kampfes wird ein [UNSICHERES_SYMBOL_ROT_OVAL] aus der Tischmitte entfernt."
+    },
+    {
+      "range": "15-18",
+      "title": "Nichts",
+      "text": "Führt einen Kriegstanz auf."
+    },
+    {
+      "range": "19-20",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+    }
+  ],
+  "illustration": "Nadine Schäkel",
+  "source": "card_image",
+  "uncertain": true,
+  "uncertainFields": [
+    "specialRules[0]",
+    "actionTable[1].text",
+    "actionTable[2].text"
+  ],
+  "uncertainNotes": [
+    "Das Symbol vor „-Würfen“ in der Sonderregel ist sichtbar, aber hier noch nicht sicher offiziell zugeordnet. Vorläufiger Platzhalter: [UNSICHERES_SYMBOL_SCHWARZER_WURF].",
+    "Das rote ovale Symbol ist auf der Karte gut sichtbar, aber hier noch nicht sicher offiziell zugeordnet. Vorläufiger Platzhalter: [UNSICHERES_SYMBOL_ROT_OVAL]."
+  ]
 }
 
 ```
