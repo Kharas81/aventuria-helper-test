@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 7:17:01 PM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 7:17:14 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -7935,6 +7935,61 @@ select {
     }
   ],
   "illustration": "Fabrice Weiss",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_geisterbaer.json
+```json
+{
+  "cardName": "Geisterbär",
+  "cardType": "Schergenkarte",
+  "set": "Wirtshaus zum Schwarzen Keiler",
+  "setId": "wirtshaus_zum_schwarzen_keiler",
+  "setShortName": "Wirtshaus zum Schwarzen Keiler",
+  "setSymbol": "tierkopf_symbol",
+  "layout": "landscape",
+  "image": "sc_geisterbaer.webp",
+  "sourceImages": ["Karte0003.webp"],
+  "tags": ["daemon", "gehoernt", "humanoid"],
+  "keywords": ["Dämon", "Gehörnt", "Humanoid"],
+  "searchAliases": [],
+  "specialRules": [
+    "Solange Anführer im Spiel sind, kann der Geisterbär keine [LEBEN] verlieren. Der Geisterbär darf zusätzliche [AKTIONEN] in Höhe von [ABENTEUERMARKE] auf dieser Karte durchführen."
+  ],
+  "stats": {
+    "gefahrenpunkte": "-",
+    "lebenspunkte": "[ANZAHL_HELDEN] x 5",
+    "ausweichen": 5,
+    "ruestung": 0,
+    "aktionen": "[ANZAHL_HELDEN]"
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "Umarmung",
+      "text": "Der Startspieler erhält 2W6 [TREFFERPUNKTE] und muss von seinen ausliegenden dauerhaften Karten die mit den höchsten Ausspielkosten auf die Hand nehmen."
+    },
+    {
+      "range": "3-8",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Held mit den meisten [LEBEN] erhält 2W6 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "9-16",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "17-20",
+      "title": "Wachsende Wildheit",
+      "text": "Legt 1 [ABENTEUERMARKE] auf diese Karte. Die [AKTIONEN] des Bären erhöhen sich dadurch erst ab der nächsten Runde."
+    }
+  ],
+  "illustration": "Tristan Denecke",
   "source": "card_image"
 }
 
