@@ -18,7 +18,7 @@ export const ArchiveController = {
         ArchiveRenderer.renderHome({
             activeSetKey: ArchiveState.currentSet,
             activeSetName: CONFIG.getSetDisplayName?.(ArchiveState.currentSet),
-            enabledSets: CONFIG.getEnabledSets?.() || [],
+            enabledSets: CONFIG.getArchiveSets?.() || CONFIG.getEnabledSets?.() || [],
             totalLoadedCards: ArchiveState.allCards.length
         });
     },
