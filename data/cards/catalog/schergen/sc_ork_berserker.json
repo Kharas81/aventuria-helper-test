@@ -1,0 +1,56 @@
+{
+  "cardName": "Ork-Berserker",
+  "cardType": "Schergenkarte",
+  "set": "Wirtshaus zum Schwarzen Keiler",
+  "setId": "wirtshaus_zum_schwarzen_keiler",
+  "setShortName": "Schwarzer Keiler",
+  "setSymbol": "Keiler-Symbol",
+  "layout": "landscape",
+  "image": "sc_ork_berserker.webp",
+  "copies": 2,
+  "sourceImages": [
+    "Karte0003.webp",
+    "Karte0010.webp"
+  ],
+  "referenceImages": [
+    "Karte0003.webp",
+    "Karte0010.webp"
+  ],
+  "usedDuplicateForVerification": true,
+  "tags": [
+    "ork",
+    "raeuber",
+    "berserker"
+  ],
+  "keywords": [
+    "Ork",
+    "Räuber",
+    "Berserker"
+  ],
+  "stats": {
+    "gefahrenpunkte": 4,
+    "lebenspunkte": 15,
+    "ausweichen": "-",
+    "ruestung": 0,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-4",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Held mit den meisten [LEBEN] erhält 3W6 [TREFFERPUNKTE]. Anschließend verliert der Berserker dieselbe Menge an [LEBEN]."
+    },
+    {
+      "range": "5-14",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Held mit den meisten [LEBEN] erhält 1W6+4 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "15-20",
+      "title": "Nichts",
+      "text": "Brüllt zornig."
+    }
+  ],
+  "illustration": "Tristan Denecke",
+  "source": "card_image"
+}
