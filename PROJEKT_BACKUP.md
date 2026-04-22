@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 12:00:37 PM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 12:13:35 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -8437,6 +8437,76 @@ select {
     }
   ],
   "illustration": "Anja DiPaolo",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_herrischer_leviatan.json
+```json
+{
+  "cardName": "Herrischer Leviatan",
+  "cardType": "Schergenkarte",
+  "set": "Wirtshaus zum Schwarzen Keiler",
+  "setId": "wirtshaus_zum_schwarzen_keiler",
+  "setShortName": "Wirtshaus zum Schwarzen Keiler",
+  "setSymbol": "Schwarzer Keiler",
+  "layout": "landscape",
+  "image": "sc_herrischer_leviatan.webp",
+  "copies": 2,
+  "sourceImages": [
+    "Karte0001.webp",
+    "Karte0002.webp"
+  ],
+  "referenceImages": [
+    "Karte0001.webp",
+    "Karte0002.webp"
+  ],
+  "usedDuplicateForVerification": true,
+  "tags": [
+    "leviatan",
+    "amphibie"
+  ],
+  "keywords": [
+    "Leviatan",
+    "Amphibie"
+  ],
+  "searchAliases": [],
+  "specialRules": [
+    "Für jeden [VERDERBEN] bei links und rechts angrenzenden Gegnern hat der Leviatan [TREFFERPUNKTE] +1 (max. +5)."
+  ],
+  "stats": {
+    "gefahrenpunkte": 6,
+    "lebenspunkte": 20,
+    "ausweichen": "-",
+    "ruestung": 3,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-4",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 2W6 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "5-10",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "11-19",
+      "title": "Anleitung",
+      "text": "Die Gegner links und rechts an den Leviatan angrenzend bekommen jeweils 1 [VERDERBEN]."
+    },
+    {
+      "range": "20",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+    }
+  ],
+  "illustration": "Tristan Denecke",
   "source": "card_image"
 }
 
