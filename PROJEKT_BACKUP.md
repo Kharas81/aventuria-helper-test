@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 11:41:17 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 11:53:11 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5629,7 +5629,14 @@ select {
   "sc_rattenschwarm.json",
   "sc_wolfsrattenschwarm.json",
   "sc_fledermausschwarm.json",
-  "sc_gefraessige_salzwasser_piranhas.json"  
+  "sc_gefraessige_salzwasser_piranhas.json",
+  "sc_borbaradianische_laienmagierin_schwarzer_schrecken_plage_dich.json",
+  "sc_orkischer_pelzjaeger.json",
+  "sc_ork_berserker.json",
+  "sc_orkischer_fallensteller.json",
+  "sc_orkischer_raeuber.json",
+  "sc_orkischer_menschenfaenger.json",
+  "sc_ork_trommler.json"
   ]
 }
 
