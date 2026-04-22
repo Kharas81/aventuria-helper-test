@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 11:57:53 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 11:58:04 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -9794,9 +9794,18 @@ select {
   "setSymbol": "A",
   "layout": "landscape",
   "image": "sc_orkischer_bogenschuetze.webp",
+  "copies": 3,
   "sourceImages": [
-    "Karte0019.webp"
+    "Karte0019.webp",
+    "Karte0022.webp",
+    "Karte0026.webp"
   ],
+  "referenceImages": [
+    "Karte0019.webp",
+    "Karte0022.webp",
+    "Karte0026.webp"
+  ],
+  "usedDuplicateForVerification": true,
   "tags": [
     "ork",
     "raeuber"
