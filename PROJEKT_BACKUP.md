@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 12:58:23 PM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 12:58:46 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5645,7 +5645,11 @@ select {
   "sc_neandertaler.json",
   "sc_neandertalerin.json",
   "sc_herrischer_leviatan.json",
-  "sc_soeldner_scharfschuetzin.json"  
+  "sc_soeldner_scharfschuetzin.json",
+  "sc_goblin_antreiber.json",
+  "sc_goblin_feldscher.json",
+  "sc_goblin_krieger.json",
+  "sc_goblin_speerwerfer.json"
   ]
 }
 
