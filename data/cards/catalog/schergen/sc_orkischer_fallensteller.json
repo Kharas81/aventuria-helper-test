@@ -1,0 +1,67 @@
+{
+  "cardName": "Orkischer Fallensteller",
+  "cardType": "Schergenkarte",
+  "set": "Wirtshaus zum Schwarzen Keiler",
+  "setId": "wirtshaus_zum_schwarzen_keiler",
+  "setShortName": "Schwarzer Keiler",
+  "setSymbol": "Keiler-Symbol",
+  "layout": "landscape",
+  "image": "sc_orkischer_fallensteller.webp",
+  "copies": 2,
+  "sourceImages": [
+    "Karte0004.webp",
+    "Karte0009.webp"
+  ],
+  "referenceImages": [
+    "Karte0004.webp",
+    "Karte0009.webp"
+  ],
+  "usedDuplicateForVerification": true,
+  "tags": [
+    "ork",
+    "raeuber",
+    "krieger"
+  ],
+  "keywords": [
+    "Ork",
+    "Räuber",
+    "Krieger"
+  ],
+  "specialRules": [
+    "Fallgrube. Sobald diese Karte ins Spiel kommt, legt 1 [UNSICHERES_SYMBOL_BLAUE_MARKE] auf diese Karte. Wenn dem orkischen Fallensteller eine [UNSICHERES_SYMBOL_ORANGE_HAND]-Probe gelingt, verliert der Angreifer 2W6 [LEBEN] und die Fallgrube ist verbraucht. Legt den [UNSICHERES_SYMBOL_BLAUE_MARKE] von dieser Karte ab."
+  ],
+  "stats": {
+    "gefahrenpunkte": 4,
+    "lebenspunkte": 12,
+    "ausweichen": 5,
+    "ruestung": 1,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-12",
+      "title": "[FERNKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6+1 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-16",
+      "title": "Nichts",
+      "text": "Versteckt sich."
+    },
+    {
+      "range": "17-20",
+      "title": "Flucht",
+      "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls geschieht nichts."
+    }
+  ],
+  "illustration": "Nadine Schäkel",
+  "source": "card_image",
+  "uncertain": true,
+  "uncertainFields": [
+    "specialRules[0]"
+  ],
+  "uncertainNotes": [
+    "Die blaue Marken-Grafik ist sichtbar, aber hier noch nicht sicher offiziell zugeordnet. Vorläufiger Platzhalter: [UNSICHERES_SYMBOL_BLAUE_MARKE].",
+    "Das orange Handsymbol ist sichtbar, aber hier noch nicht sicher offiziell zugeordnet. Vorläufiger Platzhalter: [UNSICHERES_SYMBOL_ORANGE_HAND]."
+  ]
+}
