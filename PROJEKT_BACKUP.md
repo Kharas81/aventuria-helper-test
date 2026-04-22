@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 9:34:46 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 9:36:22 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -7559,7 +7559,16 @@ select {
   "setSymbol": "A",
   "layout": "landscape",
   "image": "sc_graeberskelett.webp",
-  "sourceImages": ["Karte0003.webp"],
+  "copies": 2,
+  "sourceImages": [
+    "Karte0003.webp",
+    "Karte0021.webp"
+  ],
+  "referenceImages": [
+    "Karte0003.webp",
+    "Karte0021.webp"
+  ],
+  "usedDuplicateForVerification": true,
   "tags": ["untot", "skelett"],
   "keywords": ["Untot", "Skelett"],
   "specialRules": [
@@ -7582,7 +7591,7 @@ select {
     {
       "range": "3-10",
       "title": "[NAHKAMPF]-Angriff",
-      "text": "Ein Held nach Wahl der Spieler erhält 1W6+2 [TREFFERPUNKTE]."
+      "text": "Ein Held nach Wahl der Helden erhält 1W6+2 [TREFFERPUNKTE]."
     },
     {
       "range": "11-16",
