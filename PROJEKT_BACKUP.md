@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 7:03:04 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 7:03:32 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -12225,6 +12225,32 @@ export default CardSetResolver;
 
 ---
 
+## 📄 Datei: js/core/config-archive.js
+```js
+const CONFIG_ARCHIVE = {
+    supplementalCatalogsBySet: {
+        base_game: ['schergen'],
+        mythische_geschichten: ['schergen'],
+        rueckkehr_zum_schwarzen_keiler: ['schergen'],
+        schiff_der_verlorenen_seelen: ['schergen'],
+        wald_ohne_wiederkehr: ['schergen'],
+        wirthaus_zum_schwarzen_keiler: ['schergen']
+    },
+
+    mergePriority: {
+        adventure_specific: 300,
+        set_catalog: 200,
+        central_catalog: 100,
+        unknown: 0
+    }
+};
+
+export default CONFIG_ARCHIVE;
+
+```
+
+---
+
 ## 📄 Datei: js/core/config-cards.js
 ```js
 const CONFIG_CARDS = {
@@ -12235,6 +12261,27 @@ const CONFIG_CARDS = {
 };
 
 export default CONFIG_CARDS;
+
+```
+
+---
+
+## 📄 Datei: js/core/config-catalogs.js
+```js
+const CONFIG_CATALOGS = {
+    schergen: {
+        key: 'schergen',
+        enabled: true,
+        dataDir: 'data/cards/catalog/schergen',
+        imageDir: 'assets/images/cards/schergen',
+        indexFile: 'data/cards/catalog/schergen/index.json',
+        runtimeBundle: 'data/runtime/catalogs/schergen.cards.json',
+        defaultType: 'minion',
+        defaultCardCategory: 'schergenkarte'
+    }
+};
+
+export default CONFIG_CATALOGS;
 
 ```
 
