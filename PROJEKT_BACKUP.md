@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 11:34:47 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 11:35:01 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -10543,6 +10543,66 @@ select {
     }
   ],
   "illustration": "Fabian Schempp",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_wolfsrattenschwarm.json
+```json
+{
+  "cardName": "Wolfsrattenschwarm",
+  "cardType": "Schergenkarte",
+  "set": "Wald ohne Wiederkehr",
+  "setId": "wald_ohne_wiederkehr",
+  "setShortName": "Wald ohne Wiederkehr",
+  "setSymbol": "wald_ohne_wiederkehr_symbol",
+  "layout": "landscape",
+  "image": "sc_wolfsrattenschwarm.webp",
+  "sourceImages": [
+    "Karte0008.webp"
+  ],
+  "tags": [
+    "schwarm",
+    "tier",
+    "unterirdisch",
+    "wald",
+    "wolfsratte"
+  ],
+  "keywords": [
+    "Schwarm",
+    "Tier (Unterirdisch, Wald)"
+  ],
+  "specialRules": [
+    "Legt 3 [VERDERBEN] auf diese Karte. Immer wenn die [LEBEN] auf 0 oder darunter sinken, entfernt nach dem Angriff 1 [VERDERBEN] und setzt die [LEBEN] auf 5. Wird der letzte [VERDERBEN] entfernt, so wird der Schwarm aus dem Spiel entfernt und nicht in den Schergenstapel zurückgemischt."
+  ],
+  "stats": {
+    "gefahrenpunkte": 5,
+    "lebenspunkte": 5,
+    "ausweichen": "-",
+    "ruestung": 0,
+    "aktionen": "[VERDERBEN]"
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Zwei zufällige Helden erhalten 1W6 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "3-10",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein Held nach Wahl der Helden erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "11-20",
+      "title": "Nichts",
+      "text": "Die Wolfsratten quieken böse."
+    }
+  ],
+  "illustration": "Tristan Denecke",
   "source": "card_image"
 }
 
