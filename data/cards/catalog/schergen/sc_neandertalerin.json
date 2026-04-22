@@ -1,0 +1,58 @@
+{
+  "cardName": "Neandertalerin",
+  "cardType": "Schergenkarte",
+  "set": "Wirtshaus zum Schwarzen Keiler",
+  "setId": "wirtshaus_zum_schwarzen_keiler",
+  "setShortName": "Wirtshaus zum Schwarzen Keiler",
+  "setSymbol": "Keiler-Symbol",
+  "layout": "landscape",
+  "image": "sc_neandertalerin.webp",
+  "copies": 4,
+  "sourceImages": [
+    "Karte0001.webp",
+    "Karte0006.webp",
+    "Karte0007.webp",
+    "Karte0008.webp"
+  ],
+  "referenceImages": [
+    "Karte0001.webp",
+    "Karte0006.webp",
+    "Karte0007.webp",
+    "Karte0008.webp"
+  ],
+  "usedDuplicateForVerification": true,
+  "tags": [
+    "neandertaler",
+    "raeuber"
+  ],
+  "keywords": [
+    "Neandertaler",
+    "Räuber"
+  ],
+  "stats": {
+    "gefahrenpunkte": 5,
+    "lebenspunkte": 20,
+    "ausweichen": "-",
+    "ruestung": 0,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-14",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein Held nach Wahl der Spieler erhält 1W6+3 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "15-16",
+      "title": "Kräuterpaste",
+      "text": "Die Neandertalerin heilt jedem anliegenden Schergen mit dem Schlagwort „Neandertaler“ 3 [LEBEN]."
+    },
+    {
+      "range": "17-20",
+      "title": "Nichts",
+      "text": "Glotzt dumm in der Gegend herum."
+    }
+  ],
+  "illustration": "Annalena Weber",
+  "source": "card_image"
+}
