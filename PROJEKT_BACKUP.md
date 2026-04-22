@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 7:23:53 PM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 7:32:16 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -7414,14 +7414,18 @@ select {
   "setSymbol": "Schwarzer Keiler",
   "layout": "landscape",
   "image": "sc_echsenmenschen_kultist.webp",
-  "copies": 2,
+  "copies": 4,
   "sourceImages": [
     "Karte0005.webp",
-    "Karte0009.webp"
+    "Karte0009.webp",
+    "Karte0011.webp",
+    "Karte0012.webp"
   ],
   "referenceImages": [
     "Karte0005.webp",
-    "Karte0009.webp"
+    "Karte0009.webp",
+    "Karte0011.webp",
+    "Karte0012.webp"
   ],
   "usedDuplicateForVerification": true,
   "tags": [
