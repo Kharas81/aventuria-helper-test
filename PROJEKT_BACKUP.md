@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 11:58:50 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 11:59:46 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -9571,6 +9571,69 @@ select {
     }
   ],
   "illustration": "Verena Biskup",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_neandertaler.json
+```json
+{
+  "cardName": "Neandertaler",
+  "cardType": "Schergenkarte",
+  "set": "Wirtshaus zum Schwarzen Keiler",
+  "setId": "wirtshaus_zum_schwarzen_keiler",
+  "setShortName": "Wirtshaus zum Schwarzen Keiler",
+  "setSymbol": "Keiler-Symbol",
+  "layout": "landscape",
+  "image": "sc_neandertaler.webp",
+  "copies": 4,
+  "sourceImages": [
+    "Karte0002.webp",
+    "Karte0003.webp",
+    "Karte0004.webp",
+    "Karte0005.webp"
+  ],
+  "referenceImages": [
+    "Karte0002.webp",
+    "Karte0003.webp",
+    "Karte0004.webp",
+    "Karte0005.webp"
+  ],
+  "usedDuplicateForVerification": true,
+  "tags": [
+    "neandertaler",
+    "raeuber"
+  ],
+  "keywords": [
+    "Neandertaler",
+    "Räuber"
+  ],
+  "specialRules": [
+    "[AUSWEICHEN]-Proben gegen Neandertaler-Angriffe sind um 4 Punkte erleichtert."
+  ],
+  "stats": {
+    "gefahrenpunkte": 5,
+    "lebenspunkte": 20,
+    "ausweichen": "-",
+    "ruestung": 0,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-14",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein Held nach Wahl der Spieler erhält 1W6+4 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "15-20",
+      "title": "Nichts",
+      "text": "Glotzt dumm in der Gegend herum."
+    }
+  ],
+  "illustration": "Julia Metzger",
   "source": "card_image"
 }
 
