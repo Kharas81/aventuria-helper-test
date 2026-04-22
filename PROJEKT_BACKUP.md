@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 10:20:54 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 10:21:19 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5617,7 +5617,13 @@ select {
   "sc_widderhyaene.json",
   "sc_raubschwinge.json",
   "sc_blutschakal.json",
-  "sc_ikanaria_morfu.json"
+  "sc_ikanaria_morfu.json",
+  "sc_gargyl.json",
+  "sc_hundeblume.json",
+  "sc_frostriese.json",
+  "sc_wolfsechse.json",
+  "sc_geschwaechter_gestaltwandler.json",
+  "sc_daemonische_eule.json"
   ]
 }
 
