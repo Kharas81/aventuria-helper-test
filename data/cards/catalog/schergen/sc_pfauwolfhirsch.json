@@ -1,0 +1,62 @@
+{
+  "cardName": "Pfauwolfhirsch",
+  "cardType": "Schergenkarte",
+  "set": "Mythische Geschichten",
+  "setId": "mythische_geschichten",
+  "setShortName": "Mythische Geschichten",
+  "setSymbol": "[SET_SYMBOL_MYTHISCHE_GESCHICHTEN]",
+  "layout": "landscape",
+  "image": "sc_pfauwolfhirsch.webp",
+  "copies": 2,
+  "sourceImages": [
+    "Karte0002.webp",
+    "Karte0004.webp"
+  ],
+  "referenceImages": [
+    "Karte0002.webp",
+    "Karte0004.webp"
+  ],
+  "usedDuplicateForVerification": true,
+  "tags": [
+    "uebernatuerlich",
+    "chimaere"
+  ],
+  "keywords": [
+    "Übernatürlich",
+    "Chimäre"
+  ],
+  "searchAliases": [],
+  "stats": {
+    "gefahrenpunkte": 5,
+    "lebenspunkte": 20,
+    "ausweichen": 1,
+    "ruestung": "-",
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-4",
+      "title": "Geweihstoß",
+      "text": "Der Startspieler muss eine seiner im Spiel befindlichen Waffen ablegen oder verliert 1W6 [LEBEN]. Dies zählt nicht als Angriff."
+    },
+    {
+      "range": "5-10",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 2W6 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "11-20",
+      "title": "Hypnotische Federpracht",
+      "text": "Lege 1 [UNSICHERES_SYMBOL_LILA_MARKER] auf diese Karte, um anzuzeigen, dass Angriffe gegen den Pfauwolfhirsch und an ihn angrenzende Gegner bis zum Beginn des nächsten Gegnerzuges um 4 Punkte erschwert sind."
+    }
+  ],
+  "illustration": "Sandra Braun",
+  "source": "card_image",
+  "uncertain": true,
+  "uncertainFields": [
+    "actionTable[2].text"
+  ],
+  "uncertainNotes": [
+    "Auf der Karte steht ein lila Marker-Symbol, dessen offizielle Bezeichnung hier noch nicht sicher zugeordnet ist. Vorläufiger Platzhalter: [UNSICHERES_SYMBOL_LILA_MARKER]."
+  ]
+}
