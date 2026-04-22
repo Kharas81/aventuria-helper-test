@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 10:19:59 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 10:20:20 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -10154,6 +10154,61 @@ select {
     }
   ],
   "illustration": "Matthias Kinigkeit",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_wolfsechse.json
+```json
+{
+  "cardName": "Wolfsechse",
+  "cardType": "Schergenkarte",
+  "set": "Mythische Geschichten",
+  "setId": "mythische_geschichten",
+  "setShortName": "Mythische Geschichten",
+  "setSymbol": "[SET_SYMBOL_MYTHISCHE_GESCHICHTEN]",
+  "layout": "landscape",
+  "image": "sc_wolfsechse.webp",
+  "sourceImages": [
+    "Karte0014.webp"
+  ],
+  "tags": [
+    "uebernatuerlich",
+    "chimaere"
+  ],
+  "keywords": [
+    "Übernatürlich",
+    "Chimäre"
+  ],
+  "searchAliases": [],
+  "stats": {
+    "gefahrenpunkte": 6,
+    "lebenspunkte": 18,
+    "ausweichen": 2,
+    "ruestung": "-",
+    "aktionen": 2
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "Anspringen",
+      "text": "Der Startspieler muss eine Sinnesschärfe-Probe ablegen. Misslingt sie, so darf er in der darauffolgenden Runde nur die Hälfte (abgerundet) seiner erschöpften Ausdauerkarten bereit machen."
+    },
+    {
+      "range": "3-8",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 2W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "9-20",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 1W6 [TREFFERPUNKTE]."
+    }
+  ],
+  "illustration": "Fabian Schempp",
   "source": "card_image"
 }
 
