@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 11:34:33 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 11:34:47 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -9598,6 +9598,66 @@ select {
     }
   ],
   "illustration": "Ben Maier",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_rattenschwarm.json
+```json
+{
+  "cardName": "Rattenschwarm",
+  "cardType": "Schergenkarte",
+  "set": "Wald ohne Wiederkehr",
+  "setId": "wald_ohne_wiederkehr",
+  "setShortName": "Wald ohne Wiederkehr",
+  "setSymbol": "wald_ohne_wiederkehr_symbol",
+  "layout": "landscape",
+  "image": "sc_rattenschwarm.webp",
+  "sourceImages": [
+    "Karte0007.webp"
+  ],
+  "tags": [
+    "schwarm",
+    "tier",
+    "unterirdisch",
+    "wald",
+    "ratte"
+  ],
+  "keywords": [
+    "Schwarm",
+    "Tier (Unterirdisch, Wald)"
+  ],
+  "specialRules": [
+    "Legt 3 [VERDERBEN] auf diese Karte. Immer wenn die [LEBEN] auf 0 oder darunter sinken, entfernt nach dem Angriff 1 [VERDERBEN] und setzt die [LEBEN] auf 3. Wird der letzte [VERDERBEN] entfernt, so wird der Schwarm aus dem Spiel entfernt und nicht in den Schergenstapel zurückgemischt."
+  ],
+  "stats": {
+    "gefahrenpunkte": 4,
+    "lebenspunkte": 3,
+    "ausweichen": "-",
+    "ruestung": 0,
+    "aktionen": "[VERDERBEN]"
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "3-10",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein Held nach Wahl der Helden erhält 1W6+1 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "11-20",
+      "title": "Nichts",
+      "text": "Sie quieken böse."
+    }
+  ],
+  "illustration": "Tristan Denecke",
   "source": "card_image"
 }
 
