@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 10:16:23 AM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 10:16:41 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -9704,6 +9704,73 @@ select {
     }
   ],
   "illustration": "Anna Steinbauer",
+  "source": "card_image"
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_widderhyaene.json
+```json
+{
+  "cardName": "Widderhyäne",
+  "cardType": "Schergenkarte",
+  "set": "Mythische Geschichten",
+  "setId": "mythische_geschichten",
+  "setShortName": "Mythische Geschichten",
+  "setSymbol": "[SET_SYMBOL_MYTHISCHE_GESCHICHTEN]",
+  "layout": "landscape",
+  "image": "sc_widderhyaene.webp",
+  "copies": 2,
+  "sourceImages": [
+    "Karte0003.webp",
+    "Karte0005.webp"
+  ],
+  "referenceImages": [
+    "Karte0003.webp",
+    "Karte0005.webp"
+  ],
+  "usedDuplicateForVerification": true,
+  "tags": [
+    "uebernatuerlich",
+    "chimaere"
+  ],
+  "keywords": [
+    "Übernatürlich",
+    "Chimäre"
+  ],
+  "searchAliases": [],
+  "stats": {
+    "gefahrenpunkte": 4,
+    "lebenspunkte": 16,
+    "ausweichen": 1,
+    "ruestung": "-",
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-8",
+      "title": "Hornstoß",
+      "text": "Der Startspieler muss 1 [AUSDAUER]karte ablegen oder verliert 1W6 [LEBEN]. Dies zählt nicht als Angriff."
+    },
+    {
+      "range": "9-12",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein zufälliger Held erhält 1W6+2 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-15",
+      "title": "Angriffslustig",
+      "text": "Die Widderhyäne verliert 2 [LEBEN] und führt 1 weitere [AKTIONEN] durch."
+    },
+    {
+      "range": "16-20",
+      "title": "Nichts",
+      "text": "Sie scharrt mit den Hufen."
+    }
+  ],
+  "illustration": "Matthias Kinigkeit",
   "source": "card_image"
 }
 
