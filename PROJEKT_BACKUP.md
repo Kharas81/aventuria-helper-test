@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 7:16:49 PM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 7:17:01 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -7764,6 +7764,56 @@ select {
   "uncertainNotes": [
     "Im grauen Regelkasten steht ein oranges Symbol vor \"-Würfe\", dessen offizieller Token hier noch nicht sicher zugeordnet ist. Vorläufiger Platzhalter: [UNSICHERES_SYMBOL_ORANGE_PROBE]."
   ]
+}
+
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_fuenfgehoernte_echse.json
+```json
+{
+  "cardName": "Fünfgehörnte Echse",
+  "cardType": "Schergenkarte",
+  "set": "Wirtshaus zum Schwarzen Keiler",
+  "setId": "wirtshaus_zum_schwarzen_keiler",
+  "setShortName": "Wirtshaus zum Schwarzen Keiler",
+  "setSymbol": "tierkopf_symbol",
+  "layout": "landscape",
+  "image": "sc_fuenfgehoernte_echse.webp",
+  "sourceImages": ["Karte0002.webp"],
+  "tags": ["daemon", "gehoernt", "humanoid"],
+  "keywords": ["Dämon", "Gehörnt", "Humanoid"],
+  "searchAliases": [],
+  "specialRules": [
+    "Gegen [NAHKAMPF]-Angriffe verfügt die Fünfgehörnte Echse über [AUSWEICHEN] 6."
+  ],
+  "stats": {
+    "gefahrenpunkte": "-",
+    "lebenspunkte": "[ANZAHL_HELDEN] x 6",
+    "ausweichen": 4,
+    "ruestung": 0,
+    "aktionen": "[ANZAHL_HELDEN]"
+  },
+  "actionTable": [
+    {
+      "range": "1-3",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Held mit den meisten [LEBEN] erhält 5W6 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "4-12",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Startspieler erhält 2W6 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-20",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein Held nach Wahl der Spieler erhält 1W6 [TREFFERPUNKTE]."
+    }
+  ],
+  "illustration": "Petra Rudolf",
+  "source": "card_image"
 }
 
 ```
