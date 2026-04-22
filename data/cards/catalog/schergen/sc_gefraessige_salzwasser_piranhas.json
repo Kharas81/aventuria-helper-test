@@ -1,0 +1,52 @@
+{
+  "cardName": "Gefräßige Salzwasser-Piranhas",
+  "cardType": "Schergenkarte",
+  "set": "Schiff der verlorenen Seelen",
+  "setId": "schiff_der_verlorenen_seelen",
+  "setShortName": "Schiff der verlorenen Seelen",
+  "setSymbol": "schiff_der_verlorenen_seelen_symbol",
+  "layout": "landscape",
+  "image": "sc_gefraessige_salzwasser_piranhas.webp",
+  "sourceImages": [
+    "Karte0010.webp"
+  ],
+  "tags": [
+    "schwarm",
+    "tier",
+    "meer",
+    "piranha"
+  ],
+  "keywords": [
+    "Schwarm",
+    "Tier (Meer)"
+  ],
+  "specialRules": [
+    "Lege 2 [VERDERBEN] auf diese Karte. Immer wenn die [LEBEN] auf 0 oder darunter sinken, entferne nach dem Angriff 1 [VERDERBEN] und setze die [LEBEN] auf 3. Wird der letzte [VERDERBEN] entfernt, so werden stattdessen die Salzwasser-Piranhas aus dem Spiel entfernt."
+  ],
+  "stats": {
+    "gefahrenpunkte": 4,
+    "lebenspunkte": 3,
+    "ausweichen": 8,
+    "ruestung": 0,
+    "aktionen": "[VERDERBEN]"
+  },
+  "actionTable": [
+    {
+      "range": "1-2",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Der Held mit den wenigsten [LEBEN] erhält 1W6+1 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "3-12",
+      "title": "[NAHKAMPF]-Angriff",
+      "text": "Ein Held nach Wahl der Spieler erhält 1W6 [TREFFERPUNKTE]."
+    },
+    {
+      "range": "13-20",
+      "title": "Nichts",
+      "text": "Schnappen wild um sich."
+    }
+  ],
+  "illustration": "Fabrice Weiss",
+  "source": "card_image"
+}
