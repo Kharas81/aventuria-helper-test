@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 7:19:48 PM
+# 🛡️ Aventuria Projekt-Backup - 4/22/2026, 7:20:06 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -9823,6 +9823,87 @@ select {
   "illustration": "Nadine Schäkel",
   "source": "card_image"
 }
+```
+
+---
+
+## 📄 Datei: data/cards/catalog/schergen/sc_junger_kristallomant.json
+```json
+{
+  "cardName": "Junger Kristallomant",
+  "cardType": "Schergenkarte",
+  "set": "Wirtshaus zum Schwarzen Keiler",
+  "setId": "wirtshaus_zum_schwarzen_keiler",
+  "setShortName": "Wirtshaus zum Schwarzen Keiler",
+  "setSymbol": "Schwarzer Keiler",
+  "layout": "landscape",
+  "image": "sc_junger_kristallomant.webp",
+  "copies": 3,
+  "sourceImages": [
+    "Karte0002.webp",
+    "Karte0003.webp",
+    "Karte0010.webp"
+  ],
+  "referenceImages": [
+    "Karte0002.webp",
+    "Karte0003.webp",
+    "Karte0010.webp"
+  ],
+  "usedDuplicateForVerification": true,
+  "tags": [
+    "achaz",
+    "zauberer"
+  ],
+  "keywords": [
+    "Achaz",
+    "Zauberer"
+  ],
+  "searchAliases": [],
+  "specialRules": [],
+  "stats": {
+    "gefahrenpunkte": 4,
+    "lebenspunkte": 8,
+    "ausweichen": "-",
+    "ruestung": 3,
+    "aktionen": 1
+  },
+  "actionTable": [
+    {
+      "range": "1-5",
+      "title": "[MAGIE]-Angriff",
+      "text": "Der Held mit den meisten [UNSICHERES_SYMBOL_ROT_OVAL] erhält 1W6+([UNSICHERES_SYMBOL_LILA_ORB] x2) [TREFFERPUNKTE]."
+    },
+    {
+      "range": "6-9",
+      "title": "Kristallkraft sammeln",
+      "text": "Der Achaz-Scherge mit den meisten [UNSICHERES_SYMBOL_LILA_ORB] (außer dem Kristallomanten selbst) gibt sofort einen seiner [UNSICHERES_SYMBOL_LILA_ORB] an den Kristallomanten. Der Kristallomant darf danach 1 weitere [AKTIONEN] durchführen."
+    },
+    {
+      "range": "10-18",
+      "title": "Meditation",
+      "text": "Legt 1 [UNSICHERES_SYMBOL_LILA_ORB] auf diese Karte."
+    },
+    {
+      "range": "19-20",
+      "title": "Blick zum Anführer",
+      "text": "Entfernt die Karte aus dem Kampf, falls alle Anführer bereits besiegt wurden. Andernfalls legt 1 [UNSICHERES_SYMBOL_LILA_ORB] auf diese Karte."
+    }
+  ],
+  "illustration": "Petra Rudolf",
+  "source": "card_image",
+  "uncertain": true,
+  "uncertainFields": [
+    "actionTable[0].text",
+    "actionTable[1].text",
+    "actionTable[2].text",
+    "actionTable[3].text"
+  ],
+  "uncertainNotes": [
+    "Das rote ovale Inline-Symbol und das lila Inline-Symbol sind sichtbar, aber nicht sicher offiziell zugeordnet.",
+    "Vorläufige Platzhalter: [UNSICHERES_SYMBOL_ROT_OVAL] und [UNSICHERES_SYMBOL_LILA_ORB]."
+  ]
+}
+
 ```
 
 ---
