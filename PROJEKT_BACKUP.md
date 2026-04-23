@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:20:50 AM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:21:15 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -1206,9 +1206,9 @@ a {
 
 .card-detail__title {
     margin: 0;
-    color: var(--color-primary);
-    font-size: 2rem;
-    line-height: 1.1;
+    color: var(--ui-color-burgundy-900);
+    font-size: clamp(1.9rem, 3vw, 3rem);
+    line-height: 1.08;
 }
 
 .card-detail__badges {
@@ -1225,11 +1225,22 @@ a {
 }
 
 .card-detail__image-panel {
-    background: var(--color-bg-white-soft);
-    border: 1px solid var(--color-border-soft-card);
-    border-radius: var(--radius-xl);
-    padding: var(--space-lg);
-    box-shadow: var(--shadow-card);
+    position: relative;
+    padding: var(--space-xl);
+    border: 1px solid rgba(129, 90, 42, 0.14);
+    border-radius: var(--radius-2xl);
+    background: var(--ui-gradient-panel);
+    box-shadow: var(--ui-shadow-sm);
+    overflow: hidden;
+}
+
+.card-detail__image-panel::before {
+    content: "";
+    position: absolute;
+    inset: 10px;
+    border: 1px solid rgba(190, 154, 101, 0.16);
+    border-radius: calc(var(--radius-2xl) - 8px);
+    pointer-events: none;
 }
 
 .card-detail__image-wrap {
@@ -1241,10 +1252,10 @@ a {
     width: 100%;
     max-height: 68vh;
     object-fit: contain;
-    border: var(--border-thin) solid var(--color-secondary);
-    border-radius: var(--radius-lg);
-    background: var(--color-white);
-    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(129, 90, 42, 0.18);
+    border-radius: var(--radius-xl);
+    background: rgba(255, 255, 255, 0.78);
+    box-shadow: var(--ui-shadow-xs);
 }
 
 .card-detail__info {
@@ -1270,7 +1281,7 @@ a {
 
 @media (max-width: 700px) {
     .card-detail__title {
-        font-size: 1.55rem;
+        font-size: 1.7rem;
     }
 }
 
