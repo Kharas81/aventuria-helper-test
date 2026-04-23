@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 4:27:55 PM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 4:28:10 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5070,6 +5070,277 @@ a {
     #reader-tab,
     #codex-tab {
         padding: var(--space-lg);
+    }
+}
+
+```
+
+---
+
+## 📄 Datei: css/features/rulebook/rulebook-reader.css
+```css
+.reader-container {
+    position: relative;
+    z-index: 1;
+    background: transparent;
+    color: var(--ui-color-ink);
+    padding: 0;
+    border-radius: 0;
+    font-family: var(--ui-font-body);
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.reader-page {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: var(--space-sm);
+}
+
+.reader-text {
+    max-width: 920px;
+    margin: 0 auto;
+    color: var(--ui-color-ink);
+    font-family: var(--ui-font-body);
+    line-height: 1.72;
+    word-break: break-word;
+}
+
+.reader-text h2 {
+    color: var(--ui-color-burgundy-900);
+    border-bottom: 1px solid rgba(197, 149, 62, 0.52);
+    padding-bottom: 8px;
+    margin: 0 0 var(--space-lg) 0;
+    text-transform: none;
+    font-size: 1.8rem;
+    letter-spacing: 0.02em;
+}
+
+.reader-text h3 {
+    color: var(--ui-color-bronze-900);
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-sm);
+    font-size: 1.35rem;
+}
+
+.location-info {
+    display: inline-block;
+    margin-bottom: var(--space-lg);
+    padding: 8px 12px;
+    border: 1px solid rgba(129, 90, 42, 0.14);
+    border-radius: var(--radius-pill);
+    background: rgba(255, 252, 247, 0.76);
+    color: var(--ui-color-ink-soft);
+    font-style: italic;
+    font-size: 0.95rem;
+}
+
+.img-wrapper {
+    width: 100%;
+    max-width: 780px;
+    margin: 0 auto var(--space-2xl) auto;
+    padding: var(--space-sm);
+    border: 1px solid rgba(129, 90, 42, 0.14);
+    border-radius: var(--radius-xl);
+    background: rgba(255, 252, 247, 0.8);
+    text-align: center;
+    box-shadow: var(--ui-shadow-sm);
+}
+
+.manual-page-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid rgba(129, 90, 42, 0.18);
+    border-radius: var(--radius-lg);
+    max-width: 100%;
+    box-shadow: none;
+}
+
+.narrative-text {
+    color: var(--ui-color-ink-soft);
+    font-style: italic;
+    margin: var(--space-lg) 0;
+    padding: var(--space-md) var(--space-lg);
+    border-left: 4px solid rgba(197, 149, 62, 0.72);
+    border-radius: var(--radius-md);
+    background: rgba(255, 252, 247, 0.6);
+}
+
+.instruction-box {
+    border: 1px solid rgba(54, 94, 137, 0.24);
+    background: rgba(255, 252, 247, 0.76);
+    margin: var(--space-xl) 0;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--ui-shadow-xs);
+}
+
+.box-header {
+    background: linear-gradient(180deg, #3c608b 0%, #2e4f76 100%);
+    color: #fffaf2;
+    padding: 10px 16px;
+    font-weight: 700;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.box-content {
+    padding: var(--space-lg);
+}
+
+.box-action {
+    color: var(--ui-color-burgundy-900);
+    font-weight: 700;
+    margin-bottom: var(--space-sm);
+}
+
+.box-results {
+    list-style: none;
+    padding-left: 0;
+    margin: var(--space-md) 0 0 0;
+    border-top: 1px solid rgba(129, 90, 42, 0.16);
+}
+
+.box-results li {
+    padding: 8px 0;
+    font-size: 0.96rem;
+    border-bottom: 1px dotted rgba(129, 90, 42, 0.22);
+}
+
+.box-results li:last-child {
+    border-bottom: none;
+}
+
+.box-results li strong {
+    color: var(--ui-color-bronze-900);
+    min-width: 140px;
+    display: inline-block;
+}
+
+.rule-block {
+    margin-bottom: var(--space-lg);
+    padding: var(--space-md) var(--space-lg);
+    background: rgba(197, 149, 62, 0.06);
+    border-left: 4px solid rgba(197, 149, 62, 0.72);
+    border-radius: var(--radius-md);
+}
+
+.warning-box {
+    margin: var(--space-lg) 0;
+    padding: var(--space-md) var(--space-lg);
+    border-left: 5px solid var(--ui-color-danger);
+    background: rgba(154, 44, 44, 0.08);
+    color: var(--ui-color-ink);
+    border-radius: var(--radius-md);
+}
+
+.warning-box strong {
+    color: var(--ui-color-danger);
+}
+
+.toc-box {
+    margin: var(--space-lg) 0;
+    padding: var(--space-lg);
+    border: 1px solid rgba(129, 90, 42, 0.16);
+    background: rgba(255, 252, 247, 0.74);
+    border-radius: var(--radius-xl);
+}
+
+.toc-box h3 {
+    margin-top: 0;
+    margin-bottom: var(--space-sm);
+    color: var(--ui-color-burgundy-900);
+}
+
+.toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.toc-list li {
+    padding: 8px 0;
+    border-bottom: 1px dotted rgba(129, 90, 42, 0.22);
+}
+
+.toc-list li:last-child {
+    border-bottom: none;
+}
+
+.manual-table-wrap {
+    overflow-x: auto;
+    margin: var(--space-xl) 0;
+    border: 1px solid rgba(129, 90, 42, 0.16);
+    border-radius: var(--radius-xl);
+    background: rgba(255, 252, 247, 0.74);
+}
+
+.manual-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 560px;
+    font-size: 0.96rem;
+}
+
+.manual-table th,
+.manual-table td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid rgba(129, 90, 42, 0.14);
+    vertical-align: top;
+}
+
+.manual-table th {
+    background: rgba(54, 94, 137, 0.08);
+    color: var(--ui-color-bronze-900);
+    font-weight: 700;
+}
+
+.manual-table tr:last-child td {
+    border-bottom: none;
+}
+
+.reader-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-lg) 0 0 0;
+    margin-top: var(--space-lg);
+    border-top: 1px solid rgba(129, 90, 42, 0.16);
+    flex-wrap: wrap;
+}
+
+#manual-page-indicator {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 0 var(--space-lg);
+    border: 1px solid rgba(129, 90, 42, 0.14);
+    border-radius: var(--radius-pill);
+    background: rgba(255, 252, 247, 0.72);
+    color: var(--ui-color-burgundy-900);
+    font-family: var(--ui-font-ui);
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+@media (max-width: 700px) {
+    .reader-footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .reader-footer button {
+        width: 100%;
+    }
+
+    #manual-page-indicator {
+        width: 100%;
     }
 }
 
