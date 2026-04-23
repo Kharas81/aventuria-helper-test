@@ -1,0 +1,65 @@
+#rulebook-modal .modal-sidebar {
+    position: relative;
+    padding: var(--space-2xl);
+    border-right: 1px solid rgba(129, 90, 42, 0.14);
+    background: linear-gradient(180deg, rgba(244, 232, 210, 0.9) 0%, rgba(235, 220, 193, 0.92) 100%);
+    overflow: auto;
+}
+
+#rulebook-modal .modal-sidebar::after {
+    content: "";
+    position: absolute;
+    inset: auto -60px -80px auto;
+    width: 180px;
+    height: 180px;
+    border-radius: var(--radius-round);
+    background: radial-gradient(circle, rgba(123, 31, 31, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+#manual-set-label {
+    margin: 0 0 var(--space-lg) 0;
+    color: var(--ui-color-burgundy-900);
+    font-family: var(--ui-font-display);
+    font-size: 1.35rem;
+    line-height: 1.2;
+}
+
+#manual-page-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+#manual-page-list li {
+    padding: 12px 14px;
+    border: 1px solid rgba(129, 90, 42, 0.12);
+    border-radius: var(--radius-lg);
+    background: rgba(255, 252, 247, 0.72);
+    color: var(--ui-color-ink);
+    line-height: 1.4;
+    cursor: pointer;
+    transition:
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast),
+        border-color var(--transition-fast),
+        background var(--transition-fast);
+}
+
+#manual-page-list li:hover {
+    transform: translateX(3px);
+    box-shadow: var(--ui-shadow-xs);
+    border-color: var(--ui-color-border-accent);
+    background: rgba(255, 252, 247, 0.92);
+}
+
+@media (max-width: 1020px) {
+    #rulebook-modal .modal-sidebar {
+        border-right: 0;
+        border-bottom: 1px solid rgba(129, 90, 42, 0.14);
+        max-height: 240px;
+    }
+}
