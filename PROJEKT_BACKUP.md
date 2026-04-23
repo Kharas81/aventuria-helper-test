@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:21:26 AM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:23:28 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -21227,6 +21227,11 @@ select {
     <link rel="stylesheet" href="css/ui/panels.css">
     <link rel="stylesheet" href="css/ui/badges.css">
     <link rel="stylesheet" href="css/ui/dividers.css">
+    <link rel="stylesheet" href="css/features/main-session.css">
+    <link rel="stylesheet" href="css/features/adventure-setup.css">
+    <link rel="stylesheet" href="css/features/rulebook-theme.css">
+    <link rel="stylesheet" href="css/features/card-detail-theme.css">
+    <link rel="stylesheet" href="css/modal.css">
 
     <!-- Bestehende Feature-CSS -->
     <link rel="stylesheet" href="css/preview-tooltip.css">
@@ -21248,6 +21253,7 @@ select {
     <link rel="stylesheet" href="css/card-detail-panels.css">
     <link rel="stylesheet" href="css/card-detail-meta.css">
     <link rel="stylesheet" href="css/card-detail-actions.css">
+    <link rel="stylesheet" href="css/features/card-detail-theme.css">
 </head>
 <body class="theme-aventuria">
     <div class="app-container app-shell__frame">
