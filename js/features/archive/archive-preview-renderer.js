@@ -12,7 +12,7 @@ export const ArchivePreviewRenderer = {
 
         if (normalized?.hasRealImage && normalized?.imageSrc) {
             return `
-                <div class="archive-preview-card__image-wrap">
+                <div class="archive-preview-card__media">
                     <img
                         class="archive-preview-card__image"
                         src="${Utils.escapeHtml(normalized.imageSrc)}"
@@ -23,7 +23,7 @@ export const ArchivePreviewRenderer = {
         }
 
         return `
-            <div class="archive-preview-card__image-wrap">
+            <div class="archive-preview-card__media">
                 <div class="archive-preview-card__placeholder">
                     Keine Kartenabbildung für diese Vorschau vorhanden.
                 </div>
@@ -35,28 +35,28 @@ export const ArchivePreviewRenderer = {
         const stats = ArchiveCardMeta.getStats(card);
 
         return `
-            <section class="archive-preview-card__section">
-                <div class="archive-preview-card__section-title">Werte</div>
+            <section class="archive-preview-card__stats-block" aria-label="Kartenwerte">
+                <div class="archive-preview-card__section-kicker">Werte</div>
 
-                <div class="archive-card__stats">
-                    <div class="archive-card__stat">
-                        <div class="archive-card__stat-label">GP</div>
-                        <div class="archive-card__stat-value">${Utils.escapeHtml(stats.gp)}</div>
+                <div class="archive-preview-card__stats-strip">
+                    <div class="archive-preview-card__stat-pill">
+                        <span class="archive-preview-card__stat-key">GP</span>
+                        <span class="archive-preview-card__stat-value">${Utils.escapeHtml(stats.gp)}</span>
                     </div>
 
-                    <div class="archive-card__stat">
-                        <div class="archive-card__stat-label">Leben</div>
-                        <div class="archive-card__stat-value">${Utils.escapeHtml(stats.leben)}</div>
+                    <div class="archive-preview-card__stat-pill">
+                        <span class="archive-preview-card__stat-key">Leben</span>
+                        <span class="archive-preview-card__stat-value">${Utils.escapeHtml(stats.leben)}</span>
                     </div>
 
-                    <div class="archive-card__stat">
-                        <div class="archive-card__stat-label">Rüstung</div>
-                        <div class="archive-card__stat-value">${Utils.escapeHtml(stats.ruestung)}</div>
+                    <div class="archive-preview-card__stat-pill">
+                        <span class="archive-preview-card__stat-key">Rüstung</span>
+                        <span class="archive-preview-card__stat-value">${Utils.escapeHtml(stats.ruestung)}</span>
                     </div>
 
-                    <div class="archive-card__stat">
-                        <div class="archive-card__stat-label">Aktionen</div>
-                        <div class="archive-card__stat-value">${Utils.escapeHtml(stats.aktionen)}</div>
+                    <div class="archive-preview-card__stat-pill">
+                        <span class="archive-preview-card__stat-key">Aktionen</span>
+                        <span class="archive-preview-card__stat-value">${Utils.escapeHtml(stats.aktionen)}</span>
                     </div>
                 </div>
             </section>
@@ -68,8 +68,8 @@ export const ArchivePreviewRenderer = {
 
         if (!rows.length) {
             return `
-                <section class="archive-preview-card__section">
-                    <div class="archive-preview-card__section-title">Aktionen</div>
+                <section class="archive-preview-card__rules-block">
+                    <div class="archive-preview-card__section-kicker">Aktionen</div>
                     <div class="archive-browser-empty">
                         Für diese Karte sind keine Aktionsdaten hinterlegt.
                     </div>
@@ -78,16 +78,16 @@ export const ArchivePreviewRenderer = {
         }
 
         return `
-            <section class="archive-preview-card__section">
-                <div class="archive-preview-card__section-title">Aktionen</div>
+            <section class="archive-preview-card__rules-block">
+                <div class="archive-preview-card__section-kicker">Aktionen</div>
 
-                <div class="archive-preview-card__rules">
+                <div class="archive-preview-card__rules-list">
                     ${rows.map(row => {
                         const parsed = parseArchiveActionTitle(row.title);
 
                         return `
                             <article class="archive-preview-card__rule">
-                                <div class="archive-preview-card__rule-top">
+                                <div class="archive-preview-card__rule-meta">
                                     ${row.range ? `<span class="archive-card__action-range">${Utils.escapeHtml(row.range)}</span>` : ''}
                                     ${parsed.typeLabel ? `<span class="archive-preview-card__rule-type">${Utils.escapeHtml(parsed.typeLabel)}</span>` : ''}
                                 </div>
@@ -157,16 +157,18 @@ export const ArchivePreviewRenderer = {
                 </div>
 
                 <div class="archive-preview-card">
-                    ${this.renderImage(card)}
+                    <section class="archive-preview-card__hero">
+                        ${this.renderImage(card)}
 
-                    <div class="archive-preview-card__head">
-                        <h4 class="archive-preview-card__title">${Utils.escapeHtml(name)}</h4>
+                        <div class="archive-preview-card__head">
+                            <h4 class="archive-preview-card__title">${Utils.escapeHtml(name)}</h4>
 
-                        <div class="archive-preview-card__meta">
-                            <span class="archive-badge archive-badge--type">${Utils.escapeHtml(typeLabel)}</span>
-                            <span class="archive-badge archive-badge--set">${Utils.escapeHtml(sourceLabel)}</span>
+                            <div class="archive-preview-card__meta">
+                                <span class="archive-badge archive-badge--type">${Utils.escapeHtml(typeLabel)}</span>
+                                <span class="archive-badge archive-badge--set">${Utils.escapeHtml(sourceLabel)}</span>
+                            </div>
                         </div>
-                    </div>
+                    </section>
 
                     ${this.renderStats(card)}
                     ${this.renderActions(card)}
