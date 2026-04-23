@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:04:29 AM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:04:44 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -19725,6 +19725,7 @@ export default App;
 ```js
 import AppControls from './controls.js';
 import AppPersistence from './persistence.js';
+import SessionUI from '../render/session/session-ui.js';
 
 export const AppBootstrap = {
     async populateAdventurePicker() {
@@ -19744,6 +19745,7 @@ export const AppBootstrap = {
         await this.populateAdventurePicker();
         this.bindEvents();
         await this.restoreSavedState();
+        SessionUI.syncStatusStrip();
     }
 };
 
