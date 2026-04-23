@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 3:31:42 PM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 3:31:57 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5293,6 +5293,151 @@ a {
     .modal-sidebar li {
         font-size: 0.8em;
         padding: 7px var(--space-sm);
+    }
+}
+
+```
+
+---
+
+## 📄 Datei: css/modal/modal-tabs.css
+```css
+.modal-nav {
+    display: flex;
+    align-items: center;
+    padding: var(--space-md) var(--space-2xl);
+    background: var(--color-bg-body);
+    border-bottom: var(--border-md) solid var(--color-secondary);
+    gap: var(--space-xl);
+    flex-wrap: wrap;
+}
+
+.modal-nav h2 {
+    margin: 0;
+    color: var(--color-primary);
+    font-size: 1.3rem;
+}
+
+.tab-btn {
+    background: var(--color-bg-panel);
+    border: var(--border-thin) solid var(--color-secondary);
+    padding: var(--space-sm) var(--space-2xl);
+    cursor: pointer;
+    font-weight: bold;
+    font-family: inherit;
+    border-radius: var(--radius-sm);
+}
+
+.tab-btn.active {
+    background: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+}
+
+.tab-content {
+    flex: 1;
+    padding: var(--space-3xl);
+    overflow-y: auto;
+    min-height: 0;
+    box-sizing: border-box;
+}
+
+.search-bar {
+    width: 100%;
+    padding: var(--space-lg);
+    margin-bottom: var(--space-2xl);
+    border: var(--border-md) solid var(--color-secondary);
+    box-sizing: border-box;
+    background: var(--color-ivory);
+    color: var(--color-text);
+    font-family: inherit;
+    border-radius: var(--radius-sm);
+}
+
+.reader-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-lg);
+    padding: var(--space-xl) 0;
+    margin-top: var(--space-md);
+    border-top: var(--border-md) solid var(--color-secondary);
+    flex-wrap: wrap;
+}
+
+.rule-entry {
+    background: var(--color-bg-white-soft);
+    padding: var(--space-xl);
+    margin-bottom: var(--space-xl);
+    border-left: var(--border-xl) solid var(--color-primary);
+    border-radius: var(--radius-sm);
+}
+
+.rule-entry h4 {
+    margin-top: 0;
+    margin-bottom: var(--space-sm);
+    color: var(--color-primary);
+}
+
+@media (max-width: 1000px) {
+    .tab-content {
+        padding: 18px;
+    }
+}
+
+@media (max-width: 820px) {
+    .modal-nav {
+        padding: var(--space-md) 14px;
+        gap: var(--space-md);
+    }
+
+    .tab-content {
+        padding: 14px;
+    }
+}
+
+@media (max-width: 600px) {
+    .modal-nav {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .modal-nav h2 {
+        font-size: 1.1rem;
+    }
+
+    .tab-btn {
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    .tab-content {
+        padding: var(--space-lg);
+    }
+
+    .reader-footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .reader-footer button {
+        width: 100%;
+    }
+
+    .reader-footer span {
+        text-align: center;
+    }
+
+    .search-bar {
+        padding: var(--space-md);
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .tab-content {
+        padding: var(--space-md);
     }
 }
 
