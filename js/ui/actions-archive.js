@@ -72,6 +72,12 @@ export function getArchiveActions() {
             );
         },
 
+        'archive-select-card': trigger => {
+            CoreRuntime.getArchive()?.setSelectedCard?.(
+                trigger?.dataset?.cardId || ''
+            );
+        },
+
         'archive-search': trigger => {
             openArchiveWithSearch({
                 query: trigger?.dataset?.archiveQuery || '',
