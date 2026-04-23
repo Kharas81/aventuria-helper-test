@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:14:21 AM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:14:38 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -26487,6 +26487,14 @@ export const Archive = {
         ArchiveState.filteredCards = Utils.normalizeArray(value);
     },
 
+    get selectedCardId() {
+        return ArchiveState.selectedCardId;
+    },
+
+    set selectedCardId(value) {
+        ArchiveState.selectedCardId = ArchiveState.normalizeSelectedCardId(value);
+    },
+
     get isLoading() {
         return ArchiveState.isLoading;
     },
@@ -26553,6 +26561,10 @@ export const Archive = {
 
     setCategoryFilter(categoryFilter = '') {
         return ArchiveController.setCategoryFilter(categoryFilter);
+    },
+
+    setSelectedCard(cardId = '') {
+        return ArchiveController.setSelectedCard(cardId);
     },
 
     render() {
