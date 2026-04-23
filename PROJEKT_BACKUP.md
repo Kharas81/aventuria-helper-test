@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 3:31:29 PM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 3:31:42 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5133,6 +5133,38 @@ a {
     .modal-content {
         border-radius: var(--radius-sm);
         height: 97vh;
+    }
+}
+
+```
+
+---
+
+## 📄 Datei: css/modal/modal-close.css
+```css
+.close-modal {
+    position: absolute;
+    top: var(--space-md);
+    right: var(--space-2xl);
+    font-size: 2.5em;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--color-primary);
+    z-index: 100;
+}
+
+@media (max-width: 820px) {
+    .close-modal {
+        top: var(--space-sm);
+        right: 14px;
+        font-size: 2.2em;
+    }
+}
+
+@media (max-width: 420px) {
+    .close-modal {
+        font-size: 2em;
+        right: var(--space-md);
     }
 }
 
