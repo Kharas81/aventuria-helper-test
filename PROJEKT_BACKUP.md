@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 4:12:06 PM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 4:13:06 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -22682,7 +22682,7 @@ select {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aventuria Abenteuer-Helfer</title>
+    <title>Aventuria Abenteuer-Helfer TEST</title>
 
     <!-- Neue UI-Basis -->
     <link rel="stylesheet" href="css/ui/tokens.css">
@@ -22717,7 +22717,12 @@ select {
     <link rel="stylesheet" href="css/features/rulebook-theme.css">
     <link rel="stylesheet" href="css/combat-tools.css">
     <link rel="stylesheet" href="css/intermission.css">
-    <link rel="stylesheet" href="css/features/main-session.css">
+    <link rel="stylesheet" href="css/features/session/session-shell.css">
+    <link rel="stylesheet" href="css/features/session/session-header.css">
+    <link rel="stylesheet" href="css/features/session/session-status-strip.css">
+    <link rel="stylesheet" href="css/features/session/session-combat.css">
+    <link rel="stylesheet" href="css/features/session/session-heroes.css">
+    <link rel="stylesheet" href="css/features/session/session-rest.css">
     <link rel="stylesheet" href="css/features/adventure-setup.css">
     <link rel="stylesheet" href="css/features/card-detail-theme.css">
 
