@@ -45,19 +45,47 @@ export const ArchiveRenderer = {
         }
     },
 
+    prepareSurface(surfaceClassName = 'archive-surface') {
+        const grid = this.getGrid();
+        if (!grid) {
+            return null;
+        }
+
+        grid.className = surfaceClassName;
+        return grid;
+    },
+
     showLoading() {
         this.setSearchEnabled(true, 'Karten suchen ...');
-        ArchiveEmptyStateRenderer.showLoading(this.getGrid());
+
+        const grid = this.prepareSurface('archive-surface');
+        if (!grid) {
+            return;
+        }
+
+        ArchiveEmptyStateRenderer.showLoading(grid);
     },
 
     showError(message = '') {
         this.setSearchEnabled(true, 'Karten suchen ...');
-        ArchiveEmptyStateRenderer.showError(this.getGrid(), message);
+
+        const grid = this.prepareSurface('archive-surface');
+        if (!grid) {
+            return;
+        }
+
+        ArchiveEmptyStateRenderer.showError(grid, message);
     },
 
     showEmpty(message = '') {
         this.setSearchEnabled(true, 'Karten suchen ...');
-        ArchiveEmptyStateRenderer.showEmpty(this.getGrid(), message);
+
+        const grid = this.prepareSurface('archive-surface');
+        if (!grid) {
+            return;
+        }
+
+        ArchiveEmptyStateRenderer.showEmpty(grid, message);
     },
 
     renderHome(options = {}) {
@@ -66,7 +94,7 @@ export const ArchiveRenderer = {
         this.setSearchValue('');
         this.setSearchEnabled(false, 'Wähle zuerst einen Bereich ...');
 
-        const grid = this.getGrid();
+        const grid = this.prepareSurface('archive-surface archive-surface--home');
         if (!grid) {
             return;
         }
@@ -81,7 +109,7 @@ export const ArchiveRenderer = {
     },
 
     renderGrid(cards = [], options = {}) {
-        const grid = this.getGrid();
+        const grid = this.prepareSurface('archive-surface archive-surface--browser');
         if (!grid) {
             return;
         }
