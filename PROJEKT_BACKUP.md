@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 9:15:41 AM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 9:16:04 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -25371,7 +25371,6 @@ import ArchiveFilter from './filter.js';
 import ArchiveRenderer from './renderer.js';
 import ArchiveState from './archive-state.js';
 import ArchiveModal from '../../templates/archive-modal.js';
-import ArchiveCardMeta from './archive-card-meta.js';
 
 export const ArchiveController = {
     getModal() {
@@ -25403,37 +25402,6 @@ export const ArchiveController = {
         ArchiveRenderer.renderHome(this.buildHomeViewModel());
     },
 
-    getSelectedCard() {
-        const selectedId = ArchiveState.normalizeSelectedCardId(ArchiveState.selectedCardId);
-        if (!selectedId) {
-            return null;
-        }
-
-        return ArchiveState.filteredCards.find(card => {
-            return Utils.normalizeString(ArchiveCardMeta.getCardId(card)) === selectedId;
-        }) || null;
-    },
-
-    syncSelectedCard() {
-        const filteredCards = Utils.normalizeArray(ArchiveState.filteredCards);
-
-        if (!filteredCards.length) {
-            ArchiveState.selectedCardId = '';
-            return;
-        }
-
-        const selectedId = ArchiveState.normalizeSelectedCardId(ArchiveState.selectedCardId);
-        const hasSelectedCard = filteredCards.some(card => {
-            return Utils.normalizeString(ArchiveCardMeta.getCardId(card)) === selectedId;
-        });
-
-        if (!hasSelectedCard) {
-            ArchiveState.selectedCardId = Utils.normalizeString(
-                ArchiveCardMeta.getCardId(filteredCards[0])
-            );
-        }
-    },
-
     applyFilters() {
         ArchiveState.filteredCards = ArchiveFilter.filterCards(ArchiveState.allCards, {
             searchTerm: ArchiveState.currentSearchTerm,
@@ -25441,7 +25409,6 @@ export const ArchiveController = {
             categoryFilter: ArchiveState.currentCategoryFilter
         });
 
-        this.syncSelectedCard();
         this.render();
     },
 
@@ -25555,7 +25522,6 @@ export const ArchiveController = {
                 ArchiveState.currentCategoryFilter = ArchiveFilter.ALL_CATEGORY_FILTER;
             }
 
-            ArchiveState.selectedCardId = '';
             ArchiveRenderer.setSearchValue(ArchiveState.currentSearchTerm);
             this.applyFilters();
 
@@ -25610,15 +25576,6 @@ export const ArchiveController = {
         this.applyFilters();
     },
 
-    setSelectedCard(cardId = '') {
-        if (ArchiveState.isHomeView) {
-            return;
-        }
-
-        ArchiveState.selectedCardId = ArchiveState.normalizeSelectedCardId(cardId);
-        this.render();
-    },
-
     render() {
         if (ArchiveState.isHomeView) {
             this.renderHome();
@@ -25639,9 +25596,7 @@ export const ArchiveController = {
         ArchiveRenderer.renderGrid(ArchiveState.filteredCards, {
             query: ArchiveState.currentSearchTerm,
             sourceFilter: ArchiveState.currentSourceFilter,
-            categoryFilter: ArchiveState.currentCategoryFilter,
-            selectedCardId: ArchiveState.selectedCardId,
-            selectedCard: this.getSelectedCard()
+            categoryFilter: ArchiveState.currentCategoryFilter
         });
     }
 };
