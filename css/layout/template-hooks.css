@@ -1,0 +1,63 @@
+.app-title-row {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.template-title-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.button-label-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.icon-size-32 {
+    width: 32px;
+    height: 32px;
+}
+
+.icon-size-22 {
+    width: 22px;
+    height: 22px;
+}
+
+.icon-size-20 {
+    width: 20px;
+    height: 20px;
+}
+
+.icon-size-18 {
+    width: 18px;
+    height: 18px;
+}
+
+.icon-decorative {
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.search-input-wrap {
+    position: relative;
+}
+
+.search-input--with-icon {
+    padding-left: 48px;
+}
+
+.search-input-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    opacity: 0.8;
+    pointer-events: none;
+}
