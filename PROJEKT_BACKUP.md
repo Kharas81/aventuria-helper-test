@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 7:53:01 PM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 7:53:15 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -28232,9 +28232,26 @@ export const ArchiveBrowserLayout = {
 
         container.innerHTML = `
             <div class="archive-browser">
-                <aside class="archive-browser__panel archive-browser__sidebar" id="archive-browser-sidebar"></aside>
-                <section class="archive-browser__panel archive-browser__list" id="archive-browser-list"></section>
-                <aside class="archive-browser__panel archive-browser__preview" id="archive-browser-preview"></aside>
+                <aside class="archive-browser__panel archive-browser__panel--sidebar">
+                    <div
+                        class="archive-browser__panel-scroll archive-browser__panel-scroll--sidebar"
+                        id="archive-browser-sidebar"
+                    ></div>
+                </aside>
+
+                <section class="archive-browser__panel archive-browser__panel--list">
+                    <div
+                        class="archive-browser__panel-scroll archive-browser__panel-scroll--list"
+                        id="archive-browser-list"
+                    ></div>
+                </section>
+
+                <aside class="archive-browser__panel archive-browser__panel--preview">
+                    <div
+                        class="archive-browser__panel-scroll archive-browser__panel-scroll--preview"
+                        id="archive-browser-preview"
+                    ></div>
+                </aside>
             </div>
         `;
 
