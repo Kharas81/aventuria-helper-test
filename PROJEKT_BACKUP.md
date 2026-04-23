@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 9:30:32 AM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 9:46:57 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -21242,6 +21242,7 @@ select {
     <link rel="stylesheet" href="css/intermission.css">
     <link rel="stylesheet" href="css/features/main-session.css">
     <link rel="stylesheet" href="css/features/adventure-setup.css">
+    <link rel="stylesheet" href="css/features/card-detail-theme.css">
     <link rel="stylesheet" href="css/modal.css">
     <link rel="stylesheet" href="css/card-detail.css">
     <link rel="stylesheet" href="css/card-detail-layout.css">
@@ -21252,7 +21253,16 @@ select {
 <body class="theme-aventuria">
     <div class="app-container app-shell__frame">
         <header class="app-header">
-            <h1>Aventuria Abenteuer-Helfer</h1>
+            <h1 style="display: inline-flex; align-items: center; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                <img
+                    src="assets/ui/icons/v2/rulebook.svg"
+                    alt=""
+                    aria-hidden="true"
+                    style="width: 32px; height: 32px;"
+                >
+                Aventuria Abenteuer-Helfer
+            </h1>
+
             <p id="loading-status" class="app-header__status" aria-live="polite">Bereit.</p>
         </header>
 
@@ -21260,10 +21270,27 @@ select {
             <div class="top-bar">
                 <div class="button-group">
                     <button type="button" class="btn" data-action="open-archive">
-                        Archiv öffnen
+                        <span style="display: inline-flex; align-items: center; gap: 8px;">
+                            <img
+                                src="assets/ui/icons/v2/archive.svg"
+                                alt=""
+                                aria-hidden="true"
+                                style="width: 18px; height: 18px;"
+                            >
+                            Archiv öffnen
+                        </span>
                     </button>
+
                     <button type="button" class="btn" data-action="open-rulebook">
-                        Regelbuch öffnen
+                        <span style="display: inline-flex; align-items: center; gap: 8px;">
+                            <img
+                                src="assets/ui/icons/v2/rulebook.svg"
+                                alt=""
+                                aria-hidden="true"
+                                style="width: 18px; height: 18px;"
+                            >
+                            Regelbuch öffnen
+                        </span>
                     </button>
                 </div>
 
@@ -21295,10 +21322,27 @@ select {
 
                 <div class="button-group">
                     <button type="button" class="btn-outline" id="saveStateBtn">
-                        Speichern
+                        <span style="display: inline-flex; align-items: center; gap: 8px;">
+                            <img
+                                src="assets/ui/icons/v2/save.svg"
+                                alt=""
+                                aria-hidden="true"
+                                style="width: 18px; height: 18px;"
+                            >
+                            Speichern
+                        </span>
                     </button>
+
                     <button type="button" class="btn-outline" id="clearStateBtn">
-                        Zurücksetzen
+                        <span style="display: inline-flex; align-items: center; gap: 8px;">
+                            <img
+                                src="assets/ui/icons/v2/reset.svg"
+                                alt=""
+                                aria-hidden="true"
+                                style="width: 18px; height: 18px;"
+                            >
+                            Zurücksetzen
+                        </span>
                     </button>
                 </div>
             </div>
@@ -21319,7 +21363,15 @@ select {
                         data-action="toggle-section"
                         data-target="combat-tools-section"
                     >
-                        Kampf-Tools ein-/ausblenden
+                        <span style="display: inline-flex; align-items: center; gap: 8px;">
+                            <img
+                                src="assets/ui/icons/v2/combat.svg"
+                                alt=""
+                                aria-hidden="true"
+                                style="width: 18px; height: 18px;"
+                            >
+                            Kampf-Tools ein-/ausblenden
+                        </span>
                     </button>
 
                     <button
@@ -21328,7 +21380,15 @@ select {
                         data-action="toggle-section"
                         data-target="intermission-section"
                     >
-                        Atempause ein-/ausblenden
+                        <span style="display: inline-flex; align-items: center; gap: 8px;">
+                            <img
+                                src="assets/ui/icons/v2/rest.svg"
+                                alt=""
+                                aria-hidden="true"
+                                style="width: 18px; height: 18px;"
+                            >
+                            Atempause ein-/ausblenden
+                        </span>
                     </button>
                 </div>
             </section>
@@ -21376,13 +21436,34 @@ select {
 
                 <div class="tab-content">
                     <div class="archive-header">
-                        <h2 id="archive-modal-title">Kartenarchiv</h2>
-                        <input
-                            type="search"
-                            id="archive-search"
-                            class="search-bar"
-                            placeholder="Karten suchen ..."
+                        <h2
+                            id="archive-modal-title"
+                            style="display: inline-flex; align-items: center; gap: 10px;"
                         >
+                            <img
+                                src="assets/ui/icons/v2/archive.svg"
+                                alt=""
+                                aria-hidden="true"
+                                style="width: 22px; height: 22px;"
+                            >
+                            Kartenarchiv
+                        </h2>
+
+                        <div style="position: relative;">
+                            <input
+                                type="search"
+                                id="archive-search"
+                                class="search-bar"
+                                placeholder="Karten suchen ..."
+                                style="padding-left: 48px;"
+                            >
+                            <img
+                                src="assets/ui/icons/v2/search.svg"
+                                alt=""
+                                aria-hidden="true"
+                                style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; opacity: 0.8;"
+                            >
+                        </div>
                     </div>
 
                     <div id="archive-set-buttons" class="button-group"></div>
@@ -21406,13 +21487,36 @@ select {
 
                 <div class="modal-layout">
                     <aside class="modal-sidebar" aria-label="Regelbuch-Seiten">
-                        <h4 id="manual-set-label">Regelbuch</h4>
+                        <h4
+                            id="manual-set-label"
+                            style="display: inline-flex; align-items: center; gap: 10px;"
+                        >
+                            <img
+                                src="assets/ui/icons/v2/rulebook.svg"
+                                alt=""
+                                aria-hidden="true"
+                                style="width: 20px; height: 20px;"
+                            >
+                            Regelbuch
+                        </h4>
+
                         <ul id="manual-page-list"></ul>
                     </aside>
 
                     <div class="modal-main">
                         <div class="modal-nav">
-                            <h2 id="manual-title">Regelbuch</h2>
+                            <h2
+                                id="manual-title"
+                                style="display: inline-flex; align-items: center; gap: 10px;"
+                            >
+                                <img
+                                    src="assets/ui/icons/v2/rulebook.svg"
+                                    alt=""
+                                    aria-hidden="true"
+                                    style="width: 22px; height: 22px;"
+                                >
+                                Regelbuch
+                            </h2>
 
                             <button
                                 type="button"
@@ -21444,12 +21548,22 @@ select {
                         </div>
 
                         <div id="codex-tab" class="tab-content hidden">
-                            <input
-                                type="search"
-                                id="codex-search"
-                                class="search-bar"
-                                placeholder="Im Regelbuch suchen ..."
-                            >
+                            <div style="position: relative;">
+                                <input
+                                    type="search"
+                                    id="codex-search"
+                                    class="search-bar"
+                                    placeholder="Im Regelbuch suchen ..."
+                                    style="padding-left: 48px;"
+                                >
+                                <img
+                                    src="assets/ui/icons/v2/search.svg"
+                                    alt=""
+                                    aria-hidden="true"
+                                    style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; opacity: 0.8;"
+                                >
+                            </div>
+
                             <div id="codex-results"></div>
                         </div>
                     </div>
