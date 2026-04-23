@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:17:19 AM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:17:46 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -21050,6 +21050,7 @@ select {
     <link rel="stylesheet" href="css/features/archive-browser.css">
     <link rel="stylesheet" href="css/rulebook-layout.css">
     <link rel="stylesheet" href="css/rulebook-blocks.css">
+    <link rel="stylesheet" href="css/features/rulebook-theme.css">
     <link rel="stylesheet" href="css/combat-tools.css">
     <link rel="stylesheet" href="css/intermission.css">
     <link rel="stylesheet" href="css/features/main-session.css">
@@ -21249,9 +21250,9 @@ select {
                             <div id="manual-content"></div>
 
                             <div class="reader-footer">
-                                <button type="button" data-action="rulebook-prev-page">Zurück</button>
+                                <button type="button" class="btn-outline" data-action="rulebook-prev-page">Zurück</button>
                                 <span id="manual-page-indicator">Seite 0 / 0</span>
-                                <button type="button" data-action="rulebook-next-page">Weiter</button>
+                                <button type="button" class="btn-outline" data-action="rulebook-next-page">Weiter</button>
                             </div>
                         </div>
 
