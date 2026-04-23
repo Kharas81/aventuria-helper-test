@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 7:28:04 AM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 7:28:32 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -1711,6 +1711,125 @@ a {
 
 ---
 
+## 📄 Datei: css/layout/app-shell.css
+```css
+.app-container.app-shell__frame {
+    position: relative;
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: var(--space-3xl);
+    border: var(--border-md) solid var(--ui-color-border-strong);
+    border-radius: var(--ui-radius-shell);
+    background: var(--ui-gradient-shell);
+    box-shadow: var(--ui-shadow-shell);
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.app-container.app-shell__frame::before {
+    content: "";
+    position: absolute;
+    inset: 16px;
+    border: 1px solid rgba(201, 160, 97, 0.45);
+    border-radius: calc(var(--ui-radius-shell) - 10px);
+    pointer-events: none;
+    opacity: 0.9;
+}
+
+.app-container.app-shell__frame::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.2), transparent 22%),
+        radial-gradient(circle at bottom right, rgba(143, 36, 36, 0.045), transparent 25%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.app-header {
+    position: relative;
+    margin-bottom: var(--space-2xl);
+    padding-bottom: var(--space-xl);
+    text-align: center;
+    border-bottom: 1px solid var(--ui-color-border-muted);
+}
+
+.app-header::after {
+    content: "";
+    display: block;
+    width: min(560px, 72%);
+    height: 1px;
+    margin: var(--space-lg) auto 0;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(183, 138, 75, 0.7) 18%,
+        rgba(107, 67, 32, 0.7) 50%,
+        rgba(183, 138, 75, 0.7) 82%,
+        transparent 100%
+    );
+}
+
+.app-toolbar {
+    margin-bottom: var(--space-2xl);
+    padding: var(--space-xl);
+    border: 1px solid var(--ui-color-border-soft);
+    border-radius: var(--radius-xl);
+    background: var(--ui-gradient-panel-soft);
+    box-shadow: var(--ui-shadow-inset);
+}
+
+.app-toolbar .top-bar {
+    margin-bottom: 0;
+}
+
+.app-main {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xl);
+    min-width: 0;
+}
+
+.app-main > section {
+    margin: 0;
+}
+
+@media (max-width: 900px) {
+    .app-container.app-shell__frame {
+        padding: var(--space-xl);
+        border-radius: var(--radius-xl);
+    }
+
+    .app-container.app-shell__frame::before {
+        inset: 10px;
+        border-radius: calc(var(--radius-xl) - 6px);
+    }
+
+    .app-toolbar {
+        padding: var(--space-lg);
+    }
+}
+
+@media (max-width: 600px) {
+    .app-container.app-shell__frame {
+        padding: var(--space-lg);
+    }
+
+    .app-header {
+        margin-bottom: var(--space-xl);
+        padding-bottom: var(--space-lg);
+    }
+
+    .app-toolbar {
+        padding: var(--space-md);
+    }
+}
+
+```
+
+---
+
 ## 📄 Datei: css/modal.css
 ```css
 /* --- MODAL BASIS --- */
@@ -2640,6 +2759,114 @@ a {
     --shadow-card: 0 14px 32px rgba(34, 20, 10, 0.14);
     --shadow-preview: 0 20px 54px rgba(0, 0, 0, 0.34);
     --shadow-panel: var(--ui-shadow-md);
+}
+
+```
+
+---
+
+## 📄 Datei: css/ui/typography.css
+```css
+body {
+    font-size: 18px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    color: var(--ui-color-burgundy-900);
+    font-family: var(--ui-font-display);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 0.01em;
+    text-wrap: balance;
+}
+
+h1 {
+    font-size: clamp(2.3rem, 4vw, 4rem);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+h2 {
+    font-size: clamp(1.9rem, 3vw, 3rem);
+}
+
+h3 {
+    font-size: clamp(1.45rem, 2vw, 2.1rem);
+}
+
+h4 {
+    font-size: clamp(1.15rem, 1.6vw, 1.5rem);
+}
+
+p {
+    margin: 0 0 var(--space-md);
+}
+
+p:last-child {
+    margin-bottom: 0;
+}
+
+strong,
+label {
+    color: var(--ui-color-burgundy-900);
+    font-weight: 700;
+}
+
+small {
+    color: var(--ui-color-muted);
+}
+
+.app-header__status,
+#loading-status {
+    margin-top: var(--space-sm);
+    color: var(--ui-color-ink-soft);
+    font-size: 1.05rem;
+    text-align: center;
+}
+
+.ui-eyebrow {
+    display: inline-block;
+    color: var(--ui-color-bronze-900);
+    font-family: var(--ui-font-ui);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.ui-page-title {
+    font-size: clamp(2rem, 3vw, 3.2rem);
+    color: var(--ui-color-burgundy-900);
+}
+
+.ui-section-title {
+    font-size: clamp(1.25rem, 1.8vw, 1.8rem);
+    color: var(--ui-color-burgundy-900);
+}
+
+.ui-copy-muted {
+    color: var(--ui-color-muted);
+}
+
+.card-list h3,
+.ui-panel__title,
+.ui-section__title {
+    color: var(--ui-color-burgundy-900);
+    font-family: var(--ui-font-display);
+    font-weight: 700;
+}
+
+@media (max-width: 700px) {
+    body {
+        font-size: 17px;
+    }
 }
 
 ```
