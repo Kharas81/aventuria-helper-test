@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 3:44:24 PM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 3:44:48 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -22055,6 +22055,7 @@ select {
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/ui/typography.css">
     <link rel="stylesheet" href="css/layout/app-shell.css">
+    <link rel="stylesheet" href="css/layout/template-hooks.css">
     <link rel="stylesheet" href="css/app-layout.css">
     <link rel="stylesheet" href="css/ui/buttons.css">
     <link rel="stylesheet" href="css/ui/forms.css">
