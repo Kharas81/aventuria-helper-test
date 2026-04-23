@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 9:24:32 AM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 9:24:42 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -21234,6 +21234,7 @@ select {
     <link rel="stylesheet" href="css/archive-cards.css">
     <link rel="stylesheet" href="css/archive-home.css">
     <link rel="stylesheet" href="css/features/archive-home.css">
+    <link rel="stylesheet" href="css/features/archive-browser.css">
     <link rel="stylesheet" href="css/rulebook-layout.css">
     <link rel="stylesheet" href="css/rulebook-blocks.css">
     <link rel="stylesheet" href="css/combat-tools.css">
