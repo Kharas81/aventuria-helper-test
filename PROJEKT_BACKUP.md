@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 7:29:35 AM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 7:29:51 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -2792,6 +2792,73 @@ a {
     .archive-card__details-btn {
         width: 100%;
     }
+}
+
+```
+
+---
+
+## 📄 Datei: css/ui/dividers.css
+```css
+hr {
+    border: 0;
+    height: 1px;
+    margin: var(--space-2xl) 0;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(129, 90, 42, 0.2) 18%,
+        rgba(129, 90, 42, 0.46) 50%,
+        rgba(129, 90, 42, 0.2) 82%,
+        transparent 100%
+    );
+}
+
+.ui-divider {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    width: 100%;
+    color: var(--ui-color-bronze-900);
+}
+
+.ui-divider::before,
+.ui-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(129, 90, 42, 0.42) 100%
+    );
+}
+
+.ui-divider::after {
+    background: linear-gradient(
+        90deg,
+        rgba(129, 90, 42, 0.42) 0%,
+        transparent 100%
+    );
+}
+
+.ui-divider__label {
+    font-family: var(--ui-font-display);
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.ui-divider--ornament {
+    gap: var(--space-lg);
+}
+
+.ui-divider--ornament .ui-divider__label {
+    position: relative;
+    padding: 0 var(--space-xs);
+}
+
+.section-divider {
+    margin: var(--space-2xl) 0;
 }
 
 ```
