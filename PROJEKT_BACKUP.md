@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 4:28:10 PM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 4:28:26 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -4966,6 +4966,36 @@ a {
         grid-column: 1 / -1;
         justify-content: flex-end;
     }
+}
+
+```
+
+---
+
+## 📄 Datei: css/features/rulebook/rulebook-codex.css
+```css
+#codex-search {
+    margin-bottom: var(--space-lg);
+}
+
+#codex-results {
+    position: relative;
+    z-index: 1;
+}
+
+#codex-results .rule-entry {
+    background: rgba(255, 252, 247, 0.76);
+    border: 1px solid rgba(129, 90, 42, 0.14);
+    border-left: 4px solid var(--ui-color-burgundy-800);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-md);
+}
+
+#codex-results .rule-entry h4 {
+    margin-top: 0;
+    margin-bottom: 6px;
+    color: var(--ui-color-burgundy-900);
 }
 
 ```
