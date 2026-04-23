@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:09:31 AM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:10:38 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -26591,7 +26591,7 @@ export default ArchiveLoader;
 import ArchiveToolbarRenderer from './archive-toolbar-renderer.js';
 import ArchiveGridRenderer from './archive-grid-renderer.js';
 import ArchiveEmptyStateRenderer from './archive-empty-state-renderer.js';
-import ArchiveHomeRenderer from './archive-home-renderer.js';
+import ArchiveHomeLayout from './archive-home-layout.js';
 import ArchiveModal from '../../templates/archive-modal.js';
 
 export const ArchiveRenderer = {
@@ -26653,7 +26653,13 @@ export const ArchiveRenderer = {
         this.clearToolbar();
         this.setSearchValue('');
         this.setSearchEnabled(false, 'Wähle zuerst einen Bereich ...');
-        ArchiveHomeRenderer.renderHome(this.getGrid(), options);
+
+        const grid = this.getGrid();
+        if (!grid) {
+            return;
+        }
+
+        grid.innerHTML = ArchiveHomeLayout.render(options);
     },
 
     renderToolbar(options = {}) {
