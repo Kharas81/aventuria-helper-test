@@ -28,8 +28,8 @@ export const ChecklistItemTemplate = {
         const isPlaceholder = normalized.status === 'placeholder';
 
         const previewAttr = hasPreview
-            ? ` data-image="${Utils.escapeHtml(imageSrc)}" data-card-id="${cardId || safeReferenceQuery}" class="has-preview"`
-            : '';
+            ? ` data-image="${Utils.escapeHtml(imageSrc)}" data-card-id="${cardId || safeReferenceQuery}" class="checklist-item__label has-preview"`
+            : ' class="checklist-item__label"';
 
         const infoButton = `
             <button
@@ -49,9 +49,9 @@ export const ChecklistItemTemplate = {
         `;
 
         const suffix = isMissing
-            ? ' ⚠️'
+            ? 'Fehlt im Katalog'
             : isPlaceholder
-                ? ' 🛈'
+                ? 'Platzhalter / freie Auswahl'
                 : '';
 
         return `
@@ -65,7 +65,12 @@ export const ChecklistItemTemplate = {
                 data-prefer-archive-search="${preferArchiveSearch ? 'true' : 'false'}"
             >
                 <input type="checkbox">
-                <span${previewAttr}>${safeLabel}${suffix}</span>
+
+                <div class="checklist-item__content">
+                    <span${previewAttr}>${safeLabel}</span>
+                    ${suffix ? `<span class="checklist-item__hint">${Utils.escapeHtml(suffix)}</span>` : ''}
+                </div>
+
                 ${infoButton}
             </li>
         `;
