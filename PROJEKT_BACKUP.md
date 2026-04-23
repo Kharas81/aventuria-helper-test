@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 4:19:10 PM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 4:19:26 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -2023,6 +2023,109 @@ a {
 
 @media (max-width: 640px) {
     #setup-display {
+        padding: var(--space-lg);
+    }
+}
+
+```
+
+---
+
+## 📄 Datei: css/features/adventure/adventure-story.css
+```css
+#story-area {
+    position: relative;
+}
+
+.adventure-story {
+    position: relative;
+    padding: var(--space-2xl);
+    border: 1px solid var(--ui-color-border-soft);
+    border-radius: var(--radius-2xl);
+    background: var(--ui-gradient-panel);
+    box-shadow: var(--ui-shadow-md);
+    overflow: hidden;
+}
+
+.adventure-story::before {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    border: 1px solid rgba(190, 154, 101, 0.22);
+    border-radius: calc(var(--radius-2xl) - 10px);
+    pointer-events: none;
+}
+
+.adventure-story__header {
+    position: relative;
+    z-index: 1;
+    margin-bottom: var(--space-xl);
+}
+
+.adventure-story__eyebrow {
+    display: inline-block;
+    margin-bottom: var(--space-sm);
+    color: var(--ui-color-bronze-900);
+    font-family: var(--ui-font-ui);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.adventure-story__title {
+    margin-bottom: var(--space-sm);
+}
+
+.adventure-story__lead {
+    color: var(--ui-color-ink-soft);
+    line-height: 1.55;
+}
+
+.adventure-story__body {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+    gap: var(--space-xl);
+}
+
+.adventure-story__text-panel,
+.adventure-story__checks-panel {
+    position: relative;
+    padding: var(--space-xl);
+    border: 1px solid rgba(129, 90, 42, 0.16);
+    border-radius: var(--radius-xl);
+    background: rgba(255, 252, 247, 0.78);
+    box-shadow: var(--ui-shadow-xs);
+}
+
+.adventure-story__text {
+    color: var(--ui-color-ink);
+    line-height: 1.75;
+    white-space: pre-line;
+}
+
+.adventure-story__checks-title {
+    margin-bottom: var(--space-md);
+    color: var(--ui-color-burgundy-900);
+    font-family: var(--ui-font-display);
+    font-size: 1.2rem;
+}
+
+@media (max-width: 1100px) {
+    .adventure-story__body {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .adventure-story {
+        padding: var(--space-lg);
+    }
+
+    .adventure-story__text-panel,
+    .adventure-story__checks-panel {
         padding: var(--space-lg);
     }
 }
