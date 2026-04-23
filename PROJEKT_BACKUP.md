@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 10:07:26 AM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 11:32:16 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -21255,7 +21255,7 @@ select {
         <header class="app-header">
             <h1 style="display: inline-flex; align-items: center; gap: 12px; justify-content: center; flex-wrap: wrap;">
                 <img
-                    src="assets/ui/icons/v2/rulebook.svg"
+                    src="assets/ui/icons/rulebook.svg"
                     alt=""
                     aria-hidden="true"
                     style="width: 32px; height: 32px;"
@@ -21272,7 +21272,7 @@ select {
                     <button type="button" class="btn" data-action="open-archive">
                         <span style="display: inline-flex; align-items: center; gap: 8px;">
                             <img
-                                src="assets/ui/icons/v2/archive.svg"
+                                src="assets/ui/icons/archive.svg"
                                 alt=""
                                 aria-hidden="true"
                                 style="width: 18px; height: 18px;"
@@ -21284,7 +21284,7 @@ select {
                     <button type="button" class="btn" data-action="open-rulebook">
                         <span style="display: inline-flex; align-items: center; gap: 8px;">
                             <img
-                                src="assets/ui/icons/v2/rulebook.svg"
+                                src="assets/ui/icons/rulebook.svg"
                                 alt=""
                                 aria-hidden="true"
                                 style="width: 18px; height: 18px;"
@@ -21324,7 +21324,7 @@ select {
                     <button type="button" class="btn-outline" id="saveStateBtn">
                         <span style="display: inline-flex; align-items: center; gap: 8px;">
                             <img
-                                src="assets/ui/icons/v2/save.svg"
+                                src="assets/ui/icons/save.svg"
                                 alt=""
                                 aria-hidden="true"
                                 style="width: 18px; height: 18px;"
@@ -21336,7 +21336,7 @@ select {
                     <button type="button" class="btn-outline" id="clearStateBtn">
                         <span style="display: inline-flex; align-items: center; gap: 8px;">
                             <img
-                                src="assets/ui/icons/v2/reset.svg"
+                                src="assets/ui/icons/reset.svg"
                                 alt=""
                                 aria-hidden="true"
                                 style="width: 18px; height: 18px;"
@@ -21365,7 +21365,7 @@ select {
                     >
                         <span style="display: inline-flex; align-items: center; gap: 8px;">
                             <img
-                                src="assets/ui/icons/v2/combat.svg"
+                                src="assets/ui/icons/combat.svg"
                                 alt=""
                                 aria-hidden="true"
                                 style="width: 18px; height: 18px;"
@@ -21382,7 +21382,7 @@ select {
                     >
                         <span style="display: inline-flex; align-items: center; gap: 8px;">
                             <img
-                                src="assets/ui/icons/v2/rest.svg"
+                                src="assets/ui/icons/rest.svg"
                                 alt=""
                                 aria-hidden="true"
                                 style="width: 18px; height: 18px;"
@@ -21441,7 +21441,7 @@ select {
                             style="display: inline-flex; align-items: center; gap: 10px;"
                         >
                             <img
-                                src="assets/ui/icons/v2/archive.svg"
+                                src="assets/ui/icons/archive.svg"
                                 alt=""
                                 aria-hidden="true"
                                 style="width: 22px; height: 22px;"
@@ -21458,7 +21458,7 @@ select {
                                 style="padding-left: 48px;"
                             >
                             <img
-                                src="assets/ui/icons/v2/search.svg"
+                                src="assets/ui/icons/search.svg"
                                 alt=""
                                 aria-hidden="true"
                                 style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; opacity: 0.8;"
@@ -21467,7 +21467,7 @@ select {
                     </div>
 
                     <div id="archive-set-buttons" class="button-group"></div>
-                    <div id="archive-grid" class="archive-grid"></div>
+                    <div id="archive-grid" class="archive-surface"></div>
                 </div>
             </div>
         </div>
@@ -21492,7 +21492,7 @@ select {
                             style="display: inline-flex; align-items: center; gap: 10px;"
                         >
                             <img
-                                src="assets/ui/icons/v2/rulebook.svg"
+                                src="assets/ui/icons/rulebook.svg"
                                 alt=""
                                 aria-hidden="true"
                                 style="width: 20px; height: 20px;"
@@ -21510,7 +21510,7 @@ select {
                                 style="display: inline-flex; align-items: center; gap: 10px;"
                             >
                                 <img
-                                    src="assets/ui/icons/v2/rulebook.svg"
+                                    src="assets/ui/icons/rulebook.svg"
                                     alt=""
                                     aria-hidden="true"
                                     style="width: 22px; height: 22px;"
@@ -21557,7 +21557,7 @@ select {
                                     style="padding-left: 48px;"
                                 >
                                 <img
-                                    src="assets/ui/icons/v2/search.svg"
+                                    src="assets/ui/icons/search.svg"
                                     alt=""
                                     aria-hidden="true"
                                     style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; opacity: 0.8;"
