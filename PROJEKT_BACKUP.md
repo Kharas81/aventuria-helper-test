@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 7:28:47 AM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 7:29:03 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -2711,6 +2711,115 @@ a {
     .btn-outline,
     .archive-card__details-btn {
         width: 100%;
+    }
+}
+
+```
+
+---
+
+## 📄 Datei: css/ui/forms.css
+```css
+:where(
+    input[type="text"],
+    input[type="number"],
+    input[type="search"],
+    select,
+    textarea
+) {
+    min-height: 46px;
+    padding: 0 var(--space-lg);
+    border: 1px solid var(--ui-color-border-strong);
+    border-radius: var(--radius-md);
+    background: linear-gradient(
+        180deg,
+        rgba(255, 252, 246, 0.96) 0%,
+        rgba(244, 234, 216, 0.96) 100%
+    );
+    color: var(--ui-color-ink);
+    box-shadow: var(--ui-shadow-inset);
+    transition:
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast),
+        background var(--transition-fast);
+}
+
+:where(
+    input[type="text"],
+    input[type="number"],
+    input[type="search"],
+    select,
+    textarea
+):hover {
+    border-color: var(--ui-color-border-accent);
+}
+
+:where(
+    input[type="text"],
+    input[type="number"],
+    input[type="search"],
+    select,
+    textarea
+):focus-visible {
+    outline: none;
+    border-color: rgba(54, 94, 137, 0.75);
+    box-shadow:
+        0 0 0 3px rgba(54, 94, 137, 0.16),
+        var(--ui-shadow-inset);
+}
+
+input[type="number"] {
+    max-width: 120px;
+}
+
+textarea {
+    min-height: 140px;
+    padding: var(--space-md) var(--space-lg);
+    resize: vertical;
+}
+
+select {
+    cursor: pointer;
+}
+
+.search-bar {
+    width: 100%;
+    min-height: 52px;
+    padding: 0 var(--space-xl);
+    margin-bottom: var(--space-2xl);
+    border: 1px solid var(--ui-color-border-strong);
+    border-radius: var(--radius-lg);
+    background: linear-gradient(
+        180deg,
+        rgba(255, 252, 246, 0.98) 0%,
+        rgba(243, 233, 215, 0.98) 100%
+    );
+    color: var(--ui-color-ink);
+    box-sizing: border-box;
+    box-shadow: var(--ui-shadow-inset);
+}
+
+.search-bar::placeholder,
+input::placeholder,
+textarea::placeholder {
+    color: var(--ui-color-muted);
+}
+
+.config-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.config-item label {
+    white-space: nowrap;
+    font-size: 0.97rem;
+}
+
+@media (max-width: 700px) {
+    .search-bar {
+        min-height: 48px;
+        padding: 0 var(--space-lg);
     }
 }
 
