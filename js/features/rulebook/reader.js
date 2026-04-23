@@ -2,6 +2,7 @@ import RulebookReaderNavigation from './reader-navigation.js';
 import RulebookReaderBlockRenderer from './reader-block-renderer.js';
 import RulebookReaderPageLoader from './reader-page-loader.js';
 import RulebookReaderActions from './reader-actions.js';
+import RulebookUIRender from './rulebook-ui-render.js';
 
 export const RulebookReader = {
     getPageEntries(rulebook) {
@@ -41,7 +42,15 @@ export const RulebookReader = {
     },
 
     async loadPage(rulebook, pageNumber) {
-        return RulebookReaderPageLoader.loadPage(rulebook, pageNumber);
+        const result = await RulebookReaderPageLoader.loadPage(rulebook, pageNumber);
+
+        RulebookUIRender.highlightActivePage(pageNumber);
+
+        if (rulebook?.indexData?.setKey) {
+            RulebookUIRender.updateModalTitle(rulebook.indexData.setKey);
+        }
+
+        return result;
     },
 
     bindInlinePageActions(scope, rulebook) {
