@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:08:03 AM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:08:25 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -30717,70 +30717,100 @@ export default SetupCardMapper;
 ## 📄 Datei: js/render/setup-renderer.js
 ```js
 import Utils from '../core/utils.js';
-import ChecklistItemTemplate from './checklist-item-template.js';
-import CardPreviewBinder from './card-preview-binder.js';
 import SetupCardMapper from './setup-card-mapper.js';
+import SetupHeaderRenderer from './setup/setup-header-renderer.js';
+import SetupGroupRenderer from './setup/setup-group-renderer.js';
 
 export const SetupRenderer = {
-    renderListInto(containerSelector, cards) {
-        const list = Utils.qs(containerSelector);
-        if (!list) return;
+    getSetupDisplay() {
+        return Utils.byId('setup-display');
+    },
 
-        list.innerHTML = Utils.normalizeArray(cards)
-            .map(card => ChecklistItemTemplate.buildChecklistItem(card))
-            .join('');
+    getOrCreateGroupsContainer() {
+        const setupDisplay = this.getSetupDisplay();
+        if (!setupDisplay) {
+            return null;
+        }
 
-        CardPreviewBinder.bindCardPreviews(list);
+        let groupsContainer = setupDisplay.querySelector('.adventure-setup__groups');
+
+        if (!groupsContainer) {
+            groupsContainer = document.createElement('div');
+            groupsContainer.className = 'adventure-setup__groups';
+            setupDisplay.appendChild(groupsContainer);
+        }
+
+        return groupsContainer;
+    },
+
+    getOrCreateGroupSection(groupId = '') {
+        const groupsContainer = this.getOrCreateGroupsContainer();
+        if (!groupsContainer) {
+            return null;
+        }
+
+        let group = Utils.byId(groupId);
+
+        if (!group) {
+            group = document.createElement('div');
+            group.id = groupId;
+            groupsContainer.appendChild(group);
+        } else if (group.parentElement !== groupsContainer) {
+            groupsContainer.appendChild(group);
+        }
+
+        return group;
+    },
+
+    renderDanger() {
+        // Bewusst leer:
+        // Die Gefahrenstufe wird jetzt vom Header-Renderer visuell übernommen.
+    },
+
+    renderListInto(containerSelector, cards, groupKey = '') {
+        const container = document.querySelector(containerSelector);
+        if (!container) return;
+
+        SetupGroupRenderer.renderGroup(container, groupKey, cards);
     },
 
     renderSpecialSection(cards) {
-        const specialSection = Utils.byId('special');
+        const specialSection = this.getOrCreateGroupSection('special');
         if (!specialSection) return;
 
-        const ul = specialSection.querySelector('ul');
-        if (!ul) return;
-
-        const safeCards = Utils.normalizeArray(cards);
-
-        ul.innerHTML = safeCards
-            .map(card => ChecklistItemTemplate.buildChecklistItem(card))
-            .join('');
-
-        specialSection.classList.toggle('hidden', safeCards.length === 0);
-        CardPreviewBinder.bindCardPreviews(ul);
-    },
-
-    renderDanger(adventure) {
-        const dangerValue = Utils.byId('danger-value');
-        if (!dangerValue) return;
-
-        const danger = Number(adventure?.danger_calc ?? 0);
-        dangerValue.innerHTML = danger > 0
-            ? `<strong>Gefahrenstufe:</strong> ${Utils.escapeHtml(danger)}`
-            : '';
+        SetupGroupRenderer.renderGroup(specialSection, 'special', cards);
+        specialSection.classList.toggle('hidden', !Utils.normalizeArray(cards).length);
     },
 
     renderSetup(adventure, allCards = []) {
-        const title = Utils.byId('title');
-        const setupDisplay = Utils.byId('setup-display');
-
-        if (title) {
-            title.textContent = Utils.normalizeString(adventure?.name || 'Abenteuer');
+        const setupDisplay = this.getSetupDisplay();
+        if (!setupDisplay) {
+            return;
         }
 
-        if (setupDisplay) {
-            setupDisplay.classList.remove('hidden');
-        }
+        setupDisplay.classList.remove('hidden');
+
+        SetupHeaderRenderer.render(setupDisplay, adventure);
 
         const { blueCards, minionCards, specialCards } = SetupCardMapper.splitCardsBySetup(
             adventure,
             allCards
         );
 
-        this.renderListInto('#blue-cards ul', blueCards);
-        this.renderListInto('#minions ul', minionCards);
+        const blueSection = this.getOrCreateGroupSection('blue-cards');
+        const minionSection = this.getOrCreateGroupSection('minions');
+
+        this.renderListInto('#blue-cards', blueCards, 'blue');
+        this.renderListInto('#minions', minionCards, 'minions');
         this.renderSpecialSection(specialCards);
-        this.renderDanger(adventure);
+
+        if (blueSection) {
+            blueSection.classList.remove('hidden');
+        }
+
+        if (minionSection) {
+            minionSection.classList.remove('hidden');
+        }
     }
 };
 
