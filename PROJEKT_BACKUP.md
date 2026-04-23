@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:44:00 PM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:45:32 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -29976,7 +29976,10 @@ export default ArchivePreference;
 import Utils from '../../core/utils.js';
 import RenderCommon from '../../render/common.js';
 import ArchiveCardMeta from './archive-card-meta.js';
-import { parseArchiveActionTitle } from './archive-action-format.js';
+import {
+    parseArchiveActionTitle,
+    formatArchiveActionText
+} from './archive-action-format.js';
 
 export const ArchivePreviewRenderer = {
     renderImage(card = {}) {
@@ -30070,7 +30073,7 @@ export const ArchivePreviewRenderer = {
 
                                 ${row.text ? `
                                     <p class="archive-preview-card__rule-text">
-                                        ${Utils.escapeHtml(row.text)}
+                                        ${formatArchiveActionText(row.text)}
                                     </p>
                                 ` : ''}
                             </article>
