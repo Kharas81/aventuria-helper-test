@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 7:53:15 PM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 7:53:38 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -29293,27 +29293,7 @@ export default ArchiveHomeTemplate;
 ```js
 import Utils from '../../core/utils.js';
 import ArchiveCardMeta from './archive-card-meta.js';
-
-function formatActionTypeLabel(rawType = '') {
-    const normalized = Utils.normalizeString(rawType).toUpperCase();
-
-    const knownLabels = {
-        NAHKAMPF: 'Nahkampf',
-        FERNKAMPF: 'Fernkampf',
-        ZEIT: 'Zeit',
-        PASSIV: 'Passiv'
-    };
-
-    if (knownLabels[normalized]) {
-        return knownLabels[normalized];
-    }
-
-    if (!normalized) {
-        return '';
-    }
-
-    return normalized.charAt(0) + normalized.slice(1).toLowerCase();
-}
+import { parseArchiveActionTitle } from './archive-action-format.js';
 
 export const ArchiveListCardTemplate = {
     renderStat(label = '', value = '') {
@@ -29329,56 +29309,33 @@ export const ArchiveListCardTemplate = {
     },
 
     renderTags(tags = []) {
-        if (!tags.length) {
+        const safeTags = Utils.normalizeArray(tags).slice(0, 3);
+
+        if (!safeTags.length) {
             return '';
         }
 
         return `
             <div class="archive-card__tags">
-                ${tags.map(tag => `<span class="archive-tag">${Utils.escapeHtml(tag)}</span>`).join('')}
+                ${safeTags.map(tag => `<span class="archive-tag">${Utils.escapeHtml(tag)}</span>`).join('')}
             </div>
         `;
     },
 
-    parseActionTitle(rawTitle = '') {
-        const normalizedTitle = Utils.normalizeString(rawTitle);
-
-        if (!normalizedTitle) {
-            return {
-                typeLabel: '',
-                titleLabel: ''
-            };
-        }
-
-        const match = normalizedTitle.match(/^\[([^\]]+)\]\s*-?\s*(.*)$/);
-
-        if (!match) {
-            return {
-                typeLabel: '',
-                titleLabel: normalizedTitle
-            };
-        }
-
-        const typeLabel = formatActionTypeLabel(match[1]);
-        const titleLabel = Utils.normalizeString(match[2]) || 'Aktion';
-
-        return {
-            typeLabel,
-            titleLabel
-        };
-    },
-
     renderActions(actionRows = []) {
-        if (!actionRows.length) {
+        const previewRows = Utils.normalizeArray(actionRows).slice(0, 2);
+
+        if (!previewRows.length) {
             return '';
         }
 
         return `
             <div class="archive-card__actions-preview">
-                <div class="archive-card__actions-title">Aktionen:</div>
+                <div class="archive-card__actions-title">Aktionen</div>
+
                 <ul class="archive-card__actions-list">
-                    ${actionRows.map(row => {
-                        const parsed = this.parseActionTitle(row.title);
+                    ${previewRows.map(row => {
+                        const parsed = parseArchiveActionTitle(row.title);
 
                         return `
                             <li class="archive-card__action-item">
@@ -29404,7 +29361,7 @@ export const ArchiveListCardTemplate = {
 
         const stats = ArchiveCardMeta.getStats(card);
         const tags = ArchiveCardMeta.getTags(card);
-        const actionRows = ArchiveCardMeta.getActionPreviewRows(card, 4);
+        const actionRows = ArchiveCardMeta.getActionPreviewRows(card, 2);
         const selectedCardId = Utils.normalizeString(options?.selectedCardId);
         const isSelected = Utils.normalizeString(ArchiveCardMeta.getCardId(card)) === selectedCardId;
 
@@ -29455,7 +29412,7 @@ export const ArchiveListCardTemplate = {
                         data-card-label="${name}"
                         title="${name}"
                     >
-                        Details ansehen
+                        Details öffnen
                     </button>
                 </div>
             </article>
