@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:10:38 AM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:10:49 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -24209,21 +24209,24 @@ export const ArchiveController = {
         return archiveSets.length ? archiveSets : (CONFIG.getEnabledSets?.() || []);
     },
 
-    renderHome() {
+    buildHomeViewModel() {
         const availableArchiveSets = this.getResolvedArchiveSets();
 
         if (!availableArchiveSets.some(setConfig => setConfig.id === ArchiveState.currentSet)) {
             ArchiveState.currentSet = availableArchiveSets[0]?.id || CONFIG.defaultSet || 'base_game';
         }
 
-        ArchiveState.isHomeView = true;
-
-        ArchiveRenderer.renderHome({
+        return {
             activeSetKey: ArchiveState.currentSet,
             activeSetName: CONFIG.getSetDisplayName?.(ArchiveState.currentSet),
             enabledSets: availableArchiveSets,
             totalLoadedCards: ArchiveState.allCards.length
-        });
+        };
+    },
+
+    renderHome() {
+        ArchiveState.isHomeView = true;
+        ArchiveRenderer.renderHome(this.buildHomeViewModel());
     },
 
     applyFilters() {
