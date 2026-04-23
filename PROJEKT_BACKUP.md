@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:20:24 AM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:20:38 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -31427,6 +31427,7 @@ export function renderTextBlock(title = '', text = '') {
 
     return `
         <section class="card-detail__text-block">
+            <span class="card-detail__rule-kicker">Regeltext</span>
             <h3>${Utils.escapeHtml(title)}</h3>
             <p>${CardDetailFormatters.formatRuleText(safeText)}</p>
         </section>
@@ -31441,8 +31442,9 @@ export function renderRuleList(title, items, valueKey = 'text') {
 
     return `
         <section class="card-detail__text-block">
+            <span class="card-detail__rule-kicker">Listenregel</span>
             <h3>${Utils.escapeHtml(title)}</h3>
-            <div class="card-detail__sections">
+            <div class="card-detail__rules-grid">
                 ${safeItems.map(item => {
                     if (typeof item === 'string') {
                         return `<p>${CardDetailFormatters.formatRuleText(item)}</p>`;
@@ -31472,6 +31474,7 @@ export function renderActionBlocks(actionTable) {
 
     return `
         <section class="card-detail__text-block">
+            <span class="card-detail__rule-kicker">Aktionsübersicht</span>
             <h3>Aktionen</h3>
             <div class="card-detail__actions">
                 ${rows.map(row => `
@@ -31495,7 +31498,8 @@ export function buildRulesSections(card) {
     const notesHtml = Utils.normalizeString(card.notes)
         ? `
             <section class="card-detail__text-block">
-                <h3>Hinweis</h3>
+                <span class="card-detail__rule-kicker">Hinweis</span>
+                <h3>Zusatznotiz</h3>
                 <p class="card-detail__notes">${CardDetailFormatters.formatRuleText(card.notes)}</p>
             </section>
         `
