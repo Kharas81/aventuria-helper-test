@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:16:43 AM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:17:04 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -30538,6 +30538,28 @@ export const RulebookUIRender = {
         label.textContent = CONFIG.getSetDisplayName?.(setKey) || 'Regelbuch';
     },
 
+    updateModalTitle(setKey = '') {
+        const title = RulebookUIDom.getManualTitle();
+        if (!title) {
+            return;
+        }
+
+        const setLabel = CONFIG.getSetDisplayName?.(setKey) || 'Regelbuch';
+        title.textContent = `Regelbuch – ${setLabel}`;
+    },
+
+    highlightActivePage(pageNumber = 0) {
+        const list = RulebookUIDom.getManualPageList();
+        if (!list) {
+            return;
+        }
+
+        const items = list.querySelectorAll('li[data-page]');
+        items.forEach(item => {
+            item.classList.toggle('active', Number(item.dataset.page) === Number(pageNumber));
+        });
+    },
+
     renderPageList(indexData, onJump) {
         const list = RulebookUIDom.getManualPageList();
         if (!list) {
@@ -30552,6 +30574,7 @@ export const RulebookUIRender = {
         pages.forEach(entry => {
             const li = document.createElement('li');
             li.textContent = `S. ${entry.page} – ${entry.title}`;
+            li.dataset.page = String(entry.page);
             li.addEventListener('click', () => onJump?.(entry.page));
             fragment.appendChild(li);
         });
