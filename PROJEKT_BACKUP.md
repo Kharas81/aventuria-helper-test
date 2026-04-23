@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:04:08 AM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:04:29 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -20193,6 +20193,7 @@ export async function ensureDomReady() {
 export async function boot({
     Theme,
     UI,
+    SessionUI,
     Combat,
     Archive,
     Diagnostics,
@@ -20212,6 +20213,7 @@ export async function boot({
 
         Theme?.init?.();
         UI?.init?.();
+        SessionUI?.init?.();
         Combat?.init?.();
         Archive?.init?.();
         Diagnostics?.init?.();
