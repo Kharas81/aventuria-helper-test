@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:04:44 AM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:05:03 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -19583,6 +19583,7 @@ import ApiFetch from '../core/api-fetch.js';
 import ApiCardLookup from '../core/api-card-lookup.js';
 import AppStateSync from './state-sync.js';
 import AppRuntime from './runtime.js';
+import SessionUI from '../render/session/session-ui.js';
 
 export const AppAdventureFlow = {
     renderStory(adventure) {
@@ -19607,6 +19608,7 @@ export const AppAdventureFlow = {
             AppStateSync.resetUIToDefaults();
             AppRuntime.clearDiagnostics();
             AppRuntime.setStatus(Constants.ui?.defaultStatusText ?? 'Bereit.');
+            SessionUI.syncStatusStrip();
             return;
         }
 
@@ -19650,6 +19652,12 @@ export const AppAdventureFlow = {
                 setKey: advData?.set?.id || 'base_game'
             });
 
+            Events.emit(Constants.events?.archiveSetChanged || 'archive:setChanged', {
+                source: 'adventure',
+                setKey: advData?.set?.id || 'base_game',
+                adventureId: advData?.id || ''
+            });
+
             Events.emit(Constants.events?.setChanged || 'set:changed', {
                 source: 'adventure',
                 setKey: advData?.set?.id || 'base_game',
@@ -19661,6 +19669,7 @@ export const AppAdventureFlow = {
             }
 
             AppRuntime.setStatus(`✅ Abenteuer geladen: ${advData.name}`);
+            SessionUI.syncStatusStrip();
         } catch (error) {
             console.error(error);
             AppRuntime.clearDiagnostics();
@@ -19670,6 +19679,7 @@ export const AppAdventureFlow = {
                 error?.message || 'Unbekannter Fehler beim Laden des Abenteuers.'
             );
             AppRuntime.setStatus(`❌ Fehler: ${error.message}`);
+            SessionUI.syncStatusStrip();
         }
     }
 };
