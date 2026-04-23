@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 7:55:13 PM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 7:57:02 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -2847,10 +2847,13 @@ a {
 
 .archive-card {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
     padding: var(--space-lg);
     border: 1px solid rgba(129, 90, 42, 0.14);
     border-radius: var(--radius-xl);
-    background: linear-gradient(180deg, rgba(255, 252, 247, 0.96) 0%, rgba(246, 236, 220, 0.94) 100%);
+    background: linear-gradient(180deg, rgba(255, 252, 247, 0.97) 0%, rgba(246, 236, 220, 0.95) 100%);
     box-shadow: var(--ui-shadow-xs);
     transition:
         transform var(--transition-fast),
@@ -2865,7 +2868,7 @@ a {
     inset: 0 auto 0 0;
     width: 4px;
     background: linear-gradient(180deg, var(--ui-color-gold-700) 0%, var(--ui-color-burgundy-800) 100%);
-    opacity: 0.85;
+    opacity: 0.88;
 }
 
 .archive-card:hover {
@@ -2876,7 +2879,7 @@ a {
 
 .archive-card--selected {
     border-color: rgba(197, 149, 62, 0.72);
-    box-shadow: 0 14px 32px rgba(77, 22, 22, 0.15);
+    box-shadow: 0 14px 32px rgba(77, 22, 22, 0.14);
     background: linear-gradient(180deg, rgba(255, 251, 244, 1) 0%, rgba(244, 232, 210, 0.98) 100%);
 }
 
@@ -2884,15 +2887,15 @@ a {
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
-    margin-bottom: var(--space-md);
 }
 
 .archive-card__title {
     margin: 0;
     color: var(--ui-color-burgundy-900);
     font-family: var(--ui-font-display);
-    font-size: 1.2rem;
-    line-height: 1.2;
+    font-size: 1.28rem;
+    line-height: 1.18;
+    overflow-wrap: anywhere;
 }
 
 .archive-card__badges {
@@ -2921,7 +2924,7 @@ a {
     padding: 10px 12px;
     border: 1px solid rgba(129, 90, 42, 0.12);
     border-radius: var(--radius-lg);
-    background: rgba(255, 252, 247, 0.72);
+    background: rgba(255, 252, 247, 0.78);
 }
 
 .archive-card__stat-label {
@@ -2964,6 +2967,10 @@ a {
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
+    padding: var(--space-md);
+    border: 1px solid rgba(129, 90, 42, 0.12);
+    border-radius: var(--radius-lg);
+    background: rgba(255, 252, 247, 0.68);
 }
 
 .archive-card__actions-title {
@@ -2986,7 +2993,7 @@ a {
 
 .archive-card__action-item {
     display: flex;
-    align-items: start;
+    align-items: flex-start;
     gap: 10px;
     color: var(--ui-color-ink);
     line-height: 1.35;
@@ -2995,33 +3002,47 @@ a {
 .archive-card__action-range {
     display: inline-flex;
     align-items: center;
-    min-height: 24px;
-    padding: 0 8px;
+    justify-content: center;
+    min-width: 54px;
+    min-height: 28px;
+    padding: 0 10px;
     border-radius: var(--radius-pill);
     background: rgba(123, 31, 31, 0.08);
     color: var(--ui-color-burgundy-900);
     font-size: 0.78rem;
     font-weight: 700;
     white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .archive-card__action-main {
     display: flex;
-    flex-direction: column;
-    gap: 2px;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
 }
 
 .archive-card__action-type {
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+    padding: 0 8px;
+    border-radius: var(--radius-pill);
+    background: rgba(139, 69, 19, 0.08);
+    border: 1px solid rgba(129, 90, 42, 0.12);
     color: var(--ui-color-bronze-900);
-    font-size: 0.76rem;
+    font-size: 0.74rem;
     font-weight: 700;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    white-space: nowrap;
 }
 
 .archive-card__action-name {
     color: var(--ui-color-ink);
     font-weight: 700;
+    overflow-wrap: anywhere;
 }
 
 .archive-card__footer {
@@ -3029,7 +3050,7 @@ a {
     align-items: center;
     justify-content: space-between;
     gap: var(--space-sm);
-    margin-top: var(--space-lg);
+    margin-top: auto;
     padding-top: var(--space-md);
     border-top: 1px solid rgba(129, 90, 42, 0.1);
 }
@@ -3040,6 +3061,10 @@ a {
     flex-wrap: wrap;
 }
 
+.archive-card__details-btn {
+    min-width: 148px;
+}
+
 @media (max-width: 860px) {
     .archive-card__stats {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -3047,13 +3072,22 @@ a {
 }
 
 @media (max-width: 600px) {
+    .archive-card {
+        padding: var(--space-md);
+    }
+
     .archive-card__stats {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
     }
 
     .archive-card__footer {
         flex-direction: column;
         align-items: stretch;
+    }
+
+    .archive-card__details-btn,
+    .archive-card__footer-left .btn-outline {
+        width: 100%;
     }
 }
 
