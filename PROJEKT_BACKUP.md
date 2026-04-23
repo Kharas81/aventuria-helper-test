@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 4:13:06 PM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 4:19:10 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -1686,6 +1686,345 @@ a {
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+```
+
+---
+
+## 📄 Datei: css/features/adventure/adventure-groups.css
+```css
+.adventure-setup__groups {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-lg);
+}
+
+.setup-group {
+    position: relative;
+    min-width: 0;
+    padding: var(--space-xl);
+    border: 1px solid var(--ui-color-border-soft);
+    border-radius: var(--radius-xl);
+    background: rgba(255, 252, 247, 0.78);
+    box-shadow: var(--ui-shadow-sm);
+    overflow: hidden;
+}
+
+.setup-group::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 5px;
+    opacity: 0.95;
+}
+
+.setup-group--blue::before {
+    background: linear-gradient(180deg, #426d9c 0%, #2d4f72 100%);
+}
+
+.setup-group--minions::before {
+    background: linear-gradient(180deg, #8b5b2a 0%, #69411a 100%);
+}
+
+.setup-group--special::before {
+    background: linear-gradient(180deg, #6d3f92 0%, #4a266d 100%);
+}
+
+.setup-group__header {
+    display: flex;
+    align-items: start;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.setup-group__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: var(--radius-round);
+    box-shadow: var(--ui-shadow-xs);
+    flex-shrink: 0;
+}
+
+.setup-group--blue .setup-group__icon {
+    background: linear-gradient(180deg, rgba(66, 109, 156, 0.18) 0%, rgba(255, 251, 245, 0.96) 100%);
+    color: #2d4f72;
+}
+
+.setup-group--minions .setup-group__icon {
+    background: linear-gradient(180deg, rgba(139, 91, 42, 0.18) 0%, rgba(255, 251, 245, 0.96) 100%);
+    color: #69411a;
+}
+
+.setup-group--special .setup-group__icon {
+    background: linear-gradient(180deg, rgba(109, 63, 146, 0.18) 0%, rgba(255, 251, 245, 0.96) 100%);
+    color: #4a266d;
+}
+
+.setup-group__header-copy {
+    min-width: 0;
+}
+
+.setup-group__eyebrow {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--ui-color-bronze-900);
+    font-family: var(--ui-font-ui);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+}
+
+.setup-group__title {
+    margin: 0;
+    color: var(--ui-color-burgundy-900);
+    font-family: var(--ui-font-display);
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.15;
+}
+
+.setup-group__description {
+    margin-top: var(--space-xs);
+    color: var(--ui-color-ink-soft);
+    font-size: 0.94rem;
+    line-height: 1.45;
+}
+
+.setup-group__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.setup-group__empty {
+    padding: var(--space-lg);
+    border: 1px dashed var(--ui-color-border-muted);
+    border-radius: var(--radius-lg);
+    background: rgba(255, 252, 247, 0.6);
+    color: var(--ui-color-muted);
+    font-style: italic;
+}
+
+.checklist-item {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: start;
+    gap: var(--space-md);
+    padding: var(--space-md) 0;
+    border-bottom: 1px solid rgba(129, 90, 42, 0.08);
+    line-height: 1.45;
+    transition: transform var(--transition-fast);
+}
+
+.checklist-item:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+.checklist-item:hover {
+    transform: translateX(3px);
+}
+
+.checklist-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-top: 4px;
+    cursor: pointer;
+    accent-color: var(--ui-color-burgundy-800);
+    flex-shrink: 0;
+}
+
+.checklist-item__content {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+}
+
+.checklist-item__label {
+    display: block;
+    min-width: 0;
+    color: var(--ui-color-ink);
+    font-weight: 700;
+    word-break: break-word;
+}
+
+.checklist-item__hint {
+    color: var(--ui-color-muted);
+    font-size: 0.86rem;
+    line-height: 1.35;
+}
+
+.checklist-item input:checked + .checklist-item__content .checklist-item__label {
+    text-decoration: line-through var(--ui-color-burgundy-800) 2px;
+    color: var(--ui-color-muted);
+    opacity: 0.7;
+}
+
+.has-preview {
+    color: var(--ui-color-burgundy-900);
+    cursor: help;
+}
+
+@media (max-width: 1100px) {
+    .adventure-setup__groups {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .setup-group {
+        padding: var(--space-lg);
+    }
+
+    .checklist-item {
+        grid-template-columns: auto minmax(0, 1fr);
+    }
+
+    .checklist-item .info-btn {
+        grid-column: 2;
+        justify-self: end;
+    }
+}
+
+```
+
+---
+
+## 📄 Datei: css/features/adventure/adventure-header.css
+```css
+#setup-display {
+    position: relative;
+    padding: var(--space-2xl);
+    border: 1px solid var(--ui-color-border-soft);
+    border-radius: var(--radius-2xl);
+    background: var(--ui-gradient-panel);
+    box-shadow: var(--ui-shadow-md);
+    overflow: hidden;
+}
+
+#setup-display::before {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    border: 1px solid rgba(190, 154, 101, 0.22);
+    border-radius: calc(var(--radius-2xl) - 10px);
+    pointer-events: none;
+}
+
+#setup-display::after {
+    content: "";
+    position: absolute;
+    inset: auto -60px -100px auto;
+    width: 260px;
+    height: 260px;
+    border-radius: var(--radius-round);
+    background: radial-gradient(circle, rgba(123, 31, 31, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.adventure-setup__header {
+    position: relative;
+    z-index: 1;
+    margin-bottom: var(--space-2xl);
+}
+
+.adventure-setup__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-sm);
+    color: var(--ui-color-bronze-900);
+    font-family: var(--ui-font-ui);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.adventure-setup__eyebrow::before,
+.adventure-setup__eyebrow::after {
+    content: "✦";
+    color: var(--ui-color-gold-700);
+}
+
+.adventure-setup__title-row {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-md);
+}
+
+.adventure-setup__title {
+    margin: 0;
+}
+
+.adventure-setup__lead {
+    max-width: 840px;
+    color: var(--ui-color-ink-soft);
+    line-height: 1.55;
+}
+
+.adventure-danger {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 42px;
+    padding: 0 var(--space-lg);
+    border: 1px solid rgba(154, 44, 44, 0.24);
+    border-radius: var(--radius-pill);
+    background: linear-gradient(180deg, rgba(180, 56, 56, 0.16) 0%, rgba(255, 245, 245, 0.88) 100%);
+    color: var(--ui-color-burgundy-900);
+    font-family: var(--ui-font-ui);
+    font-weight: 700;
+    box-shadow: var(--ui-shadow-xs);
+    white-space: nowrap;
+}
+
+.adventure-danger__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-round);
+    background: linear-gradient(180deg, #b43838 0%, #922828 100%);
+    color: #fffaf2;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.adventure-danger__label {
+    display: inline-flex;
+    gap: 8px;
+    align-items: baseline;
+}
+
+.adventure-danger__value {
+    font-family: var(--ui-font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+@media (max-width: 800px) {
+    .adventure-setup__title-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+@media (max-width: 640px) {
+    #setup-display {
+        padding: var(--space-lg);
+    }
 }
 
 ```
