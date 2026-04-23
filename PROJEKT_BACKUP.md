@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 4:11:01 PM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 4:11:13 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -4896,6 +4896,126 @@ a {
 
     #manual-page-indicator {
         width: 100%;
+    }
+}
+
+```
+
+---
+
+## 📄 Datei: css/features/session/session-header.css
+```css
+.session-app-header {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-bottom: var(--space-2xl);
+    text-align: center;
+    overflow: hidden;
+}
+
+.session-app-header__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    width: 100%;
+}
+
+.session-app-header__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    color: var(--ui-color-bronze-900);
+    font-family: var(--ui-font-ui);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.session-app-header__eyebrow::before,
+.session-app-header__eyebrow::after {
+    content: "✦";
+    color: var(--ui-color-gold-700);
+    font-size: 0.9rem;
+}
+
+.session-app-header__title {
+    margin: 0;
+}
+
+.session-app-header__subtitle {
+    max-width: 760px;
+    color: var(--ui-color-ink-soft);
+    font-size: 1rem;
+    line-height: 1.45;
+}
+
+.session-app-header__status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    padding: 0 var(--space-lg);
+    border: 1px solid var(--ui-color-border-soft);
+    border-radius: var(--radius-pill);
+    background: rgba(255, 251, 245, 0.72);
+    color: var(--ui-color-burgundy-900);
+    box-shadow: var(--ui-shadow-xs);
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.app-toolbar {
+    position: relative;
+    overflow: hidden;
+}
+
+.app-toolbar::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at top right, rgba(255, 255, 255, 0.28), transparent 24%),
+        radial-gradient(circle at bottom left, rgba(123, 31, 31, 0.05), transparent 22%);
+    pointer-events: none;
+}
+
+.app-toolbar .top-bar {
+    align-items: end;
+    gap: var(--space-xl);
+}
+
+.app-toolbar .button-group {
+    align-items: center;
+}
+
+.app-toolbar .config-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    min-width: 170px;
+}
+
+.app-toolbar .config-item label,
+.app-toolbar .config-item strong {
+    font-family: var(--ui-font-ui);
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ui-color-bronze-900);
+}
+
+@media (max-width: 820px) {
+    .app-toolbar .config-item {
+        min-width: 100%;
+    }
+}
+
+@media (max-width: 640px) {
+    .session-app-header__subtitle {
+        font-size: 0.95rem;
     }
 }
 
