@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:21:15 AM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:21:26 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -1432,17 +1432,29 @@ a {
 ## 📄 Datei: css/card-detail-panels.css
 ```css
 .card-detail__panel {
-    background: var(--color-bg-white-soft);
-    border: 1px solid var(--color-border-soft-card);
-    border-radius: var(--radius-xl);
+    position: relative;
+    background: var(--ui-gradient-panel);
+    border: 1px solid rgba(129, 90, 42, 0.14);
+    border-radius: var(--radius-2xl);
     padding: var(--space-xl);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--ui-shadow-xs);
+    overflow: hidden;
+}
+
+.card-detail__panel::before {
+    content: "";
+    position: absolute;
+    inset: 10px;
+    border: 1px solid rgba(190, 154, 101, 0.14);
+    border-radius: calc(var(--radius-2xl) - 8px);
+    pointer-events: none;
 }
 
 .card-detail__panel-title {
-    margin: 0 0 var(--space-md) 0;
-    color: var(--color-primary);
-    font-size: 1.05rem;
+    margin: 0;
+    color: var(--ui-color-burgundy-900);
+    font-size: 1.2rem;
+    line-height: 1.2;
 }
 
 .card-detail__sections {
@@ -1452,29 +1464,35 @@ a {
 }
 
 .card-detail__text-block {
-    background: var(--color-bg-white-soft);
-    border-left: var(--border-xl) solid var(--color-primary);
-    border-radius: var(--radius-sm);
+    position: relative;
+    background: linear-gradient(180deg, rgba(255, 252, 247, 0.96) 0%, rgba(246, 236, 220, 0.94) 100%);
+    border: 1px solid rgba(129, 90, 42, 0.14);
+    border-left: 4px solid var(--ui-color-burgundy-800);
+    border-radius: var(--radius-xl);
     padding: var(--space-xl);
+    box-shadow: var(--ui-shadow-xs);
 }
 
 .card-detail__text-block h3 {
     margin: 0 0 var(--space-sm) 0;
-    color: var(--color-primary);
-    font-size: 1.05rem;
+    color: var(--ui-color-burgundy-900);
+    font-size: 1.15rem;
 }
 
 .card-detail__text-block p {
     margin: 0;
     white-space: pre-line;
+    color: var(--ui-color-ink);
+    line-height: 1.65;
 }
 
 .card-detail__notes {
     font-style: italic;
+    color: var(--ui-color-ink-soft);
 }
 
 .card-detail__empty {
-    color: var(--color-secondary);
+    color: var(--ui-color-muted);
     font-style: italic;
     margin: 0;
 }
