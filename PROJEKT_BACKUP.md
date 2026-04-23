@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:08:46 AM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:09:01 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -19800,6 +19800,7 @@ select {
     <link rel="stylesheet" href="css/combat-tools.css">
     <link rel="stylesheet" href="css/intermission.css">
     <link rel="stylesheet" href="css/features/main-session.css">
+    <link rel="stylesheet" href="css/features/adventure-setup.css">
     <link rel="stylesheet" href="css/modal.css">
     <link rel="stylesheet" href="css/card-detail.css">
     <link rel="stylesheet" href="css/card-detail-layout.css">
@@ -19865,27 +19866,7 @@ select {
         <section id="session-status-strip" aria-label="Sitzungsstatus"></section>
 
         <main id="app-main" class="app-main">
-            <section id="setup-display" class="hidden" aria-label="Abenteuer-Setup">
-                <h2 id="title">Abenteuer</h2>
-                <p id="danger-value"></p>
-
-                <div class="grid-container">
-                    <div class="card-list" id="blue-cards">
-                        <h3>Blaue Karten</h3>
-                        <ul></ul>
-                    </div>
-
-                    <div class="card-list" id="minions">
-                        <h3>Schergen</h3>
-                        <ul></ul>
-                    </div>
-
-                    <div class="card-list hidden" id="special">
-                        <h3>Spezial</h3>
-                        <ul></ul>
-                    </div>
-                </div>
-            </section>
+            <section id="setup-display" class="hidden" aria-label="Abenteuer-Setup"></section>
 
             <section id="story-area" aria-label="Abenteuertext"></section>
 
