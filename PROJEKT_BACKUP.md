@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 7:27:35 AM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 7:27:50 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -2490,6 +2490,223 @@ h1 {
         font-size: 0.96rem;
         line-height: 1.55;
     }
+}
+
+```
+
+---
+
+## 📄 Datei: css/ui/tokens.css
+```css
+:root {
+    /* =========================================================
+       TYPOGRAFIE
+    ========================================================= */
+    --ui-font-display: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+    --ui-font-body: "Crimson Text", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+    --ui-font-ui: "Segoe UI", "Trebuchet MS", system-ui, sans-serif;
+
+    /* =========================================================
+       FARBWELT
+    ========================================================= */
+    --ui-color-ink-strong: #241710;
+    --ui-color-ink: #33251b;
+    --ui-color-ink-soft: #5f4d41;
+    --ui-color-muted: #7d6b5f;
+
+    --ui-color-burgundy-900: #4b1111;
+    --ui-color-burgundy-800: #611818;
+    --ui-color-burgundy-700: #7b1f1f;
+    --ui-color-burgundy-600: #942727;
+
+    --ui-color-bronze-900: #6b4320;
+    --ui-color-bronze-800: #8a5a2a;
+    --ui-color-bronze-700: #b07a3a;
+    --ui-color-bronze-500: #cfa466;
+
+    --ui-color-gold-700: #c5953e;
+    --ui-color-gold-500: #dbb97b;
+    --ui-color-gold-300: #eeddb8;
+
+    --ui-color-parchment-50: #fbf5e9;
+    --ui-color-parchment-100: #f6eddc;
+    --ui-color-parchment-200: #efe1ca;
+    --ui-color-parchment-300: #e7d3b2;
+    --ui-color-parchment-400: #dbc39d;
+
+    --ui-color-stone-100: #f7f3eb;
+    --ui-color-stone-200: #ebe1d2;
+
+    --ui-color-success: #2f6b46;
+    --ui-color-danger: #9a2c2c;
+    --ui-color-info: #365e89;
+
+    /* =========================================================
+       FLÄCHEN
+    ========================================================= */
+    --ui-color-bg-page: #e9dbc2;
+    --ui-color-bg-page-deep: #d7c19d;
+    --ui-color-bg-shell: #f7efdf;
+    --ui-color-bg-panel: rgba(255, 249, 239, 0.86);
+    --ui-color-bg-panel-strong: rgba(255, 250, 243, 0.92);
+    --ui-color-bg-panel-soft: rgba(255, 251, 245, 0.72);
+    --ui-color-bg-inset: rgba(255, 248, 235, 0.7);
+
+    /* =========================================================
+       RAHMEN
+    ========================================================= */
+    --ui-color-border-soft: rgba(129, 90, 42, 0.18);
+    --ui-color-border-muted: rgba(129, 90, 42, 0.28);
+    --ui-color-border-strong: rgba(107, 67, 32, 0.55);
+    --ui-color-border-accent: rgba(203, 157, 89, 0.8);
+
+    /* =========================================================
+       GRADIENTS
+    ========================================================= */
+    --ui-gradient-page:
+        radial-gradient(circle at top, rgba(255, 255, 255, 0.38), transparent 34%),
+        linear-gradient(180deg, #f0e5d2 0%, #dcc6a4 100%);
+
+    --ui-gradient-shell:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.28), transparent 25%),
+        linear-gradient(180deg, rgba(255, 252, 246, 0.95) 0%, rgba(245, 234, 216, 0.98) 100%);
+
+    --ui-gradient-panel:
+        linear-gradient(180deg, rgba(255, 251, 245, 0.98) 0%, rgba(247, 238, 224, 0.96) 100%);
+
+    --ui-gradient-panel-soft:
+        linear-gradient(180deg, rgba(255, 252, 247, 0.9) 0%, rgba(249, 241, 230, 0.82) 100%);
+
+    --ui-gradient-button-primary:
+        linear-gradient(180deg, #8f2424 0%, #6a1717 100%);
+
+    --ui-gradient-button-secondary:
+        linear-gradient(180deg, rgba(255, 250, 242, 0.98) 0%, rgba(245, 234, 214, 0.96) 100%);
+
+    --ui-gradient-success:
+        linear-gradient(180deg, #3a8457 0%, #2f6b46 100%);
+
+    --ui-gradient-danger:
+        linear-gradient(180deg, #b43838 0%, #922828 100%);
+
+    /* =========================================================
+       SCHATTEN
+    ========================================================= */
+    --ui-shadow-xs: 0 1px 2px rgba(31, 18, 10, 0.08);
+    --ui-shadow-sm: 0 3px 8px rgba(44, 25, 12, 0.12);
+    --ui-shadow-md: 0 10px 24px rgba(53, 31, 16, 0.16);
+    --ui-shadow-lg: 0 20px 48px rgba(40, 22, 11, 0.24);
+    --ui-shadow-shell: 0 18px 50px rgba(34, 18, 9, 0.28);
+    --ui-shadow-inset:
+        inset 0 1px 0 rgba(255, 255, 255, 0.65),
+        inset 0 -1px 0 rgba(129, 90, 42, 0.08);
+
+    /* =========================================================
+       ABSTÄNDE
+    ========================================================= */
+    --space-2xs: 4px;
+    --space-xs: 8px;
+    --space-sm: 12px;
+    --space-md: 16px;
+    --space-lg: 20px;
+    --space-xl: 24px;
+    --space-2xl: 32px;
+    --space-3xl: 40px;
+    --space-4xl: 48px;
+    --space-5xl: 64px;
+    --space-6xl: 80px;
+
+    /* =========================================================
+       RADII
+    ========================================================= */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --radius-xl: 24px;
+    --radius-2xl: 30px;
+    --radius-pill: 999px;
+    --radius-round: 50%;
+    --ui-radius-shell: 28px;
+
+    /* =========================================================
+       BORDERS
+    ========================================================= */
+    --border-thin: 1px;
+    --border-md: 2px;
+    --border-lg: 3px;
+    --border-xl: 4px;
+    --border-accent: 6px;
+
+    /* =========================================================
+       TRANSITIONS
+    ========================================================= */
+    --transition-fast: 160ms ease;
+    --transition-medium: 240ms ease;
+    --transition-slow: 360ms ease;
+
+    /* =========================================================
+       LAYOUT
+    ========================================================= */
+    --container-max-width: 1320px;
+    --modal-max-width: 1240px;
+    --modal-max-width-archive: 1460px;
+    --sidebar-width: 300px;
+    --sidebar-min-width: 240px;
+    --tooltip-width: 450px;
+
+    /* =========================================================
+       LEGACY-ALIASES
+       Damit bestehende CSS-Dateien weiter stabil laufen.
+    ========================================================= */
+    --color-text: var(--ui-color-ink);
+    --color-primary: var(--ui-color-burgundy-800);
+    --color-primary-hover: var(--ui-color-burgundy-700);
+    --color-secondary: var(--ui-color-bronze-800);
+    --color-secondary-soft: var(--ui-color-bronze-700);
+
+    --color-bg-body: var(--ui-color-bg-page);
+    --color-bg-panel: var(--ui-color-parchment-100);
+    --color-bg-panel-alt: var(--ui-color-bg-page-deep);
+    --color-bg-soft: var(--ui-color-bg-panel-soft);
+    --color-bg-soft-strong: var(--ui-color-bg-panel);
+    --color-bg-soft-muted: rgba(255, 249, 241, 0.5);
+    --color-bg-white-soft: rgba(255, 252, 247, 0.72);
+    --color-bg-white-strong: rgba(255, 252, 247, 0.82);
+    --color-bg-white-stronger: rgba(255, 252, 247, 0.92);
+
+    --color-manual-parchment: #fdf6e3;
+    --color-manual-blue: #23476c;
+    --color-manual-gold: var(--ui-color-gold-700);
+    --color-manual-narrative: #5d4037;
+    --color-manual-border: #d3c6a3;
+
+    --color-border-soft: var(--ui-color-border-soft);
+    --color-border-soft-strong: var(--ui-color-border-muted);
+    --color-border-soft-card: rgba(107, 67, 32, 0.24);
+
+    --color-primary-fade: rgba(123, 31, 31, 0.08);
+    --color-primary-shadow: rgba(97, 24, 24, 0.28);
+    --color-black-soft: rgba(0, 0, 0, 0.12);
+    --color-black-medium: rgba(0, 0, 0, 0.22);
+    --color-black-strong: rgba(0, 0, 0, 0.36);
+    --color-black-heavy: rgba(0, 0, 0, 0.68);
+
+    --color-success: var(--ui-color-success);
+    --color-danger: var(--ui-color-danger);
+    --color-info: var(--ui-color-info);
+    --color-muted: var(--ui-color-muted);
+    --color-white: #fffdf8;
+    --color-black: #000000;
+    --color-ivory: #fffcf6;
+
+    --shadow-sm: var(--ui-shadow-xs);
+    --shadow-md: var(--ui-shadow-sm);
+    --shadow-lg: var(--ui-shadow-md);
+    --shadow-xl: var(--ui-shadow-lg);
+    --shadow-2xl: 0 28px 80px rgba(24, 14, 8, 0.35);
+    --shadow-card: 0 14px 32px rgba(34, 20, 10, 0.14);
+    --shadow-preview: 0 20px 54px rgba(0, 0, 0, 0.34);
+    --shadow-panel: var(--ui-shadow-md);
 }
 
 ```
