@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 3:10:24 PM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 3:10:48 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -2294,6 +2294,270 @@ a {
     .archive-browser__panel {
         padding: var(--space-lg);
     }
+}
+
+```
+
+---
+
+## 📄 Datei: css/features/archive-browser/archive-browser-list.css
+```css
+.archive-browser-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.archive-card {
+    position: relative;
+    padding: var(--space-lg);
+    border: 1px solid rgba(129, 90, 42, 0.14);
+    border-radius: var(--radius-xl);
+    background: linear-gradient(180deg, rgba(255, 252, 247, 0.96) 0%, rgba(246, 236, 220, 0.94) 100%);
+    box-shadow: var(--ui-shadow-xs);
+    transition:
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast),
+        border-color var(--transition-fast),
+        background var(--transition-fast);
+}
+
+.archive-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    background: linear-gradient(180deg, var(--ui-color-gold-700) 0%, var(--ui-color-burgundy-800) 100%);
+    opacity: 0.85;
+}
+
+.archive-card:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--ui-shadow-sm);
+    border-color: var(--ui-color-border-accent);
+}
+
+.archive-card--selected {
+    border-color: rgba(197, 149, 62, 0.72);
+    box-shadow: 0 14px 32px rgba(77, 22, 22, 0.15);
+    background: linear-gradient(180deg, rgba(255, 251, 244, 1) 0%, rgba(244, 232, 210, 0.98) 100%);
+}
+
+.archive-card__header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+.archive-card__title {
+    margin: 0;
+    color: var(--ui-color-burgundy-900);
+    font-family: var(--ui-font-display);
+    font-size: 1.2rem;
+    line-height: 1.2;
+}
+
+.archive-card__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+}
+
+.archive-card__subtitle {
+    display: none;
+}
+
+.archive-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.archive-card__stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-sm);
+}
+
+.archive-card__stat {
+    padding: 10px 12px;
+    border: 1px solid rgba(129, 90, 42, 0.12);
+    border-radius: var(--radius-lg);
+    background: rgba(255, 252, 247, 0.72);
+}
+
+.archive-card__stat-label {
+    color: var(--ui-color-bronze-900);
+    font-family: var(--ui-font-ui);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.archive-card__stat-value {
+    margin-top: 4px;
+    color: var(--ui-color-burgundy-900);
+    font-family: var(--ui-font-display);
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.archive-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+}
+
+.archive-tag {
+    display: inline-flex;
+    align-items: center;
+    min-height: 28px;
+    padding: 0 10px;
+    border: 1px solid rgba(129, 90, 42, 0.14);
+    border-radius: var(--radius-pill);
+    background: rgba(255, 252, 247, 0.76);
+    color: var(--ui-color-ink-soft);
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.archive-card__actions-preview {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.archive-card__actions-title {
+    color: var(--ui-color-bronze-900);
+    font-family: var(--ui-font-ui);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.archive-card__actions-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.archive-card__action-item {
+    display: flex;
+    align-items: start;
+    gap: 10px;
+    color: var(--ui-color-ink);
+    line-height: 1.35;
+}
+
+.archive-card__action-range {
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+    padding: 0 8px;
+    border-radius: var(--radius-pill);
+    background: rgba(123, 31, 31, 0.08);
+    color: var(--ui-color-burgundy-900);
+    font-size: 0.78rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.archive-card__action-main {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.archive-card__action-type {
+    color: var(--ui-color-bronze-900);
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.archive-card__action-name {
+    color: var(--ui-color-ink);
+    font-weight: 700;
+}
+
+.archive-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    margin-top: var(--space-lg);
+    padding-top: var(--space-md);
+    border-top: 1px solid rgba(129, 90, 42, 0.1);
+}
+
+.archive-card__footer-left {
+    display: flex;
+    gap: var(--space-xs);
+    flex-wrap: wrap;
+}
+
+@media (max-width: 860px) {
+    .archive-card__stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .archive-card__stats {
+        grid-template-columns: 1fr;
+    }
+
+    .archive-card__footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+```
+
+---
+
+## 📄 Datei: css/features/archive-browser/archive-browser-sidebar.css
+```css
+.archive-sidebar-block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.archive-sidebar-block__label {
+    color: var(--ui-color-bronze-900);
+    font-family: var(--ui-font-ui);
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.archive-sidebar-block__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+}
+
+.archive-sidebar-summary {
+    padding: var(--space-md);
+    border: 1px solid rgba(129, 90, 42, 0.14);
+    border-radius: var(--radius-lg);
+    background: rgba(255, 252, 247, 0.72);
+    color: var(--ui-color-ink-soft);
+    line-height: 1.45;
+}
+
+.archive-sidebar-summary strong {
+    color: var(--ui-color-burgundy-900);
 }
 
 ```
