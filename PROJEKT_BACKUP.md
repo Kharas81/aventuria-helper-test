@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 4:20:23 PM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 4:27:55 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -4965,6 +4965,183 @@ a {
     .session-hero-stat__actions {
         grid-column: 1 / -1;
         justify-content: flex-end;
+    }
+}
+
+```
+
+---
+
+## 📄 Datei: css/features/rulebook/rulebook-modal.css
+```css
+#rulebook-modal .modal-content {
+    max-width: min(1400px, calc(100vw - 40px));
+    border-radius: var(--radius-2xl);
+    border: 1px solid var(--ui-color-border-strong);
+    background: var(--ui-gradient-shell);
+    box-shadow: var(--ui-shadow-shell);
+    overflow: hidden;
+}
+
+#rulebook-modal .modal-content::before {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    border: 1px solid rgba(190, 154, 101, 0.22);
+    border-radius: calc(var(--radius-2xl) - 10px);
+    pointer-events: none;
+}
+
+#rulebook-modal .modal-layout {
+    display: grid;
+    grid-template-columns: minmax(240px, 290px) minmax(0, 1fr);
+    min-height: 78vh;
+    gap: var(--space-lg);
+}
+
+#rulebook-modal .modal-main {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: var(--space-2xl) var(--space-2xl) var(--space-xl) 0;
+}
+
+#rulebook-modal .modal-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-lg);
+    padding: var(--space-xl);
+    border: 1px solid rgba(129, 90, 42, 0.14);
+    border-radius: var(--radius-2xl);
+    background: var(--ui-gradient-panel-soft);
+    box-shadow: var(--ui-shadow-inset);
+}
+
+#manual-title {
+    margin-right: auto;
+    color: var(--ui-color-burgundy-900);
+}
+
+#rulebook-modal .tab-content {
+    min-width: 0;
+}
+
+#reader-tab,
+#codex-tab {
+    position: relative;
+    min-height: 0;
+    padding: var(--space-xl);
+    border: 1px solid rgba(129, 90, 42, 0.14);
+    border-radius: var(--radius-2xl);
+    background: var(--ui-gradient-panel);
+    box-shadow: var(--ui-shadow-sm);
+    overflow: hidden;
+}
+
+#reader-tab::before,
+#codex-tab::before {
+    content: "";
+    position: absolute;
+    inset: 10px;
+    border: 1px solid rgba(190, 154, 101, 0.16);
+    border-radius: calc(var(--radius-2xl) - 8px);
+    pointer-events: none;
+}
+
+@media (max-width: 1020px) {
+    #rulebook-modal .modal-layout {
+        grid-template-columns: 1fr;
+    }
+
+    #rulebook-modal .modal-main {
+        padding: 0 var(--space-lg) var(--space-lg) var(--space-lg);
+    }
+}
+
+@media (max-width: 700px) {
+    #rulebook-modal .modal-content {
+        max-width: calc(100vw - 16px);
+    }
+
+    #rulebook-modal .modal-sidebar,
+    #rulebook-modal .modal-nav,
+    #reader-tab,
+    #codex-tab {
+        padding: var(--space-lg);
+    }
+}
+
+```
+
+---
+
+## 📄 Datei: css/features/rulebook/rulebook-sidebar.css
+```css
+#rulebook-modal .modal-sidebar {
+    position: relative;
+    padding: var(--space-2xl);
+    border-right: 1px solid rgba(129, 90, 42, 0.14);
+    background: linear-gradient(180deg, rgba(244, 232, 210, 0.9) 0%, rgba(235, 220, 193, 0.92) 100%);
+    overflow: auto;
+}
+
+#rulebook-modal .modal-sidebar::after {
+    content: "";
+    position: absolute;
+    inset: auto -60px -80px auto;
+    width: 180px;
+    height: 180px;
+    border-radius: var(--radius-round);
+    background: radial-gradient(circle, rgba(123, 31, 31, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+#manual-set-label {
+    margin: 0 0 var(--space-lg) 0;
+    color: var(--ui-color-burgundy-900);
+    font-family: var(--ui-font-display);
+    font-size: 1.35rem;
+    line-height: 1.2;
+}
+
+#manual-page-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+#manual-page-list li {
+    padding: 12px 14px;
+    border: 1px solid rgba(129, 90, 42, 0.12);
+    border-radius: var(--radius-lg);
+    background: rgba(255, 252, 247, 0.72);
+    color: var(--ui-color-ink);
+    line-height: 1.4;
+    cursor: pointer;
+    transition:
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast),
+        border-color var(--transition-fast),
+        background var(--transition-fast);
+}
+
+#manual-page-list li:hover {
+    transform: translateX(3px);
+    box-shadow: var(--ui-shadow-xs);
+    border-color: var(--ui-color-border-accent);
+    background: rgba(255, 252, 247, 0.92);
+}
+
+@media (max-width: 1020px) {
+    #rulebook-modal .modal-sidebar {
+        border-right: 0;
+        border-bottom: 1px solid rgba(129, 90, 42, 0.14);
+        max-height: 240px;
     }
 }
 
