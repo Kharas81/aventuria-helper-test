@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 7:57:02 PM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 7:57:20 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -3100,7 +3100,7 @@ a {
 .archive-sidebar-block {
     display: flex;
     flex-direction: column;
-    gap: var(--space-sm);
+    gap: var(--space-xs);
 }
 
 .archive-sidebar-block__label {
@@ -3113,22 +3113,50 @@ a {
 }
 
 .archive-sidebar-block__row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-xs);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+.archive-sidebar-block__row .btn,
+.archive-sidebar-block__row .btn-outline {
+    width: 100%;
+    justify-content: flex-start;
+    text-align: left;
+    padding: 12px 14px;
+    min-height: 0;
 }
 
 .archive-sidebar-summary {
+    margin-top: var(--space-sm);
     padding: var(--space-md);
     border: 1px solid rgba(129, 90, 42, 0.14);
     border-radius: var(--radius-lg);
     background: rgba(255, 252, 247, 0.72);
     color: var(--ui-color-ink-soft);
-    line-height: 1.45;
+    line-height: 1.5;
 }
 
 .archive-sidebar-summary strong {
     color: var(--ui-color-burgundy-900);
+}
+
+@media (max-width: 1180px) {
+    .archive-sidebar-block__row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 860px) {
+    .archive-sidebar-block__row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 560px) {
+    .archive-sidebar-block__row {
+        grid-template-columns: 1fr;
+    }
 }
 
 ```
