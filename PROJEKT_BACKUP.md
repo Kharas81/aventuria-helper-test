@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 3:12:35 PM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 3:19:54 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -26546,6 +26546,61 @@ export default ArchiveEmptyStateRenderer;
 
 ---
 
+## 📄 Datei: js/features/archive/archive-filter-flow.js
+```js
+import Utils from '../../core/utils.js';
+import ArchiveState from './archive-state.js';
+import ArchiveFilter from './filter.js';
+import ArchiveSelectionFlow from './archive-selection-flow.js';
+
+export const ArchiveFilterFlow = {
+    applyFilters() {
+        ArchiveState.filteredCards = ArchiveFilter.filterCards(ArchiveState.allCards, {
+            searchTerm: ArchiveState.currentSearchTerm,
+            sourceFilter: ArchiveState.currentSourceFilter,
+            categoryFilter: ArchiveState.currentCategoryFilter
+        });
+
+        ArchiveSelectionFlow.syncSelectedCard();
+    },
+
+    handleSearch(searchTerm = '') {
+        if (ArchiveState.isHomeView) {
+            return false;
+        }
+
+        ArchiveState.currentSearchTerm = Utils.normalizeString(searchTerm);
+        this.applyFilters();
+        return true;
+    },
+
+    setSourceFilter(sourceFilter = '') {
+        if (ArchiveState.isHomeView) {
+            return false;
+        }
+
+        ArchiveState.currentSourceFilter = ArchiveState.normalizeSourceFilter(sourceFilter);
+        this.applyFilters();
+        return true;
+    },
+
+    setCategoryFilter(categoryFilter = '') {
+        if (ArchiveState.isHomeView) {
+            return false;
+        }
+
+        ArchiveState.currentCategoryFilter = ArchiveState.normalizeCategoryFilter(categoryFilter);
+        this.applyFilters();
+        return true;
+    }
+};
+
+export default ArchiveFilterFlow;
+
+```
+
+---
+
 ## 📄 Datei: js/features/archive/archive-grid-renderer.js
 ```js
 import Utils from '../../core/utils.js';
@@ -27253,6 +27308,185 @@ export default ArchiveMerge;
 
 ---
 
+## 📄 Datei: js/features/archive/archive-open-flow.js
+```js
+import Utils from '../../core/utils.js';
+import CONFIG from '../../core/config.js';
+import Constants from '../../core/constants.js';
+import Events from '../../core/events.js';
+import ArchiveLoader from './loader.js';
+import ArchiveFilter from './filter.js';
+import ArchiveRenderer from './renderer.js';
+import ArchiveState from './archive-state.js';
+
+export const ArchiveOpenFlow = {
+    getResolvedArchiveSets() {
+        const archiveSets = CONFIG.getArchiveSets?.() || [];
+        return archiveSets.length ? archiveSets : (CONFIG.getEnabledSets?.() || []);
+    },
+
+    buildHomeViewModel() {
+        const availableArchiveSets = this.getResolvedArchiveSets();
+
+        if (!availableArchiveSets.some(setConfig => setConfig.id === ArchiveState.currentSet)) {
+            ArchiveState.currentSet = availableArchiveSets[0]?.id || CONFIG.defaultSet || 'base_game';
+        }
+
+        return {
+            activeSetKey: ArchiveState.currentSet,
+            activeSetName: CONFIG.getSetDisplayName?.(ArchiveState.currentSet),
+            enabledSets: availableArchiveSets,
+            totalLoadedCards: ArchiveState.allCards.length
+        };
+    },
+
+    renderHome() {
+        ArchiveState.isHomeView = true;
+        ArchiveRenderer.renderHome(this.buildHomeViewModel());
+    },
+
+    async open(options = {}, deps = {}) {
+        const modal = deps.openModal?.();
+        if (!modal) {
+            return;
+        }
+
+        const desiredSet = Utils.normalizeString(
+            options?.setKey
+            || ArchiveLoader.getSuggestedSetKey(ArchiveState.currentSet)
+            || ArchiveState.getResolvedCurrentSet()
+        );
+
+        const hasExplicitQuery = Object.prototype.hasOwnProperty.call(options, 'query');
+        const hasExplicitSource = Object.prototype.hasOwnProperty.call(options, 'sourceFilter');
+        const hasExplicitCategory = Object.prototype.hasOwnProperty.call(options, 'categoryFilter');
+        const hasExplicitSet = Object.prototype.hasOwnProperty.call(options, 'setKey');
+
+        ArchiveState.currentSet = desiredSet || ArchiveState.currentSet;
+
+        if (hasExplicitQuery || hasExplicitSource || hasExplicitCategory || hasExplicitSet) {
+            await deps.loadSet?.(ArchiveState.currentSet, {
+                query: hasExplicitQuery ? Utils.normalizeString(options.query) : '',
+                sourceFilter: hasExplicitSource
+                    ? ArchiveState.normalizeSourceFilter(options.sourceFilter)
+                    : ArchiveFilter.ALL_SOURCE_FILTER,
+                categoryFilter: hasExplicitCategory
+                    ? ArchiveState.normalizeCategoryFilter(options.categoryFilter)
+                    : ArchiveFilter.ALL_CATEGORY_FILTER
+            });
+            return;
+        }
+
+        deps.renderHome?.();
+    },
+
+    async openCategory(categoryFilter = '', options = {}, deps = {}) {
+        const resolvedCategory = ArchiveState.normalizeCategoryFilter(categoryFilter);
+        const resolvedSet = Utils.normalizeString(
+            options?.setKey
+            || ArchiveState.currentSet
+            || CONFIG.defaultSet
+            || 'base_game'
+        );
+
+        await deps.loadSet?.(resolvedSet, {
+            query: '',
+            sourceFilter: ArchiveFilter.ALL_SOURCE_FILTER,
+            categoryFilter: resolvedCategory
+        });
+    },
+
+    async loadSet(setKey = '', options = {}, deps = {}) {
+        const resolvedSetKey = Utils.normalizeString(
+            setKey || CONFIG.defaultSet || 'base_game'
+        );
+
+        if (!resolvedSetKey) {
+            return;
+        }
+
+        const previousSet = ArchiveState.currentSet;
+        const hasExplicitQuery = Object.prototype.hasOwnProperty.call(options, 'query');
+        const hasExplicitSource = Object.prototype.hasOwnProperty.call(options, 'sourceFilter');
+        const hasExplicitCategory = Object.prototype.hasOwnProperty.call(options, 'categoryFilter');
+
+        ArchiveState.currentSet = resolvedSetKey;
+        ArchiveState.isLoading = true;
+        ArchiveState.isHomeView = false;
+
+        ArchiveRenderer.renderToolbar({
+            activeSetKey: ArchiveState.currentSet,
+            activeSourceFilter: ArchiveState.currentSourceFilter,
+            activeCategoryFilter: ArchiveState.currentCategoryFilter,
+            availableSources: [],
+            availableCategories: [],
+            currentQuery: ArchiveState.currentSearchTerm,
+            filteredCount: 0,
+            totalCount: 0
+        });
+
+        ArchiveRenderer.showLoading();
+
+        try {
+            const loadedCards = await ArchiveLoader.fetchCardsForSet(ArchiveState.currentSet);
+
+            ArchiveState.allCards = Utils.normalizeArray(loadedCards);
+            ArchiveState.isLoading = false;
+
+            if (hasExplicitQuery) {
+                ArchiveState.currentSearchTerm = Utils.normalizeString(options.query);
+            } else {
+                ArchiveState.currentSearchTerm = '';
+            }
+
+            if (hasExplicitSource) {
+                ArchiveState.currentSourceFilter = ArchiveState.normalizeSourceFilter(options.sourceFilter);
+            } else if (resolvedSetKey !== previousSet) {
+                ArchiveState.currentSourceFilter = ArchiveFilter.ALL_SOURCE_FILTER;
+            }
+
+            if (hasExplicitCategory) {
+                ArchiveState.currentCategoryFilter = ArchiveState.normalizeCategoryFilter(options.categoryFilter);
+            } else if (resolvedSetKey !== previousSet) {
+                ArchiveState.currentCategoryFilter = ArchiveFilter.ALL_CATEGORY_FILTER;
+            }
+
+            ArchiveState.selectedCardId = '';
+            ArchiveRenderer.setSearchValue(ArchiveState.currentSearchTerm);
+
+            deps.applyFiltersAndRender?.();
+
+            Events.emit(
+                Constants.events?.archiveSetChanged || 'archive:setChanged',
+                {
+                    source: 'archive',
+                    setKey: ArchiveState.currentSet,
+                    cardCount: ArchiveState.allCards.length
+                }
+            );
+
+            Events.emit(
+                Constants.events?.setChanged || 'set:changed',
+                {
+                    source: 'archive',
+                    setKey: ArchiveState.currentSet,
+                    cardCount: ArchiveState.allCards.length
+                }
+            );
+        } catch (error) {
+            ArchiveState.isLoading = false;
+            console.error('Fehler beim Laden des Archivs:', error);
+            ArchiveRenderer.showError(error?.message || 'Fehler beim Laden des Archivs.');
+        }
+    }
+};
+
+export default ArchiveOpenFlow;
+
+```
+
+---
+
 ## 📄 Datei: js/features/archive/archive-preference.js
 ```js
 import Utils from '../../core/utils.js';
@@ -27597,6 +27831,51 @@ export const ArchiveScoring = {
 };
 
 export default ArchiveScoring;
+
+```
+
+---
+
+## 📄 Datei: js/features/archive/archive-selection-flow.js
+```js
+import Utils from '../../core/utils.js';
+import ArchiveState from './archive-state.js';
+import ArchiveCardMeta from './archive-card-meta.js';
+
+export const ArchiveSelectionFlow = {
+    getSelectedCard() {
+        const selectedId = ArchiveState.normalizeSelectedCardId(ArchiveState.selectedCardId);
+        if (!selectedId) {
+            return null;
+        }
+
+        return ArchiveState.filteredCards.find(card => {
+            return Utils.normalizeString(ArchiveCardMeta.getCardId(card)) === selectedId;
+        }) || null;
+    },
+
+    syncSelectedCard() {
+        const filteredCards = Utils.normalizeArray(ArchiveState.filteredCards);
+
+        if (!filteredCards.length) {
+            ArchiveState.selectedCardId = '';
+            return;
+        }
+
+        const selectedId = ArchiveState.normalizeSelectedCardId(ArchiveState.selectedCardId);
+        const hasSelectedCard = filteredCards.some(card => {
+            return Utils.normalizeString(ArchiveCardMeta.getCardId(card)) === selectedId;
+        });
+
+        if (!hasSelectedCard) {
+            ArchiveState.selectedCardId = Utils.normalizeString(
+                ArchiveCardMeta.getCardId(filteredCards[0])
+            );
+        }
+    }
+};
+
+export default ArchiveSelectionFlow;
 
 ```
 
