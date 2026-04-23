@@ -23,13 +23,17 @@
     <link rel="stylesheet" href="css/archive-layout.css">
     <link rel="stylesheet" href="css/archive-cards.css">
     <link rel="stylesheet" href="css/archive-home.css">
+
     <link rel="stylesheet" href="css/features/archive-home/archive-home-hero.css">
     <link rel="stylesheet" href="css/features/archive-home/archive-home-sections.css">
     <link rel="stylesheet" href="css/features/archive-home/archive-home-cards.css">
+
     <link rel="stylesheet" href="css/features/archive-browser/archive-browser-layout.css">
     <link rel="stylesheet" href="css/features/archive-browser/archive-browser-sidebar.css">
     <link rel="stylesheet" href="css/features/archive-browser/archive-browser-list.css">
-    <link rel="stylesheet" href="css/features/archive-browser/archive-browser-preview.css">    <link rel="stylesheet" href="css/rulebook-layout.css">
+    <link rel="stylesheet" href="css/features/archive-browser/archive-browser-preview.css">
+
+    <link rel="stylesheet" href="css/rulebook-layout.css">
     <link rel="stylesheet" href="css/rulebook-blocks.css">
     <link rel="stylesheet" href="css/features/rulebook-theme.css">
     <link rel="stylesheet" href="css/combat-tools.css">
@@ -37,11 +41,13 @@
     <link rel="stylesheet" href="css/features/main-session.css">
     <link rel="stylesheet" href="css/features/adventure-setup.css">
     <link rel="stylesheet" href="css/features/card-detail-theme.css">
+
     <link rel="stylesheet" href="css/modal/modal-base.css">
     <link rel="stylesheet" href="css/modal/modal-layout.css">
     <link rel="stylesheet" href="css/modal/modal-close.css">
     <link rel="stylesheet" href="css/modal/modal-tabs.css">
     <link rel="stylesheet" href="css/modal.css">
+
     <link rel="stylesheet" href="css/card-detail.css">
     <link rel="stylesheet" href="css/card-detail-layout.css">
     <link rel="stylesheet" href="css/card-detail-panels.css">
@@ -51,12 +57,12 @@
 <body class="theme-aventuria">
     <div class="app-container app-shell__frame">
         <header class="app-header">
-            <h1 style="display: inline-flex; align-items: center; gap: 12px; justify-content: center; flex-wrap: wrap;">
+            <h1 class="app-title-row">
                 <img
                     src="assets/ui/icons/rulebook.svg"
                     alt=""
                     aria-hidden="true"
-                    style="width: 32px; height: 32px;"
+                    class="icon-size-32 icon-decorative"
                 >
                 Aventuria Abenteuer-Helfer
             </h1>
@@ -68,24 +74,24 @@
             <div class="top-bar">
                 <div class="button-group">
                     <button type="button" class="btn" data-action="open-archive">
-                        <span style="display: inline-flex; align-items: center; gap: 8px;">
+                        <span class="button-label-row">
                             <img
                                 src="assets/ui/icons/archive.svg"
                                 alt=""
                                 aria-hidden="true"
-                                style="width: 18px; height: 18px;"
+                                class="icon-size-18 icon-decorative"
                             >
                             Archiv öffnen
                         </span>
                     </button>
 
                     <button type="button" class="btn" data-action="open-rulebook">
-                        <span style="display: inline-flex; align-items: center; gap: 8px;">
+                        <span class="button-label-row">
                             <img
                                 src="assets/ui/icons/rulebook.svg"
                                 alt=""
                                 aria-hidden="true"
-                                style="width: 18px; height: 18px;"
+                                class="icon-size-18 icon-decorative"
                             >
                             Regelbuch öffnen
                         </span>
@@ -120,24 +126,24 @@
 
                 <div class="button-group">
                     <button type="button" class="btn-outline" id="saveStateBtn">
-                        <span style="display: inline-flex; align-items: center; gap: 8px;">
+                        <span class="button-label-row">
                             <img
                                 src="assets/ui/icons/save.svg"
                                 alt=""
                                 aria-hidden="true"
-                                style="width: 18px; height: 18px;"
+                                class="icon-size-18 icon-decorative"
                             >
                             Speichern
                         </span>
                     </button>
 
                     <button type="button" class="btn-outline" id="clearStateBtn">
-                        <span style="display: inline-flex; align-items: center; gap: 8px;">
+                        <span class="button-label-row">
                             <img
                                 src="assets/ui/icons/reset.svg"
                                 alt=""
                                 aria-hidden="true"
-                                style="width: 18px; height: 18px;"
+                                class="icon-size-18 icon-decorative"
                             >
                             Zurücksetzen
                         </span>
@@ -161,12 +167,12 @@
                         data-action="toggle-section"
                         data-target="combat-tools-section"
                     >
-                        <span style="display: inline-flex; align-items: center; gap: 8px;">
+                        <span class="button-label-row">
                             <img
                                 src="assets/ui/icons/combat.svg"
                                 alt=""
                                 aria-hidden="true"
-                                style="width: 18px; height: 18px;"
+                                class="icon-size-18 icon-decorative"
                             >
                             Kampf-Tools ein-/ausblenden
                         </span>
@@ -178,12 +184,12 @@
                         data-action="toggle-section"
                         data-target="intermission-section"
                     >
-                        <span style="display: inline-flex; align-items: center; gap: 8px;">
+                        <span class="button-label-row">
                             <img
                                 src="assets/ui/icons/rest.svg"
                                 alt=""
                                 aria-hidden="true"
-                                style="width: 18px; height: 18px;"
+                                class="icon-size-18 icon-decorative"
                             >
                             Atempause ein-/ausblenden
                         </span>
@@ -234,32 +240,28 @@
 
                 <div class="tab-content">
                     <div class="archive-header">
-                        <h2
-                            id="archive-modal-title"
-                            style="display: inline-flex; align-items: center; gap: 10px;"
-                        >
+                        <h2 id="archive-modal-title" class="template-title-row">
                             <img
                                 src="assets/ui/icons/archive.svg"
                                 alt=""
                                 aria-hidden="true"
-                                style="width: 22px; height: 22px;"
+                                class="icon-size-22 icon-decorative"
                             >
                             Kartenarchiv
                         </h2>
 
-                        <div style="position: relative;">
+                        <div class="search-input-wrap">
                             <input
                                 type="search"
                                 id="archive-search"
-                                class="search-bar"
+                                class="search-bar search-input--with-icon"
                                 placeholder="Karten suchen ..."
-                                style="padding-left: 48px;"
                             >
                             <img
                                 src="assets/ui/icons/search.svg"
                                 alt=""
                                 aria-hidden="true"
-                                style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; opacity: 0.8;"
+                                class="search-input-icon"
                             >
                         </div>
                     </div>
@@ -285,15 +287,12 @@
 
                 <div class="modal-layout">
                     <aside class="modal-sidebar" aria-label="Regelbuch-Seiten">
-                        <h4
-                            id="manual-set-label"
-                            style="display: inline-flex; align-items: center; gap: 10px;"
-                        >
+                        <h4 id="manual-set-label" class="template-title-row">
                             <img
                                 src="assets/ui/icons/rulebook.svg"
                                 alt=""
                                 aria-hidden="true"
-                                style="width: 20px; height: 20px;"
+                                class="icon-size-20 icon-decorative"
                             >
                             Regelbuch
                         </h4>
@@ -303,15 +302,12 @@
 
                     <div class="modal-main">
                         <div class="modal-nav">
-                            <h2
-                                id="manual-title"
-                                style="display: inline-flex; align-items: center; gap: 10px;"
-                            >
+                            <h2 id="manual-title" class="template-title-row">
                                 <img
                                     src="assets/ui/icons/rulebook.svg"
                                     alt=""
                                     aria-hidden="true"
-                                    style="width: 22px; height: 22px;"
+                                    class="icon-size-22 icon-decorative"
                                 >
                                 Regelbuch
                             </h2>
@@ -346,19 +342,18 @@
                         </div>
 
                         <div id="codex-tab" class="tab-content hidden">
-                            <div style="position: relative;">
+                            <div class="search-input-wrap">
                                 <input
                                     type="search"
                                     id="codex-search"
-                                    class="search-bar"
+                                    class="search-bar search-input--with-icon"
                                     placeholder="Im Regelbuch suchen ..."
-                                    style="padding-left: 48px;"
                                 >
                                 <img
                                     src="assets/ui/icons/search.svg"
                                     alt=""
                                     aria-hidden="true"
-                                    style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; opacity: 0.8;"
+                                    class="search-input-icon"
                                 >
                             </div>
 
