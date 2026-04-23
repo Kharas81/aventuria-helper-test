@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 3:32:22 PM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 3:33:01 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -22011,6 +22011,10 @@ select {
     <link rel="stylesheet" href="css/features/main-session.css">
     <link rel="stylesheet" href="css/features/adventure-setup.css">
     <link rel="stylesheet" href="css/features/card-detail-theme.css">
+    <link rel="stylesheet" href="css/modal/modal-base.css">
+    <link rel="stylesheet" href="css/modal/modal-layout.css">
+    <link rel="stylesheet" href="css/modal/modal-close.css">
+    <link rel="stylesheet" href="css/modal/modal-tabs.css">
     <link rel="stylesheet" href="css/modal.css">
     <link rel="stylesheet" href="css/card-detail.css">
     <link rel="stylesheet" href="css/card-detail-layout.css">
