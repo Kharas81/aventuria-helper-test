@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:19:39 AM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:19:56 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -31312,7 +31312,11 @@ export function buildOverviewPanel(card) {
 
     return `
         <section class="card-detail__panel">
-            <h3 class="card-detail__panel-title">Übersicht</h3>
+            <div class="card-detail__panel-head">
+                <span class="card-detail__section-label">Übersicht</span>
+                <h3 class="card-detail__panel-title">Kartenprofil</h3>
+            </div>
+
             ${metaHtml}
         </section>
     `;
@@ -31321,7 +31325,11 @@ export function buildOverviewPanel(card) {
 export function buildValuesPanel(card) {
     return `
         <section class="card-detail__panel">
-            <h3 class="card-detail__panel-title">Werte</h3>
+            <div class="card-detail__panel-head">
+                <span class="card-detail__section-label">Werte</span>
+                <h3 class="card-detail__panel-title">Spielrelevante Zahlen</h3>
+            </div>
+
             ${renderStats(card.stats)}
         </section>
     `;
@@ -31346,7 +31354,15 @@ export function buildExplorePanel(card) {
 
     return `
         <section class="card-detail__panel">
-            <h3 class="card-detail__panel-title">Ähnliche Karten finden</h3>
+            <div class="card-detail__panel-head">
+                <span class="card-detail__section-label">Weiter erkunden</span>
+                <h3 class="card-detail__panel-title">Ähnliche Karten finden</h3>
+            </div>
+
+            <p class="card-detail__text-intro">
+                Nutze diese Schlagworte, um im Archiv ähnliche oder thematisch verwandte Karten zu finden.
+            </p>
+
             ${renderSearchChips(suggestedQueries)}
         </section>
     `;
@@ -31356,13 +31372,25 @@ export function buildImagePanel(card, imageId = 'card-detail-image') {
     if (!card.hasRealImage) {
         return `
             <div class="card-detail__image-panel">
-                <p class="card-detail__empty">Kein Kartenbild vorhanden.</p>
+                <div class="card-detail__panel-head">
+                    <span class="card-detail__section-label">Kartenbild</span>
+                    <h3 class="card-detail__panel-title">Vorschau</h3>
+                </div>
+
+                <div class="card-detail__image-empty">
+                    Kein Kartenbild vorhanden.
+                </div>
             </div>
         `;
     }
 
     return `
         <div class="card-detail__image-panel">
+            <div class="card-detail__panel-head">
+                <span class="card-detail__section-label">Kartenbild</span>
+                <h3 class="card-detail__panel-title">Vorschau</h3>
+            </div>
+
             <div class="card-detail__image-wrap">
                 <img
                     id="${imageId}"
