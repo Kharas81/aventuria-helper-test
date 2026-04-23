@@ -25,6 +25,7 @@ import UIComponents from './ui/components.js';
 import RenderCommon from './render/common.js';
 import RenderSetup from './render/setup.js';
 import RenderCardDetail from './render/card-detail.js';
+import SessionUI from './render/session/session-ui.js';
 
 import CombatDashboard from './features/combat/dashboard.js';
 import CombatTracker from './features/combat/tracker.js';
@@ -81,6 +82,7 @@ registerGlobals({
     RenderCommon,
     RenderSetup,
     RenderCardDetail,
+    SessionUI,
 
     CombatDashboard,
     CombatTracker,
@@ -114,6 +116,7 @@ registerGlobals({
 void boot({
     Theme,
     UI,
+    SessionUI,
     Combat,
     Archive,
     Diagnostics,
