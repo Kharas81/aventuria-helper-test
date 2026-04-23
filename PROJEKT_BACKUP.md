@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 4:38:07 PM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 4:38:19 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -4291,6 +4291,188 @@ a {
 @media (max-width: 520px) {
     .card-detail__image-panel {
         padding: var(--space-lg);
+    }
+}
+
+```
+
+---
+
+## 📄 Datei: css/features/card-detail/card-detail-panels.css
+```css
+.card-detail__panel {
+    position: relative;
+    background: var(--ui-gradient-panel);
+    border: 1px solid rgba(129, 90, 42, 0.14);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-xl);
+    box-shadow: var(--ui-shadow-xs);
+    overflow: hidden;
+}
+
+.card-detail__panel::before {
+    content: "";
+    position: absolute;
+    inset: 10px;
+    border: 1px solid rgba(190, 154, 101, 0.14);
+    border-radius: calc(var(--radius-2xl) - 8px);
+    pointer-events: none;
+}
+
+.card-detail__panel-head {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: var(--space-md);
+}
+
+.card-detail__section-label {
+    color: var(--ui-color-bronze-900);
+    font-family: var(--ui-font-ui);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.card-detail__panel-title {
+    margin: 0;
+    color: var(--ui-color-burgundy-900);
+    font-size: 1.2rem;
+    line-height: 1.2;
+}
+
+.card-detail__text-intro {
+    color: var(--ui-color-ink-soft);
+    font-size: 0.95rem;
+    line-height: 1.45;
+}
+
+.card-detail__meta {
+    margin: 0;
+    display: grid;
+    gap: var(--space-sm);
+}
+
+.card-detail__meta-row {
+    display: grid;
+    grid-template-columns: minmax(110px, 150px) minmax(0, 1fr);
+    gap: var(--space-md);
+    align-items: start;
+}
+
+.card-detail__meta-label {
+    font-weight: 700;
+    color: var(--ui-color-burgundy-900);
+    margin: 0;
+}
+
+.card-detail__meta-value {
+    margin: 0;
+    color: var(--ui-color-ink);
+    word-break: break-word;
+}
+
+.card-detail__chip-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+
+.card-detail__chip-button {
+    appearance: none;
+    border: 1px solid rgba(129, 90, 42, 0.18);
+    border-radius: var(--radius-pill);
+    background: rgba(255, 249, 239, 0.88);
+    color: var(--ui-color-burgundy-900);
+    padding: 4px 10px;
+    font-size: 0.9rem;
+    line-height: 1.2;
+    cursor: pointer;
+    transition:
+        transform var(--transition-fast),
+        background var(--transition-fast),
+        border-color var(--transition-fast);
+}
+
+.card-detail__chip-button:hover {
+    transform: translateY(-1px);
+    background: rgba(255, 252, 247, 0.98);
+    border-color: var(--ui-color-border-accent);
+}
+
+.card-detail__stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: var(--space-md);
+}
+
+.card-detail__stat {
+    background: rgba(255, 252, 247, 0.84);
+    border: 1px solid rgba(129, 90, 42, 0.16);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
+    text-align: center;
+    box-shadow: var(--ui-shadow-xs);
+}
+
+.card-detail__stat-label {
+    display: block;
+    color: var(--ui-color-bronze-900);
+    font-size: 0.82rem;
+    font-weight: 700;
+    margin-bottom: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.card-detail__stat-value {
+    display: block;
+    color: var(--ui-color-burgundy-900);
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.card-detail__symbol {
+    display: inline-block;
+    padding: 1px 7px;
+    margin: 0 2px;
+    border-radius: var(--radius-pill);
+    background: rgba(255, 249, 239, 0.88);
+    border: 1px solid rgba(129, 90, 42, 0.18);
+    color: var(--ui-color-burgundy-900);
+    font-size: 0.9em;
+    white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+    .card-detail__meta-row {
+        grid-template-columns: 1fr;
+        gap: 2px;
+    }
+
+    .card-detail__stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 520px) {
+    .card-detail__panel {
+        padding: var(--space-lg);
+    }
+
+    .card-detail__stats {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-sm);
+    }
+
+    .card-detail__stat-value {
+        font-size: 1.3rem;
+    }
+
+    .card-detail__chip-button {
+        font-size: 0.85rem;
     }
 }
 
