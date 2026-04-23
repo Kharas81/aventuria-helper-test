@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:06:33 AM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:06:48 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -30463,6 +30463,44 @@ export const SetupHeaderRenderer = {
 };
 
 export default SetupHeaderRenderer;
+
+```
+
+---
+
+## 📄 Datei: js/render/setup/setup-probe-renderer.js
+```js
+import Utils from '../../core/utils.js';
+
+export const SetupProbeRenderer = {
+    renderProbe(check = {}, index = 0) {
+        return `
+            <div class="adventure-probe-card probe-item" data-check-index="${index}">
+                <div class="adventure-probe-card__skill">
+                    ${Utils.escapeHtml(check?.skill || 'Probe')}
+                </div>
+
+                <div class="adventure-probe-card__text">
+                    ${Utils.escapeHtml(check?.text || '')}
+                </div>
+
+                <div class="adventure-probe-card__buttons probe-buttons">
+                    <button type="button" class="btn-sm success" data-check-result="success">
+                        Erfolg
+                    </button>
+
+                    <button type="button" class="btn-sm fail" data-check-result="fail">
+                        Misserfolg
+                    </button>
+                </div>
+
+                <div class="check-result" aria-live="polite"></div>
+            </div>
+        `;
+    }
+};
+
+export default SetupProbeRenderer;
 
 ```
 
