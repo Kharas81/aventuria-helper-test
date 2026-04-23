@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="css/rulebook-blocks.css">
     <link rel="stylesheet" href="css/combat-tools.css">
     <link rel="stylesheet" href="css/intermission.css">
+    <link rel="stylesheet" href="css/features/main-session.css">
     <link rel="stylesheet" href="css/modal.css">
     <link rel="stylesheet" href="css/card-detail.css">
     <link rel="stylesheet" href="css/card-detail-layout.css">
@@ -88,6 +89,8 @@
             </div>
         </section>
 
+        <section id="session-status-strip" aria-label="Sitzungsstatus"></section>
+
         <main id="app-main" class="app-main">
             <section id="setup-display" class="hidden" aria-label="Abenteuer-Setup">
                 <h2 id="title">Abenteuer</h2>
@@ -139,74 +142,13 @@
                 id="combat-tools-section"
                 class="hidden-section show"
                 aria-label="Kampf-Tools"
-            >
-                <div class="card-list">
-                    <h3>Kampf-Tools</h3>
-
-                    <div class="phase-steps" id="phaseTracker" aria-label="Phasenanzeige">
-                        <div class="step active">Heldenphase</div>
-                        <div class="step">Schergenphase</div>
-                        <div class="step">Anführerphase</div>
-                        <div class="step">Zeitphase</div>
-                    </div>
-
-                    <div class="button-group button-group--center button-group--mb-lg">
-                        <button type="button" class="btn-outline" data-action="combat-prev-phase">
-                            Phase zurück
-                        </button>
-                        <button type="button" class="btn-outline" data-action="combat-next-phase">
-                            Nächste Phase
-                        </button>
-                        <button type="button" class="btn-outline" data-action="combat-roll-target">
-                            Zufallsziel würfeln
-                        </button>
-                        <button type="button" class="btn-outline" data-action="combat-update-ep">
-                            EP neu berechnen
-                        </button>
-                    </div>
-
-                    <div class="top-bar top-bar--compact">
-                        <div class="config-item">
-                            <label for="remainingTime"><strong>Zeitmarker:</strong></label>
-                            <input type="number" id="remainingTime" min="0" value="0">
-                        </div>
-
-                        <div class="config-item">
-                            <strong>Ergebnis:</strong>
-                            <span id="ep-result">2 EP</span>
-                        </div>
-
-                        <div class="config-item">
-                            <strong>Zufallsziel:</strong>
-                            <span id="targetResult">--</span>
-                        </div>
-                    </div>
-
-                    <div class="hero-dashboard" id="heroDashboard"></div>
-                </div>
-            </section>
+            ></section>
 
             <section
                 id="intermission-section"
                 class="hidden-section show"
                 aria-label="Atempause"
-            >
-                <div class="intermission-area">
-                    <div class="intermission-card">
-                        <h3>Atempause</h3>
-                        <p id="victory-text"><strong>Sieg:</strong> —</p>
-                        <p id="defeat-text"><strong>Niederlage:</strong> —</p>
-
-                        <div class="result-badge" id="intermission-result">Atempause</div>
-
-                        <div class="button-group button-group--center button-group--mt-lg">
-                            <button type="button" class="btn" data-action="combat-apply-intermission">
-                                Atempause anwenden
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            ></section>
 
             <section
                 id="diagnostics-section"
