@@ -1,0 +1,121 @@
+.modal-layout {
+    display: flex;
+    height: 100%;
+    overflow: hidden;
+    min-height: 0;
+}
+
+.modal-sidebar {
+    width: 250px;
+    min-width: 220px;
+    background: var(--color-bg-panel-alt);
+    border-right: var(--border-md) solid var(--color-secondary);
+    padding: var(--space-lg);
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.modal-sidebar h4 {
+    margin-top: 0;
+    margin-bottom: var(--space-md);
+    color: var(--color-primary);
+    border-bottom: var(--border-md) solid var(--color-secondary);
+    padding-bottom: 6px;
+    font-variant: small-caps;
+    font-size: 1.05rem;
+}
+
+.modal-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.modal-sidebar li {
+    padding: 9px 8px;
+    border-bottom: var(--border-thin) solid var(--color-border-soft);
+    font-size: 0.92em;
+    line-height: 1.35;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+    word-break: break-word;
+}
+
+.modal-sidebar li:hover {
+    background: var(--color-bg-body);
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+.modal-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: var(--color-bg-panel);
+    min-width: 0;
+    min-height: 0;
+}
+
+@media (max-width: 1000px) {
+    .modal-sidebar {
+        width: 220px;
+        min-width: 210px;
+        padding: 14px;
+    }
+}
+
+@media (max-width: 820px) {
+    .modal-layout {
+        flex-direction: column;
+    }
+
+    .modal-sidebar {
+        width: 100%;
+        min-width: 0;
+        max-height: 170px;
+        border-right: none;
+        border-bottom: var(--border-md) solid var(--color-secondary);
+        padding: 12px 14px;
+    }
+
+    .modal-sidebar ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-xs);
+    }
+
+    .modal-sidebar li {
+        border-bottom: none;
+        background: var(--color-bg-soft-strong);
+        border: var(--border-thin) solid var(--color-border-soft-strong);
+        border-radius: 6px;
+        padding: var(--space-sm) var(--space-md);
+        font-size: 0.85em;
+    }
+
+    .modal-main {
+        min-height: 0;
+    }
+}
+
+@media (max-width: 600px) {
+    .modal-sidebar {
+        max-height: 145px;
+    }
+}
+
+@media (max-width: 420px) {
+    .modal-sidebar {
+        padding: var(--space-md);
+        max-height: 135px;
+    }
+
+    .modal-sidebar h4 {
+        font-size: 1rem;
+    }
+
+    .modal-sidebar li {
+        font-size: 0.8em;
+        padding: 7px var(--space-sm);
+    }
+}
