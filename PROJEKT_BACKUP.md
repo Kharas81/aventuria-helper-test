@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 11:32:16 AM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 11:32:30 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -672,21 +672,21 @@ hr {
     font-size: 0.95rem;
 }
 
-.archive-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: var(--space-lg);
-    padding: var(--space-lg) 0;
-    align-items: stretch;
+/* WICHTIG:
+   Der Host-Container für Home + Browser darf NICHT mehr das alte Karten-Grid erzwingen.
+*/
+.archive-surface {
+    display: block;
+    width: 100%;
+    padding: 0;
+    min-height: 520px;
+}
+
+.hidden {
+    display: none;
 }
 
 @media (max-width: 900px) {
-    .archive-grid {
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: var(--space-md);
-        padding: var(--space-md) 0;
-    }
-
     .archive-header {
         flex-direction: column;
         align-items: stretch;
@@ -695,14 +695,6 @@ hr {
 
     .archive-header .search-bar {
         max-width: none;
-    }
-}
-
-@media (max-width: 700px) {
-    .archive-grid {
-        grid-template-columns: 1fr;
-        gap: var(--space-md);
-        padding: var(--space-sm) 0;
     }
 }
 
