@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:15:32 AM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:15:54 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -25612,7 +25612,7 @@ export const ArchiveListCardTemplate = {
         `;
     },
 
-    renderCard(card = {}) {
+    renderCard(card = {}, options = {}) {
         const cardId = Utils.escapeHtml(ArchiveCardMeta.getCardId(card));
         const name = Utils.escapeHtml(ArchiveCardMeta.getDisplayName(card));
         const typeLabel = Utils.escapeHtml(ArchiveCardMeta.getTypeLabel(card));
@@ -25621,6 +25621,8 @@ export const ArchiveListCardTemplate = {
         const stats = ArchiveCardMeta.getStats(card);
         const tags = ArchiveCardMeta.getTags(card);
         const actionRows = ArchiveCardMeta.getActionPreviewRows(card, 4);
+        const selectedCardId = Utils.normalizeString(options?.selectedCardId);
+        const isSelected = Utils.normalizeString(ArchiveCardMeta.getCardId(card)) === selectedCardId;
 
         const statsHtml = [
             this.renderStat('GP', stats.gp),
@@ -25630,7 +25632,7 @@ export const ArchiveListCardTemplate = {
         ].join('');
 
         return `
-            <article class="archive-card" data-card-id="${cardId}">
+            <article class="archive-card ${isSelected ? 'archive-card--selected' : ''}" data-card-id="${cardId}">
                 <div class="archive-card__header">
                     <h3 class="archive-card__title" title="${name}">${name}</h3>
 
@@ -25639,8 +25641,6 @@ export const ArchiveListCardTemplate = {
                         <span class="archive-badge archive-badge--set">${sourceLabel}</span>
                     </div>
                 </div>
-
-                <div class="archive-card__subtitle">${typeLabel}</div>
 
                 <div class="archive-card__body">
                     <div class="archive-card__stats">
@@ -25652,6 +25652,17 @@ export const ArchiveListCardTemplate = {
                 </div>
 
                 <div class="archive-card__footer">
+                    <div class="archive-card__footer-left">
+                        <button
+                            type="button"
+                            class="btn-outline"
+                            data-action="archive-select-card"
+                            data-card-id="${cardId}"
+                        >
+                            ${isSelected ? 'Ausgewählt' : 'Vorschau'}
+                        </button>
+                    </div>
+
                     <button
                         type="button"
                         class="archive-card__details-btn"
