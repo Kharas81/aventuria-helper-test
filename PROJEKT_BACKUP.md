@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:08:25 AM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:08:46 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -27277,6 +27277,7 @@ export default DiagnosticsSetupChecks;
 ```js
 import Utils from '../../core/utils.js';
 import CoreRuntime from '../../core/runtime.js';
+import SetupStoryRenderer from '../../render/setup/setup-story-renderer.js';
 
 export const Narrative = {
     normalizeChecks(checks) {
@@ -27286,51 +27287,12 @@ export const Narrative = {
     renderStory(data) {
         const container = Utils.byId('story-area');
 
-        if (!container || !data || !data.narrative) {
-            if (container) {
-                container.innerHTML = '';
-            }
+        if (!container) {
             return;
         }
 
-        const intro = Utils.escapeHtml(data.narrative.intro ?? '');
-        const checks = this.normalizeChecks(data.narrative.checks);
-
-        container.innerHTML = `
-            <div class="card-list">
-                <h3>📖 Die Geschichte</h3>
-                <p class="story-text">${intro}</p>
-
-                <div class="probes-area">
-                    <h4>Interaktive Proben:</h4>
-
-                    ${checks.length
-                        ? checks.map((check, index) => `
-                            <div class="probe-item" data-check-index="${index}">
-                                <p>
-                                    <strong>${Utils.escapeHtml(check?.skill ?? 'Probe')}:</strong>
-                                    ${Utils.escapeHtml(check?.text ?? '')}
-                                </p>
-
-                                <div class="probe-buttons">
-                                    <button type="button" class="btn-sm success" data-check-result="success">
-                                        Erfolg
-                                    </button>
-                                    <button type="button" class="btn-sm fail" data-check-result="fail">
-                                        Misserfolg
-                                    </button>
-                                </div>
-
-                                <div class="check-result" aria-live="polite"></div>
-                            </div>
-                        `).join('')
-                        : '<p>Keine Proben vorhanden.</p>'
-                    }
-                </div>
-            </div>
-        `;
-
-        this.bindCheckButtons(checks);
+        SetupStoryRenderer.render(container, data);
+        this.bindCheckButtons(this.normalizeChecks(data?.narrative?.checks));
     },
 
     showCheckResult(button, type, resultText) {
