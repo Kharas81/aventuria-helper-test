@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 9:16:04 AM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 9:16:17 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -21227,11 +21227,6 @@ select {
     <link rel="stylesheet" href="css/ui/panels.css">
     <link rel="stylesheet" href="css/ui/badges.css">
     <link rel="stylesheet" href="css/ui/dividers.css">
-    <link rel="stylesheet" href="css/features/main-session.css">
-    <link rel="stylesheet" href="css/features/adventure-setup.css">
-    <link rel="stylesheet" href="css/features/rulebook-theme.css">
-    <link rel="stylesheet" href="css/features/card-detail-theme.css">
-    <link rel="stylesheet" href="css/modal.css">
 
     <!-- Bestehende Feature-CSS -->
     <link rel="stylesheet" href="css/preview-tooltip.css">
@@ -21239,10 +21234,8 @@ select {
     <link rel="stylesheet" href="css/archive-cards.css">
     <link rel="stylesheet" href="css/archive-home.css">
     <link rel="stylesheet" href="css/features/archive-home.css">
-    <link rel="stylesheet" href="css/features/archive-browser.css">
     <link rel="stylesheet" href="css/rulebook-layout.css">
     <link rel="stylesheet" href="css/rulebook-blocks.css">
-    <link rel="stylesheet" href="css/features/rulebook-theme.css">
     <link rel="stylesheet" href="css/combat-tools.css">
     <link rel="stylesheet" href="css/intermission.css">
     <link rel="stylesheet" href="css/features/main-session.css">
@@ -21253,7 +21246,6 @@ select {
     <link rel="stylesheet" href="css/card-detail-panels.css">
     <link rel="stylesheet" href="css/card-detail-meta.css">
     <link rel="stylesheet" href="css/card-detail-actions.css">
-    <link rel="stylesheet" href="css/features/card-detail-theme.css">
 </head>
 <body class="theme-aventuria">
     <div class="app-container app-shell__frame">
@@ -21443,9 +21435,9 @@ select {
                             <div id="manual-content"></div>
 
                             <div class="reader-footer">
-                                <button type="button" class="btn-outline" data-action="rulebook-prev-page">Zurück</button>
+                                <button type="button" data-action="rulebook-prev-page">Zurück</button>
                                 <span id="manual-page-indicator">Seite 0 / 0</span>
-                                <button type="button" class="btn-outline" data-action="rulebook-next-page">Weiter</button>
+                                <button type="button" data-action="rulebook-next-page">Weiter</button>
                             </div>
                         </div>
 
