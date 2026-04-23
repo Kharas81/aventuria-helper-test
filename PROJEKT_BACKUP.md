@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 11:33:10 AM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 3:09:08 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -2647,6 +2647,140 @@ a {
     .archive-card__footer {
         flex-direction: column;
         align-items: stretch;
+    }
+}
+
+```
+
+---
+
+## 📄 Datei: css/features/archive-home/archive-home-hero.css
+```css
+.archive-home-shell {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xl);
+    padding: var(--space-md) 0;
+}
+
+.archive-home-hero {
+    position: relative;
+    padding: var(--space-2xl);
+    border: 1px solid var(--ui-color-border-soft);
+    border-radius: var(--radius-2xl);
+    background: var(--ui-gradient-panel);
+    box-shadow: var(--ui-shadow-md);
+    overflow: hidden;
+}
+
+.archive-home-hero::before {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    border: 1px solid rgba(190, 154, 101, 0.2);
+    border-radius: calc(var(--radius-2xl) - 10px);
+    pointer-events: none;
+}
+
+.archive-home-hero::after {
+    content: "";
+    position: absolute;
+    inset: auto -40px -80px auto;
+    width: 220px;
+    height: 220px;
+    border-radius: var(--radius-round);
+    background: radial-gradient(circle, rgba(123, 31, 31, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.archive-home-hero__layout {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+    gap: var(--space-xl);
+    align-items: stretch;
+}
+
+.archive-home-hero__copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.archive-home-hero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-sm);
+    color: var(--ui-color-bronze-900);
+    font-family: var(--ui-font-ui);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.archive-home-hero__eyebrow::before,
+.archive-home-hero__eyebrow::after {
+    content: "✦";
+    color: var(--ui-color-gold-700);
+}
+
+.archive-home-hero__title {
+    margin-bottom: var(--space-sm);
+}
+
+.archive-home-hero__lead {
+    max-width: 760px;
+    color: var(--ui-color-ink-soft);
+    line-height: 1.6;
+}
+
+.archive-home-hero__meta {
+    display: grid;
+    gap: var(--space-md);
+}
+
+.archive-home-meta-card {
+    position: relative;
+    padding: var(--space-lg);
+    border: 1px solid rgba(129, 90, 42, 0.16);
+    border-radius: var(--radius-xl);
+    background: rgba(255, 252, 247, 0.8);
+    box-shadow: var(--ui-shadow-xs);
+}
+
+.archive-home-meta-card__label {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--ui-color-bronze-900);
+    font-family: var(--ui-font-ui);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+}
+
+.archive-home-meta-card__value {
+    display: block;
+    color: var(--ui-color-burgundy-900);
+    font-family: var(--ui-font-display);
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+@media (max-width: 1000px) {
+    .archive-home-hero__layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 700px) {
+    .archive-home-hero {
+        padding: var(--space-lg);
     }
 }
 
