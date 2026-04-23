@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 9:24:42 AM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 9:25:20 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
