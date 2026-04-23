@@ -1,0 +1,76 @@
+.adventure-story__checks-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.adventure-probe-card {
+    position: relative;
+    padding: var(--space-lg);
+    border: 1px solid rgba(129, 90, 42, 0.16);
+    border-radius: var(--radius-xl);
+    background: linear-gradient(180deg, rgba(255, 252, 247, 0.96) 0%, rgba(246, 236, 220, 0.94) 100%);
+    box-shadow: var(--ui-shadow-xs);
+    overflow: hidden;
+}
+
+.adventure-probe-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    background: linear-gradient(180deg, var(--ui-color-gold-700) 0%, var(--ui-color-burgundy-800) 100%);
+}
+
+.adventure-probe-card__skill {
+    display: inline-flex;
+    align-items: center;
+    min-height: 30px;
+    padding: 0 12px;
+    margin-bottom: var(--space-sm);
+    border: 1px solid rgba(129, 90, 42, 0.16);
+    border-radius: var(--radius-pill);
+    background: rgba(255, 251, 245, 0.75);
+    color: var(--ui-color-burgundy-900);
+    font-family: var(--ui-font-ui);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.adventure-probe-card__text {
+    margin-bottom: var(--space-md);
+    color: var(--ui-color-ink);
+    line-height: 1.5;
+}
+
+.adventure-probe-card__buttons {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+}
+
+.check-result {
+    margin-top: var(--space-md);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    display: none;
+    font-size: 0.92rem;
+    border-left: 4px solid var(--ui-color-bronze-800);
+    background: rgba(255, 251, 245, 0.84);
+    line-height: 1.45;
+    color: var(--ui-color-ink);
+}
+
+.check-result.show {
+    display: block;
+}
+
+.check-result.success {
+    border-color: var(--ui-color-success);
+}
+
+.check-result.fail {
+    border-color: var(--ui-color-danger);
+}
