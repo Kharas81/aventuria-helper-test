@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 7:57:20 PM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 7:57:38 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -3088,6 +3088,178 @@ a {
     .archive-card__details-btn,
     .archive-card__footer-left .btn-outline {
         width: 100%;
+    }
+}
+
+```
+
+---
+
+## 📄 Datei: css/features/archive-browser/archive-browser-preview.css
+```css
+.archive-preview-shell {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    min-height: 100%;
+}
+
+.archive-preview-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.archive-preview-card__head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.archive-preview-card__title {
+    margin: 0;
+    color: var(--ui-color-burgundy-900);
+    font-family: var(--ui-font-display);
+    font-size: 1.6rem;
+    line-height: 1.15;
+    overflow-wrap: anywhere;
+}
+
+.archive-preview-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+}
+
+.archive-preview-card__image-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--space-sm);
+    border: 1px solid rgba(129, 90, 42, 0.12);
+    border-radius: var(--radius-xl);
+    background: rgba(255, 252, 247, 0.7);
+}
+
+.archive-preview-card__image {
+    display: block;
+    width: 100%;
+    max-width: 360px;
+    height: auto;
+    max-height: 460px;
+    object-fit: contain;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--ui-shadow-xs);
+}
+
+.archive-preview-card__placeholder {
+    width: 100%;
+    padding: var(--space-xl);
+    border: 1px dashed var(--ui-color-border-muted);
+    border-radius: var(--radius-lg);
+    background: rgba(255, 252, 247, 0.7);
+    color: var(--ui-color-muted);
+    text-align: center;
+    line-height: 1.5;
+}
+
+.archive-preview-card__section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    border: 1px solid rgba(129, 90, 42, 0.12);
+    border-radius: var(--radius-xl);
+    background: rgba(255, 252, 247, 0.62);
+}
+
+.archive-preview-card__section--footer {
+    padding-top: 0;
+    border: 0;
+    background: transparent;
+}
+
+.archive-preview-card__section-title {
+    color: var(--ui-color-bronze-900);
+    font-family: var(--ui-font-ui);
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.archive-preview-card__actions {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.archive-preview-card__action {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid rgba(129, 90, 42, 0.1);
+}
+
+.archive-preview-card__action:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.archive-preview-card__action-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.archive-preview-card__action-type {
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+    padding: 0 8px;
+    border-radius: var(--radius-pill);
+    background: rgba(139, 69, 19, 0.08);
+    border: 1px solid rgba(129, 90, 42, 0.12);
+    color: var(--ui-color-bronze-900);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.archive-preview-card__action-name {
+    color: var(--ui-color-burgundy-900);
+    font-family: var(--ui-font-display);
+    font-size: 1.08rem;
+    font-weight: 700;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+}
+
+.archive-preview-card__action-text {
+    color: var(--ui-color-ink);
+    line-height: 1.65;
+    overflow-wrap: anywhere;
+}
+
+.archive-preview-card__section--footer .btn {
+    width: 100%;
+}
+
+@media (max-width: 860px) {
+    .archive-preview-card__title {
+        font-size: 1.4rem;
+    }
+
+    .archive-preview-card__image {
+        max-width: 320px;
+        max-height: 400px;
     }
 }
 
