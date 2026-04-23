@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:30:22 PM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 8:30:39 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -29977,7 +29977,7 @@ export const ArchivePreviewRenderer = {
         return `
             <div class="archive-preview-card__image-wrap">
                 <div class="archive-preview-card__placeholder">
-                    Keine Kartenabbildung für die Vorschau vorhanden.
+                    Keine Kartenabbildung für diese Vorschau vorhanden.
                 </div>
             </div>
         `;
@@ -29987,7 +29987,7 @@ export const ArchivePreviewRenderer = {
         const stats = ArchiveCardMeta.getStats(card);
 
         return `
-            <div class="archive-preview-card__section">
+            <section class="archive-preview-card__section">
                 <div class="archive-preview-card__section-title">Werte</div>
 
                 <div class="archive-card__stats">
@@ -30011,25 +30011,7 @@ export const ArchivePreviewRenderer = {
                         <div class="archive-card__stat-value">${Utils.escapeHtml(stats.aktionen)}</div>
                     </div>
                 </div>
-            </div>
-        `;
-    },
-
-    renderTags(card = {}) {
-        const tags = ArchiveCardMeta.getTags(card);
-
-        if (!tags.length) {
-            return '';
-        }
-
-        return `
-            <div class="archive-preview-card__section">
-                <div class="archive-preview-card__section-title">Schlagworte</div>
-
-                <div class="archive-card__tags">
-                    ${tags.map(tag => `<span class="archive-tag">${Utils.escapeHtml(tag)}</span>`).join('')}
-                </div>
-            </div>
+            </section>
         `;
     },
 
@@ -30038,41 +30020,44 @@ export const ArchivePreviewRenderer = {
 
         if (!rows.length) {
             return `
-                <div class="archive-preview-card__section">
+                <section class="archive-preview-card__section">
                     <div class="archive-preview-card__section-title">Aktionen</div>
                     <div class="archive-browser-empty">
                         Für diese Karte sind keine Aktionsdaten hinterlegt.
                     </div>
-                </div>
+                </section>
             `;
         }
 
         return `
-            <div class="archive-preview-card__section">
+            <section class="archive-preview-card__section">
                 <div class="archive-preview-card__section-title">Aktionen</div>
 
-                <ul class="archive-preview-card__actions">
+                <div class="archive-preview-card__rules">
                     ${rows.map(row => {
                         const parsed = parseArchiveActionTitle(row.title);
 
                         return `
-                            <li class="archive-preview-card__action">
-                                <div class="archive-preview-card__action-head">
+                            <article class="archive-preview-card__rule">
+                                <div class="archive-preview-card__rule-top">
                                     ${row.range ? `<span class="archive-card__action-range">${Utils.escapeHtml(row.range)}</span>` : ''}
-                                    ${parsed.typeLabel ? `<span class="archive-preview-card__action-type">${Utils.escapeHtml(parsed.typeLabel)}</span>` : ''}
-                                    <span class="archive-preview-card__action-name">${Utils.escapeHtml(parsed.titleLabel || row.title || 'Ohne Titel')}</span>
+                                    ${parsed.typeLabel ? `<span class="archive-preview-card__rule-type">${Utils.escapeHtml(parsed.typeLabel)}</span>` : ''}
                                 </div>
 
+                                <h5 class="archive-preview-card__rule-title">
+                                    ${Utils.escapeHtml(parsed.titleLabel || row.title || 'Ohne Titel')}
+                                </h5>
+
                                 ${row.text ? `
-                                    <div class="archive-preview-card__action-text">
+                                    <p class="archive-preview-card__rule-text">
                                         ${Utils.escapeHtml(row.text)}
-                                    </div>
+                                    </p>
                                 ` : ''}
-                            </li>
+                            </article>
                         `;
                     }).join('')}
-                </ul>
-            </div>
+                </div>
+            </section>
         `;
     },
 
@@ -30087,12 +30072,12 @@ export const ArchivePreviewRenderer = {
                     <div class="archive-browser-head__eyebrow">Vorschau</div>
                     <h4 class="archive-browser-head__title">Keine Karte gewählt</h4>
                     <p class="archive-browser-head__text">
-                        Wähle links oder in der Kartenliste eine Karte aus, um hier eine Vorschau zu sehen.
+                        Wähle in der mittleren Liste eine Karte aus, um hier die Vorschau zu sehen.
                     </p>
                 </div>
 
                 <div class="archive-browser-empty">
-                    Die rechte Spalte zeigt die Vorschau der aktuell markierten Karte.
+                    Rechts erscheint die große Kartenansicht mit Werten und Aktionen.
                 </div>
             </div>
         `;
@@ -30119,11 +30104,13 @@ export const ArchivePreviewRenderer = {
                     <div class="archive-browser-head__eyebrow">Vorschau</div>
                     <h4 class="archive-browser-head__title">Kartendetails auf einen Blick</h4>
                     <p class="archive-browser-head__text">
-                        Sofortvorschau der aktuell markierten Karte.
+                        Große, ruhige Vorschau der aktuell markierten Karte.
                     </p>
                 </div>
 
                 <div class="archive-preview-card">
+                    ${this.renderImage(card)}
+
                     <div class="archive-preview-card__head">
                         <h4 class="archive-preview-card__title">${Utils.escapeHtml(name)}</h4>
 
@@ -30133,12 +30120,10 @@ export const ArchivePreviewRenderer = {
                         </div>
                     </div>
 
-                    ${this.renderImage(card)}
                     ${this.renderStats(card)}
-                    ${this.renderTags(card)}
                     ${this.renderActions(card)}
 
-                    <div class="archive-preview-card__section archive-preview-card__section--footer">
+                    <div class="archive-preview-card__footer">
                         <button
                             type="button"
                             class="btn"
