@@ -1,6 +1,7 @@
 import Utils from '../../core/utils.js';
 import State from '../../core/state.js';
 import CombatRuntime from './runtime.js';
+import SessionHeroCardsRenderer from '../../render/session/session-hero-cards-renderer.js';
 
 export const CombatDashboard = {
     getDefaultHeroLp() {
@@ -23,19 +24,6 @@ export const CombatDashboard = {
         return State.getState().heroStats || {};
     },
 
-    buildHeroStatRow(icon, value, valueKey, minusAction, plusAction, extraClass = '') {
-        const rowClass = extraClass ? `stat ${extraClass}` : 'stat';
-
-        return `
-            <div class="${rowClass}">
-                <span aria-hidden="true">${icon}</span>
-                <span data-stat="${valueKey}">${Utils.escapeHtml(value)}</span>
-                <button type="button" data-action="${minusAction}" aria-label="${valueKey} verringern">-</button>
-                <button type="button" data-action="${plusAction}" aria-label="${valueKey} erhöhen">+</button>
-            </div>
-        `;
-    },
-
     buildHeroCard(heroIndex, heroState = {}) {
         const lp = Number.isFinite(Number(heroState.lp))
             ? Number(heroState.lp)
@@ -45,14 +33,11 @@ export const CombatDashboard = {
             ? Number(heroState.fate)
             : this.getDefaultHeroFate();
 
-        return `
-            <div class="hero-card" data-hero-index="${heroIndex}">
-                <h4>Held ${heroIndex}</h4>
-
-                ${this.buildHeroStatRow('💗', lp, 'lp', 'lp-minus', 'lp-plus')}
-                ${this.buildHeroStatRow('🍀', fate, 'fate', 'fate-minus', 'fate-plus', 'stat--spaced')}
-            </div>
-        `;
+        return SessionHeroCardsRenderer.renderHeroCard({
+            heroIndex,
+            lp,
+            fate
+        });
     },
 
     updateDashboard(savedHeroStats = null) {
