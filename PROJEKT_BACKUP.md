@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 3:11:11 PM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 3:12:35 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -21949,9 +21949,13 @@ select {
     <link rel="stylesheet" href="css/archive-layout.css">
     <link rel="stylesheet" href="css/archive-cards.css">
     <link rel="stylesheet" href="css/archive-home.css">
-    <link rel="stylesheet" href="css/features/archive-home.css">
-    <link rel="stylesheet" href="css/features/archive-browser.css">
-    <link rel="stylesheet" href="css/rulebook-layout.css">
+    <link rel="stylesheet" href="css/features/archive-home/archive-home-hero.css">
+    <link rel="stylesheet" href="css/features/archive-home/archive-home-sections.css">
+    <link rel="stylesheet" href="css/features/archive-home/archive-home-cards.css">
+    <link rel="stylesheet" href="css/features/archive-browser/archive-browser-layout.css">
+    <link rel="stylesheet" href="css/features/archive-browser/archive-browser-sidebar.css">
+    <link rel="stylesheet" href="css/features/archive-browser/archive-browser-list.css">
+    <link rel="stylesheet" href="css/features/archive-browser/archive-browser-preview.css">    <link rel="stylesheet" href="css/rulebook-layout.css">
     <link rel="stylesheet" href="css/rulebook-blocks.css">
     <link rel="stylesheet" href="css/features/rulebook-theme.css">
     <link rel="stylesheet" href="css/combat-tools.css">
