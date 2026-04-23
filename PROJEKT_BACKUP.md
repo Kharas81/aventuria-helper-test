@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 9:18:33 AM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 9:23:31 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -28225,13 +28225,14 @@ export default ArchiveLoader;
 
 ## 📄 Datei: js/features/archive/renderer.js
 ```js
-import ArchiveToolbarRenderer from './archive-toolbar-renderer.js';
-import ArchiveGridRenderer from './archive-grid-renderer.js';
 import ArchiveEmptyStateRenderer from './archive-empty-state-renderer.js';
 import ArchiveHomeLayout from './archive-home-layout.js';
+import ArchiveBrowserLayout from './archive-browser-layout.js';
 import ArchiveModal from '../../templates/archive-modal.js';
 
 export const ArchiveRenderer = {
+    latestBrowserOptions: null,
+
     getGrid() {
         ArchiveModal.ensure();
         return ArchiveModal.getGrid();
@@ -28287,6 +28288,7 @@ export const ArchiveRenderer = {
     },
 
     renderHome(options = {}) {
+        this.latestBrowserOptions = null;
         this.clearToolbar();
         this.setSearchValue('');
         this.setSearchEnabled(false, 'Wähle zuerst einen Bereich ...');
@@ -28300,12 +28302,23 @@ export const ArchiveRenderer = {
     },
 
     renderToolbar(options = {}) {
+        this.latestBrowserOptions = options;
+        this.clearToolbar();
         this.setSearchEnabled(true, 'Karten suchen ...');
-        ArchiveToolbarRenderer.renderToolbar(this.getToolbarContainer(), options);
     },
 
     renderGrid(cards = [], options = {}) {
-        ArchiveGridRenderer.renderGrid(this.getGrid(), cards, options);
+        const grid = this.getGrid();
+        if (!grid) {
+            return;
+        }
+
+        ArchiveBrowserLayout.render(grid, {
+            sidebarOptions: this.latestBrowserOptions || {},
+            cards,
+            listOptions: options,
+            selectedCard: options?.selectedCard || null
+        });
     }
 };
 
