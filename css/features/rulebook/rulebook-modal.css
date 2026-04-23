@@ -1,0 +1,98 @@
+#rulebook-modal .modal-content {
+    max-width: min(1400px, calc(100vw - 40px));
+    border-radius: var(--radius-2xl);
+    border: 1px solid var(--ui-color-border-strong);
+    background: var(--ui-gradient-shell);
+    box-shadow: var(--ui-shadow-shell);
+    overflow: hidden;
+}
+
+#rulebook-modal .modal-content::before {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    border: 1px solid rgba(190, 154, 101, 0.22);
+    border-radius: calc(var(--radius-2xl) - 10px);
+    pointer-events: none;
+}
+
+#rulebook-modal .modal-layout {
+    display: grid;
+    grid-template-columns: minmax(240px, 290px) minmax(0, 1fr);
+    min-height: 78vh;
+    gap: var(--space-lg);
+}
+
+#rulebook-modal .modal-main {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: var(--space-2xl) var(--space-2xl) var(--space-xl) 0;
+}
+
+#rulebook-modal .modal-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-lg);
+    padding: var(--space-xl);
+    border: 1px solid rgba(129, 90, 42, 0.14);
+    border-radius: var(--radius-2xl);
+    background: var(--ui-gradient-panel-soft);
+    box-shadow: var(--ui-shadow-inset);
+}
+
+#manual-title {
+    margin-right: auto;
+    color: var(--ui-color-burgundy-900);
+}
+
+#rulebook-modal .tab-content {
+    min-width: 0;
+}
+
+#reader-tab,
+#codex-tab {
+    position: relative;
+    min-height: 0;
+    padding: var(--space-xl);
+    border: 1px solid rgba(129, 90, 42, 0.14);
+    border-radius: var(--radius-2xl);
+    background: var(--ui-gradient-panel);
+    box-shadow: var(--ui-shadow-sm);
+    overflow: hidden;
+}
+
+#reader-tab::before,
+#codex-tab::before {
+    content: "";
+    position: absolute;
+    inset: 10px;
+    border: 1px solid rgba(190, 154, 101, 0.16);
+    border-radius: calc(var(--radius-2xl) - 8px);
+    pointer-events: none;
+}
+
+@media (max-width: 1020px) {
+    #rulebook-modal .modal-layout {
+        grid-template-columns: 1fr;
+    }
+
+    #rulebook-modal .modal-main {
+        padding: 0 var(--space-lg) var(--space-lg) var(--space-lg);
+    }
+}
+
+@media (max-width: 700px) {
+    #rulebook-modal .modal-content {
+        max-width: calc(100vw - 16px);
+    }
+
+    #rulebook-modal .modal-sidebar,
+    #rulebook-modal .modal-nav,
+    #reader-tab,
+    #codex-tab {
+        padding: var(--space-lg);
+    }
+}
