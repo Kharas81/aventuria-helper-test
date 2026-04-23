@@ -1,0 +1,109 @@
+.archive-browser {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(240px, 280px) minmax(320px, 1fr) minmax(300px, 420px);
+    gap: var(--space-lg);
+    min-height: 720px;
+    align-items: stretch;
+}
+
+.archive-browser__panel {
+    position: relative;
+    min-width: 0;
+    padding: var(--space-xl);
+    border: 1px solid var(--ui-color-border-soft);
+    border-radius: var(--radius-2xl);
+    background: var(--ui-gradient-panel);
+    box-shadow: var(--ui-shadow-sm);
+    overflow: hidden;
+}
+
+.archive-browser__panel::before {
+    content: "";
+    position: absolute;
+    inset: 10px;
+    border: 1px solid rgba(190, 154, 101, 0.16);
+    border-radius: calc(var(--radius-2xl) - 8px);
+    pointer-events: none;
+}
+
+.archive-browser__panel > * {
+    position: relative;
+    z-index: 1;
+}
+
+.archive-browser__sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.archive-browser__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.archive-browser__preview {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.archive-browser-head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-md);
+}
+
+.archive-browser-head__eyebrow {
+    color: var(--ui-color-bronze-900);
+    font-family: var(--ui-font-ui);
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.archive-browser-head__title {
+    margin: 0;
+}
+
+.archive-browser-head__text {
+    margin: 0;
+    color: var(--ui-color-ink-soft);
+    line-height: 1.45;
+}
+
+.archive-browser-empty {
+    padding: var(--space-xl);
+    border: 1px dashed var(--ui-color-border-muted);
+    border-radius: var(--radius-xl);
+    background: rgba(255, 252, 247, 0.68);
+    color: var(--ui-color-muted);
+    font-style: italic;
+    line-height: 1.5;
+}
+
+@media (max-width: 1250px) {
+    .archive-browser {
+        grid-template-columns: minmax(220px, 260px) minmax(280px, 1fr);
+    }
+
+    .archive-browser__preview {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 860px) {
+    .archive-browser {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .archive-browser__panel {
+        padding: var(--space-lg);
+    }
+}
