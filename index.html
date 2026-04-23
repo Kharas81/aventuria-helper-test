@@ -5,16 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aventuria Abenteuer-Helfer</title>
 
-    <!-- Basis & Layout -->
+    <!-- Neue UI-Basis -->
+    <link rel="stylesheet" href="css/ui/tokens.css">
     <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/ui/typography.css">
+    <link rel="stylesheet" href="css/layout/app-shell.css">
     <link rel="stylesheet" href="css/app-layout.css">
+    <link rel="stylesheet" href="css/ui/buttons.css">
+    <link rel="stylesheet" href="css/ui/forms.css">
+    <link rel="stylesheet" href="css/ui/panels.css">
+    <link rel="stylesheet" href="css/ui/badges.css">
+    <link rel="stylesheet" href="css/ui/dividers.css">
 
-    <!-- Wiederverwendbare UI-Bausteine -->
-    <link rel="stylesheet" href="css/ui-buttons.css">
-    <link rel="stylesheet" href="css/ui-forms.css">
-    <link rel="stylesheet" href="css/ui-shared.css">
-
-    <!-- Spezifische Bereiche -->
+    <!-- Bestehende Feature-CSS -->
     <link rel="stylesheet" href="css/preview-tooltip.css">
     <link rel="stylesheet" href="css/archive-layout.css">
     <link rel="stylesheet" href="css/archive-cards.css">
@@ -30,14 +33,14 @@
     <link rel="stylesheet" href="css/card-detail-meta.css">
     <link rel="stylesheet" href="css/card-detail-actions.css">
 </head>
-<body>
-    <div class="app-container">
-        <header>
+<body class="theme-aventuria">
+    <div class="app-container app-shell__frame">
+        <header class="app-header">
             <h1>Aventuria Abenteuer-Helfer</h1>
-            <p id="loading-status" aria-live="polite">Bereit.</p>
+            <p id="loading-status" class="app-header__status" aria-live="polite">Bereit.</p>
         </header>
 
-        <section aria-label="Hauptsteuerung">
+        <section class="app-toolbar" aria-label="Hauptsteuerung">
             <div class="top-bar">
                 <div class="button-group">
                     <button type="button" class="btn" data-action="open-archive">
@@ -85,7 +88,7 @@
             </div>
         </section>
 
-        <main id="app-main">
+        <main id="app-main" class="app-main">
             <section id="setup-display" class="hidden" aria-label="Abenteuer-Setup">
                 <h2 id="title">Abenteuer</h2>
                 <p id="danger-value"></p>
