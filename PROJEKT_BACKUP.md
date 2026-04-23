@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 3:10:48 PM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 3:11:11 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -35089,6 +35089,118 @@ export const UI = {
 };
 
 export default UI;
+
+```
+
+---
+
+## 📄 Datei: ss/features/archive-browser/archive-browser-preview.css
+```css
+.archive-preview-shell {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    height: 100%;
+}
+
+.archive-preview-card {
+    position: relative;
+    padding: var(--space-xl);
+    border: 1px solid rgba(129, 90, 42, 0.14);
+    border-radius: var(--radius-xl);
+    background: rgba(255, 252, 247, 0.78);
+    box-shadow: var(--ui-shadow-xs);
+}
+
+.archive-preview-card__title {
+    margin-bottom: var(--space-sm);
+}
+
+.archive-preview-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-md);
+}
+
+.archive-preview-card__image-wrap {
+    margin-bottom: var(--space-lg);
+    border: 1px solid rgba(129, 90, 42, 0.14);
+    border-radius: var(--radius-xl);
+    background: rgba(255, 252, 247, 0.76);
+    padding: var(--space-sm);
+}
+
+.archive-preview-card__image {
+    width: 100%;
+    aspect-ratio: 5 / 7;
+    object-fit: contain;
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.72);
+}
+
+.archive-preview-card__placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: 5 / 7;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(180deg, rgba(248, 240, 227, 0.98) 0%, rgba(240, 228, 206, 0.98) 100%);
+    color: var(--ui-color-muted);
+    font-style: italic;
+    text-align: center;
+    padding: var(--space-lg);
+}
+
+.archive-preview-card__section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-top: var(--space-lg);
+}
+
+.archive-preview-card__section-title {
+    color: var(--ui-color-bronze-900);
+    font-family: var(--ui-font-ui);
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.archive-preview-card__actions {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.archive-preview-card__action {
+    padding: 10px 12px;
+    border: 1px solid rgba(129, 90, 42, 0.1);
+    border-radius: var(--radius-lg);
+    background: rgba(255, 252, 247, 0.72);
+}
+
+.archive-preview-card__action-head {
+    display: flex;
+    gap: 8px;
+    align-items: start;
+    margin-bottom: 4px;
+}
+
+.archive-preview-card__action-title {
+    color: var(--ui-color-ink);
+    font-weight: 700;
+}
+
+.archive-preview-card__action-text {
+    color: var(--ui-color-ink-soft);
+    line-height: 1.45;
+}
 
 ```
 
