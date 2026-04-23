@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 11:32:43 AM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 11:33:10 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -25885,28 +25885,32 @@ export const ArchiveHomeLayout = {
                 description: `Alle Schergen im Set „${safeSetName}“ schnell durchsuchen.`,
                 categoryFilter: 'schergen',
                 setKey: safeSetKey,
-                icon: '⚔'
+                iconPath: 'assets/ui/icons/minions.svg',
+                iconAlt: ''
             },
             {
                 title: 'Anführer',
                 description: `Stärkere Gegner und Bosskarten im Set „${safeSetName}“ anzeigen.`,
                 categoryFilter: 'anfuehrer',
                 setKey: safeSetKey,
-                icon: '♛'
+                iconPath: 'assets/ui/icons/danger.svg',
+                iconAlt: ''
             },
             {
                 title: 'Abenteuerkarten',
                 description: 'Storykarten, Zeitskalen und Abenteuerkarten gesammelt öffnen.',
                 categoryFilter: 'abenteuerkarten',
                 setKey: safeSetKey,
-                icon: '✦'
+                iconPath: 'assets/ui/icons/blue-cards.svg',
+                iconAlt: ''
             },
             {
                 title: 'Spezialkarten',
                 description: 'Besondere Karten, Effekte und seltene Sonderelemente ansehen.',
                 categoryFilter: 'spezial',
                 setKey: safeSetKey,
-                icon: '✧'
+                iconPath: 'assets/ui/icons/special.svg',
+                iconAlt: ''
             }
         ];
     },
@@ -25920,12 +25924,27 @@ export const ArchiveHomeLayout = {
         `;
     },
 
+    renderIcon(iconPath = '', iconAlt = '') {
+        const safePath = Utils.escapeHtml(iconPath);
+        const safeAlt = Utils.escapeHtml(iconAlt);
+
+        return `
+            <img
+                src="${safePath}"
+                alt="${safeAlt}"
+                aria-hidden="${safeAlt ? 'false' : 'true'}"
+                style="width: 22px; height: 22px;"
+            >
+        `;
+    },
+
     renderCategoryCard({
         title = '',
         description = '',
         categoryFilter = '',
         setKey = '',
-        icon = '✦'
+        iconPath = '',
+        iconAlt = ''
     } = {}) {
         return `
             <button
@@ -25936,7 +25955,9 @@ export const ArchiveHomeLayout = {
                 data-set="${Utils.escapeHtml(setKey)}"
             >
                 <div class="archive-home-card__top">
-                    <span class="archive-home-card__icon" aria-hidden="true">${Utils.escapeHtml(icon)}</span>
+                    <span class="archive-home-card__icon" aria-hidden="true">
+                        ${this.renderIcon(iconPath, iconAlt)}
+                    </span>
                     <span class="archive-home-card__eyebrow">Schnellzugriff</span>
                     <span class="archive-home-card__title">${Utils.escapeHtml(title)}</span>
                     <span class="archive-home-card__text">${Utils.escapeHtml(description)}</span>
@@ -25961,7 +25982,9 @@ export const ArchiveHomeLayout = {
                 data-set="${Utils.escapeHtml(setId)}"
             >
                 <div class="archive-home-card__top">
-                    <span class="archive-home-card__icon" aria-hidden="true">🗂</span>
+                    <span class="archive-home-card__icon" aria-hidden="true">
+                        ${this.renderIcon('assets/ui/icons/archive.svg', '')}
+                    </span>
                     <span class="archive-home-card__eyebrow">
                         ${isActive ? 'Aktives Set' : 'Karten-Set'}
                     </span>
