@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 7:54:45 PM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 7:55:13 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -2711,19 +2711,28 @@ a {
 
 ## 📄 Datei: css/features/archive-browser/archive-browser-layout.css
 ```css
+.archive-surface--browser {
+    height: min(72vh, 820px);
+    min-height: 620px;
+}
+
 .archive-browser {
     position: relative;
     display: grid;
-    grid-template-columns: minmax(240px, 280px) minmax(320px, 1fr) minmax(300px, 420px);
+    grid-template-columns: minmax(230px, 260px) minmax(0, 1fr) minmax(320px, 390px);
     gap: var(--space-lg);
-    min-height: 720px;
+    height: 100%;
+    min-height: 0;
     align-items: stretch;
 }
 
 .archive-browser__panel {
     position: relative;
+    display: flex;
+    flex-direction: column;
     min-width: 0;
-    padding: var(--space-xl);
+    min-height: 0;
+    padding: var(--space-lg);
     border: 1px solid var(--ui-color-border-soft);
     border-radius: var(--radius-2xl);
     background: var(--ui-gradient-panel);
@@ -2740,27 +2749,14 @@ a {
     pointer-events: none;
 }
 
-.archive-browser__panel > * {
+.archive-browser__panel-scroll {
     position: relative;
     z-index: 1;
-}
-
-.archive-browser__sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-lg);
-}
-
-.archive-browser__list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-lg);
-}
-
-.archive-browser__preview {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-lg);
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+    padding-right: 6px;
+    scrollbar-gutter: stable;
 }
 
 .archive-browser-head {
@@ -2790,7 +2786,7 @@ a {
 }
 
 .archive-browser-empty {
-    padding: var(--space-xl);
+    padding: var(--space-lg);
     border: 1px dashed var(--ui-color-border-muted);
     border-radius: var(--radius-xl);
     background: rgba(255, 252, 247, 0.68);
@@ -2799,25 +2795,41 @@ a {
     line-height: 1.5;
 }
 
-@media (max-width: 1250px) {
+@media (max-width: 1180px) {
     .archive-browser {
-        grid-template-columns: minmax(220px, 260px) minmax(280px, 1fr);
+        grid-template-columns: minmax(220px, 250px) minmax(0, 1fr);
     }
 
-    .archive-browser__preview {
+    .archive-browser__panel--preview {
         grid-column: 1 / -1;
     }
 }
 
 @media (max-width: 860px) {
+    .archive-surface--browser {
+        height: auto;
+        min-height: 0;
+    }
+
     .archive-browser {
         grid-template-columns: 1fr;
+        height: auto;
+    }
+
+    .archive-browser__panel,
+    .archive-browser__panel-scroll {
+        min-height: 0;
+    }
+
+    .archive-browser__panel-scroll {
+        overflow: visible;
+        padding-right: 0;
     }
 }
 
 @media (max-width: 600px) {
     .archive-browser__panel {
-        padding: var(--space-lg);
+        padding: var(--space-md);
     }
 }
 
