@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 3:19:54 PM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 3:20:14 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -26192,14 +26192,14 @@ export default ArchiveCardTemplate;
 ```js
 import Utils from '../../core/utils.js';
 import CONFIG from '../../core/config.js';
-import Constants from '../../core/constants.js';
-import Events from '../../core/events.js';
-import ArchiveLoader from './loader.js';
 import ArchiveFilter from './filter.js';
 import ArchiveRenderer from './renderer.js';
 import ArchiveState from './archive-state.js';
 import ArchiveModal from '../../templates/archive-modal.js';
-import ArchiveCardMeta from './archive-card-meta.js';
+
+import ArchiveSelectionFlow from './archive-selection-flow.js';
+import ArchiveFilterFlow from './archive-filter-flow.js';
+import ArchiveOpenFlow from './archive-open-flow.js';
 
 export const ArchiveController = {
     getModal() {
@@ -26207,105 +26207,36 @@ export const ArchiveController = {
     },
 
     getResolvedArchiveSets() {
-        const archiveSets = CONFIG.getArchiveSets?.() || [];
-        return archiveSets.length ? archiveSets : (CONFIG.getEnabledSets?.() || []);
+        return ArchiveOpenFlow.getResolvedArchiveSets();
     },
 
     buildHomeViewModel() {
-        const availableArchiveSets = this.getResolvedArchiveSets();
-
-        if (!availableArchiveSets.some(setConfig => setConfig.id === ArchiveState.currentSet)) {
-            ArchiveState.currentSet = availableArchiveSets[0]?.id || CONFIG.defaultSet || 'base_game';
-        }
-
-        return {
-            activeSetKey: ArchiveState.currentSet,
-            activeSetName: CONFIG.getSetDisplayName?.(ArchiveState.currentSet),
-            enabledSets: availableArchiveSets,
-            totalLoadedCards: ArchiveState.allCards.length
-        };
+        return ArchiveOpenFlow.buildHomeViewModel();
     },
 
     renderHome() {
-        ArchiveState.isHomeView = true;
-        ArchiveRenderer.renderHome(this.buildHomeViewModel());
+        ArchiveOpenFlow.renderHome();
     },
 
     getSelectedCard() {
-        const selectedId = ArchiveState.normalizeSelectedCardId(ArchiveState.selectedCardId);
-        if (!selectedId) {
-            return null;
-        }
-
-        return ArchiveState.filteredCards.find(card => {
-            return Utils.normalizeString(ArchiveCardMeta.getCardId(card)) === selectedId;
-        }) || null;
+        return ArchiveSelectionFlow.getSelectedCard();
     },
 
     syncSelectedCard() {
-        const filteredCards = Utils.normalizeArray(ArchiveState.filteredCards);
-
-        if (!filteredCards.length) {
-            ArchiveState.selectedCardId = '';
-            return;
-        }
-
-        const selectedId = ArchiveState.normalizeSelectedCardId(ArchiveState.selectedCardId);
-        const hasSelectedCard = filteredCards.some(card => {
-            return Utils.normalizeString(ArchiveCardMeta.getCardId(card)) === selectedId;
-        });
-
-        if (!hasSelectedCard) {
-            ArchiveState.selectedCardId = Utils.normalizeString(
-                ArchiveCardMeta.getCardId(filteredCards[0])
-            );
-        }
+        ArchiveSelectionFlow.syncSelectedCard();
     },
 
     applyFilters() {
-        ArchiveState.filteredCards = ArchiveFilter.filterCards(ArchiveState.allCards, {
-            searchTerm: ArchiveState.currentSearchTerm,
-            sourceFilter: ArchiveState.currentSourceFilter,
-            categoryFilter: ArchiveState.currentCategoryFilter
-        });
-
-        this.syncSelectedCard();
+        ArchiveFilterFlow.applyFilters();
         this.render();
     },
 
     async open(options = {}) {
-        const modal = ArchiveModal.open();
-        if (!modal) {
-            return;
-        }
-
-        const desiredSet = Utils.normalizeString(
-            options?.setKey
-            || ArchiveLoader.getSuggestedSetKey(ArchiveState.currentSet)
-            || ArchiveState.getResolvedCurrentSet()
-        );
-
-        const hasExplicitQuery = Object.prototype.hasOwnProperty.call(options, 'query');
-        const hasExplicitSource = Object.prototype.hasOwnProperty.call(options, 'sourceFilter');
-        const hasExplicitCategory = Object.prototype.hasOwnProperty.call(options, 'categoryFilter');
-        const hasExplicitSet = Object.prototype.hasOwnProperty.call(options, 'setKey');
-
-        ArchiveState.currentSet = desiredSet || ArchiveState.currentSet;
-
-        if (hasExplicitQuery || hasExplicitSource || hasExplicitCategory || hasExplicitSet) {
-            await this.loadSet(ArchiveState.currentSet, {
-                query: hasExplicitQuery ? Utils.normalizeString(options.query) : '',
-                sourceFilter: hasExplicitSource
-                    ? ArchiveState.normalizeSourceFilter(options.sourceFilter)
-                    : ArchiveFilter.ALL_SOURCE_FILTER,
-                categoryFilter: hasExplicitCategory
-                    ? ArchiveState.normalizeCategoryFilter(options.categoryFilter)
-                    : ArchiveFilter.ALL_CATEGORY_FILTER
-            });
-            return;
-        }
-
-        this.renderHome();
+        return ArchiveOpenFlow.open(options, {
+            openModal: () => ArchiveModal.open(),
+            loadSet: (setKey, loadOptions) => this.loadSet(setKey, loadOptions),
+            renderHome: () => this.renderHome()
+        });
     },
 
     close() {
@@ -26313,129 +26244,36 @@ export const ArchiveController = {
     },
 
     async openCategory(categoryFilter = '', options = {}) {
-        const resolvedCategory = ArchiveState.normalizeCategoryFilter(categoryFilter);
-        const resolvedSet = Utils.normalizeString(
-            options?.setKey
-            || ArchiveState.currentSet
-            || CONFIG.defaultSet
-            || 'base_game'
-        );
-
-        await this.loadSet(resolvedSet, {
-            query: '',
-            sourceFilter: ArchiveFilter.ALL_SOURCE_FILTER,
-            categoryFilter: resolvedCategory
+        return ArchiveOpenFlow.openCategory(categoryFilter, options, {
+            loadSet: (setKey, loadOptions) => this.loadSet(setKey, loadOptions)
         });
     },
 
     async loadSet(setKey = '', options = {}) {
-        const resolvedSetKey = Utils.normalizeString(
-            setKey || CONFIG.defaultSet || 'base_game'
-        );
-
-        if (!resolvedSetKey) {
-            return;
-        }
-
-        const previousSet = ArchiveState.currentSet;
-        const hasExplicitQuery = Object.prototype.hasOwnProperty.call(options, 'query');
-        const hasExplicitSource = Object.prototype.hasOwnProperty.call(options, 'sourceFilter');
-        const hasExplicitCategory = Object.prototype.hasOwnProperty.call(options, 'categoryFilter');
-
-        ArchiveState.currentSet = resolvedSetKey;
-        ArchiveState.isLoading = true;
-        ArchiveState.isHomeView = false;
-
-        ArchiveRenderer.renderToolbar({
-            activeSetKey: ArchiveState.currentSet,
-            activeSourceFilter: ArchiveState.currentSourceFilter,
-            activeCategoryFilter: ArchiveState.currentCategoryFilter,
-            availableSources: [],
-            availableCategories: [],
-            currentQuery: ArchiveState.currentSearchTerm,
-            filteredCount: 0,
-            totalCount: 0
+        return ArchiveOpenFlow.loadSet(setKey, options, {
+            applyFiltersAndRender: () => this.applyFilters()
         });
-
-        ArchiveRenderer.showLoading();
-
-        try {
-            const loadedCards = await ArchiveLoader.fetchCardsForSet(ArchiveState.currentSet);
-
-            ArchiveState.allCards = Utils.normalizeArray(loadedCards);
-            ArchiveState.isLoading = false;
-
-            if (hasExplicitQuery) {
-                ArchiveState.currentSearchTerm = Utils.normalizeString(options.query);
-            } else {
-                ArchiveState.currentSearchTerm = '';
-            }
-
-            if (hasExplicitSource) {
-                ArchiveState.currentSourceFilter = ArchiveState.normalizeSourceFilter(options.sourceFilter);
-            } else if (resolvedSetKey !== previousSet) {
-                ArchiveState.currentSourceFilter = ArchiveFilter.ALL_SOURCE_FILTER;
-            }
-
-            if (hasExplicitCategory) {
-                ArchiveState.currentCategoryFilter = ArchiveState.normalizeCategoryFilter(options.categoryFilter);
-            } else if (resolvedSetKey !== previousSet) {
-                ArchiveState.currentCategoryFilter = ArchiveFilter.ALL_CATEGORY_FILTER;
-            }
-
-            ArchiveState.selectedCardId = '';
-            ArchiveRenderer.setSearchValue(ArchiveState.currentSearchTerm);
-            this.applyFilters();
-
-            Events.emit(
-                Constants.events?.archiveSetChanged || 'archive:setChanged',
-                {
-                    source: 'archive',
-                    setKey: ArchiveState.currentSet,
-                    cardCount: ArchiveState.allCards.length
-                }
-            );
-
-            Events.emit(
-                Constants.events?.setChanged || 'set:changed',
-                {
-                    source: 'archive',
-                    setKey: ArchiveState.currentSet,
-                    cardCount: ArchiveState.allCards.length
-                }
-            );
-        } catch (error) {
-            ArchiveState.isLoading = false;
-            console.error('Fehler beim Laden des Archivs:', error);
-            ArchiveRenderer.showError(error?.message || 'Fehler beim Laden des Archivs.');
-        }
     },
 
     handleSearch(searchTerm = '') {
-        if (ArchiveState.isHomeView) {
-            return;
+        const didApply = ArchiveFilterFlow.handleSearch(searchTerm);
+        if (didApply) {
+            this.render();
         }
-
-        ArchiveState.currentSearchTerm = Utils.normalizeString(searchTerm);
-        this.applyFilters();
     },
 
     setSourceFilter(sourceFilter = '') {
-        if (ArchiveState.isHomeView) {
-            return;
+        const didApply = ArchiveFilterFlow.setSourceFilter(sourceFilter);
+        if (didApply) {
+            this.render();
         }
-
-        ArchiveState.currentSourceFilter = ArchiveState.normalizeSourceFilter(sourceFilter);
-        this.applyFilters();
     },
 
     setCategoryFilter(categoryFilter = '') {
-        if (ArchiveState.isHomeView) {
-            return;
+        const didApply = ArchiveFilterFlow.setCategoryFilter(categoryFilter);
+        if (didApply) {
+            this.render();
         }
-
-        ArchiveState.currentCategoryFilter = ArchiveState.normalizeCategoryFilter(categoryFilter);
-        this.applyFilters();
     },
 
     setSelectedCard(cardId = '') {
