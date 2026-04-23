@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 3:20:14 PM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 3:31:29 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -5055,6 +5055,212 @@ a {
 
     .app-toolbar {
         padding: var(--space-md);
+    }
+}
+
+```
+
+---
+
+## 📄 Datei: css/modal/modal-base.css
+```css
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: var(--color-black-heavy);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    padding: var(--space-lg);
+    box-sizing: border-box;
+}
+
+.modal-content {
+    background: var(--color-bg-panel);
+    width: 95vw;
+    max-width: var(--modal-max-width);
+    height: 90vh;
+    border: var(--border-lg) solid var(--color-primary);
+    border-radius: var(--radius-lg);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-2xl);
+    overflow: hidden;
+}
+
+.archive-modal-size {
+    max-width: 1240px;
+}
+
+.hidden {
+    display: none;
+}
+
+@media (max-width: 1000px) {
+    .modal-content {
+        width: 98vw;
+        height: 92vh;
+    }
+}
+
+@media (max-width: 820px) {
+    .modal-backdrop {
+        padding: var(--space-sm);
+    }
+
+    .modal-content {
+        width: 100%;
+        height: 95vh;
+        border-width: var(--border-md);
+        border-radius: var(--radius-lg);
+    }
+}
+
+@media (max-width: 600px) {
+    .modal-content {
+        height: 96vh;
+        border-radius: 6px;
+    }
+}
+
+@media (max-width: 420px) {
+    .modal-backdrop {
+        padding: var(--space-2xs);
+    }
+
+    .modal-content {
+        border-radius: var(--radius-sm);
+        height: 97vh;
+    }
+}
+
+```
+
+---
+
+## 📄 Datei: css/modal/modal-layout.css
+```css
+.modal-layout {
+    display: flex;
+    height: 100%;
+    overflow: hidden;
+    min-height: 0;
+}
+
+.modal-sidebar {
+    width: 250px;
+    min-width: 220px;
+    background: var(--color-bg-panel-alt);
+    border-right: var(--border-md) solid var(--color-secondary);
+    padding: var(--space-lg);
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.modal-sidebar h4 {
+    margin-top: 0;
+    margin-bottom: var(--space-md);
+    color: var(--color-primary);
+    border-bottom: var(--border-md) solid var(--color-secondary);
+    padding-bottom: 6px;
+    font-variant: small-caps;
+    font-size: 1.05rem;
+}
+
+.modal-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.modal-sidebar li {
+    padding: 9px 8px;
+    border-bottom: var(--border-thin) solid var(--color-border-soft);
+    font-size: 0.92em;
+    line-height: 1.35;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+    word-break: break-word;
+}
+
+.modal-sidebar li:hover {
+    background: var(--color-bg-body);
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+.modal-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: var(--color-bg-panel);
+    min-width: 0;
+    min-height: 0;
+}
+
+@media (max-width: 1000px) {
+    .modal-sidebar {
+        width: 220px;
+        min-width: 210px;
+        padding: 14px;
+    }
+}
+
+@media (max-width: 820px) {
+    .modal-layout {
+        flex-direction: column;
+    }
+
+    .modal-sidebar {
+        width: 100%;
+        min-width: 0;
+        max-height: 170px;
+        border-right: none;
+        border-bottom: var(--border-md) solid var(--color-secondary);
+        padding: 12px 14px;
+    }
+
+    .modal-sidebar ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-xs);
+    }
+
+    .modal-sidebar li {
+        border-bottom: none;
+        background: var(--color-bg-soft-strong);
+        border: var(--border-thin) solid var(--color-border-soft-strong);
+        border-radius: 6px;
+        padding: var(--space-sm) var(--space-md);
+        font-size: 0.85em;
+    }
+
+    .modal-main {
+        min-height: 0;
+    }
+}
+
+@media (max-width: 600px) {
+    .modal-sidebar {
+        max-height: 145px;
+    }
+}
+
+@media (max-width: 420px) {
+    .modal-sidebar {
+        padding: var(--space-md);
+        max-height: 135px;
+    }
+
+    .modal-sidebar h4 {
+        font-size: 1rem;
+    }
+
+    .modal-sidebar li {
+        font-size: 0.8em;
+        padding: 7px var(--space-sm);
     }
 }
 
