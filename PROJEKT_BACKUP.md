@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 4:04:31 PM
+# 🛡️ Aventuria Projekt-Backup - 4/23/2026, 4:11:01 PM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -4896,6 +4896,82 @@ a {
 
     #manual-page-indicator {
         width: 100%;
+    }
+}
+
+```
+
+---
+
+## 📄 Datei: css/features/session/session-shell.css
+```css
+#session-status-strip {
+    margin-bottom: var(--space-2xl);
+}
+
+.toggle-section {
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-xl);
+    gap: var(--space-md);
+}
+
+#combat-tools-section,
+#intermission-section {
+    margin-top: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+}
+
+.session-section {
+    position: relative;
+}
+
+.session-section__frame {
+    position: relative;
+    padding: var(--space-2xl);
+    border: 1px solid var(--ui-color-border-soft);
+    border-radius: var(--radius-2xl);
+    background: var(--ui-gradient-panel);
+    box-shadow: var(--ui-shadow-md);
+    overflow: hidden;
+}
+
+.session-section__frame::before {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    border: 1px solid rgba(190, 154, 101, 0.22);
+    border-radius: calc(var(--radius-2xl) - 10px);
+    pointer-events: none;
+}
+
+.session-section__frame--combat::after,
+.session-section__frame--rest::after {
+    content: "";
+    position: absolute;
+    inset: auto -60px -90px auto;
+    width: 220px;
+    height: 220px;
+    border-radius: var(--radius-round);
+    background: radial-gradient(circle, rgba(123, 31, 31, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.session-panel__header {
+    position: relative;
+    margin-bottom: var(--space-xl);
+}
+
+.session-panel__subcopy {
+    margin-top: var(--space-sm);
+    color: var(--ui-color-ink-soft);
+    text-align: center;
+}
+
+@media (max-width: 820px) {
+    .session-section__frame {
+        padding: var(--space-lg);
     }
 }
 
