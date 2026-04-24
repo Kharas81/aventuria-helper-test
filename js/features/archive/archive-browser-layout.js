@@ -3,59 +3,48 @@ import ArchiveGridRenderer from './archive-grid-renderer.js';
 import ArchivePreviewRenderer from './archive-preview-renderer.js';
 
 export const ArchiveBrowserLayout = {
-    ensureSections(container) {
-        if (!container) {
-            return {};
-        }
+  ensureSections(container) {
+    if (!container) return {};
 
-        container.innerHTML = `
-            <div class="archive-browser">
-                <aside class="archive-browser__panel archive-browser__panel--sidebar">
-                    <div
-                        class="archive-browser__panel-scroll archive-browser__panel-scroll--sidebar"
-                        id="archive-browser-sidebar"
-                    ></div>
-                </aside>
+    container.innerHTML = `
+      <div class="archive-browser">
+        <section class="archive-browser__setbar" id="archive-browser-setbar"></section>
 
-                <section class="archive-browser__panel archive-browser__panel--list">
-                    <div
-                        class="archive-browser__panel-scroll archive-browser__panel-scroll--list"
-                        id="archive-browser-list"
-                    ></div>
-                </section>
+        <aside class="archive-browser__panel archive-browser__panel--sidebar">
+          <div class="archive-browser__panel-scroll" id="archive-browser-sidebar"></div>
+        </aside>
 
-                <aside class="archive-browser__panel archive-browser__panel--preview">
-                    <div
-                        class="archive-browser__panel-scroll archive-browser__panel-scroll--preview"
-                        id="archive-browser-preview"
-                    ></div>
-                </aside>
-            </div>
-        `;
+        <section class="archive-browser__panel archive-browser__panel--list">
+          <div class="archive-browser__panel-scroll" id="archive-browser-list"></div>
+        </section>
 
-        return {
-            sidebar: container.querySelector('#archive-browser-sidebar'),
-            list: container.querySelector('#archive-browser-list'),
-            preview: container.querySelector('#archive-browser-preview')
-        };
-    },
+        <section class="archive-browser__panel archive-browser__panel--preview">
+          <div class="archive-browser__panel-scroll" id="archive-browser-preview"></div>
+        </section>
+      </div>
+    `;
 
-    render(container, {
-        sidebarOptions = {},
-        cards = [],
-        listOptions = {},
-        selectedCard = null
-    } = {}) {
-        if (!container) {
-            return;
-        }
+    return {
+      setbar: container.querySelector('#archive-browser-setbar'),
+      sidebar: container.querySelector('#archive-browser-sidebar'),
+      list: container.querySelector('#archive-browser-list'),
+      preview: container.querySelector('#archive-browser-preview'),
+    };
+  },
 
-        const sections = this.ensureSections(container);
+  render(
+    container,
+    { sidebarOptions = {}, cards = [], listOptions = {}, selectedCard = null } = {}
+  ) {
+    if (!container) return;
 
-        ArchiveSidebarRenderer.render(sections.sidebar, sidebarOptions);
-        ArchiveGridRenderer.renderGrid(sections.list, cards, listOptions);
-        ArchivePreviewRenderer.render(sections.preview, selectedCard);
-    }
+    const sections = this.ensureSections(container);
+
+    ArchiveSidebarRenderer.renderSetbar(sections.setbar, sidebarOptions);
+    ArchiveSidebarRenderer.render(sections.sidebar, sidebarOptions);
+    ArchiveGridRenderer.renderGrid(sections.list, cards, listOptions);
+    ArchivePreviewRenderer.render(sections.preview, selectedCard);
+  },
 };
 
 export default ArchiveBrowserLayout;
