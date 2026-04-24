@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phase Banner Test</title>
+
+  <style>
+    :root {
+      --page-bg: #1f1b17;
+      --panel-bg: rgba(255, 255, 255, 0.04);
+      --panel-border: rgba(255, 244, 220, 0.08);
+
+      --banner-width: 430px;
+      --banner-label-size: clamp(1.2rem, 2.4vw, 1.9rem);
+      --banner-side-size: 1rem;
+
+      --text-main: #3c2b1f;
+      --text-soft: #5a4433;
+      --text-shadow: rgba(255, 248, 230, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,0.05), transparent 30%),
+        linear-gradient(180deg, #2a241f 0%, #1a1714 100%);
+      color: #f2e7d0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+    }
+
+    .demo-panel {
+      width: min(100%, 900px);
+      padding: 32px;
+      border-radius: 20px;
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      box-shadow:
+        0 20px 40px rgba(0,0,0,0.35),
+        inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+
+    .demo-title {
+      margin: 0 0 24px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #f0e3cb;
+    }
+
+    .demo-grid {
+      display: grid;
+      gap: 28px;
+      justify-items: start;
+    }
+
+    .phase-banner {
+      position: relative;
+      width: min(100%, var(--banner-width));
+    }
+
+    .phase-banner__frame {
+      display: block;
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,0.28));
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .phase-banner__label {
+      position: absolute;
+      left: 50%;
+      top: 12%;
+      transform: translateX(-50%);
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: var(--banner-label-size);
+      font-weight: 600;
+      color: var(--text-main);
+      text-shadow: 0 1px 0 var(--text-shadow);
+      white-space: nowrap;
+      letter-spacing: 0.01em;
+    }
+
+    .phase-banner__icon-wrap {
+      position: absolute;
+      left: 50%;
+      top: 57%;
+      transform: translate(-50%, -50%);
+      width: 19%;
+      aspect-ratio: 1 / 1;
+      display: grid;
+      place-items: center;
+    }
+
+    .phase-banner__icon {
+      width: 74%;
+      height: 74%;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 3px rgba(0,0,0,0.25));
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .phase-banner__side {
+      position: absolute;
+      top: 57%;
+      transform: translateY(-50%);
+      width: 15%;
+      height: 24%;
+      display: grid;
+      place-items: center;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: var(--banner-side-size);
+      font-weight: 700;
+      color: var(--text-soft);
+      text-shadow: 0 1px 0 rgba(255,255,255,0.25);
+    }
+
+    .phase-banner__side--left {
+      left: 12%;
+    }
+
+    .phase-banner__side--right {
+      right: 12%;
+    }
+
+    .phase-banner__badge {
+      min-width: 40px;
+      height: 40px;
+      padding: 0 10px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(111, 86, 59, 0.10);
+      border: 1px solid rgba(78, 57, 38, 0.18);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.35),
+        0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    .phase-banner--active .phase-banner__frame {
+      filter:
+        drop-shadow(0 12px 18px rgba(0,0,0,0.28))
+        brightness(1.03);
+    }
+
+    .phase-banner--inactive {
+      opacity: 0.68;
+      transform: scale(0.98);
+    }
+
+    .hint {
+      margin-top: 18px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: #dbcdb2;
+    }
+
+    .hint code {
+      background: rgba(255,255,255,0.08);
+      padding: 2px 6px;
+      border-radius: 6px;
+      color: #fff1d5;
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-panel">
+    <h1 class="demo-title">Test – Aventuria Phase Banner</h1>
+
+    <div class="demo-grid">
+      <!-- Aktive Variante -->
+      <div class="phase-banner phase-banner--active">
+        <img
+          class="phase-banner__frame"
+          src="assets/images/ui/phase-banner-base.png"
+          alt=""
+        />
+
+        <div class="phase-banner__label">Heldenphase</div>
+
+        <div class="phase-banner__side phase-banner__side--left">
+          <span class="phase-banner__badge">3</span>
+        </div>
+
+        <div class="phase-banner__icon-wrap">
+          <img
+            class="phase-banner__icon"
+            src="assets/images/ui/icon-heroes.png"
+            alt="Heldenphase Symbol"
+          />
+        </div>
+
+        <div class="phase-banner__side phase-banner__side--right">
+          <span class="phase-banner__badge">5</span>
+        </div>
+      </div>
+
+      <!-- Inaktive Variante -->
+      <div class="phase-banner phase-banner--inactive">
+        <img
+          class="phase-banner__frame"
+          src="assets/images/ui/phase-banner-base.png"
+          alt=""
+        />
+
+        <div class="phase-banner__label">Schergenphase</div>
+
+        <div class="phase-banner__side phase-banner__side--left">
+          <span class="phase-banner__badge">2</span>
+        </div>
+
+        <div class="phase-banner__icon-wrap">
+          <img
+            class="phase-banner__icon"
+            src="assets/images/ui/icon-heroes.png"
+            alt="Platzhalter Symbol"
+          />
+        </div>
+
+        <div class="phase-banner__side phase-banner__side--right">
+          <span class="phase-banner__badge">4</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hint">
+      Wenn Text oder Symbol noch nicht perfekt sitzen, kannst du diese Werte anpassen:
+      <br />
+      <code>.phase-banner__label { top: ... }</code>
+      <br />
+      <code>.phase-banner__icon-wrap { top: ...; width: ... }</code>
+      <br />
+      <code>.phase-banner__side--left / --right { left/right: ... }</code>
+    </div>
+  </div>
+</body>
+</html>
