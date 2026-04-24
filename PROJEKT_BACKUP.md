@@ -1,4 +1,4 @@
-# 🛡️ Aventuria Projekt-Backup - 4/24/2026, 9:48:31 AM
+# 🛡️ Aventuria Projekt-Backup - 4/24/2026, 9:51:34 AM
 
 ## 📄 Datei: css/app-layout.css
 ```css
@@ -37908,17 +37908,16 @@ export default UI;
 
   <style>
     :root {
-      --page-bg: #1f1b17;
-      --panel-bg: rgba(255, 255, 255, 0.04);
-      --panel-border: rgba(255, 244, 220, 0.08);
+      --banner-image: url("assets/images/ui/phase-banner-base.png");
+      --hero-icon-image: url("assets/images/ui/icon-heroes.png");
 
-      --banner-width: 430px;
-      --banner-label-size: clamp(1.2rem, 2.4vw, 1.9rem);
-      --banner-side-size: 1rem;
+      --page-bg: #1d1712;
+      --panel-bg: rgba(46, 37, 29, 0.88);
+      --panel-border: rgba(235, 211, 162, 0.18);
 
-      --text-main: #3c2b1f;
-      --text-soft: #5a4433;
-      --text-shadow: rgba(255, 248, 230, 0.35);
+      --text-main: #3a2719;
+      --text-soft: #5d432d;
+      --text-light: #f3dfb7;
     }
 
     * {
@@ -37930,9 +37929,9 @@ export default UI;
       min-height: 100vh;
       font-family: Arial, sans-serif;
       background:
-        radial-gradient(circle at top, rgba(255,255,255,0.05), transparent 30%),
-        linear-gradient(180deg, #2a241f 0%, #1a1714 100%);
-      color: #f2e7d0;
+        radial-gradient(circle at top, rgba(255, 226, 170, 0.08), transparent 34%),
+        linear-gradient(180deg, #2a211b 0%, #17120f 100%);
+      color: var(--text-light);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -37940,24 +37939,21 @@ export default UI;
     }
 
     .demo-panel {
-      width: min(100%, 900px);
-      padding: 32px;
-      border-radius: 20px;
+      width: min(100%, 980px);
+      padding: 34px;
+      border-radius: 18px;
       background: var(--panel-bg);
       border: 1px solid var(--panel-border);
-      box-shadow:
-        0 20px 40px rgba(0,0,0,0.35),
-        inset 0 1px 0 rgba(255,255,255,0.04);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.38);
     }
 
     .demo-title {
-      margin: 0 0 24px;
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #f0e3cb;
+      margin: 0 0 28px;
+      font-size: 1.55rem;
+      color: #ffe8bb;
     }
 
-    .demo-grid {
+    .demo-stack {
       display: grid;
       gap: 28px;
       justify-items: start;
@@ -37965,187 +37961,142 @@ export default UI;
 
     .phase-banner {
       position: relative;
-      width: min(100%, var(--banner-width));
+      width: min(100%, 520px);
+      aspect-ratio: 2.35 / 1;
+      background-image: var(--banner-image);
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      filter: drop-shadow(0 12px 16px rgba(0, 0, 0, 0.35));
     }
 
-    .phase-banner__frame {
-      display: block;
-      width: 100%;
-      height: auto;
-      filter: drop-shadow(0 10px 18px rgba(0,0,0,0.28));
-      user-select: none;
-      pointer-events: none;
+    .phase-banner--inactive {
+      opacity: 0.62;
+      transform: scale(0.98);
     }
 
     .phase-banner__label {
       position: absolute;
       left: 50%;
-      top: 12%;
+      top: 15%;
       transform: translateX(-50%);
       margin: 0;
       font-family: Georgia, "Times New Roman", serif;
-      font-size: var(--banner-label-size);
+      font-size: clamp(1.45rem, 3vw, 2.15rem);
       font-weight: 600;
       color: var(--text-main);
-      text-shadow: 0 1px 0 var(--text-shadow);
+      text-shadow:
+        0 1px 0 rgba(255, 245, 215, 0.45),
+        0 2px 3px rgba(0, 0, 0, 0.18);
       white-space: nowrap;
-      letter-spacing: 0.01em;
-    }
-
-    .phase-banner__icon-wrap {
-      position: absolute;
-      left: 50%;
-      top: 57%;
-      transform: translate(-50%, -50%);
-      width: 19%;
-      aspect-ratio: 1 / 1;
-      display: grid;
-      place-items: center;
-    }
-
-    .phase-banner__icon {
-      width: 74%;
-      height: 74%;
-      object-fit: contain;
-      filter: drop-shadow(0 2px 3px rgba(0,0,0,0.25));
-      user-select: none;
       pointer-events: none;
     }
 
-    .phase-banner__side {
+    .phase-banner__icon {
       position: absolute;
-      top: 57%;
+      left: 50%;
+      top: 58%;
+      transform: translate(-50%, -50%);
+      width: 16%;
+      aspect-ratio: 1 / 1;
+      background-image: var(--hero-icon-image);
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.35));
+      pointer-events: none;
+    }
+
+    .phase-banner__slot {
+      position: absolute;
+      top: 58%;
       transform: translateY(-50%);
       width: 15%;
-      height: 24%;
-      display: grid;
-      place-items: center;
+      height: 25%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-family: Georgia, "Times New Roman", serif;
-      font-size: var(--banner-side-size);
+      font-size: 1.05rem;
       font-weight: 700;
       color: var(--text-soft);
-      text-shadow: 0 1px 0 rgba(255,255,255,0.25);
     }
 
-    .phase-banner__side--left {
-      left: 12%;
+    .phase-banner__slot--left {
+      left: 12.5%;
     }
 
-    .phase-banner__side--right {
-      right: 12%;
+    .phase-banner__slot--right {
+      right: 12.5%;
     }
 
-    .phase-banner__badge {
-      min-width: 40px;
-      height: 40px;
+    .phase-banner__pill {
+      min-width: 42px;
+      height: 34px;
       padding: 0 10px;
       border-radius: 999px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background: rgba(111, 86, 59, 0.10);
-      border: 1px solid rgba(78, 57, 38, 0.18);
+      background: rgba(74, 52, 31, 0.14);
+      border: 1px solid rgba(73, 52, 33, 0.22);
       box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.35),
-        0 1px 3px rgba(0,0,0,0.08);
-    }
-
-    .phase-banner--active .phase-banner__frame {
-      filter:
-        drop-shadow(0 12px 18px rgba(0,0,0,0.28))
-        brightness(1.03);
-    }
-
-    .phase-banner--inactive {
-      opacity: 0.68;
-      transform: scale(0.98);
+        inset 0 1px 0 rgba(255, 250, 230, 0.35),
+        0 1px 3px rgba(0, 0, 0, 0.12);
     }
 
     .hint {
-      margin-top: 18px;
+      margin-top: 26px;
+      line-height: 1.55;
+      color: #dfc89e;
       font-size: 0.95rem;
-      line-height: 1.5;
-      color: #dbcdb2;
     }
 
     .hint code {
-      background: rgba(255,255,255,0.08);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       padding: 2px 6px;
       border-radius: 6px;
-      color: #fff1d5;
+      color: #fff0c8;
     }
   </style>
 </head>
+
 <body>
-  <div class="demo-panel">
+  <main class="demo-panel">
     <h1 class="demo-title">Test – Aventuria Phase Banner</h1>
 
-    <div class="demo-grid">
-      <!-- Aktive Variante -->
-      <div class="phase-banner phase-banner--active">
-        <img
-          class="phase-banner__frame"
-          src="assets/images/ui/phase-banner-base.png"
-          alt=""
-        />
-
+    <section class="demo-stack">
+      <div class="phase-banner">
         <div class="phase-banner__label">Heldenphase</div>
-
-        <div class="phase-banner__side phase-banner__side--left">
-          <span class="phase-banner__badge">3</span>
+        <div class="phase-banner__slot phase-banner__slot--left">
+          <span class="phase-banner__pill">3</span>
         </div>
-
-        <div class="phase-banner__icon-wrap">
-          <img
-            class="phase-banner__icon"
-            src="assets/images/ui/icon-heroes.png"
-            alt="Heldenphase Symbol"
-          />
-        </div>
-
-        <div class="phase-banner__side phase-banner__side--right">
-          <span class="phase-banner__badge">5</span>
+        <div class="phase-banner__icon"></div>
+        <div class="phase-banner__slot phase-banner__slot--right">
+          <span class="phase-banner__pill">5</span>
         </div>
       </div>
 
-      <!-- Inaktive Variante -->
       <div class="phase-banner phase-banner--inactive">
-        <img
-          class="phase-banner__frame"
-          src="assets/images/ui/phase-banner-base.png"
-          alt=""
-        />
-
         <div class="phase-banner__label">Schergenphase</div>
-
-        <div class="phase-banner__side phase-banner__side--left">
-          <span class="phase-banner__badge">2</span>
+        <div class="phase-banner__slot phase-banner__slot--left">
+          <span class="phase-banner__pill">2</span>
         </div>
-
-        <div class="phase-banner__icon-wrap">
-          <img
-            class="phase-banner__icon"
-            src="assets/images/ui/icon-heroes.png"
-            alt="Platzhalter Symbol"
-          />
-        </div>
-
-        <div class="phase-banner__side phase-banner__side--right">
-          <span class="phase-banner__badge">4</span>
+        <div class="phase-banner__icon"></div>
+        <div class="phase-banner__slot phase-banner__slot--right">
+          <span class="phase-banner__pill">4</span>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="hint">
-      Wenn Text oder Symbol noch nicht perfekt sitzen, kannst du diese Werte anpassen:
-      <br />
-      <code>.phase-banner__label { top: ... }</code>
-      <br />
-      <code>.phase-banner__icon-wrap { top: ...; width: ... }</code>
-      <br />
-      <code>.phase-banner__side--left / --right { left/right: ... }</code>
-    </div>
-  </div>
+    <p class="hint">
+      Falls kein Banner sichtbar ist, prüfe zuerst den Dateipfad:
+      <code>assets/images/ui/phase-banner-base.png</code><br />
+      Falls kein Symbol sichtbar ist, prüfe:
+      <code>assets/images/ui/icon-heroes.png</code>
+    </p>
+  </main>
 </body>
 </html>
 
